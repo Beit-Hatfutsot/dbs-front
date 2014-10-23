@@ -1,0 +1,15 @@
+$images: '/images/';
+
+@mixin image($url, $size: "", $position: 0 0, $repeat: no-repeat) {
+	background: url($images + $url) $position $repeat;
+
+	@if $size != "" {
+		background-size: $size;
+	}
+}
+
+
+@mixin bg_image($url) {
+	background: url($images + $url) 0 0 no-repeat;
+	background-size: 100% 100%;
+}

@@ -1,0 +1,32 @@
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+
+	.modal-dialog {
+		position: relative;
+		margin: 110px auto;
+		width: 900px;
+
+		.auth-modal {
+			background: #ffffff;
+			border: 1px solid;
+			height: 500px;
+
+			form.auth {
+				margin: 50px auto;
+				width: 800px;
+
+				.field {
+					padding: 5px;
+				}
+
+				.buttons {
+					padding: 5px;
+				}
+			}
+		}
+	}
+}

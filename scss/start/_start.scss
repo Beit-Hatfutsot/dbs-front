@@ -1,0 +1,36 @@
+#start {
+
+	#wizard {
+		width: 1282px;
+		height: 625px;
+		margin: 0 auto;
+		padding: 200px 20px;
+		@include bg_image("main.png");
+
+		form#wizard-form {
+			margin: 0 auto;
+			padding: 60px;
+			width: 925px;
+			height: 250px;
+			background: rgba(248, 248, 255, 0.6);
+			
+			.field {
+				display: inline-block;
+
+				label {
+					font-size: 16px;
+				}
+
+				input {
+					width: 350px;
+					height: 40px;
+				}
+			}
+
+			button {
+				width: 80px;
+				height: 40px;
+			}
+		}
+	}
+}

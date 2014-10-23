@@ -1,0 +1,29 @@
+#footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 90px;
+	width: 100%;
+	border-top: 1px solid #999999;
+	padding: 15px 25px;
+
+	a {
+		padding: 0 5px;
+	}
+
+	.links {
+		font-size: 12px;
+
+		.title {
+			font-weight: bold;
+			font-size: 14px;
+			margin: 0 0 10px;
+		}
+	}
+
+	.contact, .rights {
+		color: #666666;
+		font-size: 12px;
+		padding: 5px 0;
+	}
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html ng-app="bhpClient" ng-controller="MainCtrl as mainController">
+	<head>
+		<meta charset="utf-8">
+		<!-- Let Goggle crawler know we use HTML5 push state API -->
+		<meta name="fragment" content="!">  
+		<base href="/">
+		<link href="css/bhpclient.css" rel="stylesheet" type="text/css" media="all">
+		<script src="js/lib/angular/angular.min.js"></script>
+		<script src="js/lib/angular/angular-resource.min.js"></script>
+		<script src="js/lib/ui-bootstrap-tpls-0.11.2.min.js"></script>
+		<script src="js/lib/angular/angular-ui-router.min.js"></script>
+		<script src="js/modules/bhp_client/bootstrap.js"></script>
+		<script src="js/modules/bhp_client/controllers.js"></script>
+		<script src="js/modules/lang/directives.js"></script>
+		<script src="js/modules/lang/services.js"></script>
+		<script src="js/modules/auth/controllers.js"></script>
+		<script src="js/modules/auth/services.js"></script>
+		<script src="js/modules/wizard/controllers.js"></script>
+		<script src="js/modules/search/services.js"></script>
+		<script src="js/modules/api_client/services.js"></script>
+	</head>
+	<body class={{mainController.lang}}>
+		<div id="app-container">
+			<ng-include src="'templates/header/header.html'"></ng-include>
+			<div id="view" ui-view></div>	
+			<ng-include src="'templates/footer/footer.html'"></ng-include>
+		</div>
+	</body>
+</html>

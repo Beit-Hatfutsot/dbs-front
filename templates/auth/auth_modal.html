@@ -1,0 +1,20 @@
+<div class="auth-modal">
+	<form class="auth">
+		<div class="field">
+			<label for="iare">User Name</label>
+			<input type="text" id="iare" class="lang-float {{authController.lang}}" ng-model="authController.iare"></input>
+		</div>
+		<div class="field">
+			<label for="ias">Password</label>
+			<input type="text" id="ias" class="lang-float {{authController.lang}}" ng-model="authController.ias"></input>
+		</div>
+		<br>
+		<div ng-show="authController.in_process">Processing...</div>
+		<div>{{authController.message}}</div>
+		<br>
+		<div class="buttons lang-float {{authController.lang}}">
+			<button ng-click="authController.signin()">Sign in</button>
+			<button ng-click="authController.dismiss()">Cancel</button>
+		</div>
+	</form>
+</div>
