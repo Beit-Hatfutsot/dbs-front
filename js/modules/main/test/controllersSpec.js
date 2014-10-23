@@ -1,7 +1,7 @@
-describe('bhpClient-controllers', function() {
+describe('main-controllers', function() {
 
 	beforeEach(function() {
-		module('bhpClient');
+		module('main');
 	});
 
 	describe('MainCtrl', function() {

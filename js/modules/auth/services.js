@@ -2,30 +2,22 @@
 
 angular.module('auth').
 
-	factory('authManager', function($modal, $state, $resource, apiClient, $http, $compile, $rootScope, $q) {
+	factory('authManager', [
+	'$modal', '$state', '$resource', 'apiClient', '$http', '$compile', '$rootScope', '$q', 
+	function($modal, $state, $resource, apiClient, $http, $compile, $rootScope, $q) {
 
 		//$http.defaults.withCredentials = true;
 
 		var authClient = $resource(apiClient.urls.auth, null, {
     		signin: { 
     			method: 'POST', 
-    			headers: {
-    				//'Content-Type': 'application/x-www-form-urlencoded',
-    			}, 
     			withCredentials: true,
-    			/*
-    			transformRequest: function(obj) {
-			        var str = [];
-			        for(var p in obj)
-			        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-			        return str.join("&");
-    			}*/
     		}
 		});
 
 	  	var auth_manager = {
 
-	  		in_process: false,
+	  		in_progress: false,
 
 	  		signed_in_user: false,
 
@@ -79,13 +71,13 @@ angular.module('auth').
 
 		  	signin: function(username, password) {
 		  		
-		  		if (!this.in_process && !this.signed_in_user) {
+		  		if (!this.in_progress && !this.signed_in_user) {
 
 			  		var self = this;
 
 			  		var sign_in_deferred = $q.defer();
 
-			  		this.in_process = true;
+			  		this.in_progress = true;
 
 			  		this.initiate_contact().then(function(response) {
 
@@ -105,26 +97,14 @@ angular.module('auth').
 				    	}).$promise.
 				    	then(function(response) {
 				    		self.signed_in_user = response.response.user;
-				    		self.in_process = false;
+				    		self.in_progress = false;
 				    		sign_in_deferred.resolve(response);
 				    	}, function() {
-				    		self.in_process = false;
+				    		self.in_progress = false;
 				    		sign_in_deferred.reject();
 				    	});
-						
-						/*
-						$http.post(apiClient.urls.auth, {
-							email: username, 
-				    		password: password, 
-				    		next: '/',
-				    		submit: 'Login',
-				    		csrf_token: csrf_token
-						}).success(function() {
-
-						})
-						*/
 			  		}, function() {
-			  			self.in_process = false;
+			  			self.in_progress = false;
 			  			sign_in_deferred.reject();
 			  		});
 
@@ -141,4 +121,4 @@ angular.module('auth').
 	  	};
 
   		return auth_manager;
-	});
+	}]);

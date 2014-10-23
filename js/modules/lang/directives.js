@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lang', []).
-	directive('en', function(langManager) {
+	directive('en', ['langManager', function(langManager) {
 		return {
 			restrict: 'E',
 
@@ -15,9 +15,9 @@ angular.module('lang', []).
 		    	scope.langManager = langManager;
 		    }
 		};
-	}).
+	}]).
 
-	directive('he', function(langManager) {
+	directive('he', ['langManager', function(langManager) {
 		return {
 			restrict: 'E',
 
@@ -31,4 +31,4 @@ angular.module('lang', []).
 		    	scope.langManager = langManager;
 		    }
 		};
-	});
+	}]);

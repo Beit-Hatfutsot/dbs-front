@@ -1,11 +1,11 @@
 'use strict';
 
-var AuthCtrl = function(_$modalInstance_, langManager, _authManager_, _apiClient_) {
+var AuthCtrl = function($modalInstance, langManager, authManager, apiClient) {
     var self = this;
 
-    this.$modalInstance = _$modalInstance_;
-    this.authManager = _authManager_;
-    this.apiClient = _apiClient_;
+    this.$modalInstance = $modalInstance;
+    this.authManager = authManager;
+    this.apiClient = apiClient;
 
     Object.defineProperty(this, 'lang', {
     	get: function() {
@@ -14,9 +14,9 @@ var AuthCtrl = function(_$modalInstance_, langManager, _authManager_, _apiClient
     });
 
     // TODO maybe turn this into event listener
-    Object.defineProperty(this, 'in_process', {
+    Object.defineProperty(this, 'in_progress', {
         get: function() {
-            return self.authManager.in_process;
+            return self.authManager.in_progress;
         }
     });
 
@@ -54,5 +54,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth', []).controller('AuthCtrl', AuthCtrl);
+angular.module('auth', []).controller('AuthCtrl', ['$modalInstance', 'langManager', 'authManager', 'apiClient', AuthCtrl]);
 

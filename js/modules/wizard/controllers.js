@@ -1,15 +1,17 @@
 'use strict';
 
-var WizardCtrl = function() {
+var WizardCtrl = function($state) {
     var self = this;
 
-	this.name = '';
-	this.place = '';
+    this.$state = $state;
+
+    this.name = '';
+    this.place = '';
 
     Object.defineProperty(this, 'submit_disabled', {
 
     	get: function() {
-    		if (this.name == '' || this.place == '') {
+    		if (this.name == '' && this.place == '') {
     			return true;
     		}
     		else {
@@ -17,6 +19,13 @@ var WizardCtrl = function() {
     		}
     	}
     });
-}
+};
 
-angular.module('wizard', []).controller('WizardCtrl', WizardCtrl);
+WizardCtrl.prototype = {
+
+    start: function() {
+        this.$state.go('wizard-result', {name: this.name, place: this.place});
+    }
+};
+
+angular.module('wizard', []).controller('WizardCtrl', ['$state', WizardCtrl]);

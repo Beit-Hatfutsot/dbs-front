@@ -4,14 +4,19 @@
 
 angular.module('search', []).
 
-	factory('searchManager', function() {
+	factory('searchManager', ['$timeout', function($timeout) {
 
 	  	var search_manager = {
 
+	  		in_progress: false,
+
 	  		wizard_search: function(name, place) {
-	  			console.log('search!');
+	  			var self = this;
+
+	  			this.in_progress = true;
+	  			$timeout(function() {self.in_progress = false}, 2000);
 	  		}
 	  	};
 
   		return search_manager;
-	});
+	}]);
