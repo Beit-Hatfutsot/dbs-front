@@ -1,23 +1,15 @@
 'use strict';
 
-var AuthCtrl = function($modalInstance, langManager, authManager, apiClient) {
+var AuthCtrl = function($modalInstance, langManager, authManager) {
     var self = this;
 
     this.$modalInstance = $modalInstance;
     this.authManager = authManager;
-    this.apiClient = apiClient;
-
+    
     Object.defineProperty(this, 'lang', {
     	get: function() {
     		return langManager.lang;
     	}
-    });
-
-    // TODO maybe turn this into event listener
-    Object.defineProperty(this, 'in_progress', {
-        get: function() {
-            return self.authManager.in_progress;
-        }
     });
 
     // user name
@@ -36,14 +28,9 @@ AuthCtrl.prototype = {
         var self = this;
 
     	this.authManager.signin(this.iare, this.ias).
-            then(function(response) {
-                if (response.meta.code == 200) {
-                    self.message = 'Sign in succeeded';
-                    self.$modalInstance.close({user: response.response.user});
-                } 
-                else {
-                    self.message = 'Sign in failed';
-                }
+            then(function() {    
+                self.message = 'Sign in succeeded';
+                self.$modalInstance.close();
             }, function() {
                 self.message = 'Sign in failed';
             });

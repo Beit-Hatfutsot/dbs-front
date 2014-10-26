@@ -1,20 +1,27 @@
 'use strict';
 
-/* Services */
-
 angular.module('search', []).
 
-	factory('searchManager', ['$timeout', function($timeout) {
+	factory('searchManager', ['$timeout', '$q', function($timeout, $q) {
 
 	  	var search_manager = {
 
 	  		in_progress: false,
 
 	  		wizard_search: function(name, place) {
-	  			var self = this;
+	  			var self = this,
+	  			result_deferred = $q.defer(); 
 
 	  			this.in_progress = true;
-	  			$timeout(function() {self.in_progress = false}, 2000);
+	  			$timeout(function() {
+	  				self.in_progress = false; 
+	  				result_deferred.resolve({
+	  					places: [{header:'place'}], 
+	  					names: [{header:'name'}]
+	  				});
+	  			}, 1000);
+
+	  			return result_deferred.promise;
 	  		}
 	  	};
 

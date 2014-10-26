@@ -19,27 +19,24 @@ angular.module('auth').
 
 	  		in_progress: false,
 
-	  		signed_in_user: false,
+	  		signedin_user: false,
 
 	  		csrf_token: '',
 
-	  		authenticate: function(next_state, mandatory) {
+	  		authenticate: function(next_state, config) {
 
 	  			if ( !this.signed_in_user ) {
 				    
 				    var authModalInstance = $modal.open({
-				      templateUrl: 'templates/auth/auth_modal.html',
-				      controller: 'AuthCtrl as authController',
-				      sise: 'lg'
+				     	templateUrl: 'templates/auth/auth_modal.html',
+				     	controller: 'AuthCtrl as authController',
+				     	size: 'lg'
 				    });
 
 				    authModalInstance.result.then(function(user_data) {
 				    	$state.go(next_state);
 				    }, function(dismiss_reason) {
-				    	if (mandatory) {
-				    		console.log(dismiss_reason);
-				    	}
-				    	else {
+				    	if (config.mandatory === false) {
 				    		$state.go(next_state);
 				    	}
 				    });
@@ -47,26 +44,6 @@ angular.module('auth').
 				else {
 					$state.go(next_state);
 				} 
-		  	},
-
-		  	openRegistrationModal: function(next_state, mandatory) {
-		  		
-		  		var authModalInstance = $modal.open({
-			      templateUrl: 'templates/auth/authmodal.html',
-			      controller: 'AuthCtrl as authController',
-			      sise: 'lg'
-			    });
-
-			    authModalInstance.result.then(function(user_data) {
-			    	$state.go(next_state);
-			    }, function(dismiss_reason) {
-			    	if (mandatory) {
-			    		console.log(dismiss_reason);
-			    	}
-			    	else {
-			    		$state.go(next_state);
-			    	}
-			    });
 		  	},
 
 		  	signin: function(username, password) {
@@ -86,7 +63,10 @@ angular.module('auth').
 			  			var key = Object.keys(e).filter(function(key) {
 			  				return e[key].tagName == 'FORM' || e[key].tagName == 'form'
 			  			})[0];
-			  			var csrf_token = e[key].querySelector('#csrf_token').value;
+
+			  			if ( e[key] !== undefined ) {
+			  				var csrf_token = e[key].querySelector('#csrf_token').value;
+			  			}
 			  			
 			  			authClient.signin({
 				    		email: username, 
@@ -96,9 +76,14 @@ angular.module('auth').
 				    		csrf_token: csrf_token
 				    	}).$promise.
 				    	then(function(response) {
-				    		self.signed_in_user = response.response.user;
-				    		self.in_progress = false;
-				    		sign_in_deferred.resolve(response);
+				    		if (response.meta.code == 200) {
+					    		self.signedin_user = response.response.user;
+					    		self.in_progress = false;
+					    		sign_in_deferred.resolve(response);
+				    		} else {
+				    			self.in_progress = false;
+				    			sign_in_deferred.reject()
+				    		}
 				    	}, function() {
 				    		self.in_progress = false;
 				    		sign_in_deferred.reject();

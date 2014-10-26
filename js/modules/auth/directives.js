@@ -5,12 +5,12 @@ angular.module('auth').directive('needAuth', ['$state', 'authManager', function(
 		restrict: 'A',
 		scope: {
 			nextState: '@',
-			mandatory: '@needAuth'
+			isMandatory: '@needAuth'
 		},
 		link: function(scope, element) {
 			element.bind('click', function() {
 				var nextState,
-					mandatory = JSON.parse(scope.mandatory);
+					isMandatory = JSON.parse(scope.isMandatory);
 				
 				if (scope.nextState === undefined) {
 					nextState = $state.current.name;
@@ -18,7 +18,7 @@ angular.module('auth').directive('needAuth', ['$state', 'authManager', function(
 					nextState = scope.nextState;
 				}
 
-				authManager.authenticate(nextState, mandatory);
+				authManager.authenticate(nextState, { mandatory: isMandatory });
 			});
 		}
 	}

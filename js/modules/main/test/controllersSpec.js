@@ -1,3 +1,5 @@
+'use strict';
+
 describe('main-controllers', function() {
 
 	beforeEach(function() {
@@ -8,7 +10,7 @@ describe('main-controllers', function() {
 
 		var scope;
 
-		beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+		beforeEach(inject(function($rootScope, $controller) {
 			scope = $rootScope.$new(); 
 			$controller('MainCtrl as mainController', {$scope: scope});
 		}));

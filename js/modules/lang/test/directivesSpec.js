@@ -1,3 +1,5 @@
+'use strict';
+
 describe('lang-directives', function() {
 
 	beforeEach(function() {
@@ -5,7 +7,7 @@ describe('lang-directives', function() {
 	});
 
 	describe('en, he', function() {
-		var scope, en_element, he_element, langManager;
+		var scope, en_element, he_element;
 
 		function set_lang(scope, language) {
 	        	
@@ -14,8 +16,7 @@ describe('lang-directives', function() {
         	});
         }
 
-		beforeEach(inject(function (_$compile_, $rootScope, langManager) {
-			$compile = _$compile_
+		beforeEach(inject(function ($compile, $rootScope, langManager) {
 	       	scope = $rootScope.$new();
 	       	scope.langManager = langManager;
 	        en_element = angular.element('<en></en>');

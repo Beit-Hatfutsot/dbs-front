@@ -1,12 +1,17 @@
+'use strict';
+
 describe('wizard-controllers', function() {
 
-	beforeEach(module('wizard'));
+	beforeEach(function() {
+		module('ui.router');
+		module('wizard');
+	});
 
 	describe('WizardCtrl', function() {
 
 		var scope;
 
-		beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+		beforeEach(inject(function($rootScope, $controller) {
 			scope = $rootScope.$new(); 
 			$controller('WizardCtrl as wizardController', {$scope: scope});
 		}));
@@ -15,6 +20,9 @@ describe('wizard-controllers', function() {
 			expect(scope.wizardController.submit_disabled).toBe(true);
 
 			scope.wizardController.name = 'test';
+			expect(scope.wizardController.submit_disabled).toBe(false);
+
+			scope.wizardController.name = '';
 			scope.wizardController.place = 'test';
 			expect(scope.wizardController.submit_disabled).toBe(false);
 		});

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('lang-services', function() {
 
 	beforeEach(function() {
