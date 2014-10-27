@@ -16,8 +16,12 @@
 		</div>
 		<div id="wizard-search-results">
 			<div id="names-result" ng-switch on="wizardResultController.name_view_mode">
-				<div ng-switch-when="single"></div>
-				<div ng-switch-when="multiple"></div>
+				<div ng-switch-when="single">
+					<single-result result-data="wizardResultController.result.names[0]"></single-result>
+				</div>
+				<div ng-switch-when="multiple">
+
+				</div>
 			</div>
 			<div id="places-result" ng-switch on="wizardResultController.places_view_mode"></div>
 		</div>

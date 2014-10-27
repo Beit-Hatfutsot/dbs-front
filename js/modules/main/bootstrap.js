@@ -7,6 +7,7 @@ angular.module('main', [
     'lang',
     'auth',
     'wizard',
+    'wizardResult',
     'search',
     'apiClient'
 ]).

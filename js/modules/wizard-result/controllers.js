@@ -62,3 +62,14 @@ WizardResultCtrl.prototype = {
 };
 
 angular.module('wizardResult', []).controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
+
+
+var SingleResultCtrl = function($scope) {
+    console.log($scope);
+};
+
+SingleResultCtrl.prototype = {
+
+};
+
+angular.module('wizardResult', []).controller('SingleResultCtrl', ['$scope', SingleResultCtrl]);
