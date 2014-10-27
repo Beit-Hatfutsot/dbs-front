@@ -1,6 +1,6 @@
 'use strict';
 
-var WizardCtrl = function($state) {
+var WizardCtrl = function($state, $stateParams) {
     var self = this;
 
     this.$state = $state;
@@ -18,6 +18,18 @@ var WizardCtrl = function($state) {
     			return false;
     		}
     	}
+    });
+
+    Object.defineProperty(this, 'show_result', {
+
+        get: function() {
+
+            if (self.$state.current.name == 'wizard-result') {
+                return true;
+            }
+
+            return false;
+        }
     });
 };
 

@@ -33,4 +33,46 @@
 			}
 		}
 	}
+
+	#wizard-result {
+
+		#search-again {
+			background: rgba(248, 248, 255, 0.6);
+
+			#search-again-header {
+				height: 40px;
+				width: 100%;
+				background: #E0E0E0;
+
+				.instruction-text {
+					text-align: center;
+				}
+			}
+
+			form#wizard-form {
+				margin: 0 auto;
+				padding: 20px;
+				width: 925px;
+				height: 250px;
+				
+				.field {
+					display: inline-block;
+
+					label {
+						font-size: 16px;
+					}
+
+					input {
+						width: 350px;
+						height: 40px;
+					}
+				}
+
+				button {
+					width: 80px;
+					height: 40px;
+				}
+			}
+		}
+	}
 }

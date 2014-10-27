@@ -14,8 +14,6 @@ config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider',
 function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
 
-    $urlRouterProvider.otherwise('/404');
-
     var states = [ 
         {
             name: 'start',
@@ -32,7 +30,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
 
         {
             name: 'wizard-result',
-            url: '/wizard-result/place=:place/name=:name',
+            parent: 'start',
+            url: 'wizard-result/place=:place/name=:name',
             templateUrl: 'templates/wizard-result/wizard-result.html',
             controller: 'WizardResultCtrl as wizardResultController'
         }
@@ -41,6 +40,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
     angular.forEach(states, function(state) {
         $stateProvider.state(state);
     });
+
+    $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode(true);
 }]).

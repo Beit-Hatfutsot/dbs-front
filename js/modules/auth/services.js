@@ -5,17 +5,17 @@ angular.module('auth').
 	factory('authManager', [
 	'$modal', '$state', '$resource', 'apiClient', '$http', '$compile', '$rootScope', '$q', 
 	function($modal, $state, $resource, apiClient, $http, $compile, $rootScope, $q) {
-
+		var authClient, auth_manager;
 		//$http.defaults.withCredentials = true;
 
-		var authClient = $resource(apiClient.urls.auth, null, {
+		authClient = $resource(apiClient.urls.auth, null, {
     		signin: { 
     			method: 'POST', 
     			withCredentials: true,
     		}
 		});
 
-	  	var auth_manager = {
+	  	auth_manager = {
 
 	  		in_progress: false,
 
@@ -78,16 +78,16 @@ angular.module('auth').
 				    	then(function(response) {
 				    		if (response.meta.code == 200) {
 					    		self.signedin_user = response.response.user;
-					    		self.in_progress = false;
 					    		sign_in_deferred.resolve(response);
 				    		} else {
-				    			self.in_progress = false;
 				    			sign_in_deferred.reject()
 				    		}
 				    	}, function() {
-				    		self.in_progress = false;
 				    		sign_in_deferred.reject();
-				    	});
+				    	}).
+				    	finally(function() {
+	  						self.in_progress = false;
+		  				});
 			  		}, function() {
 			  			self.in_progress = false;
 			  			sign_in_deferred.reject();

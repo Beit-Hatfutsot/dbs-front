@@ -1,20 +1,6 @@
 <div id="start">
-	<div id="wizard">
-		<form id="wizard-form">
-			<div class="field">
-				<en><label for="wizard-name">Name</label></en>
-				<he><label for="wizard-name">שם</label></he>
-				<input type="text" id="wizard-name" ng-model="wizardController.name" />
-			</div>
-			<div class="field">
-				<en><label for="wizard-place">Place</label></en>
-				<he><label for="wizard-place">מקום</label></he>
-				<input type="text" id="wizard-place" ng-model="wizardController.place" />
-			</div>
-			<button ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
-				<en>Sart</en>
-				<he>התחל</he>
-			</button>
-		</form>
+	<div id="wizard" ng-if="!wizardController.show_result">
+		<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
 	</div>
+	<ui-view></ui-view>
 </div>

@@ -1,4 +1,25 @@
-<div>
+<div id="wizard-result">
 	<div ng-show="wizardResultController.in_progress">SEARCHING...</div>
-	<div ng-show="!wizardResultController.in_progress">THIS IS A RESULT {{wizardResultController.result}}</div>
+	<div ng-show="!wizardResultController.in_progress">
+		<div id="search-again" ng-show="wizardResultController.search_again_visible">
+			<button class="lang-float {{mainController.lang}}" ng-click="wizardResultController.search_again_closed=true">
+				<en>Close</en>
+				<he>סגור</he>
+			</button>
+			<div id="search-again-header">
+				<div class="instruction-text">
+					<en>We did not find a family and community that match your search. Please our suggestions or make a new search</en>
+					<he>לא מצאנו משפחה וקהילה שתואמים את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש</he>
+				</div>
+			</div>
+			<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
+		</div>
+		<div id="wizard-search-results">
+			<div id="names-result" ng-switch on="wizardResultController.name_view_mode">
+				<div ng-switch-when="single"></div>
+				<div ng-switch-when="multiple"></div>
+			</div>
+			<div id="places-result" ng-switch on="wizardResultController.places_view_mode"></div>
+		</div>
+	</div>
 </div>
