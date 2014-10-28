@@ -35,8 +35,10 @@
 	}
 
 	#wizard-result {
-
+		
 		#search-again {
+			height: 200px;
+			width: 100%;
 			background: rgba(248, 248, 255, 0.6);
 
 			#search-again-header {
@@ -71,6 +73,56 @@
 				button {
 					width: 80px;
 					height: 40px;
+				}
+			}
+		}
+
+		#wizard-search-result {
+			padding: 60px 500px;
+	
+			#name-tree-result, #place-result {
+				display: inline-block;
+				vertical-align: top;
+				padding: 10px;
+				
+				.single-result {
+					background: #666666;
+					border: 0.5px solid;
+					color: #ffffff;
+					padding: 5px;
+
+					.header {
+						min-height: 30px; 
+						font-weight: bold;
+					}
+				}
+			}
+
+			#name-tree-result {
+
+				#name-result {
+					margin: 20px 0 10px;
+
+					.single-result {
+						height: 200px;
+						width: 300px;	
+					}
+				}
+			}
+
+			#place-result {
+
+				.single-result {
+					height: 300px;
+					width: 300px;
+				}
+			}
+
+			#tree-result {
+
+				.single-result {
+					height: 150px;
+					width: 300px;
 				}
 			}
 		}

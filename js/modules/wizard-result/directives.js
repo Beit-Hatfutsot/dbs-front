@@ -11,5 +11,22 @@ angular.module('wizardResult').directive('singleResult', function() {
 		link: function(scope) {
 			scope.singleResultController.result_data = scope.result_data;
 		}
-	}
+	};
+});
+
+angular.module('wizardResult').directive('multipleResult', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'templates/wizard-result/multiple-result.html',
+		scope: {
+			result_data: '=resultData',
+			content: '@'
+		},
+		controller: 'MultipleResultCtrl as multipleResultController',
+		link: function(scope) {
+			window.s = scope;
+			scope.multipleResultController.result_data = scope.result_data;
+			scope.multipleResultController.content = scope.content;
+		}
+	};
 });

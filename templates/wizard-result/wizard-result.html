@@ -14,16 +14,21 @@
 			</div>
 			<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
 		</div>
-		<div id="wizard-search-results">
-			<div id="names-result" ng-switch on="wizardResultController.name_view_mode">
-				<div ng-switch-when="single">
-					<single-result result-data="wizardResultController.result.names[0]"></single-result>
+		<div id="wizard-search-result">
+			<div id="place-result" ng-switch on="wizardResultController.view_mode('places')">
+				<single-result ng-switch-when="single" result-data="wizardResultController.result.places[0]"></single-result>
+				<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.places" content="places"></multiple-result>	
+			</div>
+			<div id="name-tree-result">
+				<div id="name-result" ng-switch on="wizardResultController.view_mode('names')">
+					<single-result ng-switch-when="single" result-data="wizardResultController.result.names[0]"></single-result>
+					<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.names" content="names"></multiple-result>
 				</div>
-				<div ng-switch-when="multiple">
-
+				<div id="tree-result" ng-switch on="wizardResultController.view_mode('trees')">
+					<single-result ng-switch-when="single" result-data="wizardResultController.result.trees[0]"></single-result>
+					<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.trees" content="trees"></multiple-result>
 				</div>
 			</div>
-			<div id="places-result" ng-switch on="wizardResultController.places_view_mode"></div>
 		</div>
 	</div>
 </div>

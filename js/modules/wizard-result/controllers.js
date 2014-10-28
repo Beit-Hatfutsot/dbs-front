@@ -24,29 +24,6 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
         }
     });
 
-    Object.defineProperty(this, 'name_view_mode', {
-        get: function() {
-        	if (self.result.names && self.result.names.length == 1) {
-        		return 'single';	
-        	}
-        	else {
-            	return 'multiple';
-        	}
-        }
-    });
-
-
-    Object.defineProperty(this, 'place_view_mode', {
-        get: function() {
-            if (self.result.places && self.result.places.length == 1) {
-        		return 'single';	
-        	}
-        	else {
-            	return 'multiple';
-        	}
-        }
-    });
-
 	$scope.$on('$viewContentLoaded', function() {
 		searchManager.wizard_search(self.query.name, self.query.place)
 			.then(function(result) {
@@ -54,22 +31,54 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                 $scope.wizardController.name = self.query.name;
                 $scope.wizardController.place = self.query.place;
 			});
-	})
+	});
 };
 
 WizardResultCtrl.prototype = {
-
+    
+    view_mode: function(content_type) {
+        if (this.result[content_type] && this.result[content_type].length == 1) {
+            return 'single';    
+        }
+        else {
+            return 'multiple';
+        }
+    }
 };
 
 angular.module('wizardResult', []).controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
 
 
-var SingleResultCtrl = function($scope) {
-    console.log($scope);
+var SingleResultCtrl = function() {
+    
 };
 
 SingleResultCtrl.prototype = {
 
 };
 
-angular.module('wizardResult', []).controller('SingleResultCtrl', ['$scope', SingleResultCtrl]);
+angular.module('wizardResult').controller('SingleResultCtrl', [SingleResultCtrl]);
+
+var MultipleResultCtrl = function() {
+
+    this.titles = {
+        names: {
+            en: 'Family Names',
+            he: 'פירושי שמות משפחה'
+        },
+        places: {
+            en: 'Places',
+            he: 'קהילות'
+        },
+        trees: {
+            en: 'Family Trees',
+            he: 'עצי משפחה'
+        }
+    };
+};
+
+MultipleResultCtrl.prototype = {
+
+};
+
+angular.module('wizardResult').controller('MultipleResultCtrl', [MultipleResultCtrl]);
