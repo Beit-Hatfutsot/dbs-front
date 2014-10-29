@@ -11,7 +11,7 @@ angular.module('auth').
 		authClient = $resource(apiClient.urls.auth, null, {
     		signin: { 
     			method: 'POST', 
-    			withCredentials: true,
+    			//withCredentials: true,
     		}
 		});
 
@@ -25,7 +25,7 @@ angular.module('auth').
 
 	  		authenticate: function(next_state, config) {
 
-	  			if ( !this.signed_in_user ) {
+	  			if ( !this.signedin_user ) {
 				    
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
@@ -47,12 +47,42 @@ angular.module('auth').
 		  	},
 
 		  	signin: function(username, password) {
-		  		
+		  		var self = this;
+
+		  		if (!this.in_progress && !this.signed_in_user) {
+
+			  		var signin_deferred = $q.defer(); 
+
+			  		authClient.signin({
+			    		username: username, 
+			    		password: password 
+			    	}).$promise.
+			    	then(function(response) {
+			    		if (response.token) {
+			    			sessionStorage.bhsclient_token = response.token;
+				    		self.signedin_user = username;
+				    		signin_deferred.resolve();
+			    		} else {
+			    			signin_deferred.reject()
+			    		}
+			    	}, function() {
+			    		signin_deferred.reject();
+			    	}).
+			    	finally(function() {
+							self.in_progress = false;
+	  				});
+
+	  				return signin_deferred.promise;
+	  			}
+	  			else {
+	  				return false;
+	  			}
+				/*		  		
 		  		if (!this.in_progress && !this.signed_in_user) {
 
 			  		var self = this;
 
-			  		var sign_in_deferred = $q.defer();
+			  		var signin_deferred = $q.defer();
 
 			  		this.in_progress = true;
 
@@ -69,18 +99,18 @@ angular.module('auth').
 			  			}
 			  			
 			  			authClient.signin({
-				    		email: username, 
+				    		username: username, 
 				    		password: password, 
-				    		next: '/',
-				    		submit: 'Login',
-				    		csrf_token: csrf_token
+				    		//next: '/',
+				    		//submit: 'Login',
+				    		//csrf_token: csrf_token
 				    	}).$promise.
 				    	then(function(response) {
 				    		if (response.meta.code == 200) {
 					    		self.signedin_user = response.response.user;
-					    		sign_in_deferred.resolve(response);
+					    		signin_deferred.resolve();
 				    		} else {
-				    			sign_in_deferred.reject()
+				    			signin_deferred.reject()
 				    		}
 				    	}, function() {
 				    		sign_in_deferred.reject();
@@ -90,14 +120,15 @@ angular.module('auth').
 		  				});
 			  		}, function() {
 			  			self.in_progress = false;
-			  			sign_in_deferred.reject();
+			  			signin_deferred.reject();
 			  		});
 
-			  		return sign_in_deferred.promise;
+			  		return signin_deferred.promise;
 		  		}
 		  		else {
 		  			return false;
 		  		}
+		  		*/
 		  	},
 
 		  	initiate_contact: function() {
@@ -107,3 +138,22 @@ angular.module('auth').
 
   		return auth_manager;
 	}]);
+
+angular.module('auth').
+	factory('authInterceptor', ['$rootScope', '$q', '$window', function ($rootScope, $q, $window) {
+	  	return {
+		    request: function (config) {
+		      config.headers = config.headers || {};
+		      if ($window.sessionStorage.bhsclient_token) {
+		        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.bhsclient_token;
+		      }
+		      return config;
+		    },
+		    response: function (response) {
+		      if (response.status === 401) {
+		        // handle the case where the user is not authenticated
+		      }
+		      return response || $q.when(response);
+		    }
+	  	};
+}]);

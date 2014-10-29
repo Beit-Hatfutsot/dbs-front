@@ -3,6 +3,7 @@
 var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 	var self = this;
 
+    this.failed = false;
 	this.query = $stateParams;
 	this.result = {};
     this.search_again_closed = false;
@@ -30,7 +31,11 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 				self.result = result;
                 $scope.wizardController.name = self.query.name;
                 $scope.wizardController.place = self.query.place;
-			});
+			}, 
+            function() {
+                // handle case when connection to search service failed
+                self.failed = true;
+            });
 	});
 };
 
@@ -40,7 +45,7 @@ WizardResultCtrl.prototype = {
         if (this.result[content_type] && this.result[content_type].length == 1) {
             return 'single';    
         }
-        else {
+        else if (this.result[content_type] && this.result[content_type].length > 1) {
             return 'multiple';
         }
     }

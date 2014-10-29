@@ -4,13 +4,34 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        concat: {
+            options: {
+                // define a string to put between each file in the concatenated output
+                separator: ';'
+            },
+            dist: {
+                // the files to concatenate
+                src: [
+                    'js/modules/main/*.js',
+                    'js/modules/lang/*.js',
+                    'js/modules/api_client/*.js',
+                    'js/modules/auth/*.js',
+                    'js/modules/wizard/*.js',
+                    'js/modules/search/*.js',
+                    'js/modules/wizard-result/*.js',
+                ],
+                // the location of the resulting JS file
+                dest: 'js-build/<%= pkg.name %>.js'
+            }
+        },
+
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             
             js: {
-                src: 'js/*.js',
+                src: ['js-build/<%= pkg.name %>.js'],
                 dest: '',
                 expand: true, 
                 ext: '.min.js',
@@ -40,8 +61,8 @@ module.exports = function(grunt) {
 
         watch: {
             css: {
-                files: ['scss/*.scss', 'scss/**/*.scss'],
-                tasks: ['sass']
+                files: ['js/modules/**/*.js', 'scss/*.scss', 'scss/**/*.scss'],
+                tasks: ['concat', 'sass', 'uglify']
             }
         },
 
@@ -53,12 +74,13 @@ module.exports = function(grunt) {
     });
 
     // Load plugins
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
 
-    // Default tasks
-    //grunt.registerTask('default', ['uglify', 'sass']);
+    grunt.registerTask('default', ['build']);
+    grunt.registerTask('build', ['concat', 'uglify', 'sass']);
 
 };

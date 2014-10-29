@@ -1,12 +1,36 @@
 'use strict';
 
-var WizardCtrl = function($state, $stateParams) {
-    var self = this;
-
+var WizardCtrl = function($state, langManager) {
+    var self    = this;
+        
+    this.name   = '',
+    this.place  = '';
     this.$state = $state;
 
-    this.name = '';
-    this.place = '';
+    this.placeholders = {
+        name: {
+            en: 'Type in a family name',
+            he: 'הכניסו שם'
+        },
+        place: {
+            en: 'Type in a place',
+            he: 'הכניסו מקום'
+        }
+    };
+
+    Object.defineProperty(this, 'name_placeholder', {
+
+        get: function() {
+            return this.placeholders.name[langManager.lang];
+        }
+    });
+
+    Object.defineProperty(this, 'place_placeholder', {
+
+        get: function() {
+            return this.placeholders.place[langManager.lang];
+        }
+    });
 
     Object.defineProperty(this, 'submit_disabled', {
 
@@ -40,4 +64,4 @@ WizardCtrl.prototype = {
     }
 };
 
-angular.module('wizard', []).controller('WizardCtrl', ['$state', WizardCtrl]);
+angular.module('wizard', []).controller('WizardCtrl', ['$state', 'langManager', WizardCtrl]);

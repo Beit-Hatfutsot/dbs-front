@@ -1,5 +1,6 @@
 <div id="wizard-result">
 	<div ng-show="wizardResultController.in_progress">SEARCHING...</div>
+	<div ng-show="wizardResultController.failed">SEARCH FAILED</div>
 	<div ng-show="!wizardResultController.in_progress">
 		<div id="search-again" ng-show="wizardResultController.search_again_visible">
 			<button class="lang-float {{mainController.lang}}" ng-click="wizardResultController.search_again_closed=true">

@@ -2,12 +2,12 @@
 	<div class="field">
 		<en><label for="wizard-name">Name</label></en>
 		<he><label for="wizard-name">שם</label></he>
-		<input type="text" id="wizard-name" ng-model="wizardController.name" />
+		<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
 	</div>
 	<div class="field">
 		<en><label for="wizard-place">Place</label></en>
 		<he><label for="wizard-place">מקום</label></he>
-		<input type="text" id="wizard-place" ng-model="wizardController.place" />
+		<input type="text" id="wizard-place" ng-model="wizardController.place" placeholder="{{wizardController.place_placeholder}}" />
 	</div>
 	<button ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
 		<en>Sart</en>

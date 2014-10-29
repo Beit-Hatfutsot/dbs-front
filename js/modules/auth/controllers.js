@@ -5,7 +5,7 @@ var AuthCtrl = function($modalInstance, langManager, authManager) {
 
     this.$modalInstance = $modalInstance;
     this.authManager = authManager;
-    
+
     Object.defineProperty(this, 'lang', {
     	get: function() {
     		return langManager.lang;
@@ -41,5 +41,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth', []).controller('AuthCtrl', ['$modalInstance', 'langManager', 'authManager', 'apiClient', AuthCtrl]);
+angular.module('auth').controller('AuthCtrl', ['$modalInstance', 'langManager', 'authManager', '$http', AuthCtrl]);
 

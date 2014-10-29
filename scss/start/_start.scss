@@ -85,7 +85,7 @@
 				vertical-align: top;
 				padding: 10px;
 				
-				.single-result {
+				.single-result, .multiple-result {
 					background: #666666;
 					border: 0.5px solid;
 					color: #ffffff;
@@ -103,7 +103,7 @@
 				#name-result {
 					margin: 20px 0 10px;
 
-					.single-result {
+					.single-result, .multiple-result {
 						height: 200px;
 						width: 300px;	
 					}
@@ -112,7 +112,7 @@
 
 			#place-result {
 
-				.single-result {
+				.single-result, .multiple-result {
 					height: 300px;
 					width: 300px;
 				}
@@ -120,7 +120,7 @@
 
 			#tree-result {
 
-				.single-result {
+				.single-result, .multiple-result {
 					height: 150px;
 					width: 300px;
 				}
