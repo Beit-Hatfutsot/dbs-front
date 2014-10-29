@@ -1,5 +1,3 @@
-'use strict';
-
 var WizardCtrl = function($state, langManager) {
     var self    = this;
         
@@ -64,4 +62,4 @@ WizardCtrl.prototype = {
     }
 };
 
-angular.module('wizard', []).controller('WizardCtrl', ['$state', 'langManager', WizardCtrl]);
+angular.module('wizard').controller('WizardCtrl', ['$state', 'langManager', WizardCtrl]);

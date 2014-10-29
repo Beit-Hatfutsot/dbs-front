@@ -1,6 +1,4 @@
-'use strict';
-
-angular.module('lang', []).
+angular.module('lang').
 	directive('en', ['langManager', function(langManager) {
 		return {
 			restrict: 'E',

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('wizardResult').directive('singleResult', function() {
 	return {
 		restrict: 'E',

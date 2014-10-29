@@ -1,20 +1,19 @@
-'use strict'
-
 var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 	var self = this;
 
     this.failed = false;
 	this.query = $stateParams;
 	this.result = {};
-    this.search_again_closed = false;
+    this.search_again_visible = false;
+    this.bingo = true;
 
-	Object.defineProperty(this, 'search_again_visible', {
+	Object.defineProperty(this, 'search_again_button_visible', {
         get: function() {
-        	if ( ( (self.result.names && self.result.names.length == 0) || (self.result.places && self.result.places.length == 0) ) && !self.search_again_closed )  {
-        		return true;
+        	if (self.search_again_visible || self.in_progress)  {
+        		return false;
         	}
 
-        	return false;
+        	return true;
         }
     });
 
@@ -31,6 +30,12 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 				self.result = result;
                 $scope.wizardController.name = self.query.name;
                 $scope.wizardController.place = self.query.place;
+
+                if ( (self.result.names && self.result.names.length == 0) || (self.result.places && self.result.places.length == 0) )  {
+                    
+                    self.bingo = false;
+                    self.search_again_visible = true;
+                }
 			}, 
             function() {
                 // handle case when connection to search service failed
@@ -51,7 +56,7 @@ WizardResultCtrl.prototype = {
     }
 };
 
-angular.module('wizardResult', []).controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
+angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
 
 
 var SingleResultCtrl = function() {

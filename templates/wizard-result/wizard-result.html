@@ -1,16 +1,26 @@
 <div id="wizard-result">
 	<div ng-show="wizardResultController.in_progress">SEARCHING...</div>
 	<div ng-show="wizardResultController.failed">SEARCH FAILED</div>
+	<button class="lang-float {{mainController.lang}}" ng-show="wizardResultController.search_again_button_visible" ng-click="wizardResultController.search_again_visible=true">
+		<en>Search again</en>
+		<he>חיפוש חוזר</he>
+	</button>
 	<div ng-show="!wizardResultController.in_progress">
 		<div id="search-again" ng-show="wizardResultController.search_again_visible">
-			<button class="lang-float {{mainController.lang}}" ng-click="wizardResultController.search_again_closed=true">
+			<button class="lang-float {{mainController.lang}}" ng-click="wizardResultController.search_again_visible=false">
 				<en>Close</en>
 				<he>סגור</he>
 			</button>
 			<div id="search-again-header">
-				<div class="instruction-text">
-					<en>We did not find a family and community that match your search. Please our suggestions or make a new search</en>
-					<he>לא מצאנו משפחה וקהילה שתואמים את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש</he>
+				<div class="instruction-text" ng-switch on="wizardResultController.bingo">
+					<div ng-switch-when="true">
+						<en>New Search</en>
+						<he>חיפוש חדש</he>
+					</div>
+					<div ng-switch-when="false">
+						<en>We did not find a family and community that match your search. Please our suggestions or make a new search</en>
+						<he>לא מצאנו משפחה וקהילה שתואמים את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש</he>
+					</div>
 				</div>
 			</div>
 			<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>

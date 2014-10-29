@@ -1,8 +1,4 @@
-'use strict';
-
-/* Services */
-
-angular.module('apiClient', []).
+angular.module('apiClient').
 
 	factory('apiClient', function() {
 	

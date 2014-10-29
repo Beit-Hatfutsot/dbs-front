@@ -1,5 +1,3 @@
-'use strict';
-
 var AuthCtrl = function($modalInstance, langManager, authManager) {
     var self = this;
 

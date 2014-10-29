@@ -12,13 +12,13 @@ module.exports = function(grunt) {
             dist: {
                 // the files to concatenate
                 src: [
-                    'js/modules/main/*.js',
-                    'js/modules/lang/*.js',
-                    'js/modules/api_client/*.js',
-                    'js/modules/auth/*.js',
-                    'js/modules/wizard/*.js',
-                    'js/modules/search/*.js',
-                    'js/modules/wizard-result/*.js',
+                    'js/modules/main/src/**/*.js',
+                    'js/modules/lang/src/**/*.js',
+                    'js/modules/api_client/src/**/*.js',
+                    'js/modules/auth/src/**/*.js',
+                    'js/modules/wizard/src/**/*.js',
+                    'js/modules/search/src/**/*.js',
+                    'js/modules/wizard-result/src/**/*.js',
                 ],
                 // the location of the resulting JS file
                 dest: 'js-build/<%= pkg.name %>.js'
@@ -60,8 +60,8 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            css: {
-                files: ['js/modules/**/*.js', 'scss/*.scss', 'scss/**/*.scss'],
+            build: {
+                files: ['js/modules/**/src/**/*.js', 'scss/*.scss', 'scss/**/*.scss'],
                 tasks: ['concat', 'sass', 'uglify']
             }
         },

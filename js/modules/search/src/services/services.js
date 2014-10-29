@@ -1,6 +1,4 @@
-'use strict';
-
-angular.module('search', []).
+angular.module('search').
 
 	factory('searchManager', ['apiClient', '$q', '$resource', function(apiClient, $q, $resource) {
 		var searchClient, search_manager;

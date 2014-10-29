@@ -1,5 +1,3 @@
-'use strict';
-
 var MainCtrl = function(langManager, authManager) {
     var self = this;
 

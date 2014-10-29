@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('auth').directive('needAuth', ['$state', 'authManager', function($state, authManager) {
 	return {
 		restrict: 'A',
