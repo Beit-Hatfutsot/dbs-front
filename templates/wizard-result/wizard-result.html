@@ -32,11 +32,13 @@
 		<div id="wizard-search-result">
 			<div id="place-result" ng-switch on="wizardResultController.view_mode('places')">
 				<single-result ng-switch-when="single" result-data="wizardResultController.result.places[0]"></single-result>
+				<no-result ng-switch-when="none" content="places"></no-result>
 				<no-result ng-switch-when="multiple" content="places"></no-result>	
 			</div>
 			<div id="name-tree-result">
 				<div id="name-result" ng-switch on="wizardResultController.view_mode('names')">
 					<single-result ng-switch-when="single" result-data="wizardResultController.result.names[0]"></single-result>
+					<no-result ng-switch-when="none" content="names"></no-result>
 					<no-result ng-switch-when="multiple" content="names"></no-result>
 				</div>
 				<div id="tree-result" ng-switch on="wizardResultController.view_mode('trees')">
