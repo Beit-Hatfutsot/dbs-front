@@ -4,6 +4,7 @@ describe('wizard-controllers', function() {
 
 	beforeEach(function() {
 		module('ui.router');
+		module('lang')
 		module('wizard');
 	});
 

@@ -1,0 +1,21 @@
+<div class="no-result">
+	<div class="text">
+		<en>
+			We have not found
+			<ng-switch on="noResultController.content">
+				<span ng-switch-when="names"> the name </span>
+				<span ng-switch-when="places"> the place </span>
+				<span ng-switch-when="trees"> trees that match what </span>
+			</ng-switch>
+			you were looking for. go away. 
+		</en>
+		<he>לא מצאנו
+			<ng-switch on="noResultController.content">
+				<span ng-switch-when="names"> שם משפחה שמתאים </span>
+				<span ng-switch-when="places"> קהילה שמתאימה </span>
+				<span ng-switch-when="trees"> עצים שמתאימים </span>
+			</ng-switch>
+			למה שחיפשת.
+		</he>
+	</div>
+</div>

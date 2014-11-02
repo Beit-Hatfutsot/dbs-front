@@ -3,14 +3,29 @@
 		<en><label for="wizard-name">Name</label></en>
 		<he><label for="wizard-name">שם</label></he>
 		<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
+		<div class="suggestions" ng-if="wizardResultController.view_mode('names') == 'multiple'">
+			<div class="suggestion" ng-repeat="name in wizardResultController.result.names">
+				<en>{{name.header.en}}</en>
+				<he>{{name.header.he}}</he>
+			</div>
+		</div>
 	</div>
 	<div class="field">
 		<en><label for="wizard-place">Place</label></en>
 		<he><label for="wizard-place">מקום</label></he>
-		<input type="text" id="wizard-place" ng-model="wizardController.place" placeholder="{{wizardController.place_placeholder}}" />
+		<div>	
+			<input type="text" id="wizard-place" ng-model="wizardController.place" placeholder="{{wizardController.place_placeholder}}" />
+			<button ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
+				<en>Sart</en>
+				<he>התחל</he>
+			</button>
+		</div>
+		<div class="suggestions" ng-if="wizardResultController.view_mode('places') == 'multiple'">
+			<div class="suggestion" ng-repeat="place in wizardResultController.result.places">
+				<en>{{place.header.en}}</en>
+				<he>{{place.header.he}}</he>
+			</div>
+		</div>
 	</div>
-	<button ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
-		<en>Sart</en>
-		<he>התחל</he>
-	</button>
+	
 </form>

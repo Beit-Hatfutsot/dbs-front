@@ -12,6 +12,20 @@ angular.module('wizardResult').directive('singleResult', function() {
 	};
 });
 
+angular.module('wizardResult').directive('noResult', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'templates/wizard-result/no-result.html',
+		scope: {
+			content: '@'
+		},
+		controller: 'NoResultCtrl as noResultController',
+		link: function(scope) {
+			scope.noResultController.content = scope.content;
+		}
+	};
+});
+
 angular.module('wizardResult').directive('multipleResult', function() {
 	return {
 		restrict: 'E',
@@ -22,7 +36,6 @@ angular.module('wizardResult').directive('multipleResult', function() {
 		},
 		controller: 'MultipleResultCtrl as multipleResultController',
 		link: function(scope) {
-			window.s = scope;
 			scope.multipleResultController.result_data = scope.result_data;
 			scope.multipleResultController.content = scope.content;
 		}

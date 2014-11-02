@@ -12,14 +12,18 @@
 				<he>סגור</he>
 			</button>
 			<div id="search-again-header">
-				<div class="instruction-text" ng-switch on="wizardResultController.bingo">
-					<div ng-switch-when="true">
+				<div class="instruction-text" ng-switch on="wizardResultController.search_status">
+					<div ng-switch-when="bingo">
 						<en>New Search</en>
 						<he>חיפוש חדש</he>
 					</div>
-					<div ng-switch-when="false">
+					<div ng-switch-when="suggestions">
 						<en>We did not find a family and community that match your search. Please our suggestions or make a new search</en>
 						<he>לא מצאנו משפחה וקהילה שתואמים את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש</he>
+					</div>
+					<div ng-switch-when="none">
+						<en>We did not find a family and community that match your search.</en>
+						<he>לא מצאנו משפחה וקהילה שתואמים את החיפוש שלכם.</he>
 					</div>
 				</div>
 			</div>
@@ -28,16 +32,17 @@
 		<div id="wizard-search-result">
 			<div id="place-result" ng-switch on="wizardResultController.view_mode('places')">
 				<single-result ng-switch-when="single" result-data="wizardResultController.result.places[0]"></single-result>
-				<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.places" content="places"></multiple-result>	
+				<no-result ng-switch-when="multiple" content="places"></no-result>	
 			</div>
 			<div id="name-tree-result">
 				<div id="name-result" ng-switch on="wizardResultController.view_mode('names')">
 					<single-result ng-switch-when="single" result-data="wizardResultController.result.names[0]"></single-result>
-					<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.names" content="names"></multiple-result>
+					<no-result ng-switch-when="multiple" content="names"></no-result>
 				</div>
 				<div id="tree-result" ng-switch on="wizardResultController.view_mode('trees')">
 					<single-result ng-switch-when="single" result-data="wizardResultController.result.trees[0]"></single-result>
 					<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.trees" content="trees"></multiple-result>
+					<no-result ng-switch-when="none" content="trees"></no-result>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 angular.module('search').
 
-	factory('searchManager', ['apiClient', '$q', '$resource', function(apiClient, $q, $resource) {
+	factory('searchManager', ['apiClient', '$resource', function(apiClient, $resource) {
 		var searchClient, search_manager;
 
 		searchClient = $resource(apiClient.urls.search +'/:search_type', null, {
@@ -15,26 +15,21 @@ angular.module('search').
 	  		in_progress: false,
 
 	  		wizard_search: function(name, place) {
-	  			var self = this,
-	  				result_deferred = $q.defer();
+	  			var self = this, 
+	  				search_promise;
 	  			
 	  			this.in_progress = true; 
 
-	  			searchClient.wizard_search({
-	  				name: name,
-	  				place: place	
-	  			}).$promise.
-  				then(function(result) {
-  					result_deferred.resolve(result);
-  				},
-  				function() {
-  					result_deferred.reject();
-  				}).
-  				finally(function() {
+	  			search_promise = searchClient.wizard_search({
+  					name: name,
+  					place: place	
+  				}).$promise;
+  					
+  				search_promise.finally(function() {
   					self.in_progress = false;
   				});
 
-	  			return result_deferred.promise;
+  				return search_promise;
 	  		}
 	  	};
 

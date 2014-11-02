@@ -16,6 +16,7 @@
 			
 			.field {
 				display: inline-block;
+				vertical-align: top;
 
 				label {
 					font-size: 16px;
@@ -28,6 +29,7 @@
 			}
 
 			button {
+				vertical-align: bottom;
 				width: 80px;
 				height: 40px;
 			}
@@ -59,6 +61,7 @@
 				
 				.field {
 					display: inline-block;
+					vertical-align: top;
 
 					label {
 						font-size: 16px;
@@ -68,11 +71,22 @@
 						width: 350px;
 						height: 40px;
 					}
-				}
+				
+					button {
+						width: 80px;
+						height: 40px;
+					}
 
-				button {
-					width: 80px;
-					height: 40px;
+					.suggestions {
+						padding: 10px 0 0;
+
+						.suggestion {
+							margin: 5px;
+							display: inline-block;
+							padding: 5px;
+							border: 1px solid #666666;
+						}
+					}
 				}
 			}
 		}
@@ -85,7 +99,7 @@
 				vertical-align: top;
 				padding: 10px;
 				
-				.single-result, .multiple-result {
+				.single-result, .no-result, .multiple-result {
 					background: #666666;
 					border: 0.5px solid;
 					color: #ffffff;
@@ -103,7 +117,7 @@
 				#name-result {
 					margin: 20px 0 10px;
 
-					.single-result, .multiple-result {
+					.single-result, .no-result, .multiple-result {
 						height: 200px;
 						width: 300px;	
 					}
@@ -112,7 +126,7 @@
 
 			#place-result {
 
-				.single-result, .multiple-result {
+				.single-result, .no-result, .multiple-result {
 					height: 300px;
 					width: 300px;
 				}
@@ -120,7 +134,7 @@
 
 			#tree-result {
 
-				.single-result, .multiple-result {
+				.single-result, .no-result, .multiple-result {
 					height: 150px;
 					width: 300px;
 				}

@@ -19,8 +19,6 @@ describe('auth-services', function() {
 			apiClient 		= _apiClient_;
 			$httpBackend 	= _$httpBackend_;
 
-			$httpBackend.whenGET(apiClient.urls.auth).respond();
-			$httpBackend.whenGET('templates/auth/auth_modal.html').respond();
 			$httpBackend.whenPOST(apiClient.urls.auth).
 				respond(function(method, url, data, headers) {
 					var code, response,
@@ -29,25 +27,14 @@ describe('auth-services', function() {
 					if (requestData.email == 'test-username' && requestData.password == 'test-password') {
 						
 						response = {
-							meta: {
-								code: 200
-							},
-							response: {
-								user: { 
-									name: 'test' 
-								}
-							}
-						}
+							token: 'test-token'
+						};
 
 						code = 200;
 					}
 					else {
 
-						response = {
-							meta: {
-								code: 400
-							}
-						}
+						response = {};
 
 						code = 400;
 					}		
@@ -59,21 +46,16 @@ describe('auth-services', function() {
 		
 		it('should signin', function() {
 			
-			$httpBackend.expectGET(apiClient.urls.auth);
 			$httpBackend.expectPOST(apiClient.urls.auth);
 
-			authManager.signin('test-username', 'test-password').
-				then(function(response) {
-					expect(response.response.user.name).toEqual('test');
-				});
+			authManager.signin('test-username', 'test-password');
 			$httpBackend.flush();
-			expect(authManager.signedin_user.name).toEqual('test');
+			expect(authManager.signedin_user.name).not.toEqual('test-username');
 		});
 
 
 		it('should not signin', function() {
 			
-			$httpBackend.expectGET(apiClient.urls.auth);
 			$httpBackend.expectPOST(apiClient.urls.auth);
 
 			authManager.signin('wrong-username', 'wrong-password');
