@@ -6,7 +6,7 @@ angular.module('search').
 		searchClient = $resource(apiClient.urls.search +'/:search_type', null, {
 			wizard_search: { 
 				method: 'GET', 
-				params: {search_type: 'wizard'} 
+				params: {search_type: 'wizard'}
 			}
 		});
 

@@ -24,7 +24,7 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
         }
     });
 
-	$scope.$on('$viewContentLoaded', function() {
+	//$scope.$on('$viewContentLoaded', function() {
 	
         searchManager.wizard_search(self.query.name, self.query.place)
 			.then(function(result) {
@@ -32,14 +32,14 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                 $scope.wizardController.name = self.query.name;
                 $scope.wizardController.place = self.query.place;
 
-                if ( (result.names && result.names.length !== 1)  || (result.places && result.places.length !== 1) )  {
+                if ( !result.bingo.name || !result.bingo.place )  {
                     self.search_again_visible = true;
                 }
 
-                if ( result.names.length === 1 && result.places.length === 1 )  {
+                if ( result.bingo.name && result.bingo.place )  {
                     self.search_status = 'bingo';
                 }
-                else if ( result.names.length > 1 || result.places.length > 1 ) {
+                else if ( result.suggestions.name || result.suggestions.place ) {
                     self.search_status =  'suggestions'; 
                 }
                 else {
@@ -52,22 +52,11 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                 // handle case when connection to search service failed
                 self.failed = true;
             });
-	});
+	//});
 };
 
 WizardResultCtrl.prototype = {
     
-    view_mode: function(content_type) {
-        if (this.result[content_type] && this.result[content_type].length === 1) {
-            return 'single';    
-        }
-        else if (this.result[content_type] && this.result[content_type].length === 0) {
-            return 'none';
-        }
-        else if (this.result[content_type] && this.result[content_type].length > 1) {
-            return 'multiple';
-        }
-    }
 };
 
 angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
@@ -94,14 +83,7 @@ angular.module('wizardResult').controller('SingleResultCtrl', [SingleResultCtrl]
 var MultipleResultCtrl = function() {
 
     this.titles = {
-        names: {
-            en: 'Family Names',
-            he: 'פירושי שמות משפחה'
-        },
-        places: {
-            en: 'Places',
-            he: 'קהילות'
-        },
+    
         trees: {
             en: 'Family Trees',
             he: 'עצי משפחה'

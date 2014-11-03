@@ -3,10 +3,10 @@
 		<en><label for="wizard-name">Name</label></en>
 		<he><label for="wizard-name">שם</label></he>
 		<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
-		<div class="suggestions" ng-if="wizardResultController.view_mode('names') == 'multiple'">
-			<div class="suggestion" ng-repeat="name in wizardResultController.result.names">
-				<en>{{name.header.en}}</en>
-				<he>{{name.header.he}}</he>
+		<div class="suggestions" ng-if="wizardResultController.result.suggestions.name">
+			<div class="suggestion" ng-repeat="name in wizardResultController.result.suggestions.name">
+				<en>{{name.Header.En}}</en>
+				<he>{{name.Header.He}}</he>
 			</div>
 		</div>
 	</div>
@@ -20,10 +20,10 @@
 				<he>התחל</he>
 			</button>
 		</div>
-		<div class="suggestions" ng-if="wizardResultController.view_mode('places') == 'multiple'">
-			<div class="suggestion" ng-repeat="place in wizardResultController.result.places">
-				<en>{{place.header.en}}</en>
-				<he>{{place.header.he}}</he>
+		<div class="suggestions" ng-if="wizardResultController.result.suggestions.place">
+			<div class="suggestion" ng-repeat="place in wizardResultController.result.suggestions.place">
+				<en>{{place.Header.En}}</en>
+				<he>{{place.Header.He}}</he>
 			</div>
 		</div>
 	</div>

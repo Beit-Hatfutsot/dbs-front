@@ -12,11 +12,9 @@ describe('wizard-result-controllers', function() {
 
 	describe('WizardResultCtrl', function() {
 
-		var scope, result, $timeout;
+		var scope, result, $timeout, createCtrl;
 
 		beforeEach(inject(function($rootScope, $controller, $q, _$timeout_) {
-			result = {names: [], places: [], trees: []};
-			$timeout = _$timeout_;
 
 			var wizard_search = jasmine.createSpy('searchManager.wizard_search').
 				andCallFake(function() {
@@ -38,65 +36,85 @@ describe('wizard-result-controllers', function() {
 				place: 'test-place'
 			};
 
-			scope = $rootScope.$new(); 
-			scope.wizardController = {};
-			$controller('WizardResultCtrl as wizardResultController', {
-				$scope: scope,
-				searchManager: searchManager,
-				$stateParams: stateParams
-			});
-		}));
+			result = {
+				bingo: {
+					name: null, 
+					place: null
+				}, 
 
+				suggestions: {
+					name: null,
+					place: null
+				}
+			};
+
+			$timeout = _$timeout_;
+
+			scope = $rootScope.$new();
+			scope.wizardController = {};
+
+			createCtrl = function() {
+				return $controller('WizardResultCtrl as wizardResultController', {
+					$scope: scope,
+					searchManager: searchManager,
+					$stateParams: stateParams
+				});
+			}
+		}));
+		
 		it('should search', function() {
-			scope.$emit('$viewContentLoaded');
+			createCtrl();
 			$timeout.flush();
-			
 			expect(scope.wizardResultController.result).toBe(result);
 		});
-
-		it('should set proper view modes', function() {
-			result = {
-				names: [{}, {}],
-				places: [{}],
-				trees: []
-			}
-			scope.$emit('$viewContentLoaded');
-			$timeout.flush();
-
-			expect(scope.wizardResultController.view_mode('names')).toEqual('multiple');
-			expect(scope.wizardResultController.view_mode('places')).toEqual('single');
-			expect(scope.wizardResultController.view_mode('trees')).toEqual('none');
-		});
-
+		
 		it('should properly set search_status & search_again_visible', function() {
 			result = {
-				names: [{}],
-				places: [{}],
-				trees: []
-			}
-			scope.$emit('$viewContentLoaded');
+				bingo: {
+					name: {},
+					place: {}
+				},
+
+				suggestions: {
+					name: null,
+					place: null
+				}
+			};
+			createCtrl();
 			$timeout.flush();
 			
 			expect(scope.wizardResultController.search_status).toEqual('bingo');
 			expect(scope.wizardResultController.search_again_visible).toBe(false);
 
 			result = {
-				names: [{}, {}],
-				places: [{}],
-				trees: []
+				bingo: {
+					name: null,
+					place: null
+				},
+
+				suggestions: {
+					name: {},
+					place: null
+				}
 			}
-			scope.$emit('$viewContentLoaded');
+			createCtrl();
 			$timeout.flush();
 			
 			expect(scope.wizardResultController.search_status).toEqual('suggestions');
 			expect(scope.wizardResultController.search_again_visible).toBe(true);
 
 			result = {
-				names: [],
-				places: [{}],
-				trees: []
+				bingo: {
+					name: null,
+					place: null
+				},
+
+				suggestions: {
+					name: null,
+					place: null
+				}
 			}
-			scope.$emit('$viewContentLoaded');
+			createCtrl();
 			$timeout.flush();
 			
 			expect(scope.wizardResultController.search_status).toEqual('none');
