@@ -1,153 +1,75 @@
-#start-wrapper {
-	width: 1120px;
-	height: 624px;
-	overflow: visible;
-	margin: 0 auto;
+#start {
 
-	#start {
-		@include bg_image("start.jpg");
-		width: 1920px;
-		height: 694px;
-		position : absolute;
-	    left: 50%;
-	    top: 50%;
-	    @include translate(-50%, -50%);
+	#start-wrapper {
+		width: 1120px;
+		height: 624px;
+		overflow: visible;
+		margin: 0 auto;
 
-		#wizard {
-			margin: 130px auto;
-			padding: 42px 68px;
-			width: 944px;
-			height: 380px;
-			background: rgba(249, 249, 249, 0.85);		
+		#start-inner {
+			@include bg_image("start.jpg");
+			width: 1920px;
+			height: 694px;
+			position : absolute;
+		    left: 50%;
+		    top: 50%;
+		    @include translate(-50%, -50%);
 
-			#wizard-text {
+			#wizard {
+				margin: 130px auto;
+				padding: 42px 68px;
+				width: 944px;
+				height: 380px;
+				background: rgba(249, 249, 249, 0.85);		
 
-				.title {
-					color: #5dc2d4;
-					font-size: 72px;
-					margin-bottom: 8px;
+				#wizard-text {
+
+					.title {
+						color: #5dc2d4;
+						font-size: 72px;
+						margin-bottom: 8px;
+					}
+
+					.text {
+						font-size: 22px;
+						margin-bottom: 58px;
+					}
+
+					.instructions {
+						font-size: 20px;
+						margin-bottom: 5px;
+					}
 				}
-
-				.text {
-					font-size: 22px;
-					margin-bottom: 58px;
-				}
-
-				.instructions {
-					font-size: 20px;
-					margin-bottom: 3px;
-				}
-			}
-		}
-	}
-
-	form#wizard-form {
-				
-		.field {
-			display: inline-block;
-			vertical-align: top;
-
-			label {
-				font-size: 11px;
-			}
-
-			input {
-				width: 294px;
-				height: 38px;
-				padding: 0 8px;
-			}
-		}
-
-		.field.place {
-			
-			.en & {
-				margin: 0 0 0 35px;	
-			}
-
-			.he & {
-				margin: 0 35px 0 0;	
-			}
-		}
-
-		button {
-			vertical-align: bottom;
-			width: 144px;
-			height: 38px;
-			color: #f9f9f9;
-			font-size: 22px;
-			background: #5dc2d4;
-			border: none;
-			border-radius: 2px;
-
-			.en & {
-				margin: 0 0 0 30px;	
-			}
-
-			.he & {
-				margin: 0 30px 0 0;	
-			}
-
-			&:disabled {
-				background: grey;
 			}
 		}
 	}
 
 	#wizard-result {
 			
-			#search-again {
-				min-height: 200px;
+		#search-again {
+			min-height: 200px;
+			width: 100%;
+			background: rgba(248, 248, 255, 0.6);
+
+			#search-again-header {
+				height: 40px;
 				width: 100%;
-				background: rgba(248, 248, 255, 0.6);
+				background: #E0E0E0;
 
-				#search-again-header {
-					height: 40px;
-					width: 100%;
-					background: #E0E0E0;
-
-					.instruction-text {
-						text-align: center;
-					}
-				}
-
-				form#wizard-form {
-					margin: 0 auto;
-					padding: 20px;
-					width: 925px;
-					min-height: 250px;
-					
-					.field {
-						display: inline-block;
-						vertical-align: top;
-
-						label {
-							font-size: 16px;
-						}
-
-						input {
-							width: 350px;
-							height: 40px;
-						}
-					
-						button {
-							width: 80px;
-							height: 40px;
-						}
-
-						.suggestions {
-							padding: 10px 0 0;
-							width: 350px;
-
-							.suggestion {
-								margin: 5px;
-								display: inline-block;
-								padding: 5px;
-								border: 1px solid #666666;
-							}
-						}
-					}
+				.instruction-text {
+					text-align: center;
 				}
 			}
+
+			form#wizard-form {
+				margin: 0 auto;
+				padding: 20px;
+				width: 925px;
+				min-height: 250px;
+				
+				
+			}
+		}
 
 		#wizard-search-result {
 			padding: 60px 500px;
@@ -197,6 +119,59 @@
 					height: 150px;
 					width: 300px;
 				}
+			}
+		}
+	}
+
+	form#wizard-form {
+				
+		.field {
+			display: inline-block;
+			vertical-align: top;
+
+			label {
+				font-size: 12px;
+			}
+
+			input {
+				width: 294px;
+				height: 38px;
+				padding: 0 8px;
+			}
+		}
+
+		.field.place {
+			
+			.en & {
+				margin: 0 0 0 35px;	
+			}
+
+			.he & {
+				margin: 0 35px 0 0;	
+			}
+		}
+
+		button {
+			vertical-align: bottom;
+			width: 144px;
+			height: 38px;
+			color: #f9f9f9;
+			font-size: 22px;
+			background: #5dc2d4;
+			border: none;
+			border-radius: 2px;
+
+			.en & {
+				margin: 0 0 0 30px;	
+			}
+
+			.he & {
+				margin: 0 30px 0 0;	
+			}
+
+			&:disabled {
+				background: grey;
+				cursor: default;
 			}
 		}
 	}

@@ -12,8 +12,8 @@
 		<script src="js/lib/angular/angular-ui-router.min.js"></script>
 		<script src="js-build/bhsclient.js"></script>
 	</head>
-	<body class={{mainController.lang}}>
-		<div id="app-container">
+	<body>
+		<div id="app-container" class={{mainController.lang}}>
 			<ng-include src="'templates/header/header.html'"></ng-include>
 			<div id="view" ui-view></div>	
 			<ng-include src="'templates/footer/footer.html'"></ng-include>

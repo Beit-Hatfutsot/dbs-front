@@ -6,6 +6,7 @@ angular.module('main', [
     'ui.router',
     'lang',
     'auth',
+    'header',
     'wizard',
     'wizardResult',
     'search',

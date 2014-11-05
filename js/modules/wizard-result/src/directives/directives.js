@@ -3,7 +3,7 @@ angular.module('wizardResult').directive('singleResult', function() {
 		restrict: 'E',
 		templateUrl: 'templates/wizard-result/single-result.html',
 		scope: {
-			result_data: '=resultData'
+			result_data: '=resultData',
 		}
 	};
 });

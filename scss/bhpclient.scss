@@ -20,29 +20,36 @@ html {
 		margin: 0;
 		color: #333333;
 
-		&.en {
-			direction: ltr;
-		}
-
-		&.he {
-			direction: rtl;
-		}
-
-		.lang-float {
-
-			&.en {
-				float: right;
-			}
-
-			&.he {
-				float: left;
-			}
-		}
-
 		#app-container {
 			position: relative;
 			padding: 0 5px;
-			min-height: 100%;	
+			min-height: 100%;
+
+			&.en {
+				direction: ltr;
+			}
+
+			&.he {
+				direction: rtl;
+			}
+
+			.lang-float {
+
+				&.en {
+					float: right;
+				}
+
+				&.he {
+					float: left;
+				}
+			}
+
+			.bh-pointer {
+
+				&:hover {
+					cursor: pointer;
+				}
+			}	
 
 			#view {
 				position: relative;

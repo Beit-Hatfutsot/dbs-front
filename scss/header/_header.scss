@@ -1,32 +1,55 @@
-#header {
+#header-wrapper {
 	height: 70px;
 	width: 100%;
-	padding: 5px 5px;
-	margin-bottom: 20px;
 
-	div {
-		display: inline-block;
-		height: 100%;
-	}
-
-	#logo-container {
-		padding: 3px 5px 0;
-	}
-
-	#search-area {
-		padding: 20px 5px 0;
-		vertical-align: top;
-
-		input {
-			height: 30px;
-			width: 300px;
+	#header-inner {
+		margin: 0 auto;
+		width: 1140px;
+			
+		div {
+			display: inline-block;
+			height: 100%;
 		}
 
-		button {
-			height: 30px;
-			width: 60px;
+		#logo-container {
+			padding: 3px 5px 0;
+		}
+
+		#search-area {
+			padding: 20px 5px 0;
 			vertical-align: top;
-			padding: 5px;
+
+			form {
+
+				input {
+					height: 30px;
+					width: 300px;
+
+					.en & {
+						padding: 0 70px 0 0;
+					}
+
+					.he & {
+						padding: 0 0 0 70px;	
+					}
+				}
+
+				button {
+					position: relative;
+					height: 30px;
+					width: 60px;
+					vertical-align: top;
+					padding: 5px;
+
+					.en & {
+						left: -60px;
+					}
+
+					.he & {
+						right: -60px;	
+					}
+				}
+			}
 		}
 	}
 }

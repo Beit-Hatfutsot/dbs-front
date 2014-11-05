@@ -29,49 +29,53 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 	
         searchManager.wizard_search(self.query.name, self.query.place)
 			.then(function(result) {
-	       
-                $scope.wizardController.name = self.query.name;
-                $scope.wizardController.place = self.query.place;
+	            try {
+                    $scope.wizardController.name = self.query.name;
+                    $scope.wizardController.place = self.query.place;
 
-                if ( !result.bingo.name || !result.bingo.place )  {
-                    self.search_again_visible = true;
-                }
+                    if ( !result.bingo.name || !result.bingo.place )  {
+                        self.search_again_visible = true;
+                    }
 
-                // set search status
-                if ( result.bingo.name || result.bingo.place )  {
+                    // set search status
+                    if ( result.bingo.name || result.bingo.place )  {
+                        
+                        if (result.bingo.name && !result.bingo.place) {
+                            self.search_status = 'bingo-name';
+                        }
+                        else if (!result.bingo.name && result.bingo.place) {
+                            self.search_status = 'bingo-place';
+                        }
+                        else {
+                            self.search_status = 'bingo';
+                        }
+                    }
+                    else {
+                        self.search_status =  'none';
+                    }
                     
-                    if (result.bingo.name && !result.bingo.place) {
-                        self.search_status = 'bingo-name';
-                    }
-                    else if (!result.bingo.name && result.bingo.place) {
-                        self.search_status = 'bingo-place';
+                    // set suggestions status
+                    if ( result.suggestions.name || result.suggestions.place ) {
+
+                        if (result.suggestions.name && !result.suggestions.place) {
+                            self.suggestions_status = 'name';
+                        }
+                        else if (!result.suggestions.name && result.suggestions.place) {
+                            self.suggestions_status = 'place';
+                        }
+                        else {
+                            self.suggestions_status = 'both';
+                        }
                     }
                     else {
-                        self.search_status = 'bingo';
+                        self.suggestions_status = 'none';
                     }
-                }
-                else {
-                    self.search_status =  'none';
-                }
-                
-                // set suggestions status
-                if ( result.suggestions.name || result.suggestions.place ) {
 
-                    if (result.suggestions.name && !result.suggestions.place) {
-                        self.suggestions_status = 'name';
-                    }
-                    else if (!result.suggestions.name && result.suggestions.place) {
-                        self.suggestions_status = 'place';
-                    }
-                    else {
-                        self.suggestions_status = 'both';
-                    }
+                    self.result = result;    
                 }
-                else {
-                    self.suggestions_status = 'none';
-                }
-
-                self.result = result;
+                catch(e) {
+                    self.filed = true;
+                }    
 			}, 
             function() {
                 // handle case when connection to search service failed
@@ -87,13 +91,15 @@ WizardResultCtrl.prototype = {
 angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
 
 
-var SingleResultCtrl = function() {
+var SingleResultCtrl = function($scope) {
     
 };
 
 SingleResultCtrl.prototype = {
 
 };
+
+angular.module('wizardResult').controller('SingleResultCtrl', ['$scope', SingleResultCtrl]);
 
 var NoResultCtrl = function() {
     
@@ -103,7 +109,7 @@ NoResultCtrl.prototype = {
 
 };
 
-angular.module('wizardResult').controller('SingleResultCtrl', [SingleResultCtrl]);
+angular.module('wizardResult').controller('NoResultCtrl', [NoResultCtrl]);
 
 var MultipleResultCtrl = function() {
 

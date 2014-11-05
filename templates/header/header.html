@@ -1,25 +1,29 @@
-<div id="header">
-	<div id="lang-selector" class="lang-float {{mainController.lang}}">
-		<en>
-			<span ng-click="mainController.lang='he'">עברית</span>
-		</en>
-		<he>
-			<span ng-click="mainController.lang='en'">English</span>
-		</he>
-	</div>
-	<div id="logo-container">
-		<en>
-			<img src="images/logo-en-medium.png" alt="Logo" />
-		</en>
-		<he>
-			<img src="images/logo-he-medium.png" alt="Logo" />
-		</he>
-	</div>
-	<div id="search-area">
-		<input type="text" />
-		<button need-auth="false">
-			<en>Search</en>
-			<he>חפש</he>
-		</button>
+<div id="header-wrapper" ng-controller="HeaderCtrl as headerController">
+	<div id="header-inner">
+		<div id="lang-selector" class="lang-float {{mainController.lang}}">
+			<en>
+				<span ng-click="mainController.lang='he'">עברית</span>
+			</en>
+			<he>
+				<span ng-click="mainController.lang='en'">English</span>
+			</he>
+		</div>
+		<div id="logo-container" class="bh-pointer" ui-sref="start">
+			<en>
+				<img src="images/logo-en-medium.png" alt="Logo" />
+			</en>
+			<he>
+				<img src="images/logo-he-medium.png" alt="Logo" />
+			</he>
+		</div>
+		<div id="search-area">
+			<form>
+				<input type="text" />
+				<button class="bh-pointer" need-auth="false">
+					<en>Search</en>
+					<he>חפש</he>
+				</button>
+			</form>
+		</div>
 	</div>
 </div>

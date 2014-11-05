@@ -16,6 +16,7 @@ module.exports = function(grunt) {
                     'js/modules/lang/src/**/*.js',
                     'js/modules/api_client/src/**/*.js',
                     'js/modules/auth/src/**/*.js',
+                    'js/modules/header/src/**/*.js',
                     'js/modules/wizard/src/**/*.js',
                     'js/modules/search/src/**/*.js',
                     'js/modules/wizard-result/src/**/*.js',
