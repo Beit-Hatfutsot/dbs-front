@@ -1,12 +1,10 @@
 <div id="header-wrapper" ng-controller="HeaderCtrl as headerController">
 	<div id="header-inner">
-		<div id="lang-selector" class="lang-float {{mainController.lang}}">
-			<en>
-				<span ng-click="mainController.lang='he'">עברית</span>
-			</en>
-			<he>
-				<span ng-click="mainController.lang='en'">English</span>
-			</he>
+		<div id="dropdown-icons" class="lang-float {{mainController.lang}}">
+			<div class="language-selector bh-pointer">
+				<en ng-click="mainController.lang='he'">עב</en>
+				<he ng-click="mainController.lang='en'">EN</he>
+			</div>
 		</div>
 		<div id="logo-container" class="bh-pointer" ui-sref="start">
 			<en>

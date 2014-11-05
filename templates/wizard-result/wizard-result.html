@@ -1,67 +1,63 @@
 <div id="wizard-result">
 	<div ng-show="wizardResultController.in_progress">SEARCHING...</div>
 	<div ng-show="wizardResultController.failed">SEARCH FAILED</div>
-	<button class="lang-float {{mainController.lang}}" ng-show="wizardResultController.search_again_button_visible" ng-click="wizardResultController.search_again_visible=true">
-		<en>Search again</en>
-		<he>חיפוש חוזר</he>
-	</button>
 	<div ng-show="!wizardResultController.in_progress">
-		<div id="search-again" ng-show="wizardResultController.search_again_visible">
-			<button class="lang-float {{mainController.lang}}" ng-click="wizardResultController.search_again_visible=false">
-				<en>Close</en>
-				<he>סגור</he>
+		<div id="wizard-result-header">
+			<button class="lang-float {{mainController.lang}}" ng-click="wizardResultController.search_again_visible=!wizardResultController.search_again_visible">
+				<en>Search again</en>
+				<he>חיפוש חוזר</he>
 			</button>
-			<div id="search-again-header">
-				<div class="instruction-text" ng-switch on="wizardResultController.search_status === 'bingo'">
-					<div ng-switch-when="true">
-						<en>New Search</en>
-						<he>חיפוש חדש</he>
-					</div>
-					<div ng-switch-when="false">
-						<en>We could not find a</en>
-						<he>לא מצאנו</he> 
-						<ng-switch on="wizardResultController.search_status">
-							<span ng-switch-when="bingo-place"> 
-								<en> family name </en>
-								<he> שם משפחה שתואם </he> 
-							</span>
-							<span ng-switch-when="bingo-name">
-								<en> community </en>
-								<he> קהילה שתואמת </he>
-							</span>
-							<span ng-switch-when="none">
-								<en> family name and community </en>
-								<he> שם משפחה וקהילה שתואמים </he>
-							</span>
-						</ng-switch>
-						<ng-switch on="wizardResultController.suggestions_status === 'none'">
-							<span ng-switch-when="false">
-								<en> to match your search. Please try using our suggestions or make a new search.</en>
-								<he> את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש.</he>
-							</span>
-							<span ng-switch-when="true">
-								<en> to match your search. Please try making a new search.</en>
-								<he> את החיפוש שלכם. נסו לחפש מחדש.</he>
-							</span>
-						</ng-switch>							
-					</div>
+			<div class="instruction-text" ng-switch on="wizardResultController.search_status === 'bingo'">
+				<div ng-switch-when="true">
+					<en>New Search</en>
+					<he>חיפוש חדש</he>
+				</div>
+				<div ng-switch-when="false">
+					<en>We could not find a</en>
+					<he>לא מצאנו</he> 
+					<ng-switch on="wizardResultController.search_status">
+						<span ng-switch-when="bingo-place"> 
+							<en> family name </en>
+							<he> שם משפחה שתואם </he> 
+						</span>
+						<span ng-switch-when="bingo-name">
+							<en> community </en>
+							<he> קהילה שתואמת </he>
+						</span>
+						<span ng-switch-when="none">
+							<en> family name and community </en>
+							<he> שם משפחה וקהילה שתואמים </he>
+						</span>
+					</ng-switch>
+					<ng-switch on="wizardResultController.suggestions_status === 'none'">
+						<span ng-switch-when="false">
+							<en> to match your search. Please try using our suggestions or make a new search.</en>
+							<he> את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש.</he>
+						</span>
+						<span ng-switch-when="true">
+							<en> to match your search. Please try making a new search.</en>
+							<he> את החיפוש שלכם. נסו לחפש מחדש.</he>
+						</span>
+					</ng-switch>							
 				</div>
 			</div>
+		</div>
+		<div id="search-again" ng-show="wizardResultController.search_again_visible">
 			<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
 		</div>
 		<div id="wizard-search-result">
 			<div id="place-result" ng-switch on="wizardResultController.result.bingo.place === null">
-				<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.place"></single-result>
+				<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.place" content="place"></single-result>
 				<no-result ng-switch-when="true" content="place"></no-result>
 			</div>
 			<div id="name-tree-result">
 				<div id="name-result" ng-switch on="wizardResultController.result.bingo.name === null">
-					<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.name"></single-result>
+					<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.name" content="name"></single-result>
 					<no-result ng-switch-when="true" content="name"></no-result>
 				</div>
 				<!--
 				<div id="tree-result" ng-switch on="wizardResultController.view_mode('trees')">
-					<single-result ng-switch-when="single" result-data="wizardResultController.result.trees[0]"></single-result>
+					<single-result ng-switch-when="single" result-data="wizardResultController.result.trees[0]" content="tree"></single-result>
 					<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.trees" content="trees"></multiple-result>
 					<no-result ng-switch-when="none" content="tree"></no-result>
 				</div>

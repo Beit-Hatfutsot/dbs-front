@@ -4,7 +4,9 @@ angular.module('wizardResult').directive('singleResult', function() {
 		templateUrl: 'templates/wizard-result/single-result.html',
 		scope: {
 			result_data: '=resultData',
-		}
+			content_type: '@content'
+		},
+		controller: 'SingleResultCtrl as singleResultController'
 	};
 });
 

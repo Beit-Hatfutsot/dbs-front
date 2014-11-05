@@ -3,23 +3,31 @@
 	width: 100%;
 
 	#header-inner {
+		position: relative;
 		margin: 0 auto;
 		width: 1140px;
+		height: 100%;
 			
 		div {
-			display: inline-block;
 			height: 100%;
 		}
 
 		#logo-container {
+			display: inline-block;
 			padding: 3px 5px 0;
+			z-index: 1;
 		}
 
 		#search-area {
+			position: relative;
+			top: -100%;
+			margin: 0 auto;
 			padding: 20px 5px 0;
 			vertical-align: top;
 
 			form {
+				width: 365px;
+				margin: 0 auto;
 
 				input {
 					height: 30px;
@@ -48,6 +56,41 @@
 					.he & {
 						right: -60px;	
 					}
+				}
+			}
+		}
+
+		#dropdown-icons {
+			padding: 20px 0;
+			position: absolute;
+			top: 0;
+			z-index: 1;
+
+			.en & {
+				right: 0;
+			}
+
+			.he & {
+				left: 0;
+			}
+
+			.language-selector {
+				height: 33px;
+				width: 33px;
+				color: #f9f9f9;
+				font-weight: bold;
+				border-radius: 50%;
+				background: grey;
+				text-align: center;
+
+				.en & {
+					padding: 6px 0;
+					font-size: 17px;
+				}
+
+				.he & {
+					padding: 7px 0;
+					font-size: 17px;
 				}
 			}
 		}

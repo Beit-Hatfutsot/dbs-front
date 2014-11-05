@@ -93,6 +93,31 @@ angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state
 
 var SingleResultCtrl = function($scope) {
     
+    this.content_types = {
+        name: {
+            en: 'Surname Origin',
+
+            he: 'פירוש שם משפחה'
+        },
+
+        place: {
+            en: 'Community',
+            
+            he: 'קהילה'
+        },
+
+        tree: {
+            en: 'Family Tree',
+            
+            he: 'עץ משפחה'
+        },
+
+        trees: {
+            en: 'Family Trees',
+            
+            he: 'עצי משפחה'
+        } 
+    }
 };
 
 SingleResultCtrl.prototype = {
