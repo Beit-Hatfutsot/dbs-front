@@ -4,7 +4,7 @@ angular.module('lang').
 
 	  	var lang_manager = {
 
-	  		lang: 'he'
+	  		lang: 'en'
 
 	  	};
 

@@ -7,12 +7,12 @@ var WizardCtrl = function($state, langManager) {
 
     this.placeholders = {
         name: {
-            en: 'Type in a family name',
-            he: 'הכניסו שם'
+            en: 'Surname',
+            he: 'שם משפחה'
         },
         place: {
-            en: 'Type in a place',
-            he: 'הכניסו מקום'
+            en: 'Place of Origin',
+            he: 'מקום'
         }
     };
 

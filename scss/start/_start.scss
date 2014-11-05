@@ -14,37 +14,81 @@
 	    @include translate(-50%, -50%);
 
 		#wizard {
-			width: 1140px;
-			height: 625px;
-			padding: 200px 20px;
-			margin: 0 auto;		
+			margin: 130px auto;
+			padding: 42px 68px;
+			width: 944px;
+			height: 380px;
+			background: rgba(249, 249, 249, 0.85);		
 
-			form#wizard-form {
-				margin: 0 auto;
-				padding: 60px;
-				width: 925px;
-				height: 250px;
-				background: rgba(248, 248, 255, 0.6);
+			#wizard-text {
+
+				.title {
+					color: #5dc2d4;
+					font-size: 72px;
+					margin-bottom: 8px;
+				}
+
+				.text {
+					font-size: 22px;
+					margin-bottom: 58px;
+				}
+
+				.instructions {
+					font-size: 20px;
+					margin-bottom: 3px;
+				}
+			}
+		}
+	}
+
+	form#wizard-form {
 				
-				.field {
-					display: inline-block;
-					vertical-align: top;
+		.field {
+			display: inline-block;
+			vertical-align: top;
 
-					label {
-						font-size: 16px;
-					}
+			label {
+				font-size: 11px;
+			}
 
-					input {
-						width: 350px;
-						height: 40px;
-					}
-				}
+			input {
+				width: 294px;
+				height: 38px;
+				padding: 0 8px;
+			}
+		}
 
-				button {
-					vertical-align: bottom;
-					width: 80px;
-					height: 40px;
-				}
+		.field.place {
+			
+			.en & {
+				margin: 0 0 0 35px;	
+			}
+
+			.he & {
+				margin: 0 35px 0 0;	
+			}
+		}
+
+		button {
+			vertical-align: bottom;
+			width: 144px;
+			height: 38px;
+			color: #f9f9f9;
+			font-size: 22px;
+			background: #5dc2d4;
+			border: none;
+			border-radius: 2px;
+
+			.en & {
+				margin: 0 0 0 30px;	
+			}
+
+			.he & {
+				margin: 0 30px 0 0;	
+			}
+
+			&:disabled {
+				background: grey;
 			}
 		}
 	}

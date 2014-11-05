@@ -1,10 +1,12 @@
 <form id="wizard-form">
-	<div class="field">
-		<en><label for="wizard-name">Name</label></en>
-		<he><label for="wizard-name">שם</label></he>
+	<div class="field name">
 		<div>
 			<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
 		</div>
+		<label for="wizard-place">
+			<en>Original family name of one of your ancestors</en>
+			<he>שם</he>
+		</label>
 		<div class="suggestions" ng-if="wizardResultController.result.suggestions.name">
 			<div class="suggestions-instructions">
 				<en>Did you mean...</en>
@@ -16,16 +18,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="field">
-		<en><label for="wizard-place">Place</label></en>
-		<he><label for="wizard-place">מקום</label></he>
+	<div class="field place">
 		<div>	
 			<input type="text" id="wizard-place" ng-model="wizardController.place" placeholder="{{wizardController.place_placeholder}}" />
 			<button ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
-				<en>Sart</en>
+				<en>Start</en>
 				<he>התחל</he>
 			</button>
 		</div>
+		<label for="wizard-place">
+			<en>Town / Village they came from. Uf unknown, type country</en>
+			<he>מקום</he>
+		</label>
 		<div class="suggestions" ng-if="wizardResultController.result.suggestions.place">
 			<div class="suggestions-instructions">
 				<en>Did you mean...</en>
@@ -36,6 +40,5 @@
 				<he>{{place.Header.He}}</he>
 			</div>
 		</div>
-	</div>
-	
+	</div>	
 </form>
