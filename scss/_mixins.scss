@@ -10,6 +10,15 @@ $images: '/images/';
 
 
 @mixin bg_image($url) {
-	background: url($images + $url) 0 0 no-repeat;
+	background: url($images + $url);
+	background-repeat: no-repeat;
+	background-position: 0 0;
 	background-size: 100% 100%;
+}
+
+@mixin translate($x, $y) {
+	-webkit-transform: translate($x, $y);
+    -moz-transform: translate($x, $y);
+    -ms-transform: translate($x, $y);
+    transform: translate($x, $y);
 }

@@ -34,7 +34,6 @@ describe('search-services', function() {
 			searchManager.wizard_search('test-name', 'test-place').
 				then(function(response) {
 					result = response;
-					console.log(response)
 				});
 			$httpBackend.flush();
 

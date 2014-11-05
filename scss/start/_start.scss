@@ -1,63 +1,30 @@
-#start {
+#start-wrapper {
+	width: 1120px;
+	height: 624px;
+	overflow: visible;
+	margin: 0 auto;
 
-	#wizard {
-		width: 1282px;
-		height: 625px;
-		margin: 0 auto;
-		padding: 200px 20px;
-		@include bg_image("main.png");
+	#start {
+		@include bg_image("start.jpg");
+		width: 1920px;
+		height: 694px;
+		position : absolute;
+	    left: 50%;
+	    top: 50%;
+	    @include translate(-50%, -50%);
 
-		form#wizard-form {
-			margin: 0 auto;
-			padding: 60px;
-			width: 925px;
-			height: 250px;
-			background: rgba(248, 248, 255, 0.6);
-			
-			.field {
-				display: inline-block;
-				vertical-align: top;
-
-				label {
-					font-size: 16px;
-				}
-
-				input {
-					width: 350px;
-					height: 40px;
-				}
-			}
-
-			button {
-				vertical-align: bottom;
-				width: 80px;
-				height: 40px;
-			}
-		}
-	}
-
-	#wizard-result {
-		
-		#search-again {
-			height: 200px;
-			width: 100%;
-			background: rgba(248, 248, 255, 0.6);
-
-			#search-again-header {
-				height: 40px;
-				width: 100%;
-				background: #E0E0E0;
-
-				.instruction-text {
-					text-align: center;
-				}
-			}
+		#wizard {
+			width: 1140px;
+			height: 625px;
+			padding: 200px 20px;
+			margin: 0 auto;		
 
 			form#wizard-form {
 				margin: 0 auto;
-				padding: 20px;
+				padding: 60px;
 				width: 925px;
 				height: 250px;
+				background: rgba(248, 248, 255, 0.6);
 				
 				.field {
 					display: inline-block;
@@ -71,25 +38,72 @@
 						width: 350px;
 						height: 40px;
 					}
-				
-					button {
-						width: 80px;
-						height: 40px;
+				}
+
+				button {
+					vertical-align: bottom;
+					width: 80px;
+					height: 40px;
+				}
+			}
+		}
+	}
+
+	#wizard-result {
+			
+			#search-again {
+				min-height: 200px;
+				width: 100%;
+				background: rgba(248, 248, 255, 0.6);
+
+				#search-again-header {
+					height: 40px;
+					width: 100%;
+					background: #E0E0E0;
+
+					.instruction-text {
+						text-align: center;
 					}
+				}
 
-					.suggestions {
-						padding: 10px 0 0;
+				form#wizard-form {
+					margin: 0 auto;
+					padding: 20px;
+					width: 925px;
+					min-height: 250px;
+					
+					.field {
+						display: inline-block;
+						vertical-align: top;
 
-						.suggestion {
-							margin: 5px;
-							display: inline-block;
-							padding: 5px;
-							border: 1px solid #666666;
+						label {
+							font-size: 16px;
+						}
+
+						input {
+							width: 350px;
+							height: 40px;
+						}
+					
+						button {
+							width: 80px;
+							height: 40px;
+						}
+
+						.suggestions {
+							padding: 10px 0 0;
+							width: 350px;
+
+							.suggestion {
+								margin: 5px;
+								display: inline-block;
+								padding: 5px;
+								border: 1px solid #666666;
+							}
 						}
 					}
 				}
 			}
-		}
 
 		#wizard-search-result {
 			padding: 60px 500px;

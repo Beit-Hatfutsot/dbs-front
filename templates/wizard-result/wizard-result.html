@@ -12,18 +12,38 @@
 				<he>סגור</he>
 			</button>
 			<div id="search-again-header">
-				<div class="instruction-text" ng-switch on="wizardResultController.search_status">
-					<div ng-switch-when="bingo">
+				<div class="instruction-text" ng-switch on="wizardResultController.search_status === 'bingo'">
+					<div ng-switch-when="true">
 						<en>New Search</en>
 						<he>חיפוש חדש</he>
 					</div>
-					<div ng-switch-when="suggestions">
-						<en>We did not find a family and community that match your search. Please our suggestions or make a new search</en>
-						<he>לא מצאנו משפחה וקהילה שתואמים את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש</he>
-					</div>
-					<div ng-switch-when="none">
-						<en>We did not find a family and community that match your search.</en>
-						<he>לא מצאנו משפחה וקהילה שתואמים את החיפוש שלכם.</he>
+					<div ng-switch-when="false">
+						<en>We could not find a</en>
+						<he>לא מצאנו</he> 
+						<ng-switch on="wizardResultController.search_status">
+							<span ng-switch-when="bingo-place"> 
+								<en> family name </en>
+								<he> שם משפחה שתואם </he> 
+							</span>
+							<span ng-switch-when="bingo-name">
+								<en> community </en>
+								<he> קהילה שתואמת </he>
+							</span>
+							<span ng-switch-when="none">
+								<en> family name and community </en>
+								<he> שם משפחה וקהילה שתואמים </he>
+							</span>
+						</ng-switch>
+						<ng-switch on="wizardResultController.suggestions_status === 'none'">
+							<span ng-switch-when="false">
+								<en> to match your search. Please try using our suggestions or make a new search.</en>
+								<he> את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש.</he>
+							</span>
+							<span ng-switch-when="true">
+								<en> to match your search. Please try making a new search.</en>
+								<he> את החיפוש שלכם. נסו לחפש מחדש.</he>
+							</span>
+						</ng-switch>							
 					</div>
 				</div>
 			</div>

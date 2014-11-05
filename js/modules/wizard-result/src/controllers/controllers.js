@@ -6,6 +6,7 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 	this.result = {};
     this.search_again_visible = false;
     this.search_status = '';
+    this.suggestions_status = '';
 
     Object.defineProperty(this, 'search_again_button_visible', {
         get: function() {
@@ -36,14 +37,38 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                     self.search_again_visible = true;
                 }
 
-                if ( result.bingo.name && result.bingo.place )  {
-                    self.search_status = 'bingo';
-                }
-                else if ( result.suggestions.name || result.suggestions.place ) {
-                    self.search_status =  'suggestions'; 
+                // set search status
+                if ( result.bingo.name || result.bingo.place )  {
+                    
+                    if (result.bingo.name && !result.bingo.place) {
+                        self.search_status = 'bingo-name';
+                    }
+                    else if (!result.bingo.name && result.bingo.place) {
+                        self.search_status = 'bingo-place';
+                    }
+                    else {
+                        self.search_status = 'bingo';
+                    }
                 }
                 else {
                     self.search_status =  'none';
+                }
+                
+                // set suggestions status
+                if ( result.suggestions.name || result.suggestions.place ) {
+
+                    if (result.suggestions.name && !result.suggestions.place) {
+                        self.suggestions_status = 'name';
+                    }
+                    else if (!result.suggestions.name && result.suggestions.place) {
+                        self.suggestions_status = 'place';
+                    }
+                    else {
+                        self.suggestions_status = 'both';
+                    }
+                }
+                else {
+                    self.suggestions_status = 'none';
                 }
 
                 self.result = result;

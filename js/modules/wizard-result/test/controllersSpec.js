@@ -68,7 +68,7 @@ describe('wizard-result-controllers', function() {
 			expect(scope.wizardResultController.result).toBe(result);
 		});
 		
-		it('should properly set search_status & search_again_visible', function() {
+		it('should properly set search_status, search_again_visible', function() {
 			result = {
 				bingo: {
 					name: {},
@@ -88,19 +88,36 @@ describe('wizard-result-controllers', function() {
 
 			result = {
 				bingo: {
-					name: null,
+					name: {},
 					place: null
 				},
 
 				suggestions: {
-					name: {},
+					name: null,
 					place: null
 				}
 			}
 			createCtrl();
 			$timeout.flush();
 			
-			expect(scope.wizardResultController.search_status).toEqual('suggestions');
+			expect(scope.wizardResultController.search_status).toEqual('bingo-name');
+			expect(scope.wizardResultController.search_again_visible).toBe(true);
+
+			result = {
+				bingo: {
+					name: null,
+					place: {}
+				},
+
+				suggestions: {
+					name: null,
+					place: null
+				}
+			}
+			createCtrl();
+			$timeout.flush();
+			
+			expect(scope.wizardResultController.search_status).toEqual('bingo-place');
 			expect(scope.wizardResultController.search_again_visible).toBe(true);
 
 			result = {
@@ -119,6 +136,72 @@ describe('wizard-result-controllers', function() {
 			
 			expect(scope.wizardResultController.search_status).toEqual('none');
 			expect(scope.wizardResultController.search_again_visible).toBe(true);
+		});
+	
+		it('should properly set suggestions_status', function() {
+			result = {
+				bingo: {
+					name: null,
+					place: null
+				},
+
+				suggestions: {
+					name: {},
+					place: {}
+				}
+			};
+			createCtrl();
+			$timeout.flush();
+			
+			expect(scope.wizardResultController.suggestions_status).toEqual('both');
+
+			result = {
+				bingo: {
+					name: null,
+					place: null
+				},
+
+				suggestions: {
+					name: {},
+					place: null
+				}
+			}
+			createCtrl();
+			$timeout.flush();
+			
+			expect(scope.wizardResultController.suggestions_status).toEqual('name');
+
+			result = {
+				bingo: {
+					name: null,
+					place: null
+				},
+
+				suggestions: {
+					name: null,
+					place: {}
+				}
+			}
+			createCtrl();
+			$timeout.flush();
+			
+			expect(scope.wizardResultController.suggestions_status).toEqual('place');
+
+			result = {
+				bingo: {
+					name: null,
+					place: null
+				},
+
+				suggestions: {
+					name: null,
+					place: null
+				}
+			}
+			createCtrl();
+			$timeout.flush();
+			
+			expect(scope.wizardResultController.suggestions_status).toEqual('none');
 		});
 	});
 });

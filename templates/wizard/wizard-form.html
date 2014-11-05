@@ -2,8 +2,14 @@
 	<div class="field">
 		<en><label for="wizard-name">Name</label></en>
 		<he><label for="wizard-name">שם</label></he>
-		<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
+		<div>
+			<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
+		</div>
 		<div class="suggestions" ng-if="wizardResultController.result.suggestions.name">
+			<div class="suggestions-instructions">
+				<en>Did you mean...</en>
+				<he>האם התכונת ל...</he>
+			</div>
 			<div class="suggestion" ng-repeat="name in wizardResultController.result.suggestions.name">
 				<en>{{name.Header.En}}</en>
 				<he>{{name.Header.He}}</he>
@@ -21,6 +27,10 @@
 			</button>
 		</div>
 		<div class="suggestions" ng-if="wizardResultController.result.suggestions.place">
+			<div class="suggestions-instructions">
+				<en>Did you mean...</en>
+				<he>האם התכונת ל...</he>
+			</div>
 			<div class="suggestion" ng-repeat="place in wizardResultController.result.suggestions.place">
 				<en>{{place.Header.En}}</en>
 				<he>{{place.Header.He}}</he>

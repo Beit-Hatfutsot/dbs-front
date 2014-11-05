@@ -1,6 +1,8 @@
-<div id="start">
-	<div id="wizard" ng-if="!wizardController.show_result">
-		<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
+<div id="start-wrapper">
+	<div id="start" ng-if="!wizardController.show_result">
+		<div id="wizard">
+			<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
+		</div>
 	</div>
 	<ui-view></ui-view>
 </div>
