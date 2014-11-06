@@ -41,31 +41,6 @@
 						margin-bottom: 5px;
 					}
 				}
-
-				form#wizard-form {
-
-					.field.place {
-			
-						.en & {
-							margin: 0 0 0 35px;	
-						}
-
-						.he & {
-							margin: 0 35px 0 0;	
-						}
-					}
-
-					button {
-
-						.en & {
-							margin: 0 0 0 30px;	
-						}
-
-						.he & {
-							margin: 0 30px 0 0;	
-						}
-					}
-				}
 			}
 		}
 	}
@@ -97,21 +72,22 @@
 		}
 
 		#search-again {
-			min-height: 200px;
-			width: 350px;;
-			background: rgba(248, 248, 255, 1);
 			position: relative;
+			min-height: 200px;
+			width: 100%;
+			background: rgba(248, 248, 255, 1);
 
 			form#wizard-form {
+				width: 846px;
 				margin: 0 auto;
 				padding: 20px 20px 60px;
 				min-height: 250px;
 
 				.field {
-					margin: 0 0 10px;
 
 					.suggestions {
 						margin: 10px 0;
+						width: 294px;
 
 						.suggestion {
 							display: inline-block;
@@ -119,19 +95,6 @@
 							padding: 5px;
 							border: 1px solid #333333;
 						}
-					}
-				}
-
-				button {
-					position: absolute;
-					bottom: 20px;
-
-					.en & {
-						left: 20px;
-					}
-
-					.he & {
-						right: 20px;
 					}
 				}
 			}
@@ -232,6 +195,17 @@
 				height: 38px;
 				padding: 0 8px;
 			}
+		
+			&.place {
+
+				.en & {
+					margin: 0 0 0 35px;	
+				}
+
+				.he & {
+					margin: 0 35px 0 0;	
+				}
+			}
 		}
 
 		button {
@@ -248,6 +222,15 @@
 				background: grey;
 				cursor: default;
 			}
+
+			.en & {
+				margin: 0 0 0 30px;	
+			}
+
+			.he & {
+				margin: 0 30px 0 0;	
+			}
+
 		}
 	}
 }
