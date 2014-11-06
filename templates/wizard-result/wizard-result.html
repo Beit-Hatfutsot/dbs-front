@@ -3,10 +3,6 @@
 	<div ng-show="wizardResultController.failed">SEARCH FAILED</div>
 	<div ng-show="!wizardResultController.in_progress">
 		<div id="wizard-result-header">
-			<button class="lang-float {{mainController.lang}}" ng-click="wizardResultController.search_again_visible=!wizardResultController.search_again_visible">
-				<en>Search again</en>
-				<he>חיפוש חוזר</he>
-			</button>
 			<div class="instruction-text" ng-switch on="wizardResultController.search_status === 'bingo'">
 				<div ng-switch-when="true">
 					<en>New Search</en>
@@ -39,6 +35,10 @@
 							<he> את החיפוש שלכם. נסו לחפש מחדש.</he>
 						</span>
 					</ng-switch>							
+				</div>
+				<div class="search-again-trigger" ng-click="wizardResultController.search_again_visible=!wizardResultController.search_again_visible">
+					<en>Search again</en>
+					<he>חיפוש חוזר</he>
 				</div>
 			</div>
 		</div>
