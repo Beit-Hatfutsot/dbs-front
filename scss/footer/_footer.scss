@@ -10,25 +10,44 @@
 	#footer-inner {
 		width: $view-width;
 		margin: 0 auto;
+		padding: 20px 0 0;
 
-		a {
-			padding: 0 5px;
+		.title {
+			font-weight: bold;
+			font-size: 14px;
+			margin: 0 0 10px;
 		}
+		
+		a {
+			
+			.en & {
+				padding: 0 5px 0 0;
+			}
 
-		.links {
-			font-size: 12px;
-
-			.title {
-				font-weight: bold;
-				font-size: 14px;
-				margin: 0 0 10px;
+			.he & {
+				padding: 0 0 0 5px;
 			}
 		}
 
-		.contact, .rights {
-			color: #666666;
-			font-size: 12px;
-			padding: 5px 0;
+		.links-contact-rights {
+			position: relative;
+
+			.links, .contact-rights {
+				font-size: 12px;
+			}
+
+			.contact-rights {
+				position: absolute;
+				top: 0;
+
+				.en & {
+					right: 0;
+				}
+
+				.he & {
+					left: 0;
+				}
+			}
 		}
 	}
 }
