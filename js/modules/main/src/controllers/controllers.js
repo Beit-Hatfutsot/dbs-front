@@ -8,6 +8,7 @@ var MainCtrl = function(langManager, authManager) {
 
     	set: function(language) {
     		langManager.lang = language;
+            window.localStorage.language= language;
     	}
     });
 

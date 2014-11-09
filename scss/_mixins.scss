@@ -22,3 +22,15 @@ $images: '/images/';
     -ms-transform: translate($x, $y);
     transform: translate($x, $y);
 }
+
+@mixin linear-gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%) { 
+	background: $start;
+	background: -webkit-gradient(linear, left top, left bottom, from($start), to($stop));
+	background: -moz-linear-gradient(center top, $start $from, $stop $to);
+	background: -moz-gradient(center top, $start $from, $stop $to);
+	background: -webkit-linear-gradient(top, $start $from,$stop $to);
+	background: -o-linear-gradient(top, $start $from,$stop $to);
+	background: -ms-linear-gradient(top, $start $from,$stop $to);
+	background: linear-gradient(to bottom, $start $from,$stop $to);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$start}', endColorstr='#{$stop}',GradientType=0 );
+}

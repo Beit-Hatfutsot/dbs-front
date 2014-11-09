@@ -1,7 +1,25 @@
 <div class="single-result">
 	<div class="type">
-		<en>{{singleResultController.content_types[content_type].en}}</en>
-		<he>{{singleResultController.content_types[content_type].he}}</he>
+		<ng-switch on="content_type">
+			<div ng-switch-when="name">
+				<div class="type-icon-container">
+					<img src="images/surname.svg" alt="content-type-icon">
+				</div>
+				<div class="type-desc-container">
+					<en>Surname Origin</en>
+					<he>פירוש שם משפחה</he>
+				</div>
+			</div>
+			<div ng-switch-when="place">
+				<div class="type-icon-container">
+					<img src="images/community.svg" alt="content-type-icon">
+				</div>
+				<div class="type-desc-container">
+					<en>Community</en>
+					<he>קהילה</he>
+				</div>
+			</div>
+		</ng-switch>
 	</div>
 	<div class="header">
 		<en>{{result_data.Header.En}}</en>

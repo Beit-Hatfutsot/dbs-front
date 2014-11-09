@@ -16,12 +16,11 @@ describe('main-controllers', function() {
 		}));
 
 		it('should set and get a language', function() {
-
-			expect(scope.mainController.hasOwnProperty('lang')).toBe(true);
-			expect(scope.mainController.lang).toBe('he');
-
 			scope.mainController.lang = 'en';
 			expect(scope.mainController.lang).toBe('en');
+
+			scope.mainController.lang = 'he';
+			expect(scope.mainController.lang).toBe('he');
 		});
 	});
 });

@@ -5,20 +5,24 @@
 	#header-inner {
 		position: relative;
 		margin: 0 auto;
-		width: $view-width;
+		max-width: $view-width;
 		height: 100%;
 
 		#logo-container {
 			position: relative;
 			display: inline-block;
-			height: 100%;
-			padding: 3px 5px 0;
+			top: 10px;
 			z-index: 1;
+
+			img {
+				width: auto;
+				height: 50px;
+			}
 		}
 
 		#search-area {
 			position: relative;
-			top: -70px;
+			top: -53px;
 			width: 100%;
 			margin: 0 auto;
 			padding: 20px 5px 0;
@@ -26,23 +30,24 @@
 			z-index: 0;
 
 			form {
-				width: 365px;
+				width: 425px;
 				margin: 0 auto;
 
 				input {
 					height: 30px;
-					width: 300px;
+					width: 360px;
+					font-size: 12px;
 
 					.en & {
-						padding: 0 70px 0 0;
+						padding: 0 45px 0 10px;
 					}
 
 					.he & {
-						padding: 0 0 0 70px;	
+						padding: 0 10px 0 45px;	
 					}
 				}
 
-				button {
+				.search-button {
 					position: relative;
 					height: 30px;
 					width: 60px;
@@ -50,11 +55,11 @@
 					padding: 5px;
 
 					.en & {
-						left: -60px;
+						left: -50px;
 					}
 
 					.he & {
-						right: -60px;	
+						right: -50px;	
 					}
 				}
 			}
@@ -81,16 +86,72 @@
 				font-weight: bold;
 				border-radius: 50%;
 				background: grey;
-				text-align: center;
+
+				.en & {
+					padding: 7px 0;
+					font-size: 17px;
+				}
+
+				.he & {
+					padding: 6px 0;
+					font-size: 17px;
+				}
+
+				.selector {
+					text-align: center;
+				}
+
+				.title {
+					height: 44px;
+				}
+
+				.row {
+					height: 42px;
+					padding: 15px 15px 0;
+					border-bottom: 2px solid #eceaea;
+					font-size: 15px;
+
+					.language-selector {
+						position: relative;
+						top: -50%;
+						display: inline-block;
+					}
+
+					.language-desc {
+						position: relative;
+						top: -5px;
+						display: inline-block;
+						height: 100%;
+						width: auto;
+						vertical-align: top;
+
+						.en & {
+							right: -5px;
+						}
+
+						.he & {
+							left: -5px;	
+						}
+					}
+				}
 				
 				.language-menu {
 					display: none;
 					position: relative;
-					height: 40px;
-					width: 20px;
+					height: 145px;
+					width: 330px;
 					top: 20px;
 					background: #ffffff;
 					color: #333333;
+					border-bottom: 2px solid #5ecad8;
+
+					.en & {
+						left: -300px;
+					}
+
+					.he & {
+						right: -300px;
+					}
 				}
 				
 				&.open {
@@ -98,16 +159,6 @@
 					.language-menu {
 						display: block;
 					}
-				}
-
-				.en & {
-					padding: 6px 0;
-					font-size: 17px;
-				}
-
-				.he & {
-					padding: 7px 0;
-					font-size: 17px;
 				}
 			}
 		}

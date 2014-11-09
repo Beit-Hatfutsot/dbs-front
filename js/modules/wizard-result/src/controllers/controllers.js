@@ -4,7 +4,7 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
     this.failed = false;
 	this.query = $stateParams;
 	this.result = {};
-    this.search_again_visible = false;
+    this.search_again_visible = true;
     this.search_status = '';
     this.suggestions_status = '';
 
@@ -32,10 +32,6 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 	            try {
                     $scope.wizardController.name = self.query.name;
                     $scope.wizardController.place = self.query.place;
-
-                    if ( !result.bingo.name || !result.bingo.place )  {
-                        self.search_again_visible = true;
-                    }
 
                     // set search status
                     if ( result.bingo.name || result.bingo.place )  {
@@ -74,7 +70,7 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                     self.result = result;    
                 }
                 catch(e) {
-                    self.filed = true;
+                    self.failed = true;
                 }    
 			}, 
             function() {
@@ -93,31 +89,6 @@ angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state
 
 var SingleResultCtrl = function($scope) {
     
-    this.content_types = {
-        name: {
-            en: 'Surname Origin',
-
-            he: 'פירוש שם משפחה'
-        },
-
-        place: {
-            en: 'Community',
-            
-            he: 'קהילה'
-        },
-
-        tree: {
-            en: 'Family Tree',
-            
-            he: 'עץ משפחה'
-        },
-
-        trees: {
-            en: 'Family Trees',
-            
-            he: 'עצי משפחה'
-        } 
-    }
 };
 
 SingleResultCtrl.prototype = {

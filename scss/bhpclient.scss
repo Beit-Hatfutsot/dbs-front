@@ -23,8 +23,8 @@ html {
 
 		#app-container {
 			position: relative;
-			padding: 0 5px;
-			min-height: 100%;
+			padding: 0 0 70px;
+			height: 100%;
 
 			&.en {
 				direction: ltr;
@@ -54,7 +54,7 @@ html {
 
 			#view {
 				position: relative;
-				padding-bottom: 70px;
+				padding-bottom: 80px;
 				height: 100%;
 				width: 100%;
 				overflow-x: hidden;

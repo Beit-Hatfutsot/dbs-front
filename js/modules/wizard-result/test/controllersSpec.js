@@ -84,7 +84,7 @@ describe('wizard-result-controllers', function() {
 			$timeout.flush();
 			
 			expect(scope.wizardResultController.search_status).toEqual('bingo');
-			expect(scope.wizardResultController.search_again_visible).toBe(false);
+			expect(scope.wizardResultController.search_again_visible).toBe(true);
 
 			result = {
 				bingo: {
