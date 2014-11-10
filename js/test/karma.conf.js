@@ -21,6 +21,7 @@ module.exports = function(config) {
         'lib/angular/angular-mocks.js',
         {pattern: 'modules/**/**/*.js/', included: true},
         {pattern: 'modules/**/test/*.js', included: true},
+        {pattern: 'modules/**/test/**/*.js', included: true},
     ],
 
 

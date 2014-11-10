@@ -10,7 +10,9 @@ angular.module('main', [
     'wizard',
     'wizardResult',
     'search',
-    'apiClient'
+    'apiClient',
+    'cache',
+    'item'
 ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider',
@@ -33,9 +35,22 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         {
             name: 'wizard-result',
             parent: 'start',
-            url: 'wizard-result/place=:place/name=:name',
+            url: 'wizard-result?place&name',
             templateUrl: 'templates/wizard-result/wizard-result.html',
             controller: 'WizardResultCtrl as wizardResultController'
+        },
+        
+        {
+            name: 'item-view',
+            url: '/item/:id',
+            templateUrl: 'templates/item/item.html',
+            controller: 'ItemCtrl as itemController',
+            resolve: {
+
+                itemData: ['$stateParams', 'item', function($stateParams, item) {
+                    return item.get($stateParams.id);
+                }]
+            }
         }
     ];
 

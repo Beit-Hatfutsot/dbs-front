@@ -1,6 +1,7 @@
 var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
 	var self = this;
 
+    this.in_progress = true;
     this.failed = false;
 	this.query = $stateParams;
 	this.result = {};
@@ -15,13 +16,6 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
         	}
 
         	return true;
-        }
-    });
-
-	// TODO maybe turn this into event listener
-    Object.defineProperty(this, 'in_progress', {
-        get: function() {
-            return searchManager.in_progress;
         }
     });
 
@@ -76,6 +70,9 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
             function() {
                 // handle case when connection to search service failed
                 self.failed = true;
+            }).
+            finally(function() {
+                self.in_progress = false;
             });
 	//});
 };
@@ -87,15 +84,19 @@ WizardResultCtrl.prototype = {
 angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
 
 
-var SingleResultCtrl = function($scope) {
+var SingleResultCtrl = function($state) {
     
+    this.$state = $state;
 };
 
 SingleResultCtrl.prototype = {
 
+    goto_item: function(item_data) {
+        this.$state.go('item-view', {id: item_data._id});
+    }
 };
 
-angular.module('wizardResult').controller('SingleResultCtrl', ['$scope', SingleResultCtrl]);
+angular.module('wizardResult').controller('SingleResultCtrl', ['$state', SingleResultCtrl]);
 
 var NoResultCtrl = function() {
     

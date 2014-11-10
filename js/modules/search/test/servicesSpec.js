@@ -5,6 +5,7 @@ describe('search-services', function() {
 	beforeEach(function() {
 		module('ngResource');
 		module('apiClient');
+		module('cache')
 		module('search');
 	});
 

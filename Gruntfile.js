@@ -20,6 +20,8 @@ module.exports = function(grunt) {
                     'js/modules/wizard/src/**/*.js',
                     'js/modules/search/src/**/*.js',
                     'js/modules/wizard-result/src/**/*.js',
+                    'js/modules/cache/src/**/*.js',
+                    'js/modules/item/src/**/*.js',
                 ],
                 // the location of the resulting JS file
                 dest: 'js-build/<%= pkg.name %>.js'
