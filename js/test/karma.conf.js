@@ -16,6 +16,7 @@ module.exports = function(config) {
     files: [
         'lib/angular/angular.min.js',
         'lib/angular/angular-resource.min.js',
+        'lib/angular/angular-animate.min.js',
         'lib/angular/angular-ui-router.min.js',
         'lib/ui-bootstrap-tpls-0.11.2.min.js',
         'lib/angular/angular-mocks.js',

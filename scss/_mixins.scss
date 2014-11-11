@@ -23,6 +23,27 @@ $images: '/images/';
     transform: translate($x, $y);
 }
 
+@mixin translateX($x) {
+	-webkit-transform: translateX($x);
+    -moz-transform: translateX($x);
+    -ms-transform: translateX($x);
+    transform: translateX($x);
+}
+
+@mixin translateY($y) {
+	-webkit-transform: translateY($y);
+    -moz-transform: translateY($y);
+    -ms-transform: translateY($y);
+    transform: translateY($y);
+}
+
+@mixin transition($property, $duration, $timing-function, $delay:0s) {
+	-webkit-transition: $property $duration $timing-function $delay;
+    -moz-transition: $property $duration $timing-function $delay;
+    -ms-transition: $property $duration $timing-function $delay;
+    transition: $property $duration $timing-function $delay;
+}
+
 @mixin linear-gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%) { 
 	background: $start;
 	background: -webkit-gradient(linear, left top, left bottom, from($start), to($stop));

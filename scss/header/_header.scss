@@ -1,6 +1,9 @@
 #header-wrapper {
+	position: relative;
+	z-index: 1;
 	height: 70px;
 	width: 100%;
+	background: #ffffff;
 
 	#header-inner {
 		position: relative;

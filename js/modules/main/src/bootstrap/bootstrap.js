@@ -2,6 +2,7 @@
 
 angular.module('main', [
     'ngResource',
+    'ngAnimate',
     'ui.bootstrap',
     'ui.router',
     'lang',
@@ -62,6 +63,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
 
     $locationProvider.html5Mode(true);
 }]).
-run(['$state', 'authManager', function ($state, authManager) {
+run(['$state', function ($state) {
     $state.go('start');
 }]);

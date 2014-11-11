@@ -56,11 +56,12 @@ html {
 
 			#view {
 				position: relative;
+				z-index: 0;
 				padding-bottom: 80px;
 				height: 100%;
 				width: 100%;
 				margin: 0 auto;
-				overflow: visible;
+				overflow: auto;
 			}
 		}
 	}

@@ -1,6 +1,6 @@
-var WizardCtrl = function($state, langManager) {
+var WizardCtrl = function($state, $scope, $timeout, langManager) {
     var self    = this;
-        
+window.s = $scope;
     this.name   = '',
     this.place  = '';
     this.$state = $state;
@@ -41,18 +41,6 @@ var WizardCtrl = function($state, langManager) {
     		}
     	}
     });
-
-    Object.defineProperty(this, 'show_result', {
-
-        get: function() {
-
-            if (self.$state.current.name == 'wizard-result') {
-                return true;
-            }
-
-            return false;
-        }
-    });
 };
 
 WizardCtrl.prototype = {
@@ -62,4 +50,4 @@ WizardCtrl.prototype = {
     }
 };
 
-angular.module('wizard').controller('WizardCtrl', ['$state', 'langManager', WizardCtrl]);
+angular.module('wizard').controller('WizardCtrl', ['$state', '$scope', '$timeout', 'langManager', WizardCtrl]);
