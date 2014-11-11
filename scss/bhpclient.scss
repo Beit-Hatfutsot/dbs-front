@@ -24,7 +24,9 @@ html {
 		#app-container {
 			position: relative;
 			padding: 0 0 70px;
+			width: auto;
 			height: 100%;
+			overflow: hidden;
 
 			&.en {
 				direction: ltr;
@@ -57,7 +59,8 @@ html {
 				padding-bottom: 80px;
 				height: 100%;
 				width: 100%;
-				overflow-x: hidden;
+				margin: 0 auto;
+				overflow: visible;
 			}
 		}
 	}

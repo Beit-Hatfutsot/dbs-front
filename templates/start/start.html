@@ -1,26 +1,22 @@
-<div id="start">
-	<div id="start-wrapper" ng-if="!wizardController.show_result">
-		<div id="start-inner">
-			<div id="wizard">
-				<div id="wizard-text">
-					<div class="title">
-						<en>My Jewish Story</en>
-						<he>הסיפור היהודי שלי</he>
-					</div>
-					<div class="text">
-						<en>
-							Come stroll among thousands of content items:<br>
-							Pictures, family trees, music, stories of communities and more.
-						</en>
-						<he></he>
-					</div>
-					<div class="instructions">
-						<en>To get started, enter a family member's details</en>
-					</div>
-				</div>
-				<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
+<div id="start">	
+	<div id="wizard">
+		<div id="wizard-text">
+			<div class="title">
+				<en>My Jewish Story</en>
+				<he>הסיפור היהודי שלי</he>
+			</div>
+			<div class="text">
+				<en>
+					Come stroll among thousands of content items:<br>
+					Pictures, family trees, music, stories of communities and more.
+				</en>
+				<he></he>
+			</div>
+			<div class="instructions">
+				<en>To get started, enter a family member's details</en>
 			</div>
 		</div>
+		<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
 	</div>
 </div>
 <ui-view></ui-view>

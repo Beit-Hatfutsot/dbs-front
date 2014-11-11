@@ -1,52 +1,42 @@
 #start {
-	width: $view-width;
-	margin: 0 auto;
+	@include bg_image("start.jpg");
+	width: 1920px;
+	height: 694px;
+	position : absolute;
+    left: 50%;
+    top: 0;
+    @include translate(-50%, 0);
 
-	#start-wrapper {
-		height: 624px;
-		overflow: visible;
-		margin: 0 auto;
+	#wizard {
+		margin: 130px auto;
+		padding: 42px 68px;
+		width: 944px;
+		height: 380px;
+		background: rgba(249, 249, 249, 0.85);		
 
-		#start-inner {
-			@include bg_image("start.jpg");
-			width: 1920px;
-			height: 694px;
-			position : absolute;
-		    left: 50%;
-		    top: 0;
-		    @include translate(-50%, 0);
+		#wizard-text {
 
-			#wizard {
-				margin: 130px auto;
-				padding: 42px 68px;
-				width: 944px;
-				height: 380px;
-				background: rgba(249, 249, 249, 0.85);		
+			.title {
+				color: #5dc2d4;
+				font-size: 72px;
+				margin-bottom: 8px;
+			}
 
-				#wizard-text {
+			.text {
+				font-size: 22px;
+				margin-bottom: 58px;
+			}
 
-					.title {
-						color: #5dc2d4;
-						font-size: 72px;
-						margin-bottom: 8px;
-					}
-
-					.text {
-						font-size: 22px;
-						margin-bottom: 58px;
-					}
-
-					.instructions {
-						font-size: 20px;
-						margin-bottom: 5px;
-					}
-				}
+			.instructions {
+				font-size: 20px;
+				margin-bottom: 5px;
 			}
 		}
 	}
 }
-
+	
 #wizard-result {
+	position: relative;
 	background: #eeeeee;
 	height: 100%;
 
