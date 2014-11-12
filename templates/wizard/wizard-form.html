@@ -1,4 +1,7 @@
 <form id="wizard-form">
+	<div class="instructions">
+		<en>To get started, enter a family member's details</en>
+	</div>
 	<div class="field name">
 		<div>
 			<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
@@ -21,10 +24,6 @@
 	<div class="field place">
 		<div>	
 			<input type="text" id="wizard-place" ng-model="wizardController.place" placeholder="{{wizardController.place_placeholder}}" />
-			<button class="bh-pointer" ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
-				<en>Start</en>
-				<he>התחל</he>
-			</button>
 		</div>
 		<label for="wizard-place">
 			<en>Town / Village they came from. If unknown, type country</en>
@@ -40,5 +39,10 @@
 				<he>{{place.Header.He}}</he>
 			</div>
 		</div>
-	</div>	
+	</div>
+	<br>
+	<button class="bh-pointer" ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
+		<en>Start</en>
+		<he>התחל</he>
+	</button>	
 </form>
