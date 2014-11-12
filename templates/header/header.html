@@ -1,35 +1,29 @@
 <div id="header-wrapper" ng-controller="HeaderCtrl as headerController">
 	<div id="header-inner">
 		<div id="dropdown-icons" class="lang-float {{mainController.lang}}">
-			<div class="language-selector bh-pointer" dropdown dropdown-toggle>
-				<div class="selector">
-					<en>EN</en>
-					<he>עב</he>
+			<div class="language-selector bh-pointer" dropdown>
+				<div dropdown-toggle>
+					<en>
+						<div class="language-icon-en"></div>
+					</en>
+					<he>
+						<div class="language-icon-he"></div>
+					</he>
 				</div>
 				<div class="language-menu">
-					<div class="row title">
+					<div class="title">
 						<en>Choose a language</en>
 						<he>בחרו שפה</he>
 					</div>
 					<div class="row" ng-click="mainController.lang='he'">
-						<div class="language-selector">
-							<div class="selector">
-								<en>HE</en>
-								<he>עב</he>
-							</div>
-						</div>
+						<div class="language-icon-he"></div>
 						<div class="language-desc">
 							<en>Hebrew</en>
 							<he>עברית</he>
 						</div>
 					</div>
 					<div class="row" ng-click="mainController.lang='en'">
-						<div class="language-selector">
-							<div class="selector">
-								<en>EN</en>
-								<he>אנ</he>
-							</div>
-						</div>
+						<div class="language-icon-en"></div>
 						<div class="language-desc">
 							<en>English</en>
 							<he>אנגלית</he>
@@ -38,13 +32,12 @@
 				</div>
 			</div>
 		</div>
-		<div id="logo-container" class="bh-pointer" ui-sref="start">
-			<img src="images/bh_logo.svg" alt="Logo" />
-		</div>
+		<div id="logo" class="bh-pointer" ui-sref="start"></div>
+		<div id="mystory-icon" class="bh-pointer"></div>
 		<div id="search-area">
 			<form action="">
 				<input type="text" placeholder={{headerController.search_placeholders[mainController.lang]}} />
-				<img class="search-button bh-pointer" src="images/search.svg" alt="search" need-auth="false" />
+				<div class="search-button bh-pointer" need-auth="false"></div>
 			</form>
 		</div>
 	</div>

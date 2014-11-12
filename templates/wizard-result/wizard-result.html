@@ -79,7 +79,7 @@
 		<div id="wizard-search-result">
 			<div id="place-result" ng-switch on="wizardResultController.result.bingo.place === null">
 				<div class="item-arrow-container">
-					<img src="images/item_arrow.svg" alt="item-arrow" />
+					<div class="item-arrow-left"></div>
 				</div>
 				<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.place" content="place"></single-result>
 				<no-result ng-switch-when="true" content="place"></no-result>
@@ -89,7 +89,7 @@
 					<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.name" content="name"></single-result>
 					<no-result ng-switch-when="true" content="name"></no-result>
 					<div class="item-arrow-container">
-						<img src="images/item_arrow.svg" alt="item-arrow" />
+						<div class="item-arrow-right"></div>
 					</div>
 				</div>
 				<!--

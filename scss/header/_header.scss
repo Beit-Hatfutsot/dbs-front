@@ -11,15 +11,36 @@
 		max-width: $view-width;
 		height: 100%;
 
-		#logo-container {
+		#logo {
 			position: relative;
 			display: inline-block;
 			top: 10px;
+			width: 45px;
+			height: 50px;
 			z-index: 1;
+			@include icon(-26px -14px);
+		}
 
-			img {
-				width: auto;
-				height: 50px;
+		#mystory-icon {
+			position: relative;
+			top: -8px;
+			display: inline-block;
+			vertical-align: middle;
+			width: 86px;
+			height: 24px;
+			z-index: 1;
+			@include icon(-83px -24px);
+
+			.en & {
+				margin-left: 20px;
+			}
+
+			.he & {
+				margin-right: 20px
+			}
+
+			&:hover {
+				@include icon(-83px -53px);				
 			}
 		}
 
@@ -52,24 +73,25 @@
 
 				.search-button {
 					position: relative;
-					height: 30px;
-					width: 60px;
+					display: inline-block;
+					height: 23px;
+					width: 15px;
 					vertical-align: top;
-					padding: 5px;
+					@include icon(-350px -24px);
 
 					.en & {
-						left: -50px;
+						left: -32px;
 					}
 
 					.he & {
-						right: -50px;	
+						right: -32px;	
 					}
 				}
 			}
 		}
 
 		#dropdown-icons {
-			padding: 20px 0;
+			padding: 22px 0;
 			position: absolute;
 			top: 0;
 			z-index: 1;
@@ -83,25 +105,37 @@
 			}
 
 			.language-selector {
-				height: 33px;
-				width: 33px;
+				width: 27px;
 				color: #f9f9f9;
 				font-weight: bold;
-				border-radius: 50%;
-				background: grey;
 
-				.en & {
-					padding: 7px 0;
-					font-size: 17px;
+				.language-icon-en, .language-icon-he {
+					display: inline-block;
+					width: 27px;
+					height: 27px;
 				}
 
-				.he & {
-					padding: 6px 0;
-					font-size: 17px;
+				.language-icon-en {
+					@include icon(-313px -25px);
+				
+					&:hover {
+						@include icon(-313px -55px);	
+					}
 				}
 
-				.selector {
-					text-align: center;
+				.language-icon-he {
+					@include icon(-313px -86px);
+				
+					&:hover {
+						@include icon(-313px -116px);	
+					}
+				}
+
+				.title, .row {
+					height: 42px;
+					padding: 8px 15px 0;
+					border-bottom: 2px solid #eceaea;
+					font-size: 15px;
 				}
 
 				.title {
@@ -109,24 +143,14 @@
 				}
 
 				.row {
-					height: 42px;
-					padding: 15px 15px 0;
-					border-bottom: 2px solid #eceaea;
-					font-size: 15px;
-
-					.language-selector {
-						position: relative;
-						top: -50%;
-						display: inline-block;
-					}
-
+			
 					.language-desc {
 						position: relative;
 						top: -5px;
 						display: inline-block;
 						height: 100%;
 						width: auto;
-						vertical-align: top;
+						vertical-align: middle;
 
 						.en & {
 							right: -5px;
@@ -136,6 +160,18 @@
 							left: -5px;	
 						}
 					}
+
+					&:hover {
+						color: #5dc2d4;
+
+						.language-icon-en {
+							@include icon(-313px -55px);	
+						}
+
+						.language-icon-he {
+							@include icon(-313px -116px);	
+						}
+					}
 				}
 				
 				.language-menu {
@@ -143,7 +179,7 @@
 					position: relative;
 					height: 145px;
 					width: 330px;
-					top: 20px;
+					top: 15px;
 					background: #ffffff;
 					color: #333333;
 					border-bottom: 2px solid #5ecad8;

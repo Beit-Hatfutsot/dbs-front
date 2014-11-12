@@ -16,6 +16,12 @@ $images: '/images/';
 	background-size: 100% 100%;
 }
 
+@mixin icon($position: 0 0) {
+	background: url($images + "icons.png") $position no-repeat;
+	background-size: 1024px 768px;
+	
+}
+
 @mixin translate($x, $y) {
 	-webkit-transform: translate($x, $y);
     -moz-transform: translate($x, $y);
