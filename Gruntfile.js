@@ -48,7 +48,7 @@ module.exports = function(grunt) {
                 },
 
                 files: {
-                    'css/bhpclient.css' : 'scss/bhpclient.scss'
+                    'css/bhsclient.css' : 'scss/bhsclient.scss'
                 }
                 /*
                 files: [{

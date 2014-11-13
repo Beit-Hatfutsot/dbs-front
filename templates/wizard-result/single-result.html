@@ -1,32 +1,35 @@
 <div class="single-result" ng-click="singleResultController.goto_item(result_data)">
-	<div class="type">
-		<ng-switch on="content_type">
-			<div ng-switch-when="name">
-				<div class="type-icon-container">
-					<div class="surname-icon"></div>
+	<div id="thumbnail" ng-if="content_type == 'place'" style="background: url('images/items/{{result_data.thumbnail.toLowerCase()}}')"></div>
+	<div class="below-thumbnail">
+		<div class="type">
+			<ng-switch on="content_type">
+				<div ng-switch-when="name">
+					<div class="type-icon-container">
+						<div class="surname-icon"></div>
+					</div>
+					<div class="type-desc-container">
+						<en>Surname Origin</en>
+						<he>פירוש שם משפחה</he>
+					</div>
 				</div>
-				<div class="type-desc-container">
-					<en>Surname Origin</en>
-					<he>פירוש שם משפחה</he>
+				<div ng-switch-when="place">
+					<div class="type-icon-container">
+						<div class="community-icon"></div>
+					</div>
+					<div class="type-desc-container">
+						<en>Community</en>
+						<he>קהילה</he>
+					</div>
 				</div>
-			</div>
-			<div ng-switch-when="place">
-				<div class="type-icon-container">
-					<div class="community-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Community</en>
-					<he>קהילה</he>
-				</div>
-			</div>
-		</ng-switch>
-	</div>
-	<div class="header">
-		<en>{{result_data.Header.En}}</en>
-		<he>{{result_data.Header.He}}</he>
-	</div>
-	<div class="text">
-		<en>{{result_data.UnitText1.En}}</en>
-		<he>{{result_data.UnitText1.He}}</he>
+			</ng-switch>
+		</div>
+		<div class="header">
+			<en>{{result_data.Header.En}}</en>
+			<he>{{result_data.Header.He}}</he>
+		</div>
+		<div class="text">
+			<en>{{result_data.UnitText1.En}}</en>
+			<he>{{result_data.UnitText1.He}}</he>
+		</div>
 	</div>
 </div>

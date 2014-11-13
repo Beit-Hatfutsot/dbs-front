@@ -28,12 +28,12 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                     $scope.wizardController.place = self.query.place;
 
                     // set search status
-                    if ( result.bingo.name || result.bingo.place )  {
+                    if ( !result.bingo.name.isEmpty() || !result.bingo.place.isEmpty() )  {
                         
-                        if (result.bingo.name && !result.bingo.place) {
+                        if ( !result.bingo.name.isEmpty() && result.bingo.place.isEmpty() ) {
                             self.search_status = 'bingo-name';
                         }
-                        else if (!result.bingo.name && result.bingo.place) {
+                        else if ( result.bingo.name.isEmpty() && !result.bingo.place.isEmpty() ) {
                             self.search_status = 'bingo-place';
                         }
                         else {
@@ -45,12 +45,12 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                     }
                     
                     // set suggestions status
-                    if ( result.suggestions.name || result.suggestions.place ) {
+                    if ( !result.suggestions.name.isEmpty() || !result.suggestions.place.isEmpty() ) {
 
-                        if (result.suggestions.name && !result.suggestions.place) {
+                        if ( !result.suggestions.name.isEmpty() && result.suggestions.place.isEmpty() ) {
                             self.suggestions_status = 'name';
                         }
-                        else if (!result.suggestions.name && result.suggestions.place) {
+                        else if ( result.suggestions.name.isEmpty() && !result.suggestions.place.isEmpty() ) {
                             self.suggestions_status = 'place';
                         }
                         else {
@@ -85,7 +85,6 @@ angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state
 
 
 var SingleResultCtrl = function($state) {
-    
     this.$state = $state;
 };
 
