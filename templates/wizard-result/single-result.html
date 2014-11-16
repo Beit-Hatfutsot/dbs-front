@@ -1,5 +1,5 @@
 <div class="single-result" ng-click="singleResultController.goto_item(result_data)">
-	<div id="thumbnail" ng-if="content_type == 'place'" style="background: url('images/items/{{result_data.thumbnail.toLowerCase()}}')"></div>
+	<div class="thumbnail" ng-if="content_type == 'place'" style="background: url('images/items/{{result_data.thumbnail.toLowerCase()}}')"></div>
 	<div class="below-thumbnail">
 		<div class="type">
 			<ng-switch on="content_type">

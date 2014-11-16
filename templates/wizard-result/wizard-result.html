@@ -77,20 +77,14 @@
 			<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
 		</div>
 		<div id="wizard-search-result">
-			<div id="place-result" ng-switch on="wizardResultController.result.bingo.place === null">
-				<div class="item-arrow-container">
-					<div class="item-arrow-left"></div>
-				</div>
-				<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.place" content="place"></single-result>
-				<no-result ng-switch-when="true" content="place"></no-result>
-			</div>
 			<div id="name-tree-result">
-				<div id="name-result" ng-switch on="wizardResultController.result.bingo.name === null">
+				<div id="name-result" ng-switch on="wizardResultController.result.bingo.name.isEmpty()">
+					<div class="item-arrow-container">
+						<en><div class="item-arrow-left"></div></en>
+						<he><div class="item-arrow-right"></div></he>
+					</div>
 					<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.name" content="name"></single-result>
 					<no-result ng-switch-when="true" content="name"></no-result>
-					<div class="item-arrow-container">
-						<div class="item-arrow-right"></div>
-					</div>
 				</div>
 				<!--
 				<div id="tree-result" ng-switch on="wizardResultController.view_mode('trees')">
@@ -99,6 +93,14 @@
 					<no-result ng-switch-when="none" content="tree"></no-result>
 				</div>
 				-->
+			</div>
+			<div id="place-result" ng-switch on="wizardResultController.result.bingo.place.isEmpty()">
+				<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.place" content="place"></single-result>
+				<no-result ng-switch-when="true" content="place"></no-result>
+				<div class="item-arrow-container">
+					<en><div class="item-arrow-right"></div></en>
+					<he><div class="item-arrow-left"></div></he>
+				</div>
 			</div>
 		</div>
 	</div>

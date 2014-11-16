@@ -24,7 +24,6 @@ html {
 
 		#app-container {
 			position: relative;
-			padding: 0 0 70px;
 			width: auto;
 			height: 100%;
 			overflow: hidden;
@@ -61,17 +60,18 @@ html {
 				height: 100%;
 				width: 100%;
 				margin: 0 auto;
+				padding-bottom: $header-height + $footer-height;
 				overflow: auto;
 				@include transition(all, 1s, linear);
 
 				&.ng-enter, &.ng-leave {
-				  position: absolute;
-				  left: 0;
-				  right: 0;
-				  -webkit-transition:all .5s ease-in-out;
-				    -moz-transition:all .5s ease-in-out;
-				    -o-transition:all .5s ease-in-out;
-				    transition:all .5s ease-in-out;
+				  	position: absolute;
+				  	left: 0;
+				  	right: 0;
+				  	-webkit-transition:all .5s ease-in-out;
+				   	-moz-transition:all .5s ease-in-out;
+				   	-o-transition:all .5s ease-in-out;
+				   	transition:all .5s ease-in-out;
 				}
 				/*
 				&.ng-enter {
@@ -89,17 +89,17 @@ html {
 				}
 				*/
 				&.ng-leave {
-				  opacity: 1; 
-				  -webkit-transform:translate3d(0, 0, 0);
-				  -moz-transform:translate3d(0, 0, 0);
-				  transform:translate3d(0, 0, 0);
+				  	opacity: 1; 
+				  	-webkit-transform:translate3d(0, 0, 0);
+				  	-moz-transform:translate3d(0, 0, 0);
+				  	transform:translate3d(0, 0, 0);
 				}
 
 				&.ng-leave-active {
-				  opacity: 0;
-				  -webkit-transform:translate3d(100px, 0, 0);
-				  -moz-transform:translate3d(100px, 0, 0);
-				  transform:translate3d(100px, 0, 0);
+				  	opacity: 0;
+				  	-webkit-transform:translate3d(100px, 0, 0);
+				  	-moz-transform:translate3d(100px, 0, 0);
+				  	transform:translate3d(100px, 0, 0);
 				}
 			}
 		}
