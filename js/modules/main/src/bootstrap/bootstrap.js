@@ -45,13 +45,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
             name: 'item-view',
             url: '/item/:id',
             templateUrl: 'templates/item/item.html',
-            controller: 'ItemCtrl as itemController',
-            resolve: {
-
-                itemData: ['$stateParams', 'item', function($stateParams, item) {
-                    return item.get($stateParams.id);
-                }]
-            }
+            controller: 'ItemCtrl as itemController'
         }
     ];
 

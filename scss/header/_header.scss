@@ -105,29 +105,29 @@
 			}
 
 			.language-selector {
-				width: 27px;
+				width: 29px;
 				color: #f9f9f9;
 				font-weight: bold;
 
 				.language-icon-en, .language-icon-he {
 					display: inline-block;
-					width: 27px;
-					height: 27px;
+					width: 29px;
+					height: 29px;
 				}
 
 				.language-icon-en {
-					@include icon(-313px -25px);
+					@include icon(-312px -24px);
 				
 					&:hover {
-						@include icon(-313px -55px);	
+						@include icon(-312px -54px);	
 					}
 				}
 
 				.language-icon-he {
-					@include icon(-313px -86px);
+					@include icon(-312px -86px);
 				
 					&:hover {
-						@include icon(-313px -116px);	
+						@include icon(-312px -116px);	
 					}
 				}
 
@@ -144,6 +144,18 @@
 
 				.row {
 			
+					&:hover {
+						color: #5dc2d4;
+
+						.language-icon-en {
+							@include icon(-312px -54px);	
+						}
+
+						.language-icon-he {
+							@include icon(-312px -116px);	
+						}
+					}
+
 					.language-desc {
 						position: relative;
 						top: -5px;
@@ -158,18 +170,6 @@
 
 						.he & {
 							left: -5px;	
-						}
-					}
-
-					&:hover {
-						color: #5dc2d4;
-
-						.language-icon-en {
-							@include icon(-313px -55px);	
-						}
-
-						.language-icon-he {
-							@include icon(-313px -116px);	
 						}
 					}
 				}

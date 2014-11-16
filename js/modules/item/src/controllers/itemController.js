@@ -1,11 +1,13 @@
-
-var ItemCtrl = function($scope, $state, $stateParams, itemData) {
-	console.log(itemData)
-	this.item_data = itemData;
+var ItemCtrl = function($stateParams, item) {
+	var self = this;
+	
+	item.get($stateParams.id).then(function(item_data) {
+		self.item_data = item_data;
+	});
 };
 
 ItemCtrl.prototype = {
 
 };
 
-angular.module('item').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'itemData', ItemCtrl]);
+angular.module('item').controller('ItemCtrl', ['$stateParams', 'item', ItemCtrl]);

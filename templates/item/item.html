@@ -1,5 +1,21 @@
-I AM AN ITEM
-
-my id is: {{itemController.id}}
-
-my data is: {{itemController.item_data}}
+<div id="item-page">
+	<div id="related"></div>
+	<div id="item-container">
+		<div class="item">
+			<div class="item__header">
+				<en>{{itemController.item_data.Header.En}}</en>
+				<he>{{itemController.item_data.Header.He}}</he>
+			</div>
+			<div class="item__top-bar">
+			</div>
+			<div class="item__content">
+				<div class="thumbnail" style="background: url('images/items/{{itemController.item_data.thumbnail.toLowerCase()}}')" ng-if="itemController.item_data.thumbnail"></div>
+				<en>{{itemController.item_data.UnitText1.En}}</en>
+				<he>{{itemController.item_data.UnitText1.He}}</he>
+			</div>
+			<div class="item__bottom-bar">
+			</div>
+		</div>
+	</div>
+	<div id="related"></div>
+</div>
