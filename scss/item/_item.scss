@@ -3,17 +3,17 @@
 	margin: 0 auto;
 	padding: 50px 0 10px;
 
-	@at-root #item-container, #related {
+	.item-container, .related {
 		display: inline-block;
 		vertical-align: top;
 
-		.item, .related-item {
+		.item {
 			@include item-bottom-border();
 			@include item-shadow();
 		}
 	}
 
-	@at-root #item-container {
+	.item-container {
 		width: 560px;
 
 		.item {
@@ -71,12 +71,13 @@
 	}
 
 
-	@at-root #related {
+	.related {
 		width: 265px;
 		height: 100%;
 
-		.related-item {
-
+		.single-result {
+			@extend %item-preview;
+			display: block;  
 		}
 	}
 }

@@ -4,8 +4,8 @@ angular.module('cache').
 
 		cache = {
 			write: function(item) {
-				if (item) {
-					cached_items[item._id] = angular.copy(item);
+				if ( item.isNotEmpty() ) {
+					cached_items[item._id.$oid] = angular.copy(item);
 					return true;
 				}
 				return false;

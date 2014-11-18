@@ -69,3 +69,81 @@ $images: '/images/';
 @mixin item-bottom-border() {
 	border-bottom: 4px solid #47c2d3;
 }
+
+%item-preview {
+	background: #ffffff;
+	overflow: hidden;
+	@include item-bottom-border(); 
+	@include item-shadow();
+
+	.below-thumbnail {
+		height: 100%;
+		padding: 0 10px 10px;
+		
+		.type {
+			display: inline-block;
+			width: auto;
+			height: auto;
+			background: #5ec5d6;
+			color: #f9f9f9; 
+			font-weight: bold;
+			border-bottom-right-radius: 3px;
+			border-bottom-left-radius: 3px;
+
+			.en & {
+				padding-right: 5px;
+			}
+
+			.he & {
+				padding-left: 5px;	
+			}
+
+			.type-icon-container {
+				display: inline-block;
+				padding-top: 3px;
+
+				.en & {
+					padding-left: 4px;
+				}
+
+				.he & {
+					padding-right: 4px;	
+				}
+
+				.surname-icon {
+					position: relative;
+					top: 2px;
+					width: 18px;
+					height: 16px;
+					@include icon(-28px -161px);
+				}
+
+				.community-icon {
+					width: 14px;
+					height: 17px;
+					@include icon(-30px -106px);
+				}
+			}
+
+			.type-desc-container {
+				position: relative;
+				display: inline-block;
+				vertical-align: top;
+				padding: 5px 0;
+			}
+		}
+
+		.header {
+			padding: 5px 0;
+			font-weight: bold;
+		}
+
+		.text {
+			height: 95px;
+			margin: 0 0 10px;
+			padding: 5px 0;
+			color: #474747;
+			overflow: hidden;
+		}	
+	}
+}

@@ -28,12 +28,12 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                     $scope.wizardController.place = self.query.place;
 
                     // set search status
-                    if ( !result.bingo.name.isEmpty() || !result.bingo.place.isEmpty() )  {
+                    if ( result.bingo.name.isNotEmpty() || result.bingo.place.isNotEmpty() )  {
                         
-                        if ( !result.bingo.name.isEmpty() && result.bingo.place.isEmpty() ) {
+                        if ( result.bingo.name.isNotEmpty() && result.bingo.place.isEmpty() ) {
                             self.search_status = 'bingo-name';
                         }
-                        else if ( result.bingo.name.isEmpty() && !result.bingo.place.isEmpty() ) {
+                        else if ( result.bingo.name.isEmpty() && result.bingo.place.isNotEmpty() ) {
                             self.search_status = 'bingo-place';
                         }
                         else {
@@ -45,12 +45,12 @@ var WizardResultCtrl = function($scope, $state, $stateParams, searchManager) {
                     }
                     
                     // set suggestions status
-                    if ( !result.suggestions.name.isEmpty() || !result.suggestions.place.isEmpty() ) {
+                    if ( result.suggestions.name.isNotEmpty() || result.suggestions.place.isNotEmpty() ) {
 
-                        if ( !result.suggestions.name.isEmpty() && result.suggestions.place.isEmpty() ) {
+                        if ( result.suggestions.name.isNotEmpty() && result.suggestions.place.isEmpty() ) {
                             self.suggestions_status = 'name';
                         }
-                        else if ( result.suggestions.name.isEmpty() && !result.suggestions.place.isEmpty() ) {
+                        else if ( result.suggestions.name.isEmpty() && result.suggestions.place.isNotEmpty() ) {
                             self.suggestions_status = 'place';
                         }
                         else {
@@ -91,7 +91,7 @@ var SingleResultCtrl = function($state) {
 SingleResultCtrl.prototype = {
 
     goto_item: function(item_data) {
-        this.$state.go('item-view', {id: item_data._id});
+        this.$state.go('item-view', {id: item_data._id.$oid});
     }
 };
 
