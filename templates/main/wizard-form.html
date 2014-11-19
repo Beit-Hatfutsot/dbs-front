@@ -1,47 +1,47 @@
-<form id="wizard-form">
-	<div class="instructions">
+<form class="wizard-form">
+	<div class="wizard-form__instructions">
 		<en>To get started, enter a family member's details</en>
 	</div>
-	<div class="field name">
+	<div class="wizard-form__field">
 		<div>
-			<input type="text" id="wizard-name" ng-model="wizardController.name" placeholder="{{wizardController.name_placeholder}}" />
+			<input type="text" id="wizard-name" ng-model="mainController.wizard_query.name" placeholder="{{mainController.name_placeholder}}" />
 		</div>
 		<label for="wizard-place">
 			<en>Original family name of one of your ancestors</en>
 			<he>שם</he>
 		</label>
-		<div class="suggestions" ng-if="wizardResultController.result.suggestions.name">
-			<div class="suggestions-instructions">
+		<div class="wizard-form__field__suggestions" ng-if="mainController.wizard_suggestions.name.isNotEmpty()">
+			<div class="wizard-form__suggestions__instructions">
 				<en>Did you mean...</en>
 				<he>האם התכונת ל...</he>
 			</div>
-			<div class="suggestion" ng-repeat="name in wizardResultController.result.suggestions.name">
+			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="name in mainController.wizard_suggestions.name">
 				<en>{{name.Header.En}}</en>
 				<he>{{name.Header.He}}</he>
 			</div>
 		</div>
 	</div>
-	<div class="field place">
+	<div class="wizard-form__field wizard-form__field--place">
 		<div>	
-			<input type="text" id="wizard-place" ng-model="wizardController.place" placeholder="{{wizardController.place_placeholder}}" />
+			<input type="text" id="wizard-place" ng-model="mainController.wizard_query.place" placeholder="{{mainController.place_placeholder}}" />
 		</div>
 		<label for="wizard-place">
 			<en>Town / Village they came from. If unknown, type country</en>
 			<he>מקום</he>
 		</label>
-		<div class="suggestions" ng-if="wizardResultController.result.suggestions.place">
-			<div class="suggestions-instructions">
+		<div class="wizard-form__field__suggestions" ng-if="mainController.wizard_suggestions.place.isNotEmpty()">
+			<div class="wizard-form___field__suggestions__instructions">
 				<en>Did you mean...</en>
 				<he>האם התכונת ל...</he>
 			</div>
-			<div class="suggestion" ng-repeat="place in wizardResultController.result.suggestions.place">
+			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="place in mainController.wizard_suggestions.place">
 				<en>{{place.Header.En}}</en>
 				<he>{{place.Header.He}}</he>
 			</div>
 		</div>
 	</div>
 	<br>
-	<button class="bh-pointer" ng-disabled="wizardController.submit_disabled" ng-click="wizardController.start()">
+	<button class="wizard-form__btn" ng-disabled="mainController.submit_disabled" ng-click="mainController.start()">
 		<en>Start</en>
 		<he>התחל</he>
 	</button>	

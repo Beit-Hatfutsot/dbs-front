@@ -10,6 +10,8 @@
 		margin: 0 auto;
 		max-width: $view-width;
 		height: 100%;
+		background: inherit;
+		z-index: 1;
 
 		#logo {
 			position: relative;
@@ -201,5 +203,94 @@
 				}
 			}
 		}
+	}
+}
+
+@at-root #notification-bar {
+	position: relative;
+	height: 45px;
+	width: 100%;
+	@include linear-gradient(#bbbdbc, 0, #d4d6d5, 20%);
+	border-bottom: 2px solid #ffffff;
+	z-index: 1;
+	font-size: 12px;
+
+	&__inner {
+		position: relative;
+		width: 1140px;
+		height: 100%;
+		margin: 0 auto;
+		padding: 15px 0;
+
+		@at-root #search-again-trigger {
+			position: absolute;
+			bottom: 6px;
+			border: 1px solid #969fa2;
+			border-radius: 5px;
+			padding: 5px;
+
+			.en & {
+				right: 189px;	
+			}
+
+			.he & {
+				left: 189px;	
+			}
+
+			img {
+				height: 10px;
+				width: auto;
+			}
+		}
+	}
+}
+
+@at-root #search-again {
+	position: relative;
+	min-height: 190px;
+	width: 760px;;
+	margin: 0 auto;
+	padding: 30px 0 0;
+	background: rgba(248, 248, 255, 1);
+	z-index: 0;
+	border-bottom: 4px solid #5ec5d6;
+	@include transition(all, 0.5s, ease);
+
+	&.ng-hide {
+		@include translate(0, -230px);
+	}
+
+	&.ng-hide-add, &.ng-hide-remove {
+		display: block !important;
+	}
+
+	.wizard-form {
+		margin: 0 auto;
+
+		&__field {
+
+			&__suggestions {
+				margin: 10px 0 0;
+				width: 294px;
+
+				&__suggestion {
+					display: inline-block;
+					margin: 5px;
+					padding: 5px;
+					border: 1px solid grey;
+					border-radius: 5px;
+					font-size: 11px;
+				}
+			}
+		}
+	}
+
+	&.ng-hide-add.ng-hide-add-active + #wizard-search-result {
+		@include transition(all, 0.5s, ease);
+		@include translate(0, -205px);
+	}
+
+	&.ng-hide-remove.ng-hide-remove-active + #wizard-search-result {
+
 	}
 }

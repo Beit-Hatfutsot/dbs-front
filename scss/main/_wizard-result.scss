@@ -1,193 +1,102 @@
-#wizard-result-view {
+@at-root #wizard-result {
 	position: relative;
-	height: 110%;
+	width: 100%;
+	height: 100%;
 	z-index: 1;
+	background: #eeeeee;
+	overflow: auto;
 
-	#wizard-result {
-		background: #eeeeee;
-		width: 100%;
-		min-height: 100%;
+	.items {
+		width: 654px;
+		margin: 0 auto;
+		padding: 60px 0;
 		
-		#wizard-result-header {
-			position: relative;
-			height: 45px;
-			width: 100%;
-			@include linear-gradient(#bbbdbc, 0, #d4d6d5, 20%);
-			border-bottom: 2px solid #ffffff;
-			z-index: 1;
-			font-size: 12px;
+		&__name-tree, &__place {
+			display: inline-block;
+			vertical-align: top;
+			padding: 10px;
 
-			.instruction-text {
-				position: relative;
-				width: 1140px;
-				margin: 0 auto;
-				padding: 15px 0;
-
-				.search-again-trigger {
-					position: absolute;
-					bottom: 6px;
-					border: 1px solid #969fa2;
-					border-radius: 5px;
-					padding: 5px;
-
-					.en & {
-						right: 189px;;	
-					}
-
-					.he & {
-						left: 189px;	
-					}
-
-					img {
-						height: 10px;
-						width: auto;
-					}
-				}
-			}
-		}
-
-		#search-again {
-			position: relative;
-			min-height: 190px;
-			width: 760px;;
-			margin: 0 auto;
-			padding: 30px 0 0;
-			background: rgba(248, 248, 255, 1);
-			z-index: 0;
-			border-bottom: 4px solid #5ec5d6;
-			@include transition(all, 0.5s, ease);
-
-			&.ng-hide {
-				@include translate(0, -230px);
+			.item-preview, .no-result, .multiple-result {
+				@extend %item-preview;
+				display: inline-block;
 			}
 
-			&.ng-hide-add, &.ng-hide-remove {
-				display: block !important;
-			}
-
-			form#wizard-form {
-				margin: 0 auto;
-
-				.field {
-
-					.suggestions {
-						margin: 10px 0 0;
-						width: 294px;
-
-						.suggestion {
-							display: inline-block;
-							margin: 5px;
-							padding: 5px;
-							border: 1px solid grey;
-							border-radius: 5px;
-							font-size: 11px;
-						}
-					}
-				}
-			}
-		}
-
-		#search-again.ng-hide-add.ng-hide-add-active + #wizard-search-result {
-			@include transition(all, 0.5s, ease);
-			@include translate(0, -205px);
-		}
-
-		#search-again.ng-hide-remove.ng-hide-remove-active + #wizard-search-result {
-
-		}
-
-		#wizard-search-result {
-			width: 654px;
-			margin: 0 auto;
-			padding: 60px 0;
-			
-			#name-tree-result, #place-result {
+			.item-arrow-container {
 				display: inline-block;
 				vertical-align: top;
-				padding: 10px;
+				width: 40px;
+				height: 100%;
+
+				.item-arrow-left, .item-arrow-right, .item-arrow-down {
+					width: 22px;
+					height: 22px;
+				}
+
+				.item-arrow-left {
+					@include icon(-55px -106px);
+				}
+
+				.item-arrow-right {
+					@include icon(-55px -133px);
+				}
+			}
+		}
+
+		&__name-tree {
+
+			&__name {
+				margin: 20px 0 10px;
+
+				.item-preview, .no-result, .multiple-result, .item-arrow-container {
+					height: 165px;
+				}
 
 				.item-preview, .no-result, .multiple-result {
-					@extend %item-preview;
-					display: inline-block;
+					width: 260px;	
 				}
 
 				.item-arrow-container {
-					display: inline-block;
-					vertical-align: top;
-					width: 40px;
-					height: 100%;
+					padding: 72px 9px;
+				}
+			}
+		}
 
-					.item-arrow-left, .item-arrow-right, .item-arrow-down {
-						width: 22px;
-						height: 22px;
-					}
+		&__place {
 
-					.item-arrow-left {
-						@include icon(-55px -106px);
-					}
+			.item-preview {
 
-					.item-arrow-right {
-						@include icon(-55px -133px);
+				.thumbnail {
+					margin: 0 auto;
+					width: 100%;
+					height: 170px;
+				}
+
+				.below-thumbnail {
+
+					.text {
+						height: 20px;
 					}
 				}
 			}
 
-			#name-tree-result {
-
-				#name-result {
-					margin: 20px 0 10px;
-
-					.item-preview, .no-result, .multiple-result, .item-arrow-container {
-						height: 165px;
-					}
-
-					.item-preview, .no-result, .multiple-result {
-						width: 260px;	
-					}
-
-					.item-arrow-container {
-						padding: 72px 9px;
-					}
-				}
+			.item-arrow-container, .item-preview, .no-result, .multiple-result {
+				height: 260px;
 			}
 
-			#place-result {
-
-				.item-preview {
-
-					.thumbnail {
-						margin: 0 auto;
-						width: 100%;
-						height: 170px;
-					}
-
-					.below-thumbnail {
-
-						.text {
-							height: 20px;
-						}
-					}
-				}
-
-				.item-arrow-container, .item-preview, .no-result, .multiple-result {
-					height: 260px;
-				}
-
-				.item-arrow-container {
-					padding: 119px 9px;
-				}
-
-				.item-preview, .no-result, .multiple-result {
-					width: 260px;
-				}
+			.item-arrow-container {
+				padding: 119px 9px;
 			}
 
-			#tree-result {
+			.item-preview, .no-result, .multiple-result {
+				width: 260px;
+			}
+		}
 
-				.item-preview, .no-result, .multiple-result {
-					height: 85px;
-					width: 260px;
-				}
+		&__tree {
+
+			.item-preview, .no-result, .multiple-result {
+				height: 85px;
+				width: 260px;
 			}
 		}
 	}

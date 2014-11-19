@@ -42,3 +42,79 @@
 		</div>
 	</div>
 </div>
+<div id="secondary-header" ng-if="mainController.show_notifications">
+	<div id="notification-bar">
+		<div id="notification-bar__inner" ng-switch on="wizardResultController.search_status === 'bingo'">
+			<!--<div ng-switch-when="true">
+				<en>We have found </en>
+				<he>מצאנו </he>
+				<ng-switch on="wizardResultController.result.name">
+					<span ng-switch-when="null">
+						<en></en>
+						<he></he>
+					</span>
+					<span ng-switch-default>
+						<en>a Surname, </en>
+						<he>פירוש שם משפחה, </he>
+					</span>
+				</ng-switch>
+				<ng-switch on="wizardResultController.result.place">
+					<span ng-switch-when="null">
+						<en></en>
+						<he></he>
+					</span>
+					<span ng-switch-default>
+						<en>a Community, </en>
+						<he>קהילה, </he>
+					</span>
+				</ng-switch>
+				<ng-switch on="wizardResultController.result.tree">
+					<span ng-switch-when="null">
+						<en></en>
+						<he></he>
+					</span>
+					<span ng-switch-default>
+						<en>and {{wizardResultController.result.tree.length}} Family trees.</en>
+						<he></he>
+					</span>
+				</ng-switch>
+			</div>
+			<div ng-switch-when="false">
+				<en>We could not find a</en>
+				<he>לא מצאנו</he> 
+				<ng-switch on="wizardResultController.search_status">
+					<span ng-switch-when="bingo-place"> 
+						<en> family name </en>
+						<he> שם משפחה שתואם </he> 
+					</span>
+					<span ng-switch-when="bingo-name">
+						<en> community </en>
+						<he> קהילה שתואמת </he>
+					</span>
+					<span ng-switch-when="none">
+						<en> family name and community </en>
+						<he> שם משפחה וקהילה שתואמים </he>
+					</span>
+				</ng-switch>
+				<ng-switch on="wizardResultController.suggestions_status === 'none'">
+					<span ng-switch-when="false">
+						<en> to match your search. Please try using our suggestions or make a new search.</en>
+						<he> את החיפוש שלכם. נסו להיעזר בהצעות שלנו או חפשו מחדש.</he>
+					</span>
+					<span ng-switch-when="true">
+						<en> to match your search. Please try making a new search.</en>
+						<he> את החיפוש שלכם. נסו לחפש מחדש.</he>
+					</span>
+				</ng-switch>							
+			</div>-->
+			<div id="search-again-trigger" ng-click="mainController.search_again_visible=!mainController.search_again_visible">
+				<en>Search again</en>
+				<he>חיפוש חוזר</he>
+				<img src="images/down_triangle.svg" alt="down arrow">
+			</div>
+		</div>
+	</div>
+	<div id="search-again" ng-show="mainController.search_again_visible">
+		<ng-include src="'templates/main/wizard-form.html'"></ng-include>
+	</div>
+</div>

@@ -7,8 +7,6 @@ angular.module('main', [
     'ui.router',
     'lang',
     'auth',
-    'header',
-    'search',
     'apiClient',
     'cache'
 ]).
@@ -20,8 +18,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         {
             name: 'start',
             url: '/',
-            templateUrl: 'templates/main/start.html',
-            controller: 'WizardCtrl as wizardController'
+            templateUrl: 'templates/main/start.html'
         },
 
         {
@@ -32,8 +29,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
 
         {
             name: 'wizard-result',
-            parent: 'start',
-            url: 'wizard-result?place&name',
+            url: '/wizard-result?place&name',
             templateUrl: 'templates/main/wizard-result.html',
             controller: 'WizardResultCtrl as wizardResultController'
         },

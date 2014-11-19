@@ -1,83 +1,89 @@
 #item-page {
-	width: $view-width;
-	margin: 0 auto;
-	padding: 50px 0 10px;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 
-	.item-container, .related {
-		display: inline-block;
-		vertical-align: top;
+	&__inner {
+		width: $view-width;
+		margin: 0 auto;
 
-		.item {
-			@include item-bottom-border();
-			@include item-shadow();
+		.item-container, .related {
+			display: inline-block;
+			vertical-align: top;
+			padding: 50px 0 10px;
+
+			.item {
+				@include item-bottom-border();
+				@include item-shadow();
+			}
 		}
-	}
 
-	.item-container {
-		width: 560px;
-
-		.item {
-			position: relative;
+		.item-container {
 			width: 560px;
-			background: #ffffff;
 
-			div {
-				padding: 10px 20px;
-			}
+			.item {
+				position: relative;
+				width: 560px;
+				background: #ffffff;
 
-			&__header {
-				width: 100%;
-				height: 40px;
-				background: #48c3d4;
-				color: #ffffff;
-				font-size: 20px;
-			}
+				div {
+					padding: 10px 20px;
+				}
 
-			&__top-bar {
-				width: 100%;
-				height: 55px;
-				border-bottom: 1px solid #dfdfdf;
-			} 
+				&__header {
+					width: 100%;
+					height: 40px;
+					background: #48c3d4;
+					color: #ffffff;
+					font-size: 20px;
+				}
 
-			&__content {
-				width: 100%;
-				padding-bottom: 70px !important;
+				&__top-bar {
+					width: 100%;
+					height: 55px;
+					border-bottom: 1px solid #dfdfdf;
+				} 
 
-				.thumbnail {
-					width: 220px;
-					height: 160px;
+				&__content {
+					width: 100%;
+					padding-bottom: 70px !important;
 
-					.en & {
-						float: left;
-						margin-right: 8px;	
-					}
-					
-					.he & {
-						float: right;
-						margin-left: 8px;
+					&__thumbnail {
+						width: 220px;
+						height: 160px;
+
+						.en & {
+							float: left;
+							margin-right: 8px;	
+						}
+						
+						.he & {
+							float: right;
+							margin-left: 8px;
+						}
 					}
 				}
-			}
 
-			&__bottom-bar {
-				position: absolute;
-				left: 0;
-				bottom: 0;
-				width: 100%;
-				height: 60px;
-				border-top: 1px solid #dfdfdf;
+				&__bottom-bar {
+					position: absolute;
+					left: 0;
+					bottom: 0;
+					width: 100%;
+					height: 60px;
+					border-top: 1px solid #dfdfdf;
+				}
 			}
 		}
-	}
 
 
-	.related {
-		width: 265px;
-		height: 100%;
+		.related {
+			width: 265px;
+			height: 100%;
 
-		.item-preview {
-			@extend %item-preview;
-			display: block;  
+			.item-preview {
+				@extend %item-preview;
+				display: block;  
+			}
 		}
 	}
 }

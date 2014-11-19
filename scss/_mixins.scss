@@ -70,6 +70,13 @@ $images: '/images/';
 	border-bottom: 4px solid #47c2d3;
 }
 
+@mixin hover-pointer() {
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
 %item-preview {
 	background: #ffffff;
 	overflow: hidden;

@@ -1,7 +1,7 @@
 @import "params";
 @import "mixins";
-@import "header/header";
-@import "footer/footer";
+@import "main/header";
+@import "main/footer";
 @import "main/wizard-form";
 @import "main/start";
 @import "main/wizard-result";
@@ -17,14 +17,14 @@ html {
 	height: 100%;
 	width: 100%;
 
-	body {
+	@at-root body {
 		height: 100%;
 		width: 100%;
 		padding: 0;
 		margin: 0;
 		color: #333333;
 
-		#app-container {
+		@at-root #app-container {
 			position: relative;
 			width: auto;
 			height: 100%;
@@ -49,21 +49,13 @@ html {
 				}
 			}
 
-			.bh-pointer {
-
-				&:hover {
-					cursor: pointer;
-				}
-			}	
-
-			#view {
+			@at-root #view {
 				position: relative;
 				z-index: 0;
 				height: 100%;
 				width: 100%;
 				margin: 0 auto;
 				padding-bottom: $header-height + $footer-height;
-				overflow: auto;
 				@include transition(all, 1s, linear);
 
 				&.ng-enter, &.ng-leave {

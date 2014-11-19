@@ -4,7 +4,7 @@
 	height: 100%;
 	background: #ffffff;
 	
-	#wizard-container {
+	@at-root #wizard-container {
 		position: absolute;
 		top: 0;
 		left: 50%;
@@ -20,13 +20,13 @@
 			opacity: 0;
 			z-index: 0;
 
-			#wizard {
+			.wizard {
 				opacity: 1;
 				@include translate(0, -494px);
 			}
 		}
 
-		#wizard {
+		.wizard {
 			margin: 130px auto;
 			padding: 42px 68px;
 			width: 790px;
@@ -34,16 +34,16 @@
 			background: rgba(249, 249, 249, 0.85);	
 			@include transition(all, 0.8s, linear);	
 
-			#wizard-text {
+			&__text {
 
-				.title {
+				&__title {
 					color: #5dc2d4;
 					font-size: 72px;
 					font-family: helvatica;
 					margin-bottom: 8px;
 				}
 
-				.text {
+				&__content {
 					font-size: 22px;
 					margin-bottom: 58px;
 				}

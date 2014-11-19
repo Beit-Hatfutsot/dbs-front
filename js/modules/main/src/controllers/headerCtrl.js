@@ -10,4 +10,4 @@ HeaderCtrl.prototype = {
 
 };
 
-angular.module('header').controller('HeaderCtrl', [HeaderCtrl]);
+angular.module('main').controller('HeaderCtrl', [HeaderCtrl]);

@@ -1,12 +1,12 @@
-#wizard-form {
+.wizard-form {
 	width: 640px;
 
-	.instructions {
+	&__instructions {
 		font-size: 20px;
 		margin-bottom: 5px;
 	}
 			
-	.field {
+	&__field {
 		display: inline-block;
 		vertical-align: top;
 
@@ -20,7 +20,7 @@
 			padding: 0 8px;
 		}
 	
-		&.place {
+		&--place {
 
 			.en & {
 				margin: 0 0 0 35px;	
@@ -32,7 +32,7 @@
 		}
 	}
 
-	button {
+	&__btn {
 		vertical-align: bottom;
 		width: 144px;
 		height: 38px;
