@@ -19,4 +19,4 @@ ItemCtrl.prototype = {
 
 };
 
-angular.module('item').controller('ItemCtrl', ['$stateParams', 'item', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', ItemCtrl]);

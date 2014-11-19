@@ -8,12 +8,9 @@ angular.module('main', [
     'lang',
     'auth',
     'header',
-    'wizard',
-    'wizardResult',
     'search',
     'apiClient',
-    'cache',
-    'item'
+    'cache'
 ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider',
@@ -23,28 +20,28 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         {
             name: 'start',
             url: '/',
-            templateUrl: 'templates/start/start.html',
+            templateUrl: 'templates/main/start.html',
             controller: 'WizardCtrl as wizardController'
         },
 
         {
             name: '404',
             url: '/404',
-            templateUrl: 'templates/404.html'
+            templateUrl: 'templates/main/404.html'
         },
 
         {
             name: 'wizard-result',
             parent: 'start',
             url: 'wizard-result?place&name',
-            templateUrl: 'templates/wizard-result/wizard-result.html',
+            templateUrl: 'templates/main/wizard-result.html',
             controller: 'WizardResultCtrl as wizardResultController'
         },
         
         {
             name: 'item-view',
             url: '/item/:id',
-            templateUrl: 'templates/item/item.html',
+            templateUrl: 'templates/main/item.html',
             controller: 'ItemCtrl as itemController'
         }
     ];

@@ -81,45 +81,4 @@ WizardResultCtrl.prototype = {
     
 };
 
-angular.module('wizardResult').controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);
-
-
-var SingleResultCtrl = function($state) {
-    this.$state = $state;
-};
-
-SingleResultCtrl.prototype = {
-
-    goto_item: function(item_data) {
-        this.$state.go('item-view', {id: item_data._id.$oid});
-    }
-};
-
-angular.module('wizardResult').controller('SingleResultCtrl', ['$state', SingleResultCtrl]);
-
-var NoResultCtrl = function() {
-    
-};
-
-NoResultCtrl.prototype = {
-
-};
-
-angular.module('wizardResult').controller('NoResultCtrl', [NoResultCtrl]);
-
-var MultipleResultCtrl = function() {
-
-    this.titles = {
-    
-        trees: {
-            en: 'Family Trees',
-            he: 'עצי משפחה'
-        }
-    };
-};
-
-MultipleResultCtrl.prototype = {
-
-};
-
-angular.module('wizardResult').controller('MultipleResultCtrl', [MultipleResultCtrl]);
+angular.module('main').controller('WizardResultCtrl', ['$scope', '$state', '$stateParams', 'searchManager', WizardResultCtrl]);

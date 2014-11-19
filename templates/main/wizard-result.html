@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<div id="search-again" ng-show="wizardResultController.search_again_visible">
-			<ng-include src="'templates/wizard/wizard-form.html'"></ng-include>
+			<ng-include src="'templates/main/wizard-form.html'"></ng-include>
 		</div>
 		<div id="wizard-search-result">
 			<div id="name-tree-result">
@@ -83,7 +83,7 @@
 						<en><div class="item-arrow-left"></div></en>
 						<he><div class="item-arrow-right"></div></he>
 					</div>
-					<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.name" content="name"></single-result>
+					<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.name" content="name"></item-preview>
 					<no-result ng-switch-when="true" content="name"></no-result>
 				</div>
 				<!--
@@ -95,7 +95,7 @@
 				-->
 			</div>
 			<div id="place-result" ng-switch on="wizardResultController.result.bingo.place.isEmpty()">
-				<single-result ng-switch-when="false" result-data="wizardResultController.result.bingo.place" content="place"></single-result>
+				<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.place" content="place"></item-preview>
 				<no-result ng-switch-when="true" content="place"></no-result>
 				<div class="item-arrow-container">
 					<en><div class="item-arrow-right"></div></en>

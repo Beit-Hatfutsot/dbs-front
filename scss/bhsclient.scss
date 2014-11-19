@@ -2,9 +2,11 @@
 @import "mixins";
 @import "header/header";
 @import "footer/footer";
-@import "start/start";
+@import "main/wizard-form";
+@import "main/start";
+@import "main/wizard-result";
+@import "main/item";
 @import "auth/modal";
-@import "item/item";
 
 * {
 	font-family: Arial, Helvetica, sans-serif;

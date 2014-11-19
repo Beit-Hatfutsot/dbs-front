@@ -50,4 +50,4 @@ WizardCtrl.prototype = {
     }
 };
 
-angular.module('wizard').controller('WizardCtrl', ['$state', '$scope', '$timeout', 'langManager', WizardCtrl]);
+angular.module('main').controller('WizardCtrl', ['$state', '$scope', '$timeout', 'langManager', WizardCtrl]);

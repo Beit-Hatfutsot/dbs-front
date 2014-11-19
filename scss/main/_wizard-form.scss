@@ -1,0 +1,51 @@
+#wizard-form {
+	width: 640px;
+
+	.instructions {
+		font-size: 20px;
+		margin-bottom: 5px;
+	}
+			
+	.field {
+		display: inline-block;
+		vertical-align: top;
+
+		label {
+			font-size: 12px;
+		}
+
+		input {
+			width: 300px;
+			height: 38px;
+			padding: 0 8px;
+		}
+	
+		&.place {
+
+			.en & {
+				margin: 0 0 0 35px;	
+			}
+
+			.he & {
+				margin: 0 35px 0 0;	
+			}
+		}
+	}
+
+	button {
+		vertical-align: bottom;
+		width: 144px;
+		height: 38px;
+		margin: 20px 0;
+		color: #f9f9f9;
+		font-size: 22px;
+		background: #5dc2d4;
+		border: none;
+		border-radius: 2px;
+
+		&:disabled {
+			background: grey;
+			cursor: default;
+		}
+	}
+}

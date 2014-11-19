@@ -1,4 +1,4 @@
-angular.module('item').
+angular.module('main').
 	factory('item', ['$resource', '$q', 'apiClient', 'cache', function($resource, $q, apiClient, cache) {
 		var item_service, itemClient;
 
