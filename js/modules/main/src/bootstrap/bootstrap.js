@@ -18,7 +18,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         {
             name: 'start',
             url: '/',
-            templateUrl: 'templates/main/start.html'
+            templateUrl: 'templates/main/start.html',
+            onEnter: ['wizard', function(wizard) {
+                wizard.clear();
+            }]
         },
 
         {

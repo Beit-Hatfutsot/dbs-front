@@ -5,7 +5,10 @@ angular.module('main').
 
 		var wizard = {
 			result: {},
-			search: search
+			search: search,
+			clear: function() {
+				this.result = {};
+			}
 		};
 
 		function search(name, place) {

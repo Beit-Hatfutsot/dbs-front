@@ -1,30 +1,30 @@
-<div id="header-wrapper" ng-controller="HeaderCtrl as headerController">
-	<div id="header-inner">
-		<div id="dropdown-icons" class="lang-float {{mainController.lang}}">
-			<div class="language-selector bh-pointer" dropdown>
+<div id="header-container" ng-controller="HeaderCtrl as headerController">
+	<div id="header">
+		<div class="dropdown-icons lang-float {{mainController.lang}}">
+			<div class="dropdown-icons__language-selector" dropdown>
 				<div dropdown-toggle>
 					<en>
-						<div class="language-icon-en"></div>
+						<div class="language-icon--en"></div>
 					</en>
 					<he>
-						<div class="language-icon-he"></div>
+						<div class="language-icon--he"></div>
 					</he>
 				</div>
 				<div class="language-menu">
-					<div class="title">
+					<div class="language-menu__title">
 						<en>Choose a language</en>
 						<he>בחרו שפה</he>
 					</div>
-					<div class="row" ng-click="mainController.lang='he'">
-						<div class="language-icon-he"></div>
-						<div class="language-desc">
+					<div class="language-menu__row" ng-click="mainController.lang='he'">
+						<div class="language-icon--he"></div>
+						<div class="language-menu__row__language-desc">
 							<en>Hebrew</en>
 							<he>עברית</he>
 						</div>
 					</div>
-					<div class="row" ng-click="mainController.lang='en'">
-						<div class="language-icon-en"></div>
-						<div class="language-desc">
+					<div class="language-menu__row" ng-click="mainController.lang='en'">
+						<div class="language-icon--en"></div>
+						<div class="language-menu__row__language-desc">
 							<en>English</en>
 							<he>אנגלית</he>
 						</div>
@@ -32,19 +32,19 @@
 				</div>
 			</div>
 		</div>
-		<div id="logo" class="bh-pointer" ui-sref="start"></div>
-		<div id="mystory-icon" class="bh-pointer"></div>
-		<div id="search-area">
-			<form action="">
-				<input type="text" placeholder={{headerController.search_placeholders[mainController.lang]}} />
-				<div class="search-button bh-pointer" need-auth="false"></div>
+		<div class="logo" ui-sref="start"></div>
+		<div class="mystory-icon"></div>
+		<div class="search-area">
+			<form action="" class="search-area__form">
+				<input type="text" placeholder={{headerController.search_placeholders[mainController.lang]}} class="search-area__form__input" />
+				<div class="search-area__form__search-button" need-auth="false"></div>
 			</form>
 		</div>
 	</div>
 </div>
 <div id="secondary-header" ng-if="mainController.show_notifications">
-	<div id="notification-bar">
-		<div id="notification-bar__inner" ng-switch on="wizardResultController.search_status === 'bingo'">
+	<div id="notification-bar-container">
+		<div id="notification-bar" ng-switch on="wizardResultController.search_status === 'bingo'">
 			<!--<div ng-switch-when="true">
 				<en>We have found </en>
 				<he>מצאנו </he>
