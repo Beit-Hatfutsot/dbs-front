@@ -20,6 +20,7 @@ module.exports = function(config) {
         'lib/angular/angular-ui-router.min.js',
         'lib/ui-bootstrap-tpls-0.11.2.min.js',
         'lib/angular/angular-mocks.js',
+        'lib/stateMock.js',
         {pattern: 'modules/**/**/*.js/', included: true},
         {pattern: 'modules/**/test/*.js', included: true},
         {pattern: 'modules/**/test/**/*.js', included: true},

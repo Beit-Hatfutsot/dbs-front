@@ -5,37 +5,35 @@ angular.module('main').
 
 		var wizard = {
 			result: {},
-			search: search,
 			clear: function() {
 				this.result = {};
-			}
-		};
+			},
+			search: function(name, place) {
+	  			var self = this, 
+	  				search_promise,
+	  				deferred = $q.defer();
 
-		function search(name, place) {
-  			var self = this, 
-  				search_promise,
-  				deferred = $q.defer();
-
-  			search_promise = searchClient.get({
-				name: name,
-				place: place	
-			}).$promise;
-  					
-			search_promise
-				.then(function(result) {
-					self.result = result;
-					angular.forEach(result.bingo, function(item) {
-						cache.write(item)
+	  			search_promise = searchClient.get({
+					name: name,
+					place: place	
+				}).$promise;
+	  					
+				search_promise
+					.then(function(result) {
+						self.result = result;
+						angular.forEach(result.bingo, function(item) {
+							cache.put(item)
+						});
+					
+						deferred.resolve(result);
+					},
+					function() {
+						deferred.reject();
 					});
-				
-					deferred.resolve(result);
-				},
-				function() {
-					deferred.reject();
-				});
 
-  			return deferred.promise;
-	  	}
+	  			return deferred.promise;
+		  	}
+		};
 
 		return wizard;
 	}]);

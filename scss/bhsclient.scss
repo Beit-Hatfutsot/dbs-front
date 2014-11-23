@@ -52,10 +52,10 @@ html {
 			@at-root #view {
 				position: relative;
 				z-index: 0;
-				height: 100%;
 				width: 100%;
+				height: 100%;
 				margin: 0 auto;
-				padding-bottom: $header-height + $footer-height;
+				padding-bottom: $header-height + $secondary-header-height + $footer-height;
 				@include transition(all, 1s, linear);
 
 				&.ng-enter, &.ng-leave {

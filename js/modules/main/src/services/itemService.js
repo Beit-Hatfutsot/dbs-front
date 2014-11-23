@@ -9,7 +9,7 @@ angular.module('main').
 			get: function(item_id) {
 				var self 		= this,
 					deferred	= $q.defer(),
-					cached		= cache.read(item_id); 
+					cached		= cache.get(item_id); 
 
 				if (cached) {
 					deferred.resolve(cached);
@@ -18,7 +18,7 @@ angular.module('main').
 					itemClient.get({item_id: item_id}).
 						$promise.
 						then(function(response) {
-							cache.write(response.item_data);
+							cache.put(response.item_data);
 							deferred.resolve(response.item_data);
 						},
 						function() {

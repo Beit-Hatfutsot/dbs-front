@@ -3,7 +3,7 @@ angular.module('cache').
 		var cache, cached_items = {},
 
 		cache = {
-			write: function(item) {
+			put: function(item) {
 				if ( item.isNotEmpty() ) {
 					cached_items[item._id.$oid] = angular.copy(item);
 					return true;
@@ -11,8 +11,8 @@ angular.module('cache').
 				return false;
 			},
 
-			read: function(item_id) {
-				return cached_items[item_id] || null;
+			get: function(item_id) {
+				return cached_items[item_id] || {};
 			}
 		};
 

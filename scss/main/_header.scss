@@ -214,7 +214,7 @@
 
 	@at-root #notification-bar-container {
 		position: relative;
-		height: 45px;
+		height: $secondary-header-height;
 		width: 100%;
 		@include linear-gradient(#bbbdbc, 0, #d4d6d5, 20%);
 		border-bottom: 2px solid #ffffff;
