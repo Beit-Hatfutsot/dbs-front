@@ -4,9 +4,6 @@ describe('wizard', function() {
 	var wizard, apiClient, $httpBackend, wizard_search_url, query_url, cache;
 
 	beforeEach(function() {
-		//module('ngResource');
-		//module('apiClient');
-		//module('cache')
 		module('main');
 	});
 

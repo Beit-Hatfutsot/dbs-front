@@ -1,5 +1,5 @@
 <div id="item-page">
-	<div id="item-page__inner" animate-down on="mainController.search_again_visible">
+	<div id="item-page__inner" animate-down when="mainController.search_again_visible">
 		<div class="related">
 			<item-preview ng-repeat="related_data in itemController.item_data.related | limitTo: 3" preview-data="related_data"></item-preview>
 		</div>

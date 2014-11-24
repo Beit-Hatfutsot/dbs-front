@@ -237,8 +237,8 @@
 				position: absolute;
 				bottom: 6px;
 				border: 1px solid #969fa2;
-				border-radius: 5px;
 				padding: 5px;
+				@include border-radius(5px);
 				@include hover-pointer();
 
 				.en & {
@@ -296,8 +296,9 @@
 							margin: 5px;
 							padding: 5px;
 							border: 1px solid grey;
-							border-radius: 5px;
 							font-size: 11px;
+							@include border-radius(5px);
+							@include hover-pointer();
 						}
 					}
 				}

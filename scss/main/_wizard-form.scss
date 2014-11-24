@@ -41,7 +41,7 @@
 		font-size: 22px;
 		background: #5dc2d4;
 		border: none;
-		border-radius: 2px;
+		@include border-radius(2px);
 
 		&:disabled {
 			background: grey;

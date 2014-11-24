@@ -15,7 +15,7 @@
 				<en>Did you mean...</en>
 				<he>האם התכונת ל...</he>
 			</div>
-			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="name in mainController.wizard_suggestions.name">
+			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="name in mainController.wizard_suggestions.name | limitTo: 6" ng-click="mainController.start_name(name)">
 				<en>{{name.Header.En}}</en>
 				<he>{{name.Header.He}}</he>
 			</div>
@@ -34,7 +34,7 @@
 				<en>Did you mean...</en>
 				<he>האם התכונת ל...</he>
 			</div>
-			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="place in mainController.wizard_suggestions.place">
+			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="place in mainController.wizard_suggestions.place | limitTo: 6" ng-click="mainController.start_place(place)">
 				<en>{{place.Header.En}}</en>
 				<he>{{place.Header.He}}</he>
 			</div>

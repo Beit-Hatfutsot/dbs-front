@@ -51,6 +51,7 @@ describe('item', function() {
 	it('should fetch items from server', function() {
 		var retrieved;
 
+		cache.clear();
 		$httpBackend.expectGET(item_url);
 
 		item.get('non-cached-id').

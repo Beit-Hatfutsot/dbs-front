@@ -2,6 +2,7 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
     var self = this;
 
     this.$state = $state;
+    this.langManager = langManager;
     this.search_again_visible = false;
     this.placeholders = { 
         name: {
@@ -82,6 +83,18 @@ MainCtrl.prototype = {
 
     start: function() {
         this.$state.go('wizard-result', {name: this.wizard_query.name, place: this.wizard_query.place});
+    },
+
+    start_name: function(name) {
+        var lang_index = this.langManager.lang[0].toUpperCase() + this.langManager.lang[1];
+        this.wizard_query.name = name.Header[lang_index];
+        this.start();
+    },
+
+    start_place: function(place) {
+        var lang_index = this.langManager.lang[0].toUpperCase() + this.langManager.lang[1];
+        this.wizard_query.place = place.Header[lang_index];
+        this.start();
     }
 }
 

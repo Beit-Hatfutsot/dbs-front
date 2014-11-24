@@ -4,7 +4,7 @@ angular.module('lang').
 			restrict: 'E',
 
 			transclude: true,
-
+			
 			scope: {},
 		  		
 		    template: "<span ng-transclude class=\"en\" ng-show=\"langManager.lang == 'en'\" ng-transclude></span>",

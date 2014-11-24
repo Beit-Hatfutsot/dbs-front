@@ -19,7 +19,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
             name: 'start',
             url: '/',
             templateUrl: 'templates/main/start.html',
-            onEnter: ['wizard', function(wizard) {
+            onEnter: ['cache', 'wizard', function(cache, wizard) {
+                cache.clear();
                 wizard.clear();
             }]
         },

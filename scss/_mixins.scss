@@ -1,5 +1,3 @@
-$images: '/images/';
-
 @mixin image($url, $size: "", $position: 0 0, $repeat: no-repeat) {
 	background: url($images + $url) $position $repeat;
 
@@ -7,7 +5,6 @@ $images: '/images/';
 		background-size: $size;
 	}
 }
-
 
 @mixin bg_image($url) {
 	background: url($images + $url);
@@ -22,9 +19,17 @@ $images: '/images/';
 	
 }
 
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+}
+
 @mixin translate($x, $y) {
 	-webkit-transform: translate($x, $y);
     -moz-transform: translate($x, $y);
+    -o-transform: translate($x, $y);
     -ms-transform: translate($x, $y);
     transform: translate($x, $y);
 }
@@ -32,6 +37,7 @@ $images: '/images/';
 @mixin translateX($x) {
 	-webkit-transform: translateX($x);
     -moz-transform: translateX($x);
+    -o-transform: translateX($x);
     -ms-transform: translateX($x);
     transform: translateX($x);
 }
@@ -39,6 +45,7 @@ $images: '/images/';
 @mixin translateY($y) {
 	-webkit-transform: translateY($y);
     -moz-transform: translateY($y);
+    -o-transform: translateY($y);
     -ms-transform: translateY($y);
     transform: translateY($y);
 }
@@ -46,6 +53,7 @@ $images: '/images/';
 @mixin transition($property, $duration, $timing-function, $delay:0s) {
 	-webkit-transition: $property $duration $timing-function $delay;
     -moz-transition: $property $duration $timing-function $delay;
+    -o-transition: $property $duration $timing-function $delay;
     -ms-transition: $property $duration $timing-function $delay;
     transition: $property $duration $timing-function $delay;
 }
