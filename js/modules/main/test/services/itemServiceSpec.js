@@ -1,14 +1,14 @@
 'use strict';
 
-describe('item-service', function() {
+describe('item', function() {
 
 	var item, item_data, item_url, cache, $httpBackend, $timeout;
 
 	beforeEach(function() {
-		module('ngResource');
-		module('apiClient');
-		module('cache');
-		module('item');
+		//module('ngResource');
+		//module('apiClient');
+		//module('cache');
+		module('main');
 	});
 
 	beforeEach(inject(function(_item_, _cache_, _$httpBackend_, apiClient, _$timeout_) {
@@ -17,8 +17,10 @@ describe('item-service', function() {
 		$httpBackend = _$httpBackend_;
 		$timeout = _$timeout_;
 
+		$httpBackend.expectGET('templates/main/start.html').respond('');
+
 		item_data = {
-			_id: 'test-id',
+			_id: { $oid: 'test-id' },
 			data: 'test-data'
 		};
 
@@ -26,7 +28,7 @@ describe('item-service', function() {
 		$httpBackend.whenGET(item_url).
 			respond(200, {
 				item_data: {
-					_id: 'non-cached-id',
+					_id: { $oid: 'non-cached-id' },
 					data: 'non-cached-data'
 				}
 			});
@@ -35,9 +37,9 @@ describe('item-service', function() {
 	it('should fetch items from cache', function() {
 		var retrieved;
 
-		cache.write(item_data);
+		cache.put(item_data);
 
-		item.get(item_data._id).
+		item.get(item_data._id.$oid).
 			then(function(data) {
 				retrieved = data;
 			}); 
@@ -47,25 +49,25 @@ describe('item-service', function() {
 	});
 
 	it('should fetch items from server', function() {
-		var result;
+		var retrieved;
 
 		$httpBackend.expectGET(item_url);
 
 		item.get('non-cached-id').
-			then(function(response) {
-				result = response;
+			then(function(data) {
+				retrieved = data;
 			});
 		$httpBackend.flush();
 
-		expect(result._id).toEqual('non-cached-id');
+		expect(retrieved._id.$oid).toEqual('non-cached-id');
 
-		result = {};
+		retrieved = {};
 		item.get('non-cached-id').
-			then(function(response) {
-				result = response;
+			then(function(data) {
+				retrieved = data;
 			});
 		$timeout.flush();
 
-		expect(result._id).toEqual('non-cached-id');
+		expect(retrieved._id.$oid).toEqual('non-cached-id');
 	});
 });

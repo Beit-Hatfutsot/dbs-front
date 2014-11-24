@@ -1,6 +1,6 @@
 #header-container {
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 	height: $header-height;
 	width: 100%;
 	background: #ffffff;
@@ -20,6 +20,7 @@
 			width: 45px;
 			height: 50px;
 			z-index: 1;
+			@include hover-pointer();
 			@include icon(-26px -14px);
 		}
 
@@ -31,6 +32,7 @@
 			width: 86px;
 			height: 24px;
 			z-index: 1;
+			@include hover-pointer();
 			@include icon(-83px -24px);
 
 			.en & {
@@ -79,6 +81,7 @@
 					height: 23px;
 					width: 15px;
 					vertical-align: top;
+					@include hover-pointer();
 					@include icon(-350px -24px);
 
 					.en & {
@@ -115,6 +118,7 @@
 					display: inline-block;
 					width: 29px;
 					height: 29px;
+					@include hover-pointer();
 				}
 
 				.language-icon--en {
@@ -163,7 +167,8 @@
 					}
 
 					&__row {
-				
+						@include hover-pointer();
+						
 						&:hover {
 							color: #5dc2d4;
 							
@@ -210,7 +215,7 @@
 
 #secondary-header {
 	position: relative;
-	z-index: 0;
+	z-index: 1;
 
 	@at-root #notification-bar-container {
 		position: relative;
@@ -234,6 +239,7 @@
 				border: 1px solid #969fa2;
 				border-radius: 5px;
 				padding: 5px;
+				@include hover-pointer();
 
 				.en & {
 					right: 189px;	
@@ -251,53 +257,51 @@
 		}
 	}
 
-	@at-root #search-again {
-		position: relative;
-		min-height: 190px;
-		width: 760px;;
-		margin: 0 auto;
-		padding: 30px 0 0;
-		background: rgba(248, 248, 255, 1);
+	@at-root #search-again-container {
+		position: absolute;
+		width: 100%;
+		background: transparent;
 		z-index: 0;
-		border-bottom: 4px solid #5ec5d6;
 		@include transition(all, 0.5s, ease);
 
 		&.ng-hide {
-			@include translate(0, -230px);
+			@include translate(0, -$max-search-again-height);
 		}
 
 		&.ng-hide-add, &.ng-hide-remove {
 			display: block !important;
 		}
 
-		.wizard-form {
+		@at-root #search-again {
+			position: relative;
+			min-height: 190px;
+			max-height: $max-search-again-height;
+			width: 760px;;
 			margin: 0 auto;
+			padding: 30px 0 0;
+			background: rgba(248, 248, 255, 1);
+			border-bottom: 4px solid #5ec5d6;
 
-			&__field {
+			.wizard-form {
+				margin: 0 auto;
 
-				&__suggestions {
-					margin: 10px 0 0;
-					width: 294px;
+				&__field {
 
-					&__suggestion {
-						display: inline-block;
-						margin: 5px;
-						padding: 5px;
-						border: 1px solid grey;
-						border-radius: 5px;
-						font-size: 11px;
+					&__suggestions {
+						margin: 10px 0 0;
+						width: 294px;
+
+						&__suggestion {
+							display: inline-block;
+							margin: 5px;
+							padding: 5px;
+							border: 1px solid grey;
+							border-radius: 5px;
+							font-size: 11px;
+						}
 					}
 				}
 			}
-		}
-
-		&.ng-hide-add.ng-hide-add-active + #wizard-search-result {
-			@include transition(all, 0.5s, ease);
-			@include translate(0, -205px);
-		}
-
-		&.ng-hide-remove.ng-hide-remove-active + #wizard-search-result {
-
-		}
+		}	
 	}
 }

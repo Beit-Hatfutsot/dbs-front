@@ -10,8 +10,8 @@ angular.module('main').
 				var self 		= this,
 					deferred	= $q.defer(),
 					cached		= cache.get(item_id); 
-
-				if (cached) {
+					
+				if (cached.isNotEmpty()) {
 					deferred.resolve(cached);
 				} 
 				else {

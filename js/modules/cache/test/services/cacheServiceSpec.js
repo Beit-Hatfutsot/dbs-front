@@ -1,6 +1,6 @@
 'use strict';
 
-describe('cache-service', function() {
+describe('cache', function() {
 
 	var cache;
 
@@ -16,12 +16,12 @@ describe('cache-service', function() {
 		var item_data, retrieved;
 
 		item_data = {
-			_id: 'test_id',
+			_id: { $oid: 'test_id' },
 			data: 'test_data'
 		};
 
-		cache.write(item_data);
-		retrieved = cache.read(item_data._id);
+		cache.put(item_data);
+		retrieved = cache.get(item_data._id.$oid);
 
 		expect(retrieved).toEqual(item_data);
 	})
