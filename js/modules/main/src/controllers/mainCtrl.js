@@ -3,7 +3,7 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
 
     this.$state = $state;
     this.langManager = langManager;
-    this.search_again_visible = false;
+    this.search_again_visible = true;
     this.placeholders = { 
         name: {
             en: 'Surname',
@@ -82,6 +82,7 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
 MainCtrl.prototype = {
 
     start: function() {
+        this.search_again_visible = true;
         this.$state.go('wizard-result', {name: this.wizard_query.name, place: this.wizard_query.place});
     },
 

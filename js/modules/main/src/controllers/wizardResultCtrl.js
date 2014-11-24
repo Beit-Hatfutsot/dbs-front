@@ -14,6 +14,12 @@ var WizardResultCtrl = function($scope, $stateParams, wizard, notification) {
 	
     $scope.mainController.wizard_query.name = $stateParams.name;
     $scope.mainController.wizard_query.place = $stateParams.place;
+    
+    notification.put({
+        en: 'Searching...',
+        he: 'מחפש...'
+    });
+    
     wizard.search($stateParams.name, $stateParams.place)
 		.then(function(result) {
             try {
@@ -37,7 +43,7 @@ var WizardResultCtrl = function($scope, $stateParams, wizard, notification) {
                     else {
                         self.search_status = 'bingo';
                         notification.put({
-                            en: 'Search finisjed successfuly.',
+                            en: 'Search finished successfuly.',
                             he: 'החיפוש הסתיים בהצלחה.'
                         });
                     }
