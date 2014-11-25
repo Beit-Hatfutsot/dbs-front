@@ -53,4 +53,14 @@ describe('wizard', function() {
 		expect(cache.get('name-id').header).toEqual('test-name');
 		expect(cache.get('place-id').header).toEqual('test-place');
 	});
+
+	it('should save last_search input', function() {
+		$httpBackend.expectGET(query_url);
+
+		wizard.search('test-name', 'test-place')
+		$httpBackend.flush();
+
+		expect(wizard.last_search.name).toEqual('test-name');
+		expect(wizard.last_search.place).toEqual('test-place');
+	});
 });

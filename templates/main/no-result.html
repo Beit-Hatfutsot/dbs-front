@@ -1,21 +1,42 @@
 <div class="no-result">
-	<div class="text">
-		<en>
-			We have not found
-			<ng-switch on="noResultController.content">
-				<span ng-switch-when="name"> the name </span>
-				<span ng-switch-when="place"> the place </span>
-				<span ng-switch-when="tree"> trees that match what </span>
-			</ng-switch>
-			you were looking for. go away. 
-		</en>
-		<he>לא מצאנו
-			<ng-switch on="noResultController.content">
-				<span ng-switch-when="name"> שם משפחה שמתאים </span>
-				<span ng-switch-when="place"> קהילה שמתאימה </span>
-				<span ng-switch-when="tree"> עצים שמתאימים </span>
-			</ng-switch>
-			למה שחיפשת.
-		</he>
+	<div class="type">
+		<ng-switch on="content_type">
+			<div ng-switch-when="name">
+				<div class="type-icon-container">
+					<div class="surname-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Surname Origin</en>
+					<he>פירוש שם משפחה</he>
+				</div>
+			</div>
+			<div ng-switch-when="place">
+				<div class="type-icon-container">
+					<div class="community-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Community</en>
+					<he>קהילה</he>
+				</div>
+			</div>
+		</ng-switch>
+	</div>
+	<div class="header">
+		<en>No exact matches were found for </en>
+		<he>לא נמצאה התאמה מדויקת עבור </he>
+		<ng-switch on="content_type">
+			<span ng-switch-when="name"><strong>{{wizardResultController.last_search.name}}</strong></span>
+			<span ng-switch-when="place"><strong>{{wizardResultController.last_search.place}}</strong></span>
+		</ng-switch>
+	</div>
+	<div class="text" ng-switch on="wizardResultController.suggestion_status === 'none'">
+		<span ng-switch-when="false">
+			<en>Try one of the suggestions above or </en>
+		</span>
+		<span ng-switch-when="true">
+			<en>Try to </en>
+		</span>
+		<en><a href="" ng-click="mainController.search_again_visible = true">start a new search</a> for name and place</en>
+		<he></he>
 	</div>
 </div>

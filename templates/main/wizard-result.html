@@ -1,28 +1,18 @@
 <div id="wizard-result" ng-show="!(wizardResultController.in_progress || wizardResultController.failed)">
 	<div class="items" animate-down when="mainController.search_again_visible">
-		<div class="items__name-tree">
-			<div class="items__name-tree__name" ng-switch on="wizardResultController.result.bingo.name.isEmpty()">
-				<div class="item-arrow-container">
-					<en><div class="item-arrow-left"></div></en>
-					<he><div class="item-arrow-right"></div></he>
-				</div>
-				<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.name" content="name"></item-preview>
-				<no-result ng-switch-when="true" content="name"></no-result>
-			</div>
-			<!--
-			<div class="items__tree" ng-switch on="wizardResultController.view_mode('trees')">
-				<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.trees" content="trees"></multiple-result>
-				<no-result ng-switch-when="none" content="tree"></no-result>
-			</div>
-			-->
+		<div class="items__name" ng-switch on="wizardResultController.result.bingo.name.isEmpty()">
+			<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.name" content="name"></item-preview>
+			<no-result ng-switch-when="true" content="name"></no-result>
 		</div>
+		<!--
+		<div class="items__tree" ng-switch on="wizardResultController.view_mode('trees')">
+			<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.trees" content="trees"></multiple-result>
+			<no-result ng-switch-when="none" content="tree"></no-result>
+		</div>
+		-->
 		<div class="items__place" ng-switch on="wizardResultController.result.bingo.place.isEmpty()">
 			<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.place" content="place"></item-preview>
 			<no-result ng-switch-when="true" content="place"></no-result>
-			<div class="item-arrow-container">
-				<en><div class="item-arrow-right"></div></en>
-				<he><div class="item-arrow-left"></div></he>
-			</div>
 		</div>
 	</div>
 </div>

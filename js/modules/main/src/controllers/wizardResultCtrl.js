@@ -3,12 +3,19 @@ var WizardResultCtrl = function($scope, $stateParams, wizard, notification) {
 
     this.in_progress = true;
     this.failed = false;
-    this.search_status = '';
-    this.suggestions_status = '';
+    this.search_status = 'none';
+    this.suggestion_status = 'none';
+    this.notification = notification;
 
     Object.defineProperty(this, 'result', {
         get: function() {
             return wizard.result;
+        }
+    });
+
+    Object.defineProperty(this, 'last_search', {
+        get: function() {
+            return wizard.last_search;
         }
     });
 	
@@ -65,30 +72,26 @@ var WizardResultCtrl = function($scope, $stateParams, wizard, notification) {
                     });
                     
                     if ( result.suggestions.name.isNotEmpty() && result.suggestions.place.isEmpty() ) {
-                        self.suggestions_status = 'name';
+                        self.suggestion_status = 'name';
                     }
                     else if ( result.suggestions.name.isEmpty() && result.suggestions.place.isNotEmpty() ) {
-                        self.suggestions_status = 'place';
+                        self.suggestion_status = 'place';
                     }
                     else {
-                        self.suggestions_status = 'both';
+                        self.suggestion_status = 'both';
                     }
                 }
                 else {
-                    self.suggestions_status = 'none';
+                    self.suggestion_status = 'none';
                 }    
             }
             catch(e) {
-                self.failed = true;
+                self.fail();
             }    
 		}, 
         function() {
             // handle case when connection to search service failed
-            self.failed = true;
-            notification.put({
-                en: 'Search has failed.',
-                he: 'החיפוש נכשל.'
-            });
+            self.fail();
         }).
         finally(function() {
             self.in_progress = false;
@@ -97,6 +100,13 @@ var WizardResultCtrl = function($scope, $stateParams, wizard, notification) {
 
 WizardResultCtrl.prototype = {
     
+    fail: function() {
+        this.failed = true;
+        this.notification.put({
+            en: 'Search has failed.',
+            he: 'החיפוש נכשל.'
+        });
+    }
 };
 
 angular.module('main').controller('WizardResultCtrl', ['$scope', '$stateParams', 'wizard', 'notification', WizardResultCtrl]);

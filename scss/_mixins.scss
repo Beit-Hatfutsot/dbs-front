@@ -75,7 +75,8 @@
 }
 
 @mixin item-bottom-border() {
-	border-bottom: 4px solid #47c2d3;
+	//border-bottom: 4px solid #47c2d3;
+	border-bottom: 4px solid #f5f5f5;
 }
 
 @mixin hover-pointer() {
@@ -86,79 +87,78 @@
 }
 
 %item-preview {
+	height: 100%;
 	background: #ffffff;
 	overflow: hidden;
-	@include item-bottom-border(); 
+	padding: 0 10px 10px;
+	@include item-bottom-border();
+	@include border-radius(8px 8px 0 0);
 	@include item-shadow();
-
-	.below-thumbnail {
-		height: 100%;
-		padding: 0 10px 10px;
 		
-		.type {
+	.type {
+		display: inline-block;
+		width: auto;
+		height: auto;
+		background: #f5f5f5;
+		color: #b4b4b4; 
+		font-weight: bold;
+		border-bottom-right-radius: 3px;
+		border-bottom-left-radius: 3px;
+
+		.en & {
+			padding-right: 5px;
+			float: right;
+		}
+
+		.he & {
+			padding-left: 5px;
+			float: left;
+		}
+
+		.type-icon-container {
 			display: inline-block;
-			width: auto;
-			height: auto;
-			background: #5ec5d6;
-			color: #f9f9f9; 
-			font-weight: bold;
-			border-bottom-right-radius: 3px;
-			border-bottom-left-radius: 3px;
+			padding-top: 3px;
 
 			.en & {
-				padding-right: 5px;
+				padding-left: 4px;
 			}
 
 			.he & {
-				padding-left: 5px;	
+				padding-right: 4px;	
 			}
 
-			.type-icon-container {
-				display: inline-block;
-				padding-top: 3px;
-
-				.en & {
-					padding-left: 4px;
-				}
-
-				.he & {
-					padding-right: 4px;	
-				}
-
-				.surname-icon {
-					position: relative;
-					top: 2px;
-					width: 18px;
-					height: 16px;
-					@include icon(-28px -161px);
-				}
-
-				.community-icon {
-					width: 14px;
-					height: 17px;
-					@include icon(-30px -106px);
-				}
-			}
-
-			.type-desc-container {
+			.surname-icon {
 				position: relative;
-				display: inline-block;
-				vertical-align: top;
-				padding: 5px 0;
+				top: 2px;
+				width: 18px;
+				height: 16px;
+				@include icon(-28px -161px);
+			}
+
+			.community-icon {
+				width: 14px;
+				height: 17px;
+				@include icon(-30px -106px);
 			}
 		}
 
-		.header {
+		.type-desc-container {
+			position: relative;
+			display: inline-block;
+			vertical-align: top;
 			padding: 5px 0;
-			font-weight: bold;
 		}
-
-		.text {
-			height: 95px;
-			margin: 0 0 10px;
-			padding: 5px 0;
-			color: #474747;
-			overflow: hidden;
-		}	
 	}
+
+	.header {
+		font-size: 12px;
+		font-weight: bold;
+		clear: both;
+	}
+
+	.text {
+		color: #474747;
+		overflow: hidden;
+		font-size: 11px;
+	}	
 }

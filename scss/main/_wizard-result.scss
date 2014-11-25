@@ -7,88 +7,76 @@
 	overflow: auto;
 
 	.items {
-		width: 654px;
+		width: 610px;
 		margin: 0 auto;
 		padding: 60px 0;
 		
-		&__name-tree, &__place {
+		&__name, &__place {
 			display: inline-block;
 			vertical-align: top;
 			padding: 10px;
 
-			.item-preview, .no-result, .multiple-result {
+			.item-preview, .no-result {
 				@extend %item-preview;
 				display: inline-block;
+
+				.header {
+					margin: 33px 0 26px;
+				}
+
+				.text {
+					line-height: 16px;
+				}
 			}
 
-			.item-arrow-container {
-				display: inline-block;
-				vertical-align: top;
-				width: 40px;
-				height: 100%;
+			.item-preview {
+				@include hover-pointer();
 
-				.item-arrow-left, .item-arrow-right, .item-arrow-down {
-					width: 22px;
-					height: 22px;
+				.header {
+
+					.en & {
+						padding: 0 0 0 10px;
+					}
+
+					.he & {
+						padding: 0 10px 0 0;
+					}
 				}
 
-				.item-arrow-left {
-					@include icon(-55px -106px);
+				.text {
+					height: 46px;
+					margin: 0 0 28px;
 				}
 
-				.item-arrow-right {
-					@include icon(-55px -133px);
+				.thumbnail {
+					margin: 0 auto;
+					width: 260px;
+					height: 170px;
+				}
+			}
+
+			.no-result {
+
+				.header, .text {
+					color: grey;
+					font-weight: normal;
 				}
 			}
 		}
 
-		&__name-tree {
+		&__name {
 
-			&__name {
-				margin: 20px 0 10px;
-
-				.item-preview, .no-result, .multiple-result, .item-arrow-container {
-					height: 165px;
-				}
-
-				.item-preview, .no-result, .multiple-result {
-					width: 260px;	
-				}
-
-				.item-arrow-container {
-					padding: 72px 9px;
-				}
+			.item-preview, .no-result {
+				width: 280px;
+				height: 330px;
 			}
 		}
 
 		&__place {
 
-			.item-preview {
-
-				.thumbnail {
-					margin: 0 auto;
-					width: 100%;
-					height: 170px;
-				}
-
-				.below-thumbnail {
-
-					.text {
-						height: 20px;
-					}
-				}
-			}
-
-			.item-arrow-container, .item-preview, .no-result, .multiple-result {
-				height: 260px;
-			}
-
-			.item-arrow-container {
-				padding: 119px 9px;
-			}
-
-			.item-preview, .no-result, .multiple-result {
-				width: 260px;
+			.item-preview, .no-result {
+				width: 280px;
+				height: 330px;
 			}
 		}
 

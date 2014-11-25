@@ -5,9 +5,16 @@ angular.module('main').
 
 		var wizard = {
 			result: {},
+			
+			last_search: {
+				name: '',
+				place: ''
+			},
+			
 			clear: function() {
 				this.result = {};
 			},
+			
 			search: function(name, place) {
 	  			var self = this, 
 	  				search_promise,
@@ -21,6 +28,8 @@ angular.module('main').
 				search_promise
 					.then(function(result) {
 						self.result = result;
+						self.last_search.name = name;
+						self.last_search.place = place;
 						angular.forEach(result.bingo, function(item) {
 							cache.put(item)
 						});

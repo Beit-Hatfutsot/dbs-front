@@ -249,9 +249,11 @@
 					left: 189px;	
 				}
 
-				img {
-					height: 10px;
-					width: auto;
+				.down-triangle {
+					width: 13px;
+					height: 8px;
+					display: inline-block;
+					@include icon(-379px -100px);
 				}
 			}
 		}

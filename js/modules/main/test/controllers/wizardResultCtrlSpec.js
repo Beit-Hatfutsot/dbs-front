@@ -3,7 +3,6 @@
 describe('WizardResultCtrl', function() {
 
 	beforeEach(function() {
-		//module('ui.router');
 		module('main');
 	});
 
@@ -68,7 +67,7 @@ describe('WizardResultCtrl', function() {
 		expect(scope.wizardResultController.result).toBe(wizard.result);
 	});
 	
-	it('should properly set search_status, search_again_visible', function() {
+	it('should properly set search_status', function() {
 		result = {
 			bingo: {
 				name: {test: 'test'},
@@ -84,7 +83,6 @@ describe('WizardResultCtrl', function() {
 		$timeout.flush();
 		
 		expect(scope.wizardResultController.search_status).toEqual('bingo');
-		expect(scope.mainController.search_again_visible).toBe(true);
 
 		result = {
 			bingo: {
@@ -101,7 +99,6 @@ describe('WizardResultCtrl', function() {
 		$timeout.flush();
 		
 		expect(scope.wizardResultController.search_status).toEqual('bingo-name');
-		expect(scope.mainController.search_again_visible).toBe(true);
 
 		result = {
 			bingo: {
@@ -118,7 +115,6 @@ describe('WizardResultCtrl', function() {
 		$timeout.flush();
 		
 		expect(scope.wizardResultController.search_status).toEqual('bingo-place');
-		expect(scope.mainController.search_again_visible).toBe(true);
 
 		result = {
 			bingo: {
@@ -135,10 +131,9 @@ describe('WizardResultCtrl', function() {
 		$timeout.flush();
 		
 		expect(scope.wizardResultController.search_status).toEqual('none');
-		expect(scope.mainController.search_again_visible).toBe(true);
 	});
 
-	it('should properly set suggestions_status', function() {
+	it('should properly set suggestion_status', function() {
 		result = {
 			bingo: {
 				name: {},
@@ -153,7 +148,7 @@ describe('WizardResultCtrl', function() {
 		createCtrl();
 		$timeout.flush();
 		
-		expect(scope.wizardResultController.suggestions_status).toEqual('both');
+		expect(scope.wizardResultController.suggestion_status).toEqual('both');
 
 		result = {
 			bingo: {
@@ -169,7 +164,7 @@ describe('WizardResultCtrl', function() {
 		createCtrl();
 		$timeout.flush();
 		
-		expect(scope.wizardResultController.suggestions_status).toEqual('name');
+		expect(scope.wizardResultController.suggestion_status).toEqual('name');
 
 		result = {
 			bingo: {
@@ -185,7 +180,7 @@ describe('WizardResultCtrl', function() {
 		createCtrl();
 		$timeout.flush();
 		
-		expect(scope.wizardResultController.suggestions_status).toEqual('place');
+		expect(scope.wizardResultController.suggestion_status).toEqual('place');
 
 		result = {
 			bingo: {
@@ -201,6 +196,6 @@ describe('WizardResultCtrl', function() {
 		createCtrl();
 		$timeout.flush();
 		
-		expect(scope.wizardResultController.suggestions_status).toEqual('none');
+		expect(scope.wizardResultController.suggestion_status).toEqual('none');
 	});
 });
