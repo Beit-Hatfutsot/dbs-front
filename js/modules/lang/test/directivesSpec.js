@@ -29,16 +29,16 @@ describe('lang-directives', function() {
 
 	    	set_lang(scope, 'he');
 
-	    	var en_div = angular.element( en_element.children()[0] ),
-	    		he_div = angular.element( he_element.children()[0] )
+	    	var en_span = angular.element( en_element[0] ),
+	    		he_span = angular.element( he_element[0] )
 
-	    	expect(en_div.hasClass('ng-hide')).toBe(true);
-	    	expect(he_div.hasClass('ng-hide')).toBe(false);
+	    	expect(en_span.hasClass('ng-hide')).toBe(true);
+	    	expect(he_span.hasClass('ng-hide')).toBe(false);
 
 	    	set_lang(scope, 'en');
 
-	    	expect(en_div.hasClass('ng-hide')).toBe(false);
-	    	expect(he_div.hasClass('ng-hide')).toBe(true);
+	    	expect(en_span.hasClass('ng-hide')).toBe(false);
+	    	expect(he_span.hasClass('ng-hide')).toBe(true);
 	    });
 	});
 });

@@ -1,6 +1,7 @@
 angular.module('main').directive('itemPreview', function() {
 	return {
 		restrict: 'E',
+		replace: true,
 		templateUrl: 'templates/main/item-preview.html',
 		scope: {
 			preview_data: '=previewData',

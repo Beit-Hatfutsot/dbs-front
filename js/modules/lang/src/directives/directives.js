@@ -4,10 +4,12 @@ angular.module('lang').
 			restrict: 'E',
 
 			transclude: true,
+
+			replace: true,
 			
 			scope: {},
 		  		
-		    template: "<span ng-transclude class=\"en\" ng-show=\"langManager.lang == 'en'\" ng-transclude></span>",
+		    template: "<span ng-transclude style=\"width: inherit; height: inherit\" class=\"en\" ng-show=\"langManager.lang == 'en'\"></span>",
 		
 		    link: function(scope) {
 		    	scope.langManager = langManager;
@@ -21,9 +23,11 @@ angular.module('lang').
 
 			transclude: true,
 
+			replace: true,
+
 			scope: {},
 		  		
-		    template: "<span ng-transclude class=\"he\" ng-show=\"langManager.lang == 'he'\" ng-transclude></span>",
+		    template: "<span ng-transclude style=\"width: inherit; height: inherit\" class=\"he\" ng-show=\"langManager.lang == 'he'\"></span>",
 		
 		    link: function(scope) {
 		    	scope.langManager = langManager;

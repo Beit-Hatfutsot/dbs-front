@@ -21,7 +21,6 @@
 			height: 50px;
 			z-index: 1;
 			@include hover-pointer();
-			@include icon(-26px -14px);
 		}
 
 		.mystory-icon {
@@ -33,7 +32,6 @@
 			height: 24px;
 			z-index: 1;
 			@include hover-pointer();
-			@include icon(-83px -24px);
 
 			.en & {
 				margin-left: 20px;
@@ -41,10 +39,6 @@
 
 			.he & {
 				margin-right: 20px
-			}
-
-			&:hover {
-				@include icon(-83px -53px);				
 			}
 		}
 
@@ -82,7 +76,6 @@
 					width: 15px;
 					vertical-align: top;
 					@include hover-pointer();
-					@include icon(-350px -24px);
 
 					.en & {
 						left: -32px;
@@ -114,27 +107,11 @@
 				color: #f9f9f9;
 				font-weight: bold;
 
-				.language-icon--en, .language-icon--he {
+				.language-icon, .language-icon {
 					display: inline-block;
 					width: 29px;
 					height: 29px;
 					@include hover-pointer();
-				}
-
-				.language-icon--en {
-					@include icon(-312px -24px);
-				
-					&:hover {
-						@include icon(-312px -54px);	
-					}
-				}
-
-				.language-icon--he {
-					@include icon(-312px -86px);
-				
-					&:hover {
-						@include icon(-312px -116px);	
-					}
 				}
 				
 				.language-menu {
@@ -172,12 +149,11 @@
 						&:hover {
 							color: #5dc2d4;
 							
-							.language-icon--en {
-								@include icon(-312px -54px);	
-							}
+							.language-icon {
 
-							.language-icon--he {
-								@include icon(-312px -116px);	
+								img {
+									@include translate(0, -30px);	
+								}
 							}
 						}
 

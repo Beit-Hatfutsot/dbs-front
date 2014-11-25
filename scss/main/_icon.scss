@@ -1,0 +1,10 @@
+.icon-container {
+	position: relative;
+	width: inherit;
+	height: inherit;
+	overflow: hidden;
+
+	.icon {
+		position: absolute;
+	}
+}
