@@ -9,11 +9,10 @@
 					<en>{{itemController.item_data.Header.En}}</en>
 					<he>{{itemController.item_data.Header.He}}</he>
 				</div>
-				<div class="item__top-bar">
-				</div>
 				<div class="item__content">
-					<div class="item__content__thumbnail" style="background:url('data:image/jpeg;base64,{{itemController.item_data.thumbnail}}');" ng-if="itemController.item_data.thumbnail"></div>
-					<!--<div class="thumbnail" style="background:url('images/items/moscow.JPG');" ></div>-->
+					<div class="item__content__thumbnail-container" ng-if="itemController.item_data.thumbnail">
+						<img src="data:image/jpeg;base64,{{itemController.item_data.thumbnail}}" />
+					</div>
 					<en>{{itemController.item_data.UnitText1.En}}</en>
 					<he>{{itemController.item_data.UnitText1.He}}</he>
 				</div>

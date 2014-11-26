@@ -4,8 +4,7 @@ angular.module('main').directive('itemPreview', function() {
 		replace: true,
 		templateUrl: 'templates/main/item-preview.html',
 		scope: {
-			preview_data: '=previewData',
-			content_type: '@content'
+			preview_data: '=previewData'
 		},
 		controller: 'ItemPreviewCtrl as itemPreviewController'
 	};
@@ -17,8 +16,7 @@ angular.module('main').directive('multipleResult', function() {
 		restrict: 'E',
 		templateUrl: 'templates/main/multiple-result.html',
 		scope: {
-			result_data: '=resultData',
-			content: '@'
+			result_data: '=resultData'
 		},
 		controller: 'MultipleResultCtrl as multipleResultController',
 		link: function(scope) {
