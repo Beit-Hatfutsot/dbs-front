@@ -1,7 +1,7 @@
-<div id="item-page">
-	<div id="item-page__inner" animate-down when="mainController.search_again_visible">
+<div id="item-page-container">
+	<div id="item-page" animate-down when="mainController.search_again_visible">
 		<div class="related">
-			<item-preview ng-repeat="related_data in itemController.item_data.related | limitTo: 3" preview-data="related_data"></item-preview>
+			<item-preview ng-repeat="related_data in itemController.item_data.related | limitTo: 3" preview-data="related_data" arrow="left"></item-preview>
 		</div>
 		<div class="item-container">
 			<div class="item">
@@ -10,8 +10,8 @@
 					<he>{{itemController.item_data.Header.He}}</he>
 				</div>
 				<div class="item__content">
-					<div class="item__content__thumbnail-container" ng-if="itemController.item_data.thumbnail">
-						<img src="data:image/jpeg;base64,{{itemController.item_data.thumbnail}}" />
+					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.path">
+						<img src="data:image/jpeg;base64,{{itemController.item_data.thumbnail.data}}" alt="Item Image" />
 					</div>
 					<en>{{itemController.item_data.UnitText1.En}}</en>
 					<he>{{itemController.item_data.UnitText1.He}}</he>
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="related">
-			<item-preview ng-repeat="related_data in itemController.item_data.related.slice(3, 6)" preview-data="related_data"></item-preview>
+			<item-preview ng-repeat="related_data in itemController.item_data.related.slice(3, 6)" preview-data="related_data" arrow="right"></item-preview>
 		</div>
 	</div>
 </div>

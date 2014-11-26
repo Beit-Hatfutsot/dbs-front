@@ -1,42 +1,66 @@
-<div class="item-preview" ng-click="itemPreviewController.goto_item(preview_data)">
-	<div class="type">
-		<ng-switch on="content_type">
-			<div ng-switch-when="name">
-				<div class="type-icon-container">
-					<div class="surname-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Surname Origin</en>
-					<he>פירוש שם משפחה</he>
-				</div>
-			</div>
-			<div ng-switch-when="place">
-				<div class="type-icon-container">
-					<div class="community-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Community</en>
-					<he>קהילה</he>
-				</div>
-			</div>
-			<div ng-switch-when="photo">
-				<div class="type-icon-container">
-					<div class="photo-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Image</en>
-					<he>תמונה</he>
-				</div>
-			</div>
-		</ng-switch>
+<div class="item-preview-container">
+	<div class="item-arrow-container" ng-if="arrow === 'left'">
+		<div class="item-arrow" ng-click="itemPreviewController.goto_item(preview_data)">
+			<en>
+				<icon position="[-55, -106]" alt-text="{en: 'Go to Related Item', he: 'מעבר לפריט מקושר'}" ></icon>
+			</en>
+			<he>
+				<icon position="[-55, -133]" alt-text="{en: 'Go to Related Item', he: 'מעבר לפריט מקושר'}" ></icon>
+			</he>
+		</div>
 	</div>
-	<div class="header">
-		<en>{{preview_data.Header.En}}</en>
-		<he>{{preview_data.Header.He}}</he>
+	<div class="item-preview" ng-click="itemPreviewController.goto_item(preview_data)">
+		<div class="type">
+			<ng-switch on="content_type">
+				<div ng-switch-when="name">
+					<div class="type-icon-container">
+						<div class="surname-icon"></div>
+					</div>
+					<div class="type-desc-container">
+						<en>Surname Origin</en>
+						<he>פירוש שם משפחה</he>
+					</div>
+				</div>
+				<div ng-switch-when="place">
+					<div class="type-icon-container">
+						<div class="community-icon"></div>
+					</div>
+					<div class="type-desc-container">
+						<en>Community</en>
+						<he>קהילה</he>
+					</div>
+				</div>
+				<div ng-switch-when="photo">
+					<div class="type-icon-container">
+						<div class="photo-icon"></div>
+					</div>
+					<div class="type-desc-container">
+						<en>Image</en>
+						<he>תמונה</he>
+					</div>
+				</div>
+			</ng-switch>
+		</div>
+		<div class="header">
+			<en>{{preview_data.Header.En}}</en>
+			<he>{{preview_data.Header.He}}</he>
+		</div>
+		<div class="text">
+			<en>{{preview_data.UnitText1.En}}</en>
+			<he>{{preview_data.UnitText1.He}}</he>
+		</div>
+		<div class="thumbnail" ng-if="preview_data.thumbnail.data">
+			<img src="data:image/jpeg;base64,{{preview_data.thumbnail.data}}" alt="Preview Image" />
+		</div>
 	</div>
-	<div class="text">
-		<en>{{preview_data.UnitText1.En}}</en>
-		<he>{{preview_data.UnitText1.He}}</he>
+	<div class="item-arrow-container" ng-if="arrow === 'right'">
+		<div class="item-arrow" ng-click="itemPreviewController.goto_item(preview_data)">
+			<en>
+				<icon position="[-55, -133]" alt-text="{en: 'Go to Related Item', he: 'מעבר לפריט מקושר'}" ></icon>
+			</en>
+			<he>
+				<icon position="[-55, -106]" alt-text="{en: 'Go to Related Item', he: 'מעבר לפריט מקושר'}" ></icon>
+			</he>
+		</div>
 	</div>
-	<div class="thumbnail" ng-if="preview_data.thumbnail" style="background:url('data:image/jpeg;base64,{{preview_data.thumbnail}}');"></div>
 </div>

@@ -87,78 +87,111 @@
 }
 
 %item-preview {
-	height: 100%;
-	background: #ffffff;
-	overflow: hidden;
-	padding: 0 10px 10px;
-	@include item-bottom-border();
-	@include border-radius(8px 8px 0 0);
-	@include item-shadow();
-		
-	.type {
+
+	.item-preview {
 		display: inline-block;
-		width: auto;
-		height: auto;
-		background: #f5f5f5;
-		color: #b4b4b4; 
-		font-weight: bold;
-		border-bottom-right-radius: 3px;
-		border-bottom-left-radius: 3px;
-
-		.en & {
-			padding-right: 5px;
-			float: right;
-		}
-
-		.he & {
-			padding-left: 5px;
-			float: left;
-		}
-
-		.type-icon-container {
+		height: 100%;
+		background: #ffffff;
+		overflow: hidden;
+		padding: 0 10px 10px;
+		@include item-bottom-border();
+		@include border-radius(8px 8px 0 0);
+		@include item-shadow();
+			
+		.type {
 			display: inline-block;
-			padding-top: 3px;
+			width: auto;
+			height: auto;
+			background: #f5f5f5;
+			color: #b4b4b4; 
+			font-weight: bold;
+			border-bottom-right-radius: 3px;
+			border-bottom-left-radius: 3px;
 
 			.en & {
-				padding-left: 4px;
+				padding-right: 5px;
+				float: right;
 			}
 
 			.he & {
-				padding-right: 4px;	
+				padding-left: 5px;
+				float: left;
 			}
 
-			.surname-icon {
+			.type-icon-container {
+				display: inline-block;
+				padding-top: 3px;
+
+				.en & {
+					padding-left: 4px;
+				}
+
+				.he & {
+					padding-right: 4px;	
+				}
+
+				.surname-icon {
+					position: relative;
+					top: 2px;
+					width: 18px;
+					height: 16px;
+					@include icon(-28px -161px);
+				}
+
+				.community-icon {
+					width: 14px;
+					height: 17px;
+					@include icon(-30px -106px);
+				}
+			}
+
+			.type-desc-container {
 				position: relative;
-				top: 2px;
-				width: 18px;
-				height: 16px;
-				@include icon(-28px -161px);
-			}
-
-			.community-icon {
-				width: 14px;
-				height: 17px;
-				@include icon(-30px -106px);
+				display: inline-block;
+				vertical-align: top;
+				padding: 5px 0;
 			}
 		}
 
-		.type-desc-container {
+		.header {
+			font-size: 12px;
+			font-weight: bold;
+			clear: both;
+		}
+
+		.text {
+			color: #474747;
+			overflow: hidden;
+			font-size: 11px;
+		}	
+
+		.thumbnail {
 			position: relative;
-			display: inline-block;
-			vertical-align: top;
-			padding: 5px 0;
+			margin: 0 auto;
+			overflow: hidden;
+
+			img {
+				position: absolute;
+				width: inherit;
+				height: auto;
+				left: 50%;
+				top: 50%;
+				@include translate(-50%, -50%);
+			}
 		}
 	}
 
-	.header {
-		font-size: 12px;
-		font-weight: bold;
-		clear: both;
-	}
+	.item-arrow-container {
+		display: inline-block;
+		vertical-align: top;
+		height: inherit;
+		width: 28px;
+		padding: 149px 3px;
 
-	.text {
-		color: #474747;
-		overflow: hidden;
-		font-size: 11px;
-	}	
+		.item-arrow {
+			width: 22px;
+			height: 22px;
+			@include hover-pointer();
+		}
+	}
 }

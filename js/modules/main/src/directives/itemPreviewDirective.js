@@ -4,7 +4,8 @@ angular.module('main').directive('itemPreview', function() {
 		replace: true,
 		templateUrl: 'templates/main/item-preview.html',
 		scope: {
-			preview_data: '=previewData'
+			preview_data: '=previewData',
+			arrow: '@'
 		},
 		controller: 'ItemPreviewCtrl as itemPreviewController'
 	};

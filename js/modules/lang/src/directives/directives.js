@@ -9,7 +9,7 @@ angular.module('lang').
 			
 			scope: {},
 		  		
-		    template: "<span ng-transclude style=\"width: inherit; height: inherit\" class=\"en\" ng-show=\"langManager.lang == 'en'\"></span>",
+		    template: "<span ng-transclude style=\"width: inherit; height: inherit;\" class=\"en\" ng-show=\"langManager.lang == 'en'\"></span>",
 		
 		    link: function(scope) {
 		    	scope.langManager = langManager;
@@ -27,7 +27,7 @@ angular.module('lang').
 
 			scope: {},
 		  		
-		    template: "<span ng-transclude style=\"width: inherit; height: inherit\" class=\"he\" ng-show=\"langManager.lang == 'he'\"></span>",
+		    template: "<span ng-transclude style=\"width: inherit; height: inherit;\" class=\"he\" ng-show=\"langManager.lang == 'he'\"></span>",
 		
 		    link: function(scope) {
 		    	scope.langManager = langManager;
