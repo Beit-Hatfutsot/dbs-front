@@ -104,7 +104,6 @@
 			height: auto;
 			background: #f5f5f5;
 			color: #b4b4b4; 
-			font-weight: bold;
 			border-bottom-right-radius: 3px;
 			border-bottom-left-radius: 3px;
 
@@ -172,8 +171,8 @@
 
 			img {
 				position: absolute;
-				width: inherit;
-				height: auto;
+				width: auto;
+				height: inherit;
 				left: 50%;
 				top: 50%;
 				@include translate(-50%, -50%);

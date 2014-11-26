@@ -23,28 +23,52 @@
 			@include hover-pointer();
 		}
 
-		.mystory-icon {
+		.mystory {
+			width: 130px;
 			position: relative;
 			top: -8px;
 			display: inline-block;
 			vertical-align: middle;
-			width: 86px;
-			height: 24px;
 			z-index: 1;
 			@include hover-pointer();
 
-			.en & {
-				margin-left: 20px;
+			&:hover {
+				color: #48c3d3;
+
+				.mystory__icon {
+
+					img {
+						@include translate(0, -29px);
+					}
+				}
 			}
 
-			.he & {
-				margin-right: 20px
+			&__icon {
+				width: 25px;
+				height: 24px;
+				display: inline-block;
+
+				.en & {
+					margin-left: 20px;
+				}
+
+				.he & {
+					margin-right: 20px
+				}
+			}
+
+			&__text {
+				display: inline-block;
+				vertical-align: bottom;
+				padding: 0 2px 7px;
+				font-size: 14px;
+				font-weight: bold;
 			}
 		}
 
 		.search-area {
 			position: relative;
-			top: -53px;
+			top: -58px;
 			width: 100%;
 			margin: 0 auto;
 			padding: 20px 5px 0;
@@ -52,7 +76,7 @@
 			z-index: 0;
 
 			&__form {
-				width: 425px;
+				width: 381px;
 				margin: 0 auto;
 
 				&__input {

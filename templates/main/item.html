@@ -6,8 +6,19 @@
 		<div class="item-container">
 			<div class="item">
 				<div class="item__header">
-					<en>{{itemController.item_data.Header.En}}</en>
-					<he>{{itemController.item_data.Header.He}}</he>
+					<div class="text">
+						<en>{{itemController.item_data.Header.En}}</en>
+						<he>{{itemController.item_data.Header.He}}</he>
+					</div>
+					<div class="add">
+						<div class="add__icon">
+							<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
+						</div>
+						<div class="add__text">
+							<en>Add to My Story</en>
+							<he>הוסף לסיפור שלי</he>
+						</div>
+					</div>
 				</div>
 				<div class="item__content">
 					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.path">
@@ -17,6 +28,9 @@
 					<he>{{itemController.item_data.UnitText1.He}}</he>
 				</div>
 				<div class="item__bottom-bar">
+					<div class="flag">
+						<icon position="[-372, -25]" hover-offset="[0, -33]"></icon>
+					</div>
 				</div>
 			</div>
 		</div>
