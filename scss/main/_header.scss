@@ -26,7 +26,7 @@
 		.mystory {
 			width: 130px;
 			position: relative;
-			top: -8px;
+			top: -9px;
 			display: inline-block;
 			vertical-align: middle;
 			z-index: 1;
@@ -62,7 +62,6 @@
 				vertical-align: bottom;
 				padding: 0 2px 7px;
 				font-size: 14px;
-				font-weight: bold;
 			}
 		}
 
@@ -119,11 +118,11 @@
 			z-index: 1;
 
 			.en & {
-				right: 0;
+				right: 23px;
 			}
 
 			.he & {
-				left: 0;
+				left: 23px;
 			}
 
 			&__language-selector {
@@ -143,17 +142,55 @@
 					position: relative;
 					height: 145px;
 					width: 330px;
-					top: 15px;
+					top: 8px;
 					background: #ffffff;
 					color: #333333;
-					border-bottom: 2px solid #5ecad8;
+					border: 1px solid #c4c4c4;
+					border-bottom: 4px solid #5ecad8;
+					@include box-shadow(0 3px 2px 1px #d4d6d5);
 
 					.en & {
-						left: -300px;
+						left: -277px;
 					}
 
 					.he & {
-						right: -300px;
+						right: -277px;
+					}
+
+					&:before, &:after {
+						bottom: 100%;
+						border: solid transparent;
+						content: " ";
+						height: 0;
+						width: 0;
+						position: absolute;
+						pointer-events: none;
+					}
+
+					&:before {
+						border-bottom-color: #dbdbdb;
+						border-width: 10px;
+
+						.en & {
+							right: 27px;
+						}
+
+						.he & {
+							left: 27px;
+						}
+					}
+
+					&:after {
+						border-bottom-color: #ffffff;
+						border-width: 8px;
+
+						.en & {
+							right: 29px;
+						}
+
+						.he & {
+							left: 29px;
+						}
 					}
 
 					&__title, &__row {

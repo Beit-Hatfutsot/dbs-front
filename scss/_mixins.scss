@@ -70,12 +70,17 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$start}', endColorstr='#{$stop}',GradientType=0 );
 }
 
+@mixin box-shadow($shadow) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
 @mixin item-shadow() {
-	box-shadow: 0 3px 5px 2px #d4d6d5;
+	@include box-shadow(0 3px 5px 2px #d4d6d5)
 }
 
 @mixin item-bottom-border() {
-	//border-bottom: 4px solid #47c2d3;
 	border-bottom: 4px solid #f5f5f5;
 }
 
@@ -86,10 +91,65 @@
 	}
 }
 
+@mixin item-type {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	background: #f5f5f5;
+	color: #b4b4b4; 
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+
+	.en & {
+		padding-right: 5px;
+		float: right;
+	}
+
+	.he & {
+		padding-left: 5px;
+		float: left;
+	}
+
+	.type-icon-container {
+		display: inline-block;
+		padding-top: 3px;
+
+		.en & {
+			padding-left: 5px;
+		}
+
+		.he & {
+			padding-right: 5px;	
+		}
+
+		.surname-icon {
+			position: relative;
+			top: 0;
+			width: 19px;
+			height: 16px;
+			@include icon(-28px -161px);
+		}
+
+		.place-icon {
+			width: 19px;
+			height: 17px;
+			@include icon(-30px -106px);
+		}
+	}
+
+	.type-desc-container {
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		padding: 5px 0;
+	}
+}
+
 %item-preview {
 
 	.item-preview {
 		display: inline-block;
+		vertical-align: middle;
 		height: 100%;
 		background: #ffffff;
 		overflow: hidden;
@@ -99,57 +159,7 @@
 		@include item-shadow();
 			
 		.type {
-			display: inline-block;
-			width: auto;
-			height: auto;
-			background: #f5f5f5;
-			color: #b4b4b4; 
-			border-bottom-right-radius: 3px;
-			border-bottom-left-radius: 3px;
-
-			.en & {
-				padding-right: 5px;
-				float: right;
-			}
-
-			.he & {
-				padding-left: 5px;
-				float: left;
-			}
-
-			.type-icon-container {
-				display: inline-block;
-				padding-top: 3px;
-
-				.en & {
-					padding-left: 4px;
-				}
-
-				.he & {
-					padding-right: 4px;	
-				}
-
-				.surname-icon {
-					position: relative;
-					top: 2px;
-					width: 18px;
-					height: 16px;
-					@include icon(-28px -161px);
-				}
-
-				.community-icon {
-					width: 14px;
-					height: 17px;
-					@include icon(-30px -106px);
-				}
-			}
-
-			.type-desc-container {
-				position: relative;
-				display: inline-block;
-				vertical-align: top;
-				padding: 5px 0;
-			}
+			@include item-type();
 		}
 
 		.header {
@@ -171,8 +181,6 @@
 
 			img {
 				position: absolute;
-				width: auto;
-				height: inherit;
 				left: 50%;
 				top: 50%;
 				@include translate(-50%, -50%);
@@ -182,10 +190,10 @@
 
 	.item-arrow-container {
 		display: inline-block;
-		vertical-align: top;
-		height: inherit;
+		vertical-align: middle;
+		height: 100%;
 		width: 28px;
-		padding: 149px 3px;
+		padding: 0 3px;
 
 		.item-arrow {
 			width: 22px;

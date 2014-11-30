@@ -3,7 +3,7 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
 
     this.$state = $state;
     this.langManager = langManager;
-    this.search_again_visible = true;
+    this.search_again_visible = false;
     this.placeholders = { 
         name: {
             en: 'Surname',

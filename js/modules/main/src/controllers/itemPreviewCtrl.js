@@ -1,13 +1,7 @@
-var ItemPreviewCtrl = function($state, $scope) {
+var ItemPreviewCtrl = function($state, $scope, itemTypeMap) {
     this.$state = $state;
 
-    var content_type_map = {
-    	1: 'photo',
-    	5: 'place',
-    	6: 'name'
-    }
-
-    $scope.content_type = content_type_map[$scope.preview_data.UnitType];
+    $scope.item_type = itemTypeMap.get_type($scope.preview_data.UnitType);
 };
 
 ItemPreviewCtrl.prototype = {
@@ -17,4 +11,4 @@ ItemPreviewCtrl.prototype = {
     }
 };
 
-angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', ItemPreviewCtrl]);
+angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', ItemPreviewCtrl]);

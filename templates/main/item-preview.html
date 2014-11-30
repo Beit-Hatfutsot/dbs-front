@@ -11,7 +11,7 @@
 	</div>
 	<div class="item-preview" ng-click="itemPreviewController.goto_item(preview_data)">
 		<div class="type">
-			<ng-switch on="content_type">
+			<ng-switch on="item_type">
 				<div ng-switch-when="name">
 					<div class="type-icon-container">
 						<div class="surname-icon"></div>
@@ -23,11 +23,11 @@
 				</div>
 				<div ng-switch-when="place">
 					<div class="type-icon-container">
-						<div class="community-icon"></div>
+						<div class="place-icon"></div>
 					</div>
 					<div class="type-desc-container">
-						<en>Community</en>
-						<he>קהילה</he>
+						<en>Place</en>
+						<he>מקום</he>
 					</div>
 				</div>
 				<div ng-switch-when="photo">
@@ -45,12 +45,12 @@
 			<en>{{preview_data.Header.En}}</en>
 			<he>{{preview_data.Header.He}}</he>
 		</div>
-		<div class="text">
+		<div class="text" ng-class="{'text--nothumb': !(preview_data.thumbnail.data)}">
 			<en>{{preview_data.UnitText1.En}}</en>
 			<he>{{preview_data.UnitText1.He}}</he>
 		</div>
 		<div class="thumbnail" ng-if="preview_data.thumbnail.data">
-			<img src="data:image/jpeg;base64,{{preview_data.thumbnail.data}}" alt="Preview Image" />
+			<img src="data:image/jpeg;base64,{{preview_data.thumbnail.data}}" alt="Preview Image" fit-thumb />
 		</div>
 	</div>
 	<div class="item-arrow-container" ng-if="arrow === 'right'">

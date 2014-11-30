@@ -1,4 +1,4 @@
-<div id="item-page-container">
+<div id="item-page-container" item-scroll>
 	<div id="item-page" animate-down when="mainController.search_again_visible">
 		<div class="related">
 			<item-preview ng-repeat="related_data in itemController.item_data.related | limitTo: 3" preview-data="related_data" arrow="left"></item-preview>
@@ -10,15 +10,46 @@
 						<en>{{itemController.item_data.Header.En}}</en>
 						<he>{{itemController.item_data.Header.He}}</he>
 					</div>
-					<div class="add">
-						<div class="add__icon">
-							<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
-						</div>
-						<div class="add__text">
-							<en>Add to My Story</en>
-							<he>הוסף לסיפור שלי</he>
-						</div>
+				</div>
+				<div class="add">
+					<div class="add__icon">
+						<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
 					</div>
+					<div class="add__text">
+						<en>Add to My Story</en>
+						<he>הוסף לסיפור שלי</he>
+					</div>
+				</div>
+				<div class="item__type">
+					<ng-switch on="itemController.item_type">
+						<div ng-switch-when="name">
+							<div class="type-icon-container">
+								<div class="surname-icon"></div>
+							</div>
+							<div class="type-desc-container">
+								<en>Surname Origin</en>
+								<he>פירוש שם משפחה</he>
+							</div>
+						</div>
+						<div ng-switch-when="place">
+							<div class="type-icon-container">
+								<div class="place-icon"></div>
+							</div>
+							<div class="type-desc-container">
+								<en>Place</en>
+								<he>מקום</he>
+							</div>
+						</div>
+						<div ng-switch-when="photo">
+							<div class="type-icon-container">
+								<div class="photo-icon"></div>
+							</div>
+							<div class="type-desc-container">
+								<en>Image</en>
+								<he>תמונה</he>
+							</div>
+						</div>
+					</ng-switch>
 				</div>
 				<div class="item__content">
 					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.path">
@@ -28,6 +59,15 @@
 					<he>{{itemController.item_data.UnitText1.He}}</he>
 				</div>
 				<div class="item__bottom-bar">
+					<div class="add">
+						<div class="add__icon">
+							<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
+						</div>
+						<div class="add__text">
+							<en>Add to My Story</en>
+							<he>הוסף לסיפור שלי</he>
+						</div>
+					</div>
 					<div class="flag">
 						<icon position="[-372, -25]" hover-offset="[0, -33]"></icon>
 					</div>

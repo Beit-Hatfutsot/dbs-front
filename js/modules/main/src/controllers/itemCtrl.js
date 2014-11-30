@@ -1,10 +1,16 @@
-var ItemCtrl = function($stateParams, item, notification) {
+var ItemCtrl = function($stateParams, item, notification, itemTypeMap) {
 	var self = this;
 
 	this.in_progress = true;
 	this.failed = false;
 	
 	notification.clear();
+
+	Object.defineProperty(this, 'item_type', {
+		get: function() {
+			return itemTypeMap.get_type(this.item_data.UnitType)
+		}
+	})
 
 	item.get($stateParams.id).
 		then(function(item_data) {
@@ -21,4 +27,4 @@ ItemCtrl.prototype = {
 
 };
 
-angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap', ItemCtrl]);
