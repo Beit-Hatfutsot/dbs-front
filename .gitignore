@@ -1,4 +1,5 @@
 .sass-cache
 css
 node_modules
-js-build
+bower_components
+public

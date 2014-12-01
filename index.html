@@ -6,18 +6,18 @@
 		<meta name="fragment" content="!">  
 		<base href="/">
 		<link href="css/bhsclient.css" rel="stylesheet" type="text/css" media="all">
-		<script src="js/lib/angular/angular.min.js"></script>
-		<script src="js/lib/angular/angular-resource.min.js"></script>
-		<script src="js/lib/angular/angular-animate.min.js"></script>
-		<script src="js/lib/ui-bootstrap-tpls-0.11.2.min.js"></script>
-		<script src="js/lib/angular/angular-ui-router.min.js"></script>
-		<script src="js-build/bhsclient.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	</head>
-	<body lang="{{mainController.lang}}">
+	<body lang="{{mainController.lang}}" ng-cloak>
 		<div id="app-container" class="{{mainController.lang}}">
 			<ng-include src="'templates/main/header.html'"></ng-include>
 			<div id="view" ui-view></div>	
 			<ng-include src="'templates/main/footer.html'"></ng-include>
 		</div>
+		<script src="js/bhsclient.js"></script>
 	</body>
 </html>

@@ -16,15 +16,11 @@ module.exports = function(grunt) {
                     'js/modules/lang/src/**/*.js',
                     'js/modules/api_client/src/**/*.js',
                     'js/modules/auth/src/**/*.js',
-                    'js/modules/header/src/**/*.js',
-                    'js/modules/wizard/src/**/*.js',
-                    'js/modules/search/src/**/*.js',
-                    'js/modules/wizard-result/src/**/*.js',
-                    'js/modules/cache/src/**/*.js',
-                    'js/modules/item/src/**/*.js',
+                    'js/modules/cache/src/**/*.js'
+                    
                 ],
                 // the location of the resulting JS file
-                dest: 'js-build/<%= pkg.name %>.js'
+                dest: 'js/<%= pkg.name %>.js'
             }
         },
 
@@ -34,7 +30,7 @@ module.exports = function(grunt) {
             },
             
             js: {
-                src: ['js-build/<%= pkg.name %>.js'],
+                src: ['js/<%= pkg.name %>.js'],
                 dest: '',
                 expand: true, 
                 ext: '.min.js',
@@ -62,10 +58,25 @@ module.exports = function(grunt) {
             }
         },
 
+        clean: ["public/"],
+
+        copy: {
+            main: {
+                files: [
+                    {expand: true, src: ['bower_components/**'], dest: 'public/'},
+                    {expand: true, src: ['css/*'], dest: 'public/', filter: 'isFile'},
+                    {expand: true, src: ['js/*'], dest: 'public/', filter: 'isFile'},
+                    {expand: true, src: ['templates/**'], dest: 'public/'},
+                    {expand: true, src: ['images/**'], dest: 'public/'},
+                    {expand: true, src: ['index.html'], dest: 'public/', filter: 'isFile'},
+                ],
+            },
+        },
+
         watch: {
-            build: {
-                files: ['js/modules/**/src/**/*.js', 'scss/*.scss', 'scss/**/*.scss'],
-                tasks: ['concat', 'sass', 'uglify']
+            main: {
+                files: ['js/modules/**/src/**/*.js', 'scss/**', 'templates/**', 'index.html'],
+                tasks: ['deploy']
             }
         },
 
@@ -81,9 +92,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['build']);
     grunt.registerTask('build', ['concat', 'uglify', 'sass']);
-
+    grunt.registerTask('deploy', ['build', 'clean', 'copy']);
 };

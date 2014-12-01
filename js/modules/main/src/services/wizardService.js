@@ -19,10 +19,10 @@ angular.module('main').
 	  			var self = this, 
 	  				search_promise,
 	  				deferred = $q.defer();
-
+	  			
 	  			search_promise = searchClient.get({
-					name: name,
-					place: place	
+					name: name || '',
+					place: place || ''	
 				}).$promise;
 	  					
 				search_promise

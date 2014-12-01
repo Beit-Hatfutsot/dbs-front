@@ -142,7 +142,7 @@
 					position: relative;
 					height: 145px;
 					width: 330px;
-					top: 8px;
+					top: 15px;
 					background: #ffffff;
 					color: #333333;
 					border: 1px solid #c4c4c4;
@@ -294,54 +294,49 @@
 				}
 			}
 		}
-	}
+	}	
 
-	@at-root #search-again-container {
+	@at-root #search-again {
 		position: absolute;
-		width: 100%;
+		left: 50%;
+		@include translate(-50%, 0);
 		background: transparent;
-		z-index: 0;
 		@include transition(all, 0.5s, ease);
+		min-height: 190px;
+		max-height: $max-search-again-height;
+		width: 760px;;
+		padding: 30px 0 0;
+		background: rgba(248, 248, 255, 1);
+		border-bottom: 4px solid #5ec5d6;
 
 		&.ng-hide {
-			@include translate(0, -$max-search-again-height);
+			@include translate(-50%, -$max-search-again-height);
 		}
 
 		&.ng-hide-add, &.ng-hide-remove {
 			display: block !important;
 		}
 
-		@at-root #search-again {
-			position: relative;
-			min-height: 190px;
-			max-height: $max-search-again-height;
-			width: 760px;;
+		.wizard-form {
 			margin: 0 auto;
-			padding: 30px 0 0;
-			background: rgba(248, 248, 255, 1);
-			border-bottom: 4px solid #5ec5d6;
 
-			.wizard-form {
-				margin: 0 auto;
+			&__field {
 
-				&__field {
+				&__suggestions {
+					margin: 10px 0 0;
+					width: 294px;
 
-					&__suggestions {
-						margin: 10px 0 0;
-						width: 294px;
-
-						&__suggestion {
-							display: inline-block;
-							margin: 5px;
-							padding: 5px;
-							border: 1px solid grey;
-							font-size: 11px;
-							@include border-radius(5px);
-							@include hover-pointer();
-						}
+					&__suggestion {
+						display: inline-block;
+						margin: 5px;
+						padding: 5px;
+						border: 1px solid grey;
+						font-size: 11px;
+						@include border-radius(5px);
+						@include hover-pointer();
 					}
 				}
 			}
-		}	
-	}
+		}
+	}	
 }

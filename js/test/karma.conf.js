@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path, that will be used to resolve files and exclude
-    basePath: '../',
+    basePath: '../../',
 
 
     // frameworks to use
@@ -14,16 +14,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'lib/angular/angular.min.js',
-        'lib/angular/angular-resource.min.js',
-        'lib/angular/angular-animate.min.js',
-        'lib/angular/angular-ui-router.min.js',
-        'lib/ui-bootstrap-tpls-0.11.2.min.js',
-        'lib/angular/angular-mocks.js',
-        'lib/stateMock.js',
-        {pattern: 'modules/**/**/*.js/', included: true},
-        {pattern: 'modules/**/test/*.js', included: true},
-        {pattern: 'modules/**/test/**/*.js', included: true},
+        'bower_components/angular/angular.min.js',
+        'bower_components/angular-resource/angular-resource.min.js',
+        'bower_components/angular-animate/angular-animate.min.js',
+        'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        {pattern: 'js/modules/**/**/*.js/', included: true},
+        {pattern: 'js/modules/**/test/*.js', included: true},
+        {pattern: 'js/modules/**/test/**/*.js', included: true},
     ],
 
 
