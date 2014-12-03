@@ -1,10 +1,16 @@
-bhsclient_path = /home/bhs/bhsclient/bhsclient
+bhsclient_path = /home/bhs/client/bhsclient
 
-all: backup pull install build copy clean
+all: test-user backup pull install build copy clean
+
+test-user:
+	runner=`whoami` ; \
+	if test $$runner != "bhs"; then \
+		exit 1; \
+	fi
 
 backup:
 	if [ -d $(bhsclient_path)/../public ];then \
-		cd $(bhsclient_path)/../ && mv public public-old; \
+		cd $(bhsclient_path)/../ && mv public build-`date +%d.%m.%y-%H:%M:%S`; \
 	fi
 
 pull:
