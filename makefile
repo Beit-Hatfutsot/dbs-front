@@ -1,6 +1,6 @@
 bhsclient_path = /home/bhs/bhsclient
 
-all: backup install build copy clean
+all: backup pull install build copy clean
 
 backup:
 	if [ -d $(bhsclient_path)/../public ];then \
