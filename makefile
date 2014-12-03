@@ -11,7 +11,7 @@ pull:
 	cd $(bhsclient_path) && git pull origin master
 
 install:
-	npm install && bower install
+	bower install
 
 build: Gruntfile.js
 	cd $(bhsclient_path) && grunt build
