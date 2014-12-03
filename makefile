@@ -20,10 +20,10 @@ install:
 	npm install && bower install
 
 build: Gruntfile.js
-	cd $(bhsclient_path) && grunt build
+	grunt build
 
 copy: 
 	cd $(bhsclient_path)/../ && cp -r $(bhsclient_path)/public public
 
 clean: 
-	rm -r $(bhsclient_path)/public  
+	cd $(bhsclient_path) && rm -r public && rm -r bower_components

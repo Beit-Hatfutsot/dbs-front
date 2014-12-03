@@ -68,8 +68,6 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     {expand: true, src: ['bower_components/**'], dest: public_dir},
-                    //{expand: true, src: ['css/*'], dest: public_dir, filter: 'isFile'},
-                    //{expand: true, src: ['js-build/*'], dest: public_dir, filter: 'isFile'},
                     {expand: true, src: ['templates/**'], dest: public_dir},
                     {expand: true, src: ['images/**'], dest: public_dir},
                     {expand: true, src: ['index.html'], dest: public_dir, filter: 'isFile'},
@@ -101,5 +99,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['clean:public', 'sass', 'concat', 'uglify', 'copy', 'clean:bower']);
+    grunt.registerTask('build', ['clean:public', 'sass', 'concat', 'uglify', 'copy']);
 };

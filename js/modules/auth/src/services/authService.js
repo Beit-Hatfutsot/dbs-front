@@ -1,25 +1,23 @@
 angular.module('auth').
 
 	factory('authManager', [
-	'$modal', '$state', '$resource', 'apiClient', '$http', '$compile', '$rootScope', '$q', 
-	function($modal, $state, $resource, apiClient, $http, $compile, $rootScope, $q) {
-		var authClient, auth_manager;
-		//$http.defaults.withCredentials = true;
+	'$modal', '$state', '$resource', 'apiClient', '$http', '$compile', '$rootScope', '$q', '$window',
+	function($modal, $state, $resource, apiClient, $http, $compile, $rootScope, $q, $window) {
+		var authClient, userClient, auth_manager;
 
 		authClient = $resource(apiClient.urls.auth, null, {
     		signin: { 
-    			method: 'POST', 
-    			//withCredentials: true,
+    			method: 'POST'
     		}
 		});
+
+		userClient = $resource(apiClient.urls.user);		
 
 	  	auth_manager = {
 
 	  		in_progress: false,
 
 	  		signedin_user: false,
-
-	  		csrf_token: '',
 
 	  		authenticate: function(next_state, config) {
 
@@ -49,6 +47,7 @@ angular.module('auth').
 
 		  		if (!this.in_progress && !this.signed_in_user) {
 
+		  			this.in_progress = true;
 			  		var signin_deferred = $q.defer(); 
 
 			  		authClient.signin({
@@ -57,9 +56,15 @@ angular.module('auth').
 			    	}).$promise.
 			    	then(function(response) {
 			    		if (response.token) {
-			    			sessionStorage.bhsclient_token = response.token;
-				    		self.signedin_user = username;
-				    		signin_deferred.resolve();
+			    			$window.localStorage.setItem('bhsclient_token', response.token);
+				    		
+			    			userClient.get().$promise.then(function(user_data) {
+			    				self.signedin_user = user_data;
+			    				console.log(self);
+			    				signin_deferred.resolve();
+			    			}, function() {
+			    				signin_deferred.reject();
+			    			});
 			    		} else {
 			    			signin_deferred.reject()
 			    		}
@@ -74,6 +79,10 @@ angular.module('auth').
 	  			}
 	  			
 	  			return false;
+		  	},
+
+		  	signout: function() {
+		  		localStorage.removeItem('bhsclient_token');
 		  	}
 	  	};
 
@@ -84,17 +93,17 @@ angular.module('auth').
 	factory('authInterceptor', ['$rootScope', '$q', '$window', function ($rootScope, $q, $window) {
 	  	return {
 		    request: function (config) {
-		      config.headers = config.headers || {};
-		      if ($window.sessionStorage.bhsclient_token) {
-		        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.bhsclient_token;
-		      }
-		      return config;
+		    	config.headers = config.headers || {};
+		    	if ( $window.localStorage.getItem('bhsclient_token') ) {
+		        	config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('bhsclient_token');
+		    	}
+		     	return config;
 		    },
 		    response: function (response) {
-		      if (response.status === 401) {
-		        // handle the case where the user is not authenticated
-		      }
-		      return response || $q.when(response);
+		      	if (response.status === 401) {
+		        	// handle the case where the user is not authenticated
+		      	}
+		      	return response || $q.when(response);
 		    }
 	  	};
 }]);

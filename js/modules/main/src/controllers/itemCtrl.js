@@ -4,12 +4,13 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap) {
 	this.in_progress = true;
 	this.content_loaded = false;
 	this.failed = false;
+	this.item_data = {};
 	
 	notification.clear();
 
 	Object.defineProperty(this, 'item_type', {
 		get: function() {
-			return itemTypeMap.get_type(this.item_data.UnitType)
+			return itemTypeMap.get_type( this.item_data.UnitType );
 		}
 	})
 
