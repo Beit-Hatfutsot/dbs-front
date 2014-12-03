@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+    var public_dir = 'public/';
+
     // Project configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -20,7 +22,7 @@ module.exports = function(grunt) {
                     
                 ],
                 // the location of the resulting JS file
-                dest: 'js/<%= pkg.name %>.js'
+                dest: public_dir + 'js/<%= pkg.name %>.js'
             }
         },
 
@@ -30,10 +32,10 @@ module.exports = function(grunt) {
             },
             
             js: {
-                src: ['js/<%= pkg.name %>.js'],
+                src: [public_dir + 'js/<%= pkg.name %>.js'],
                 dest: '',
                 expand: true, 
-                ext: '.min.js',
+                ext: '.min.js'
             },
         },
 
@@ -42,41 +44,43 @@ module.exports = function(grunt) {
                 options: {
                     style: 'compressed',
                 },
-
+                /*
                 files: {
                     'css/bhsclient.css' : 'scss/bhsclient.scss'
                 }
-                /*
+                */
                 files: [{
-                    src: ['scss/*.scss'],
-                    dest: './css',
+                    src: ['scss/bhsclient.scss'],
+                    dest: public_dir + 'css/',
                     expand: true,
-                    flatten: false, 
-                    ext: '.css',
+                    flatten: true, 
+                    ext: '.css'
                 }]
-                */  
             }
         },
 
-        clean: ["public/"],
+        clean: { 
+            public: [public_dir],
+            bower: ['bower_components/']
+        },
 
         copy: {
             main: {
                 files: [
-                    {expand: true, src: ['bower_components/**'], dest: 'public/'},
-                    {expand: true, src: ['css/*'], dest: 'public/', filter: 'isFile'},
-                    {expand: true, src: ['js/*'], dest: 'public/', filter: 'isFile'},
-                    {expand: true, src: ['templates/**'], dest: 'public/'},
-                    {expand: true, src: ['images/**'], dest: 'public/'},
-                    {expand: true, src: ['index.html'], dest: 'public/', filter: 'isFile'},
-                ],
-            },
+                    {expand: true, src: ['bower_components/**'], dest: public_dir},
+                    //{expand: true, src: ['css/*'], dest: public_dir, filter: 'isFile'},
+                    //{expand: true, src: ['js-build/*'], dest: public_dir, filter: 'isFile'},
+                    {expand: true, src: ['templates/**'], dest: public_dir},
+                    {expand: true, src: ['images/**'], dest: public_dir},
+                    {expand: true, src: ['index.html'], dest: public_dir, filter: 'isFile'},
+                ]
+            }
         },
 
         watch: {
             main: {
                 files: ['js/modules/**/src/**/*.js', 'scss/**', 'templates/**', 'index.html'],
-                tasks: ['deploy']
+                tasks: ['build']
             }
         },
 
@@ -97,6 +101,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['concat', 'uglify', 'sass']);
-    grunt.registerTask('deploy', ['build', 'clean', 'copy']);
+    grunt.registerTask('build', ['clean:public', 'sass', 'concat', 'uglify', 'copy', 'clean:bower']);
 };
