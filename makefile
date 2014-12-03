@@ -1,4 +1,4 @@
-bhsclient_path = /home/bhs/bhsclient
+bhsclient_path = /home/bhs/bhsclient/bhsclient
 
 all: backup pull install build copy clean
 
