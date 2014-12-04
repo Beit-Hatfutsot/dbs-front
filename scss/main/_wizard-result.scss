@@ -4,7 +4,6 @@
 	height: 100%;
 	z-index: 1;
 	background: #eeeeee;
-	overflow: auto;
 
 	.items {
 		width: 610px;
@@ -23,7 +22,10 @@
 				.item-preview {
 
 					.type {
-						font-weight: bold;
+						
+						.type-icon-container {
+							padding-top: 6px;
+						}
 					}
 
 					.header {

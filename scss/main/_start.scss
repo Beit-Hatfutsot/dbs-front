@@ -3,49 +3,57 @@
 	width: 100%;
 	height: 100%;
 	background: #ffffff;
+	overflow-y: auto;
+	overflow-x: hidden;
 	
 	@at-root #wizard-container {
-		position: absolute;
-		top: 0;
-		left: 50%;
+		position: relative;
 		width: 1920px;
 		height: 694px;
-		z-index: 2;
-		opacity: 1;
-		@include transition(all, 1s, linear);
-		@include bg_image("start.jpg");
-		@include translate(-50%, 0);
 
-		&.hidden {
-			opacity: 0;
-			z-index: 0;
+		@at-root #wizard {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 100%;
+			height: 100%;
+			//z-index: 2;
+			opacity: 1;
+			@include transition(all, 1s, linear);
+			@include bg_image("start.jpg");
+			@include translate(-50%, 0);
 
-			.wizard {
-				opacity: 1;
-				@include translate(0, -494px);
-			}
-		}
+			&.hidden {
+				opacity: 0;
+				z-index: 0;
 
-		.wizard {
-			margin: 130px auto;
-			padding: 42px 68px;
-			width: 790px;
-			height: 425px;
-			background: rgba(249, 249, 249, 0.85);	
-			@include transition(all, 0.8s, linear);	
-
-			&__text {
-
-				&__title {
-					color: #5dc2d4;
-					font-size: 72px;
-					font-family: helvatica;
-					margin-bottom: 8px;
+				.wizard {
+					opacity: 1;
+					@include translate(0, -494px);
 				}
+			}
 
-				&__content {
-					font-size: 22px;
-					margin-bottom: 58px;
+			.wizard-form-container {
+				margin: 130px auto;
+				padding: 42px 68px;
+				width: 790px;
+				height: 425px;
+				background: rgba(249, 249, 249, 0.85);	
+				@include transition(all, 0.8s, linear);	
+
+				&__text {
+
+					&__title {
+						color: #5dc2d4;
+						font-size: 72px;
+						font-family: helvatica;
+						margin-bottom: 8px;
+					}
+
+					&__content {
+						font-size: 22px;
+						margin-bottom: 58px;
+					}
 				}
 			}
 		}

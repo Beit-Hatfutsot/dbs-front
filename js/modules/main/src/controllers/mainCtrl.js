@@ -3,7 +3,7 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
 
     this.$state = $state;
     this.langManager = langManager;
-    this.search_again_visible = false;
+    this.search_again_visible = true;
     this.placeholders = { 
         name: {
             en: 'Surname',
@@ -82,20 +82,19 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
 MainCtrl.prototype = {
 
     start: function() {
+        var next_state,
+            $state = this.$state;
+
         this.search_again_visible = true;
-        this.$state.go('wizard-result', {name: this.wizard_query.name, place: this.wizard_query.place});
-    },
+        
+        if ($state.includes('start')) {
+            next_state = 'start-result';
+        }
+        else {
+            next_state = 'wizard-result';
+        }
 
-    start_name: function(name) {
-        var lang_index = this.langManager.lang[0].toUpperCase() + this.langManager.lang[1];
-        this.wizard_query.name = name.Header[lang_index];
-        this.start();
-    },
-
-    start_place: function(place) {
-        var lang_index = this.langManager.lang[0].toUpperCase() + this.langManager.lang[1];
-        this.wizard_query.place = place.Header[lang_index];
-        this.start();
+        $state.go(next_state, {name: this.wizard_query.name, place: this.wizard_query.place});
     }
 }
 

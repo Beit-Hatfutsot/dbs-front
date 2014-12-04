@@ -1,0 +1,110 @@
+%item-type {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	background: #f5f5f5;
+	color: #b4b4b4; 
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+
+	.en & {
+		padding-right: 5px;
+		float: right;
+	}
+
+	.he & {
+		padding-left: 5px;
+		float: left;
+	}
+
+	.type-icon-container {
+		display: inline-block;
+
+		.en & {
+			padding-left: 5px;
+		}
+
+		.he & {
+			padding-right: 5px;	
+		}
+
+		.surname-icon {
+			position: relative;
+			top: 0;
+			width: 19px;
+			height: 16px;
+			@include icon(-28px -161px);
+		}
+
+		.place-icon {
+			width: 19px;
+			height: 17px;
+			@include icon(-30px -106px);
+		}
+	}
+
+	.type-desc-container {
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		padding: 5px 0;
+	}
+}
+
+%item-preview {
+
+	.item-preview {
+		display: inline-block;
+		vertical-align: middle;
+		height: 100%;
+		background: #ffffff;
+		overflow: hidden;
+		padding: 0 10px 10px;
+		@include item-bottom-border();
+		@include border-radius(8px 8px 0 0);
+		@include item-shadow();
+			
+		.type {
+			@extend %item-type;
+		}
+
+		.header {
+			font-size: 12px;
+			font-weight: bold;
+			clear: both;
+		}
+
+		.text {
+			color: #474747;
+			overflow: hidden;
+			font-size: 11px;
+		}	
+
+		.thumbnail {
+			position: relative;
+			margin: 0 auto;
+			overflow: hidden;
+
+			img {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				@include translate(-50%, -50%);
+			}
+		}
+	}
+
+	.item-arrow-container {
+		display: inline-block;
+		vertical-align: middle;
+		height: 100%;
+		width: 28px;
+		padding: 0 3px;
+
+		.item-arrow {
+			width: 22px;
+			height: 22px;
+			@include hover-pointer();
+		}
+	}
+}

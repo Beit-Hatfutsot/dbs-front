@@ -31,7 +31,7 @@
 				background: #ffffff;
 
 				&__type {
-					@include item-type();
+					@extend %item-type;
 					margin-bottom: 20px;
 	
 					.en & {
@@ -40,6 +40,10 @@
 
 					.he & {
 						margin-left: 11px;	
+					}
+
+					.type-icon-container {
+						padding-top: 7px;
 					}
 				}
 
@@ -142,6 +146,10 @@
 
 					.type {
 						font-size: 11px;
+
+						.type-icon-container {
+							padding-top: 3px;
+						}
 					}
 
 					.header {

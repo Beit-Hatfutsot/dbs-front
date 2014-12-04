@@ -26,6 +26,14 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         },
 
         {
+            name: 'start-result',
+            parent: 'start',
+            url: 'start-result?place&name',
+            controller: 'WizardResultCtrl as wizardResultController',
+            templateUrl: 'templates/main/wizard-result.html'
+        },
+
+        {
             name: '404',
             url: '/404',
             templateUrl: 'templates/main/404.html'
@@ -34,8 +42,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         {
             name: 'wizard-result',
             url: '/wizard-result?place&name',
-            templateUrl: 'templates/main/wizard-result.html',
-            controller: 'WizardResultCtrl as wizardResultController'
+            controller: 'WizardResultCtrl as wizardResultController',
+            templateUrl: 'templates/main/wizard-result.html'
         },
         
         {

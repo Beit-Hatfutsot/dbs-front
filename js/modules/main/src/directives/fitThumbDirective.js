@@ -12,7 +12,7 @@ angular.module('main').directive('fitThumb', ['$timeout', function($timeout) {
 				if (width !== undefined && height !== undefined) {
 					ratio = height/width;
 				
-					if (ratio < 1) {
+					if (ratio > 0.65) {
 						element.css('height', '100%');
 					}
 					else {
