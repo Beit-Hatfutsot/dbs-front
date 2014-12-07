@@ -1,9 +1,11 @@
-var MainCtrl = function($state, langManager, wizard, authManager) {
+var MainCtrl = function($state, langManager, wizard, authManager, notification) {
     var self = this;
 
     this.$state = $state;
+    this.notification = notification;
+    this.wizard = wizard;
     this.langManager = langManager;
-    this.search_again_visible = true;
+    this.search_again_visible = false;
     this.placeholders = { 
         name: {
             en: 'Surname',
@@ -19,9 +21,9 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
         place: ''
     };
 
-    Object.defineProperty(this, 'wizard_suggestions', {
+    Object.defineProperty(this, 'search_status', {
         get: function() {
-            return wizard.result.suggestions;
+            return wizard.search_status;
         }
     });
 
@@ -38,7 +40,7 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
 
     Object.defineProperty(this, 'show_notifications', {
         get: function() {
-            if ( $state.includes('start') ) {
+            if ( $state.includes('start') && this.search_status == '' && !(wizard.in_progress) && !(wizard.failed) ) {
                 return false;
             }
 
@@ -82,20 +84,8 @@ var MainCtrl = function($state, langManager, wizard, authManager) {
 MainCtrl.prototype = {
 
     start: function() {
-        var next_state,
-            $state = this.$state;
-
-        this.search_again_visible = true;
-        
-        if ($state.includes('start')) {
-            next_state = 'start-result';
-        }
-        else {
-            next_state = 'wizard-result';
-        }
-
-        $state.go(next_state, {name: this.wizard_query.name, place: this.wizard_query.place});
+        this.wizard.search(this.wizard_query.name, this.wizard_query.place);
     }
 }
 
-angular.module('main').controller('MainCtrl', ['$state', 'langManager', 'wizard', 'authManager', MainCtrl]);
+angular.module('main').controller('MainCtrl', ['$state', 'langManager', 'wizard', 'authManager', 'notification', MainCtrl]);

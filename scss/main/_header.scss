@@ -252,14 +252,20 @@
 
 #secondary-header {
 	position: relative;
+	margin-top: 0;
 	z-index: 1;
+	@include transition(all, 1s, ease);
+
+	&.ng-hide {
+		margin-top: -$secondary-header-height;
+	}
 
 	@at-root #notification-bar-container {
 		position: relative;
 		height: $secondary-header-height;
 		width: 100%;
 		@include linear-gradient(#bbbdbc, 0, #d4d6d5, 20%);
-		border-bottom: 2px solid #ffffff;
+		border-bottom: 1px solid #ffffff;
 		z-index: 1;
 		font-size: 12px;
 
@@ -308,9 +314,10 @@
 		padding: 30px 0 0;
 		background: rgba(248, 248, 255, 1);
 		border-bottom: 4px solid #5ec5d6;
+		margin-top: 0;
 
 		&.ng-hide {
-			@include translate(-50%, -$max-search-again-height);
+			margin-top: -$max-search-again-height;
 		}
 
 		&.ng-hide-add, &.ng-hide-remove {

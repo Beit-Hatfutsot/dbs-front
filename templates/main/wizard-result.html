@@ -1,5 +1,5 @@
-<div id="wizard-result">
-	<div class="items" animate-down when="mainController.search_again_visible" by="#search-again" ng-show="!(wizardResultController.in_progress || wizardResultController.failed)">
+<div id="wizard-result" ng-if="wizardResultController.result.isNotEmpty()">
+	<div class="items" ng-show="!(wizardResultController.in_progress || wizardResultController.failed)">
 		<div class="items__name" ng-switch on="wizardResultController.result.bingo.name.isEmpty()">
 			<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.name" content="name"></item-preview>
 			<no-result ng-switch-when="true" content="name"></no-result>

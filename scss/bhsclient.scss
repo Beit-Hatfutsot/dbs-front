@@ -58,6 +58,7 @@ html {
 				height: 100%;
 				margin: 0 auto;
 				padding-bottom: $header-height + $secondary-header-height + $footer-height;
+				background: #eeeeee;
 				@include transition(all, 1s, linear);
 
 				&.ng-enter, &.ng-leave {

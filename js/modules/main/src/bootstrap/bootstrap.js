@@ -34,16 +34,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         },
 
         {
-            name: '404',
-            url: '/404',
-            templateUrl: 'templates/main/404.html'
-        },
-
-        {
             name: 'wizard-result',
             url: '/wizard-result?place&name',
-            controller: 'WizardResultCtrl as wizardResultController',
-            templateUrl: 'templates/main/wizard-result.html'
+            template: '<wizard-result></wizard-result>',
+            onEnter: ['$stateParams', 'wizard', function($stateParams, wizard) {
+                wizard.search($stateParams.name, $stateParams.place);
+            }]
         },
         
         {
@@ -51,6 +47,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
             url: '/item/:id',
             templateUrl: 'templates/main/item.html',
             controller: 'ItemCtrl as itemController'
+        },
+
+        {
+            name: '404',
+            url: '/404',
+            templateUrl: 'templates/main/404.html'
         }
     ];
 

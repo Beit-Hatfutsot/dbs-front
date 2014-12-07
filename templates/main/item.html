@@ -1,5 +1,5 @@
 <div id="item-page-container" item-scroll>
-	<div id="item-page" ng-show="itemController.content_loaded" animate-down when="mainController.search_again_visible" by="#search-again">
+	<div id="item-page" ng-show="itemController.content_loaded">
 		<div class="related">
 			<item-preview ng-repeat="related_data in itemController.item_data.related | limitTo: 3" preview-data="related_data" arrow="left"></item-preview>
 		</div>

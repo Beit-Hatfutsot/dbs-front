@@ -10,16 +10,6 @@
 			<en>Original family name of one of your ancestors</en>
 			<he>שם</he>
 		</label>
-		<div class="wizard-form__field__suggestions" ng-if="mainController.wizard_suggestions.name.isNotEmpty()">
-			<div class="wizard-form__suggestions__instructions">
-				<en>Did you mean...</en>
-				<he>האם התכונת ל...</he>
-			</div>
-			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="name in mainController.wizard_suggestions.name | limitTo: 6" ng-click="mainController.start_name(name)">
-				<en>{{name.Header.En}}</en>
-				<he>{{name.Header.He}}</he>
-			</div>
-		</div>
 	</div>
 	<div class="wizard-form__field wizard-form__field--place">
 		<div>	
@@ -29,18 +19,7 @@
 			<en>Town / Village they came from. If unknown, type country</en>
 			<he>מקום</he>
 		</label>
-		<div class="wizard-form__field__suggestions" ng-if="mainController.wizard_suggestions.place.isNotEmpty()">
-			<div class="wizard-form___field__suggestions__instructions">
-				<en>Did you mean...</en>
-				<he>האם התכונת ל...</he>
-			</div>
-			<div class="wizard-form__field__suggestions__suggestion" ng-repeat="place in mainController.wizard_suggestions.place | limitTo: 6" ng-click="mainController.start_place(place)">
-				<en>{{place.Header.En}}</en>
-				<he>{{place.Header.He}}</he>
-			</div>
-		</div>
 	</div>
-	<br>
 	<button class="wizard-form__btn" ng-disabled="mainController.submit_disabled" ng-click="mainController.start()">
 		<en>Search</en>
 		<he>חפש</he>

@@ -1,5 +1,5 @@
 .wizard-form {
-	width: 640px;
+	//width: 640px;
 
 	&__instructions {
 		font-size: 20px;
@@ -33,15 +33,23 @@
 	}
 
 	&__btn {
-		vertical-align: bottom;
+		display: inline-block;
+		vertical-align: top;
 		width: 144px;
 		height: 38px;
-		margin: 20px 0;
 		color: #f9f9f9;
 		font-size: 22px;
 		background: #5dc2d4;
 		border: none;
 		@include border-radius(2px);
+
+		.en & {
+			margin-left: 35px;
+		}
+
+		.he & {
+			margin-right: 35px;
+		}
 
 		&:disabled {
 			background: grey;
