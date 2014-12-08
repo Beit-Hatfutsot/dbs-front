@@ -13,7 +13,7 @@ var HeaderCtrl = function(notification) {
 };
 
 HeaderCtrl.prototype = {
-
+	
 };
 
 angular.module('main').controller('HeaderCtrl', ['notification', HeaderCtrl]);

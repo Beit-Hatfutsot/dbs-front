@@ -51,6 +51,12 @@
 					<he>הסיפור שלי</he>
 				</div>
 			</div>
+			<div id="search-again-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.set_sub_header_state('wizard')">
+				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]"></icon>
+			</div>
+			<div id="breadcrumbs-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.set_sub_header_state('breadcrumbs')">
+				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-125, -89]" hover-offset="[0, -30]"></icon>
+			</div>
 			<div class="search-area">
 				<form action="" class="search-area__form">
 					<input type="text" placeholder={{headerController.search_placeholders[mainController.lang]}} class="search-area__form__input" />
@@ -61,19 +67,21 @@
 			</div>
 		</div>
 	</div>
-	<div id="secondary-header" ng-show="mainController.show_notifications">
-		<div id="notification-bar-container">
+	<div id="secondary-header">
+		<div id="notification-bar-container" ng-show="mainController.show_notifications">
 			<div id="notification-bar">
 				{{headerController.notification_message}}
-				<div id="search-again-trigger" ng-click="mainController.search_again_visible=!(mainController.search_again_visible)">
-					<en>Search again</en>
-					<he>חיפוש חוזר</he>
-					<div class="down-triangle"></div>
-				</div>
 			</div>
 		</div>
-		<div id="search-again" ng-show="mainController.search_again_visible">
-			<ng-include src="'templates/main/wizard-form.html'"></ng-include>
+		<div id="sub-header-wrapper" ng-show="mainController.sub_header_state != 'closed' && !(mainController.$state.includes('start'))">
+			<div id="sub-header">
+				<div id="header-wizard" ng-show="mainController.sub_header_state=='wizard'">
+					<ng-include src="'templates/main/wizard-form.html'"></ng-include>
+				</div>
+				<div id="breadcrumbs" ng-show="mainController.sub_header_state=='breadcrumbs'">
+					BREADCRUMBS
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
