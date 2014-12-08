@@ -51,10 +51,10 @@
 					<he>הסיפור שלי</he>
 				</div>
 			</div>
-			<div id="search-again-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.set_sub_header_state('wizard')">
+			<div id="search-again-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'wizard'">
 				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]"></icon>
 			</div>
-			<div id="breadcrumbs-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.set_sub_header_state('breadcrumbs')">
+			<div id="breadcrumbs-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'breadcrumbs'">
 				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-125, -89]" hover-offset="[0, -30]"></icon>
 			</div>
 			<div class="search-area">

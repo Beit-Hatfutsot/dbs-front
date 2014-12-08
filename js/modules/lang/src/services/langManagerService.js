@@ -1,12 +1,20 @@
 angular.module('lang').
 
-	factory('langManager', function() {
+	factory('langManager', ['$window', function($window) {
+		var _lang = $window.localStorage.getItem('bhsclient-language') || 'en';
 
 	  	var lang_manager = {
 
-	  		lang: window.localStorage.language || 'en'
+	  		get lang() {
+	  			return _lang;
+	  		},
+
+	  		set lang(new_lang) {
+	  			$window.localStorage.setItem('bhsclient-language', new_lang);
+	  			_lang = new_lang;
+	  		}
 
 	  	};
 
   		return lang_manager;
-	});
+	}]);
