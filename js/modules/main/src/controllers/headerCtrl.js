@@ -1,5 +1,7 @@
 var HeaderCtrl = function(notification) {
 
+	this.langauage_menu_open = false;
+
 	this.search_placeholders = {
 		'en': 'Search for communities, last names and personalities',
 		'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'

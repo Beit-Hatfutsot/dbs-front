@@ -14,17 +14,8 @@ angular.module('main').
 		            _sub_header_state = 'closed';
 		        }
 		        else {
-		            if (old_state == 'closed' || new_state == 'closed') {
-		                _sub_header_state = new_state;
-		            }
-		            else {
-		                $timeout(function() {
-		                    _sub_header_state = new_state;
-		                }, 1000);
-
-		                _sub_header_state = '';
-		            }
-		        }
+		            _sub_header_state = new_state;
+				}
 			}
 		}
 

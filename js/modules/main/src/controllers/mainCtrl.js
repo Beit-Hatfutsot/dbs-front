@@ -3,7 +3,7 @@ var MainCtrl = function($state, header, langManager, wizard, authManager) {
 
     this.$state = $state;
     this.wizard = wizard;
-    this.langManager = langManager;
+    //this.langManager = langManager;
     this.header = header;
     
     this.placeholders = { 

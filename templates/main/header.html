@@ -1,15 +1,17 @@
 <div ng-controller="HeaderCtrl as headerController">
 	<div id="header-container">
 		<div id="header">
+			<div class="sub-header-indicator" ng-class="{'sub-header-indicator--wizard': mainController.sub_header_state == 'wizard', 'sub-header-indicator--breadcrumbs': mainController.sub_header_state == 'breadcrumbs'}" ng-show="mainController.sub_header_state != 'closed'">
+			</div>
 			<div class="dropdown-icons lang-float {{mainController.lang}}">
 				<div class="dropdown-icons__language-selector" dropdown>
-					<div dropdown-toggle>	
+					<div dropdown-toggle ng-click="headerController.language_menu_open = !(headerController.language_menu_open)">	
 						<div class="language-icon">
 							<en>
-								<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -24]" hover-offset="[0, -30]"></icon>
+								<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -24]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
 							</en>
 							<he>
-								<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -86]" hover-offset="[0, -30]"></icon>
+								<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -86]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
 							</he>
 						</div>
 					</div>
@@ -51,11 +53,11 @@
 					<he>הסיפור שלי</he>
 				</div>
 			</div>
-			<div id="search-again-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'wizard'">
-				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]"></icon>
+			<div class="header-wizard-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'wizard'">
+				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]" offset-on="mainController.sub_header_state == 'wizard'"></icon>
 			</div>
-			<div id="breadcrumbs-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'breadcrumbs'">
-				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-125, -89]" hover-offset="[0, -30]"></icon>
+			<div class="breadcrumbs-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'breadcrumbs'">
+				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-125, -89]" hover-offset="[0, -30]" offset-on="mainController.sub_header_state == 'breadcrumbs'"></icon>
 			</div>
 			<div class="search-area">
 				<form action="" class="search-area__form">
@@ -75,10 +77,10 @@
 		</div>
 		<div id="sub-header-wrapper" ng-show="mainController.sub_header_state != 'closed' && !(mainController.$state.includes('start'))">
 			<div id="sub-header">
-				<div id="header-wizard" ng-show="mainController.sub_header_state=='wizard'">
+				<div class="header-wizard" ng-show="mainController.sub_header_state == 'wizard'">
 					<ng-include src="'templates/main/wizard-form.html'"></ng-include>
 				</div>
-				<div id="breadcrumbs" ng-show="mainController.sub_header_state=='breadcrumbs'">
+				<div class="breadcrumbs" ng-show="mainController.sub_header_state == 'breadcrumbs'">
 					BREADCRUMBS
 				</div>
 			</div>
