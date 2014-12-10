@@ -1,6 +1,5 @@
 .wizard-form {
-	//width: 640px;
-
+	
 	&__instructions {
 		font-size: 20px;
 		margin-bottom: 5px;
@@ -9,13 +8,14 @@
 	&__field {
 		display: inline-block;
 		vertical-align: top;
+		width: 300px;
 
 		label {
 			font-size: 12px;
 		}
 
 		input {
-			width: 300px;
+			width: 100%;
 			height: 38px;
 			padding: 0 8px;
 		}
@@ -28,6 +28,17 @@
 
 			.he & {
 				margin: 0 35px 0 0;	
+			}
+		}
+
+		&__autosuggest-wrapper {
+			position: relative;
+			height: 100%;
+
+			.autosuggest {
+				position: absolute;
+				width: 100%;
+				background: #ffffff;
 			}
 		}
 	}

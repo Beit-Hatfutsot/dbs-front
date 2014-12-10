@@ -1,9 +1,9 @@
 <div ng-controller="HeaderCtrl as headerController">
 	<div id="header-container">
 		<div id="header">
-			<div class="sub-header-indicator" ng-class="{'sub-header-indicator--wizard': mainController.sub_header_state == 'wizard', 'sub-header-indicator--breadcrumbs': mainController.sub_header_state == 'breadcrumbs'}" ng-show="mainController.sub_header_state != 'closed'">
+			<div class="sub-header-indicator" ng-class="{'sub-header-indicator--wizard': headerController.sub_header_state == 'wizard', 'sub-header-indicator--breadcrumbs': headerController.sub_header_state == 'breadcrumbs'}" ng-show="headerController.sub_header_state != 'closed'">
 			</div>
-			<div class="dropdown-icons lang-float {{mainController.lang}}">
+			<div class="dropdown-icons lang-float {{lang}}">
 				<div class="dropdown-icons__language-selector" dropdown>
 					<div dropdown-toggle ng-click="headerController.language_menu_open = !(headerController.language_menu_open)">	
 						<div class="language-icon">
@@ -20,7 +20,7 @@
 							<en>Choose a language</en>
 							<he>בחרו שפה</he>
 						</div>
-						<div class="language-menu__row" ng-click="mainController.lang='he'">
+						<div class="language-menu__row" ng-click="lang='he'">
 							<div class="language-icon">
 								<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
 							</div>
@@ -29,7 +29,7 @@
 								<he>עברית</he>
 							</div>
 						</div>
-						<div class="language-menu__row" ng-click="mainController.lang='en'">
+						<div class="language-menu__row" ng-click="lang='en'">
 							<div class="language-icon">
 								<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
 							</div>
@@ -53,15 +53,15 @@
 					<he>הסיפור שלי</he>
 				</div>
 			</div>
-			<div class="header-wizard-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'wizard'">
-				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]" offset-on="mainController.sub_header_state == 'wizard'"></icon>
+			<div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'wizard'">
+				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]" offset-on="headerController.sub_header_state == 'wizard'"></icon>
 			</div>
-			<div class="breadcrumbs-trigger" ng-if="!(mainController.$state.includes('start'))" ng-click="mainController.sub_header_state = 'breadcrumbs'">
-				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-125, -89]" hover-offset="[0, -30]" offset-on="mainController.sub_header_state == 'breadcrumbs'"></icon>
+			<div class="breadcrumbs-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'breadcrumbs'">
+				<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-125, -89]" hover-offset="[0, -30]" offset-on="headerController.sub_header_state == 'breadcrumbs'"></icon>
 			</div>
 			<div class="search-area">
 				<form action="" class="search-area__form">
-					<input type="text" placeholder={{headerController.search_placeholders[mainController.lang]}} class="search-area__form__input" />
+					<input type="text" placeholder={{headerController.search_placeholders[lang]}} class="search-area__form__input" />
 					<div class="search-area__form__search-button" need-auth="false">
 						<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-350, -24]"></icon>
 					</div>
@@ -70,17 +70,17 @@
 		</div>
 	</div>
 	<div id="secondary-header">
-		<div id="notification-bar-container" ng-show="mainController.show_notifications">
+		<div id="notification-bar-container" ng-show="headerController.show_notifications">
 			<div id="notification-bar">
 				{{headerController.notification_message}}
 			</div>
 		</div>
-		<div id="sub-header-wrapper" ng-show="mainController.sub_header_state != 'closed' && !(mainController.$state.includes('start'))">
+		<div id="sub-header-wrapper" ng-show="headerController.sub_header_state != 'closed' && !(isCurrentState('start'))">
 			<div id="sub-header">
-				<div class="header-wizard" ng-show="mainController.sub_header_state == 'wizard'">
+				<div class="header-wizard" ng-show="headerController.sub_header_state == 'wizard'">
 					<ng-include src="'templates/main/wizard-form.html'"></ng-include>
 				</div>
-				<div class="breadcrumbs" ng-show="mainController.sub_header_state == 'breadcrumbs'">
+				<div class="breadcrumbs" ng-show="headerController.sub_header_state == 'breadcrumbs'">
 					BREADCRUMBS
 				</div>
 			</div>

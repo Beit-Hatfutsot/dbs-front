@@ -8,6 +8,11 @@ angular.module('main').
 
 			failed: false,
 
+			query: {
+				name: '',
+				place: ''
+			},
+
 			result: {},
 			
 			search_status: '',
@@ -22,7 +27,7 @@ angular.module('main').
 				this.search_status = '';
 			},
 			
-			search: function(name, place) {
+			search: function() {
 	  			if ( !(this.in_progress) ) {
 	  				
 					notification.put({
@@ -37,8 +42,8 @@ angular.module('main').
 		  				deferred = $q.defer();
 		  			
 		  			search_promise = searchClient.get({
-						name: name || '',
-						place: place || ''	
+						name: this.query.name || '',
+						place: this.query.place || ''	
 					}).$promise;
 		  					
 					search_promise
@@ -79,8 +84,8 @@ angular.module('main').
 			                }
 
 							self.result = result;
-							self.last_search.name = name;
-							self.last_search.place = place;
+							self.last_search.name = self.query.name;
+							self.last_search.place = self.query.place;
 							angular.forEach(result.bingo, function(item) {
 								cache.put(item)
 							});

@@ -18,6 +18,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         {
             name: 'start',
             url: '/',
+            controller: 'StartCtrl as startController',
             templateUrl: 'templates/main/start.html',
             onEnter: ['cache', 'wizard', function(cache, wizard) {
                 wizard.clear();
@@ -63,6 +64,28 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
 
     $locationProvider.html5Mode(true);
 }]).
-run(['$state', function ($state) {
+run(['$state', '$rootScope', 'langManager', 'authManager', function ($state, $rootScope, langManager, authManager) {
+    
+    Object.defineProperty($rootScope, 'lang', {
+        get: function() {
+            return langManager.lang;
+        },
+
+        set: function(language) {
+            langManager.lang = language;
+        }
+    });
+
+    Object.defineProperty($rootScope, 'signed_in_user', {
+        get: function() {
+            return authManager.signed_in_user;
+        }
+    });
+
+    $rootScope.isCurrentState = function(state_name) {
+        return $state.includes(state_name);
+    };
+
+
     $state.go('start');
 }]);

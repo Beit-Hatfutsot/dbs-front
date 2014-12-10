@@ -26,8 +26,8 @@
 			<en>No exact matches were found for </en>
 			<he>לא נמצאה התאמה מדויקת עבור </he>
 			<ng-switch on="content_type">
-				<span ng-switch-when="name"><strong>{{wizardResultController.last_search.name}}</strong></span>
-				<span ng-switch-when="place"><strong>{{wizardResultController.last_search.place}}</strong></span>
+				<span ng-switch-when="name"><strong>{{wizardResultController.last_search_name}}</strong></span>
+				<span ng-switch-when="place"><strong>{{wizardResultController.last_search_place}}</strong></span>
 			</ng-switch>
 		</div>
 		<div class="text" ng-switch on="wizardResultController.suggestion_status === 'none'">
@@ -37,7 +37,7 @@
 			<span ng-switch-when="true">
 				<en>Try to </en>
 			</span>
-			<en><a href="" ng-click="mainController.search_again_visible = true">start a new search</a> for name and place</en>
+			<en><a href="" ng-click="sub_header_state = 'wizard'">start a new search</a> for name and place</en>
 			<he></he>
 		</div>
 	</div>

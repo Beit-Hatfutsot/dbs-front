@@ -1,12 +1,21 @@
-var WizardResultCtrl = function($scope, $stateParams, wizard, notification) {
+var WizardResultCtrl = function(wizard) {
 	var self = this;
-
-    this.failed = false;
-    this.notification = notification;
 
     Object.defineProperty(this, 'result', {
         get: function() {
             return wizard.result;
+        }
+    });
+
+    Object.defineProperty(this, 'last_search_name', {
+        get: function() {
+            return wizard.last_search.name;
+        }
+    });
+
+    Object.defineProperty(this, 'last_search_place', {
+        get: function() {
+            return wizard.last_search.place;
         }
     });
 
@@ -27,4 +36,4 @@ WizardResultCtrl.prototype = {
     
 };
 
-angular.module('main').controller('WizardResultCtrl', ['$scope', '$stateParams', 'wizard', 'notification', WizardResultCtrl]);
+angular.module('main').controller('WizardResultCtrl', ['wizard', WizardResultCtrl]);

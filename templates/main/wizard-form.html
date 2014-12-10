@@ -1,26 +1,35 @@
-<form class="wizard-form">
+<form class="wizard-form" ng-controller="WizardFormCtrl as wizardFormController">
 	<div class="wizard-form__instructions">
 		<en>To get started, enter a family member's details</en>
 	</div>
 	<div class="wizard-form__field">
 		<div>
-			<input type="text" id="wizard-name" ng-model="mainController.wizard_query.name" placeholder="{{mainController.name_placeholder}}" />
+			<input type="text" id="wizard-name" ng-model="wizardFormController.wizard_query_name" placeholder="{{wizardFormController.name_placeholder}}" />
 		</div>
-		<label for="wizard-place">
-			<en>Original family name of one of your ancestors</en>
-			<he>שם</he>
-		</label>
+		<div class="wizard-form__field__autosuggest-wrapper">
+			<div class="autosuggest">
+				blabla<br>
+				bkabkabka<br>
+				bkabka<br>
+				bkabkabka<br>
+				kbaka<br>
+			</div>
+			<label for="wizard-place">
+				<en>Original family name of one of your ancestors</en>
+				<he>שם</he>
+			</label>
+		</div>
 	</div>
 	<div class="wizard-form__field wizard-form__field--place">
 		<div>	
-			<input type="text" id="wizard-place" ng-model="mainController.wizard_query.place" placeholder="{{mainController.place_placeholder}}" />
+			<input type="text" id="wizard-place" ng-model="wizardFormController.wizard_query_place" placeholder="{{wizardFormController.place_placeholder}}" />
 		</div>
 		<label for="wizard-place">
 			<en>Town / Village they came from. If unknown, type country</en>
 			<he>מקום</he>
 		</label>
 	</div>
-	<button class="wizard-form__btn" ng-disabled="mainController.submit_disabled" ng-click="mainController.search()">
+	<button class="wizard-form__btn" ng-disabled="wizardFormController.submit_disabled" ng-click="wizardFormController.search()">
 		<en>Search</en>
 		<he>חפש</he>
 	</button>	

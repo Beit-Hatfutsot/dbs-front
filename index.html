@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="main" ng-controller="MainCtrl as mainController">
+<html ng-app="main">
 	<head>
 		<meta charset="utf-8">
 		<!-- Let Goggle crawler know we use HTML5 push state API -->
@@ -13,8 +13,8 @@
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	</head>
-	<body lang="{{mainController.lang}}" ng-cloak>
-		<div id="app-container" class="{{mainController.lang}}">
+	<body lang="{{lang}}" ng-cloak>
+		<div id="app-container" class="{{lang}}">
 			<ng-include src="'templates/main/header.html'"></ng-include>
 			<div id="view" ui-view></div>	
 			<ng-include src="'templates/main/footer.html'"></ng-include>

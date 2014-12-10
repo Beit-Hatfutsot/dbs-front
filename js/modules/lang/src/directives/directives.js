@@ -10,7 +10,7 @@ angular.module('lang').
 			scope: {},
 		  		
 		    template: "<span ng-transclude style=\"width: inherit; height: inherit;\" class=\"en\" ng-show=\"langManager.lang == 'en'\"></span>",
-		
+
 		    link: function(scope) {
 		    	scope.langManager = langManager;
 		    }

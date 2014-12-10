@@ -1,25 +1,23 @@
 <div id="start" scroll-top>	
-	<div id="wizard-container">
-		<div id="wizard">
-			<div id="wizard-form-strip">
-				<div class="wizard-form-container">
-					<div class="wizard-form-container__text">
-						<div class="wizard-form-container__text__title">
-							<en>My Jewish Story</en>
-							<he>הסיפור היהודי שלי</he>
-						</div>
-						<div class="wizard-form-container__text__content">
-							<en>
-								Come stroll among thousands of content items:<br>
-								Pictures, family trees, music, stories of communities and more.
-							</en>
-							<he></he>
-						</div>
+	<div id="wizard">
+		<div id="wizard-form-strip">
+			<div class="wizard-form-container">
+				<div class="wizard-form-container__text">
+					<div class="wizard-form-container__text__title">
+						<en>My Jewish Story</en>
+						<he>הסיפור היהודי שלי</he>
 					</div>
-					<ng-include src="'templates/main/wizard-form.html'"></ng-include>
+					<div class="wizard-form-container__text__content">
+						<en>
+							Come stroll among thousands of content items:<br>
+							Pictures, family trees, music, stories of communities and more.
+						</en>
+						<he></he>
+					</div>
 				</div>
+				<ng-include src="'templates/main/wizard-form.html'"></ng-include>
 			</div>
 		</div>
 	</div>
-	<wizard-result ng-show="mainController.search_status != 'none'"></wizard-result>
+	<wizard-result ng-show="startController.search_status != 'none'"></wizard-result>
 </div>

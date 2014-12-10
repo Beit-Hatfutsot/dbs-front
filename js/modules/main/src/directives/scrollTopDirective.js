@@ -2,8 +2,16 @@ angular.module('main').
 	directive('scrollTop', [function() {
 		return {
 			restrict: 'A',
+			scope: {},
+			controller: ['$scope', 'wizard', function($scope, wizard) {
+				Object.defineProperty($scope, 'search_status', {
+					get: function() {
+						return wizard.search_status;
+					}
+				});
+			}],
 			link: function(scope, element) {
-				scope.$watch('mainController.search_status', function(newVal, oldVal) {
+				scope.$watch('search_status', function(newVal, oldVal) {
 					if (newVal != 'none' && newVal != '') {
 						setTimeout(function() {
 							element.removeAttr('style');
