@@ -1,7 +1,7 @@
 <div ng-controller="HeaderCtrl as headerController">
 	<div id="header-container">
 		<div id="header">
-			<div class="sub-header-indicator" ng-class="{'sub-header-indicator--wizard': headerController.sub_header_state == 'wizard', 'sub-header-indicator--breadcrumbs': headerController.sub_header_state == 'breadcrumbs'}" ng-show="headerController.sub_header_state != 'closed'">
+			<div class="sub-header-indicator" ng-class="{'sub-header-indicator--wizard': headerController.sub_header_state == 'wizard', 'sub-header-indicator--breadcrumbs': headerController.sub_header_state == 'breadcrumbs'}">
 			</div>
 			<div class="dropdown-icons lang-float {{lang}}">
 				<div class="dropdown-icons__language-selector" dropdown>

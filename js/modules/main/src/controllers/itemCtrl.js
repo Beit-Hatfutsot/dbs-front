@@ -1,4 +1,4 @@
-var ItemCtrl = function($stateParams, item, notification, itemTypeMap) {
+var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header) {
 	var self = this;
 
 	this.in_progress = true;
@@ -12,12 +12,13 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap) {
 		get: function() {
 			return itemTypeMap.get_type( this.item_data.UnitType );
 		}
-	})
+	});
 
 	notification.put({
 		en: 'Fetching item...',
 		he: 'טוען פריט...'
 	});
+
 	item.get($stateParams.id).
 		then(function(item_data) {
 			self.item_data = item_data;
@@ -36,10 +37,17 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap) {
 		finally(function() {
 			self.in_progress = false;
 		});
+
+	//open sub-header wizard if there is a wizard search result with only one hit (bingo)
+	if ( wizard.result.isNotEmpty() ) {
+		if ( wizard.result.bingo.name.isEmpty() || wizard.result.bingo.place.isEmpty() )  {
+			header.sub_header_state = 'wizard';
+		}
+	}
 };
 
 ItemCtrl.prototype = {
 
 };
 
-angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', ItemCtrl]);

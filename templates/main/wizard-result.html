@@ -1,8 +1,7 @@
-<div id="wizard-result" ng-if="wizardResultController.result.isNotEmpty()">
+<div id="wizard-result" ng-if="wizardResultController.search_status != '' && wizardResultController.search_status != 'none'">
 	<div class="items" ng-show="!(wizardResultController.in_progress || wizardResultController.failed)">
-		<div class="items__name" ng-switch on="wizardResultController.result.bingo.name.isEmpty()">
-			<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.name" content="name"></item-preview>
-			<no-result ng-switch-when="true" content="name"></no-result>
+		<div class="items__name" ng-if="wizardResultController.result.bingo.name.isNotEmpty()" ng-class="{inline: wizardResultController.result.bingo.place.isNotEmpty()}">
+			<item-preview preview-data="wizardResultController.result.bingo.name" content="name"></item-preview>
 		</div>
 		<!--
 		<div class="items__tree" ng-switch on="wizardResultController.view_mode('trees')">
@@ -10,9 +9,8 @@
 			<no-result ng-switch-when="none" content="tree"></no-result>
 		</div>
 		-->
-		<div class="items__place" ng-switch on="wizardResultController.result.bingo.place.isEmpty()">
-			<item-preview ng-switch-when="false" preview-data="wizardResultController.result.bingo.place" content="place"></item-preview>
-			<no-result ng-switch-when="true" content="place"></no-result>
+		<div class="items__place" ng-if="wizardResultController.result.bingo.place.isNotEmpty()" ng-class="{inline: wizardResultController.result.bingo.name.isNotEmpty()}">
+			<item-preview preview-data="wizardResultController.result.bingo.place" content="place"></item-preview>
 		</div>
 	</div>
 </div>

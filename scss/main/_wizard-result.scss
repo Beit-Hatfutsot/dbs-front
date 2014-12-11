@@ -11,9 +11,14 @@
 		padding: 60px 0;
 		
 		&__name, &__place {
-			display: inline-block;
+			width: 300px;
 			vertical-align: top;
 			padding: 10px;
+			margin: 0 auto;
+
+			&.inline {
+				display: inline-block;
+			}
 
 			.item-preview-container, .no-result {
 				@extend %item-preview;

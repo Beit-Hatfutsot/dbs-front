@@ -7,6 +7,12 @@ var WizardResultCtrl = function(wizard) {
         }
     });
 
+    Object.defineProperty(this, 'search_status', {
+        get: function() {
+            return wizard.search_status;
+        }
+    });
+
     Object.defineProperty(this, 'last_search_name', {
         get: function() {
             return wizard.last_search.name;

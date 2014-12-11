@@ -18,7 +18,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         {
             name: 'start',
             url: '/',
-            controller: 'StartCtrl as startController',
             templateUrl: 'templates/main/start.html',
             onEnter: ['cache', 'wizard', function(cache, wizard) {
                 wizard.clear();
