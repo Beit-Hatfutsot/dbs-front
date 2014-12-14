@@ -1,44 +1,44 @@
-<div ng-controller="HeaderCtrl as headerController">
-	<div id="header-container">
-		<div id="header">
-			<div class="dropdown-icons lang-float {{lang}}">
-				<div class="dropdown-icons__language-selector" dropdown>
-					<div dropdown-toggle ng-click="headerController.language_menu_open = !(headerController.language_menu_open)">	
-						<div class="language-icon">
-							<en>
-								<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -24]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
-							</en>
-							<he>
-								<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -86]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
-							</he>
-						</div>
+<div id="header-container" ng-controller="HeaderCtrl as headerController">
+	<div class="dropdown-icons">
+		<div class="dropdown-icons__language-selector" dropdown is-open="headerController.language_menu_open">
+			<div dropdown-toggle>	
+				<div class="language-icon">
+					<en>
+						<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -24]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
+					</en>
+					<he>
+						<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -86]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
+					</he>
+				</div>
+			</div>
+			<div class="language-menu">
+				<div class="language-menu__title">
+					<en>Choose a language</en>
+					<he>בחרו שפה</he>
+				</div>
+				<div class="language-menu__row" ng-click="lang='he'">
+					<div class="language-icon">
+						<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
 					</div>
-					<div class="language-menu">
-						<div class="language-menu__title">
-							<en>Choose a language</en>
-							<he>בחרו שפה</he>
-						</div>
-						<div class="language-menu__row" ng-click="lang='he'">
-							<div class="language-icon">
-								<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
-							</div>
-							<div class="language-menu__row__language-desc">
-								<en>Hebrew</en>
-								<he>עברית</he>
-							</div>
-						</div>
-						<div class="language-menu__row" ng-click="lang='en'">
-							<div class="language-icon">
-								<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
-							</div>
-							<div class="language-menu__row__language-desc">
-								<en>English</en>
-								<he>אנגלית</he>
-							</div>
-						</div>
+					<div class="language-menu__row__language-desc">
+						<en>Hebrew</en>
+						<he>עברית</he>
+					</div>
+				</div>
+				<div class="language-menu__row" ng-click="lang='en'">
+					<div class="language-icon">
+						<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
+					</div>
+					<div class="language-menu__row__language-desc">
+						<en>English</en>
+						<he>אנגלית</he>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div id="top-header-container">
+		<div id="top-header">
 			<div class="logo" ui-sref="start">
 				<icon alt-text="{en: 'Home', he: 'בית'}" position="[-26, -14]"></icon>
 			</div>
@@ -72,7 +72,7 @@
 			{{headerController.notification_message}}
 		</div>
 	</div>
-	<div class="sub-header-wrapper" ng-class="{'sub-header-wrapper--closed': headerController.sub_header_state == 'closed' || isCurrentState('start'), 'sub-header-wrapper--wizard': headerController.sub_header_state == 'wizard' && !(isCurrentState('start')), 'sub-header-wrapper--breadcrumbs': headerController.sub_header_state == 'breadcrumbs' && !(isCurrentState('start'))}">
+	<div class="sub-header-container" ng-class="{'sub-header-container--closed': headerController.sub_header_state == 'closed' || isCurrentState('start'), 'sub-header-container--wizard': headerController.sub_header_state == 'wizard' && !(isCurrentState('start')), 'sub-header-container--breadcrumbs': headerController.sub_header_state == 'breadcrumbs' && !(isCurrentState('start'))}">
 		<div id="sub-header">
 			<div class="header-wizard" ng-show="headerController.sub_header_state == 'wizard'">
 				<ng-include src="'templates/main/wizard-form.html'"></ng-include>

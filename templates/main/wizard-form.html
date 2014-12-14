@@ -4,15 +4,11 @@
 	</div>
 	<div class="wizard-form__field">
 		<div>
-			<input type="text" id="wizard-name" ng-model="wizardFormController.wizard_query_name" placeholder="{{wizardFormController.name_placeholder}}" />
+			<input type="text" id="wizard-name" ng-model="wizardFormController.wizard_query_name" placeholder="{{wizardFormController.name_placeholder}}" ng-change="wizardFormController.suggest_names()" ng-focus="wizardFormController.suggest_names()" ng-blur="wizardFormController.suggested_names = []" ng-keydown="wizardFormController.handle_keyboard($event, 'name')">
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
-			<div class="autosuggest">
-				blabla<br>
-				bkabkabka<br>
-				bkabka<br>
-				bkabkabka<br>
-				kbaka<br>
+			<div class="autosuggest" ng-show="wizardFormController.suggested_names.isNotEmpty()">
+				<div class="autosuggest__item" ng-class="{'autosuggest__item--selected': wizardFormController.isSelectedSuggestedName(suggested_name)}" ng-repeat="suggested_name in wizardFormController.suggested_names track by $index" ng-click="wizardFormController.adopt_name(suggested_name)"  ng-mouseover="wizardFormController.select_suggested_name(suggested_name)">{{suggested_name}}</div>
 			</div>
 			<label for="wizard-place">
 				<en>Original family name of one of your ancestors</en>
@@ -22,12 +18,17 @@
 	</div>
 	<div class="wizard-form__field wizard-form__field--place">
 		<div>	
-			<input type="text" id="wizard-place" ng-model="wizardFormController.wizard_query_place" placeholder="{{wizardFormController.place_placeholder}}" />
+			<input type="text" id="wizard-place" ng-model="wizardFormController.wizard_query_place" placeholder="{{wizardFormController.place_placeholder}}" ng-change="wizardFormController.suggest_places()" ng-focus="wizardFormController.suggest_places()" ng-blur="wizardFormController.suggested_places = []" ng-keydown="wizardFormController.handle_keyboard($event, 'place')">
 		</div>
-		<label for="wizard-place">
-			<en>Town / Village they came from. If unknown, type country</en>
-			<he>מקום</he>
-		</label>
+		<div class="wizard-form__field__autosuggest-wrapper">
+			<div class="autosuggest autosuggest--places" ng-show="wizardFormController.suggested_places.isNotEmpty()">
+				<div class="autosuggest__item" ng-class="{'autosuggest__item--selected': wizardFormController.isSelectedSuggestedPlace(suggested_place)}" ng-repeat="suggested_place in wizardFormController.suggested_places track by $index" ng-click="wizardFormController.adopt_place(suggested_place)" ng-mouseover="wizardFormController.select_suggested_place(suggested_place)">{{suggested_place}}</div>
+			</div>
+			<label for="wizard-place">
+				<en>Town / Village they came from. If unknown, type country</en>
+				<he>מקום</he>
+			</label>
+		</div>
 	</div>
 	<button class="wizard-form__btn" ng-disabled="wizardFormController.submit_disabled" ng-click="wizardFormController.search()">
 		<en>Search</en>

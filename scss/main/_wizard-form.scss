@@ -18,6 +18,8 @@
 			width: 100%;
 			height: 38px;
 			padding: 0 8px;
+			border: 2px solid #a09e9b;
+			@include border-radius(3px);
 		}
 	
 		&--place {
@@ -33,12 +35,22 @@
 
 		&__autosuggest-wrapper {
 			position: relative;
-			height: 100%;
 
 			.autosuggest {
 				position: absolute;
 				width: 100%;
 				background: #ffffff;
+				border-left: 2px solid #a09e9b;
+				border-right: 2px solid #a09e9b;
+				border-bottom: 2px solid #a09e9b;
+			
+				&__item {
+					@include hover_pointer();
+					
+					&--selected {
+						background: grey;
+					}
+				}
 			}
 		}
 	}
