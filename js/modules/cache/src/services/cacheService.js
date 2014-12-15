@@ -26,7 +26,7 @@ angular.module('cache').
 		cache = {
 			put: function(item) {
 				if ( item._id !== undefined ) {
-					return cached_items.setItem( item._id.$oid, JSON.stringify(item) );
+					return cached_items.setItem( item._id, JSON.stringify(item) );
 				}
 				return false;
 			},

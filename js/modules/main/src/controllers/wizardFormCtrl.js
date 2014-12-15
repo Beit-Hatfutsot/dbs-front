@@ -1,5 +1,6 @@
-var WizardFormCtrl = function (langManager, wizard, suggest) {
+var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
 
+    this.$timeout = $timeout;
 	this.wizard = wizard;
     this.suggest = suggest;
 
@@ -14,8 +15,19 @@ var WizardFormCtrl = function (langManager, wizard, suggest) {
         }
     };
 
-    this.suggested_names_index = -1;
-    this.suggested_places_index = -1;
+    this.wizard_query = {};
+
+    this.suggested = {};
+
+    this.suggested_index = {
+        name: -1,
+        place: -1
+    };
+
+    this.suggested_open = {
+        name: false,
+        place: false
+    }
 
     Object.defineProperty(this, 'name_placeholder', {
 
@@ -31,7 +43,7 @@ var WizardFormCtrl = function (langManager, wizard, suggest) {
         }
     });
 
-	Object.defineProperty(this, 'wizard_query_name', {
+    Object.defineProperty(this.wizard_query, 'name', {
         get: function() {
             return wizard.query.name;
         },
@@ -41,13 +53,25 @@ var WizardFormCtrl = function (langManager, wizard, suggest) {
         }
     });
 
-    Object.defineProperty(this, 'wizard_query_place', {
+    Object.defineProperty(this.wizard_query, 'place', {
         get: function() {
             return wizard.query.place;
         },
 
         set: function(new_place) {
             wizard.query.place = new_place;
+        }
+    });
+
+    Object.defineProperty(this.suggested, 'names', {
+        get: function() {
+            return suggest.suggested.names;
+        }
+    });
+
+    Object.defineProperty(this.suggested, 'places', {
+        get: function() {
+            return suggest.suggested.places;
         }
     });
 
@@ -62,24 +86,6 @@ var WizardFormCtrl = function (langManager, wizard, suggest) {
             }
         }
     });
-
-    Object.defineProperty(this, 'suggested_names', {
-        get: function() {
-            return suggest.suggested.names;
-        },
-        set: function(suggested) {
-            suggest.suggested.names = suggested; 
-        }
-    });
-
-    Object.defineProperty(this, 'suggested_places', {
-        get: function() {
-            return suggest.suggested.places;
-        },
-        set: function(suggested) {
-            suggest.suggested.places = suggested; 
-        }
-    });
 };
 
 WizardFormCtrl.prototype = {
@@ -87,98 +93,92 @@ WizardFormCtrl.prototype = {
         this.wizard.search();
     },
 
-    suggest_names: function() {
-        this.suggested_names = [];
-        this.suggested_names_index = -1;
+    get_suggestions: function(type) {
+        this.suggested_index[type] = -1;
 
-        if ( !(this.wizard_query_name === '') ) {
-            this.suggest.suggest_names(this.wizard_query_name);
+        if ( this.wizard_query[type] ) {
+            switch (type) {
+                case 'name':
+                    this.suggest.suggest_names(this.wizard_query.name);
+                    break;
+                case 'place':
+                    this.suggest.suggest_places(this.wizard_query.place);
+                    break;
+                default:
+                    break;
+            }
+            this.open_suggested(type);
+        }
+        else {
+            this.close_suggested(type);
         }
     },
 
-    suggest_places: function() {
-        this.suggested_places = [];
-        this.suggested_places_index = -1;
-
-        if ( !(this.wizard_query_place === '') ) {
-            this.suggest.suggest_places(this.wizard_query_place);
+    adopt: function(type) {
+        
+        switch(type) {
+            case 'name':
+                this.wizard_query.name = this.suggested.names[ this.suggested_index.name ];
+                break;
+            case 'place':
+                this.wizard_query.place = this.suggested.places[ this.suggested_index.place ];
+                break;
+            default:
+                break;
         }
-    },
-
-    adopt_name: function(name) {
-        this.adopt('name', name);
-    },
-
-    adopt_place: function(place) {
-        this.adopt('place', place);
-    },
-
-    adopt: function(type, value) {
-        var suggested_type = 'suggested_' + type + 's';
-
-        this[suggested_type] = [];
-        this[suggested_type + '_index'] = -1;
-        this['wizard_query_' + type] = value;
     },
 
     handle_keyboard: function($event, type) {
-        var suggested_type = 'suggested_' + type + 's',
-            suggested_count = this[suggested_type].length,
-            suggested_index = suggested_type + '_index';
+        var suggested_count = this.suggested[type + 's'].length;
 
         if (suggested_count > 0) {
             if($event.keyCode === 40) {
                 $event.preventDefault();
                 
-                if (this[suggested_index] === suggested_count - 1) {
-                    this[suggested_index] = 0;
+                if (this.suggested_index[type] === suggested_count - 1) {
+                    this.suggested_index[type] = 0;
                 }
                 else {
-                    this[suggested_index] +=1 ;
+                    this.suggested_index[type] +=1 ;
                 }
             }
             else if ($event.keyCode === 38) {
                 $event.preventDefault();
                 
-                if (this[suggested_index] === 0 || this[suggested_index] === -1) {
-                    this[suggested_index] = suggested_count - 1;
+                if (this.suggested_index[type] === 0 || this.suggested_index[type] === -1) {
+                    this.suggested_index[type] = suggested_count - 1;
                 }
                 else {
-                    this[suggested_index] -=1 ;    
+                    this.suggested_index[type] -=1 ;    
                 }
             }
             else if ($event.keyCode === 13) {
                 $event.preventDefault();
-                this.adopt(type, this[suggested_type][ this[suggested_index] ]);
+                this.close_suggested(type);
+                this.adopt(type);
             }
         }
     },
 
-    isSelectedSuggestedName: function(name) {
-        return this.isSelectedSuggested('name', name);
-    },
-
-    isSelectedSuggestedPlace: function(place) {
-        return this.isSelectedSuggested('place', place);
-    },
-
     isSelectedSuggested: function(type, value) {
-        var suggested_type = 'suggested_' + type + 's';
-
-        return this[suggested_type].indexOf(value) === this[suggested_type + '_index'];
+        return this.suggested[type + 's'].indexOf(value) === this.suggested_index[type];
     },
 
-    select_suggested_name: function(name) {
-        this.select_suggested('suggested_names', name);
+    select_suggested: function(type, value) {
+        this.suggested_index[type] = this.suggested[type + 's'].indexOf(value); 
     },
 
-    select_suggested_place: function(place) {
-        this.select_suggested('suggested_places', place);
+    open_suggested: function(type) {
+        this.suggested_open[type] = true;
     },
 
-    select_suggested: function(suggested_type, value) {
-        this[suggested_type + '_index'] = this[suggested_type].indexOf(value); 
-    }
+    close_suggested: function(type) {
+        var self = this;
+
+        this.$timeout(function() {
+            self.suggested_open[type] = false;
+        }, 100);
+    },
 };
 
-angular.module('main').controller('WizardFormCtrl', ['langManager', 'wizard', 'suggest', WizardFormCtrl]);
+angular.module('main').controller('WizardFormCtrl', ['$timeout', 'langManager', 'wizard', 'suggest', WizardFormCtrl]);

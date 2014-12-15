@@ -1,7 +1,7 @@
 <div id="item-page-container" item-scroll>
 	<div id="item-page" ng-show="itemController.content_loaded">
 		<div class="related">
-			<item-preview ng-repeat="related_data in itemController.item_data.related | limitTo: 3" preview-data="related_data" arrow="left"></item-preview>
+			<item-preview ng-repeat="r_data in itemController.related_data | limitTo: 3" preview-data="r_data" arrow="left"></item-preview>
 		</div>
 		<div class="item-container">
 			<div class="item">
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<div class="related">
-			<item-preview ng-repeat="related_data in itemController.item_data.related.slice(3, 6)" preview-data="related_data" arrow="right"></item-preview>
+			<item-preview ng-repeat="r_data in itemController.related_data.slice(3, 6)" preview-data="r_data" arrow="right"></item-preview>
 		</div>
 	</div>
 </div>

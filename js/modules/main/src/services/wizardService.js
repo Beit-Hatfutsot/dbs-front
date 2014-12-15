@@ -51,16 +51,16 @@ angular.module('main').
 							// set search status
 							var search_status;
 
-			                if ( result.bingo.name.isNotEmpty() || result.bingo.place.isNotEmpty() )  {
+			                if ( result.name.isNotEmpty() || result.place.isNotEmpty() )  {
 			                    
-			                    if ( result.bingo.name.isNotEmpty() && result.bingo.place.isEmpty() ) {
+			                    if ( result.name.isNotEmpty() && result.place.isEmpty() ) {
 			                        self.search_status = 'bingo-name';
 			                        notification.put({
 		                                en: 'We have not found a community to match your search.',
 		                                he: 'לא מצאנו את הקהילה שחיפשתם.'
 		                            });
 			                    }
-			                    else if ( result.bingo.name.isEmpty() && result.bingo.place.isNotEmpty() ) {
+			                    else if ( result.name.isEmpty() && result.place.isNotEmpty() ) {
 			                        self.search_status = 'bingo-place';
 			                        notification.put({
 		                                en: 'We have not found a surname to match your search.',
