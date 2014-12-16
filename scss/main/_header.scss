@@ -17,7 +17,21 @@
 			@include translate(-$view-width /2 + 5px, 0);
 		}
 
+		&__sign {
+			display: inline-block;
+			vertical-align: top;
+			@include hover-pointer();
+		}
+
+		&__signup {
+			display: inline-block;
+			vertical-align: top;
+			@include hover-pointer();
+		}
+
 		&__language-selector {
+			display: inline-block;
+			vertical-align: top;
 			width: 29px;
 			color: #f9f9f9;
 			font-weight: bold;

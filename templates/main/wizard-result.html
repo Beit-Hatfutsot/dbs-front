@@ -1,5 +1,5 @@
-<div id="wizard-result" ng-if="wizardResultController.search_status != '' && wizardResultController.search_status != 'none'">
-	<div class="items" ng-show="!(wizardResultController.in_progress || wizardResultController.failed)">
+<div id="wizard-result" ng-if="wizardResultController.search_status != '' && wizardResultController.search_status != 'none' && !(wizardResultController.failed)">
+	<div class="items">
 		<div class="items__name" ng-if="wizardResultController.result.name.isNotEmpty()" ng-class="{inline: wizardResultController.result.place.isNotEmpty()}">
 			<item-preview preview-data="wizardResultController.result.name" content="name"></item-preview>
 		</div>

@@ -1,4 +1,6 @@
-var HeaderCtrl = function($state, wizard, header, notification) {
+var HeaderCtrl = function($state, wizard, header, notification, auth) {
+
+    this.auth = auth;
 
 	this.langauage_menu_open = false;
 
@@ -6,6 +8,12 @@ var HeaderCtrl = function($state, wizard, header, notification) {
 		'en': 'Search for communities, last names and personalities',
 		'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
 	};
+    
+    Object.defineProperty(this, 'is_signedin', {
+        get: function() {
+            return auth.is_signedin();
+        }
+    });
 
 	Object.defineProperty(this, 'notification_message', {
         get: function() {
@@ -35,7 +43,9 @@ var HeaderCtrl = function($state, wizard, header, notification) {
 };
 
 HeaderCtrl.prototype = {
-	
+	signout: function() {
+        this.auth.signout();
+    }
 };
 
-angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', HeaderCtrl]);
+angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', HeaderCtrl]);

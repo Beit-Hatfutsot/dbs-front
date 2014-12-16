@@ -1,4 +1,4 @@
-angular.module('auth').directive('needAuth', ['$state', 'authManager', function($state, authManager) {
+angular.module('auth').directive('needAuth', ['$state', 'auth', function($state, auth) {
 	return {
 		restrict: 'A',
 		scope: {
@@ -16,7 +16,7 @@ angular.module('auth').directive('needAuth', ['$state', 'authManager', function(
 					nextState = scope.nextState;
 				}
 
-				authManager.authenticate(nextState, { mandatory: isMandatory });
+				auth.authenticate(nextState, { mandatory: isMandatory });
 			});
 		}
 	}

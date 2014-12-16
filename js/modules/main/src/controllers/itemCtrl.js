@@ -1,7 +1,8 @@
-var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header) {
+var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header, mjs) {
 	var self = this;
 
 	this.notification = notification;
+	this.mjs = mjs;
 
 	this.failed = false;
 	this.content_loaded = false;
@@ -48,7 +49,11 @@ ItemCtrl.prototype = {
 			en: 'Failed to fetch item.',
 			he: 'טעינת פריט נכשלה.'
 		});
+	},
+
+	push_mjs: function() {
+		
 	}
 };
 
-angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', ItemCtrl]);

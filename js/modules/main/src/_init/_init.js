@@ -49,6 +49,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         },
 
         {
+            name: 'mjs',
+            url: '/mjs',
+            templateUrl: 'templates/main/mjs.html',
+            controller: 'MjsController as mjsCtrl'
+        },        
+
+        {
             name: '404',
             url: '/404',
             templateUrl: 'templates/main/404.html'
@@ -63,7 +70,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
 
     $locationProvider.html5Mode(true);
 }]).
-run(['$state', '$rootScope', 'langManager', 'authManager', function ($state, $rootScope, langManager, authManager) {
+run(['$state', '$rootScope', 'langManager', function ($state, $rootScope, langManager) {
     
     Object.defineProperty($rootScope, 'lang', {
         get: function() {
@@ -72,12 +79,6 @@ run(['$state', '$rootScope', 'langManager', 'authManager', function ($state, $ro
 
         set: function(language) {
             langManager.lang = language;
-        }
-    });
-
-    Object.defineProperty($rootScope, 'signed_in_user', {
-        get: function() {
-            return authManager.signed_in_user;
         }
     });
 

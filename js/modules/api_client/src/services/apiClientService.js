@@ -5,8 +5,9 @@ angular.module('apiClient').
 	  	return {
 
 	  		urls: {
-	  			auth: 			'http://bhsapi.ezdr.net/auth',
-	  			user: 			'http://bhsapi.ezdr.net/user', 
+	  			auth: 			'http://127.0.0.1:5000/auth',
+	  			user: 			'http://127.0.0.1:5000/user', 
+	  			mjs: 			'http://127.0.0.1:5000/mjs', 
 	  			wizard_search: 	'http://bhsapi.ezdr.net/wsearch',
 	  			item: 			'http://127.0.0.1:5000/item',
 	  			suggest: 		'http://127.0.0.1:1234'

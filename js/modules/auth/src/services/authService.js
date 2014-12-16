@@ -1,27 +1,17 @@
 angular.module('auth').
 
-	factory('authManager', [
-	'$modal', '$state', '$resource', 'apiClient', '$http', '$compile', '$rootScope', '$q', '$window',
-	function($modal, $state, $resource, apiClient, $http, $compile, $rootScope, $q, $window) {
-		var authClient, userClient, auth_manager;
+	factory('auth', [
+	'$modal', '$state', '$http', 'apiClient', '$q', '$window', 'user',
+	function($modal, $state, $http, apiClient, $q, $window, user) {
+		var auth, in_progress;
 
-		authClient = $resource(apiClient.urls.auth, null, {
-    		signin: { 
-    			method: 'POST'
-    		}
-		});
+		in_progress = false;
 
-		userClient = $resource(apiClient.urls.user);		
-
-	  	auth_manager = {
-
-	  		in_progress: false,
-
-	  		signedin_user: false,
+	  	auth = {
 
 	  		authenticate: function(next_state, config) {
 
-	  			if ( !this.signedin_user ) {
+	  			if ( !(this.signedin_user) ) {
 				    
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
@@ -43,54 +33,61 @@ angular.module('auth').
 		  	},
 
 		  	signin: function(username, password) {
-		  		var self = this;
+		  		if ( !in_progress ) {
+		  			in_progress = true;
 
-		  		if (!this.in_progress && !this.signed_in_user) {
+		  			this.signout();
 
-		  			this.in_progress = true;
-			  		var signin_deferred = $q.defer(); 
+			  		var self = this,
+					 	signin_deferred = $q.defer(); 
 
-			  		authClient.signin({
-			    		username: username, 
-			    		password: password 
-			    	}).$promise.
-			    	then(function(response) {
-			    		if (response.token) {
-			    			$window.localStorage.setItem('bhsclient_token', response.token);
-				    		
-			    			userClient.get().$promise.then(function(user_data) {
-			    				self.signedin_user = user_data;
-			    				console.log(self);
-			    				signin_deferred.resolve();
-			    			}, function() {
-			    				signin_deferred.reject();
-			    			});
-			    		} else {
-			    			signin_deferred.reject()
-			    		}
-			    	}, function() {
-			    		signin_deferred.reject();
-			    	}).
-			    	finally(function() {
-						self.in_progress = false;
-	  				});
+					try {
+				  		$http.post(apiClient.urls.auth, {
+				    		username: username, 
+				    		password: password 
+				    	}).
+				    	success(function(response) {
+				    		if (response.token) {
+				    			$window.localStorage.setItem('bhsclient_token', response.token);
+				    			signin_deferred.resolve();
+				    		} else {
+				    			signin_deferred.reject();
+				    		}
+				    	}). 
+				    	error(function() {
+				    		signin_deferred.reject();
+				    	}).
+				    	finally(function() {
+							in_progress = false;
+		  				});
+				    }
+				    catch(e) {
+				    	signin_deferred.reject();
+				    }
 
 	  				return signin_deferred.promise;
-	  			}
-	  			
-	  			return false;
+		  		}
 		  	},
 
 		  	signout: function() {
-		  		localStorage.removeItem('bhsclient_token');
+		  		$window.localStorage.removeItem('bhsclient_token');
+		  	},
+
+		  	is_signedin: function() {
+		  		if ( $window.localStorage.getItem('bhsclient_token') ) {
+		  			return true;
+		  		}
+		  		else {
+		  			return false;
+		  		}
 		  	}
 	  	};
 
-  		return auth_manager;
+  		return auth;
 	}]);
 
 angular.module('auth').
-	factory('authInterceptor', ['$rootScope', '$q', '$window', function ($rootScope, $q, $window) {
+	factory('authInterceptor', ['$q', '$window', function ($q, $window) {
 	  	return {
 		    request: function (config) {
 		    	config.headers = config.headers || {};

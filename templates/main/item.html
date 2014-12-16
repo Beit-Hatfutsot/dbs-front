@@ -11,7 +11,7 @@
 						<he>{{itemController.item_data.Header.He}}</he>
 					</div>
 				</div>
-				<div class="add">
+				<div class="add" ng-click="itemController.push_mjs()">
 					<div class="add__icon">
 						<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
 					</div>
@@ -22,7 +22,7 @@
 				</div>
 				<div class="item__type">
 					<ng-switch on="itemController.item_type">
-						<div ng-switch-when="name">
+						<div ng-switch-when="familyNames">
 							<div class="type-icon-container">
 								<div class="surname-icon"></div>
 							</div>
@@ -31,7 +31,7 @@
 								<he>פירוש שם משפחה</he>
 							</div>
 						</div>
-						<div ng-switch-when="place">
+						<div ng-switch-when="places">
 							<div class="type-icon-container">
 								<div class="place-icon"></div>
 							</div>
@@ -40,7 +40,7 @@
 								<he>מקום</he>
 							</div>
 						</div>
-						<div ng-switch-when="photo">
+						<div ng-switch-when="photoUnits">
 							<div class="type-icon-container">
 								<div class="photo-icon"></div>
 							</div>

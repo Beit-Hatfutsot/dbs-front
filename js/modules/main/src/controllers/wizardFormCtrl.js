@@ -177,7 +177,7 @@ WizardFormCtrl.prototype = {
 
         this.$timeout(function() {
             self.suggested_open[type] = false;
-        }, 100);
+        }, 200);
     },
 };
 

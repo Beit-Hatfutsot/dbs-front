@@ -1,8 +1,8 @@
-var AuthCtrl = function($modalInstance, langManager, authManager) {
+var AuthCtrl = function($modalInstance, langManager, auth) {
     var self = this;
 
     this.$modalInstance = $modalInstance;
-    this.authManager = authManager;
+    this.auth = auth;
 
     Object.defineProperty(this, 'lang', {
     	get: function() {
@@ -25,7 +25,7 @@ AuthCtrl.prototype = {
     signin: function() {
         var self = this;
 
-    	this.authManager.signin(this.iare, this.ias).
+    	this.auth.signin(this.iare, this.ias).
             then(function() {    
                 self.message = 'Sign in succeeded';
                 self.$modalInstance.close();
@@ -39,5 +39,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$modalInstance', 'langManager', 'authManager', '$http', AuthCtrl]);
+angular.module('auth').controller('AuthCtrl', ['$modalInstance', 'langManager', 'auth', '$http', AuthCtrl]);
 

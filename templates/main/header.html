@@ -1,5 +1,19 @@
 <div id="header-container" ng-controller="HeaderCtrl as headerController">
 	<div class="dropdown-icons">
+		<div class="dropdown-icons__sign">
+			<span ng-if="!(headerController.is_signedin)" need-auth="false">
+				<en>Sign In</en>
+				<he>כניסה</he>
+			</span>
+			<span ng-if="headerController.is_signedin" ng-click="headerController.signout()">
+				<en>Sign Out</en>
+				<he>יציאה</he>
+			</span>
+		</div>
+		<div class="dropdown-icons__signup" ng-if="!(headerController.is_signedin)">
+			<en>Sign Up</en>
+			<he>הרשמה</he>
+		</div>
 		<div class="dropdown-icons__language-selector" dropdown is-open="headerController.language_menu_open">
 			<div dropdown-toggle>	
 				<div class="language-icon">
@@ -42,7 +56,7 @@
 			<div class="logo" ui-sref="start">
 				<icon alt-text="{en: 'Home', he: 'בית'}" position="[-26, -14]"></icon>
 			</div>
-			<div class="mystory">
+			<div class="mystory" ui-sref="mjs">
 				<div class="mystory__icon">
 					<icon alt-text="{en: 'My Story', he: 'הסיפור שלי'}" position="[-83, -24]"></icon>
 				</div>
@@ -60,7 +74,7 @@
 			<div class="search-area">
 				<form action="" class="search-area__form">
 					<input type="text" placeholder={{headerController.search_placeholders[lang]}} class="search-area__form__input" />
-					<div class="search-area__form__search-button" need-auth="false">
+					<div class="search-area__form__search-button">
 						<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-350, -24]"></icon>
 					</div>
 				</form>
