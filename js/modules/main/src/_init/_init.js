@@ -52,7 +52,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs.html',
-            controller: 'MjsController as mjsCtrl'
+            controller: 'MjsController as mjsCtrl',
+            onEnter: ['notification', function(notification) {
+                notification.clear();
+            }]
         },        
 
         {
