@@ -1,9 +1,12 @@
 angular.module('main').
-	factory('suggest', ['$resource', 'apiClient', function($resource, apiClient) {
-		
-		var searchClient = $resource(apiClient.urls.suggest + '/:what/:value');
+	factory('suggest', ['$http', 'apiClient', function($http, apiClient) {
 
-		var suggest = {
+		var collection_name_map = {
+			names: 'familyNames', 
+			places: 'places'
+		},
+
+		suggest = {
 
 			failed: false,
 			in_progress: false,
@@ -26,11 +29,18 @@ angular.module('main').
 			if ( !(suggest.in_progress) ) {
 				suggest.in_progress = true;
 
-				searchClient.get({what: what, value: value}).$promise.
-					then(function(response) {
-						suggest.suggested[what] = response[what];
-					},
-					function() {
+				$http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
+					success(function(response) {
+						suggest.suggested[what] = [];
+						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
+							response[group].forEach(function(suggestion) {
+								if (suggest.suggested[what].indexOf(suggestion) === -1) {
+									suggest.suggested[what].push(suggestion)		
+								}
+							});
+						});
+					}).
+					error(function() {
 						suggest.failed = true;
 						suggest.suggested[what] = [];
 					}).

@@ -23,7 +23,7 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 			self.item_string = self.item_type + '.' + item_data._id;
 			self.content_loaded = true;
 
-			item.get_related(item_data.related).
+			item.get_items(item_data.related).
 				then(function(related_data) {
 					self.related_data = related_data;
 					notification.put({

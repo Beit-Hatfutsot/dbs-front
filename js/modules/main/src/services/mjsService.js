@@ -1,12 +1,12 @@
 angular.module('main').
 	factory('mjs', ['$resource', 'apiClient', function($resource, apiClient) {
-		var mjsClient = $resource(apiClient.urls.mjs, null, {
+		var mjsResource = $resource(apiClient.urls.mjs, null, {
 			put: {method: 'PUT'}
 		}),
 
 		mjs = {
 			
-			data: mjsClient.get(),
+			data: mjsResource.get(),
 
 			add: function(item_string) {
 				if (this.data.$resolved && !this.in_mjs(item_string)) {
@@ -67,7 +67,8 @@ angular.module('main').
 					var branch = this.data.assigned.filter(function(branch) {
 						return branch.name == branch_name;
 					})[0];
-					branch.splice(index, 1);
+					var index = branch.items.indexOf(item_string);
+					branch.items.splice(index, 1);
 
 					this.data.unassigned.push(item_string);
 

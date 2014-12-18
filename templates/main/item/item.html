@@ -11,26 +11,7 @@
 						<he>{{itemController.item_data.Header.He}}</he>
 					</div>
 				</div>
-				<ng-switch on="itemController.in_mjs">
-					<div class="add" ng-click="itemController.push_to_mjs()" ng-switch-when="false">
-						<div class="add__icon">
-							<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
-						</div>
-						<div class="add__text">
-							<en>Add to My Story</en>
-							<he>הוסף לסיפור שלי</he>
-						</div>
-					</div>
-					<div class="add" ng-click="itemController.remove_from_mjs()" ng-switch-when="true">
-						<div class="add__icon">
-							<icon position="[-418, -115]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
-						</div>
-						<div class="add__text">
-							<en>Remove from My Story</en>
-							<he>הורד מהסיפור שלי</he>
-						</div>
-					</div>
-				</ng-switch>
+				<ng-include src="'templates/main/item/add.html'"></ng-include>
 				<div class="item__type">
 					<ng-switch on="itemController.item_type">
 						<div ng-switch-when="familyNames">
@@ -70,15 +51,7 @@
 					<he>{{itemController.item_data.UnitText1.He}}</he>
 				</div>
 				<div class="item__bottom-bar">
-					<div class="add">
-						<div class="add__icon">
-							<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
-						</div>
-						<div class="add__text">
-							<en>Add to My Story</en>
-							<he>הוסף לסיפור שלי</he>
-						</div>
-					</div>
+					<ng-include src="'templates/main/item/add.html'"></ng-include>
 					<div class="flag">
 						<icon position="[-372, -25]" hover-offset="[0, -33]"></icon>
 					</div>

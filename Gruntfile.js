@@ -69,6 +69,7 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, src: ['bower_components/**'], dest: public_dir},
                     {expand: true, src: ['templates/**'], dest: public_dir},
+                    {expand: true, src: ['templates/**/**'], dest: public_dir},
                     {expand: true, src: ['images/**'], dest: public_dir},
                     {expand: true, src: ['index.html'], dest: public_dir, filter: 'isFile'},
                 ]

@@ -3,7 +3,7 @@ angular.module('main').
 		
 		var in_progress = false;
 
-		var itemClient = $resource(apiClient.urls.item +'/:items');
+		var itemResource = $resource(apiClient.urls.item +'/:items');
 
 		var item_service = {
 
@@ -19,7 +19,7 @@ angular.module('main').
 					} 
 					else {
 						try {
-							itemClient.get({items: item_string}).$promise.
+							itemResource.get({items: item_string}).$promise.
 								then(function(item_data) {
 									cache.put(item_data);
 									deferred.resolve(item_data);
@@ -40,7 +40,7 @@ angular.module('main').
 				}
 			},
 
-			get_related: function(items_arr) {
+			get_items: function(items_arr) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
@@ -65,7 +65,7 @@ angular.module('main').
 					else {
 						try {
 							var not_cached_items_string = parse_items_arr(not_cached_items);
-							itemClient.query({items: not_cached_items_string}).$promise.
+							itemResource.query({items: not_cached_items_string}).$promise.
 								then(function(item_data_arr) {
 									item_data_arr.forEach(function(item_data) {
 										cache.put(item_data);

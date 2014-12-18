@@ -1,13 +1,19 @@
 <div id="mjs-container">
 	<div id="unassigned">
-		<div ng-repeat="item_string in mjsCtrl.mjs_data.unassigned" ng-click="mjsCtrl.assign_item('default', item_string)">{{item_string}}</div>
+		<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" ng-click="mjsCtrl.assign_item('default', item)">
+			<en>{{item.Header.En}}</en>
+			<he>{{item.Header.He}}</he>
+		</div>
 	</div>
 	<div id="molecules">
 		<div class="silhouette"></div>
 		<div class="branch branch--first" ng-class="{'branch--first--selected': mjsCtrl.selected_branch === 0}">
 			<div class="branch__head" ng-click="mjsCtrl.select_branch(0)">{{mjsCtrl.mjs_data.assigned[0].name}}</div>
 			<div class="branch__content" ng-show="mjsCtrl.selected_branch === 0">
-				<div ng-repeat="item_string in mjsCtrl.mjs_data.assigned[0].items">{{item_string}}</div>
+				<div ng-repeat="item in mjsCtrl.mjs_items.assigned[0].items" ng-click="mjsCtrl.unassign_item('default', item)">
+					<en>{{item.Header.En}}</en>
+					<he>{{item.Header.He}}</he>
+				</div>
 			</div>
 		</div>
 		<div class="branch branch--second" ng-class="{'branch--second--selected': mjsCtrl.selected_branch === 1}">
