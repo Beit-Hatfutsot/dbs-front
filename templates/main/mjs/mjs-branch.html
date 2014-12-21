@@ -1,0 +1,9 @@
+<div class="branch branch--{{branch_index}}" ng-class="{selected: branchesCtrl.selected_branch === branch_index}">
+	<div class="branch__head" ng-click="branchesCtrl.select_branch(branch_index)">
+		<input ng-model="branch.name" ng-change="branchesCtrl.save_story()">
+	</div>
+	<div class="branch__content" ng-show="branchesCtrl.selected_branch === branch_index">
+		<mjs-assigned class="assigned assigned--first" collection="branch.items.familyNames"></mjs-assigned>
+		<mjs-assigned class="assigned assigned--second" collection="branch.items.places"></mjs-assigned>
+	</div>
+</div>

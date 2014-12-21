@@ -4,14 +4,52 @@
 	margin: 0 auto;
 	padding-top: 200px;
 
+	@at-root #unassigned, 
+	#molecules {
+
+		.item-thumbnail {
+			width: 60px;
+			height: 60px;
+			margin: 6px auto;
+			@include border-radius(4px); 
+
+			&--text {
+				padding: 16px 8px;
+				font-size: 9px;
+				background: #ffffff;
+				@include box-shadow(0 0 3px 1px #eaeaea);
+			}
+
+			&--pic {
+				position: relative;
+				overflow: hidden;
+
+				img {
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					@include translate(-50%, -50%);
+				}
+			}
+		}
+	}
+
 	@at-root #unassigned {
 		position: absolute;
 		top: 30px;
-		width: 100px;
+		width: 84px;
 		height: 430px;
+		padding: 4px;
+		background: #f4f4f4;
+		border: 2px solid #c4c4c4;
 
-		.item {
-			
+		.title {
+			width: 72px;
+			height: 40px;
+			margin: 0 auto;
+			background: #e7e7e7; 
+			font-size: 9px;
+			padding: 7px 9px;
 		}
 	}
 
@@ -37,39 +75,39 @@
 			height: 100px;
 			@include transition(all, 0.5s, linear);
 
-			&--first {
-				left: 0;
-				top: 0;
-
-				&--selected {
-					@include translate(-100px, -75px);
-				}
-			}
-
-			&--second {
-				right: 0;
-				top: 0;
-			
-				&--selected {
-					@include translate(100px, -75px);
-				}
-			}
-
-			&--third {
+			&--0 {
 				bottom: 0;
 				right: 0;
 
-				&--selected {
+				&.selected {
 					@include translate(100px, 75px);
 				}
 			}
 
-			&--fourth {
+			&--1 {
 				bottom: 0;
 				left: 0;
 
-				&--selected {
+				&.selected {
 					@include translate(-100px, 75px);
+				}
+			}
+
+			&--2 {
+				left: 0;
+				top: 0;
+
+				&.selected {
+					@include translate(-100px, -75px);
+				}
+			}
+
+			&--3 {
+				right: 0;
+				top: 0;
+			
+				&.selected {
+					@include translate(100px, -75px);
 				}
 			}
 
@@ -90,8 +128,7 @@
 				@include translate(-50%, -50%);
 				width: 330px;
 				height: 280px;
-				background: rgb(178, 237, 246);
-				opacity: 0.3; 
+				opacity: 1; 
 				@include transition(all, 0.6s, linear, 0.6s);
 
 				&.ng-hide {
@@ -100,6 +137,21 @@
 
 				&.ng-hide-add {
 					@include transition(all, 0.4s, linear);
+				}
+
+				.assigned {
+					display: inline-block;
+					position: absolute;
+
+					&--first {
+						left: 20px;
+						top: 180px;
+					}
+
+					&--second {
+						left: 0;
+						top: 80px;
+					}
 				}
 			}
 		}

@@ -13,7 +13,7 @@ angular.module('main').
 						deferred	= $q.defer(),
 						item_id		= item_string.split('.')[1],
 						cached		= cache.get(item_id); 
-
+					
 					if (cached.isNotEmpty()) {
 						deferred.resolve(cached);
 					} 
@@ -64,20 +64,30 @@ angular.module('main').
 					} 
 					else {
 						try {
-							var not_cached_items_string = parse_items_arr(not_cached_items);
-							itemResource.query({items: not_cached_items_string}).$promise.
-								then(function(item_data_arr) {
-									item_data_arr.forEach(function(item_data) {
-										cache.put(item_data);
-									});
-									deferred.resolve( item_data_arr.concat(cached_items) );
-								},
-								function() {
-									deferred.reject();
-								}).
-								finally(function() {
-									in_progress = false;
+							// handle case when only one item is not cached.
+							// the reason for this is that angular's $resource service needs to know whether the response is an array or an object.
+							if (not_cached_items.length === 1) {
+								self.get(not_cached_items[0]).then(function(item_data) {
+									cache.put(item_data);
+									deferred.resolve( cached_items.push(item_data) );
 								});
+							}
+							else {
+								var not_cached_items_string = parse_items_arr(not_cached_items);
+								itemResource.query({items: not_cached_items_string}).$promise.
+									then(function(item_data_arr) {
+										item_data_arr.forEach(function(item_data) {
+											cache.put(item_data);
+										});
+										deferred.resolve( item_data_arr.concat(cached_items) );
+									},
+									function() {
+										deferred.reject();
+									}).
+									finally(function() {
+										in_progress = false;
+									});
+							}
 						}
 						catch(e) {
 							deferred.reject();

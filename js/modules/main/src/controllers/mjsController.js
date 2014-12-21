@@ -6,11 +6,15 @@ var MjsController = function(mjs, notification, item, itemTypeMap) {
 	this.itemTypeMap = itemTypeMap;
 	this.item = item;
 
-	this.selected_branch = null;
+	this.content_loaded = false;
 	this.mjs_items = {
 		assigned: [],
 		unassigned: []
 	};
+	this.new_branch = {
+		name: '+',
+		items: []
+	}
 
 	Object.defineProperty(this, 'mjs_data', {
 		get: function() {
@@ -25,14 +29,6 @@ var MjsController = function(mjs, notification, item, itemTypeMap) {
 };
 
 MjsController.prototype = {
-	select_branch: function(branch_index) {
-		if (this.selected_branch == branch_index) {
-			this.selected_branch = null;
-		}
-		else{
-			this.selected_branch = branch_index;
-		}
-	},
 
 	select_mjs_item: function($event) {
 	
@@ -103,7 +99,7 @@ MjsController.prototype = {
 							then(function(item_data) {
 								var b = {
 									name: branch.name,
-									items: [item_data]
+									items: self.sort_items([item_data])
 								};
 								self.mjs_items.assigned.push(b);
 							});
@@ -113,15 +109,75 @@ MjsController.prototype = {
 							then(function(item_data) {
 								var b = {
 									name: branch.name,
-									items: []
+									items: self.sort_items(item_data)
 								};
-								b.items = b.items.concat(item_data);
+								//b.items = b.items.concat(item_data);
 								self.mjs_items.assigned.push(b);
 							});
 					}
 				});	
 			}
+
+			this.content_loaded = true;
 		}
+	},
+
+	sort_items: function(item_arr) {
+		var self = this,
+			item_map = {};
+		
+		item_arr.forEach(function(item) {
+			var type = self.itemTypeMap.get_type(item.UnitType);
+			if (item_map[type]) {
+				item_map[type].push(item);	
+			}
+			else {
+				item_map[type] = [item];
+			}
+		});
+
+		return item_map;
+	},
+
+	insertNewBranch: function() {
+		if (this.mjs_items.assigned.length < 4) {
+
+			var self = this;
+
+			this.mjs_data.insertBranch(this.new_branch).
+				then(function() {
+					self.parse_mjs_data();
+			});
+		}
+	},
+
+	save_story: function() {
+		var self = this,
+			new_unassigned = [], 
+			new_assigned = []; 
+
+		this.mjs_items.unassigned.forEach(function(item) {
+			new_unassigned.push(self.itemTypeMap.get_type(item.UnitType) + '.' + item._id);
+		});
+
+		this.mjs_items.assigned.forEach(function(branch) {
+			var items = [];
+			for (var collection in branch.items) {
+				if (branch.items[collection] instanceof Array) {
+					branch.items[collection].forEach(function(item) {
+						items.push(self.itemTypeMap.get_type(item.UnitType) + '.' + item._id);
+					});
+				}
+			}
+			new_assigned.push({
+				name: branch.name,
+				items: items
+			});
+		});
+
+		this.mjs_data.unassigned = new_unassigned;
+		this.mjs_data.assigned = new_assigned;
+		this.mjs_data.$put();
 	}
 };
 

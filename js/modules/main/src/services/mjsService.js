@@ -97,6 +97,13 @@ angular.module('main').
 				}
 				
 				return false;
+			},
+
+			insertBranch: function(branch) {
+				if (this.data['assigned'].length < 4) {
+					this.data['assigned'].push(branch);
+					return this.data.$put();
+				}
 			}
 		};
 

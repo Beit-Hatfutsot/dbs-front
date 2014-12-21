@@ -52,6 +52,9 @@ angular.module('main').
 
 		                if ( result.name.isNotEmpty() || result.place.isNotEmpty() )  {
 		                    
+		                	if (result.name.isNotEmpty()) { cache.put(result.name) }
+	                		if (result.place.isNotEmpty()) { cache.put(result.place) }
+
 		                    if ( result.name.isNotEmpty() && result.place.isEmpty() ) {
 		                        self.search_status = 'bingo-name';
 		                        notification.put({
