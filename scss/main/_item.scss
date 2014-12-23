@@ -243,46 +243,40 @@
 		}
 
 		.related {
-			width: 233px;
+			width: 200px;
 			height: 100%;
 
-			.item-preview-container {
+			.item-preview {
 				@extend %item-preview;
 				width: inherit;
-				//height: 320px;
 				margin: 0 0 18px;
+				@include hover-pointer(); 
 
-				.item-preview {
-					width: 200px;
-					//height: inherit;
-					@include hover-pointer(); 
+				.type {
+					font-size: 11px;
 
-					.type {
-						font-size: 11px;
-
-						.type-icon-container {
-							padding-top: 3px;
-						}
+					.type-icon-container {
+						padding-top: 3px;
 					}
+				}
 
-					.header {
-						margin: 36px 0 12px;
+				.header {
+					margin: 36px 0 12px;
+				}
+
+				.text {
+					height: 50px;
+					line-height: 16px;
+					margin: 0 0 15px;
+
+					&--nothumb {
+						height: 100px;
 					}
+				}
 
-					.text {
-						height: 50px;
-						line-height: 16px;
-						margin: 0 0 15px;
-
-						&--nothumb {
-							height: 100px;
-						}
-					}
-
-					.thumbnail {
-						width: 180px;
-						height: 180px;
-					}
+				.thumbnail {
+					width: 180px;
+					height: 180px;
 				}
 			}
 		}

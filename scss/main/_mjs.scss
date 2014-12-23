@@ -1,157 +1,272 @@
 #mjs-container {
-	width: $view-width;
-	height: 100%;
-	margin: 0 auto;
-	padding-top: 200px;
+	width: 100%;
+	//height: 100%;
 
-	@at-root #unassigned, 
-	#molecules {
+	@at-root #mjs {
+		width: $view-width;
+		margin: 0 auto;
+		padding-top: 100px;
 
-		.item-thumbnail {
-			width: 60px;
-			height: 60px;
-			margin: 6px auto;
-			@include border-radius(4px); 
+		@at-root #unassigned, 
+		#molecules {
 
-			&--text {
-				padding: 16px 8px;
+			.item-thumbnail {
+				width: 60px;
+				height: 60px;
+				margin: 6px auto;
+				@include border-radius(4px); 
+
+				&--text {
+					padding: 16px 8px;
+					font-size: 9px;
+					background: #ffffff;
+					@include box-shadow(0 0 3px 1px #eaeaea);
+				}
+
+				&--pic {
+					position: relative;
+					overflow: hidden;
+
+					img {
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						@include translate(-50%, -50%);
+					}
+				}
+			}
+		}
+
+		@at-root #unassigned {
+			position: absolute;
+			top: 30px;
+			width: 84px;
+			height: 430px;
+			padding: 4px;
+			background: #f4f4f4;
+			border: 2px solid #c4c4c4;
+
+			.title {
+				width: 72px;
+				height: 40px;
+				margin: 0 auto;
+				background: #e7e7e7; 
 				font-size: 9px;
-				background: #ffffff;
-				@include box-shadow(0 0 3px 1px #eaeaea);
+				padding: 7px 9px;
 			}
 
-			&--pic {
-				position: relative;
-				overflow: hidden;
+			.item-thumbnail {
+				@include hover-pointer();
+			}
+		}
 
-				img {
+		@at-root #molecules {
+			position: relative;
+			width: 290px;
+			height: 290px;
+			margin: 0 auto;
+
+			.silhouette {
+				position: relative;
+				width: 100px;
+				height: 100px;
+				top: 85px;
+				margin: 0 auto;
+				background: #ffffff;
+				@include border-radius(50%);
+			}
+
+			.branch {
+				position: absolute; 
+				width: 100px;
+				height: 100px;
+				@include transition(all, 0.5s, linear);
+
+				&--0 {
+					bottom: 0;
+					right: 0;
+
+					&.selected {
+						@include translate(100px, 75px);
+					}
+				}
+
+				&--1 {
+					bottom: 0;
+					left: 0;
+
+					&.selected {
+						@include translate(-100px, 75px);
+					}
+				}
+
+				&--2 {
+					left: 0;
+					top: 0;
+
+					&.selected {
+						@include translate(-100px, -75px);
+					}
+				}
+
+				&--3 {
+					right: 0;
+					top: 0;
+				
+					&.selected {
+						@include translate(100px, -75px);
+					}
+				}
+
+				&--new {
+
+					input {
+						font-size: 40px;
+
+						&.edit {
+							font-size: 12px;
+						}
+					}
+				}
+
+				&__head {
+					position: relative;
+					z-index: 1;
+					width: 100%;
+					height: 100%;
+					background: #ffffff;
+					border: 14px solid rgba(178, 237, 246, 0.6);
+					@include border-radius(50%);
+					@include hover-pointer();
+
+					&:hover {
+
+						.branch__head__remove,
+						.branch__head__edit {
+							opacity: 1;
+						}
+					}
+
+					&__name {
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						width: 50px;
+						border: none;
+						text-align: center;
+						pointer: default;
+						@include translate(-50%, -50%);
+					}
+
+					&__remove,
+					&__edit {
+						opacity: 0;
+						position: absolute;
+						overflow: hidden;
+						width: 26px;
+						height: 26px;
+						border: 1px solid #c7ecf2;
+						@include border-radius(50%);
+						@include transition(opacity, 0.5s, linear);
+					}
+
+					&__remove {
+						left: -10px;
+						bottom: -15px;
+						background: white;
+					}
+
+					&__edit {
+						left: -25px;
+						bottom: 10px;
+						background: white;
+					}
+				}
+
+				&__content {
 					position: absolute;
 					left: 50%;
 					top: 50%;
 					@include translate(-50%, -50%);
+					width: 330px;
+					height: 280px;
+					opacity: 1; 
+					@include transition(all, 0.6s, linear, 0.6s);
+
+					&.ng-hide {
+						opacity: 0;
+					}
+
+					&.ng-hide-add {
+						@include transition(all, 0.4s, linear);
+					}
+
+					.assigned {
+						display: inline-block;
+						position: absolute;
+						@include hover-pointer();
+
+						&--first {
+							left: 20px;
+							top: 180px;
+						}
+
+						&--second {
+							left: 0;
+							top: 80px;
+						}
+
+						&__grouped {
+							width: 60px;
+							height: 60px;
+							background: #ffffff;
+							@include border-radius(4px);
+						}
+					}
 				}
 			}
 		}
 	}
 
-	@at-root #unassigned {
-		position: absolute;
-		top: 30px;
-		width: 84px;
-		height: 430px;
-		padding: 4px;
-		background: #f4f4f4;
-		border: 2px solid #c4c4c4;
+	@at-root #item-bar-container {
+		width: 100%;
+		height: 260px;
+		margin-top: 175px;
+		background: #f5f5f5;
+		//@include box-shadow(0 -1px 1px 1px #eeeeee)
 
-		.title {
-			width: 72px;
-			height: 40px;
+		@at-root #item-bar {
+			width: $view-width;
+			height: 100%;
 			margin: 0 auto;
-			background: #e7e7e7; 
-			font-size: 9px;
-			padding: 7px 9px;
-		}
-	}
+			padding: 16px 0;
 
-	@at-root #molecules {
-		position: relative;
-		width: 290px;
-		height: 290px;
-		margin: 0 auto;
+			.item-preview {
+				@extend %item-preview;
+				display: inline-block;
+				width: 139px;
+				height: 223px;
 
-		.silhouette {
-			position: relative;
-			width: 100px;
-			height: 100px;
-			top: 85px;
-			margin: 0 auto;
-			background: #ffffff;
-			@include border-radius(50%);
-		}
-
-		.branch {
-			position: absolute; 
-			width: 100px;
-			height: 100px;
-			@include transition(all, 0.5s, linear);
-
-			&--0 {
-				bottom: 0;
-				right: 0;
-
-				&.selected {
-					@include translate(100px, 75px);
-				}
-			}
-
-			&--1 {
-				bottom: 0;
-				left: 0;
-
-				&.selected {
-					@include translate(-100px, 75px);
-				}
-			}
-
-			&--2 {
-				left: 0;
-				top: 0;
-
-				&.selected {
-					@include translate(-100px, -75px);
-				}
-			}
-
-			&--3 {
-				right: 0;
-				top: 0;
-			
-				&.selected {
-					@include translate(100px, -75px);
-				}
-			}
-
-			&__head {
-				position: relative;
-				z-index: 1;
-				width: 100%;
-				height: 100%;
-				background: #ffffff;
-				border: 14px solid rgba(178, 237, 246, 0.6);
-				@include border-radius(50%);
-			}
-
-			&__content {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				@include translate(-50%, -50%);
-				width: 330px;
-				height: 280px;
-				opacity: 1; 
-				@include transition(all, 0.6s, linear, 0.6s);
-
-				&.ng-hide {
-					opacity: 0;
+				.en & {
+					margin-right: 10px;
 				}
 
-				&.ng-hide-add {
-					@include transition(all, 0.4s, linear);
+				.he & {
+					margin-left: 10px;
 				}
 
-				.assigned {
-					display: inline-block;
-					position: absolute;
+				.type {
+					font-size: 12px;
+					margin-bottom: 15px;
+				}
 
-					&--first {
-						left: 20px;
-						top: 180px;
-					}
+				.text {
+					height: 118px;
+				}
 
-					&--second {
-						left: 0;
-						top: 80px;
-					}
+				.thumbnail {
+					margin-top: 6px;
+					height: 114px;
 				}
 			}
 		}

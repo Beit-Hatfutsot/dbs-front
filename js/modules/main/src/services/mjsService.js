@@ -99,11 +99,24 @@ angular.module('main').
 				return false;
 			},
 
-			insertBranch: function(branch) {
+			add_branch: function(branch_name) {
 				if (this.data['assigned'].length < 4) {
-					this.data['assigned'].push(branch);
+					this.data['assigned'].push({
+						name: branch_name,
+						items: []
+					});
 					return this.data.$put();
 				}
+			},
+
+			remove_branch: function(branch_name) {
+				var branch = this.data['assigned'].filter(function(branch) {
+					return branch.name === branch_name;
+				})[0];
+				var index = this.data['assigned'].indexOf(branch);
+				this.data['assigned'].splice(index, 1)
+
+				return this.data.$put();
 			}
 		};
 

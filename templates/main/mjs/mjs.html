@@ -1,15 +1,22 @@
-<div id="mjs-container" ng-show="mjsCtrl.content_loaded">
-	<div id="unassigned">
-		<div class="title">Unsorted Items</div>
-		<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" ng-click="mjsCtrl.assign_item('default', item)">
-			<mjs-item item="item"></mjs-item>
+<div id="mjs-container">
+	<div id="mjs" ng-show="mjsCtrl.content_loaded">
+		<div id="unassigned">
+			<div class="title">Unsorted Items</div>
+			<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" draggable ondragstart="mjsCtrl.ondragstart" ondragend="mjsCtrl.ondragend" data="item">
+				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item"></mjs-item>
+			</div>
+		</div>
+		<div id="molecules">
+			<div class="silhouette"></div>
+			<mjs-branches>
+				<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned" branch="branch" branch-index="$index"></mjs-branch>
+				<mjs-branch class="branch--new" branch="mjsCtrl.new_branch" branch-index="mjsCtrl.mjs_items.assigned.length" ng-if="mjsCtrl.mjs_items.assigned.length < 4" imutable="true"></mjs-branch>
+			</mjs-branches>
 		</div>
 	</div>
-	<div id="molecules">
-		<div class="silhouette"></div>
-		<mjs-branches>
-			<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned" branch="branch" branch-index="{{$index}}"></mjs-branch>
-			<mjs-branch class="branch branch--{{mjsCtrl.mjs_items.assigned.length}}" branch="mjsCtrl.new_branch" ng-click="mjsCtrl.insertNewBranch()"></mjs-branch>
-		</mjs-branches>
+	<div id="item-bar-container">
+		<div id="item-bar">
+			<item-preview ng-repeat="item_data in mjsCtrl.selected_collection" preview-data="item_data" arrow="right" hide-text="true"></item-preview>
+		</div>
 	</div>
 </div>

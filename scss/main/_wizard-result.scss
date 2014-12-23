@@ -20,65 +20,56 @@
 				display: inline-block;
 			}
 
-			.item-preview-container, .no-result {
+			.item-preview, .no-result {
 				@extend %item-preview;
 				display: inline-block;
 
-				.item-preview {
-
-					.type {
-						
-						.type-icon-container {
-							padding-top: 6px;
-						}
+				.type {
+					
+					.type-icon-container {
+						padding-top: 6px;
 					}
+				}
 
-					.header {
-						margin: 33px 0 26px;
-					}
+				.header {
+					margin: 33px 0 26px;
+				}
 
-					.text {
-						line-height: 16px;
-					}
+				.text {
+					line-height: 16px;
 				}
 			}
 
-			.item-preview-container {
+			.item-preview {
+				@include hover-pointer();
 
-				.item-preview {
-					@include hover-pointer();
+				.header {
 
-					.header {
-
-						.en & {
-							padding: 0 0 0 10px;
-						}
-
-						.he & {
-							padding: 0 10px 0 0;
-						}
+					.en & {
+						padding: 0 0 0 10px;
 					}
 
-					.text {
-						height: 46px;
-						margin: 0 0 28px;
+					.he & {
+						padding: 0 10px 0 0;
 					}
+				}
 
-					.thumbnail {
-						width: 260px;
-						height: 170px;
-					}
+				.text {
+					height: 46px;
+					margin: 0 0 28px;
+				}
+
+				.thumbnail {
+					width: 260px;
+					height: 170px;
 				}
 			}
 
 			.no-result {
 
-				.item-preview {
-
-					.header, .text {
-						color: grey;
-						font-weight: normal;
-					}
+				.header, .text {
+					color: grey;
+					font-weight: normal;
 				}
 			}
 		}

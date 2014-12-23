@@ -1,8 +1,14 @@
-<div class="branch branch--{{branch_index}}" ng-class="{selected: branchesCtrl.selected_branch === branch_index}">
-	<div class="branch__head" ng-click="branchesCtrl.select_branch(branch_index)">
-		<input ng-model="branch.name" ng-change="branchesCtrl.save_story()">
+<div class="branch branch--{{branchIndex}}" ng-class="{selected: branchesCtrl.selected_branch === branchIndex && !imutable}">
+	<div class="branch__head" ng-click="branchesCtrl.select_branch(branchIndex)" droppable branch-name="branch.name" ondrop="branchesCtrl.assign_item">
+		<input class="branch__head__name" ng-model="branch.name" ng-click="branchesCtrl.stopPropagation($event)" alter-mjs-branch>
+		<div class="branch__head__edit" ng-if="!imutable">
+			<icon position="[-226, -123]"></icon>
+		</div>
+		<div class="branch__head__remove" ng-if="!imutable" ng-click="branchesCtrl.remove($event, branch.name)">
+			<icon position="[-226, -102]"></icon>
+		</div>
 	</div>
-	<div class="branch__content" ng-show="branchesCtrl.selected_branch === branch_index">
+	<div class="branch__content" ng-show="branchesCtrl.selected_branch === branchIndex">
 		<mjs-assigned class="assigned assigned--first" collection="branch.items.familyNames"></mjs-assigned>
 		<mjs-assigned class="assigned assigned--second" collection="branch.items.places"></mjs-assigned>
 	</div>

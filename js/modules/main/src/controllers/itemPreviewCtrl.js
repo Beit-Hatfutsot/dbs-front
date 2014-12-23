@@ -2,7 +2,7 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap) {
     this.$state = $state;
     this.$scope = $scope;
 
-    $scope.item_type = itemTypeMap.get_type($scope.preview_data.UnitType);
+    $scope.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
 };
 
 ItemPreviewCtrl.prototype = {

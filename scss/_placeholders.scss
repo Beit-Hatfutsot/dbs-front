@@ -52,59 +52,43 @@
 }
 
 %item-preview {
-
-	.item-preview {
-		display: inline-block;
-		vertical-align: middle;
-		height: 100%;
-		background: #ffffff;
-		overflow: hidden;
-		padding: 0 10px 10px;
-		@include item-bottom-border();
-		@include border-radius(8px 8px 0 0);
-		@include item-shadow();
-			
-		.type {
-			@extend %item-type;
-		}
-
-		.header {
-			font-size: 12px;
-			font-weight: bold;
-			clear: both;
-		}
-
-		.text {
-			color: #474747;
-			overflow: hidden;
-			font-size: 11px;
-		}	
-
-		.thumbnail {
-			position: relative;
-			margin: 0 auto;
-			overflow: hidden;
-
-			img {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				@include translate(-50%, -50%);
-			}
-		}
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	background: #ffffff;
+	overflow: hidden;
+	padding: 0 10px 10px;
+	@include item-bottom-border();
+	@include border-radius(8px 8px 0 0);
+	@include item-shadow();
+	@include hover-pointer();
+		
+	.type {
+		@extend %item-type;
 	}
 
-	.item-arrow-container {
-		display: inline-block;
-		vertical-align: middle;
-		height: 100%;
-		width: 28px;
-		padding: 0 3px;
+	.header {
+		font-size: 12px;
+		font-weight: bold;
+		clear: both;
+	}
 
-		.item-arrow {
-			width: 22px;
-			height: 22px;
-			@include hover-pointer();
+	.text {
+		color: #474747;
+		overflow: hidden;
+		font-size: 11px;
+	}	
+
+	.thumbnail {
+		position: relative;
+		margin: 0 auto;
+		overflow: hidden;
+
+		img {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			@include translate(-50%, -50%);
 		}
 	}
 }

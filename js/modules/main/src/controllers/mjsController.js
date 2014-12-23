@@ -15,6 +15,7 @@ var MjsController = function(mjs, notification, item, itemTypeMap) {
 		name: '+',
 		items: []
 	}
+	this.selected_collection = [];
 
 	Object.defineProperty(this, 'mjs_data', {
 		get: function() {
@@ -29,10 +30,6 @@ var MjsController = function(mjs, notification, item, itemTypeMap) {
 };
 
 MjsController.prototype = {
-
-	select_mjs_item: function($event) {
-	
-	},
 
 	assign_item: function(branch_name, item) {
 		var self = this,
@@ -111,9 +108,15 @@ MjsController.prototype = {
 									name: branch.name,
 									items: self.sort_items(item_data)
 								};
-								//b.items = b.items.concat(item_data);
 								self.mjs_items.assigned.push(b);
 							});
+					}
+					else {
+						var b = {
+							name: branch.name,
+							items: []
+						};
+						self.mjs_items.assigned.push(b); 
 					}
 				});	
 			}
@@ -139,16 +142,28 @@ MjsController.prototype = {
 		return item_map;
 	},
 
-	insertNewBranch: function() {
-		if (this.mjs_items.assigned.length < 4) {
-
+	insert_new_branch: function() {
+		if (this.mjs_items.assigned.length < 4) {			
 			var self = this;
 
-			this.mjs_data.insertBranch(this.new_branch).
+			this.mjs.add_branch(this.new_branch.name).
 				then(function() {
+					self.new_branch = {
+						name: '+',
+					}
 					self.parse_mjs_data();
 			});
 		}
+	},
+
+	remove_branch: function($event, branch_name) {
+		var self = this;
+		$event.stopPropagation();
+		this.mjs.remove_branch(branch_name).
+			then(function() {
+				self.parse_mjs_data();
+			});
+
 	},
 
 	save_story: function() {
@@ -178,6 +193,18 @@ MjsController.prototype = {
 		this.mjs_data.unassigned = new_unassigned;
 		this.mjs_data.assigned = new_assigned;
 		this.mjs_data.$put();
+	},
+
+	select_collection: function(collection) {
+		this.selected_collection = collection;
+	},
+
+	ondragstart: function() {
+		console.log('start')
+	},
+
+	ondragend: function() {
+		console.log('end')
 	}
 };
 

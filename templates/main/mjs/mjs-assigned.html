@@ -1,8 +1,8 @@
-<ng-switch on="grouped">
+<ng-switch on="grouped" ng-click="branchesCtrl.select_collection(collection)">
 	<div ng-switch-when="false">
 		<mjs-item item="collection[0]"></mjs-item>
 	</div>
-	<div ng-switch-when="true">
-		ARRAY
+	<div class="assigned__grouped" ng-switch-when="true">
+		{{collection.length}}
 	</div>
 </ng-switch>
