@@ -1,56 +1,56 @@
-<div id="header-container">
-	<div class="dropdown-icons">
-		<div class="dropdown-icons__sign">
-			<span ng-if="!(headerController.is_signedin)" need-auth="false">
-				<en>Sign In</en>
-				<he>כניסה</he>
-			</span>
-			<span ng-if="headerController.is_signedin" ng-click="headerController.signout()">
-				<en>Sign Out</en>
-				<he>יציאה</he>
-			</span>
+<div class="dropdown-icons">
+	<div class="dropdown-icons__sign">
+		<span ng-if="!(headerController.is_signedin)" need-auth="false">
+			<en>Sign In</en>
+			<he>כניסה</he>
+		</span>
+		<span ng-if="headerController.is_signedin" ng-click="headerController.signout()">
+			<en>Sign Out</en>
+			<he>יציאה</he>
+		</span>
+	</div>
+	<div class="dropdown-icons__signup" ng-if="!(headerController.is_signedin)">
+		<en>Sign Up</en>
+		<he>הרשמה</he>
+	</div>
+	<div class="dropdown-icons__language-selector" dropdown is-open="headerController.language_menu_open">
+		<div dropdown-toggle>	
+			<div class="language-icon">
+				<en>
+					<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -24]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
+				</en>
+				<he>
+					<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -86]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
+				</he>
+			</div>
 		</div>
-		<div class="dropdown-icons__signup" ng-if="!(headerController.is_signedin)">
-			<en>Sign Up</en>
-			<he>הרשמה</he>
-		</div>
-		<div class="dropdown-icons__language-selector" dropdown is-open="headerController.language_menu_open">
-			<div dropdown-toggle>	
+		<div class="language-menu">
+			<div class="language-menu__title">
+				<en>Choose a language</en>
+				<he>בחרו שפה</he>
+			</div>
+			<div class="language-menu__row" ng-click="lang='he'">
 				<div class="language-icon">
-					<en>
-						<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -24]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
-					</en>
-					<he>
-						<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -86]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
-					</he>
+					<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
+				</div>
+				<div class="language-menu__row__language-desc">
+					<en>Hebrew</en>
+					<he>עברית</he>
 				</div>
 			</div>
-			<div class="language-menu">
-				<div class="language-menu__title">
-					<en>Choose a language</en>
-					<he>בחרו שפה</he>
+			<div class="language-menu__row" ng-click="lang='en'">
+				<div class="language-icon">
+					<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
 				</div>
-				<div class="language-menu__row" ng-click="lang='he'">
-					<div class="language-icon">
-						<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
-					</div>
-					<div class="language-menu__row__language-desc">
-						<en>Hebrew</en>
-						<he>עברית</he>
-					</div>
-				</div>
-				<div class="language-menu__row" ng-click="lang='en'">
-					<div class="language-icon">
-						<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
-					</div>
-					<div class="language-menu__row__language-desc">
-						<en>English</en>
-						<he>אנגלית</he>
-					</div>
+				<div class="language-menu__row__language-desc">
+					<en>English</en>
+					<he>אנגלית</he>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div id="header-container" ng-controller="HeaderCtrl as headerController">
 	<div id="top-header-container">
 		<div id="top-header">
 			<div class="logo" ui-sref="start">
@@ -86,5 +86,4 @@
 			{{headerController.notification_message}}
 		</div>
 	</div>
-	
 </div>

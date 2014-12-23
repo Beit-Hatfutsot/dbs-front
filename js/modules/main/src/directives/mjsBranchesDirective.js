@@ -38,6 +38,10 @@ angular.module('main').directive('mjsBranches', function() {
 				$scope.mjsCtrl.assign_item.apply($scope.mjsCtrl, [branch_name, item]);
 			};
 
+			this.insert_new_branch = function() {
+				$scope.mjsCtrl.insert_new_branch();
+			}
+
 			this.remove = function($event, branch_name) {
 				$scope.mjsCtrl.remove_branch($event, branch_name);
 			};

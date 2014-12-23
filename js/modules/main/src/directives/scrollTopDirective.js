@@ -11,11 +11,12 @@ angular.module('main').
 				});
 			}],
 			link: function(scope, element) {
+				var container = document.querySelector('#app-container');
 				scope.$watch('search_status', function(newVal, oldVal) {
 					if (newVal != 'none' && newVal != '') {
 						setTimeout(function() {
 							element.removeAttr('style');
-							element[0].scrollTop = 322;
+							container.scrollTop = 322;
 						}, 1000);
 						element.css('-webkit-transition', 'all 1s linear');
 						element.css('-moz-transition', 'all 1s linear');
@@ -24,7 +25,7 @@ angular.module('main').
 						element.css('transition', 'all 1s linear');
 						element.css('overflow', 'hidden');
 						element.css('height', '200%');
-						element.css('margin-top', '-322px');
+						element.css('margin-top', '-366px');
 					}
 				});
 			}

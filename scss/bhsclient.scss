@@ -3,6 +3,7 @@
 @import "placeholders";
 @import "main/icon";
 @import "main/header";
+@import "main/sub-header";
 @import "main/footer";
 @import "main/wizard-form";
 @import "main/start";
@@ -29,10 +30,9 @@ html {
 
 		@at-root #app-container {
 			position: relative;
-			width: auto;
 			height: 100%;
 			overflow-x: hidden;
-			overflow-y: hidden;
+			overflow-y: auto;
 			background: #eeeeee;
 
 			&.en {
@@ -57,6 +57,7 @@ html {
 			@at-root #below-header {
 				padding-top: $header-height + $notification-bar-height;
 				padding-bottom: $footer-height;
+				min-height: 100%;
 
 				@at-root #view {
 					position: relative;
