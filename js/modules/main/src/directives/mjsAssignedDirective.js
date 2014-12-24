@@ -4,7 +4,8 @@ angular.module('main').directive('mjsAssigned', function() {
 		require: '^mjsBranches',
 		templateUrl: 'templates/main/mjs/mjs-assigned.html',
 		scope: {
-			collection: '='
+			collection: '=',
+			iconPosition: '='
 		},
 		link: function(scope, element, attrs, ctrl) {
 			scope.branchesCtrl = ctrl;

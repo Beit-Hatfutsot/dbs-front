@@ -1,5 +1,5 @@
 angular.module('main').
-	directive('draggable', function() {
+	directive('draggable', ['$rootScope', function($rootScope) {
 		return  {
 			restrict: 'A',
 			scope: {
@@ -15,35 +15,24 @@ angular.module('main').
 		        el.addEventListener('dragstart', function(e) {
 	                e.dataTransfer.effectAllowed = 'move';
 	                e.dataTransfer.setData('data', JSON.stringify(scope.data));
-	                scope.$apply(function(scope) {
-					    var fn = scope.ondragstart();
-					    if ('undefined' !== typeof fn) {
-					      fn();
-					    }
-					});
+	                $rootScope.$emit('dragstart');
 	                this.classList.add('drag');
 	                return false;
 	            }, false);
 
 		        el.addEventListener('dragend', function(e) {
-		            scope.$apply(function(scope) {
-					    var fn = scope.ondragend();
-					    if ('undefined' !== typeof fn) {
-					      fn();
-					    }
-					});
+		            $rootScope.$emit('dragend');
 		            this.classList.remove('drag');
 		            return false;
 		        }, false);
 			}
 		};
-	});
+	}]);
 
 angular.module('main').
 	directive('droppable', function() {
 	    return {
 	    	scope: {
-	    		ctrl: '=',
 	    		ondrop: '&',
 	    		branchName: '='
 	    	},

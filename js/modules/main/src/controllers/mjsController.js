@@ -1,4 +1,4 @@
-var MjsController = function(mjs, notification, item, itemTypeMap) {
+var MjsController = function($scope, $rootScope, mjs, notification, item, itemTypeMap) {
 	var self = this;
 
 	this.notification = notification;
@@ -16,6 +16,8 @@ var MjsController = function(mjs, notification, item, itemTypeMap) {
 		items: []
 	}
 	this.selected_collection = [];
+	this.parse_in_progress = false;
+	this.dragging = false;
 
 	Object.defineProperty(this, 'mjs_data', {
 		get: function() {
@@ -23,10 +25,41 @@ var MjsController = function(mjs, notification, item, itemTypeMap) {
 		}
 	});
 
+	Object.defineProperty($scope, 'mjs_data', {
+		get: function() {
+			return mjs.data;
+		}
+	});
+
 	this.mjs_data.$promise.
 		then(function(mjs_data) {
-			self.parse_mjs_data();	
+			//self.parse_mjs_data();	
 		});
+
+	$scope.$watch(function() {
+		if (self.mjs_data.$resolved) {
+			var unassigned_count = self.mjs_data.unassigned.length,
+				branches_count = self.mjs_data.assigned.length,
+				assigned_count = 0;
+
+			self.mjs_data.assigned.forEach(function(branch) {
+				assigned_count += branch.items.length;
+			});
+
+			return unassigned_count - assigned_count;
+		}
+	}, function(newVal, oldVal) {
+		self.parse_mjs_data();
+	});
+
+	$scope.$watch(function() {
+		if (self.mjs_data.$resolved) {
+			var	branches_count = self.mjs_data.assigned.length;
+			return branches_count;
+		}
+	}, function(newVal, oldVal) {
+		self.parse_mjs_data();
+	});
 };
 
 MjsController.prototype = {
@@ -36,7 +69,7 @@ MjsController.prototype = {
 			item_string = this.itemTypeMap.get_type(item.UnitType) + '.' + item._id;
 
 		this.mjs.assign(branch_name, item_string).then(function() {
-			self.parse_mjs_data();	
+			//self.parse_mjs_data();	
 			self.notification.put({
 				en: 'Item successfuly added to branch ' + branch_name,
 				he: 'הפריט הוסף לענף ' + branch_name +  ' בהצלחה'
@@ -54,7 +87,7 @@ MjsController.prototype = {
 			item_string = this.itemTypeMap.get_type(item.UnitType) + '.' + item._id;
 
 		this.mjs.unassign(branch_name, item_string).then(function() {
-			self.parse_mjs_data();	
+			//self.parse_mjs_data();	
 			self.notification.put({
 				en: 'Item successfuly removed from branch ' + branch_name,
 				he: 'הפריט הורד מענף ' + branch_name +  ' בהצלחה'
@@ -67,11 +100,16 @@ MjsController.prototype = {
 		});
 	},
 
+	remove_item: function(item_string) {
+		
+	},
+
 	parse_mjs_data: function() {
 		var self = this,
 			item = this.item,
 			mjs_data = this.mjs_data;
 
+		this.select_collection([]);
 		this.mjs_items.unassigned = [];
 		this.mjs_items.assigned = [];
 
@@ -79,36 +117,38 @@ MjsController.prototype = {
 			if (mjs_data.unassigned.length === 1) {
 				item.get( mjs_data.unassigned[0] ).
 					then(function(item_data) {
-						self.mjs_items.unassigned.push(item_data);
+						self.mjs_items.unassigned = [item_data];
 					});
 			}
 			else if (mjs_data.unassigned.length > 1) {
 				item.get_items( mjs_data.unassigned ).
 					then(function(item_data) {
-						self.mjs_items.unassigned = self.mjs_items.unassigned.concat(item_data);
+						self.mjs_items.unassigned = item_data;
 					});	
 			}
 
 			if (mjs_data.assigned.length > 0) {
 				mjs_data.assigned.forEach(function(branch) {
 					if (branch.items.length === 1) {
+						var b = {
+							name: branch.name,
+							items: {}
+						};
+						self.mjs_items.assigned.push(b);
 						item.get( branch.items[0] ).
 							then(function(item_data) {
-								var b = {
-									name: branch.name,
-									items: self.sort_items([item_data])
-								};
-								self.mjs_items.assigned.push(b);
+								b.items = self.sort_items([item_data]);
 							});
 					}
 					else if (branch.items.length > 1) {
+						var b = {
+							name: branch.name,
+							items: {}
+						};
+						self.mjs_items.assigned.push(b);
 						item.get_items( branch.items ).
 							then(function(item_data) {
-								var b = {
-									name: branch.name,
-									items: self.sort_items(item_data)
-								};
-								self.mjs_items.assigned.push(b);
+								b.items = self.sort_items(item_data)	;
 							});
 					}
 					else {
@@ -151,7 +191,7 @@ MjsController.prototype = {
 					self.new_branch = {
 						name: '+',
 					}
-					self.parse_mjs_data();
+					//self.parse_mjs_data();
 			});
 		}
 	},
@@ -161,9 +201,8 @@ MjsController.prototype = {
 		$event.stopPropagation();
 		this.mjs.remove_branch(branch_name).
 			then(function() {
-				self.parse_mjs_data();
+				//self.parse_mjs_data();
 			});
-
 	},
 
 	save_story: function() {
@@ -197,17 +236,9 @@ MjsController.prototype = {
 
 	select_collection: function(collection) {
 		this.selected_collection = collection;
-	},
-
-	ondragstart: function() {
-		console.log('start')
-	},
-
-	ondragend: function() {
-		console.log('end')
 	}
 };
 
 
 
-angular.module('main').controller('MjsController', ['mjs', 'notification', 'item', 'itemTypeMap', MjsController]);
+angular.module('main').controller('MjsController', ['$scope', '$rootScope', 'mjs', 'notification', 'item', 'itemTypeMap', MjsController]);

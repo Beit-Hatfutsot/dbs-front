@@ -3,6 +3,14 @@
 		<mjs-item item="collection[0]"></mjs-item>
 	</div>
 	<div class="assigned__grouped" ng-switch-when="true">
-		{{collection.length}}
+		<div class="assigned__grouped__count">{{collection.length}}</div>
+		<div class="assigned__grouped__icon">
+			<en>
+				<icon position="iconPosition.en"></icon>
+			</en>
+			<he>
+				<icon position="iconPosition.he"></icon>
+			</he>
+		</div>
 	</div>
 </ng-switch>

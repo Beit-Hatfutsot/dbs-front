@@ -14,7 +14,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth) {
             return auth.is_signedin();
         }
     });
-
+    
 	Object.defineProperty(this, 'notification_message', {
         get: function() {
         	return notification.get();

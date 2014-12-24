@@ -41,4 +41,5 @@
 	<div class="thumbnail" ng-if="previewData.thumbnail.data">
 		<img src="data:image/jpeg;base64,{{previewData.thumbnail.data}}" alt="Preview Image" fit-thumb />
 	</div>
+	<div ng-if="removable" ng-click="itemPreviewController.remove_from_mjs($event)">REMOVE</div>
 </div>

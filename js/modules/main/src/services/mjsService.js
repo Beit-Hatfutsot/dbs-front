@@ -44,7 +44,7 @@ angular.module('main').
 		 				});
 		 			}
 
-		 			return self.data.$put();
+		 			return this.data.$put();
 				}
 			},
 

@@ -1,15 +1,33 @@
 <div class="branch branch--{{branchIndex}}" ng-class="{selected: branchesCtrl.selected_branch === branchIndex && !imutable}">
-	<div class="branch__head" ng-click="branchesCtrl.select_branch(branchIndex)" droppable branch-name="branch.name" ondrop="branchesCtrl.assign_item">
-		<input class="branch__head__name" ng-model="branch.name" ng-click="branchesCtrl.stopPropagation($event)" alter-mjs-branch>
-		<div class="branch__head__edit" ng-if="!imutable">
-			<icon position="[-226, -123]"></icon>
+	<ng-switch on="branchesCtrl.dragging">
+		<div ng-switch-when="true">
+			<ng-switch on="imutable">
+				<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="branchesCtrl.create_n_assign" branch-name="branch.name">Drop here to create a new branch</div>
+				<div ng-switch-default class="branch__drop-area" droppable ondrop="branchesCtrl.assign_item" branch-name="branch.name">Drop to add item to branch</div>
+			</ng-switch>
 		</div>
-		<div class="branch__head__remove" ng-if="!imutable" ng-click="branchesCtrl.remove($event, branch.name)">
-			<icon position="[-226, -102]"></icon>
+		<div ng-switch-when="false" class="branch__head" ng-click="branchesCtrl.select_branch(branchIndex)">
+			<input class="branch__head__name" ng-model="branch.name" ng-click="branchesCtrl.stopPropagation($event)" alter-mjs-branch>
+			<div class="branch__head__edit" ng-if="!imutable">
+				<en>
+					<icon position="[-226, -123]"></icon>
+				</en>
+				<he>
+					<icon position="[-224, -123]"></icon>
+				</he>
+			</div>
+			<div class="branch__head__remove" ng-if="!imutable" ng-click="branchesCtrl.remove($event, branch.name)">
+				<en>
+					<icon position="[-226, -102]"></icon>
+				</en>
+				<he>
+					<icon position="[-224, -102]"></icon>
+				</he>
+			</div>
 		</div>
-	</div>
+	</ng-switch>
 	<div class="branch__content" ng-show="branchesCtrl.selected_branch === branchIndex">
-		<mjs-assigned class="assigned assigned--first" collection="branch.items.familyNames"></mjs-assigned>
-		<mjs-assigned class="assigned assigned--second" collection="branch.items.places"></mjs-assigned>
+		<mjs-assigned class="assigned assigned--first" collection="branch.items.familyNames" icon-position="{en: [-81, -266], he: [-61, -266]}"></mjs-assigned>
+		<mjs-assigned class="assigned assigned--second" collection="branch.items.places" icon-position="{en: [-79, -192], he: [-59, -192]}"></mjs-assigned>
 	</div>
 </div>
