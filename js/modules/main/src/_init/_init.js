@@ -8,7 +8,8 @@ angular.module('main', [
     'lang',
     'auth',
     'apiClient',
-    'cache'
+    'cache',
+    'plumb'
 ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider',

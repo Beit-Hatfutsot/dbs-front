@@ -1,4 +1,4 @@
-var MjsController = function($scope, $rootScope, mjs, notification, item, itemTypeMap) {
+var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager) {
 	var self = this;
 
 	this.notification = notification;
@@ -33,7 +33,7 @@ var MjsController = function($scope, $rootScope, mjs, notification, item, itemTy
 
 	this.mjs_data.$promise.
 		then(function(mjs_data) {
-			//self.parse_mjs_data();	
+	
 		});
 
 	$scope.$watch(function() {
@@ -241,4 +241,4 @@ MjsController.prototype = {
 
 
 
-angular.module('main').controller('MjsController', ['$scope', '$rootScope', 'mjs', 'notification', 'item', 'itemTypeMap', MjsController]);
+angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', MjsController]);

@@ -3,7 +3,7 @@ angular.module('main').directive('mjsBranches', function() {
 		restrict: 'E',
 		transclude: true,
 		template: '<div ng-transclude></div>',
-		controller: ['$scope', '$rootScope', function($scope, $rootScope) {
+		controller: ['$scope', '$timeout', 'plumbConnectionManager', function($scope, $timeout, plumbConnectionManager) {
 			var self = this;
 
 			this.selected_branch = null;
@@ -23,6 +23,14 @@ angular.module('main').directive('mjsBranches', function() {
 					this.selected_branch = branch_index;
 				}
 				this.select_collection([]);
+				
+				var repaint;
+				setInterval(function() {
+					repaint = jsPlumb.repaintEverything();
+				}, 100);
+				setTimeout(function() {
+					clearInterval(repaint);
+				}, 1000);
 			};
 
 			this.save_story = function() {
@@ -59,15 +67,18 @@ angular.module('main').directive('mjsBranches', function() {
 				this.selected_branch = null;
 			};
 
-			$rootScope.$on('dragstart', function() {
+			$scope.$on('dragstart', function() {
 				$scope.$apply(function() {
 					self.selected_branch = null;
 					self.dragging = true;
 				});
 			});
-			$rootScope.$on('dragend', function() {
+			$scope.$on('dragend', function() {
 				$scope.$apply(function() {
 					self.dragging = false;
+					$timeout(function() {
+						plumbConnectionManager.connect();
+					});
 				});
 			});
 		}]	

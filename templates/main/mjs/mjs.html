@@ -6,10 +6,10 @@
 				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item"></mjs-item>
 			</div>
 		</div>
-		<div id="molecules">
-			<div class="silhouette"></div>
+		<div id="molecules" plymb-container>
+			<div id="silhouette" class="silhouette" plumb-root></div>
 			<mjs-branches>
-				<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned" branch="branch" branch-index="$index"></mjs-branch>
+				<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned" branch="branch" branch-index="$index" on-finish-connect></mjs-branch>
 				<mjs-branch class="branch--new" branch="mjsCtrl.new_branch" branch-index="mjsCtrl.mjs_items.assigned.length" ng-if="mjsCtrl.mjs_items.assigned.length < 4" imutable="true"></mjs-branch>
 			</mjs-branches>
 		</div>

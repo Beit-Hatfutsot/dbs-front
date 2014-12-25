@@ -2,6 +2,10 @@
 	width: 100%;
 	//height: 100%;
 
+	._jsPlumb_connector {
+		z-index: 2;
+	}
+
 	@at-root #mjs {
 		width: $view-width;
 		margin: 0 auto;
@@ -83,20 +87,24 @@
 				@include transition(all, 0.5s, linear);
 
 				&--0 {
-					bottom: 0;
 					right: 0;
+					bottom: 0;
 
 					&.selected {
-						@include translate(100px, 75px);
+						//@include translate(100px, 75px);
+						right: -100px;
+						bottom: -75px;
 					}
 				}
 
 				&--1 {
-					bottom: 0;
 					left: 0;
+					bottom: 0;
 
 					&.selected {
-						@include translate(-100px, 75px);
+						//@include translate(-100px, 75px);
+						left: -100px;
+						bottom: -75px;
 					}
 				}
 
@@ -105,7 +113,9 @@
 					top: 0;
 
 					&.selected {
-						@include translate(-100px, -75px);
+						//@include translate(-100px, -75px);
+						left: -100px;
+						top: -75px;
 					}
 				}
 
@@ -114,7 +124,9 @@
 					top: 0;
 				
 					&.selected {
-						@include translate(100px, -75px);
+						//@include translate(100px, -75px);
+						right: -100px;
+						top: -75px;
 					}
 				}
 
@@ -129,33 +141,22 @@
 					}
 				}
 
-				&__head {
+				&__head-border {
 					position: relative;
 					z-index: 1;
 					width: 100%;
 					height: 100%;
-					background: #ffffff;
+					background: transparent;
 					border: 14px solid rgba(178, 237, 246, 0.6);
 					@include border-radius(50%);
 					@include hover-pointer();
 
 					&:hover {
 
-						.branch__head__remove,
-						.branch__head__edit {
+						.branch__head-border__remove,
+						.branch__head-border__edit {
 							opacity: 1;
 						}
-					}
-
-					&__name {
-						position: absolute;
-						left: 50%;
-						top: 50%;
-						width: 50px;
-						border: none;
-						text-align: center;
-						pointer: default;
-						@include translate(-50%, -50%);
 					}
 
 					&__remove,
@@ -180,6 +181,30 @@
 						left: -25px;
 						bottom: 10px;
 						background: white;
+					}
+				}
+
+				&__head {
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					@include translate(-50%, -50%);
+					z-index: 3;
+					width: 72px;
+					height: 72px;
+					background: #ffffff;
+					@include border-radius(50%);
+					@include hover-pointer();
+
+					&__name {
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						width: 50px;
+						border: none;
+						text-align: center;
+						pointer: default;
+						@include translate(-50%, -50%);
 					}
 				}
 

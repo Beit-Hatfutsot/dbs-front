@@ -18,7 +18,8 @@ module.exports = function(grunt) {
                     'js/modules/lang/src/**/*.js',
                     'js/modules/api_client/src/**/*.js',
                     'js/modules/auth/src/**/*.js',
-                    'js/modules/cache/src/**/*.js'
+                    'js/modules/cache/src/**/*.js',
+                    'js/modules/plumb/src/**/*.js'
                     
                 ],
                 // the location of the resulting JS file
@@ -68,6 +69,7 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     {expand: true, src: ['bower_components/**'], dest: public_dir},
+                    {expand: true, src: ['js/lib/**'], dest: public_dir},
                     {expand: true, src: ['templates/**'], dest: public_dir},
                     {expand: true, src: ['templates/**/**'], dest: public_dir},
                     {expand: true, src: ['images/**'], dest: public_dir},

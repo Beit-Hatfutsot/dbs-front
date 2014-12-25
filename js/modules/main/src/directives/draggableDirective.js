@@ -1,5 +1,5 @@
 angular.module('main').
-	directive('draggable', ['$rootScope', function($rootScope) {
+	directive('draggable', [function() {
 		return  {
 			restrict: 'A',
 			scope: {
@@ -15,13 +15,13 @@ angular.module('main').
 		        el.addEventListener('dragstart', function(e) {
 	                e.dataTransfer.effectAllowed = 'move';
 	                e.dataTransfer.setData('data', JSON.stringify(scope.data));
-	                $rootScope.$emit('dragstart');
+	                scope.$emit('dragstart');
 	                this.classList.add('drag');
 	                return false;
 	            }, false);
 
 		        el.addEventListener('dragend', function(e) {
-		            $rootScope.$emit('dragend');
+		            scope.$emit('dragend');
 		            this.classList.remove('drag');
 		            return false;
 		        }, false);

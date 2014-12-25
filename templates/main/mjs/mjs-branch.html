@@ -6,23 +6,27 @@
 				<div ng-switch-default class="branch__drop-area" droppable ondrop="branchesCtrl.assign_item" branch-name="branch.name">Drop to add item to branch</div>
 			</ng-switch>
 		</div>
-		<div ng-switch-when="false" class="branch__head" ng-click="branchesCtrl.select_branch(branchIndex)">
-			<input class="branch__head__name" ng-model="branch.name" ng-click="branchesCtrl.stopPropagation($event)" alter-mjs-branch>
-			<div class="branch__head__edit" ng-if="!imutable">
-				<en>
-					<icon position="[-226, -123]"></icon>
-				</en>
-				<he>
-					<icon position="[-224, -123]"></icon>
-				</he>
+		<div ng-switch-when="false" style="width: 100%; height: 100%;">
+			<div id="branch-head-{{branchIndex}}" class="branch__head-border" ng-click="branchesCtrl.select_branch(branchIndex)" plumb-node>
+				<div class="branch__head-border__edit" ng-if="!imutable">
+					<en>
+						<icon position="[-226, -123]"></icon>
+					</en>
+					<he>
+						<icon position="[-224, -123]"></icon>
+					</he>
+				</div>
+				<div class="branch__head-border__remove" ng-if="!imutable" ng-click="branchesCtrl.remove($event, branch.name)">
+					<en>
+						<icon position="[-226, -102]"></icon>
+					</en>
+					<he>
+						<icon position="[-224, -102]"></icon>
+					</he>
+				</div>
 			</div>
-			<div class="branch__head__remove" ng-if="!imutable" ng-click="branchesCtrl.remove($event, branch.name)">
-				<en>
-					<icon position="[-226, -102]"></icon>
-				</en>
-				<he>
-					<icon position="[-224, -102]"></icon>
-				</he>
+			<div class="branch__head" ng-click="branchesCtrl.select_branch(branchIndex)">
+				<input class="branch__head__name" ng-model="branch.name" ng-click="branchesCtrl.stopPropagation($event)" alter-mjs-branch>
 			</div>
 		</div>
 	</ng-switch>
