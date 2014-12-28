@@ -1,5 +1,7 @@
-var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header, mjs) {
+var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed) {
 	var self = this;
+
+	header.sub_header_state = 'recently-viewed';
 
 	this.notification = notification;
 	this.mjs = mjs
@@ -19,6 +21,8 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 
 	item.get($stateParams.item_string).
 		then(function(item_data) {
+			recentlyViewed.put(item_data);
+
 			self.item_data = item_data;
 			self.item_string = self.item_type + '.' + item_data._id;
 			self.content_loaded = true;
@@ -79,4 +83,4 @@ ItemCtrl.prototype = {
 	}
 };
 
-angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', 'recentlyViewed', ItemCtrl]);

@@ -1,8 +1,11 @@
 angular.module('main').directive('mjsBranches', function() {
 	return {
 		restrict: 'E',
+		
 		transclude: true,
+		
 		template: '<div ng-transclude></div>',
+		
 		controller: ['$scope', '$timeout', 'plumbConnectionManager', function($scope, $timeout, plumbConnectionManager) {
 			var self = this;
 
@@ -81,6 +84,10 @@ angular.module('main').directive('mjsBranches', function() {
 					});
 				});
 			});
-		}]	
+		}],
+
+		link: function(scope, element, attrs, ctrl) {
+			scope.branchesCtrl = ctrl;
+		}
 	};
 });

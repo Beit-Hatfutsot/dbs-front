@@ -3,13 +3,10 @@ angular.module('main').
 		return  {
 			restrict: 'A',
 			scope: {
-				ondragstart: '&',
-				ondragend: '&',
 				data: '='
 			},
 			link: function(scope, element) {
 				var el = element[0];
-				console.log(scope)
 		        el.draggable = true;
 
 		        el.addEventListener('dragstart', function(e) {

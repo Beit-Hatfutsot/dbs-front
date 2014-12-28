@@ -2,15 +2,19 @@
 	<div id="mjs" ng-show="mjsCtrl.content_loaded">
 		<div id="unassigned">
 			<div class="title">Unsorted Items</div>
-			<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" draggable ondragstart="mjsCtrl.ondragstart" ondragend="mjsCtrl.ondragend" data="item">
+			<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" draggable data="item">
 				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item"></mjs-item>
 			</div>
 		</div>
-		<div id="molecules" plymb-container>
+		<div id="molecules" plumb-container connecton="mjsCtrl.mjs_items.assigned.length">
 			<div id="silhouette" class="silhouette" plumb-root></div>
 			<mjs-branches>
-				<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned" branch="branch" branch-index="$index" on-finish-connect></mjs-branch>
+				<div id="branch-placeholder--0" class="branch-placeholder branch-placeholder--0" ng-class="{selected: branchesCtrl.selected_branch === 0 && mjsCtrl.mjs_items.assigned.length > 0}" plumb-node></div>
+				<div id="branch-placeholder--1" class="branch-placeholder branch-placeholder--1" ng-class="{selected: branchesCtrl.selected_branch === 1 && mjsCtrl.mjs_items.assigned.length > 1}" plumb-node></div>
+				<div id="branch-placeholder--2" class="branch-placeholder branch-placeholder--2" ng-class="{selected: branchesCtrl.selected_branch === 2 && mjsCtrl.mjs_items.assigned.length > 2}" plumb-node></div>
+				<div id="branch-placeholder--3" class="branch-placeholder branch-placeholder--3" ng-class="{selected: branchesCtrl.selected_branch === 3 && mjsCtrl.mjs_items.assigned.length > 3}" plumb-node></div>
 				<mjs-branch class="branch--new" branch="mjsCtrl.new_branch" branch-index="mjsCtrl.mjs_items.assigned.length" ng-if="mjsCtrl.mjs_items.assigned.length < 4" imutable="true"></mjs-branch>
+				<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned" branch="branch" branch-index="$index"></mjs-branch>
 			</mjs-branches>
 		</div>
 	</div>

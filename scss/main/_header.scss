@@ -240,7 +240,7 @@
 				z-index: 1;
 			}
 
-			.breadcrumbs-trigger {
+			.recently-viewed-trigger {
 				position: relative;
 				display: inline-block;
 				vertical-align: bottom;
@@ -308,7 +308,6 @@
 
 	@at-root #notification-bar-container {
 		position: relative;
-		z-index: 1;
 		height: $notification-bar-height;
 		width: 100%;
 		margin-top: 0;

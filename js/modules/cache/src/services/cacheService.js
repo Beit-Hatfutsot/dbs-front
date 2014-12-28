@@ -1,9 +1,9 @@
 angular.module('cache').
-	factory('cache', [function() {
+	factory('cache', ['$window', function($window) {
 		var cache, cached_items;
 
-		if( window.sessionStorage !== undefined ) {
-			cached_items = window.sessionStorage;
+		if( $window.sessionStorage !== undefined ) {
+			cached_items = $window.sessionStorage;
 		}
 		else {
 			cached_items = {

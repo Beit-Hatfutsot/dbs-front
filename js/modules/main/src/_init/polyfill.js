@@ -11,7 +11,7 @@ if (Object.prototype.isEmpty === undefined) {
     Object.defineProperty(Object.prototype, 'isEmpty', {
         enumerable: false,
         configurable: false,
-        writable: false,
+        writable: true,
         value: function() {
             if (Object.keys(this).length === 0) {
                 return true;
@@ -35,7 +35,7 @@ if (Object.prototype.isNotEmpty === undefined) {
     Object.defineProperty(Object.prototype, 'isNotEmpty', {
         enumerable: false,
         configurable: false,
-        writable: false,
+        writable: true,
         value: function() {
             if (Object.keys(this).length === 0) {
                 return false;

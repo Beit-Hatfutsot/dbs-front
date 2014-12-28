@@ -30,7 +30,7 @@
 		border-width: 8px;
 	} 
 	
-	&--wizard, &--breadcrumbs {
+	&--wizard, &--recently-viewed {
 		margin-top: -$notification-bar-height;
 		z-index: 2;
 		@include box-shadow(0 3px 5px 1px #b0b0b0);
@@ -39,9 +39,11 @@
 	&--closed-add, 
 	&--closed-remove { 
 		z-index: 0;
+		min-height: 160px !important; 
 	}
 
 	&--wizard {
+		min-height: 160px;
 
 		&:before {
 
@@ -66,7 +68,8 @@
 		}
 	}
 
-	&--breadcrumbs {
+	&--recently-viewed {
+		min-height: 92px;
 
 		&:before {
 
@@ -94,11 +97,11 @@
 	@at-root #sub-header {
 		width: $view-width;
 		margin: 0 auto;
-		padding: 35px 0;
 
 		.header-wizard {
 			position: relative;
 			width: 865px;
+			padding: 35px 0;
 			opacity: 1;
 			@include transition(all, 0.3s, ease);
 			
@@ -134,10 +137,11 @@
 			}
 		}
 
-		.breadcrumbs {
+		.recently-viewed {
 			position: relative;
 			width: 100%;
 			opacity: 1;
+			padding: 11px 0;
 			@include transition(all, 0.3s, ease);
 			
 			&.ng-hide {
@@ -147,6 +151,35 @@
 			&.ng-hide-remove {
 				height: 0;
 				opacity: 0;
+			}
+
+			.item-thumbnail {
+				display: inline-block;
+				vertical-align: top;
+				width: 60px;
+				height: 60px;
+				margin: 6px 0;
+				@include border-radius(4px);
+				@include hover-pointer(); 
+
+				&--text {
+					padding: 16px 8px;
+					font-size: 9px;
+					background: #ffffff;
+					@include box-shadow(0 0 3px 1px #eaeaea);
+				}
+
+				&--pic {
+					position: relative;
+					overflow: hidden;
+
+					img {
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						@include translate(-50%, -50%);
+					}
+				}
 			}
 		}	
 	}
