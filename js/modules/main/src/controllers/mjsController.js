@@ -62,6 +62,64 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 	}, function(newVal, oldVal) {
 		self.parse_mjs_data();
 	});
+
+
+
+	/*************************************************************************/
+
+
+	this.selected_branch = null;
+	this.dragging = false;
+
+	this.select_branch = function(branch_index) {
+		if (this.selected_branch == branch_index) {
+			this.selected_branch = null;
+		}
+		else{
+			this.selected_branch = branch_index;
+		}
+		this.select_collection([]);
+		
+		var repaint;
+		setInterval(function() {
+			repaint = jsPlumb.repaintEverything();
+		}, 100);
+		setTimeout(function() {
+			clearInterval(repaint);
+		}, 1000);
+	};
+
+	this.stopPropagation = function($event) {
+		$event.stopPropagation();
+	};
+
+	this.create_n_assign = function(branch_name, item) {
+		this.dragging = false;
+		branch_name = 'new branch';
+		this.new_branch.name = branch_name;
+		this.insert_new_branch();	
+		this.assign_item.apply(branch_name, item);
+	};
+
+	this.remove = function($event, branch_name) {
+		this.remove_branch($event, branch_name);
+		this.selected_branch = null;
+	};
+
+	$scope.$on('dragstart', function() {
+		$scope.$apply(function() {
+			self.selected_branch = null;
+			self.dragging = true;
+		});
+	});
+	$scope.$on('dragend', function() {
+		$scope.$apply(function() {
+			self.dragging = false;
+			$timeout(function() {
+				plumbConnectionManager.connect();
+			});
+		});
+	});
 };
 
 MjsController.prototype = {
@@ -70,6 +128,7 @@ MjsController.prototype = {
 		var self = this,
 			item_string = this.itemTypeMap.get_type(item.UnitType) + '.' + item._id;
 
+		this.dragging = false;
 		this.mjs.assign(branch_name, item_string).then(function() {
 			//self.parse_mjs_data();	
 			self.notification.put({
@@ -193,7 +252,6 @@ MjsController.prototype = {
 					self.new_branch = {
 						name: '+',
 					}
-					//self.parse_mjs_data();
 			});
 		}
 	},
