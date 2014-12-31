@@ -1,0 +1,34 @@
+<svg>
+	<circle ng-class="{one: false, two: true}" cx="60" cy="60" r="59" />
+	<circle ng-class="{one: true, two: false}" cx="250" cy="80" r="59" />
+	<path d="M 60 60 L 250 80" />
+</svg>
+<div id="quick">
+		<select id="quickSelect" onchange="GedcomToolbox.show(this.options[this.selectedIndex].value);">
+		</select>
+</div>
+<div id="canvas"></div>
+<div id="detail">
+		<div id="content"></div>
+		<div id="closeDetail" class="close" onclick="$(GedcomConst.id.DETAIL_ID).hide();"></div>
+</div>
+<div id="history">
+		<div class="title"></div>
+</div>
+<div id="log">
+		<div class="title"></div>
+</div>
+<div id="download">
+		<a href="gedcom.tar.gz">Télécharger GEDCOM Viewer v1.0</a>
+</div>
+<script>
+	GedcomIHM.init();
+
+	var parser = new GedcomParser();
+	var viewer = new GedcomViewer();
+
+	GedcomPlugins.checkRequired();
+	GedcomPlugins.sort();
+
+	parser.load(GedcomConst.path.GED_PATH);
+</script>

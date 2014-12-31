@@ -10,6 +10,7 @@
 @import "main/wizard-result";
 @import "main/item";
 @import "main/mjs";
+@import "main/family-trees";
 @import "auth/modal";
 
 * {
@@ -62,6 +63,7 @@ html {
 				@at-root #view {
 					position: relative;
 					width: 100%;
+					/*
 					@include transition(all, 1s, linear);
 
 					&.ng-enter, &.ng-leave {
@@ -73,7 +75,7 @@ html {
 					   	-o-transition:all .5s ease-in-out;
 					   	transition:all .5s ease-in-out;
 					}
-					/*
+					
 					&.ng-enter {
 					  opacity: 0;
 					  -webkit-transform:scale3d(0.5, 0.5, 0.5);
@@ -87,7 +89,7 @@ html {
 					  -moz-transform:scale3d(1, 1, 1);
 					  transform:scale3d(1, 1, 1);
 					}
-					*/
+					
 					&.ng-leave {
 					  	opacity: 1; 
 					  	-webkit-transform:translate3d(0, 0, 0);
@@ -101,6 +103,7 @@ html {
 					  	-moz-transform:translate3d(100px, 0, 0);
 					  	transform:translate3d(100px, 0, 0);
 					}
+					*/
 				}
 			}
 		}

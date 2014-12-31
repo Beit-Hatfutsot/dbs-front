@@ -57,7 +57,19 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
             onEnter: ['notification', function(notification) {
                 notification.clear();
             }]
-        },        
+        }, 
+
+        {
+            name: 'family-trees',
+            url: '/family-trees',
+            templateUrl: 'templates/main/family-trees/family-trees.html'
+        },       
+
+        {
+            name: 'gedcom',
+            url: '/gedcom',
+            templateUrl: 'templates/gedcom/gedcom.html'
+        },
 
         {
             name: '404',
