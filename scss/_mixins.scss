@@ -58,6 +58,14 @@
     transition: $property $duration $timing-function $delay;
 }
 
+@mixin rotate($degrees:90deg) {
+	-webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -o-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    transform: rotate($degrees);
+}
+
 @mixin linear-gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%) { 
 	background: $start;
 	background: -webkit-gradient(linear, left top, left bottom, from($start), to($stop));

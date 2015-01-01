@@ -5,7 +5,7 @@
 	@at-root #tree-sort {
 		background: #ffffff;
 		@include border-radius(8px);
-		padding: 24px 21px 10px;
+		padding: 24px 18px 10px;
 
 		.title {
 			font-size: 25px;
@@ -15,11 +15,13 @@
 
 		.filters {
 			display: inline-block;
+			vertical-align: top;
 			width: 314px;
 			padding: 8px 5px 2px;
 
 			&__title {
 				margin-bottom: 12px;
+				font-size: 15px;
 			}
 
 			&__actions {
@@ -181,7 +183,98 @@
 		}
 
 		.results {
+			display: inline-block;
+			vertical-align: top;
+			margin-top: 40px;
+			box-sizing: content-box;
 
+			.en & {
+				margin-left: 10px;
+			}
+
+			.he & {
+				margin-right: 10px;
+			}
+
+			&__title {
+				font-size: 15px;
+				margin-bottom: 4px;
+			}
+
+			&__individuals {
+				padding: 5px 2px 0 0;
+				background: #f5f5f5;
+
+				thead, tbody {
+
+					tr {
+						display: block;
+						padding-left: 7px;
+						padding-right: 7px;
+						font-size: 15px;
+					}
+				}
+
+				thead {
+
+					tr {
+						height: 28px;
+						padding-top: 6px; 
+						padding-bottom: 6px;
+						border-bottom: 2px solid #ffffff;
+
+						th {
+							display: inline-block;
+							font-weight: normal;
+
+							.en & {
+								text-align: left;		
+							}
+
+							.he & {
+								text-align: right;		
+							}
+						}
+
+						.member-tree {
+							width: 176px;
+						}
+
+						.name {
+							width: 128px;
+						}
+
+						.birth {
+							width: 117px;
+						}
+
+						.marriage {
+							width: 124px;
+						}
+
+						.death {
+							width: 124px;
+						}
+
+						.sex {
+							width: 64px;
+						}
+					}
+				}
+
+				tbody {
+
+					tr {
+						height: 85px;
+						padding-top: 18px;
+						padding-bottom: 35px;
+
+						td {
+							display: inline-block;
+						}
+					}
+				}
+			}
 		}
 	}
 }
