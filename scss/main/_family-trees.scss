@@ -1,16 +1,28 @@
 #family-trees-container {
 	width: $view-width;
-	margin: 20px auto;
+	margin: 14px auto;
 
 	@at-root #tree-sort {
+		position: relative;
+		min-height: 870px;
 		background: #ffffff;
 		@include border-radius(8px);
 		padding: 24px 18px 10px;
 
+		.tree-view & {
+			padding-top: 0;
+			padding-left: 0;
+			padding-right: 0;
+		}
+
 		.title {
 			font-size: 25px;
 			padding-bottom: 22px;
-			border-bottom: 2px solid #f5f5f5;	
+			border-bottom: 2px solid #f5f5f5;
+
+			.tree-view & {
+				display: none;
+			}	
 		}
 
 		.filters {
@@ -18,6 +30,10 @@
 			vertical-align: top;
 			width: 314px;
 			padding: 8px 5px 2px;
+
+			.tree-view & {
+				display: none;
+			}	
 
 			&__title {
 				margin-bottom: 12px;
@@ -66,7 +82,14 @@
 					input[type="text"] {
 						border: 1px solid #9a9a9a;
 						@include border-radius(3px);
-						@include box-shadow(inset 1px 1px 3px 2px #e9e9e9);
+						
+						.en & {
+							@include box-shadow(inset 1px 1px 3px 2px #e9e9e9);
+						}
+
+						.he & {
+							@include box-shadow(inset -1px 1px 3px 2px #e9e9e9);
+						}
 					}
 
 					.info {
@@ -189,29 +212,65 @@
 			box-sizing: content-box;
 
 			.en & {
-				margin-left: 10px;
+				margin-left: 20px;
 			}
 
 			.he & {
-				margin-right: 10px;
+				margin-right: 20px;
+			}
+
+			.tree-view & {
+				margin-top: 0;
+				margin-left: 0;
+				margin-right: 0;
+				border-left: 5px solid #1ec3d2;
 			}
 
 			&__title {
 				font-size: 15px;
 				margin-bottom: 4px;
+
+				.tree-view & {
+					display: none;
+				}
 			}
 
 			&__individuals {
-				padding: 5px 2px 0 0;
 				background: #f5f5f5;
 
 				thead, tbody {
 
 					tr {
 						display: block;
-						padding-left: 7px;
-						padding-right: 7px;
+						padding-left: 9px;
+						padding-right: 9px;
 						font-size: 15px;
+						margin-left: -2px;
+						margin-right: -2px;
+
+						.member-tree {
+							width: 176px;
+						}
+
+						.name {
+							width: 128px;
+						}
+
+						.birth {
+							width: 117px;
+						}
+
+						.marriage {
+							width: 120px;
+						}
+
+						.death {
+							width: 120px;
+						}
+
+						.sex {
+							width: 62px;
+						}
 					}
 				}
 
@@ -235,30 +294,6 @@
 								text-align: right;		
 							}
 						}
-
-						.member-tree {
-							width: 176px;
-						}
-
-						.name {
-							width: 128px;
-						}
-
-						.birth {
-							width: 117px;
-						}
-
-						.marriage {
-							width: 124px;
-						}
-
-						.death {
-							width: 124px;
-						}
-
-						.sex {
-							width: 64px;
-						}
 					}
 				}
 
@@ -271,6 +306,118 @@
 
 						td {
 							display: inline-block;
+						}
+					}
+
+					.dark {
+						background: #eeeeee;
+					}
+				}
+			}
+		}
+
+		@at-root #tree-layout-mask {
+			position: absolute;
+			top: 0;
+			width: 960px;
+			height: 100%;
+			padding: 25px 23px 77px;
+			background: #ffffff;
+
+			.en & {
+				right: 0;
+			}
+
+			.he & {
+				left: 0;
+			}
+
+			@at-root #tree-layout-container {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+
+				.add-wrapper {
+					position: absolute;
+					top: 0;
+
+					.en & {
+						left: 0;
+					}
+
+					.he & {
+						right: 0;
+					}
+				}
+
+				.tree-title-container {
+					width: 100%;
+					height: 50px; 
+
+					.tree-title {
+						text-align: center;
+						font-size: 24px;
+						color: #559573;
+					}
+				
+				}
+
+				@at-root #tree-layout {
+					width: 915px;
+					height: 100%;
+					padding: 70px 0 0 0; 
+					background: #eeeeee;
+
+					.node-container {
+						display: inline-block;
+						min-width: 52px;
+						height: 76px;
+
+						.node {
+							position: relative;
+							width: 100%;
+							min-height: 53px;
+							padding: 0 8px;
+							background: #f5f5f5;
+							border: 1px solid #f0f0f0;
+							@include border-radius(4px);
+
+							.individual {
+								display: inline-block;
+								vertical-align: top;
+								margin-top: -11px;
+
+								&__icon {
+									margin: 0 auto;
+									width: 31px;
+									height: 31px;
+									overflow: hidden;
+								}
+
+								&__name {
+									max-width: 71px;
+									text-align: center;
+									font-size: 15px;
+									font-weight: bold;
+									word-wrap: break-word;
+									word-spacing: 100px;
+								}
+							}
+
+							.rings {
+								position: absolute;
+								left: 50%;
+								top: 0;
+								@include translate(-50%, -2px);
+
+								&__icon {
+									width: 16px;
+									height: 15px;
+									overflow: hidden;
+									margin: 0 auto;
+								}
+							}
 						}
 					}
 				}

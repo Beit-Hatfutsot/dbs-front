@@ -1,4 +1,4 @@
-<div id="family-trees-container">
+<div id="family-trees-container" class="tree-view">
 	<div id="tree-sort">
 		<div class="title">
 			<en>Family Trees search Results for</en>
@@ -50,34 +50,150 @@
 			</div>
 			<table class="results__individuals">
 				<thead>
-					<th class="member-tree">
-						<en>Member Tree</en>
-						<he>עץ</he>
-					</th>
-					<th class="name">
-						<en>Name</en>
-						<he>שם</he>
-					</th>
-					<th class="birth">
-						<en>Born</en>
-						<he>נולד</he>
-					</th>
-					<th class="marriage">
-						<en>Married</en>
-						<he>נישא</he>
-					</th>
-					<th class="death">
-						<en>Death</en>
-						<he>נפטר</he>
-					</th>
-					<th class="sex">
-						<en>Sex</en>
-						<he>מין</he>
-					</th>
+					<tr>
+						<th class="member-tree">
+							<en>Member Tree</en>
+							<he>עץ</he>
+						</th>
+						<th class="name">
+							<en>Name</en>
+							<he>שם</he>
+						</th>
+						<th class="birth">
+							<en>Born</en>
+							<he>נולד</he>
+						</th>
+						<th class="marriage">
+							<en>Married</en>
+							<he>נישא</he>
+						</th>
+						<th class="death">
+							<en>Death</en>
+							<he>נפטר</he>
+						</th>
+						<th class="sex">
+							<en>Sex</en>
+							<he>מין</he>
+						</th>
+					</tr>
 				</thead>
 				<tbody>
+					<tr>
+						<td class="member-tree">
+							<div class="tree-title">
+								<en>AZBrodsky14</en>
+								<he>אזברודצקי14</he>
+							</div>
+							<div class="tree-number">
+								<en>Tree number: 486351</en>
+								<he>מספר עץ: 486351</he>
+							</div>
+						</td>
+						<td class="name">
+							<div class="name__text">
+								<en>Yaakov Nachmanson (Nachmani)</en>
+								<he>יעקב נחמנסון )נחמני(</he>
+							</div>
+						</td>
+						<td class="birth">
+							22-12-1880
+							<en>Berlin</en>
+							<he>ברלין</he>
+						</td>
+						<td class="marriage">
+							22-12-1880
+							<en>Berlin</en>
+							<he>ברלין</he>
+						</td>
+						<td class="death">
+							22-12-1880
+							<en>Berlin</en>
+							<he>ברלין</he>
+						</td>
+						<td class="sex">
+							<en>M</en>
+							<he>ז</he>
+						</td>
+					</tr>
+					<tr class="dark">
+						<td class="member-tree">
+							<div class="tree-title">
+								<en>AZBrodsky14</en>
+								<he>אזברודצקי14</he>
+							</div>
+							<div class="tree-number">
+								<en>Tree number: 486351</en>
+								<he>מספר עץ: 486351</he>
+							</div>
+						</td>
+						<td class="name">
+							<div class="name__text">
+								<en>Yaakov Nachmanson (Nachmani)</en>
+								<he>יעקב נחמנסון )נחמני(</he>
+							</div>
+						</td>
+						<td class="birth">
+							22-12-1880
+							<en>Berlin</en>
+							<he>ברלין</he>
+						</td>
+						<td class="marriage">
+							22-12-1880
+							<en>Berlin</en>
+							<he>ברלין</he>
+						</td>
+						<td class="death">
+							22-12-1880
+							<en>Berlin</en>
+							<he>ברלין</he>
+						</td>
+						<td class="sex">
+							<en>M</en>
+							<he>ז</he>
+						</td>
+					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div id="tree-layout-mask">
+			<div id="tree-layout-container">
+				<ng-include src="'templates/main/item/add.html'"></ng-include>
+				<div class="tree-title-container">
+					<div class="tree-title">
+						<en>Goldman Family Tree</en>
+						<he>עץ המשפחה של גולדמן</he>
+					</div>
+				</div>
+				<div id="tree-layout">
+					<div class="node-container">
+						<div class="node">
+							<div class="individual">
+								<div class="individual__icon">
+									<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
+								</div>
+								<div class="individual__name">
+									<en>Shimon Peres</en>
+									<he>שמעון פרס</he>
+								</div>
+							</div>
+							<div class="rings">
+								<div class="rings__icon">
+									<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+								</div>
+							</div>
+							<div class="individual">
+								<div class="individual__icon">
+									<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+								</div>
+								<div class="individual__name">
+									<en>Sonia Gelman</en>
+									<he>סוניה גלמן</he>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
