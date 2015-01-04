@@ -1,11 +1,6 @@
 <div class="branch branch--{{$index}}" ng-class="{selected: mjsCtrl.selected_branch === $index && !imutable}">
 	<ng-switch on="mjsCtrl.dragging">
-		<div ng-switch-when="true">
-			<ng-switch on="imutable">
-				<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="mjsCtrl.create_n_assign" branch-name="branch.name">Drop here to create a new branch</div>
-				<div ng-switch-default class="branch__drop-area" droppable ondrop="mjsCtrl.assign_item" context="mjsCtrl" branch-name="branch.name">Drop to add item to branch</div>
-			</ng-switch>
-		</div>
+			<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="mjsCtrl.assign_item" context="mjsCtrl" branch-name="branch.name">Drop to add item to branch</div>
 		<div ng-switch-when="false" style="width: 100%; height: 100%;">
 			<div id="branch-head-{{$index}}" class="branch__head-border" ng-click="mjsCtrl.select_branch($index)">
 				<div class="branch__head-border__edit">
@@ -31,7 +26,7 @@
 		</div>
 	</ng-switch>
 	<div class="branch__content" ng-show="mjsCtrl.selected_branch === $index">
-		<!--<mjs-assigned class="assigned assigned--first" collection="branch.items.familyNames" icon-position="{en: [-81, -266], he: [-61, -266]}"></mjs-assigned>
-		<mjs-assigned class="assigned assigned--second" collection="branch.items.places" icon-position="{en: [-79, -192], he: [-59, -192]}"></mjs-assigned>-->
+		<mjs-assigned class="assigned assigned--first" collection-name="familyNames" icon-position='{"en": [-81, -266], "he": [-61, -266]}'></mjs-assigned>
+		<mjs-assigned class="assigned assigned--second" collection-name="places" icon-position='{"en": [-79, -192], "he": [-59, -192]}'></mjs-assigned>
 	</div>
 </div>

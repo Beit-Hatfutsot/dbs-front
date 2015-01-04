@@ -1,4 +1,4 @@
-<ng-switch on="grouped" ng-click="branchesCtrl.select_collection(collection)">
+<ng-switch on="grouped" ng-click="mjsCtrl.select_collection(collection)">
 	<div ng-switch-when="false">
 		<mjs-item item="collection[0]"></mjs-item>
 	</div>
@@ -6,10 +6,10 @@
 		<div class="assigned__grouped__count">{{collection.length}}</div>
 		<div class="assigned__grouped__icon">
 			<en>
-				<icon position="iconPosition.en"></icon>
+				<icon position="icon_position.en"></icon>
 			</en>
 			<he>
-				<icon position="iconPosition.he"></icon>
+				<icon position="icon_position.he"></icon>
 			</he>
 		</div>
 	</div>
