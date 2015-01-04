@@ -31,7 +31,8 @@ angular.module('main').
 	    return {
 	    	scope: {
 	    		ondrop: '&',
-	    		branchName: '='
+	    		branchName: '=',
+	    		context: '&'
 	    	},
 	        link: function(scope, element, attrs) {
 	            var el = element[0];
@@ -64,7 +65,12 @@ angular.module('main').
 			        scope.$apply(function(scope) {
 					    var fn = scope.ondrop();
 					    if ('undefined' !== typeof fn) {
-					      fn(scope.branchName, item);
+					    	if (scope.context) {
+					    		fn.apply(scope.context(), [scope.branchName, item]);
+					    	}
+					    	else {
+					    		fn(scope.branchName, item);
+					    	}
 					    }
 					});
 

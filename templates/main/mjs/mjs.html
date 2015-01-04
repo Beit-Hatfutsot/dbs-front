@@ -8,28 +8,27 @@
 		</div>
 		<div id="molecules" plumb-container connecton="mjsCtrl.mjs_items.assigned.length">
 			<div id="silhouette" class="silhouette" plumb-root></div>
-			<!--<mjs-branches>-->
+				<!-- placeholders for jsPlumb -->
 				<div id="branch-placeholder--0" class="branch-placeholder branch-placeholder--0" ng-class="{selected: mjsCtrl.selected_branch === 0 && mjsCtrl.mjs_items.assigned.length > 0}" plumb-node></div>
 				<div id="branch-placeholder--1" class="branch-placeholder branch-placeholder--1" ng-class="{selected: mjsCtrl.selected_branch === 1 && mjsCtrl.mjs_items.assigned.length > 1}" plumb-node></div>
 				<div id="branch-placeholder--2" class="branch-placeholder branch-placeholder--2" ng-class="{selected: mjsCtrl.selected_branch === 2 && mjsCtrl.mjs_items.assigned.length > 2}" plumb-node></div>
 				<div id="branch-placeholder--3" class="branch-placeholder branch-placeholder--3" ng-class="{selected: mjsCtrl.selected_branch === 3 && mjsCtrl.mjs_items.assigned.length > 3}" plumb-node></div>
-				
-				<div class="branch branch--{{mjsCtrl.mjs_items.assigned.length}}">
+				<!-- new branch -->
+				<div class="branch branch--{{mjsCtrl.mjs_items.assigned.length}} branch--new" ng-if="mjsCtrl.mjs_items.assigned.length < 4">
 					<ng-switch on="mjsCtrl.dragging">
 						<div ng-switch-when="true">
 							<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="mjsCtrl.create_n_assign" branch-name="mjsCtrl.new_branch.name">Drop here to create a new branch</div>
 						</div>
 						<div ng-switch-when="false" style="width: 100%; height: 100%;">
 							<div id="branch-head-{{mjsCtrl.mjs_items.assigned.length}}" class="branch__head-border"></div>
-							<div class="branch__head" ng-click="mjsCtrl.select_branch($index)">
-								<input class="branch__head__name" ng-model="mjsCtrl.new_branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
+							<div class="branch__head">
+								<input class="branch__head__name" ng-model="mjsCtrl.new_branch.name" add-mjs-branch>
 							</div>
 						</div>
 					</ng-switch>
 				</div>
-				
+				<!-- branches -->
 				<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned"></mjs-branch>
-			<!--</mjs-branches>-->
 		</div>
 	</div>
 	<div id="item-bar-container">
