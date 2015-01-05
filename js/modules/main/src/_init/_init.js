@@ -60,9 +60,11 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         }, 
 
         {
-            name: 'family-trees',
-            url: '/family-trees',
-            templateUrl: 'templates/main/family-trees/family-trees.html'
+            name: 'ftrees',
+            url: '/ftrees?first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&ind_index',
+            controller: 'FtreesController as ftreesCtrl',
+            reloadOnSearch: false,
+            templateUrl: 'templates/main/ftrees/ftrees.html'
         },       
 
         {

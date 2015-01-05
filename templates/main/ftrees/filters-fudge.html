@@ -8,11 +8,12 @@
 				{{label_text_he}}
 			</he>
 		</label>
-		<input type="text">
+		<input type="text" ng-model="model">
 	</div>
 	<div class="fudge">
 		<label>+/-</label>
-		<select>
+		<select ng-model="fudge_model">
+			<option>0</option>
 			<option>1</option>
 			<option>2</option>
 		</select>
