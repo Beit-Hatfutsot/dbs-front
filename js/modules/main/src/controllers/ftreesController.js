@@ -19,11 +19,6 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees)
 	this.$location = $location;
 	this.ftrees = ftrees;
 
-	//init
-	if ($stateParams.ind_index) {
-		this.select_individual(ind_index);
-		delete $stateParams.ind_index;
-	}
 	for (var param in $stateParams) {
 		if ( $stateParams[param] !== undefined ) {
 			this.search_params[param] = $stateParams[param];
@@ -51,6 +46,10 @@ FtreesController.prototype = {
 		var self = this, 
 			search_params = angular.copy(this.search_params);
 
+		if (search_params.ind_index) {
+			delete(search_params.ind_index);
+		}
+
 		// insert fudge_factors into query string
 		for (var factor in this.fudge_factors) {
 			var fudge_val = this.fudge_factors[factor];	
@@ -58,25 +57,49 @@ FtreesController.prototype = {
 				search_params[factor] += '~' + fudge_val;
 			}
 		}
-
+		
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
 				for (var param in self.search_params) {
 					self.$location.search(param, search_params[param]);	
 				}
+				if (self.$stateParams.ind_index) {
+					self.select_individual( self.individuals[self.$stateParams.ind_index] );
+				}
 			});
 	},
 
-	select_individual: function(index) {
-		if (this.selected_individual === index) {
+	select_individual: function(individual) {
+		if (this.selected_individual && this.selected_individual._id.$oid === individual._id.$oid) {
 			this.tree_view = false;
 			this.selected_individual = null;	
 		}
 		else {
+			this.ftrees.get(individual.GT).
+				then(function(tree_data) {
+					console.log(tree_data);
+
+					//GedcomIHM.init();
+					var parser = new GedcomParser();
+					//var viewer = new GedcomViewer();
+					//GedcomPlugins.checkRequired();
+					//GedcomPlugins.sort();
+
+					parser.load(tree_data.tree_file);
+				});
 			this.tree_view = true;
-			this.selected_individual = index;
+			this.selected_individual = individual;
+			this.$location.search('ind_index', this.individuals.indexOf(individual));
 		}
+	},
+
+	is_selected: function(individual) {
+		if (this.selected_individual && this.selected_individual._id.$oid === individual._id.$oid) {
+			return true;	
+		}
+
+		return false;
 	}
 };
 

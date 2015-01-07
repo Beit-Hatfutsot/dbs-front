@@ -27,7 +27,7 @@ angular.module('main').
 					in_progress = true;
 					var deferred = $q.defer();
 
-					$http.get(apiClient.urls.ftrees_search, {tree_number: tree_number}).
+					$http.get(apiClient.urls.ftrees_search, {params: {tree_number: tree_number, last_name: "a"}}).
 						success(function(tree_data) {
 							deferred.resolve(tree_data);
 						}).
