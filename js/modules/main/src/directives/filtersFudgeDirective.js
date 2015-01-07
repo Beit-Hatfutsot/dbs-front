@@ -15,10 +15,10 @@ angular.module('main').
 				});
 				Object.defineProperty(scope, 'fudge_model', {
 					get: function() {
-						return scope.ftreesCtrl.fudge_factors[attrs['fudgeModel']];
+						return scope.ftreesCtrl.fudge_factors[attrs['model']];
 					},
 					set: function(newVal) {
-						scope.ftreesCtrl.fudge_factors[attrs['fudgeModel']] = newVal;
+						scope.ftreesCtrl.fudge_factors[attrs['model']] = newVal;
 					}
 				});
 
