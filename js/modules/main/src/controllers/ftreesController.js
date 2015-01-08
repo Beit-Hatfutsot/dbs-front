@@ -105,7 +105,7 @@ FtreesController.prototype = {
 	},
 
 	select_individual: function(individual) {
-		if (this.selected_individual && this.selected_individual._id.$oid === individual._id.$oid) {
+		if (this.selected_individual && this.selected_individual._id && this.selected_individual._id === individual._id) {
 			this.tree_view = false;
 			this.selected_individual = null;	
 		}
@@ -129,7 +129,7 @@ FtreesController.prototype = {
 	},
 
 	is_selected: function(individual) {
-		if (this.selected_individual && this.selected_individual._id.$oid === individual._id.$oid) {
+		if (this.selected_individual && this.selected_individual._id && this.selected_individual._id === individual._id) {
 			return true;	
 		}
 
