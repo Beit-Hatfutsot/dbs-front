@@ -7,6 +7,7 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 	this.mjs = mjs;
 	this.itemTypeMap = itemTypeMap;
 	this.item = item;
+	this.plumbConnectionManager = plumbConnectionManager;
 
 	this.content_loaded = false;
 	this.mjs_items = {
@@ -261,6 +262,8 @@ MjsController.prototype = {
 	},
 
 	select_branch: function(branch_index) {
+		var self = this;
+
 		if (this.selected_branch == branch_index) {
 			this.selected_branch = null;
 		}
@@ -271,7 +274,7 @@ MjsController.prototype = {
 		
 		var repaint;
 		setInterval(function() {
-			repaint = jsPlumb.repaintEverything();
+			repaint = self.plumbConnectionManager.connections['molecules'].plumb.repaintEverything();
 		}, 100);
 		setTimeout(function() {
 			clearInterval(repaint);

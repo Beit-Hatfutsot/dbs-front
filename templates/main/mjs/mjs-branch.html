@@ -1,8 +1,13 @@
-<div class="branch branch--{{$index}}" ng-class="{selected: mjsCtrl.selected_branch === $index && !imutable}">
+<div id="branch--{{$index}}" class="branch branch--{{$index}}" ng-class="{selected: mjsCtrl.selected_branch === $index}">
 	<ng-switch on="mjsCtrl.dragging">
-			<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="mjsCtrl.assign_item" context="mjsCtrl" branch-name="branch.name">Drop to add item to branch</div>
+		<div ng-switch-when="true">
+			<div class="branch__drop-area-border"></div>
+			<div class="branch__drop-area" droppable ondrop="mjsCtrl.assign_item" context="mjsCtrl" branch-name="branch.name">
+				<div class="branch__drop-area__text">Drop to add item to branch</div>
+			</div>
+		</div>
 		<div ng-switch-when="false" style="width: 100%; height: 100%;">
-			<div id="branch-head-{{$index}}" class="branch__head-border" ng-click="mjsCtrl.select_branch($index)">
+			<div id="branch-head-border" class="branch__head-border" ng-click="mjsCtrl.select_branch($index)" plumb-container connecton="Object.keys(branch.items).length">
 				<div class="branch__head-border__edit">
 					<en>
 						<icon position="[-226, -123]"></icon>
@@ -20,13 +25,15 @@
 					</he>
 				</div>
 			</div>
-			<div class="branch__head" ng-click="mjsCtrl.select_branch($index)">
+			<div id="branch-head" class="branch__head" ng-click="mjsCtrl.select_branch($index)">
 				<input class="branch__head__name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
 			</div>
 		</div>
 	</ng-switch>
 	<div class="branch__content" ng-show="mjsCtrl.selected_branch === $index">
+		<div id="assigned-first" class="assigned-placeholder assigned-placeholder--first" plumb-node="branch--{{$index}}"></div>
 		<mjs-assigned class="assigned assigned--first" collection-name="familyNames" icon-position='{"en": [-81, -266], "he": [-61, -266]}'></mjs-assigned>
-		<mjs-assigned class="assigned assigned--second" collection-name="places" icon-position='{"en": [-79, -192], "he": [-59, -192]}'></mjs-assigned>
+		<div id="assigned-second" class="assigned-placeholder assigned-placeholder--second" plumb-node="branch--{{$index}}"></div>
+		<mjs-assigned id="assigned-second" class="assigned assigned--second" collection-name="places" icon-position='{"en": [-79, -192], "he": [-59, -192]}'></mjs-assigned>
 	</div>
 </div>

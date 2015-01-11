@@ -5,11 +5,12 @@ angular.module('plumb').
 			restrict: 'A',
 			link: function(scope, element, attrs) {
 			    var id = element.attr('id');
-				jsPlumb.setContainer(id);
+				var connection = plumbConnectionManager.connections[id] || plumbConnectionManager.createConnection(id);
 				$timeout(function() {
 					scope.$watch(attrs['connecton'], function(newVal, oldVal) {
-						jsPlumb.detachEveryConnection();	
-						plumbConnectionManager.connect(newVal);
+						connection.plumb.detachEveryConnection();	
+						connection.connect(newVal);
+						connection.plumb.repaintEverything();
 					});
 				});
 			}
@@ -19,8 +20,10 @@ angular.module('plumb').
 	directive('plumbRoot', ['plumbConnectionManager', function(plumbConnectionManager) {
 		return {
 			restrict: 'A',
-		    link: function(scope, element) {
-		    	plumbConnectionManager.root = element.attr('id');
+		    link: function(scope, element, attrs) {
+		    	var container_id = attrs['plumbRoot'];
+		    	var connection = plumbConnectionManager.connections[container_id] || plumbConnectionManager.createConnection(container_id);
+		    	connection.root = element.attr('id');
 		    }
 		};
 	}]).
@@ -30,36 +33,28 @@ angular.module('plumb').
 			restrict: 'A',
 
 		    link: function(scope, element, attrs) {
-		    	//var connection;
-		    	plumbConnectionManager.nodes.push(element);
-		    	/*
-		    	function connect() {
-		    		console.log('connect ' + element.attr('id'))
-	    			connection = jsPlumb.connect({
-						source: plumbConnectionManager.root, 
-						target: element.attr('id'),
-						paintStyle:{ lineWidth: 1, strokeStyle: '#333333' },
-						connector: 'Straight',
-						anchor: 'Center'
-					});
-		    	}
-
-		    	$timeout(function() {
-		    		connect();
-		    	});*/
+		    	var container_id = attrs['plumbNode'];
+		    	var connection = plumbConnectionManager.connections[container_id] || plumbConnectionManager.createConnection(container_id);
+		    	connection.nodes.push(element);
 		    }
 		};
 	}]).
 
-    directive('onFinishConnect', ['$timeout', 'plumbConnectionManager', function($timeout, plumbConnectionManager) {
-	    return {
-	        restrict: 'A',
-	        link: function (scope, element) {
-	            if (scope.$last === true) {
-	                $timeout(function () {
-	                    //plumbConnectionManager.connect();
-	                });
-	            }
-	        }
-	    };
+
+	directive('connectTo', ['plumbConnectionManager', function(plumbConnectionManager) {
+		return {
+			restrict: 'A',
+			link: function(scope, element, attrs) {
+				var container_id = attrs['containerId'];
+				var connection = plumbConnectionManager.connections[container_id] || plumbConnectionManager.createConnection(container_id);
+				connection.plumb.ready(function() {
+					connection.plumb.connect({
+						source: element.attr('id'),
+						target: attrs['connectTo'],
+						connector: ['Straight'],
+						anchor: 'Center'
+					});
+				});
+			}	
+		}
 	}]);
