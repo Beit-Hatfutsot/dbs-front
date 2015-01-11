@@ -57,7 +57,21 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
             onEnter: ['notification', function(notification) {
                 notification.clear();
             }]
-        },        
+        }, 
+
+        {
+            name: 'ftrees',
+            url: '/ftrees?first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&ind_index',
+            controller: 'FtreesController as ftreesCtrl',
+            reloadOnSearch: false,
+            templateUrl: 'templates/main/ftrees/ftrees.html'
+        },       
+
+        {
+            name: 'gedcom',
+            url: '/gedcom',
+            templateUrl: 'templates/gedcom/gedcom.html'
+        },
 
         {
             name: '404',

@@ -1,5 +1,5 @@
 angular.module('cache').
-	factory('cache', ['$window', function($window) {
+	factory('cache', ['$window', 'itemTypeMap', function($window, itemTypeMap) {
 		var cache, cached_items;
 
 		if( $window.sessionStorage !== undefined ) {
@@ -24,15 +24,27 @@ angular.module('cache').
 		}
 
 		cache = {
-			put: function(item) {
+			put: function(item, collection) {
 				if ( item._id !== undefined ) {
-					return cached_items.setItem( item._id, JSON.stringify(item) );
+					if (collection) {
+						return cached_items.setItem( collection + ';' + item._id, JSON.stringify(item) );
+					}
+					else {
+						return cached_items.setItem( item._id, JSON.stringify(item) );	
+					}
 				}
 				return false;
 			},
 
-			get: function(item_id) {
-				var cached_string = cached_items.getItem(item_id);
+			get: function(item_id, collection) {
+				var cached_string;
+
+				if (collection) {
+					cached_string = cached_items.getItem(collection + ';' + item_id);
+				}
+				else {
+					cached_string = cached_items.getItem(item_id);
+				}
 				return cached_string ? JSON.parse(cached_string) : {};
 			},
 

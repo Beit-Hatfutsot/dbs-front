@@ -1,7 +1,9 @@
 var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed) {
 	var self = this;
 
-	header.sub_header_state = 'recently-viewed';
+	if (header.sub_header_state !== 'recently-viewed') {
+		header.sub_header_state = 'recently-viewed';
+	}
 
 	this.notification = notification;
 	this.mjs = mjs

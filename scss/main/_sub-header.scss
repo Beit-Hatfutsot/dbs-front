@@ -153,7 +153,21 @@
 				opacity: 0;
 			}
 
+			&__title {
+				@include rotate();
+				display: inline-block;
+				width: 76px;
+				height: 33px;
+				padding: 6px 0 0;
+				text-align: center;
+				margin-top: 18px;
+				font-size: 12px;
+				border-top: 1px solid #d9d9d9; 
+			}
+
 			.item-thumbnail {
+				position: relative;
+				left: -10px;
 				display: inline-block;
 				vertical-align: top;
 				width: 60px;

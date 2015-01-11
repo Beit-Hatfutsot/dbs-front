@@ -1,0 +1,162 @@
+<div id="family-trees-container" ng-class="{'tree-view': ftreesCtrl.tree_view}">
+	<div id="tree-sort">
+		<div class="title">
+			<en>Family Trees search Results for</en>
+			<he>תוצאות חיפוש עמי משפחה עבור</he>
+		</div>
+		<form class="filters">
+			<div class="filters__title">
+				<en>Search Filters</en>
+				<he>מסנני חיפוש</he>
+			</div>
+			<div class="filters__actions">
+				<button class="filters__actions__update" ng-click="ftreesCtrl.search()">
+					<en>Update</en>
+					<he>עדכן</he>
+				</button>
+				<div class="filters__actions__clear">
+					<en>Clear filters</en>
+					<he>נקה מסננים</he>
+				</div>
+			</div>
+			<filters-field class="filters__field" label-text-en="First Name" label-text-he="שם פרטי" model="first_name"></filters-field>
+			<filters-field class="filters__field" label-text-en="Last Name" label-text-he="שם משפחה" model="last_name"></filters-field>
+			<filters-field class="filters__field" label-text-en="Maiden Name" label-text-he="שם נעורים" model="maiden_name"></filters-field>
+			<div class="filters__sex">
+				<div class="filters__sex__title">
+					<en>Sex</en>
+					<he>מין</he>
+				</div>
+				<div class="filters__sex__choices">
+					<input type="radio" name="sex" value="m" ng-model="ftreesCtrl.search_params.sex">Male<br>
+					<input type="radio" name="sex" value="f" ng-model="ftreesCtrl.search_params.sex">Female<be>
+				</div>
+			</div>
+			<filters-field class="filters__field" label-text-en="Place of Birth" label-text-he="מקום לידה" model="birth_place"></filters-field>
+			<filters-field class="filters__field" label-text-en="Place of Marriage" label-text-he="מקום נישואין" model="marriage_place"></filters-field>
+			<filters-field class="filters__field" label-text-en="Place of Death" label-text-he="מקום פטירה" model="death_place"></filters-field>
+			<filters-fudge class="filters__fudge-field" label-text-en="Year of Birth" label-text-he="שנת לידה" model="birth_year"></filters-fudge>
+			<filters-fudge class="filters__fudge-field" label-text-en="Year of Marriage" label-text-he="שנת נישואין" model="marriage_year"></filters-fudge>
+			<filters-fudge class="filters__fudge-field" label-text-en="Year of Death" label-text-he="שנת פטירה" model="death_year"></filters-fudge>
+			<filters-field class="filters__field" label-text-en="Tree Number" label-text-he="מספר עץ" model="tree_number"></filters-field>
+			<button class="filters__update" ng-click="ftreesCtrl.search()">
+				Update
+			</button>
+		</form>
+		<div class="results">
+			<div class="results__title">
+				<en>Results of</en>
+				<he>מ תוצאות</he>
+			</div>
+			<table class="results__individuals">
+				<thead>
+					<tr>
+						<th class="member-tree">
+							<en>Member Tree</en>
+							<he>עץ</he>
+						</th>
+						<th class="name">
+							<en>Name</en>
+							<he>שם</he>
+						</th>
+						<th class="birth">
+							<en>Born</en>
+							<he>נולד</he>
+						</th>
+						<th class="marriage">
+							<en>Married</en>
+							<he>נישא</he>
+						</th>
+						<th class="death">
+							<en>Death</en>
+							<he>נפטר</he>
+						</th>
+						<th class="sex">
+							<en>Sex</en>
+							<he>מין</he>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="indi in ftreesCtrl.individuals.slice(ftreesCtrl.display_from_result) | limitTo: ftreesCtrl.results_per_page" ng-class="{dark: $index % 2 !== 0, selected: ftreesCtrl.is_selected(indi)}" ng-click="ftreesCtrl.select_individual(indi)">
+						<td class="member-tree">
+							<div class="tree-title">
+								<en>TREE NAME?</en>
+								<he>TREE NAME?</he>
+							</div>
+							<div class="tree-number">
+								<en>Tree number: {{indi.GT}}</en>
+								<he>מספר עץ: {{indi.GT}}</he>
+							</div>
+						</td>
+						<td class="name">
+							<div class="name__text">
+								<en>{{indi.FN}} {{indi.LN}}</en>
+								<he>{{indi.FN}} {{indi.LN}}</he>
+							</div>
+						</td>
+						<td class="birth">
+							{{indi.BD}}
+							<en>{{indi.BP}}</en>
+							<he>{{indi.BP}}</he>
+						</td>
+						<td class="marriage">
+							{{indi.MD}}
+							<en>{{indi.MP}}</en>
+							<he>{{indi.MP}}</he>
+						</td>
+						<td class="death">
+							{{indi.DD}}
+							<en>{{indi.DP}}</en>
+							<he>{{indi.DP}}</he>
+						</td>
+						<td class="sex">
+							<en>{{indi.G}}</en>
+							<he>{{indi.G}}</he>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="tree-layout-mask" ng-show="ftreesCtrl.tree_view">
+			<div id="tree-layout-container">
+				<ng-include src="'templates/main/item/add.html'"></ng-include>
+				<div class="tree-title-container">
+					<div class="tree-title">
+						<en>Goldman Family Tree</en>
+						<he>עץ המשפחה של גולדמן</he>
+					</div>
+				</div>
+				<div id="tree-layout">
+					<div class="node-container">
+						<div class="node">
+							<div class="individual">
+								<div class="individual__icon">
+									<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
+								</div>
+								<div class="individual__name">
+									<en>Shimon Peres</en>
+									<he>שמעון פרס</he>
+								</div>
+							</div>
+							<div class="rings">
+								<div class="rings__icon">
+									<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+								</div>
+							</div>
+							<div class="individual">
+								<div class="individual__icon">
+									<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+								</div>
+								<div class="individual__name">
+									<en>Sonia Gelman</en>
+									<he>סוניה גלמן</he>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

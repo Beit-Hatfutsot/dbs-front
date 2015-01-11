@@ -1,0 +1,549 @@
+#family-trees-container {
+	width: $view-width;
+	margin: 14px auto;
+
+	@at-root #tree-sort {
+		position: relative;
+		min-height: 870px;
+		background: #ffffff;
+		@include border-radius(8px);
+		padding: 24px 18px 10px;
+
+		.tree-view & {
+			padding-top: 0;
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		.title {
+			font-size: 25px;
+			padding-bottom: 22px;
+			border-bottom: 2px solid #f5f5f5;
+
+			.tree-view & {
+				display: none;
+			}	
+		}
+
+		.filters {
+			display: inline-block;
+			vertical-align: top;
+			width: 314px;
+			padding: 8px 5px 2px;
+
+			.tree-view & {
+				display: none;
+			}	
+
+			&__title {
+				margin-bottom: 12px;
+				font-size: 15px;
+			}
+
+			&__actions {
+				padding: 0 5px 2px;
+				border-bottom: 2px solid #f5f5f5;
+				margin-bottom: 20px;
+
+				&__update {
+					width: 98px;
+					height: 23px;
+					font-size: 10px;
+				}
+
+				&__clear {
+					padding-top: 8px;
+					font-size: 10px;
+
+					.en & {
+						float: right;
+					}
+
+
+					.he & {
+						float: left;
+					}
+				}
+			}
+
+			&__field,
+			&__fudge-field {
+
+				.container {
+					margin-bottom: 15px;
+
+					label {
+						display: block;
+						font-size: 10px;
+						font-weight: bold;
+						margin-bottom: 3px;
+					}
+
+					input[type="text"] {
+						border: 1px solid #9a9a9a;
+						@include border-radius(3px);
+						
+						.en & {
+							@include box-shadow(inset 1px 1px 3px 2px #e9e9e9);
+						}
+
+						.he & {
+							@include box-shadow(inset -1px 1px 3px 2px #e9e9e9);
+						}
+					}
+
+					.info {
+						display: inline-block;
+						width: 15px;
+						height: 15px;
+						font-size: 9px;
+						text-align: center;
+						border: 2px solid #333333;
+						@include border-radius(50%);
+					}
+				}
+			}
+
+
+			&__field {
+				
+				.container {
+					//width: 284px;
+					
+					input[type="text"] {
+						display: inline-block;
+						width: 284px;
+						height: 24px;
+						padding: 0 6px;
+					}
+
+					.range-background {
+						width: 284px;
+						height: 13px;
+						background: #f5f5f5;
+						@include border-radius(2px);
+						margin-top: 3px;
+
+						.range-container {
+							width: 275px;
+							margin: 0 auto;
+
+							input[type="range"] {
+								position: relative;
+								top: -5px;
+								-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+								width: 270px; /* Specific width is required for Firefox. */
+							}
+
+							input[type=range]::-webkit-slider-thumb {
+							  -webkit-appearance: none;
+							}
+
+							input[type=range]:focus {
+							  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+							}
+
+							input[type=range]::-ms-track {
+								width: 275px;
+								cursor: pointer;
+								background: transparent; /* Hides the slider so custom styles can be added */
+								border-color: transparent;
+								color: transparent;
+							}
+
+							/* Special styling for WebKit/Blink */
+							input[type=range]::-webkit-slider-thumb {
+								-webkit-appearance: none;
+								border: 1px solid #000000;
+								height: 13px;
+								width: 13px;
+								border-radius: 50%;
+								background: #ffffff;
+								cursor: pointer;
+								margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+								box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+							}
+
+							/* All the same stuff for Firefox */
+							input[type=range]::-moz-range-thumb {
+								box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+								border: 1px solid #000000;
+								height: 13px;
+								width: 13px;
+								border-radius: 50%;
+								background: #ffffff;
+								cursor: pointer;
+							}
+
+							/* All the same stuff for IE */
+							input[type=range]::-ms-thumb {
+								box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+								border: 1px solid #000000;
+								height: 36px;
+								width: 16px;
+								border-radius: 3px;
+								background: #ffffff;
+								cursor: pointer;
+							}
+
+							input[type=range]::-webkit-slider-runnable-track {
+								width: 100%;
+								height: 4px;
+								cursor: pointer;
+								//box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+								border-radius: 1.3px;
+							}
+							
+							input[type=range]::-moz-range-track {
+								width: 100%;
+								height: 4px;
+								cursor: pointer;
+								//box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+								border-radius: 1.3px;
+							}
+
+							input[type=range]::-ms-track {
+								width: 100%;
+								height: 8.4px;
+								cursor: pointer;
+								background: transparent;
+								border-color: transparent;
+								border-width: 16px 0;
+								color: transparent;
+							}
+							input[type=range]::-ms-fill-lower {
+								background: #2a6495;
+								border: 0.2px solid #010101;
+								border-radius: 2.6px;
+								box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+							}
+
+							input[type=range]::-ms-fill-upper {
+								background: #3071a9;
+								border: 0.2px solid #010101;
+								border-radius: 2.6px;
+								box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+							}
+						}
+					}
+				}
+			}
+
+			&__sex {
+				width: 108px;
+				font-size: 10px;
+				margin-bottom: 15px;
+
+				&__title {
+					font-weight: bold;
+					margin-bottom: 8px;
+				}
+
+				&__choices {
+
+					input[type="radio"] {
+
+						.en & {
+							margin-right: 10px;
+						}
+
+						.he & {
+							margin-left: 10px;
+						}
+					}
+				}
+			}
+
+			&__fudge-field {
+
+				.container {
+
+					.text {
+						display: inline-block;
+
+						.en & {
+							margin-right: 42px;
+						}
+
+						.he & {
+							margin-left: 42px;
+						}
+
+						input[type="text"] {
+							display: inline-block;
+							width: 83px;
+							height: 24px;
+						}
+					}
+
+					.fudge {
+						display: inline-block;
+
+						.en & {
+							margin-right: 27px;
+						}
+
+						.he & {
+							margin-left: 27px;
+						}
+
+						select {
+							display: inline-block;
+							width: 55px;
+							height: 24px;
+						}
+					}
+				}
+			}
+
+			&__update, &__actions__update {
+				border: 1px solid #999999;
+				background: #1ec3d2;
+				color: #ffffff;
+				text-align: center;
+				padding: 5px 0;
+				font-weight: bold;
+				@include box-shadow(inset 1px 1px 3px 1px #1eb1c1);
+				@include border-radius(3px);
+			}
+
+			&__update {
+				width: 174px;
+				height: 42px;
+				font-size: 13px;
+				margin-top: 23px;
+			}
+
+		}
+
+		.results {
+			display: inline-block;
+			vertical-align: top;
+			margin-top: 40px;
+			box-sizing: content-box;
+
+			.en & {
+				margin-left: 20px;
+			}
+
+			.he & {
+				margin-right: 20px;
+			}
+
+			.tree-view & {
+				margin-top: 0;
+				margin-left: 0;
+				margin-right: 0;
+
+				.en & {
+					border-left: 5px solid #1ec3d2;
+				}
+
+				.he & {
+					border-right: 5px solid #1ec3d2;
+				}
+			}
+
+			&__title {
+				font-size: 15px;
+				margin-bottom: 4px;
+
+				.tree-view & {
+					display: none;
+				}
+			}
+
+			&__individuals {
+				background: #f5f5f5;
+
+				thead, tbody {
+
+					tr {
+						display: block;
+						padding-left: 9px;
+						padding-right: 9px;
+						font-size: 15px;
+						margin-left: -2px;
+						margin-right: -2px;
+
+						.member-tree {
+							width: 176px;
+						}
+
+						.name {
+							width: 128px;
+						}
+
+						.birth {
+							width: 117px;
+						}
+
+						.marriage {
+							width: 120px;
+						}
+
+						.death {
+							width: 120px;
+						}
+
+						.sex {
+							width: 62px;
+						}
+					}
+				}
+
+				thead {
+
+					tr {
+						height: 28px;
+						padding-top: 6px; 
+						padding-bottom: 6px;
+						border-bottom: 2px solid #ffffff;
+
+						th {
+							display: inline-block;
+							font-weight: normal;
+
+							.en & {
+								text-align: left;		
+							}
+
+							.he & {
+								text-align: right;		
+							}
+						}
+					}
+				}
+
+				tbody {
+
+					tr {
+						height: 85px;
+						padding-top: 18px;
+						padding-bottom: 35px;
+
+						td {
+							display: inline-block;
+						}
+
+						&.dark {
+							background: #eeeeee;	
+						}
+
+						&.selected {
+							background: #1ec3d2;
+						}
+					}
+				}
+			}
+		}
+
+		@at-root #tree-layout-mask {
+			position: absolute;
+			top: 0;
+			width: 960px;
+			height: 100%;
+			padding: 25px 23px 77px;
+			background: #ffffff;
+
+			.en & {
+				right: 0;
+			}
+
+			.he & {
+				left: 0;
+			}
+
+			@at-root #tree-layout-container {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+
+				.add-wrapper {
+					position: absolute;
+					top: 0;
+
+					.en & {
+						left: 0;
+					}
+
+					.he & {
+						right: 0;
+					}
+				}
+
+				.tree-title-container {
+					width: 100%;
+					height: 50px; 
+
+					.tree-title {
+						text-align: center;
+						font-size: 24px;
+						color: #559573;
+					}
+				
+				}
+
+				@at-root #tree-layout {
+					width: 915px;
+					height: 100%;
+					padding: 70px 0 0 0; 
+					background: #eeeeee;
+
+					.node-container {
+						display: inline-block;
+						min-width: 52px;
+						height: 76px;
+
+						.node {
+							position: relative;
+							width: 100%;
+							min-height: 53px;
+							padding: 0 8px;
+							background: #f5f5f5;
+							border: 1px solid #f0f0f0;
+							@include border-radius(4px);
+
+							.individual {
+								display: inline-block;
+								vertical-align: top;
+								margin-top: -11px;
+
+								&__icon {
+									margin: 0 auto;
+									width: 31px;
+									height: 31px;
+									overflow: hidden;
+								}
+
+								&__name {
+									max-width: 71px;
+									text-align: center;
+									font-size: 15px;
+									font-weight: bold;
+									word-wrap: break-word;
+									word-spacing: 100px;
+								}
+							}
+
+							.rings {
+								position: absolute;
+								left: 50%;
+								top: 0;
+								@include translate(-50%, -2px);
+
+								&__icon {
+									width: 16px;
+									height: 15px;
+									overflow: hidden;
+									margin: 0 auto;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
