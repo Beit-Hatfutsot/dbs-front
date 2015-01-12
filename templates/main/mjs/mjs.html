@@ -6,17 +6,17 @@
 				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item"></mjs-item>
 			</div>
 		</div>
-		<div id="molecules" plumb-container connecton="mjsCtrl.mjs_items.assigned.length">
-			<div id="silhouette" class="silhouette" plumb-root="molecules">
+		<div id="molecules">
+			<div id="silhouette" class="silhouette" plumb-root="molecules-main" root-container="molecules" connecton="mjsCtrl.mjs_items.assigned.length">
 				<div class="silhouette__icon">
 					<icon position="[-125, -148]"></icon>
 				</div>
 			</div>
 			<!-- placeholders for jsPlumb -->
-			<div id="branch-placeholder--0" class="branch-placeholder branch-placeholder--0" ng-class="{selected: mjsCtrl.selected_branch === 0 && mjsCtrl.mjs_items.assigned.length > 0}" plumb-node="molecules" plumb-root="branch--0"></div>
-			<div id="branch-placeholder--1" class="branch-placeholder branch-placeholder--1" ng-class="{selected: mjsCtrl.selected_branch === 1 && mjsCtrl.mjs_items.assigned.length > 1}" plumb-node="molecules" plumb-root="branch--1"></div>
-			<div id="branch-placeholder--2" class="branch-placeholder branch-placeholder--2" ng-class="{selected: mjsCtrl.selected_branch === 2 && mjsCtrl.mjs_items.assigned.length > 2}" plumb-node="molecules" plumb-root="branch--2"></div>
-			<div id="branch-placeholder--3" class="branch-placeholder branch-placeholder--3" ng-class="{selected: mjsCtrl.selected_branch === 3 && mjsCtrl.mjs_items.assigned.length > 3}" plumb-node="molecules" plumb-root="branch--3"></div>
+			<div id="branch-placeholder--0" class="branch-placeholder branch-placeholder--0" ng-class="{selected: mjsCtrl.selected_branch === 0 && mjsCtrl.mjs_items.assigned.length > 0}" plumb-node="molecules-main" node-container="molecules"></div>
+			<div id="branch-placeholder--1" class="branch-placeholder branch-placeholder--1" ng-class="{selected: mjsCtrl.selected_branch === 1 && mjsCtrl.mjs_items.assigned.length > 1}" plumb-node="molecules-main" node-container="molecules"></div>
+			<div id="branch-placeholder--2" class="branch-placeholder branch-placeholder--2" ng-class="{selected: mjsCtrl.selected_branch === 2 && mjsCtrl.mjs_items.assigned.length > 2}" plumb-node="molecules-main" node-container="molecules"></div>
+			<div id="branch-placeholder--3" class="branch-placeholder branch-placeholder--3" ng-class="{selected: mjsCtrl.selected_branch === 3 && mjsCtrl.mjs_items.assigned.length > 3}" plumb-node="molecules-main" node-container="molecules"></div>
 			<!-- new branch -->
 			<div class="branch branch--{{mjsCtrl.mjs_items.assigned.length}} branch--new" ng-if="mjsCtrl.mjs_items.assigned.length < 4">
 				<ng-switch on="mjsCtrl.dragging">

@@ -27,18 +27,13 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 			return mjs.data;
 		}
 	});
-
+	/*
 	Object.defineProperty($scope, 'mjs_data', {
 		get: function() {
 			return mjs.data;
 		}
 	});
-
-	this.mjs_data.$promise.
-		then(function(mjs_data) {
-			
-		});
-
+	*/
 	$scope.$watch(function() {
 		if (self.mjs_data.$resolved) {
 			var unassigned_count = self.mjs_data.unassigned.length,
@@ -222,6 +217,7 @@ MjsController.prototype = {
 	remove_branch: function($event, branch_name) {
 		var self = this;
 		$event.stopPropagation();
+		this.select_branch(this.selected_branch);
 		this.mjs.remove_branch(branch_name).
 			then(function() {
 				//self.parse_mjs_data();
@@ -272,12 +268,14 @@ MjsController.prototype = {
 		}
 		this.select_collection([]);
 		
-		var repaint;
-		setInterval(function() {
-			repaint = self.plumbConnectionManager.connections['molecules'].plumb.repaintEverything();
+		var repaint = setInterval(function() {
+			self.plumbConnectionManager.connections['molecules-main'].plumb.repaintEverything();
 		}, 100);
 		setTimeout(function() {
 			clearInterval(repaint);
+			angular.forEach(self.plumbConnectionManager.connections, function(connection) {
+				connection.plumb.repaintEverything();
+			});
 		}, 1000);
 	},
 

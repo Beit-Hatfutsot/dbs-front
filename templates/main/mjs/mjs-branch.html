@@ -7,7 +7,7 @@
 			</div>
 		</div>
 		<div ng-switch-when="false" style="width: 100%; height: 100%;">
-			<div id="branch-head-border" class="branch__head-border" ng-click="mjsCtrl.select_branch($index)" plumb-container connecton="Object.keys(branch.items).length">
+			<div id="branch-head-border-{{$index}}" class="branch__head-border" ng-click="mjsCtrl.select_branch($index)">
 				<div class="branch__head-border__edit">
 					<en>
 						<icon position="[-226, -123]"></icon>
@@ -25,15 +25,13 @@
 					</he>
 				</div>
 			</div>
-			<div id="branch-head" class="branch__head" ng-click="mjsCtrl.select_branch($index)">
+			<div class="branch__head" ng-click="mjsCtrl.select_branch($index)">
 				<input class="branch__head__name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
 			</div>
 		</div>
 	</ng-switch>
-	<div class="branch__content" ng-show="mjsCtrl.selected_branch === $index">
-		<div id="assigned-first" class="assigned-placeholder assigned-placeholder--first" plumb-node="branch--{{$index}}"></div>
-		<mjs-assigned class="assigned assigned--first" collection-name="familyNames" icon-position='{"en": [-81, -266], "he": [-61, -266]}'></mjs-assigned>
-		<div id="assigned-second" class="assigned-placeholder assigned-placeholder--second" plumb-node="branch--{{$index}}"></div>
-		<mjs-assigned id="assigned-second" class="assigned assigned--second" collection-name="places" icon-position='{"en": [-79, -192], "he": [-59, -192]}'></mjs-assigned>
+	<div id="branch-content-{{$index}}" class="branch__content" ng-show="mjsCtrl.selected_branch === $index">
+		<mjs-assigned ng-if="branch.items.familyNames" id="assigned-first-{{$index}}" class="assigned assigned--first" collection-name="familyNames" icon-position='{"en": [-81, -266], "he": [-61, -266]}' plumb-connect to="branch-head-border-{{$index}}" connection-id="familyNames-{{$index}}" connecton="mjsCtrl.selected_branch"></mjs-assigned>
+		<mjs-assigned ng-if="branch.items.places" id="assigned-second-{{$index}}" class="assigned assigned--second" collection-name="places" icon-position='{"en": [-79, -192], "he": [-59, -192]}'></mjs-assigned>
 	</div>
 </div>
