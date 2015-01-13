@@ -91,10 +91,15 @@ angular.module('auth').
 	  	return {
 		    request: function (config) {
 		    	config.headers = config.headers || {};
-		    	if ( $window.localStorage.getItem('bhsclient_token') ) {
-		        	config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('bhsclient_token');
-		    	}
-		     	return config;
+		    	delete config.headers.Authorization;
+
+		    	if ( /bhsapi/.test(config.url) || /127.0.0.1/.test(config.url) ) {
+			    	if ( $window.localStorage.getItem('bhsclient_token') ) {
+			        	config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('bhsclient_token');
+			    	}
+			    }
+			     
+			    return config;
 		    },
 		    response: function (response) {
 		      	if (response.status === 401) {

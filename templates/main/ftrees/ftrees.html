@@ -131,28 +131,34 @@
 					<div class="node-container">
 						<div class="node">
 							<div class="individual">
-								<div class="individual__icon">
-									<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
-								</div>
+								<ng-switch on="ftreesCtrl.selected_individual.sex">
+									<div class="individual__icon" ng-switch-when="M">
+										<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
+									</div>
+									<div class="individual__icon" ng-switch-when="F">
+										<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+									</div>
+								</ng-switch>
 								<div class="individual__name">
-									<en>Shimon Peres</en>
-									<he>שמעון פרס</he>
+									{{ftreesCtrl.selected_individual.name}}
 								</div>
 							</div>
-							<div class="rings">
-								<div class="rings__icon">
-									<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+							<span ng-if="ftreesCtrl.selected_individual.family.spouse">
+								<div class="rings">
+									<div class="rings__icon">
+										<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+									</div>
 								</div>
-							</div>
-							<div class="individual">
-								<div class="individual__icon">
-									<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+								<div class="individual">
+									<div class="individual__icon">
+										<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+									</div>
+									<div class="individual__name">
+										<en>Sonia Gelman</en>
+										<he>סוניה גלמן</he>
+									</div>
 								</div>
-								<div class="individual__name">
-									<en>Sonia Gelman</en>
-									<he>סוניה גלמן</he>
-								</div>
-							</div>
+							</span>
 						</div>
 					</div>
 				</div>

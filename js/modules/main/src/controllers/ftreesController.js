@@ -1,9 +1,10 @@
-var FtreesController = function($scope, $state, $stateParams, $location, ftrees) {
+var FtreesController = function($scope, $state, $stateParams, $location, ftrees, notification) {
 	var self = this;
 
 	this.individuals = [];
 	this.tree_view = false;
 	this.selected_individual = null;
+	this.selected_individual_data = {};
 	this.search_params = {};
 	this.search_modifiers = {
 		first_name: 0,
@@ -37,6 +38,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees)
 	this.$stateParams = $stateParams;
 	this.$location = $location;
 	this.ftrees = ftrees;
+	this.notification = notification;
 
 	for (var param in $stateParams) {
 		if ( $stateParams[param] !== undefined ) {
@@ -105,26 +107,35 @@ FtreesController.prototype = {
 	},
 
 	select_individual: function(individual) {
+		var self = this;
+
 		if (this.selected_individual && this.selected_individual._id && this.selected_individual._id === individual._id) {
 			this.tree_view = false;
 			this.selected_individual = null;	
 		}
 		else {
-			this.ftrees.get(individual.GT).
+			this.ftrees.get_data(individual.GT).
 				then(function(tree_data) {
-					console.log(tree_data);
+					console.log(tree_data)
+					var subset = self.ftrees.get_individuals_subset('@' + individual.II + '@');
 
-					//GedcomIHM.init();
-					var parser = new GedcomParser();
-					//var viewer = new GedcomViewer();
-					//GedcomPlugins.checkRequired();
-					//GedcomPlugins.sort();
+					self.selected_individual = {
+						_id: individual._id,
+						id: individual.II,
+						name: individual.FN + ' ' + individual.LN,
+						sex: individual.G,
+						parents: subset.parents,
+						family: subset.family
+					};
 
-					parser.load(tree_data.tree_file);
+					self.$location.search('ind_index', self.individuals.indexOf(individual));
+					self.tree_view = true;
+				}, function() {
+					self.notification.put({
+						en: 'failed to load tree',
+						he: 'טעינת עץ נכשלה'
+					});
 				});
-			this.tree_view = true;
-			this.selected_individual = individual;
-			this.$location.search('ind_index', this.individuals.indexOf(individual));
 		}
 	},
 
@@ -137,4 +148,4 @@ FtreesController.prototype = {
 	}
 };
 
-angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', FtreesController]);
+angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', 'notification', FtreesController]);
