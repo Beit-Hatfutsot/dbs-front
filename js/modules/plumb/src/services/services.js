@@ -91,10 +91,15 @@ angular.module('main').
 
 			detach: function(connection_id) {
 				this.plumb.detach(this.active_connections[connection_id]);
+				delete this.active_connections[connection_id];
 			},
 
 			active_connection: function(connection_id) {
 				return this.active_connections.hasOwnProperty(connection_id);
+			},
+
+			reinstantiatePlumb: function() {
+				this.plumb = jsPlumb.getInstance();
 			}
 		}
 

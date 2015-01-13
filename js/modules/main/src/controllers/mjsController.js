@@ -220,7 +220,7 @@ MjsController.prototype = {
 		this.select_branch(this.selected_branch);
 		this.mjs.remove_branch(branch_name).
 			then(function() {
-				//self.parse_mjs_data();
+				//notify of success
 			});
 	},
 
@@ -273,9 +273,9 @@ MjsController.prototype = {
 		}, 100);
 		setTimeout(function() {
 			clearInterval(repaint);
-			angular.forEach(self.plumbConnectionManager.connections, function(connection) {
+			/*angular.forEach(self.plumbConnectionManager.connections, function(connection) {
 				connection.plumb.repaintEverything();
-			});
+			})*;*/
 		}, 1000);
 	},
 

@@ -71,7 +71,15 @@ angular.module('plumb').
 					if (newVal === scope.$index) {
 						if ( !(plumbConnectionManager2.active_connection(connection_id)) ) {
 							console.log('creating');
-							plumbConnectionManager2.connect(connection_id);
+							$timeout(function() {
+								plumbConnectionManager2.connect(connection_id);
+							}, parseInt(attrs['delay']));
+						}
+						else {
+							console.log('repainting');
+							$timeout(function() {
+								plumbConnectionManager2.repaint(connection_id);
+							}, parseInt(attrs['delay']));
 						}
 					}
 					else {
