@@ -137,9 +137,12 @@ angular.module('main').
 			},
 
 			get_individual_data: function(individual_id) {
-				var raw_data = parser.getData(individual_id),
-					parent_data = raw_data.getValue('familleParent'),
-					family_data = raw_data.getValue('familles')[0];
+				var raw_data = parser.getData(individual_id);
+
+				if (raw_data) {
+					var parent_data = raw_data.getValue('familleParent'),
+						family_data = raw_data.getValue('familles')[0];
+				}
 				
 				return {
 					parent_data: parent_data,

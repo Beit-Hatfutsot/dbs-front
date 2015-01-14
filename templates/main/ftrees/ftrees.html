@@ -51,10 +51,6 @@
 			<table class="results__individuals">
 				<thead>
 					<tr>
-						<th class="member-tree">
-							<en>Member Tree</en>
-							<he>עץ</he>
-						</th>
 						<th class="name">
 							<en>Name</en>
 							<he>שם</he>
@@ -75,20 +71,14 @@
 							<en>Sex</en>
 							<he>מין</he>
 						</th>
+						<th class="tree-מוצנקר">
+							<en>Tree Number</en>
+							<he>מספר עץ</he>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="indi in ftreesCtrl.individuals.slice(ftreesCtrl.display_from_result) | limitTo: ftreesCtrl.results_per_page" ng-class="{dark: $index % 2 !== 0, selected: ftreesCtrl.is_selected(indi)}" ng-click="ftreesCtrl.select_individual(indi)">
-						<td class="member-tree">
-							<div class="tree-title">
-								<en>TREE NAME?</en>
-								<he>TREE NAME?</he>
-							</div>
-							<div class="tree-number">
-								<en>Tree number: {{indi.GT}}</en>
-								<he>מספר עץ: {{indi.GT}}</he>
-							</div>
-						</td>
 						<td class="name">
 							<div class="name__text">
 								<en>{{indi.FN}} {{indi.LN}}</en>
@@ -114,11 +104,12 @@
 							<en>{{indi.G}}</en>
 							<he>{{indi.G}}</he>
 						</td>
+						<td class="tree-number">{{indi.GT}}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div id="tree-layout-mask" ng-show="ftreesCtrl.tree_view">
+		<div id="tree-layout-mask" ng-show="ftreesCtrl.tree_view" ui-view>
 			<div id="tree-layout-container">
 				<ng-include src="'templates/main/item/add.html'"></ng-include>
 				<div class="tree-title-container">
@@ -128,39 +119,7 @@
 					</div>
 				</div>
 				<div id="tree-layout">
-					<div class="node-container">
-						<div class="node">
-							<div class="individual">
-								<ng-switch on="ftreesCtrl.selected_individual.sex">
-									<div class="individual__icon" ng-switch-when="M">
-										<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
-									</div>
-									<div class="individual__icon" ng-switch-when="F">
-										<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
-									</div>
-								</ng-switch>
-								<div class="individual__name">
-									{{ftreesCtrl.selected_individual.name}}
-								</div>
-							</div>
-							<span ng-if="ftreesCtrl.selected_individual.family.spouse">
-								<div class="rings">
-									<div class="rings__icon">
-										<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
-									</div>
-								</div>
-								<div class="individual">
-									<div class="individual__icon">
-										<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
-									</div>
-									<div class="individual__name">
-										<en>Sonia Gelman</en>
-										<he>סוניה גלמן</he>
-									</div>
-								</div>
-							</span>
-						</div>
-					</div>
+					<subtree></subtree>
 				</div>
 			</div>
 		</div>

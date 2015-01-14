@@ -1,0 +1,18 @@
+<div class="node-container">
+	<div class="node">
+		<span ng-if="indi.sex === 'M'">
+			<individual data="indi"></individual>
+		</span>
+		<span ng-if="indi.family.spouse">
+			<div class="rings">
+				<div class="rings__icon">
+					<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+				</div>
+			</div>
+			<individual data="indi.family.spouse"></individual>
+		</span>
+		<span ng-if="indi.sex === 'F'">
+			<individual data="indi"></individual>
+		</span>
+	</div>
+</div>

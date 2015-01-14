@@ -2,7 +2,6 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	var self = this;
 
 	this.individuals = [];
-	this.tree_view = false;
 	this.selected_individual = null;
 	this.selected_individual_data = {};
 	this.search_params = {};
@@ -36,9 +35,22 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 
 	this.$state = $state;
 	this.$stateParams = $stateParams;
+	this.$scope = $scope;
 	this.$location = $location;
 	this.ftrees = ftrees;
 	this.notification = notification;
+
+	Object.defineProperty(this, 'tree_view', {
+		get: function() {
+			return $state.includes('ftree-view');
+		}
+	})
+
+	Object.defineProperty($scope, 'tree_view', {
+		get: function() {
+			return self.tree_view;
+		}
+	})
 
 	for (var param in $stateParams) {
 		if ( $stateParams[param] !== undefined ) {
@@ -57,6 +69,12 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 			}
 		}
 	};
+	
+	$scope.$watch('tree_view', function(newVal, oldVal) {
+		if (!newVal) {
+			self.selected_individual = null;
+		}
+	});
 
 	//search
 	this.search();
@@ -100,18 +118,19 @@ FtreesController.prototype = {
 				for (var param in self.search_params) {
 					self.$location.search(param, search_params[param]);	
 				}
-				if (self.$stateParams.ind_index) {
-					self.select_individual( self.individuals[self.$stateParams.ind_index] );
+				
+				if (self.tree_view) {
+					self.$scope.$broadcast('search-end');
 				}
 			});
 	},
 
 	select_individual: function(individual) {
 		var self = this;
-
+		
 		if (this.selected_individual && this.selected_individual._id && this.selected_individual._id === individual._id) {
-			this.tree_view = false;
-			this.selected_individual = null;	
+			//this.tree_view = false;
+			//this.selected_individual = null;	
 		}
 		else {
 			this.ftrees.get_data(individual.GT).
@@ -128,8 +147,7 @@ FtreesController.prototype = {
 						family: subset.family
 					};
 
-					self.$location.search('ind_index', self.individuals.indexOf(individual));
-					self.tree_view = true;
+					self.$state.go('ftree-view', {ind_index: self.individuals.indexOf(individual)});	
 				}, function() {
 					self.notification.put({
 						en: 'failed to load tree',

@@ -1,0 +1,13 @@
+<div class="individual">
+	<ng-switch on="indi.sex">
+		<div class="individual__icon" ng-switch-when="M">
+			<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
+		</div>
+		<div class="individual__icon" ng-switch-when="F">
+			<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+		</div>
+	</ng-switch>
+	<div class="individual__name">
+		{{indi.name}}
+	</div>
+</div>
