@@ -531,13 +531,14 @@
 				@at-root #tree-layout {
 					width: 915px;
 					height: 100%;
-					padding: 70px 0 0 0; 
+					padding: 170px 200px 0; 
 					background: #eeeeee;
 
 					.node-container {
 						display: inline-block;
 						min-width: 52px;
-						height: 76px;
+						min-height: 76px;
+						margin: 15px 10px;
 
 						.node {
 							position: relative;

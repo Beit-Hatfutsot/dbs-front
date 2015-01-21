@@ -79,68 +79,112 @@ angular.module('main').
 				return deferred.promise;
 			},
 
+			parse_individual: function(individual) {
+				var subset = this.get_individuals_subset('@' + individual.II + '@');
+
+				var parsed_individual = {
+					_id: individual._id,
+					id: individual.II,
+					name: individual.FN + ' ' + individual.LN,
+					sex: individual.G,
+					parent_family: subset.parent_family,
+					family: subset.family
+				};
+
+				return parsed_individual;
+			},
+
 			get_individuals_subset: function(individual_id) {
-				var family, parents,
+				var family, parent_family,
 					individual_data = this.get_individual_data(individual_id);
 
 				if (individual_data.parent_data) {
-					parents = {
-						husband: {},
-						wife: {},
-						children: []
-					};
-					parents.husband.id = individual_data.parent_data.husb.id;
-					parents.husband.name = individual_data.parent_data.husb.getValue('name');
-					parents.husband.sex = individual_data.parent_data.husb.getValue('sexe');
-					parents.wife.id = individual_data.parent_data.wife.id;
-					parents.wife.name = individual_data.parent_data.wife.getValue('name');
-					parents.wife.sex = individual_data.parent_data.wife.getValue('sexe');
-
-					individual_data.parent_data.childs.forEach(function(child) {
-						var child_obj = {
-							id: child.id,
-							name: child.getValue('name'),
-							sex: child.getValue('sexe')
-						};
-						parents.children.push(child_obj);
-					});
+					parent_family = this.parse_parent(individual_data.parent_data);
 				}
 				else {
-					parents = {};
+					parent_family = {};
 				}
 
 				if (individual_data.family_data) {
-					family = {
-						spouse: {},
-						children: []
-					};
-					var spouse;
-					if (individual_data.family_data.husb.id === individual_id) {
-						spouse = individual_data.family_data.wife; 
-					}
-					else if (individual_data.family_data.wife.id === individual_id) {
-						spouse = individual_data.family_data.husb;
-					}
-					family.spouse.id = spouse.id;
-					family.spouse.name = spouse.getValue('name');
-					family.spouse.sex = spouse.getValue('sexe');
-					individual_data.family_data.childs.forEach(function(child) {
-						var child_obj = {
-							id: child.id,
-							name: child.getValue('name'),
-							sex: child.getValue('sexe')
-						};
-						family.children.push(child_obj);
-					});
+					family = this.parse_family(individual_data.family_data, individual_id);
 				}
 				else {
 					family = {};
 				}
 
 				return {
-					parents: parents,
+					parent_family: parent_family,
 					family: family
 				};
+			},
+
+			parse_parent: function(parent_data) {
+				var parsed_parent = {
+					husband: {},
+					wife: {},
+					children: []
+				};
+				
+				if (parent_data.husb) {
+					parsed_parent.husband.id = parent_data.husb.id;
+					parsed_parent.husband.name = parent_data.husb.getValue('name');
+					parsed_parent.husband.sex = parent_data.husb.getValue('sexe');	
+				}
+				if(parent_data.wife) {
+					parsed_parent.wife.id = parent_data.wife.id;
+					parsed_parent.wife.name = parent_data.wife.getValue('name');
+					parsed_parent.wife.sex = parent_data.wife.getValue('sexe');
+				}
+
+				parent_data.childs.forEach(function(child) {
+					var child_obj = {
+						id: child.id,
+						name: child.getValue('name'),
+						sex: child.getValue('sexe')
+					};
+					parsed_parent.children.push(child_obj);
+				});
+
+				return parsed_parent;
+			},
+
+			parse_family: function(family_data, individual_id) {
+				var self = this;
+				var parsed_family = {
+					spouse: {},
+					children: []
+				};
+				var spouse;
+				if (family_data.husb && family_data.husb.id === individual_id) {
+					spouse = family_data.wife; 
+				}
+				else if (family_data.wife && family_data.wife.id === individual_id) {
+					spouse = family_data.husb;
+				}
+
+				if (spouse) {
+					parsed_family.spouse.id = spouse.id;
+					parsed_family.spouse.name = spouse.getValue('name');
+					parsed_family.spouse.sex = spouse.getValue('sexe');	
+				}
+				
+				family_data.childs.forEach(function(child) {
+					var child_obj = {
+						id: child.id,
+						name: child.getValue('name'),
+						sex: child.getValue('sexe')
+					};
+					var child_family_data = self.get_individual_data(child.id).family_data;
+					if (child_family_data) {
+						child_obj.family = self.parse_family(child_family_data);
+					}
+					else {
+						child_obj.family = {};
+					}
+					parsed_family.children.push(child_obj);
+				});
+
+				return parsed_family;
 			},
 
 			get_individual_data: function(individual_id) {

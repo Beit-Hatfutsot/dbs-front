@@ -1,11 +1,29 @@
-<div class="parents" ng-if="indi.parents.notEmpty()">
+<div class="parent-family" ng-if="indi.parent_family.isNotEmpty()">
+	<div class="node-container">
+		<div class="node">
+			<span ng-if="indi.parent_family.husband.isNotEmpty()">
+				<individual data="indi.parent_family.husband"></individual>
+			</span>
+			<span ng-if="indi.parent_family.wife.isNotEmpty() && indi.parent_family.husband.isNotEmpty()">
+				<div class="rings">
+					<div class="rings__icon">
+						<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+					</div>
+				</div>
+				<individual data="indi.parent_family.wife"></individual>
+			</span>
+			<span ng-if="indi.parent_family.wife.isNotEmpty() && indi.parent_family.husband.isEmpty()">
+				<individual data="indi.parent_family.wife"></individual>
+			</span>
+		</div>
+	</div>
 </div>
 <div class="node-container">
 	<div class="node">
 		<span ng-if="indi.sex === 'M'">
 			<individual data="indi"></individual>
 		</span>
-		<span ng-if="indi.family.spouse">
+		<span ng-if="indi.family.spouse.isNotEmpty()">
 			<div class="rings">
 				<div class="rings__icon">
 					<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
@@ -18,5 +36,23 @@
 		</span>
 	</div>
 </div>
-<div class="family" ng-if="indi.family.notEmpty()">
+<div class="family" ng-if="indi.family.isNotEmpty()">
+	<div class="node-container" ng-repeat="child in indi.family.children">
+		<div class="node">
+			<span ng-if="child.sex === 'M'">
+				<individual data="child"></individual>
+			</span>
+			<span ng-if="child.family.spouse.isNotEmpty()">
+				<div class="rings">
+					<div class="rings__icon">
+						<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+					</div>
+				</div>
+				<individual data="child.family.spouse"></individual>
+			</span>
+			<span ng-if="child.sex === 'F'">
+				<individual data="child"></individual>
+			</span>
+		</div>
+	</div>
 </div>

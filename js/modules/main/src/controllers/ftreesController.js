@@ -154,17 +154,7 @@ FtreesController.prototype = {
 			});
 			this.ftrees.get_data(individual.GT).
 				then(function(tree_data) {
-					console.log(tree_data)
-					var subset = self.ftrees.get_individuals_subset('@' + individual.II + '@');
-
-					self.selected_individual = {
-						_id: individual._id,
-						id: individual.II,
-						name: individual.FN + ' ' + individual.LN,
-						sex: individual.G,
-						parents: subset.parents,
-						family: subset.family
-					};
+					self.selected_individual = self.ftrees.parse_individual(individual);
 
 					self.notification.put({
 						en: 'Family tree successfully loaded.',
