@@ -80,14 +80,15 @@ angular.module('main').
 			},
 
 			get_individuals_subset: function(individual_id) {
-				var parents = {
-					husband: {},
-					wife: {},
-					children: []
-				};
-				var individual_data = this.get_individual_data(individual_id);
+				var family, parents,
+					individual_data = this.get_individual_data(individual_id);
 
 				if (individual_data.parent_data) {
+					parents = {
+						husband: {},
+						wife: {},
+						children: []
+					};
 					parents.husband.id = individual_data.parent_data.husb.id;
 					parents.husband.name = individual_data.parent_data.husb.getValue('name');
 					parents.husband.sex = individual_data.parent_data.husb.getValue('sexe');
@@ -104,9 +105,12 @@ angular.module('main').
 						parents.children.push(child_obj);
 					});
 				}
+				else {
+					parents = {};
+				}
 
 				if (individual_data.family_data) {
-					var family = {
+					family = {
 						spouse: {},
 						children: []
 					};
@@ -128,6 +132,9 @@ angular.module('main').
 						};
 						family.children.push(child_obj);
 					});
+				}
+				else {
+					family = {};
 				}
 
 				return {

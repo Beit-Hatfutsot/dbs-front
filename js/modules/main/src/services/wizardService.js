@@ -37,14 +37,21 @@ angular.module('main').
 	                });
 
 		  			var self = this, 
+		  				query_params = {},
+		  				query = this.query,
 		  				search_promise,
 		  				deferred = $q.defer();
+
+		  			// make sure there are no empty strings in the request query params
+		  			if (query.name) {
+		  				query_params.name = query.name;
+		  			}
+		  			if (query.place) {
+		  				query_params.place = query.place;
+		  			}
 		  			
 		  			$http.get(apiClient.urls.wizard_search, {
-						params:{
-							name: this.query.name || '',
-							place: this.query.place || ''	
-						}
+						params: query_params
 					}).
 					success(function(result) {
 						// set search status

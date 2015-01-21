@@ -1,16 +1,13 @@
 <div id="wizard-result" ng-if="wizardResultController.search_status != '' && wizardResultController.search_status != 'none' && !(wizardResultController.failed)">
 	<div class="items">
-		<div class="items__name" ng-if="wizardResultController.result.name.isNotEmpty()" ng-class="{inline: wizardResultController.result.place.isNotEmpty()}">
+		<div class="items__name" ng-if="wizardResultController.result.name.isNotEmpty">
 			<item-preview preview-data="wizardResultController.result.name" content="name"></item-preview>
 		</div>
-		<!--
-		<div class="items__tree" ng-switch on="wizardResultController.view_mode('trees')">
-			<multiple-result ng-switch-when="multiple" result-data="wizardResultController.result.trees" content="trees"></multiple-result>
-			<no-result ng-switch-when="none" content="tree"></no-result>
-		</div>
-		-->
-		<div class="items__place" ng-if="wizardResultController.result.place.isNotEmpty()" ng-class="{inline: wizardResultController.result.name.isNotEmpty()}">
+		<div class="items__place" ng-if="wizardResultController.result.place.isNotEmpty()">
 			<item-preview preview-data="wizardResultController.result.place" content="place"></item-preview>
+		</div>
+		<div class="items__individuals" ng-if="wizardResultController.result.individuals.isNotEmpty()">
+			<trees-preview individuals="wizardResultController.result.individuals" query-params="{last_name: wizardResultController.result.name.Header.En, birth_place: wizardResultController.result.place.Header.En}"></trees-preview>
 		</div>
 	</div>
 </div>

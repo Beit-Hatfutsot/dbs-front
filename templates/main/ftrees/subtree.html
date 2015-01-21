@@ -1,3 +1,5 @@
+<div class="parents" ng-if="indi.parents.notEmpty()">
+</div>
 <div class="node-container">
 	<div class="node">
 		<span ng-if="indi.sex === 'M'">
@@ -15,4 +17,6 @@
 			<individual data="indi"></individual>
 		</span>
 	</div>
+</div>
+<div class="family" ng-if="indi.family.notEmpty()">
 </div>

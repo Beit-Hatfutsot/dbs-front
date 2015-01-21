@@ -93,6 +93,11 @@ FtreesController.prototype = {
 		var self = this, 
 			search_params = angular.copy(this.search_params);
 
+		this.notification.put({
+			en:'Searching family trees...',
+			he: 'מחפש בעצי משפחה...'			
+		});
+
 		if (search_params.ind_index) {
 			delete(search_params.ind_index);
 		}
@@ -111,17 +116,27 @@ FtreesController.prototype = {
 				search_params[factor] += '~' + fudge_val;
 			}
 		}
-		
+
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
 				for (var param in self.search_params) {
 					self.$location.search(param, search_params[param]);	
 				}
-				
+
+				self.notification.put({
+					en: 'Family Trees Search has finished successfully.',
+					he: 'חיפוש בעצי משפחה הסתיים בהצלחה.'
+				});
+
 				if (self.tree_view) {
 					self.$scope.$broadcast('search-end');
 				}
+			}, function() {
+				self.notification.put({
+					en: 'Family Trees Search has failed.',
+					he: 'חיפוש בעצי משפחה נכשל.'
+				});
 			});
 	},
 
@@ -133,6 +148,10 @@ FtreesController.prototype = {
 			//this.selected_individual = null;	
 		}
 		else {
+			this.notification.put({
+				en: 'Loading tree...',
+				he: 'טוען עץ...'
+			});
 			this.ftrees.get_data(individual.GT).
 				then(function(tree_data) {
 					console.log(tree_data)
@@ -147,11 +166,16 @@ FtreesController.prototype = {
 						family: subset.family
 					};
 
+					self.notification.put({
+						en: 'Family tree successfully loaded.',
+						he: 'עץ משפחה נטען בהצלחה.'
+					});
+
 					self.$state.go('ftree-view', {ind_index: self.individuals.indexOf(individual)});	
 				}, function() {
 					self.notification.put({
-						en: 'failed to load tree',
-						he: 'טעינת עץ נכשלה'
+						en: 'Failed to load tree.',
+						he: 'טעינת עץ נכשלה.'
 					});
 				});
 		}

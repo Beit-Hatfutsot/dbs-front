@@ -114,6 +114,7 @@ WizardFormCtrl.prototype = {
         }
     },
 
+    // adopt a suggestion for a place or a name
     adopt: function(type) {
         
         switch(type) {

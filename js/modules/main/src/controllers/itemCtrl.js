@@ -21,6 +21,19 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 		he: 'טוען פריט...'
 	});
 
+	if ( wizard.result.individuals && wizard.result.individuals.isNotEmpty() ) {
+		this.related_individuals = wizard.result.individuals; 
+
+		this.related_individuals_query_params = {}
+		if ( wizard.result.name && wizard.result.name.isNotEmpty() ) {
+			this.related_individuals_query_params.last_name = wizard.result.name.Header.En;
+		}
+
+		if ( wizard.result.place && wizard.result.place.isNotEmpty() ) {
+			this.related_individuals_query_params.birth_place = wizard.result.place.Header.En;	
+		}
+	}
+
 	item.get($stateParams.item_string).
 		then(function(item_data) {
 			recentlyViewed.put(item_data);

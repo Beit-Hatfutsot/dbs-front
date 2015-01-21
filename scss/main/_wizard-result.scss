@@ -6,18 +6,23 @@
 	background: #eeeeee;
 
 	.items {
-		width: 610px;
-		margin: 0 auto;
+		width: 100%;
 		padding: 60px 0;
-		
-		&__name, &__place {
-			width: 300px;
+		text-align: center;
+
+		&__name, &__place, &__individuals {
+			display: inline-block;
 			vertical-align: top;
+			width: 300px;
 			padding: 10px;
 			margin: 0 auto;
 
-			&.inline {
-				display: inline-block;
+			.en & {
+				text-align: left;
+			}
+
+			.he & {
+				text-align: right;
 			}
 
 			.item-preview, .no-result {
