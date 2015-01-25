@@ -21,19 +21,31 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 	this.selected_collection = [];
 	this.parse_in_progress = false;
 	this.dragging = false;
+	this.branch_edit_status = {
+		0: false,
+		1: false,
+		2: false,
+		3: false,
+	};
+	this.branch_rmdialog_status = {
+		0: false,
+		1: false,
+		2: false,
+		3: false,
+	};
 
 	Object.defineProperty(this, 'mjs_data', {
 		get: function() {
 			return mjs.data;
 		}
 	});
-	/*
-	Object.defineProperty($scope, 'mjs_data', {
+
+	Object.defineProperty(this, 'selected_collection_type', {
 		get: function() {
-			return mjs.data;
+			return this.get_collection_type(this.selected_collection);
 		}
 	});
-	*/
+
 	$scope.$watch(function() {
 		if (self.mjs_data.$resolved) {
 			var unassigned_count = self.mjs_data.unassigned.length,
@@ -88,7 +100,7 @@ MjsController.prototype = {
 
 		this.dragging = false;
 		this.mjs.assign(branch_name, item_string).then(function() {
-			//self.parse_mjs_data();	
+			self.select_branch_by_name(branch_name);
 			self.notification.put({
 				en: 'Item successfuly added to branch ' + branch_name,
 				he: 'הפריט הוסף לענף ' + branch_name +  ' בהצלחה'
@@ -106,7 +118,6 @@ MjsController.prototype = {
 			item_string = this.itemTypeMap.get_type(item.UnitType) + '.' + item._id;
 
 		this.mjs.unassign(branch_name, item_string).then(function() {
-			//self.parse_mjs_data();	
 			self.notification.put({
 				en: 'Item successfuly removed from branch ' + branch_name,
 				he: 'הפריט הורד מענף ' + branch_name +  ' בהצלחה'
@@ -257,6 +268,22 @@ MjsController.prototype = {
 		this.selected_collection = collection;
 	},
 
+	is_selected_collection: function(item_arr) {
+		var result = true;
+
+		if (this.selected_collection.length != item_arr.length) {
+			return false;
+		}
+
+		this.selected_collection.forEach(function(item, index) {
+			if (item._id !== item_arr[index]._id) {
+				result = false;
+			}
+		});
+
+		return result;
+	},
+
 	select_branch: function(branch_index) {
 		var self = this;
 
@@ -273,10 +300,17 @@ MjsController.prototype = {
 		}, 100);
 		setTimeout(function() {
 			clearInterval(repaint);
-			/*angular.forEach(self.plumbConnectionManager.connections, function(connection) {
-				connection.plumb.repaintEverything();
-			})*;*/
 		}, 1000);
+	},
+
+	select_branch_by_name: function(branch_name) {
+		var branch = this.mjs_items.assigned.filter(function(branch, index) {
+			return branch.name == branch_name;
+		})[0];
+
+		var index = this.mjs_items.assigned.indexOf(branch);
+
+		this.select_branch(index);
 	},
 
 	stopPropagation: function($event) {
@@ -288,12 +322,41 @@ MjsController.prototype = {
 		branch_name = 'new branch';
 		this.new_branch.name = branch_name;
 		this.insert_new_branch();	
-		this.assign_item.apply(branch_name, item);
+		this.assign_item(branch_name, item);
 	},
 
 	remove: function($event, branch_name) {
 		this.remove_branch($event, branch_name);
 		this.selected_branch = null;
+		for (var index in this.branch_edit_status) {
+			this.branch_edit_status[index] = false;
+		}
+		for (var index in this.branch_rmdialog_status) {
+			this.branch_rmdialog_status[index] = false;
+		}
+	},
+
+	toggle_branch_edit: function($event, index)  {
+		$event.preventDefault();
+	    $event.stopPropagation();
+		this.branch_edit_status[index] = !(this.branch_edit_status[index]); 
+	},
+
+	toggle_branch_rmdialog: function($event, index)  {
+		$event.preventDefault();
+	    $event.stopPropagation();
+		this.branch_rmdialog_status[index] = !(this.branch_rmdialog_status[index]); 
+	},
+
+	get_collection_type: function(collection) {
+		var display_type_map = {
+			'familyNames': 'Family Names',
+			'places': 'Places'
+		};
+		var type = this.itemTypeMap.get_type(collection[0].UnitType);
+		var display_type = display_type_map[type];
+		
+		return display_type ;
 	}
 };
 

@@ -7,26 +7,46 @@
 			</div>
 		</div>
 		<div ng-switch-when="false" style="width: 100%; height: 100%;">
-			<div id="branch-head-border-{{$index}}" class="branch__head-border" ng-click="mjsCtrl.select_branch($index)">
-				<div class="branch__head-border__edit">
-					<en>
-						<icon position="[-226, -123]"></icon>
-					</en>
-					<he>
-						<icon position="[-224, -123]"></icon>
-					</he>
-				</div>
-				<div class="branch__head-border__remove" ng-click="mjsCtrl.remove($event, branch.name)">
-					<en>
-						<icon position="[-226, -102]"></icon>
-					</en>
-					<he>
-						<icon position="[-224, -102]"></icon>
-					</he>
+			<div id="branch-head-border-{{$index}}" class="branch__head-border" ng-click="mjsCtrl.select_branch($index)"></div>
+			<div class="branch__head" ng-click="mjsCtrl.select_branch($index)">
+				<div class="branch__head__name">
+					{{branch.name}}
 				</div>
 			</div>
-			<div class="branch__head" ng-click="mjsCtrl.select_branch($index)">
-				<input class="branch__head__name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
+			<div class="branch__edit" ng-show="mjsCtrl.selected_branch === $index" ng-click="mjsCtrl.toggle_branch_edit($event, $index)">
+				<en>
+					<icon position="[-226, -123]"></icon>
+				</en>
+				<he>
+					<icon position="[-224, -123]"></icon>
+				</he>
+			</div>
+			<div class="branch__edit-popover" dropdown is-open="mjsCtrl.branch_edit_status[$index]">
+				<en>Rename this Family Branch</en>
+				<he>שנה את שם הענף</he>
+				<input class="name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
+			</div>
+			<div class="branch__remove" ng-show="mjsCtrl.selected_branch === $index" ng-click="mjsCtrl.toggle_branch_rmdialog($event, $index)">
+				<en>
+					<icon position="[-226, -102]"></icon>
+				</en>
+				<he>
+					<icon position="[-224, -102]"></icon>
+				</he>
+			</div>
+			<div class="branch__remove-popover" dropdown is-open="mjsCtrl.branch_rmdialog_status[$index]">
+				<en>Do you want do delete <strong>{{branch.name}}</strong> family branch?</en>
+				<he>האם ברצונך למחוק את ענף המשפחה {{branch.name}}?</he>
+				<div class="branch__remove-popover__actions">
+					<button class="remove" ng-click="mjsCtrl.remove($event, branch.name)">
+						<en>Yes, Delete</en>
+						<he>כן, מחק</he>
+					</button>
+					<button class="cancel">
+						<en>Cancel</en>
+						<he>ביטול</he>
+					</button>
+				</div>
 			</div>
 		</div>
 	</ng-switch>

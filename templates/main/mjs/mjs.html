@@ -3,7 +3,7 @@
 		<div id="unassigned">
 			<div class="title">Unsorted Items</div>
 			<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" draggable data="item">
-				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item"></mjs-item>
+				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item" ng-class="{'selected-collection': mjsCtrl.is_selected_collection([item])}"></mjs-item>
 			</div>
 		</div>
 		<div id="molecules">
@@ -22,14 +22,14 @@
 				<ng-switch on="mjsCtrl.dragging">
 					<div ng-switch-when="true">
 						<div class="branch__drop-area-border"></div>
-						<div class="branch__drop-area" droppable ondrop="mjsCtrl.create_n_assign" branch-name="mjsCtrl.new_branch.name">
+						<div class="branch__drop-area" droppable ondrop="mjsCtrl.create_n_assign" context="mjsCtrl" branch-name="mjsCtrl.new_branch.name">
 							<div class="branch__drop-area__text">Drop here to create a new branch</div>
 						</div>
 					</div>
 					<div ng-switch-when="false" style="width: 100%; height: 100%;">
 						<div class="branch__head-border"></div>
 						<div class="branch__head">
-							<input class="branch__head__name" ng-model="mjsCtrl.new_branch.name" add-mjs-branch>
+							<!--<input class="branch__head__name" ng-model="mjsCtrl.new_branch.name" add-mjs-branch>-->
 						</div>
 					</div>
 				</ng-switch>
@@ -40,6 +40,9 @@
 	</div>
 	<div id="item-bar-container">
 		<div id="item-bar">
+			<div id="item-bar-title-container" ng-hide="mjsCtrl.is_selected_collection([])">
+				<div id="item-bar-title">{{mjsCtrl.selected_collection_type}} collection</div>
+			</div>
 			<item-preview ng-repeat="item_data in mjsCtrl.selected_collection" preview-data="item_data" arrow="right" hide-text="true" removable="true"></item-preview>
 		</div>
 	</div>
