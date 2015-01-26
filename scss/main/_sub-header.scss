@@ -7,28 +7,7 @@
 	background: #f5f5f5;
 	border-top: 2px solid #d6d6d6;
 	border-bottom: 4px solid #5ec5d6;
-	@include transition(margin, 1s, ease);
-
-	&:before, &:after {
-		bottom: 100%;
-		border: solid transparent;
-		content: " ";
-		height: 0;
-		width: 0;
-		position: absolute;
-		pointer-events: none;
-		@include transition(all, 1s, ease);
-	}
-	
-	&:before {
-		border-bottom-color: #d6d6d6;
-		border-width: 11px;
-	}
-
-	&:after {
-		border-bottom-color: #f5f5f5;
-		border-width: 8px;
-	} 
+	@include transition(margin, 1s, ease); 
 	
 	&--wizard, &--recently-viewed {
 		margin-top: -$notification-bar-height;
@@ -45,27 +24,25 @@
 	&--wizard {
 		min-height: 160px;
 
-		&:before {
-			left: 50%;
+		.border-adhoc:before {
 
 			.en & {
-				@include translate(-388px, 0);
+				left: 175px;
 			}
 
 			.he & {
-				@include translate(355px, 0);
+				right: 175px;
 			}
 		}
 
-		&:after {
-			left: 50%;
-
+		.border-adhoc:after {
+			
 			.en & {
-				@include translate(-385px, 0);
+				left: 178px;
 			}
 
 			.he & {
-				@include translate(358px, 0);
+				right: 175px;
 			}
 		}
 	}
@@ -73,147 +50,171 @@
 	&--recently-viewed {
 		min-height: 92px;
 
-		&:before {
-			left: 50%;
-
+		.border-adhoc:before {
+			
 			.en & {
-				@include translate(-349px, 0);
+				left: 215px;
 			}
 
 			.he & {
-				@include translate(314px, 0);
+				right: 175px;
 			}
 		}
 
-		&:after {
-			left: 50%;
+		.border-adhoc:after {
 
 			.en & {
-				@include translate(-346px, 0);
+				left: 218px;
 			}
 
 			.he & {
-				@include translate(317px, 0);
+				right: 175px;
 			}
 		}
 	}
 
-	@at-root #sub-header {
+	.border-adhoc {
+		position: relative;
 		width: $view-width;
-		margin: 0 auto;
 
-		.header-wizard {
-			position: relative;
-			width: 865px;
-			padding: 35px 0;
-			opacity: 1;
-			@include transition(all, 0.3s, ease);
-			
-			&.ng-hide {
-				opacity: 0;
-			}
+		&:before, &:after {
+			bottom: 100%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+			@include transition(all, 1s, ease);
+		}
+		
+		&:before {
+			border-bottom-color: #d6d6d6;
+			border-width: 11px;
+		}
 
-			&.ng-hide-remove {
-				height: 0;
-				opacity: 0;
-			}
-			
-			.wizard-form {
-				margin: 0 auto;
+		&:after {
+			border-bottom-color: #f5f5f5;
+			border-width: 8px;
+		}
 
-				&__field {
+		@at-root #sub-header {
+			width: $view-width;
+			margin: 0 auto;
 
-					&__suggestions {
-						margin: 10px 0 0;
-						width: 294px;
+			.header-wizard {
+				position: relative;
+				width: 865px;
+				padding: 35px 0;
+				opacity: 1;
+				@include transition(all, 0.3s, ease);
+				
+				&.ng-hide {
+					opacity: 0;
+				}
 
-						&__suggestion {
-							display: inline-block;
-							margin: 5px;
-							padding: 5px;
-							border: 1px solid grey;
-							font-size: 11px;
-							@include border-radius(5px);
-							@include hover-pointer();
+				&.ng-hide-remove {
+					height: 0;
+					opacity: 0;
+				}
+				
+				.wizard-form {
+					margin: 0 auto;
+
+					&__field {
+
+						&__suggestions {
+							margin: 10px 0 0;
+							width: 294px;
+
+							&__suggestion {
+								display: inline-block;
+								margin: 5px;
+								padding: 5px;
+								border: 1px solid grey;
+								font-size: 11px;
+								@include border-radius(5px);
+								@include hover-pointer();
+							}
 						}
 					}
 				}
 			}
-		}
 
-		.recently-viewed {
-			position: relative;
-			width: 100%;
-			opacity: 1;
-			padding: 11px 0;
-			@include transition(all, 0.3s, ease);
-			
-			&.ng-hide {
-				opacity: 0;
-			}
-
-			&.ng-hide-remove {
-				height: 0;
-				opacity: 0;
-			}
-
-			&__title {
-				@include rotate();
-				display: inline-block;
-				width: 76px;
-				height: 33px;
-				text-align: center;
-				margin-top: 18px;
-				font-size: 12px;
-
-				.en & {
-					padding-top: 6px;
-					border-top: 1px solid #d9d9d9; 
-				}
-
-				.he & {
-					padding-bottom: 6px;
-					border-bottom: 1px solid #d9d9d9; 
-				}
-			}
-
-			.item-thumbnail {
+			.recently-viewed {
 				position: relative;
-				display: inline-block;
-				vertical-align: top;
-				width: 60px;
-				height: 60px;
-				margin: 6px 0;
-				@include border-radius(4px);
-				@include hover-pointer(); 
-
-				.en & {
-					left: -10px;
+				width: 100%;
+				opacity: 1;
+				padding: 11px 0;
+				@include transition(all, 0.3s, ease);
+				
+				&.ng-hide {
+					opacity: 0;
 				}
 
-				.he & {
-					right: -10px;
+				&.ng-hide-remove {
+					height: 0;
+					opacity: 0;
 				}
 
-				&--text {
-					padding: 16px 8px;
-					font-size: 9px;
-					background: #ffffff;
-					@include box-shadow(0 0 3px 1px #eaeaea);
-				}
+				&__title {
+					@include rotate();
+					display: inline-block;
+					width: 76px;
+					height: 33px;
+					text-align: center;
+					margin-top: 18px;
+					font-size: 12px;
 
-				&--pic {
-					position: relative;
-					overflow: hidden;
+					.en & {
+						padding-top: 6px;
+						border-top: 1px solid #d9d9d9; 
+					}
 
-					img {
-						position: absolute;
-						left: 50%;
-						top: 50%;
-						@include translate(-50%, -50%);
+					.he & {
+						padding-bottom: 6px;
+						border-bottom: 1px solid #d9d9d9; 
 					}
 				}
-			}
-		}	
+
+				.item-thumbnail {
+					position: relative;
+					display: inline-block;
+					vertical-align: top;
+					width: 60px;
+					height: 60px;
+					margin: 6px 0;
+					@include border-radius(4px);
+					@include hover-pointer(); 
+
+					.en & {
+						left: -10px;
+					}
+
+					.he & {
+						right: -10px;
+					}
+
+					&--text {
+						padding: 16px 8px;
+						font-size: 9px;
+						background: #ffffff;
+						@include box-shadow(0 0 3px 1px #eaeaea);
+					}
+
+					&--pic {
+						position: relative;
+						overflow: hidden;
+
+						img {
+							position: absolute;
+							left: 50%;
+							top: 50%;
+							@include translate(-50%, -50%);
+						}
+					}
+				}
+			}	
+		}
 	}
 }	

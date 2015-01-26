@@ -28,12 +28,12 @@ html {
 		padding: 0;
 		margin: 0;
 		color: #333333;
+		overflow-x: hidden;
+		overflow-y: auto;
 
 		@at-root #app-container {
 			position: relative;
 			height: 100%;
-			overflow-x: hidden;
-			overflow-y: auto;
 			background: #eeeeee;
 
 			&.en {
