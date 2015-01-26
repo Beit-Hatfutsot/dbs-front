@@ -11,7 +11,7 @@ angular.module('main').
 				});
 			}],
 			link: function(scope, element) {
-				var container = document.querySelector('#app-container');
+				var container = document.getElementsByTagName('body')[0];
 				scope.$watch('search_status', function(newVal, oldVal) {
 					if (newVal != 'none' && newVal != '') {
 						setTimeout(function() {
