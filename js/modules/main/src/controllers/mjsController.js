@@ -349,14 +349,19 @@ MjsController.prototype = {
 	},
 
 	get_collection_type: function(collection) {
-		var display_type_map = {
-			'familyNames': 'Family Names',
-			'places': 'Places'
-		};
-		var type = this.itemTypeMap.get_type(collection[0].UnitType);
-		var display_type = display_type_map[type];
-		
-		return display_type ;
+		if (collection.length > 0) {
+			var display_type_map = {
+				'familyNames': 'Family Names',
+				'places': 'Places'
+			};
+			var type = this.itemTypeMap.get_type(collection[0].UnitType);
+			var display_type = display_type_map[type];
+			
+			return display_type ;
+		}
+		else {
+			return '';
+		}
 	}
 };
 
