@@ -46,24 +46,26 @@
 		min-height: 160px;
 
 		&:before {
+			left: 50%;
 
 			.en & {
-				left: 532px;
+				@include translate(-388px, 0);
 			}
 
 			.he & {
-				right: 175px;
+				@include translate(355px, 0);
 			}
 		}
 
 		&:after {
+			left: 50%;
 
 			.en & {
-				left: 535px;
+				@include translate(-385px, 0);
 			}
 
 			.he & {
-				right: 175px;
+				@include translate(358px, 0);
 			}
 		}
 	}
@@ -72,24 +74,26 @@
 		min-height: 92px;
 
 		&:before {
+			left: 50%;
 
 			.en & {
-				left: 570px;
+				@include translate(-349px, 0);
 			}
 
 			.he & {
-				right: 175px;
+				@include translate(314px, 0);
 			}
 		}
 
 		&:after {
+			left: 50%;
 
 			.en & {
-				left: 573px;
+				@include translate(-346px, 0);
 			}
 
 			.he & {
-				right: 175px;
+				@include translate(317px, 0);
 			}
 		}
 	}
@@ -158,16 +162,23 @@
 				display: inline-block;
 				width: 76px;
 				height: 33px;
-				padding: 6px 0 0;
 				text-align: center;
 				margin-top: 18px;
 				font-size: 12px;
-				border-top: 1px solid #d9d9d9; 
+
+				.en & {
+					padding-top: 6px;
+					border-top: 1px solid #d9d9d9; 
+				}
+
+				.he & {
+					padding-bottom: 6px;
+					border-bottom: 1px solid #d9d9d9; 
+				}
 			}
 
 			.item-thumbnail {
 				position: relative;
-				left: -10px;
 				display: inline-block;
 				vertical-align: top;
 				width: 60px;
@@ -175,6 +186,14 @@
 				margin: 6px 0;
 				@include border-radius(4px);
 				@include hover-pointer(); 
+
+				.en & {
+					left: -10px;
+				}
+
+				.he & {
+					right: -10px;
+				}
 
 				&--text {
 					padding: 16px 8px;
