@@ -1,7 +1,10 @@
 <div id="mjs-container">
 	<div id="mjs" ng-show="mjsCtrl.content_loaded">
 		<div id="unassigned">
-			<div class="title">Unsorted Items</div>
+			<div class="title">
+				<en>Unsorted Items</en>
+				<he>פריטים לא ממויינים</he>
+			</div>
 			<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" draggable data="item">
 				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item" ng-class="{'selected-collection': mjsCtrl.is_selected_collection([item])}"></mjs-item>
 			</div>
@@ -41,7 +44,11 @@
 	<div id="item-bar-container">
 		<div id="item-bar">
 			<div id="item-bar-title-container" ng-hide="mjsCtrl.is_selected_collection([])">
-				<div id="item-bar-title">{{mjsCtrl.selected_collection_type}} collection</div>
+				<div id="item-bar-title">
+					<he>מאגר</he>
+					{{mjsCtrl.selected_collection_type}} 
+					<en>collection</en>
+				</div>
 			</div>
 			<item-preview ng-repeat="item_data in mjsCtrl.selected_collection" preview-data="item_data" arrow="right" hide-text="true" removable="true"></item-preview>
 		</div>

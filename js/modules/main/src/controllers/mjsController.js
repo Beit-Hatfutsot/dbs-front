@@ -1,4 +1,4 @@
-var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager, header) {
+var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager) {
 	var self = this;
 
 	header.sub_header_state = 'closed';
@@ -8,6 +8,7 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 	this.itemTypeMap = itemTypeMap;
 	this.item = item;
 	this.plumbConnectionManager = plumbConnectionManager;
+	this.langManager = langManager;
 
 	this.content_loaded = false;
 	this.mjs_items = {
@@ -351,11 +352,17 @@ MjsController.prototype = {
 	get_collection_type: function(collection) {
 		if (collection.length > 0) {
 			var display_type_map = {
-				'familyNames': 'Family Names',
-				'places': 'Places'
+				'familyNames': {
+					en: 'Family Names',
+					he: 'שמות משפחה'
+				},
+				'places': {
+					en: 'Places',
+					he: 'מקומות'
+				}
 			};
 			var type = this.itemTypeMap.get_type(collection[0].UnitType);
-			var display_type = display_type_map[type];
+			var display_type = display_type_map[type][this.langManager.lang];
 			
 			return display_type ;
 		}
@@ -365,4 +372,4 @@ MjsController.prototype = {
 	}
 };
 
-angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', MjsController]);
+angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', MjsController]);

@@ -14,12 +14,7 @@
 				</div>
 			</div>
 			<div class="branch__edit" ng-show="mjsCtrl.selected_branch === $index" ng-click="mjsCtrl.toggle_branch_edit($event, $index)">
-				<en>
-					<icon position="[-226, -123]"></icon>
-				</en>
-				<he>
-					<icon position="[-224, -123]"></icon>
-				</he>
+				<icon position="[-226, -123]"></icon>
 			</div>
 			<div class="branch__edit-popover" dropdown is-open="mjsCtrl.branch_edit_status[$index]">
 				<en>Rename this Family Branch</en>
@@ -27,12 +22,7 @@
 				<input class="name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
 			</div>
 			<div class="branch__remove" ng-show="mjsCtrl.selected_branch === $index" ng-click="mjsCtrl.toggle_branch_rmdialog($event, $index)">
-				<en>
-					<icon position="[-226, -102]"></icon>
-				</en>
-				<he>
-					<icon position="[-224, -102]"></icon>
-				</he>
+				<icon position="[-226, -102]"></icon>
 			</div>
 			<div class="branch__remove-popover" dropdown is-open="mjsCtrl.branch_rmdialog_status[$index]">
 				<en>Do you want do delete <strong>{{branch.name}}</strong> family branch?</en>
@@ -51,7 +41,7 @@
 		</div>
 	</ng-switch>
 	<div id="branch-content-{{$index}}" class="branch__content" ng-show="mjsCtrl.selected_branch === $index">
-		<mjs-assigned ng-if="branch.items.familyNames" id="assigned-first-{{$index}}" class="assigned assigned--first" collection-name="familyNames" icon-position='{"en": [-81, -266], "he": [-61, -266]}' plumb-connect to="branch-head-border-{{$index}}" connection-id="familyNames-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
-		<mjs-assigned ng-if="branch.items.places" id="assigned-second-{{$index}}" class="assigned assigned--second" collection-name="places" icon-position='{"en": [-79, -192], "he": [-59, -192]}' plumb-connect to="branch-head-border-{{$index}}" connection-id="places-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
+		<mjs-assigned ng-if="branch.items.familyNames" id="assigned-first-{{$index}}" class="assigned assigned--first" collection-name="familyNames" icon-position="[-81, -266]" plumb-connect to="branch-head-border-{{$index}}" connection-id="familyNames-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
+		<mjs-assigned ng-if="branch.items.places" id="assigned-second-{{$index}}" class="assigned assigned--second" collection-name="places" icon-position="[-79, -192]" plumb-connect to="branch-head-border-{{$index}}" connection-id="places-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
 	</div>
 </div>
