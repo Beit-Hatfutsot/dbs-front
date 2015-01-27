@@ -112,6 +112,13 @@
 					}
 				}
 
+				&.under-edit {
+
+					.branch__edit, .branch__remove {
+						opacity: 1;
+					}
+				}
+
 				&--0 {
 					right: 0;
 					bottom: 0;
@@ -158,12 +165,10 @@
 
 				&--new {
 
-					input {
+					.create-branch {
 						font-size: 40px;
-
-						&.edit {
-							font-size: 12px;
-						}
+						text-align: center;
+						margin-top: 15px;
 					}
 				}
 

@@ -16,8 +16,7 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 		unassigned: []
 	};
 	this.new_branch = {
-		name: '+',
-		items: []
+		name: 'new family branch'
 	}
 	this.selected_collection = [];
 	this.parse_in_progress = false;
@@ -219,9 +218,9 @@ MjsController.prototype = {
 
 			this.mjs.add_branch(this.new_branch.name).
 				then(function() {
-					self.new_branch = {
-						name: '+',
-					}
+					var index = self.mjs_items.assigned.length-1;
+					self.select_branch(index);
+					self.branch_edit_status[index] = true;
 			});
 		}
 	},

@@ -31,8 +31,8 @@
 					</div>
 					<div ng-switch-when="false" style="width: 100%; height: 100%;">
 						<div class="branch__head-border"></div>
-						<div class="branch__head">
-							<!--<input class="branch__head__name" ng-model="mjsCtrl.new_branch.name" add-mjs-branch>-->
+						<div class="branch__head" ng-click="mjsCtrl.insert_new_branch()">
+							<div class="create-branch">+</div>
 						</div>
 					</div>
 				</ng-switch>
