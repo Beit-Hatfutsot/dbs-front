@@ -14,13 +14,6 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 	this.related_data = [];
 	this.in_mjs = false;
 	
-	notification.clear();
-
-	notification.put({
-		en: 'Fetching item...',
-		he: 'טוען פריט...'
-	});
-
 	if ( wizard.result.individuals && wizard.result.individuals.isNotEmpty() ) {
 		this.related_individuals = wizard.result.individuals; 
 
@@ -65,6 +58,11 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 		get: function() {
 			return itemTypeMap.get_type( this.item_data.UnitType );
 		}
+	});
+
+	notification.put({
+		en: 'Loading item...',
+		he: 'טוען פריט...'
 	});
 };
 

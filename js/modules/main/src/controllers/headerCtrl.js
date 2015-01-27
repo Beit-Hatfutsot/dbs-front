@@ -1,4 +1,4 @@
-var HeaderCtrl = function($state, wizard, header, notification, auth) {
+var HeaderCtrl = function($state, wizard, header, notification, auth, mjs) {
 
     this.auth = auth;
 
@@ -40,6 +40,17 @@ var HeaderCtrl = function($state, wizard, header, notification, auth) {
             header.sub_header_state = new_state;
         }
     });
+
+    Object.defineProperty(this, 'mjs_count', {
+        get: function() {
+            if (mjs.data.$resolved) {
+                return mjs.data.unassigned.length;
+            }
+            else {
+                return '';
+            }
+        }
+    });
 };
 
 HeaderCtrl.prototype = {
@@ -48,4 +59,4 @@ HeaderCtrl.prototype = {
     }
 };
 
-angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', HeaderCtrl]);
+angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', 'mjs', HeaderCtrl]);

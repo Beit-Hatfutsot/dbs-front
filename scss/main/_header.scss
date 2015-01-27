@@ -207,6 +207,28 @@
 					}
 				}
 
+				&__count {
+					position: absolute;
+					z-index: 1;
+					top: -5px;
+					width: 15px;
+					height: 15px;
+					background: #be3119;
+					text-align: center;
+					font-size: 10px;
+					color: #ffffff;
+					padding: 2px;
+					@include border-radius(50%);
+
+					.en & {
+						left: 15px;
+					}
+
+					.he & {
+						right: 15px;
+					}
+				}
+
 				&__icon {
 					width: 25px;
 					height: 24px;

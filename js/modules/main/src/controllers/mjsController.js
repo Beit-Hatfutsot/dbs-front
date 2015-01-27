@@ -59,6 +59,10 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 			return unassigned_count - assigned_count;
 		}
 	}, function(newVal, oldVal) {
+		notification.put({
+			en: 'Loading Story...',
+			he: 'טוען סיפור...'
+		});
 		self.parse_mjs_data();
 	});
 
@@ -90,6 +94,10 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 			self.dragging = false;
 		});
 	});
+
+
+	// init notifications
+	notification.clear();
 };
 
 MjsController.prototype = {
@@ -192,6 +200,11 @@ MjsController.prototype = {
 			}
 
 			this.content_loaded = true;
+
+			this.notification.put({
+				en: 'Story loaded successfuly',
+				he: 'סיפור נטען בהצלחה.'
+			});
 		}
 	},
 

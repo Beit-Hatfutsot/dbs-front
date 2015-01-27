@@ -97,7 +97,7 @@
 }
 
 @mixin item-shadow() {
-	@include box-shadow(0 3px 5px 2px #d4d6d5)
+	@include box-shadow(2px 2px 5px 1px #d4d6d5)
 }
 
 @mixin item-bottom-border() {
