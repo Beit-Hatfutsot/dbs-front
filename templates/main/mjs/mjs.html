@@ -5,7 +5,7 @@
 				<en>Unsorted Items</en>
 				<he>פריטים לא ממויינים</he>
 			</div>
-			<div ng-repeat="item in mjsCtrl.mjs_items.unassigned" draggable data="item">
+			<div ng-repeat="item in mjsCtrl.mjs_items.unassigned">
 				<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item" ng-class="{'selected-collection': mjsCtrl.is_selected_collection([item])}"></mjs-item>
 			</div>
 		</div>

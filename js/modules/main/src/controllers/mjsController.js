@@ -108,7 +108,10 @@ MjsController.prototype = {
 
 		this.dragging = false;
 		this.mjs.assign(branch_name, item_string).then(function() {
-			self.select_branch_by_name(branch_name);
+			var index = self.get_branch_index(branch_name);
+			if (self.selected_branch !== index) {
+				self.select_branch(index);
+			}
 			self.notification.put({
 				en: 'Item successfuly added to branch ' + branch_name,
 				he: 'הפריט הוסף לענף ' + branch_name +  ' בהצלחה'
@@ -316,14 +319,13 @@ MjsController.prototype = {
 		}, 1000);
 	},
 
-	select_branch_by_name: function(branch_name) {
+	get_branch_index: function(branch_name) {
 		var branch = this.mjs_items.assigned.filter(function(branch, index) {
 			return branch.name == branch_name;
 		})[0];
-
 		var index = this.mjs_items.assigned.indexOf(branch);
 
-		this.select_branch(index);
+		return index;
 	},
 
 	stopPropagation: function($event) {
@@ -332,8 +334,6 @@ MjsController.prototype = {
 
 	create_n_assign: function(branch_name, item) {
 		this.dragging = false;
-		branch_name = 'new branch';
-		this.new_branch.name = branch_name;
 		this.insert_new_branch();	
 		this.assign_item(branch_name, item);
 	},
