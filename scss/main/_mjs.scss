@@ -20,6 +20,7 @@
 				margin: 6px auto;
 				@include border-radius(4px); 
 				@include box-shadow(0 0 0 2px #eaeaea);
+				overflow: hidden;
 
 				&--text {
 					padding: 16px 8px;
@@ -377,42 +378,48 @@
 					}
 				}
 
-				&__drop-area-border {
-					position: absolute;
-					left: 50%;
-					top: 50%;
-					@include translate(-50%, -50%);
-					z-index: 1;
-					width: 128px;
-					height: 128px;
-					background: transparent;
-					border: 14px solid #d6f1f5;
-					@include border-radius(50%);
-					@include hover-pointer();
-				}
-
 				&__drop-area {
-					position: absolute;
-					z-index: 3;
-					left: 50%;
-					top: 50%;
-					@include translate(-50%, -50%);
-					width: 100px;
-					height: 100px;
-					background: #fbf7f4;
-					@include border-radius(50%);
 
 					&.over {
-						background: #ffffff;
+
+						.branch__drop-area__center {
+							background: #ffffff;
+						}
 					}
 
-					&__text {
+					&__border {
 						position: absolute;
 						left: 50%;
 						top: 50%;
 						@include translate(-50%, -50%);
-						font-size: 11px;
-						font-weight: bold;
+						z-index: 1;
+						width: 128px;
+						height: 128px;
+						background: transparent;
+						border: 14px solid #d6f1f5;
+						@include border-radius(50%);
+						@include hover-pointer();
+					}
+
+					&__center {
+						position: absolute;
+						z-index: 3;
+						left: 50%;
+						top: 50%;
+						@include translate(-50%, -50%);
+						width: 100px;
+						height: 100px;
+						background: #fbf7f4;
+						@include border-radius(50%);
+
+						&__text {
+							position: absolute;
+							left: 50%;
+							top: 50%;
+							@include translate(-50%, -50%);
+							font-size: 11px;
+							font-weight: bold;
+						}	
 					}
 				}
 

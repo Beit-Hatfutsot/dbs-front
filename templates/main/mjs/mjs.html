@@ -23,10 +23,10 @@
 			<!-- new branch -->
 			<div class="branch branch--{{mjsCtrl.mjs_items.assigned.length}} branch--new" ng-if="mjsCtrl.mjs_items.assigned.length < 4">
 				<ng-switch on="mjsCtrl.dragging">
-					<div ng-switch-when="true">
-						<div class="branch__drop-area-border"></div>
-						<div class="branch__drop-area" droppable ondrop="mjsCtrl.create_n_assign" context="mjsCtrl" branch-name="mjsCtrl.new_branch.name">
-							<div class="branch__drop-area__text">Drop here to create a new branch</div>
+					<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="mjsCtrl.create_n_assign" context="mjsCtrl" branch-name="mjsCtrl.new_branch.name">
+						<div class="branch__drop-area__border"></div>
+						<div class="branch__drop-area__center">
+							<div class="branch__drop-area__center__text">Drop here to create a new branch</div>
 						</div>
 					</div>
 					<div ng-switch-when="false" style="width: 100%; height: 100%;">

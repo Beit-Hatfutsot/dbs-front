@@ -141,10 +141,6 @@ MjsController.prototype = {
 		});
 	},
 
-	remove_item: function(item_string) {
-		
-	},
-
 	parse_mjs_data: function() {
 		var self = this,
 			item = this.item,

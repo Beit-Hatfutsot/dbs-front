@@ -1,9 +1,9 @@
 <div id="branch--{{$index}}" class="branch branch--{{$index}}" ng-class="{selected: mjsCtrl.selected_branch === $index, 'under-edit': mjsCtrl.branch_edit_status[$index] || mjsCtrl.branch_rmdialog_status[$index]}">
 	<ng-switch on="mjsCtrl.dragging">
-		<div ng-switch-when="true">
-			<div class="branch__drop-area-border"></div>
-			<div class="branch__drop-area" droppable ondrop="mjsCtrl.assign_item" context="mjsCtrl" branch-name="branch.name">
-				<div class="branch__drop-area__text">Drop to add item to branch</div>
+		<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="mjsCtrl.assign_item" context="mjsCtrl" branch-name="branch.name">
+			<div class="branch__drop-area__border"></div>
+			<div class="branch__drop-area__center">
+				<div class="branch__drop-area__center__text">Drop to add item to branch</div>
 			</div>
 		</div>
 		<div ng-switch-when="false" style="width: 100%; height: 100%;">

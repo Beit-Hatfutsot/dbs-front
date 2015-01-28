@@ -185,7 +185,8 @@
 					height: 60px;
 					margin: 6px 0;
 					@include border-radius(4px);
-					@include hover-pointer(); 
+					@include hover-pointer();
+					overflow: hidden; 
 
 					.en & {
 						left: -10px;
