@@ -3,7 +3,7 @@ angular.module('apiClient').
 	factory('apiClient', function() {
 	
 	  	return {
-	  		/*
+	  		
 	  		urls: {
 	  			auth: 			'http://127.0.0.1:5000/auth',
 	  			user: 			'http://127.0.0.1:5000/user', 
@@ -12,9 +12,10 @@ angular.module('apiClient').
 	  			item: 			'http://127.0.0.1:5000/item',
 	  			suggest: 		'http://127.0.0.1:5000/suggest',
 	  			ftrees_search:	'http://127.0.0.1:5000/fsearch',
-	  			ftrees_get: 	'http://127.0.0.1:5000/get_ftree_url'
-	  		}*/
-	  		
+	  			ftrees_get: 	'http://127.0.0.1:5000/get_ftree_url',
+	  			upload: 		'http://127.0.0.1:5000/upload'
+	  		}
+	  		/*
 	  		urls: {
 	  			auth: 			'http://bhsapi.ezdr.net/auth',
 	  			user: 			'http://bhsapi.ezdr.net/user', 
@@ -23,7 +24,8 @@ angular.module('apiClient').
 	  			item: 			'http://bhsapi.ezdr.net/item',
 	  			suggest: 		'http://bhsapi.ezdr.net/suggest',
 	  			ftrees_search:	'http://bhsapi.ezdr.net/fsearch',
-	  			ftrees_get: 	'http://bhsapi.ezdr.net/get_ftree_url'
-	  		}
+	  			ftrees_get: 	'http://bhsapi.ezdr.net/get_ftree_url',
+	  			upload: 		'http://bhsapi.ezdr.net/upload'
+	  		}*/
 	  	};
 	});

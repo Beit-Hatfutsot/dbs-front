@@ -1,0 +1,41 @@
+<div id="upload">
+     <div id="upload-instructions-container">
+        <div id="upload-instructions">
+            <div class="title">
+                <en>Add Items to your jewish story</en>
+                <he></he>
+            </div>
+            <div class="content">
+                <en>If you would like to allow the usage of this item to Beit Hatfutsot please fill in the fiealds below</en>
+                <he></he>
+            </div>
+        </div>
+    </div>
+    <div id="tabs-container">
+        <!--<div class="tabs" tabs selected="uploadCtrl.selcted_tab">
+            <div id="picture-tab" class="tabs__tab tabs__tab--selected">Pictures</div>
+            <div id="video-tab" class="tabs__tab">Video</div>
+            <div id="music" class="tabs__tab">Music</div>
+            <div id="family-tree-tab" class="tabs__tab">Family Treee</div>
+        </div>-->
+        <div class="tabs">
+            <tabset justified="true">
+                <tab heading="Picture" active="uploadCtrl.tab_status.picture"></tab>
+                <tab heading="Video" active="uploadCtrl.tab_status.video"></tab>
+                <tab heading="Music" active="uploadCtrl.tab_status.music"></tab>
+                <tab heading="Family tree" active="uploadCtrl.tab_status.family_tree"></tab>
+            </tabset>
+        </div>
+    </div>
+
+
+    <div flow-init="uploadCtrl.flow_init" flow-files-submitted="uploadCtrl.upload(event, $flow, files)" flow-file-success="uploadCtrl.onSuccess()" flow-file-error="uploadCtrl.onError()">
+        <div class="alert" style="height: 300px; width: 300px; background: #999999;" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style" flow-drop ng-hide="uploadCtrl.success">
+            <span class="btn btn-default" flow-btn>Upload File</span>
+            Or Drag And Drop your file here
+            <img flow-img="$flow.files[0]" />
+        </div>
+        <div ng-show="uploadCtrl.failed">FILE UPLOAD FAILED</div>
+    </div>
+    <ui-view></ui-view>
+</div>

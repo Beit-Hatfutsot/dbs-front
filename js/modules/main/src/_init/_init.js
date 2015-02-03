@@ -5,6 +5,7 @@ angular.module('main', [
     'ngAnimate',
     'ui.bootstrap',
     'ui.router',
+    'flow',
     'lang',
     'auth',
     'apiClient',
@@ -12,8 +13,8 @@ angular.module('main', [
     'plumb'
 ]).
 config([
-'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider',
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
+'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'flowFactoryProvider',
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, flowFactoryProvider) {
 
     var states = [ 
         {
@@ -77,9 +78,39 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         },           
 
         {
-            name: 'gedcom',
-            url: '/gedcom',
-            templateUrl: 'templates/gedcom/gedcom.html'
+            name: 'upload',
+            abstract: true,
+            url: '/upload',
+            controller: 'UploadController as uploadCtrl',
+            templateUrl: 'templates/upload/upload.html'
+        },
+
+        {
+            name: 'upload.picture',
+            url: '/picture',
+            //controller: 'PictureUploadController as pictureUploadCtrl',
+            templateUrl: 'templates/upload/picture.html'
+        },
+
+        {
+            name: 'upload.video',
+            url: '/video',
+            //controller: 'PictureUploadController as pictureUploadCtrl',
+            templateUrl: 'templates/upload/video.html'
+        },
+
+        {
+            name: 'upload.music',
+            url: '/music',
+            //controller: 'PictureUploadController as pictureUploadCtrl',
+            templateUrl: 'templates/upload/music.html'
+        },
+
+        {
+            name: 'upload.family_tree',
+            url: '/family_tree',
+            //controller: 'PictureUploadController as pictureUploadCtrl',
+            templateUrl: 'templates/upload/tree.html'
         },
 
         {
