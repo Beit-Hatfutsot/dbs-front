@@ -82,35 +82,35 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
             abstract: true,
             url: '/upload',
             controller: 'UploadController as uploadCtrl',
-            templateUrl: 'templates/upload/upload.html'
+            templateUrl: 'templates/main/upload/upload.html'
         },
 
         {
             name: 'upload.picture',
             url: '/picture',
-            //controller: 'PictureUploadController as pictureUploadCtrl',
-            templateUrl: 'templates/upload/picture.html'
+            controller: 'UploadPictureController as uploadPictureCtrl',
+            templateUrl: 'templates/main/upload/picture.html'
         },
 
         {
             name: 'upload.video',
             url: '/video',
             //controller: 'PictureUploadController as pictureUploadCtrl',
-            templateUrl: 'templates/upload/video.html'
+            templateUrl: 'templates/main/upload/video.html'
         },
 
         {
             name: 'upload.music',
             url: '/music',
             //controller: 'PictureUploadController as pictureUploadCtrl',
-            templateUrl: 'templates/upload/music.html'
+            templateUrl: 'templates/main/upload/music.html'
         },
 
         {
             name: 'upload.family_tree',
             url: '/family_tree',
             //controller: 'PictureUploadController as pictureUploadCtrl',
-            templateUrl: 'templates/upload/tree.html'
+            templateUrl: 'templates/main/upload/tree.html'
         },
 
         {
