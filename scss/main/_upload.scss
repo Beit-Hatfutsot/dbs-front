@@ -85,6 +85,7 @@
 			.upload-droparea {
 				width: 100%;
 				height: 250px;
+				margin-bottom: 20px;
 				padding: 18px 0 0;
 				border: 2px dashed #666666;
 				text-align: center;
@@ -108,11 +109,17 @@
 					color: #999999;
 				}
 
+				img {
+					max-width: 900px;
+					max-height: 210px;
+				}
+
 				@at-root #upload-picture-form {
 
 					.submit {
 						width: 146px;
 						height: 41px;
+						margin: 29px 0 48px;
 						padding: 14px 0 0;
 						background: #48c3d4;
 						font-size: 16px;
@@ -121,6 +128,86 @@
 						border: none;
 						@include border-radius(4px);
 					}
+
+					.upf {
+						margin: 0;
+						padding: 0;
+						border: none;
+
+						&--en {
+							direction: ltr;
+
+							label {
+								left: 10px;
+							}
+						}
+
+						&--he {
+							direction: rtl;
+
+							label {
+								right: 10px;
+							}
+						}
+
+						&__field {
+							position: relative;
+
+							label {
+								opacity: 1;
+								position: absolute;
+								top: 10px;
+								color: #999999;
+								font-size: 14px;
+								@include transition(all, 0.5s, linear);
+
+								&.ng-hide {
+									opacity: 0;
+									top: 24px;
+								}
+
+								.upload-asterix {
+									position: relative;
+									top: -5px;
+									color: #c73420;
+								}
+							}
+
+							input {
+								width: 100%;
+								border: 2px solid #d4d6d5;
+								@include border-radius(6px);
+								margin-bottom: 6px;
+								padding: 34px 10px 0;
+								font-size: 25px;
+							}
+
+							&__title,
+							&__location,
+							&__date,
+							&__creator-name,
+							&__people-present {
+								height: 75px;
+							}
+
+							&__description {
+								height: 153px;
+							}
+						}
+
+						&__alt-instructions {
+							margin: 35px 0 42px;
+							font-size: 24px;
+
+							.en & {
+								direction: rtl;
+							}
+
+							.he & {
+								direction: ltr;
+							}
+						}
+					} 
 				}
 			}
 		}

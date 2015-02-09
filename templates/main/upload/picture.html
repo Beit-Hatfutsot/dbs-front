@@ -1,5 +1,25 @@
 <upload-area ctrl="uploadPictureCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
 <form id="upload-picture-form">
+	<fieldset class="upf upf--{{uploadPictureCtrl.lang_order[0]}}">
+		<div class="upf__field" ng-repeat="type in uploadPictureCtrl.meta_data_order">
+			<input id="upf-{{type}}-{{uploadPictureCtrl.lang_order[0]}}" class="upf__field__{{type}}" name="{{type}}_{{uploadPictureCtrl.lang_order[0]}}" placeholder="*{{uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[0]]}}" ng-model="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[0]]">
+			<label for="upf-title-en" ng-show="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[0]]">
+				*{{uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[0]]}}
+			</label>
+		</div>
+	</fieldset>
+	<div class="upf__alt-instructions">
+		<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
+		<he>If you speak English, please fill the same details below</he>
+	</div>
+	<fieldset class="upf upf--{{uploadPictureCtrl.lang_order[1]}}">
+		<div class="upf__field" ng-repeat="type in uploadPictureCtrl.meta_data_order">
+			<input id="upf-{{type}}-{{uploadPictureCtrl.lang_order[1]}}" class="upf__field__{{type}}" name="{{type}}_{{uploadPictureCtrl.lang_order[1]}}" placeholder="{{uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[1]]}}" ng-model="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[1]]">
+			<label for="upf-title-en" ng-show="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[1]]">
+				{{uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[1]]}}
+			</label>
+		</div>
+	</fieldset>
 	<div class="submit" ng-click="uploadPictureCtrl.submit()">
 		<en>Submit</en>
 		<he>שלח</he>

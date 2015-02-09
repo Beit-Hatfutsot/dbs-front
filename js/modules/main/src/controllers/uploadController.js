@@ -1,7 +1,8 @@
-var UploadController = function($state, auth, apiClient) {
+var UploadController = function($state, auth, apiClient, langManager) {
     var self = this;
 
     this.auth = auth;
+    this.langManager = langManager;
 
     this.flow_init = {
         target:             apiClient.urls.upload, 
@@ -32,6 +33,25 @@ var UploadController = function($state, auth, apiClient) {
             }
         });
     });
+
+    this.tab_headings = {
+        picture: {
+            en: 'Picture',
+            he: 'תמונה'
+        },
+        video: {
+            en: 'Video',
+            he: 'וידאו'
+        },
+        music: {
+            en: 'Music',
+            he: 'מוסיקה'
+        },
+        family_tree: {
+            en: 'Family Tree',
+            he: 'עץ משפחה'
+        },
+    };
 };
 
 UploadController.prototype = {
@@ -40,17 +60,25 @@ UploadController.prototype = {
     },
 
 	upload: function() {
-        var self = this;
-
-        this.flow.opts.headers.Authorization = 'Bearer ' + self.auth.get_token();
-        this.flow.opts.query.title          = this.meta_data.title;
-        this.flow.opts.query.description    = this.meta_data.description;
-        this.flow.opts.query.location       = this.meta_data.location;
-        this.flow.opts.query.date           = this.meta_data.date;
-        this.flow.opts.query.creator_name   = this.meta_data.creator_name;
-        this.flow.opts.query.people_present = this.meta_data.people_present;
+        this.flow.opts.headers.Authorization = 'Bearer ' + this.auth.get_token();
+        this.flow.opts.query.title_en           = this.meta_data.title.en;
+        this.flow.opts.query.description_en     = this.meta_data.description.en;
+        this.flow.opts.query.location_en        = this.meta_data.location.en;
+        this.flow.opts.query.date_en            = this.meta_data.date.en;
+        this.flow.opts.query.creator_name_en    = this.meta_data.creator_name.en;
+        this.flow.opts.query.people_present_en  = this.meta_data.people_present.en;
+        this.flow.opts.query.title_he           = this.meta_data.title.he;
+        this.flow.opts.query.description_he     = this.meta_data.description.he;
+        this.flow.opts.query.location_he        = this.meta_data.location.he;
+        this.flow.opts.query.date_he            = this.meta_data.date.he;
+        this.flow.opts.query.creator_name_he    = this.meta_data.creator_name.he;
+        this.flow.opts.query.people_present_he  = this.meta_data.people_present.he;
         this.flow.upload();
-	}
+	},
+
+    get_tab_heading: function(type) {
+        return this.tab_headings[type][this.langManager.lang]
+    }
 };
 
-angular.module('main').controller('UploadController', ['$state', 'auth', 'apiClient', UploadController]);
+angular.module('main').controller('UploadController', ['$state', 'auth', 'apiClient', 'langManager',UploadController]);

@@ -14,10 +14,10 @@
     <div id="tabs-container">
         <div class="tabs">
             <tabset justified="true">
-                <tab heading="Picture" active="uploadCtrl.tab_status.picture"></tab>
-                <tab heading="Video" active="uploadCtrl.tab_status.video"></tab>
-                <tab heading="Music" active="uploadCtrl.tab_status.music"></tab>
-                <tab heading="Family tree" active="uploadCtrl.tab_status.family_tree"></tab>
+                <tab heading="{{uploadCtrl.get_tab_heading('picture')}}" active="uploadCtrl.tab_status.picture"></tab>
+                <tab heading="{{uploadCtrl.get_tab_heading('video')}}" active="uploadCtrl.tab_status.video"></tab>
+                <tab heading="{{uploadCtrl.get_tab_heading('music')}}" active="uploadCtrl.tab_status.music"></tab>
+                <tab heading="{{uploadCtrl.get_tab_heading('family_tree')}}" active="uploadCtrl.tab_status.family_tree"></tab>
             </tabset>
         </div>
     </div>
