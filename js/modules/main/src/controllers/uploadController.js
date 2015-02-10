@@ -52,6 +52,11 @@ var UploadController = function($state, auth, apiClient, langManager) {
             he: 'עץ משפחה'
         },
     };
+
+    this.submit_value = {
+        en: 'Submit',
+        he: 'שלח'
+    };
 };
 
 UploadController.prototype = {

@@ -35,38 +35,76 @@ var UploadPictureController = function($scope, notification, auth, langManager) 
 	};
     this.meta_data_placeholders = {
         title:  {
-            en: 'Title',
-            he: 'כותרת'
+            en: {
+                true: '*Title',
+                false: 'Title'
+            },
+            he: {
+                true: '*כותרת',
+                false: 'כותרת',
+            }
         },
         description: {
-            en: 'Description',
-            he: 'תאור'
+            en: {
+                true: '*Description',
+                false: 'Description'
+            },
+            he: {
+                true: '*תאור',
+                false: 'תאור'
+            }
         },
         location: {
-            en: 'Location',
-            he: 'מיקום'
+            en: {
+                true: '*Location',
+                false: 'Location'
+            },
+            he: {
+                true: '*מיקום',
+                false: 'מיקום'
+            }
         },
         date: {
-            en: 'Date',
-            he: 'תאריך'
+            en: {
+                true: '*Date',
+                false: 'Date'
+            },
+            he: {
+                true: '*תאריך',
+                false: 'תאריך'
+            }
         },
         creator_name: {
-            en: 'Photographer\'s name',
-            he: 'שם הצלם'
+            en: {
+                true: '*Photographer\'s name',
+                false: 'Photographer\'s name'
+            },
+            he: {
+                true: '*שם הצלם',
+                false: 'שם הצלם'
+            }
         },
         people_present: {
-            en: 'Names of people in this photo',
-            he: 'שמות האנשים בתמונה זו'
+            en: {
+                true: '*Names of people in this photo',
+                false: 'Names of people in this photo'
+            },
+            he: {
+                true: '*שמות האנשים בתמונה זו',
+                false: 'שמות האנשים בתמונה זו'
+            }
         }
     };
 
-    Object.defineProperty(this, 'lang_order', {
+    Object.defineProperty(this, 'lang', {
         get: function() {
-            if (langManager.lang === 'he') {
-                return ['he', 'en'];
-            }
-            
-            return ['en', 'he'];
+            return langManager.lang;
+        }
+    });
+
+    Object.defineProperty(this, 'submit_value', {
+        get: function() {
+            return $scope.uploadCtrl.submit_value;
         }
     });
 };

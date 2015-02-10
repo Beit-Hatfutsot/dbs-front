@@ -1,5 +1,6 @@
 <div class="upload-droparea" flow-init="flowInstanceInit" flow-name="ctrl.flow" flow-file-success="ctrl.onSuccess()" flow-file-error="ctrl.onError()" flow-drag-enter="style={'border-color': '#1ec3d2'}" flow-drag-leave="style={}" ng-style="style" flow-drop ng-hide="ctrl.success">
 	<div ng-show="!($flow.files[0])">
+		<div class="upload-droparea__cloud"></div>
 	    <div class="upload-droparea__instructions">
 	    	<en>
 		        Drag And Drop files here to upload<br>

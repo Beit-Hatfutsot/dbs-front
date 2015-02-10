@@ -90,6 +90,13 @@
 				border: 2px dashed #666666;
 				text-align: center;
 
+				&__cloud {
+					width: 92px;
+					height: 67px;
+					margin: 0 auto 16px;
+					@include bg_image("cloud.png");
+				}
+
 				&__instructions {
 					font-size: 19px;
 					color: #666666;
@@ -116,19 +123,6 @@
 
 				@at-root #upload-picture-form {
 
-					.submit {
-						width: 146px;
-						height: 41px;
-						margin: 29px 0 48px;
-						padding: 14px 0 0;
-						background: #48c3d4;
-						font-size: 16px;
-						color: #ffffff;
-						text-align: center;
-						border: none;
-						@include border-radius(4px);
-					}
-
 					.upf {
 						margin: 0;
 						padding: 0;
@@ -140,12 +134,20 @@
 							label {
 								left: 10px;
 							}
+
+							.upf__field__error {
+								left: 10px;
+							}
 						}
 
 						&--he {
 							direction: rtl;
 
 							label {
+								right: 10px;
+							}
+
+							.upf__field__error {
 								right: 10px;
 							}
 						}
@@ -193,6 +195,20 @@
 							&__description {
 								height: 153px;
 							}
+
+							&__error {
+								opacity: 1;
+								position: absolute;
+								bottom: 12px;
+								font-size: 24px;
+								color: #c73420;
+								@include transition(all, 0.5s, linear);
+
+								&.ng-hide {
+									opacity: 0;
+									bottom: 0;
+								}
+							}
 						}
 
 						&__alt-instructions {
@@ -208,6 +224,18 @@
 							}
 						}
 					} 
+
+					.submit {
+						width: 146px;
+						height: 41px;
+						margin: 29px 0 48px;
+						background: #48c3d4;
+						font-size: 21px;
+						color: #ffffff;
+						text-align: center;
+						border: none;
+						@include border-radius(4px);
+					}
 				}
 			}
 		}

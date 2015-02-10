@@ -10,7 +10,8 @@ angular.module('main', [
     'auth',
     'apiClient',
     'cache',
-    'plumb'
+    'plumb',
+    'rcSubmit'
 ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'flowFactoryProvider',
