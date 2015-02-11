@@ -1,0 +1,9 @@
+# Dependencies
+# Install node.js, npm, Ruby, sass, bower and grunt-cli
+#sudo apt-get install ruby
+#sudo gem install sass
+#sudo npm install -g grunt-cli
+#sudo npm install -g grunt-cli
+npm install
+bower install
+grunt build
