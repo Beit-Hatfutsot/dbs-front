@@ -1,0 +1,34 @@
+erver {
+    listen 80;
+
+    root /home/danny/Projects/bh/bhs/bhsclient/public;
+    index index.html index.htm;
+
+    server_name bhsclient;
+
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ /index.html;
+        autoindex on;
+        expires off;
+    }
+
+    error_page 404 /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
