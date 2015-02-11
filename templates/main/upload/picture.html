@@ -1,33 +1,29 @@
 <upload-area ctrl="uploadPictureCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
 <form name="upload_form" id="upload-picture-form" rc-submit="uploadPictureCtrl.submit()" novalidate>
-	<!--<fieldset class="upf upf--{{uploadPictureCtrl.lang_order[0]}}">
-		<div class="upf__field" ng-repeat="type in uploadPictureCtrl.meta_data_order">
-			<input id="upf-{{type}}-{{uploadPictureCtrl.lang_order[0]}}" class="upf__field__{{type}}" later-name="{{type}}_{{uploadPictureCtrl.lang_order[0]}}" recompile-on="uploadPictureCtrl.lang_order[0]" placeholder="{{rc.upload_form.needsAttention(upload_form[type + '_' + uploadPictureCtrl.lang_order[0]]) ? '' : '*' + uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[0]]}}" ng-model="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[0]]" required>
-			<label for="upf-title-en" ng-show="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[0]] || rc.upload_form.needsAttention(upload_form[type + '_' + uploadPictureCtrl.lang_order[0]])">
-				*{{uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[0]]}}
-			</label>
-			<div ng-class="{'validation-icon-invalid': rc.form.needsAttention(form.phone), 'validation-icon-valid': !rc.form.needsAttention(form.phone) && rc.form.attempted}"></div>
-            <div class="upf__field__error" ng-show="rc.upload_form.needsAttention(upload_form[type + '_' + uploadPictureCtrl.lang_order[0]])">ERROR!</div>
-		</div>
-	</fieldset>-->
-	<upload-fieldset ng-if="uploadPictureCtrl.lang === 'he'" ctrl="uploadPictureCtrl" upload-form="upload_form" rc="rc" lang="he" is-required="true"></upload-fieldset>
+	<upload-fieldset	ng-if="uploadPictureCtrl.lang === 'he'" 
+						ctrl="uploadPictureCtrl" 
+						upload-form="upload_form" 
+						rc="rc" lang="he" 
+						is-required="true">
+	</upload-fieldset>
 	<div class="upf__alt-instructions" ng-if="uploadPictureCtrl.lang === 'he'">
 		<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
 		<he>If you speak English, please fill the same details below</he>
 	</div>
-	<upload-fieldset ctrl="uploadPictureCtrl" upload-form="upload_form" rc="rc" lang="en" is-required="uploadPictureCtrl.lang === 'en' ? true : false"></upload-fieldset>
+	<upload-fieldset 	ctrl="uploadPictureCtrl" 
+						upload-form="upload_form" 
+						rc="rc" lang="en" 
+						is-required="uploadPictureCtrl.lang === 'en' ? true : false">
+	</upload-fieldset>
 	<div class="upf__alt-instructions" ng-if="uploadPictureCtrl.lang === 'en'">
 		<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
 		<he>If you speak English, please fill the same details below</he>
 	</div>
-	<upload-fieldset ng-if="uploadPictureCtrl.lang === 'en'" ctrl="uploadPictureCtrl" upload-form="upload_form" rc="rc" lang="he" is-required="false"></upload-fieldset>
-	<!--<fieldset class="upf upf--{{uploadPictureCtrl.lang_order[1]}}">
-		<div class="upf__field" ng-repeat="type in uploadPictureCtrl.meta_data_order">
-			<input id="upf-{{type}}-{{uploadPictureCtrl.lang_order[1]}}" class="upf__field__{{type}}" later-name="{{type}}_{{uploadPictureCtrl.lang_order[1]}}" placeholder="{{uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[1]]}}" ng-model="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[1]]">
-			<label for="upf-title-en" ng-show="uploadPictureCtrl.meta_data[type][uploadPictureCtrl.lang_order[1]]">
-				{{uploadPictureCtrl.meta_data_placeholders[type][uploadPictureCtrl.lang_order[1]]}}
-			</label>
-		</div>
-	</fieldset>-->
+	<upload-fieldset 	ng-if="uploadPictureCtrl.lang === 'en'" 
+						ctrl="uploadPictureCtrl" 
+						upload-form="upload_form" 
+						rc="rc" lang="he" 
+						is-required="false">
+	</upload-fieldset>
 	<input type="submit" value="{{uploadPictureCtrl.submit_value[uploadPictureCtrl.lang]}}" class="submit">
 </form>

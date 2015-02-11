@@ -25,6 +25,129 @@
 		@include hover-pointer();
 	}
 
+	&__upload {
+		position: relative;
+		top: 5px;
+		display: inline-block;
+		vertical-align: top;
+		width: 26px;
+		color: #f9f9f9;
+		font-weight: bold;
+
+		.upload-icon {
+			display: inline-block;
+			width: 26px;
+			height: 20px;
+			@include hover-pointer();
+		}
+
+		.upload-menu {
+			display: none;
+			position: relative;
+			height: 145px;
+			width: 330px;
+			top: 12px;
+			background: #ffffff;
+			color: #333333;
+			border: 1px solid #c4c4c4;
+			border-bottom: 4px solid #5ecad8;
+			@include box-shadow(0 3px 2px 1px #d4d6d5);
+			.en & {
+				left: -277px;
+			}
+
+			.he & {
+				right: -277px;
+			}
+
+			&:before, &:after {
+				bottom: 100%;
+				border: solid transparent;
+				content: " ";
+				height: 0;
+				width: 0;
+				position: absolute;
+				pointer-events: none;
+			}
+
+			&:before {
+				border-bottom-color: #dbdbdb;
+				border-width: 10px;
+
+				.en & {
+					right: 27px;
+				}
+
+				.he & {
+					left: 27px;
+				}
+			}
+
+			&:after {
+				border-bottom-color: #ffffff;
+				border-width: 8px;
+
+				.en & {
+					right: 29px;
+				}
+
+				.he & {
+					left: 29px;
+				}
+			}
+
+			&__title, &__row {
+				height: 42px;
+				padding: 8px 15px 0;
+				border-bottom: 2px solid #eceaea;
+				font-size: 15px;
+			}
+
+			&__title {
+				height: 44px;
+			}
+
+			&__row {
+				@include hover-pointer();
+				
+				&:hover {
+					color: #5dc2d4;
+					
+					.language-icon {
+
+						img {
+							@include translate(0, -30px);	
+						}
+					}
+				}
+
+				&__language-desc {
+					position: relative;
+					top: -5px;
+					display: inline-block;
+					height: 100%;
+					width: auto;
+					vertical-align: middle;
+
+					.en & {
+						right: -5px;
+					}
+
+					.he & {
+						left: -5px;	
+					}
+				}
+			}
+		}
+
+		&.open {
+
+			.upload-menu {
+				display: block;
+			}
+		}
+	}
+
 	&__language-selector {
 		display: inline-block;
 		vertical-align: top;
@@ -32,7 +155,7 @@
 		color: #f9f9f9;
 		font-weight: bold;
 
-		.language-icon, .language-icon {
+		.language-icon {
 			display: inline-block;
 			width: 29px;
 			height: 29px;

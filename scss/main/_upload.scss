@@ -175,8 +175,9 @@
 								}
 							}
 
-							input {
+							input, textarea {
 								width: 100%;
+								max-width: 940px;
 								border: 2px solid #d4d6d5;
 								@include border-radius(6px);
 								margin-bottom: 6px;
@@ -187,13 +188,14 @@
 							&__title,
 							&__location,
 							&__date,
-							&__creator-name,
-							&__people-present {
+							&__creator_name,
+							&__people_present {
 								height: 75px;
 							}
 
 							&__description {
 								height: 153px;
+								padding-top: 26px !important;
 							}
 
 							&__error {

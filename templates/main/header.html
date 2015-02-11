@@ -1,5 +1,34 @@
 <div ng-controller="HeaderCtrl as headerController">
 	<div class="dropdown-icons">
+		<div class="dropdown-icons__upload" dropdown is-open="headerController.upload_menu_open">
+			<div class="upload-icon" dropdown-toggle>
+				<icon alt-text="{en: 'Upload a File', he: 'העלאת קובץ'}" position="[-185, -28]" hover-offset="[0, -27]" offset-on="headerController.upload_menu_open == true"></icon>
+			</div>
+			<div class="upload-menu">
+				<div class="language-menu__title">
+					<en>Choose a language</en>
+					<he>בחרו שפה</he>
+				</div>
+				<div class="language-menu__row" ng-click="lang='he'">
+					<div class="language-icon">
+						<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
+					</div>
+					<div class="language-menu__row__language-desc">
+						<en>Hebrew</en>
+						<he>עברית</he>
+					</div>
+				</div>
+				<div class="language-menu__row" ng-click="lang='en'">
+					<div class="language-icon">
+						<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
+					</div>
+					<div class="language-menu__row__language-desc">
+						<en>English</en>
+						<he>אנגלית</he>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="dropdown-icons__sign">
 			<span ng-if="!(headerController.is_signedin)" need-auth="false">
 				<en>Sign In</en>

@@ -96,6 +96,33 @@ var UploadPictureController = function($scope, notification, auth, langManager) 
         }
     };
 
+    this.validation_errors = {
+        title: {
+            en: 'Yo, check it, you gots to have title',
+            he: 'שדה זה הינו שדה חובה'
+        },
+        description: {
+            en: 'You better check yourself',
+            he: 'שדה זה הינו שדה חובה'
+        },  
+        location: {
+            en: 'before you wreck yourself',
+            he: 'שדה זה הינו שדה חובה'
+        },
+        date: {
+            en: 'Please fill in a date, or at least a decade',
+            he: 'שדה זה הינו שדה חובה'
+        },
+        creator_name: {
+            en: 'Who should we credit for this photo?',
+            he: 'שדה זה הינו שדה חובה'
+        },
+        people_present: {
+            en: 'Tag your friends yo',
+            he: 'שדה זה הינו שדה חובה'
+        }
+    };
+
     Object.defineProperty(this, 'lang', {
         get: function() {
             return langManager.lang;
