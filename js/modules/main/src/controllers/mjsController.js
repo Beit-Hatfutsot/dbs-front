@@ -151,33 +151,34 @@ MjsController.prototype = {
 		this.mjs_items.assigned = [];
 
 		if (mjs_data.hasOwnProperty('unassigned') || mjs_data.hasOwnProperty('assigned')) {
-			if (mjs_data.unassigned.length === 1) {
-				item.get( mjs_data.unassigned[0] ).
-					then(function(item_data) {
-						self.mjs_items.unassigned = [item_data];
-					});
-			}
-			else if (mjs_data.unassigned.length > 1) {
+			// if (mjs_data.unassigned.length === 1) {
+			// 	item.get( mjs_data.unassigned[0] ).
+			// 		then(function(item_data) {
+			// 			self.mjs_items.unassigned = [item_data];
+			// 		});
+			// }
+			// else if (mjs_data.unassigned.length > 1) {
 				item.get_items( mjs_data.unassigned ).
 					then(function(item_data) {
 						self.mjs_items.unassigned = item_data;
 					});	
-			}
+			// }
 
 			if (mjs_data.assigned.length > 0) {
 				mjs_data.assigned.forEach(function(branch) {
-					if (branch.items.length === 1) {
-						var b = {
-							name: branch.name,
-							items: {}
-						};
-						self.mjs_items.assigned.push(b);
-						item.get( branch.items[0] ).
-							then(function(item_data) {
-								b.items = self.sort_items([item_data]);
-							});
-					}
-					else if (branch.items.length > 1) {
+					// if (branch.items.length === 1) {
+					// 	var b = {
+					// 		name: branch.name,
+					// 		items: {}
+					// 	};
+					// 	self.mjs_items.assigned.push(b);
+					// 	item.get( branch.items[0] ).
+					// 		then(function(item_data) {
+					// 			b.items = self.sort_items([item_data]);
+					// 		});
+					// }
+					// else if (branch.items.length > 1) {
+					if (branch.items.length > 0) {
 						var b = {
 							name: branch.name,
 							items: {}
@@ -367,6 +368,10 @@ MjsController.prototype = {
 				'places': {
 					en: 'Places',
 					he: 'מקומות'
+				},
+				'photoUnits': {
+					en: 'Images',
+					he: 'תמונות'
 				}
 			};
 			var type = this.itemTypeMap.get_type(collection[0].UnitType);

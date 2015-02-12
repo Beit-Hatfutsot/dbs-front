@@ -45,7 +45,7 @@
 					</ng-switch>
 				</div>
 				<div class="item__content">
-					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.path">
+					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.data">
 						<img src="data:image/jpeg;base64,{{itemController.item_data.thumbnail.data}}" alt="Item Image" />
 					</div>
 					<en>{{itemController.item_data.UnitText1.En}}</en>
