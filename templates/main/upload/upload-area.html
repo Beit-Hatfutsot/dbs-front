@@ -1,4 +1,4 @@
-<div class="upload-droparea" flow-init="flowInstanceInit" flow-name="ctrl.flow" flow-file-success="ctrl.onSuccess()" flow-file-error="ctrl.onError()" flow-drag-enter="style={'border-color': '#1ec3d2'}" flow-drag-leave="style={}" ng-style="style" flow-drop ng-hide="ctrl.success">
+<div class="upload-droparea" flow-init="flowInstanceInit" flow-name="ctrl.flow" flow-file-success="ctrl.onSuccess()" flow-file-error="ctrl.onError()" flow-drag-enter="style={'border-color': '#1ec3d2'}" flow-drag-leave="style={}" ng-style="style" flow-drop>
 	<div ng-show="!($flow.files[0])">
 		<div class="upload-droparea__cloud"></div>
 	    <div class="upload-droparea__instructions">
@@ -15,11 +15,10 @@
 	    	<en>Click to browse</en>
 	    	<he>לחץ לפתיחה</he>
 	    </div>
-	    <div ng-show="ctrl.failed">FILE UPLOAD FAILED</div>
 	</div>
     <div ng-show="$flow.files[0]">
 		<img flow-img="$flow.files[0]" />
-		<div ng-click="$flow.files.splice(0, 1)">REMOVE</div>
+		<div ng-click="ctrl.remove_file()">REMOVE</div>
 	</div>
 </div>
 

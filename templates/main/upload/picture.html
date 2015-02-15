@@ -25,5 +25,8 @@
 						rc="rc" lang="he" 
 						is-required="false">
 	</upload-fieldset>
-	<input type="submit" value="{{uploadPictureCtrl.submit_value[uploadPictureCtrl.lang]}}" class="submit">
+	<input type="submit" value="{{uploadPictureCtrl.submit_value[uploadPictureCtrl.lang]}}" class="upf__submit">
+	<div class="upf__in-progress" ng-show="uploadPictureCtrl.in_progress">
+		<img src="images/progress.gif">
+	</div>
 </form>

@@ -78,11 +78,32 @@ UploadController.prototype = {
         this.flow.opts.query.date_he            = this.meta_data.date.he;
         this.flow.opts.query.creator_name_he    = this.meta_data.creator_name.he;
         this.flow.opts.query.people_present_he  = this.meta_data.people_present.he;
-        this.flow.upload();
+        this.flow.files[0].retry();
 	},
 
     get_tab_heading: function(type) {
         return this.tab_headings[type][this.langManager.lang]
+    },
+
+    reset_flow: function() {
+        this.flow.opts.headers.Authorization = '';
+        this.flow.opts.query.title_en           = '';
+        this.flow.opts.query.description_en     = '';
+        this.flow.opts.query.location_en        = '';
+        this.flow.opts.query.date_en            = '';
+        this.flow.opts.query.creator_name_en    = '';
+        this.flow.opts.query.people_present_en  = '';
+        this.flow.opts.query.title_he           = '';
+        this.flow.opts.query.description_he     = '';
+        this.flow.opts.query.location_he        = '';
+        this.flow.opts.query.date_he            = '';
+        this.flow.opts.query.creator_name_he    = '';
+        this.flow.opts.query.people_present_he  = '';
+        this.remove_file();
+    },
+
+    remove_file: function() {
+        this.flow.removeFile( this.flow.files[0] );
     }
 };
 

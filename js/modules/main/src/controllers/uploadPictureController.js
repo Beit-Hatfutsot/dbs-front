@@ -134,6 +134,21 @@ var UploadPictureController = function($scope, notification, auth, langManager) 
             return $scope.uploadCtrl.submit_value;
         }
     });
+    
+    Object.defineProperty(this, 'in_progress', {
+        get: function() {
+            return this.flow.files[0].isUploading();
+        }
+    });
+
+    $scope.$watch(function(){return self.in_progress;}, function(newVal) {
+        if (newVal) {
+            notification.put({
+                en: 'Upload in progress...',
+                he: 'העלאה מתבצעת...'
+            });
+        }
+    });
 };
 
 UploadPictureController.prototype = {
@@ -146,14 +161,40 @@ UploadPictureController.prototype = {
 
     onSuccess: function() {
         this.notification.put({
-            en: 'Upload succeeded',
-            he: 'הצלחה!'
+            en: 'Upload succeeded.',
+            he: 'העלאת הקובץ הסתיימה בהצלחה.'
         });
+        this.clear_form();
         this.success = true;
     },
 
     onError: function() {
+        this.notification.put({
+            en: 'Upload failed.',
+            he: 'העלאת הקובץ נכשלה.'
+        });
         this.failed = true;
+    },
+
+    clear_form: function() {
+        for (var field in this.meta_data) {
+            for (var lang in this.meta_data[field]) {
+                this.meta_data[field][lang] = '';
+            }
+            this.$scope.rc.upload_form.attempted = false;
+            this.$scope.upload_form.$setPristine();
+            
+            this.reset();
+            
+        }
+    },
+
+    reset: function() {
+        $scope.uploadCtrl.reset_flow.apply(this);
+    },
+
+    remove_file: function() {
+        $scope.uploadCtrl.remove_file.apply(this);
     }
 };
 

@@ -225,19 +225,30 @@
 								direction: ltr;
 							}
 						}
-					} 
 
-					.submit {
-						width: 146px;
-						height: 41px;
-						margin: 29px 0 48px;
-						background: #48c3d4;
-						font-size: 21px;
-						color: #ffffff;
-						text-align: center;
-						border: none;
-						@include border-radius(4px);
-					}
+						&__submit {
+							display: inline-block;
+							width: 146px;
+							height: 41px;
+							margin: 29px 0 48px;
+							background: #48c3d4;
+							font-size: 21px;
+							color: #ffffff;
+							text-align: center;
+							border: none;
+							@include border-radius(4px);
+						}
+
+						&__in-progress {
+							display: inline-block;
+							vertical-align: middle;
+							
+							img {
+								width: 41px;
+								height: 41px;
+							}
+						}
+					} 
 				}
 			}
 		}
