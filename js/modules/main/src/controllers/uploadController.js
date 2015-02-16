@@ -15,7 +15,7 @@ var UploadController = function($state, auth, apiClient, langManager) {
 
     // configure tab_status properties
     [
-        'picture', 
+        'image', 
         'video', 
         'music', 
         'family_tree'
@@ -35,8 +35,8 @@ var UploadController = function($state, auth, apiClient, langManager) {
     });
 
     this.tab_headings = {
-        picture: {
-            en: 'Picture',
+        image: {
+            en: 'Image',
             he: 'תמונה'
         },
         video: {

@@ -5,26 +5,26 @@
 				<icon alt-text="{en: 'Upload a File', he: 'העלאת קובץ'}" position="[-185, -28]" hover-offset="[0, -27]" offset-on="headerController.upload_menu_open == true"></icon>
 			</div>
 			<div class="upload-menu">
-				<div class="language-menu__title">
-					<en>Choose a language</en>
+				<div class="upload-menu__title">
+					<en>Upload your item</en>
 					<he>בחרו שפה</he>
 				</div>
-				<div class="language-menu__row" ng-click="lang='he'">
-					<div class="language-icon">
-						<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
+				<div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
+					<div class="upload-icon__image">
+						<icon alt-text="{en: 'Image', he: 'תמונה'}" position="[-29, -218]"></icon>
 					</div>
-					<div class="language-menu__row__language-desc">
-						<en>Hebrew</en>
-						<he>עברית</he>
+					<div class="upload-menu__row__desc">
+						<en>Image</en>
+						<he>תמונה</he>
 					</div>
 				</div>
-				<div class="language-menu__row" ng-click="lang='en'">
-					<div class="language-icon">
-						<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
+				<div class="upload-menu__row" ng-click="lang='en'">
+					<div class="upload-icon__video">
+						<icon alt-text="{en: 'Video', he: 'וידאו'}" position="[-26, -192]"></icon>
 					</div>
-					<div class="language-menu__row__language-desc">
-						<en>English</en>
-						<he>אנגלית</he>
+					<div class="upload-menu__row__desc">
+						<en>Video</en>
+						<he>וידאו</he>
 					</div>
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 					<div class="language-icon">
 						<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
 					</div>
-					<div class="language-menu__row__language-desc">
+					<div class="language-menu__row__desc">
 						<en>Hebrew</en>
 						<he>עברית</he>
 					</div>
@@ -72,7 +72,7 @@
 					<div class="language-icon">
 						<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
 					</div>
-					<div class="language-menu__row__language-desc">
+					<div class="language-menu__row__desc">
 						<en>English</en>
 						<he>אנגלית</he>
 					</div>

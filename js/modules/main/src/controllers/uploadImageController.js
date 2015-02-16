@@ -1,4 +1,4 @@
-var UploadPictureController = function($scope, notification, auth, langManager, mjs) {
+var UploadImageController = function($scope, notification, auth, langManager, mjs) {
     var self = this;
 
     this.$scope = $scope;
@@ -153,7 +153,7 @@ var UploadPictureController = function($scope, notification, auth, langManager, 
     window.$scope = $scope;
 };
 
-UploadPictureController.prototype = {
+UploadImageController.prototype = {
 	submit: function() {
         console.log(this.flow)
         if (this.flow.files.length > 0) {
@@ -200,4 +200,4 @@ UploadPictureController.prototype = {
     }
 };
 
-angular.module('main').controller('UploadPictureController', ['$scope', 'notification', 'auth', 'langManager', 'mjs', UploadPictureController]);
+angular.module('main').controller('UploadImageController', ['$scope', 'notification', 'auth', 'langManager', 'mjs', UploadImageController]);

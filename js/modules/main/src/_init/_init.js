@@ -87,10 +87,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
         },
 
         {
-            name: 'upload.picture',
-            url: '/picture',
-            controller: 'UploadPictureController as uploadPictureCtrl',
-            templateUrl: 'templates/main/upload/picture.html'
+            name: 'upload.image',
+            url: '/image',
+            controller: 'UploadImageController as uploadImageCtrl',
+            templateUrl: 'templates/main/upload/image.html'
         },
 
         {

@@ -25,40 +25,28 @@
 		@include hover-pointer();
 	}
 
-	&__upload {
+	&__upload,
+	&__language-selector {
 		position: relative;
-		top: 5px;
 		display: inline-block;
 		vertical-align: top;
-		width: 26px;
 		color: #f9f9f9;
-		font-weight: bold;
 
+		.language-icon,
 		.upload-icon {
 			display: inline-block;
-			width: 26px;
-			height: 20px;
 			@include hover-pointer();
 		}
 
+		.language-menu,
 		.upload-menu {
 			display: none;
 			position: relative;
-			height: 145px;
-			width: 330px;
-			top: 12px;
 			background: #ffffff;
 			color: #333333;
 			border: 1px solid #c4c4c4;
 			border-bottom: 4px solid #5ecad8;
-			@include box-shadow(0 3px 2px 1px #d4d6d5);
-			.en & {
-				left: -277px;
-			}
-
-			.he & {
-				right: -277px;
-			}
+			@include box-shadow(1px -1px 2px 1px #9fa1a0);
 
 			&:before, &:after {
 				bottom: 100%;
@@ -68,6 +56,67 @@
 				width: 0;
 				position: absolute;
 				pointer-events: none;
+			}
+
+			&__title, &__row {
+				height: 42px;
+				padding: 8px 20px 0;
+				border-bottom: 2px solid #eceaea;
+				font-size: 15px;
+			}
+
+			&__title {
+				height: 44px;
+			}
+
+			&__row {
+				font-size: 16px;
+				@include hover-pointer();
+				
+				&:hover {
+					color: #5dc2d4;
+				}
+
+				&__desc {
+					position: relative;
+					top: 5px;
+					display: inline-block;
+					vertical-align: top;
+					height: 100%;
+					width: auto;
+
+					.en & {
+						right: -5px;
+					}
+
+					.he & {
+						left: -5px;	
+					}
+				}
+			}
+		}
+	}
+
+	&__upload {
+		top: 10px;
+		width: 26px;
+
+		.upload-icon {
+			width: 26px;
+			height: 20px;
+		}
+
+		.upload-menu {
+			height: 145px;
+			width: 330px;
+			top: 12px;
+			
+			.en & {
+				left: -277px;
+			}
+
+			.he & {
+				right: -277px;
 			}
 
 			&:before {
@@ -96,24 +145,11 @@
 				}
 			}
 
-			&__title, &__row {
-				height: 42px;
-				padding: 8px 15px 0;
-				border-bottom: 2px solid #eceaea;
-				font-size: 15px;
-			}
-
-			&__title {
-				height: 44px;
-			}
-
 			&__row {
-				@include hover-pointer();
-				
+
 				&:hover {
-					color: #5dc2d4;
 					
-					.language-icon {
+					.upload-icon {
 
 						img {
 							@include translate(0, -30px);	
@@ -121,20 +157,33 @@
 					}
 				}
 
-				&__language-desc {
-					position: relative;
-					top: -5px;
-					display: inline-block;
-					height: 100%;
-					width: auto;
-					vertical-align: middle;
+				.upload-icon {
 
-					.en & {
-						right: -5px;
+					&__image,
+					&__video {
+						display: inline-block;
 					}
 
-					.he & {
-						left: -5px;	
+					&__image {
+						position: relative;
+						top: 3px;
+						width: 17px;
+						height: 18px;
+					}
+
+					&__video {
+						position: relative;
+						top: 3px;
+						width: 22px;
+						height: 17px;
+
+						.en & {
+							margin-left: -3px;
+						}
+
+						.he & {
+							margin-right: -3px;
+						}
 					}
 				}
 			}
@@ -149,30 +198,18 @@
 	}
 
 	&__language-selector {
-		display: inline-block;
-		vertical-align: top;
+		top: 1px;
 		width: 29px;
-		color: #f9f9f9;
-		font-weight: bold;
 
 		.language-icon {
-			display: inline-block;
 			width: 29px;
 			height: 29px;
-			@include hover-pointer();
 		}
 		
 		.language-menu {
-			display: none;
-			position: relative;
 			height: 145px;
 			width: 330px;
 			top: 12px;
-			background: #ffffff;
-			color: #333333;
-			border: 1px solid #c4c4c4;
-			border-bottom: 4px solid #5ecad8;
-			@include box-shadow(0 3px 2px 1px #d4d6d5);
 
 			.en & {
 				left: -277px;
@@ -180,16 +217,6 @@
 
 			.he & {
 				right: -277px;
-			}
-
-			&:before, &:after {
-				bottom: 100%;
-				border: solid transparent;
-				content: " ";
-				height: 0;
-				width: 0;
-				position: absolute;
-				pointer-events: none;
 			}
 
 			&:before {
@@ -218,22 +245,9 @@
 				}
 			}
 
-			&__title, &__row {
-				height: 42px;
-				padding: 8px 15px 0;
-				border-bottom: 2px solid #eceaea;
-				font-size: 15px;
-			}
-
-			&__title {
-				height: 44px;
-			}
-
 			&__row {
-				@include hover-pointer();
-				
+
 				&:hover {
-					color: #5dc2d4;
 					
 					.language-icon {
 
@@ -242,27 +256,9 @@
 						}
 					}
 				}
-
-				&__language-desc {
-					position: relative;
-					top: -5px;
-					display: inline-block;
-					height: 100%;
-					width: auto;
-					vertical-align: middle;
-
-					.en & {
-						right: -5px;
-					}
-
-					.he & {
-						left: -5px;	
-					}
-				}
 			}
-			
 		}
-		
+
 		&.open {
 
 			.language-menu {
