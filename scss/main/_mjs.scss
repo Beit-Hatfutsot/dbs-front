@@ -58,6 +58,8 @@
 			padding: 4px;
 			background: #f4f4f4;
 			border: 2px solid #c4c4c4;
+			overflow-x: hidden;
+			overflow-y: auto;
 
 			.title {
 				width: 72px;

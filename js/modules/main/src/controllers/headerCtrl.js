@@ -43,7 +43,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs) {
 
     Object.defineProperty(this, 'mjs_count', {
         get: function() {
-            if (mjs.data.$resolved) {
+            if (mjs.data.$resolved && mjs.data.unassigned) {
                 return mjs.data.unassigned.length;
             }
             else {

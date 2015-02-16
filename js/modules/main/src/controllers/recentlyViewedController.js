@@ -12,7 +12,7 @@ var RecentlyViewedController = function($state, recentlyViewed, itemTypeMap) {
 
 RecentlyViewedController.prototype = {
 	goto_item: function(item_data) {
-    	var collection_name = this.itemTypeMap.get_type(item_data.UnitType);;
+    	var collection_name = this.itemTypeMap.get_collection_name(item_data);;
     	var item_string = collection_name + '.' + item_data._id; 
         this.$state.go('item-view', {item_string: item_string});
     }

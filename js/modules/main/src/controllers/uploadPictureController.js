@@ -1,9 +1,10 @@
-var UploadPictureController = function($scope, notification, auth, langManager) {
+var UploadPictureController = function($scope, notification, auth, langManager, mjs) {
     var self = this;
 
     this.$scope = $scope;
     this.notification = notification;
     this.auth = auth;
+    this.mjs = mjs;
 
     this.meta_data_order = ['title', 'description', 'location', 'date', 'creator_name', 'people_present'];
 
@@ -137,7 +138,7 @@ var UploadPictureController = function($scope, notification, auth, langManager) 
     
     Object.defineProperty(this, 'in_progress', {
         get: function() {
-            return this.flow.files[0].isUploading();
+            return this.flow && this.flow.files[0] && this.flow.files[0].isUploading();
         }
     });
 
@@ -149,6 +150,7 @@ var UploadPictureController = function($scope, notification, auth, langManager) 
             });
         }
     });
+    window.$scope = $scope;
 };
 
 UploadPictureController.prototype = {
@@ -160,6 +162,7 @@ UploadPictureController.prototype = {
 	},
 
     onSuccess: function() {
+        this.mjs.refresh();
         this.notification.put({
             en: 'Upload succeeded.',
             he: 'העלאת הקובץ הסתיימה בהצלחה.'
@@ -185,7 +188,6 @@ UploadPictureController.prototype = {
             this.$scope.upload_form.$setPristine();
             
             this.reset();
-            
         }
     },
 
@@ -198,4 +200,4 @@ UploadPictureController.prototype = {
     }
 };
 
-angular.module('main').controller('UploadPictureController', ['$scope', 'notification', 'auth', 'langManager', UploadPictureController]);
+angular.module('main').controller('UploadPictureController', ['$scope', 'notification', 'auth', 'langManager', 'mjs', UploadPictureController]);

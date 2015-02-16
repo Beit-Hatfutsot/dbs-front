@@ -4,13 +4,14 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification) {
     this.mjs = mjs;
     this.notification = notification;
 
+    this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
     $scope.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
 };
 
 ItemPreviewCtrl.prototype = {
 
     goto_item: function(item_data) {
-    	var collection_name = this.$scope.item_type;
+    	var collection_name = this.collection_name;
     	var item_string = collection_name + '.' + item_data._id; 
         this.$state.go('item-view', {item_string: item_string});
     },

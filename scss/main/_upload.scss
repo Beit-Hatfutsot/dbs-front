@@ -114,6 +114,7 @@
 					@include border-radius(4px);
 					font-size: 19px;
 					color: #999999;
+					@include hover_pointer();
 				}
 
 				img {
@@ -237,6 +238,7 @@
 							text-align: center;
 							border: none;
 							@include border-radius(4px);
+							@include hover_pointer();
 						}
 
 						&__in-progress {
