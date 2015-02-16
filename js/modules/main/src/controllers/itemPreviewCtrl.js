@@ -20,7 +20,7 @@ ItemPreviewCtrl.prototype = {
     	$event.stopPropagation();
     	
     	var self = this,
-    		item_string = this.$scope.item_type + '.' + this.$scope.previewData._id;
+    		item_string = this.collection_name + '.' + this.$scope.previewData._id;
 
     	this.mjs.remove(item_string).
 			then(function() {

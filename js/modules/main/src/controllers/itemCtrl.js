@@ -32,7 +32,7 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 			recentlyViewed.put(item_data);
 
 			self.item_data = item_data;
-			self.item_string = self.item_type + '.' + item_data._id;
+			self.item_string = $stateParams.item_string;
 			self.content_loaded = true;
 
 			item.get_items(item_data.related).
@@ -86,7 +86,7 @@ ItemCtrl.prototype = {
 	},
 
 	remove_from_mjs: function() {
-		if (this.in_mjs) {
+		if (this.in_mjs && !(this.item_data.ugc)) {
 			var self = this;		
 			
 			this.mjs.remove(this.item_string).then(function() {
