@@ -98,13 +98,15 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 
 	// init notifications
 	notification.clear();
+
+	window.$scope=$scope
 };
 
 MjsController.prototype = {
 
 	assign_item: function(branch_name, item) {
 		var self = this,
-			item_string = this.itemTypeMap.get_type(item.UnitType) + '.' + item._id;
+			item_string = this.itemTypeMap.get_item_string(item);
 
 		this.dragging = false;
 		this.mjs.assign(branch_name, item_string).then(function() {
@@ -126,7 +128,7 @@ MjsController.prototype = {
 
 	unassign_item: function(branch_name, item) {
 		var self = this,
-			item_string = this.itemTypeMap.get_type(item.UnitType) + '.' + item._id;
+			item_string = this.itemTypeMap.get_item_string(item);
 
 		this.mjs.unassign(branch_name, item_string).then(function() {
 			self.notification.put({
