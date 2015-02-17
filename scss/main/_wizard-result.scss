@@ -13,7 +13,7 @@
 		&__name, &__place, &__individuals {
 			display: inline-block;
 			vertical-align: top;
-			width: 300px;
+			width: 220px;
 			padding: 10px;
 			margin: 0 auto;
 
@@ -24,82 +24,10 @@
 			.he & {
 				text-align: right;
 			}
-
-			.item-preview, .no-result {
+			
+			.item-preview {
 				@extend %item-preview;
 				display: inline-block;
-
-				.type {
-					
-					.type-icon-container {
-						padding-top: 6px;
-					}
-				}
-
-				.header {
-					margin: 33px 0 26px;
-				}
-
-				.text {
-					line-height: 16px;
-				}
-			}
-
-			.item-preview {
-				@include hover-pointer();
-
-				.header {
-
-					.en & {
-						padding: 0 0 0 10px;
-					}
-
-					.he & {
-						padding: 0 10px 0 0;
-					}
-				}
-
-				.text {
-					height: 46px;
-					margin: 0 0 28px;
-				}
-
-				.thumbnail {
-					width: 260px;
-					height: 170px;
-				}
-			}
-
-			.no-result {
-
-				.header, .text {
-					color: grey;
-					font-weight: normal;
-				}
-			}
-		}
-
-		&__name {
-
-			.item-preview, .no-result {
-				width: 280px;
-				height: 330px;
-			}
-		}
-
-		&__place {
-
-			.item-preview, .no-result {
-				width: 280px;
-				height: 330px;
-			}
-		}
-
-		&__tree {
-
-			.item-preview, .no-result, .multiple-result {
-				height: 85px;
-				width: 260px;
 			}
 		}
 	}

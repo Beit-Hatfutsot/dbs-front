@@ -1,4 +1,4 @@
-var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed) {
+var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, previousState) {
 	var self = this;
 
 	if (header.sub_header_state !== 'recently-viewed') {
@@ -14,7 +14,7 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 	this.related_data = [];
 	this.in_mjs = false;
 	
-	if ( wizard.result.individuals && wizard.result.individuals.isNotEmpty() ) {
+	if ( previousState.name === 'start' && wizard.result.individuals && wizard.result.individuals.isNotEmpty() ) {
 		this.related_individuals = wizard.result.individuals; 
 
 		this.related_individuals_query_params = {}
@@ -96,4 +96,4 @@ ItemCtrl.prototype = {
 	}
 };
 
-angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', 'recentlyViewed', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', 'recentlyViewed', 'previousState', ItemCtrl]);

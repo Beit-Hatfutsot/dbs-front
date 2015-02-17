@@ -48,6 +48,19 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
             name: 'item-view',
             url: '/item/:item_string',
             templateUrl: 'templates/main/item/item.html',
+            resolve: {
+                previousState: [
+                    "$state",
+                    function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name,
+                            params: $state.params,
+                            URL: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
+                    }
+                ]
+            },
             controller: 'ItemCtrl as itemController'
         },
 

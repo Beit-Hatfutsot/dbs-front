@@ -1,7 +1,7 @@
 <div class="item-preview" ng-click="treesPreviewCtrl.goto_trees(queryParams)">
 	<div class="type">
 		<div class="type-icon-container">
-			<div class="surname-icon"></div>
+			<div class="tree-icon"></div>
 		</div>
 		<div class="type-desc-container">
 			<en>Family trees</en>
@@ -9,12 +9,9 @@
 		</div>
 	</div>
 	<div class="header">
-		{{individuals.length}}
+		{{individuals.length}} Individuals
 	</div>
-	<div class="text">
-		
-	</div>
-	<div class="thumbnail">
+	<div class="thumbnail thumbnail--trees">
 		
 	</div>
 	<div ng-if="removable">REMOVE</div>

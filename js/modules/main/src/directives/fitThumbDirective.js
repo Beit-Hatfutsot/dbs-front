@@ -1,7 +1,7 @@
 angular.module('main').directive('fitThumb', ['$timeout', function($timeout) {
 	return {
 		restrict: 'A',
-		scope: true,
+		scope: {},
 		link: function(scope, element) {
 			
 			$timeout(function() {
