@@ -5,15 +5,17 @@ angular.module('main', [
     'ngAnimate',
     'ui.bootstrap',
     'ui.router',
+    'flow',
     'lang',
     'auth',
     'apiClient',
     'cache',
-    'plumb'
+    'plumb',
+    'rcSubmit'
 ]).
 config([
-'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider',
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
+'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'flowFactoryProvider',
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, flowFactoryProvider) {
 
     var states = [ 
         {
@@ -46,6 +48,19 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
             name: 'item-view',
             url: '/item/:item_string',
             templateUrl: 'templates/main/item/item.html',
+            resolve: {
+                previousState: [
+                    "$state",
+                    function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name,
+                            params: $state.params,
+                            URL: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
+                    }
+                ]
+            },
             controller: 'ItemCtrl as itemController'
         },
 
@@ -77,9 +92,39 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider) {
         },           
 
         {
-            name: 'gedcom',
-            url: '/gedcom',
-            templateUrl: 'templates/gedcom/gedcom.html'
+            name: 'upload',
+            abstract: true,
+            url: '/upload',
+            controller: 'UploadController as uploadCtrl',
+            templateUrl: 'templates/main/upload/upload.html'
+        },
+
+        {
+            name: 'upload.image',
+            url: '/image',
+            controller: 'UploadImageController as uploadImageCtrl',
+            templateUrl: 'templates/main/upload/image.html'
+        },
+
+        {
+            name: 'upload.video',
+            url: '/video',
+            //controller: 'PictureUploadController as pictureUploadCtrl',
+            templateUrl: 'templates/main/upload/video.html'
+        },
+
+        {
+            name: 'upload.music',
+            url: '/music',
+            //controller: 'PictureUploadController as pictureUploadCtrl',
+            templateUrl: 'templates/main/upload/music.html'
+        },
+
+        {
+            name: 'upload.family_tree',
+            url: '/family_tree',
+            //controller: 'PictureUploadController as pictureUploadCtrl',
+            templateUrl: 'templates/main/upload/tree.html'
         },
 
         {

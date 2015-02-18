@@ -1,5 +1,6 @@
 var HeaderCtrl = function($state, wizard, header, notification, auth, mjs) {
 
+    this.$state = $state;
     this.auth = auth;
 
 	this.langauage_menu_open = false;
@@ -43,7 +44,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs) {
 
     Object.defineProperty(this, 'mjs_count', {
         get: function() {
-            if (mjs.data.$resolved) {
+            if (mjs.data.$resolved && mjs.data.unassigned) {
                 return mjs.data.unassigned.length;
             }
             else {
@@ -56,6 +57,10 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs) {
 HeaderCtrl.prototype = {
 	signout: function() {
         this.auth.signout();
+    },
+
+    goto_state: function(state_name) {
+        this.$state.go(state_name);
     }
 };
 

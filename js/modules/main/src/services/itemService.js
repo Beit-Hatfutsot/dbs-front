@@ -19,10 +19,10 @@ angular.module('main').
 					} 
 					else {
 						try {
-							itemResource.get({items: item_string}).$promise.
+							itemResource.query({items: item_string}).$promise.
 								then(function(item_data) {
 									cache.put(item_data);
-									deferred.resolve(item_data);
+									deferred.resolve(item_data[0]);
 								},
 								function() {
 									deferred.reject();
@@ -66,15 +66,16 @@ angular.module('main').
 						try {
 							// handle case when only one item is not cached.
 							// the reason for this is that angular's $resource service needs to know whether the response is an array or an object.
-							if (not_cached_items.length === 1) {
-								self.get(not_cached_items[0]).then(function(item_data) {
-									cache.put(item_data);
-									deferred.resolve( cached_items.push(item_data) );
-								});
-							}
-							else {
-								var not_cached_items_string = parse_items_arr(not_cached_items);
-								itemResource.query({items: not_cached_items_string}).$promise.
+							// if (not_cached_items.length === 1) {
+							// 	self.get(not_cached_items[0]).then(function(item_data) {
+							// 		cache.put(item_data);
+							// 		cached_items.push(item_data);
+							// 		deferred.resolve(cached_items);
+							// 	});
+							// }
+							// else {
+								var not_cached_item_strings = parse_items_arr(not_cached_items);
+								itemResource.query({items: not_cached_item_strings}).$promise.
 									then(function(item_data_arr) {
 										item_data_arr.forEach(function(item_data) {
 											cache.put(item_data);
@@ -87,7 +88,7 @@ angular.module('main').
 									finally(function() {
 										in_progress = false;
 									});
-							}
+							//}
 						}
 						catch(e) {
 							deferred.reject();

@@ -41,7 +41,7 @@
 	<div class="thumbnail" ng-if="previewData.thumbnail.data">
 		<img src="data:image/jpeg;base64,{{previewData.thumbnail.data}}" alt="Preview Image" fit-thumb />
 	</div>
-	<div class="remove" ng-if="removable" ng-click="itemPreviewController.remove_from_mjs($event)">
+	<div class="remove" ng-if="removable && !(previewData.ugc)" ng-click="itemPreviewController.remove_from_mjs($event)">
 		<icon position="[-229, -104]"></icon>
 	</div>
 </div>

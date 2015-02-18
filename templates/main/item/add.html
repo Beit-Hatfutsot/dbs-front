@@ -22,10 +22,12 @@
 				<en>My Story</en>
 				<he>סיפור שלי</he>
 			</span>
-			<span class="add-dialog__separator">|</span> 
-			<span class="add-dialog__remove" ng-click="itemController.remove_from_mjs()">
-				<en>Remove Item</en>
-				<he>הורד</he>
+			<span ng-if="!(item_data.ugc)">
+				<span class="add-dialog__separator">|</span> 
+				<span class="add-dialog__remove" ng-click="itemController.remove_from_mjs()">
+					<en>Remove Item</en>
+					<he>הורד</he>
+				</span>
 			</span>
 		</div>
 	</div>

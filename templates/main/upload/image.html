@@ -1,0 +1,32 @@
+<upload-area ctrl="uploadImageCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
+<form name="upload_form" id="upload-picture-form" rc-submit="uploadImageCtrl.submit()" novalidate>
+	<upload-fieldset	ng-if="uploadImageCtrl.lang === 'he'" 
+						ctrl="uploadImageCtrl" 
+						upload-form="upload_form" 
+						rc="rc" lang="he" 
+						is-required="true">
+	</upload-fieldset>
+	<div class="upf__alt-instructions" ng-if="uploadImageCtrl.lang === 'he'">
+		<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
+		<he>If you speak English, please fill the same details below</he>
+	</div>
+	<upload-fieldset 	ctrl="uploadImageCtrl" 
+						upload-form="upload_form" 
+						rc="rc" lang="en" 
+						is-required="uploadImageCtrl.lang === 'en' ? true : false">
+	</upload-fieldset>
+	<div class="upf__alt-instructions" ng-if="uploadImageCtrl.lang === 'en'">
+		<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
+		<he>If you speak English, please fill the same details below</he>
+	</div>
+	<upload-fieldset 	ng-if="uploadImageCtrl.lang === 'en'" 
+						ctrl="uploadImageCtrl" 
+						upload-form="upload_form" 
+						rc="rc" lang="he" 
+						is-required="false">
+	</upload-fieldset>
+	<input type="submit" value="{{uploadImageCtrl.submit_value[uploadImageCtrl.lang]}}" class="upf__submit">
+	<div class="upf__in-progress" ng-show="uploadImageCtrl.in_progress">
+		<img src="images/progress.gif">
+	</div>
+</form>

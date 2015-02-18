@@ -80,6 +80,10 @@ angular.module('auth').
 		  		else {
 		  			return false;
 		  		}
+		  	},
+
+		  	get_token: function() {
+		  		return $window.localStorage.getItem('bhsclient_token') || false;
 		  	}
 	  	};
 

@@ -26,6 +26,17 @@
 	border-radius: $radius;
 }
 
+@mixin border-radius-top($radius) {
+	-webkit-border-top-left-raius: $radius;
+	-webkit-border-top-right-raius: $radius;
+	-moz-border-top-left-radius: $radius;
+	-moz-border-top-right-radius: $radius;
+	-o-border-top-left-radius: $radius;
+	-o-border-top-right-radius: $radius;
+	border-top-left-radius: $radius;
+	border-top-right-radius: $radius;
+}
+
 @mixin translate($x, $y) {
 	-webkit-transform: translate($x, $y);
     -moz-transform: translate($x, $y);

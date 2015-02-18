@@ -8,6 +8,10 @@ angular.module('main').
 			
 			data: mjsResource.get(),
 
+			refresh: function() {
+				this.data.$get();
+			},
+
 			add: function(item_string) {
 				if (this.data.$resolved && !this.in_mjs(item_string)) {
 					if ( this.data.hasOwnProperty('unassigned') ) {

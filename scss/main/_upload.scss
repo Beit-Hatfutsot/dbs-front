@@ -1,0 +1,258 @@
+#upload {
+	background: #ffffff;
+
+	@at-root #upload-instructions-container {
+		width: 100%;
+		background: #f5f5f5;
+
+		@at-root #upload-instructions {
+			width: 940px;
+			height: 180px;
+			margin: 0 auto;
+			padding: 30px 0 0;
+			text-align: center;
+
+			.title {
+				font-size: 37px;
+				margin-bottom: 22px;
+			}
+
+			.content {
+				font-size: 29px;
+			}
+		}	
+	}
+
+	@at-root #tabs-container {
+		width: 100%;
+		background: #eeeeee;
+
+		.tabs {
+			//display: flex;
+			width: 640px;
+			margin: 0 auto;
+
+			&__tab {
+				width: 160px;
+				height: 53px;
+				padding: 19px 0 0;
+				text-align: center;
+
+				&--selected {
+					background: #ffffff;
+					border-top: 6px solid #1ec3d2;
+					border-left: 1px solid #d5d5d5;
+					border-right: 1px solid #d5d5d5;
+					@include border-radius-top(5px);
+				}
+			} 
+
+			.nav-tabs {
+
+				li {
+					display: table-cell;
+					width: 160px;
+					height: 53px;
+					padding-top: 19px;
+					text-align: center;
+
+					&.active { 
+						height: 44px;
+						background: #ffffff;
+						border-top: 6px solid #1ec3d2;
+						border-left: 1px solid #d5d5d5;
+						border-right: 1px solid #d5d5d5;
+						@include border-radius-top(5px);
+					}
+
+					a {
+						text-decoration: none;
+						color: #333333;
+					}
+				}
+			}
+		}
+	}
+
+	@at-root #upload-view-container {
+		width: 100%;
+
+		@at-root #upload-view {
+			width: 940px;
+			margin: 0 auto;
+			padding: 30px 0 0;
+
+			.upload-droparea {
+				width: 100%;
+				height: 250px;
+				margin-bottom: 20px;
+				padding: 18px 0 0;
+				border: 2px dashed #666666;
+				text-align: center;
+
+				&__cloud {
+					width: 92px;
+					height: 67px;
+					margin: 0 auto 16px;
+					@include bg_image("cloud.png");
+				}
+
+				&__instructions {
+					font-size: 19px;
+					color: #666666;
+					text-align: center;
+				}
+
+				&__browse {
+					width: 223px;
+					height: 65px;
+					margin: 0 auto;
+					padding: 22px 0;
+					text-align: center;
+					background: #f5f5f5;
+					border: 2px solid #d7d9d8;
+					@include border-radius(4px);
+					font-size: 19px;
+					color: #999999;
+					@include hover_pointer();
+				}
+
+				img {
+					max-width: 900px;
+					max-height: 210px;
+				}
+
+				@at-root #upload-picture-form {
+
+					.upf {
+						margin: 0;
+						padding: 0;
+						border: none;
+
+						&--en {
+							direction: ltr;
+
+							label {
+								left: 10px;
+							}
+
+							.upf__field__error {
+								left: 10px;
+							}
+						}
+
+						&--he {
+							direction: rtl;
+
+							label {
+								right: 10px;
+							}
+
+							.upf__field__error {
+								right: 10px;
+							}
+						}
+
+						&__field {
+							position: relative;
+
+							label {
+								opacity: 1;
+								position: absolute;
+								top: 10px;
+								color: #999999;
+								font-size: 14px;
+								@include transition(all, 0.5s, linear);
+
+								&.ng-hide {
+									opacity: 0;
+									top: 24px;
+								}
+
+								.upload-asterix {
+									position: relative;
+									top: -5px;
+									color: #c73420;
+								}
+							}
+
+							input, textarea {
+								width: 100%;
+								max-width: 940px;
+								border: 2px solid #d4d6d5;
+								@include border-radius(6px);
+								margin-bottom: 6px;
+								padding: 34px 10px 0;
+								font-size: 25px;
+							}
+
+							&__title,
+							&__location,
+							&__date,
+							&__creator_name,
+							&__people_present {
+								height: 75px;
+							}
+
+							&__description {
+								height: 153px;
+								padding-top: 26px !important;
+							}
+
+							&__error {
+								opacity: 1;
+								position: absolute;
+								bottom: 12px;
+								font-size: 24px;
+								color: #c73420;
+								@include transition(all, 0.5s, linear);
+
+								&.ng-hide {
+									opacity: 0;
+									bottom: 0;
+								}
+							}
+						}
+
+						&__alt-instructions {
+							margin: 35px 0 42px;
+							font-size: 24px;
+
+							.en & {
+								direction: rtl;
+							}
+
+							.he & {
+								direction: ltr;
+							}
+						}
+
+						&__submit {
+							display: inline-block;
+							width: 146px;
+							height: 41px;
+							margin: 29px 0 48px;
+							background: #48c3d4;
+							font-size: 21px;
+							color: #ffffff;
+							text-align: center;
+							border: none;
+							@include border-radius(4px);
+							@include hover_pointer();
+						}
+
+						&__in-progress {
+							display: inline-block;
+							vertical-align: middle;
+							
+							img {
+								width: 41px;
+								height: 41px;
+							}
+						}
+					} 
+				}
+			}
+		}
+	}
+}

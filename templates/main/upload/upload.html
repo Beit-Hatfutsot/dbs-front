@@ -1,0 +1,27 @@
+<div id="upload">
+     <div id="upload-instructions-container">
+        <div id="upload-instructions">
+            <div class="title">
+                <en>Add Items to your jewish story</en>
+                <he></he>
+            </div>
+            <div class="content">
+                <en>If you would like to allow the usage of this item to Beit Hatfutsot please fill in the fiealds below</en>
+                <he></he>
+            </div>
+        </div>
+    </div>
+    <div id="tabs-container">
+        <div class="tabs">
+            <tabset justified="true">
+                <tab heading="{{uploadCtrl.get_tab_heading('image')}}" active="uploadCtrl.tab_status.image"></tab>
+                <tab heading="{{uploadCtrl.get_tab_heading('video')}}" active="uploadCtrl.tab_status.video"></tab>
+                <tab heading="{{uploadCtrl.get_tab_heading('music')}}" active="uploadCtrl.tab_status.music"></tab>
+                <tab heading="{{uploadCtrl.get_tab_heading('family_tree')}}" active="uploadCtrl.tab_status.family_tree"></tab>
+            </tabset>
+        </div>
+    </div>
+    <div id="upload-view-container">
+        <div id="upload-view" ui-view></div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 <div id="wizard-result" ng-if="wizardResultController.search_status != '' && wizardResultController.search_status != 'none' && !(wizardResultController.failed)">
 	<div class="items">
-		<div class="items__name" ng-if="wizardResultController.result.name.isNotEmpty">
+		<div class="items__name" ng-if="wizardResultController.result.name.isNotEmpty()">
 			<item-preview preview-data="wizardResultController.result.name" content="name"></item-preview>
 		</div>
 		<div class="items__place" ng-if="wizardResultController.result.place.isNotEmpty()">

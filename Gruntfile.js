@@ -19,7 +19,8 @@ module.exports = function(grunt) {
                     'js/modules/api_client/src/**/*.js',
                     'js/modules/auth/src/**/*.js',
                     'js/modules/cache/src/**/*.js',
-                    'js/modules/plumb/src/**/*.js'
+                    'js/modules/plumb/src/**/*.js',
+                    'js/modules/rc_submit/src/**/*.js'
                     
                 ],
                 // the location of the resulting JS file
