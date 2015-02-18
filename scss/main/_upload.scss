@@ -28,7 +28,6 @@
 		background: #eeeeee;
 
 		.tabs {
-			//display: flex;
 			width: 640px;
 			margin: 0 auto;
 
@@ -48,7 +47,8 @@
 			} 
 
 			.nav-tabs {
-
+				margin: 0;
+				
 				li {
 					display: table-cell;
 					width: 160px;
