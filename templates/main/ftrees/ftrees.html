@@ -81,30 +81,25 @@
 					<tr ng-repeat="indi in ftreesCtrl.individuals.slice(ftreesCtrl.display_from_result) | limitTo: ftreesCtrl.results_per_page" ng-class="{dark: $index % 2 !== 0, selected: ftreesCtrl.is_selected(indi)}" ng-click="ftreesCtrl.select_individual(indi)">
 						<td class="name">
 							<div class="name__text">
-								<en>{{indi.FN}} {{indi.LN}}</en>
-								<he>{{indi.FN}} {{indi.LN}}</he>
+								{{indi.FN}} {{indi.LN}}
 							</div>
 						</td>
 						<td class="birth">
 							{{indi.BD}}
-							<en>{{indi.BP}}</en>
-							<he>{{indi.BP}}</he>
+							{{indi.BP}}
 						</td>
 						<td class="marriage">
 							{{indi.MD}}
-							<en>{{indi.MP}}</en>
-							<he>{{indi.MP}}</he>
+							{{indi.MP}}
 						</td>
 						<td class="death">
 							{{indi.DD}}
-							<en>{{indi.DP}}</en>
-							<he>{{indi.DP}}</he>
+							{{indi.DP}}
 						</td>
 						<td class="sex">
-							<en>{{indi.G}}</en>
-							<he>{{indi.G}}</he>
+							{{indi.G}}
 						</td>
-						<td class="tree-number">{{indi.GT}}</td>
+						<td class="tree-number">{{indi.GTN}}</td>
 					</tr>
 				</tbody>
 			</table>

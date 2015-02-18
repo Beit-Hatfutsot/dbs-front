@@ -142,12 +142,30 @@ var UploadImageController = function($scope, notification, auth, langManager, mj
         }
     });
 
-    $scope.$watch(function(){return self.in_progress;}, function(newVal) {
+    Object.defineProperty(this, 'upload_progress', {
+        get: function() {
+            return parseInt(this.get_progress() * 100);
+        }
+    });
+
+    $scope.$watch(function() {
+        return self.in_progress;
+    }, 
+    function(newVal) { 
         if (newVal) {
             notification.put({
                 en: 'Upload in progress...',
                 he: 'העלאה מתבצעת...'
             });
+            /*
+            self.progress_interval = setInterval(function() {
+                self.upload_progress = parseInt(self.get_progress() * 100);
+            }, 1);*/
+        }
+        else {
+            /*
+            clearInterval(self.progress_interval);
+            self.upload_progress = '';*/
         }
     });
     window.$scope = $scope;
@@ -197,6 +215,12 @@ UploadImageController.prototype = {
 
     remove_file: function() {
         $scope.uploadCtrl.remove_file.apply(this);
+    },
+
+    get_progress: function() {
+        if (this.flow && this.flow.files[0]) {
+            return this.flow.files[0].progress();
+        }
     }
 };
 

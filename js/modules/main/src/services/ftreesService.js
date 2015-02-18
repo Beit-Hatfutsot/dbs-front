@@ -85,7 +85,7 @@ angular.module('main').
 				var parsed_individual = {
 					_id: individual._id,
 					id: individual.II,
-					name: individual.FN + ' ' + individual.LN,
+					name: individual.FN_lc + ' ' + individual.LN_lc,
 					sex: individual.G,
 					parent_family: subset.parent_family,
 					family: subset.family

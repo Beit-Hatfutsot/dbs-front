@@ -9,9 +9,9 @@
 	</label>
 	<input type="text" ng-model="model">
 	<div class="info">?</div>
-	<div class="range-background">
-		<div class="range-container">
-			<input type="range" min="0" max="2" step="1" value="0" ng-model="modifier_model" track-color start="#49c4cf" stop="#d2d2d2">
-		</div>
+	<div class="modifiers-container">
+		<input type="radio" name="{{label_text_en}}" value="" ng-model="modifier_model"><label>Exact</label>
+		<input type="radio" name="{{label_text_en}}" value="prefix" ng-model="modifier_model"><label>Begins with</label>
+		<input type="radio" name="{{label_text_en}}" value="phonetic" ng-model="modifier_model"><label>Sounds like</label>
 	</div>
 </div>

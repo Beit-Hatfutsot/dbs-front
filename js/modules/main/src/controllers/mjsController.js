@@ -332,7 +332,7 @@ MjsController.prototype = {
 	},
 
 	create_n_assign: function(branch_name, item) {
-		this.dragging = false;
+		//this.dragging = false;
 		this.insert_new_branch();	
 		this.assign_item(branch_name, item);
 	},

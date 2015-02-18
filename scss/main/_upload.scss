@@ -117,6 +117,17 @@
 					@include hover_pointer();
 				}
 
+				&__progressbar {
+					
+					.progress{
+						background: #999999;
+
+						.progress-bar {
+							background: green;
+						}
+					}
+				}
+
 				img {
 					max-width: 900px;
 					max-height: 210px;

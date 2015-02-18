@@ -6,29 +6,18 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.selected_individual_data = {};
 	this.search_params = {};
 	this.search_modifiers = {
-		first_name: 0,
-		last_name: 0,
-		maiden_name: 0,
-		birth_place: 0,
-		marriage_place: 0,
-		death_place: 0
+		first_name: 	'',
+		last_name: 		'',
+		maiden_name: 	'',
+		birth_place: 	'',
+		marriage_place: '',
+		death_place: 	''
 	};
 	this.fudge_factors = {
-		birth_year: 0,
-		marriage_year: 0,
-		death_year: 0
+		birth_year: 	0,
+		marriage_year: 	0,
+		death_year: 	0
 	};
-	this.modifier_map = {
-		0: '',
-		1: 'prefix',
-		2: 'phonetic'
-	}
-	
-	this.inverse_modifier_map = {}
-	for (var code in this.modifier_map) {
-		var modifier_string = this.modifier_map[code]
-		this.inverse_modifier_map[modifier_string] = code;
-	}
 
 	this.results_per_page = 15;
 	this.display_from_result = 0;
@@ -54,18 +43,20 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 
 	for (var param in $stateParams) {
 		if ( $stateParams[param] !== undefined ) {
-			this.search_params[param] = $stateParams[param];
 
 			// handle search modifiers & fudge factors in query string
 			if ( $stateParams[param].indexOf('~') !== -1 ) {
-				var parts = this.search_params[param].split('~');
+				var parts = $stateParams[param].split('~');
 				this.search_params[param] = parts[0];
 				this.fudge_factors[param] = parts[1];
 			}
 			else if ( $stateParams[param].indexOf(';') !== -1 ) {
-				var parts = this.search_params[param].split(';');
+				var parts = $stateParams[param].split(';');
 				this.search_params[param] = parts[0];	
-				this.search_modifiers[param] = this.encode_modifier(parts[1]);
+				this.search_modifiers[param] = parts[1];
+			}
+			else {
+				this.search_params[param] = $stateParams[param];
 			}
 		}
 	};
@@ -81,17 +72,15 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 };
 
 FtreesController.prototype = {
-	encode_modifier: function(modifier_string) {
-		return this.inverse_modifier_map[modifier_string];
-	},
-
-	decode_modifier: function(modifier_code) {
-		return this.modifier_map[modifier_code];
-	},
-
 	search: function() {
 		var self = this, 
 			search_params = angular.copy(this.search_params);
+
+		for (var param in search_params) {
+			if (search_params[param] === '') {
+				delete search_params[param];
+			}
+		}
 
 		this.notification.put({
 			en:'Searching family trees...',
@@ -104,9 +93,8 @@ FtreesController.prototype = {
 
 		// insert search modifiers & fudge_factors into query string
 		for (var modifier in this.search_modifiers) {
-			var modifier_code = this.search_modifiers[modifier];	
-			if (search_params[modifier] !== undefined && modifier_code !== 0) {
-				var modifier_string = self.decode_modifier(modifier_code);
+			var modifier_string = this.search_modifiers[modifier]; 
+			if (search_params[modifier] !== undefined && modifier_string !== '') {
 				search_params[modifier] += ';' + modifier_string;
 			}
 		}
@@ -120,9 +108,6 @@ FtreesController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
-				for (var param in self.search_params) {
-					self.$location.search(param, search_params[param]);	
-				}
 
 				self.notification.put({
 					en: 'Family Trees Search has finished successfully.',
@@ -137,6 +122,11 @@ FtreesController.prototype = {
 					en: 'Family Trees Search has failed.',
 					he: 'חיפוש בעצי משפחה נכשל.'
 				});
+			}).
+			finally(function() {
+				for (var param in self.search_params) {
+					self.$location.search(param, search_params[param]);	
+				}
 			});
 	},
 
@@ -152,7 +142,7 @@ FtreesController.prototype = {
 				en: 'Loading tree...',
 				he: 'טוען עץ...'
 			});
-			this.ftrees.get_data(individual.GT).
+			this.ftrees.get_data(individual.GTN).
 				then(function(tree_data) {
 					self.selected_individual = self.ftrees.parse_individual(individual);
 
@@ -163,6 +153,7 @@ FtreesController.prototype = {
 
 					self.$state.go('ftree-view', {ind_index: self.individuals.indexOf(individual)});	
 				}, function() {
+					console.log(individual)
 					self.notification.put({
 						en: 'Failed to load tree.',
 						he: 'טעינת עץ נכשלה.'
