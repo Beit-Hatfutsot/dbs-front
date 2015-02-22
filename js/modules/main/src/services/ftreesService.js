@@ -1,8 +1,6 @@
 angular.module('main').
-	factory('ftrees', ['$http', '$q', 'apiClient', function($http, $q, apiClient) {
-		var in_progress = false,
-			parser = new GedcomParser(),
-			viewer = new GedcomViewer();
+	factory('ftrees', ['$http', '$q', 'apiClient', 'gedcomParser', function($http, $q, apiClient, gedcomParser) {
+		var in_progress = false;
 
 		var ftrees = {
 			search: function(params) {
@@ -70,7 +68,7 @@ angular.module('main').
 
 				$http.get(gedcom_url).
 					success(function(gedcom_text) {
-						deferred.resolve(parser.parse(gedcom_text));
+						deferred.resolve(gedcomParser.parse(gedcom_text));
 					}).
 					error(function() {
 						deferred.reject();
@@ -85,7 +83,7 @@ angular.module('main').
 				var parsed_individual = {
 					_id: individual._id,
 					id: individual.II,
-					name: individual.FN_lc + ' ' + individual.LN_lc,
+					name: individual.FN + ' ' + individual.LN,
 					sex: individual.G,
 					parent_family: subset.parent_family,
 					family: subset.family
@@ -188,7 +186,7 @@ angular.module('main').
 			},
 
 			get_individual_data: function(individual_id) {
-				var raw_data = parser.getData(individual_id);
+				var raw_data = gedcomParser.getData(individual_id);
 
 				if (raw_data) {
 					var parent_data = raw_data.getValue('familleParent'),

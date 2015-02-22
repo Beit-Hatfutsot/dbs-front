@@ -11,7 +11,8 @@ angular.module('main', [
     'apiClient',
     'cache',
     'plumb',
-    'rcSubmit'
+    'rcSubmit',
+    'gedcomParser'
 ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'flowFactoryProvider',
