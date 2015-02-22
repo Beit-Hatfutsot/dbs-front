@@ -8,7 +8,6 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.search_modifiers = {
 		first_name: 	'',
 		last_name: 		'',
-		maiden_name: 	'',
 		birth_place: 	'',
 		marriage_place: '',
 		death_place: 	''

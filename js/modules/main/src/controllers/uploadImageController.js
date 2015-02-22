@@ -157,26 +157,18 @@ var UploadImageController = function($scope, notification, auth, langManager, mj
                 en: 'Upload in progress...',
                 he: 'העלאה מתבצעת...'
             });
-            /*
-            self.progress_interval = setInterval(function() {
-                self.upload_progress = parseInt(self.get_progress() * 100);
-            }, 1);*/
-        }
-        else {
-            /*
-            clearInterval(self.progress_interval);
-            self.upload_progress = '';*/
         }
     });
-    window.$scope = $scope;
+
+    window.$scope=$scope
 };
 
 UploadImageController.prototype = {
 	submit: function() {
-        console.log(this.flow)
         if (this.flow.files.length > 0) {
             this.$scope.uploadCtrl.upload.apply(this);
         }
+        document.getElementsByClassName('upload-droparea')[0].scrollIntoView(false);
 	},
 
     onSuccess: function() {

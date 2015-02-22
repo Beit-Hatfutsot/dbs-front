@@ -97,7 +97,12 @@ var rcSubmitDirective = {
               submitController.setAttempted();
               if (!scope.$$phase) scope.$apply();
  
-              if (!formController.$valid) return false;
+              if (!formController.$valid) {
+                var first_invalid_name = formController.$error.required[0].$name;
+                document.getElementsByName(first_invalid_name)[0].scrollIntoView(false);
+                  
+                return false;
+              }
  
               var doSubmit = function () {
  

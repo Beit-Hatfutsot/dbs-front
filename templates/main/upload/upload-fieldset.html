@@ -19,7 +19,6 @@
 				ng-show="ctrl.meta_data[type][lang] || rc.upload_form.needsAttention(upload_form[type + '_' + lang])">
 			{{ctrl.meta_data_placeholders[type][lang][isRequired]}}
 		</label>
-		<!--<div ng-class="{'validation-icon-invalid': rc.form.needsAttention(form.phone), 'validation-icon-valid': !rc.form.needsAttention(form.phone) && rc.form.attempted}"></div>-->
         <div class="upf__field__error" ng-show="rc.upload_form.needsAttention(upload_form[type + '_' + lang])">
         	{{ctrl.validation_errors[type][lang]}}
         </div>
