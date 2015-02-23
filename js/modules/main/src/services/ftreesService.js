@@ -78,11 +78,13 @@ angular.module('main').
 			},
 
 			parse_individual: function(individual) {
-				var subset = this.get_individuals_subset('@' + individual.II + '@');
+				var individual_id = individual.II[0] === '@' ? individual.II : '@' + individual.II + '@';
+				var subset = this.get_individuals_subset(individual_id);
 
 				var parsed_individual = {
 					_id: individual._id,
-					id: individual.II,
+					id: individual_id,
+					tree_number: individual.GTN,
 					name: individual.FN + ' ' + individual.LN,
 					sex: individual.G,
 					parent_family: subset.parent_family,
@@ -125,19 +127,19 @@ angular.module('main').
 				
 				if (parent_data.husb) {
 					parsed_parent.husband.id = parent_data.husb.id;
-					parsed_parent.husband.name = parent_data.husb.getValue('name');
+					parsed_parent.husband.name = parse_name( parent_data.husb.getValue('name') );
 					parsed_parent.husband.sex = parent_data.husb.getValue('sexe');	
 				}
 				if(parent_data.wife) {
 					parsed_parent.wife.id = parent_data.wife.id;
-					parsed_parent.wife.name = parent_data.wife.getValue('name');
+					parsed_parent.wife.name = parse_name( parent_data.wife.getValue('name') );
 					parsed_parent.wife.sex = parent_data.wife.getValue('sexe');
 				}
 
 				parent_data.childs.forEach(function(child) {
 					var child_obj = {
 						id: child.id,
-						name: child.getValue('name'),
+						name: parse_name( child.getValue('name') ),
 						sex: child.getValue('sexe')
 					};
 					parsed_parent.children.push(child_obj);
@@ -162,14 +164,14 @@ angular.module('main').
 
 				if (spouse) {
 					parsed_family.spouse.id = spouse.id;
-					parsed_family.spouse.name = spouse.getValue('name');
+					parsed_family.spouse.name = parse_name( spouse.getValue('name') );
 					parsed_family.spouse.sex = spouse.getValue('sexe');	
 				}
 				
 				family_data.childs.forEach(function(child) {
 					var child_obj = {
 						id: child.id,
-						name: child.getValue('name'),
+						name: parse_name( child.getValue('name') ),
 						sex: child.getValue('sexe')
 					};
 					var child_family_data = self.get_individual_data(child.id).family_data;
@@ -187,7 +189,8 @@ angular.module('main').
 
 			get_individual_data: function(individual_id) {
 				var raw_data = gedcomParser.getData(individual_id);
-
+				window.parser = gedcomParser;
+				window.raw_data = raw_data;
 				if (raw_data) {
 					var parent_data = raw_data.getValue('familleParent'),
 						family_data = raw_data.getValue('familles')[0];
@@ -197,7 +200,25 @@ angular.module('main').
 					parent_data: parent_data,
 					family_data: family_data
 				};
-			} 
+			}, 
+
+			get_individual_document: function(individual_id, tree_number) {
+				return $http.get(apiClient.urls.individual, {
+							id: individual_id,
+							gtn: tree_number
+						});
+			}
+		}
+
+		function parse_name(name) {
+			name = name[0];
+			if (!name || name.indexOf('/') === -1) {
+				return name;
+			}
+
+			var n = name.split(' ');
+			var parsed_name = n[0] + ' ' + n[2].replace('/', '');
+			return parsed_name;
 		}
 
 		return ftrees;

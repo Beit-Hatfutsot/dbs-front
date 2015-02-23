@@ -90,7 +90,14 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
             parent: 'ftrees',
             url: '/ftree_view?ind_index',
             controller: 'FtreeViewController as ftreeViewCtrl'
-        },           
+        },
+
+         {
+            name: 'ftree-item',
+            url: '/ftree_item?indi_id&gtn',
+            controller: 'FtreeItemController as ftreeItemCtrl',
+            templateUrl: 'templates/main/ftrees/ftree-item.html'
+        },            
 
         {
             name: 'upload',

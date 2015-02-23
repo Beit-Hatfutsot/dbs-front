@@ -1,5 +1,5 @@
-<div class="individual">
-	<ng-switch on="indi.sex">
+<div class="individual" ng-click="goto_ftree_item(individual.id, treeNumber)">
+	<ng-switch on="individual.sex">
 		<div class="individual__icon" ng-switch-when="M">
 			<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
 		</div>
@@ -8,6 +8,6 @@
 		</div>
 	</ng-switch>
 	<div class="individual__name">
-		{{indi.name}}
+		{{individual.name}}
 	</div>
 </div>

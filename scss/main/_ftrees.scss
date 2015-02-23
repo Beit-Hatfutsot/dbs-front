@@ -435,62 +435,13 @@
 				}
 
 				@at-root #tree-layout {
-					width: 915px;
+					width: 2000px;
 					height: 100%;
-					padding: 170px 200px 0; 
+					padding: 170px 130px 0; 
 					background: #eeeeee;
 
 					.node-container {
-						display: inline-block;
-						min-width: 52px;
-						min-height: 76px;
-						margin: 15px 10px;
-
-						.node {
-							position: relative;
-							width: 100%;
-							min-height: 53px;
-							padding: 0 8px;
-							background: #f5f5f5;
-							border: 1px solid #f0f0f0;
-							@include border-radius(4px);
-
-							.individual {
-								display: inline-block;
-								vertical-align: top;
-								margin-top: -11px;
-
-								&__icon {
-									margin: 0 auto;
-									width: 31px;
-									height: 31px;
-									overflow: hidden;
-								}
-
-								&__name {
-									max-width: 71px;
-									text-align: center;
-									font-size: 15px;
-									font-weight: bold;
-									word-wrap: break-word;
-									word-spacing: 100px;
-								}
-							}
-
-							.rings {
-								position: absolute;
-								left: 50%;
-								top: 0;
-								@include translate(-50%, -2px);
-
-								&__icon {
-									width: 16px;
-									height: 15px;
-									overflow: hidden;
-									margin: 0 auto;
-								}
-							}
-						}
+						@extend %node-container;
 					}
 				}
 			}

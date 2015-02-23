@@ -1,46 +1,64 @@
-<div class="parent-family" ng-if="indi.parent_family.isNotEmpty()">
+<div class="parent-family" ng-if="individual.parent_family.isNotEmpty()">
 	<div class="node-container">
 		<div class="node">
-			<span ng-if="indi.parent_family.husband.isNotEmpty()">
-				<individual data="indi.parent_family.husband"></individual>
+			<span ng-if="individual.parent_family.husband.isNotEmpty()">
+				<individual data="individual.parent_family.husband" tree-number="individual.tree_number"></individual>
 			</span>
-			<span ng-if="indi.parent_family.wife.isNotEmpty() && indi.parent_family.husband.isNotEmpty()">
+			<span ng-if="individual.parent_family.wife.isNotEmpty() && individual.parent_family.husband.isNotEmpty()">
 				<div class="rings">
 					<div class="rings__icon">
 						<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
 					</div>
 				</div>
-				<individual data="indi.parent_family.wife"></individual>
+				<individual data="individual.parent_family.wife" tree-number="individual.tree_number"></individual>
 			</span>
-			<span ng-if="indi.parent_family.wife.isNotEmpty() && indi.parent_family.husband.isEmpty()">
-				<individual data="indi.parent_family.wife"></individual>
+			<span ng-if="individual.parent_family.wife.isNotEmpty() && individual.parent_family.husband.isEmpty()">
+				<individual data="individual.parent_family.wife" tree-number="individual.tree_number"></individual>
 			</span>
 		</div>
 	</div>
 </div>
 <div class="node-container">
 	<div class="node">
-		<span ng-if="indi.sex === 'M'">
-			<individual data="indi"></individual>
+		<span ng-if="individual.sex === 'M'">
+			<individual data="individual" tree-number="individual.tree_number"></individual>
 		</span>
-		<span ng-if="indi.family.spouse.isNotEmpty()">
+		<span ng-if="individual.family.spouse.isNotEmpty()">
 			<div class="rings">
 				<div class="rings__icon">
 					<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
 				</div>
 			</div>
-			<individual data="indi.family.spouse"></individual>
+			<individual data="individual.family.spouse" tree-number="individual.tree_number"></individual>
 		</span>
-		<span ng-if="indi.sex === 'F'">
-			<individual data="indi"></individual>
+		<span ng-if="individual.sex === 'F'">
+			<individual data="individual" tree-number="individual.tree_number"></individual>
 		</span>
 	</div>
 </div>
-<div class="family" ng-if="indi.family.isNotEmpty()">
-	<div class="node-container" ng-repeat="child in indi.family.children">
+<div class="node-container" ng-repeat="sibling in individual.parent_family.children" ng-if="sibling.name != individual.name">
+	<div class="node">
+		<span ng-if="sibling.sex === 'M'">
+			<individual data="sibling" tree-number="individual.tree_number"></individual>
+		</span>
+		<span ng-if="sibling.family.spouse.isNotEmpty()">
+			<div class="rings">
+				<div class="rings__icon">
+					<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+				</div>
+			</div>
+			<individual data="sibling.family.spouse" tree-number="individual.tree_number"></individual>
+		</span>
+		<span ng-if="sibling.sex === 'F'">
+			<individual data="sibling" tree-number="individual.tree_number"></individual>
+		</span>
+	</div>
+</div>
+<div class="family" ng-if="individual.family.isNotEmpty()">
+	<div class="node-container" ng-repeat="child in individual.family.children">
 		<div class="node">
 			<span ng-if="child.sex === 'M'">
-				<individual data="child"></individual>
+				<individual data="child" tree-number="individual.tree_number"></individual>
 			</span>
 			<span ng-if="child.family.spouse.isNotEmpty()">
 				<div class="rings">
@@ -48,10 +66,10 @@
 						<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
 					</div>
 				</div>
-				<individual data="child.family.spouse"></individual>
+				<individual data="child.family.spouse" tree-number="individual.tree_number"></individual>
 			</span>
 			<span ng-if="child.sex === 'F'">
-				<individual data="child"></individual>
+				<individual data="child" tree-number="individual.tree_number"></individual>
 			</span>
 		</div>
 	</div>
