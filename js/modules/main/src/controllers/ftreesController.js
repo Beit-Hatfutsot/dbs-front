@@ -1,8 +1,8 @@
-var FtreesController = function($scope, $state, $stateParams, $location, ftrees, notification) {
+var FtreesController = function($scope, $state, $stateParams, $location, ftrees, notification, musicalChairsFactory) {
 	var self = this;
 
 	this.individuals = [];
-	this.sorted_by = null;
+	this._sorted_by = null;
 	this.selected_individual = null;
 	this.selected_individual_data = {};
 	this.search_params = {};
@@ -18,9 +18,12 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		marriage_year: 	0,
 		death_year: 	0
 	};
-
 	this.results_per_page = 15;
 	this.display_from_result = 0;
+	this.more_columns_menu = true;
+	this.result_column_manager = {
+		player_status: {}
+	};
 
 	this.$state = $state;
 	this.$stateParams = $stateParams;
@@ -28,18 +31,35 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.$location = $location;
 	this.ftrees = ftrees;
 	this.notification = notification;
+	this.musicalChairsFactory = musicalChairsFactory;
+
+	Object.defineProperty(this, 'sorted_by', {
+		get: function() {
+			return this._sorted_by;
+		},
+
+		set: function(key) {
+			this.sort(key);
+		}
+	});
+	
+	Object.defineProperty(this, 'column_status', {
+		get: function() {
+			return this.result_column_manager.player_status;
+		}
+	});
 
 	Object.defineProperty(this, 'tree_view', {
 		get: function() {
 			return $state.includes('ftree-view');
 		}
-	})
+	});
 
 	Object.defineProperty($scope, 'tree_view', {
 		get: function() {
 			return self.tree_view;
 		}
-	})
+	});
 
 	for (var param in $stateParams) {
 		if ( $stateParams[param] !== undefined ) {
@@ -69,6 +89,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 
 	//search
 	this.search();
+	window.ctrl = this
 };
 
 FtreesController.prototype = {
@@ -108,7 +129,24 @@ FtreesController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
-				self.sort('FN');
+				self.sort('LN');
+
+				var keys = [];
+				for (var key in individuals[0]) {
+					keys.push(key);
+				}
+				self.result_column_manager = self.musicalChairsFactory.create_game({
+					'FN': true,
+					'LN': true,
+					'BP': true,
+					'BD': true,
+					'MP': true,
+					'MD': true,
+					'DP': false,
+					'DD': false,
+					'G': false,
+					'GTN': false
+				}, 6);
 
 				self.notification.put({
 					en: 'Family Trees Search has finished successfully.',
@@ -172,7 +210,7 @@ FtreesController.prototype = {
 	},
 
 	sort: function(key) {
-		if (this.sorted_by === key) {
+		if (this._sorted_by === key) {
 			this.individuals.sort(function(a, b) {
 				if ( a[key] && (a[key] > b[key]) ) {
 					return -1;
@@ -183,7 +221,7 @@ FtreesController.prototype = {
 				return 0;
 			});
 
-			this.sorted_by = key + '_inverse';
+			this._sorted_by = key + '_inverse';
 		}
 		else {
 			this.individuals.sort(function(a, b) {
@@ -199,9 +237,9 @@ FtreesController.prototype = {
 				return 0;
 			});
 
-			this.sorted_by = key;
+			this._sorted_by = key;
 		}
 	}
 };
 
-angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', 'notification', FtreesController]);
+angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', 'notification', 'musicalChairsFactory', FtreesController]);
