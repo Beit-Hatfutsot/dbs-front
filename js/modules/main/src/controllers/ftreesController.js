@@ -2,6 +2,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	var self = this;
 
 	this.individuals = [];
+	this.sorted_by = null;
 	this.selected_individual = null;
 	this.selected_individual_data = {};
 	this.search_params = {};
@@ -107,6 +108,7 @@ FtreesController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
+				self.sort('FN');
 
 				self.notification.put({
 					en: 'Family Trees Search has finished successfully.',
@@ -167,6 +169,38 @@ FtreesController.prototype = {
 		}
 
 		return false;
+	},
+
+	sort: function(key) {
+		if (this.sorted_by === key) {
+			this.individuals.sort(function(a, b) {
+				if ( a[key] && (a[key] > b[key]) ) {
+					return -1;
+				}
+				if ( !a[key] || (a[key] < b[key]) ) {
+					return 1;
+				}
+				return 0;
+			});
+
+			this.sorted_by = key + '_inverse';
+		}
+		else {
+			this.individuals.sort(function(a, b) {
+				if ( a[key] && (a[key] < b[key]) ) {
+					return -1;
+				}
+				if ( (!a[key] || (a[key]) > b[key]) && b[key] ) {
+					return 1;
+				}
+				if ( !(b[key]) ) {
+					return -1;
+				}
+				return 0;
+			});
+
+			this.sorted_by = key;
+		}
 	}
 };
 

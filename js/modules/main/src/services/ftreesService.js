@@ -200,13 +200,6 @@ angular.module('main').
 					parent_data: parent_data,
 					family_data: family_data
 				};
-			}, 
-
-			get_individual_document: function(individual_id, tree_number) {
-				return $http.get(apiClient.urls.individual, {
-							id: individual_id,
-							gtn: tree_number
-						});
 			}
 		}
 

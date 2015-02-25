@@ -36,7 +36,7 @@
 		</span>
 	</div>
 </div>
-<div class="node-container" ng-repeat="sibling in individual.parent_family.children" ng-if="sibling.name != individual.name">
+<div class="node-container" ng-repeat="sibling in individual.parent_family.children" ng-if="sibling.id != individual.id">
 	<div class="node">
 		<span ng-if="sibling.sex === 'M'">
 			<individual data="sibling" tree-number="individual.tree_number"></individual>

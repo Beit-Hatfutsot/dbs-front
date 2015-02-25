@@ -266,62 +266,16 @@
 						th, td {
 							display: inline-block;
 							word-wrap: break-word;
-						}
-
-						.name {
-							width: 178px;
+							width: 120px;
+							height: 60px;
 
 							.en & {
-								padding-right: 86px;
+								padding-right: 20px;
 							}
 
 							.he & {
-								padding-left: 86px;
+								padding-left: 20px;
 							}
-						}
-
-						.birth {
-							width: 117px;
-
-							.en & {
-								padding-right: 36px;
-							}
-
-							.he & {
-								padding-left: 36px;
-							}
-						}
-
-						.marriage {
-							width: 124px;
-
-							.en & {
-								padding-right: 36px;
-							}
-
-							.he & {
-								padding-left: 36px;
-							}
-						}
-
-						.death {
-							width: 124px;
-
-							.en & {
-								padding-right: 42px;
-							}
-
-							.he & {
-								padding-left: 42px;
-							}
-						}
-
-						.sex {
-							width: 62px;
-						}
-
-						.tree-number {
-							width: 92px;
 						}
 					}
 				}
@@ -363,10 +317,6 @@
 						height: 85px;
 						padding-top: 18px;
 						padding-bottom: 35px;
-
-						td {
-							display: inline-block;
-						}
 
 						&.dark {
 							background: #eeeeee;	

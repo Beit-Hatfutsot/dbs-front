@@ -50,9 +50,13 @@
 			<table class="results__individuals">
 				<thead>
 					<tr>
-						<th class="name">
-							<en>Name</en>
-							<he>שם</he>
+						<th class="first-name" ng-click="ftreesCtrl.sort('FN')">
+							<en>First Name</en>
+							<he>שם פרטי</he>
+						</th>
+						<th class="last-name" ng-click="ftreesCtrl.sort('LN')">
+							<en>Last Name</en>
+							<he>שם משפחה</he>
 						</th>
 						<th class="birth">
 							<en>Born</en>
@@ -66,11 +70,11 @@
 							<en>Death</en>
 							<he>נפטר</he>
 						</th>
-						<th class="sex">
+						<th class="sex" ng-click="ftreesCtrl.sort('G')">
 							<en>Sex</en>
 							<he>מין</he>
 						</th>
-						<th class="tree-מוצנקר">
+						<th class="tree-מוצנקר" ng-click="ftreesCtrl.sort('GTN')">
 							<en>Tree Number</en>
 							<he>מספר עץ</he>
 						</th>
@@ -78,10 +82,11 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="indi in ftreesCtrl.individuals.slice(ftreesCtrl.display_from_result) | limitTo: ftreesCtrl.results_per_page" ng-class="{dark: $index % 2 !== 0, selected: ftreesCtrl.is_selected(indi)}" ng-click="ftreesCtrl.select_individual(indi)">
-						<td class="name">
-							<div class="name__text">
-								{{indi.FN}} {{indi.LN}}
-							</div>
+						<td class="first-name">
+							{{indi.FN}}
+						</td>
+						<td class="last-name">
+							{{indi.LN}}
 						</td>
 						<td class="birth">
 							{{indi.BD}}

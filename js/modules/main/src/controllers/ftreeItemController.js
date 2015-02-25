@@ -2,8 +2,8 @@ var FtreeItemController = function($stateParams, ftrees, notification) {
 	this.ftrees = ftrees;
 	this.notification = notification;
 
-	this.individual_id = this.strip_id( $stateParams.indi_id );
-	this.tree_number = $stateParams.gtn;
+	this.individual_id = this.strip_id( $stateParams.individual_id );
+	this.tree_number = parseInt($stateParams.tree_number);
 
 	this.load();	
 };
@@ -12,11 +12,14 @@ FtreeItemController.prototype = {
 	load: function() {
 		var self = this;
 
-		this.ftrees.get_individual_document(this.individual_id, this.tree_number).
-			then(function(individual) {
-				self.ftrees.get_data(individual.GTN).
+		this.ftrees.search({
+				individual_id: this.individual_id, 
+				tree_number: this.tree_number
+			}).
+			then(function(individuals) {
+				self.ftrees.get_data(individuals[0].GTN).
 					then(function() {
-						self.individual = self.ftrees.parse_individual(individual);
+						self.individual = self.ftrees.parse_individual(individuals[0]);
 
 						self.notification.put({
 							en: 'Family tree successfully loaded.',

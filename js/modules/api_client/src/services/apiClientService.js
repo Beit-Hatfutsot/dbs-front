@@ -13,7 +13,6 @@ angular.module('apiClient').
 	  			suggest: 		'http://127.0.0.1:5000/suggest',
 	  			ftrees_search:	'http://127.0.0.1:5000/fsearch',
 	  			ftrees_get: 	'http://127.0.0.1:5000/get_ftree_url',
-	  			individual: 	'http://127.0.0.1:5000/individual',
 	  			upload: 		'http://127.0.0.1:5000/upload'
 	  		}
 	  		

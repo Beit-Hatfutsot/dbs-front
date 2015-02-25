@@ -94,7 +94,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
 
          {
             name: 'ftree-item',
-            url: '/ftree_item?indi_id&gtn',
+            url: '/ftree_item?individual_id&tree_number',
             controller: 'FtreeItemController as ftreeItemCtrl',
             templateUrl: 'templates/main/ftrees/ftree-item.html'
         },            

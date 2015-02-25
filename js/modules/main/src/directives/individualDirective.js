@@ -9,7 +9,7 @@ angular.module('main').
 			},
 			controller: ['$scope', '$state', function($scope, $state) {
 				$scope.goto_ftree_item = function(individual_id, tree_number) {
-					$state.go('ftree-item', {indi_id: individual_id, gtn: tree_number});
+					$state.go('ftree-item', {individual_id: individual_id, tree_number: tree_number});
 				}
 			}]
 		};
