@@ -59,18 +59,13 @@
 			}
 
 			&__title, &__row {
-				height: 42px;
+				height: 43px;
 				padding: 8px 20px 0;
 				border-bottom: 2px solid #eceaea;
-				font-size: 15px;
-			}
-
-			&__title {
-				height: 44px;
+				font-size: 16px;
 			}
 
 			&__row {
-				font-size: 16px;
 				@include hover-pointer();
 				
 				&:hover {

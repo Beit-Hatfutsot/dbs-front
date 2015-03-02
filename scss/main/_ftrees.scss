@@ -1,10 +1,13 @@
 #family-trees-container {
-	width: $view-width;
-	margin: 14px auto;
+	width: 100%;
+	background: #eeeeee;
+	padding: 14px 0;
 
 	@at-root #tree-sort {
 		position: relative;
+		width: $view-width;
 		min-height: 870px;
+		margin: 0 auto;
 		background: #ffffff;
 		@include border-radius(8px);
 		padding: 24px 18px 10px;
@@ -108,7 +111,6 @@
 			&__field {
 				
 				.container {
-					//width: 284px;
 					
 					input[type="text"] {
 						display: inline-block;
@@ -168,16 +170,16 @@
 						display: inline-block;
 
 						.en & {
-							margin-right: 42px;
+							margin-right: 40px;
 						}
 
 						.he & {
-							margin-left: 42px;
+							margin-left: 40px;
 						}
 
 						input[type="text"] {
 							display: inline-block;
-							width: 83px;
+							width: 80px;
 							height: 24px;
 						}
 					}
@@ -186,11 +188,11 @@
 						display: inline-block;
 
 						.en & {
-							margin-right: 27px;
+							margin-right: 20px;
 						}
 
 						.he & {
-							margin-left: 27px;
+							margin-left: 20px;
 						}
 
 						select {
@@ -223,6 +225,7 @@
 		}
 
 		.results {
+			position: relative;
 			display: inline-block;
 			vertical-align: top;
 			margin-top: 40px;
@@ -320,25 +323,6 @@
 								}
 							}
 						}
-
-						.more-columns-trigger {
-							width: 0;
-							overflow: visible;
-							font-size: 9px;
-
-							.en & {
-								left: -35px;
-							}
-
-							.he & {
-								right: -35px;
-							}
-
-							&__icon {
-								width: 21px;
-								height: 19px;
-							}
-						}
 					}
 				}
 
@@ -373,6 +357,152 @@
 								border-right: 5px solid #1ec3d2;
 							}
 						}
+					}
+				}
+			}
+
+			&__more-columns {
+				position: absolute;
+				top: 72px;
+
+				.en & {
+					right: -12px;
+				}
+
+				.he & {
+					left: -12px;
+				}
+
+				&.open {
+
+					.results__more-columns__menu {
+						display: block;
+					}
+				}
+
+				&__trigger {
+					background: transparent;
+					font-size: 9px;
+					position: absolute;
+					top: -41px;
+					@include hover-pointer();
+
+					.en & {
+						right: 0;
+					}
+
+					.he & {
+						left: 0;
+					}
+
+					&__icon {
+						width: 21px;
+						height: 19px;
+					}
+				}
+
+				&__menu {
+					position: relative;
+					display: none;
+					width: 322px;
+					background: #ffffff;
+					color: #333333;
+					border: 1px solid #c4c4c4;
+					border-bottom: 4px solid #5ecad8;
+					@include box-shadow(1px -1px 2px 1px #9fa1a0);
+
+					&:before, &:after {
+						bottom: 100%;
+						border: solid transparent;
+						content: " ";
+						height: 0;
+						width: 0;
+						position: absolute;
+						pointer-events: none;
+					}
+
+					&:before {
+						border-bottom-color: #dbdbdb;
+						border-width: 10px;
+
+						.en & {
+							right: 8px;
+						}
+
+						.he & {
+							left: 8px;
+						}
+					}
+
+					&:after {
+						border-bottom-color: #ffffff;
+						border-width: 8px;
+
+						.en & {
+							right: 10px;
+						}
+
+						.he & {
+							left: 10px;
+						}
+					}
+
+					&__title, &__row {
+						height: 43px;
+						padding: 10px 12px 0;
+						border-bottom: 2px solid #eceaea;
+						font-size: 16px;
+					}
+
+					&__row {
+						&:hover {
+							//color: #5dc2d4;
+						}
+
+						&__desc {
+							position: relative;
+							top: 2px;
+							display: inline-block;
+							vertical-align: top;
+							height: 100%;
+							width: auto;
+							@include hover-pointer();
+
+							.en & {
+								right: -5px;
+							}
+
+							.he & {
+								left: -5px;	
+							}
+						}
+
+						input[type=checkbox] {
+							@include scale(1.3);
+							@include hover-pointer();
+						}
+					}
+				}
+			}
+
+			&__per-page {
+
+				&__indicator {
+
+				}
+
+				&__paginator {
+					
+				}
+
+				&__selector {
+
+					.en & {
+						float: right;
+					}
+
+					.he & {
+						float: left;
 					}
 				}
 			}

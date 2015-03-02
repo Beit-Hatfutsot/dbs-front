@@ -6,6 +6,20 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.selected_individual = null;
 	this.selected_individual_data = {};
 	this.search_params = {};
+	
+	this.key_map = {
+		FN: 'First Name',
+		LN: 'Last Name',
+		BP: 'Birth Place',
+		BD: 'Birth Date',
+		MP: 'Marriage Place',
+		MD: 'Marriage Date',
+		DP: 'Death Place',
+		DD: 'Death Date',
+		G: 'Sex',
+		GTN: 'Tree Number'
+	};
+	
 	this.search_modifiers = {
 		first_name: 	'',
 		last_name: 		'',
@@ -18,9 +32,10 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		marriage_year: 	0,
 		death_year: 	0
 	};
-	this.results_per_page = 15;
+
+	this._results_per_page = 15;
 	this.display_from_result = 0;
-	this.more_columns_menu = true;
+	this.more_columns_menu = false;
 	this.result_column_manager = {
 		player_status: {}
 	};
@@ -32,6 +47,25 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.ftrees = ftrees;
 	this.notification = notification;
 	this.musicalChairsFactory = musicalChairsFactory;
+
+	Object.defineProperty(this, 'results_per_page', {
+		get: function() {
+			return this._results_per_page;
+		},
+
+		set: function(val) {
+			val = parseInt(val);
+
+			if (val > this.display_from_result) {
+				this.display_from_result = this.display_from_result - (val % this.display_from_result);
+			}
+			else {
+				this.display_from_result = this.display_from_result - (this.display_from_result % val);	
+			}
+			
+			this._results_per_page = val;
+		}
+	});
 
 	Object.defineProperty(this, 'sorted_by', {
 		get: function() {
@@ -238,6 +272,22 @@ FtreesController.prototype = {
 			});
 
 			this._sorted_by = key;
+		}
+	},
+
+	prevent_dropdown_close: function($event) {
+		$event.stopPropagation();
+	},
+
+	prev_page: function() {
+		if (this.display_from_result - this.results_per_page >= 0) {
+			this.display_from_result = this.display_from_result - this.results_per_page;
+		}
+	},
+
+	next_page: function() {
+		if (this.display_from_result + this.results_per_page < this.individuals.length) {
+			this.display_from_result = this.display_from_result + this.results_per_page;
 		}
 	}
 };

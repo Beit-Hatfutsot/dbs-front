@@ -77,6 +77,11 @@
     transform: rotate($degrees);
 }
 
+@mixin scale($factor)  {
+	transform: scale($factor);
+	 -webkit-transform: scale($factor);
+}
+
 @mixin linear-gradient($start: #f1f1f1, $from: 0%, $stop: #d9d9d9, $to: 100%) { 
 	background: $start;
 	background: -webkit-gradient(linear, left top, left bottom, from($start), to($stop));

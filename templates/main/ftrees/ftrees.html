@@ -42,10 +42,10 @@
 				Update
 			</button>
 		</form>
-		<div class="results">
+		<div class="results" ng-show="ftreesCtrl.individuals.isNotEmpty()">
 			<div class="results__title">
-				<en>Results of</en>
-				<he>מ תוצאות</he>
+				<en>Results {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} of {{ftreesCtrl.individuals.length}}</en>
+				<he>תוצאות {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
 			</div>
 			<table class="results__individuals">
 				<thead>
@@ -78,7 +78,7 @@
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="BD_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
 						</th>
-						<th class="marriage-place" ng-click="ftreesCtrl.sort('BP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['MP']">
+						<th class="marriage-place" ng-click="ftreesCtrl.sort('MP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['MP']">
 							<en>Marriage<br>Place</en>
 							<he>צקום<br>נישואין</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="MP"></icon>
@@ -120,13 +120,6 @@
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="GTN_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
 						</th>
-						<th class="more-columns-trigger">
-							<icon class="more-columns-trigger__icon" position="[-378, -136]"></icon>
-							<div>
-								<en>MORE</en>
-								<he>עוד</he>
-							</div>
-						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -162,11 +155,42 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="results__more-columns" ng-show="ftreesCtrl.more_columns_menu">
-				<div ng-repeat="(key, val) in ftreesCtrl.column_status">
-					<input type="checkbox" id="{{key}}-check" ng-model="ftreesCtrl.column_status[key]">
-					<label for="{{key}}-check">{{key}}</label>
+			<div class="results__more-columns" dropdown is-open="ftreesCtrl.more_columns_menu">
+				<div class="results__more-columns__trigger" dropdown-toggle>
+					<icon class="results__more-columns__trigger__icon" position="[-378, -136]"></icon>
+						<div>
+							<en>MORE</en>
+							<he>עוד</he>
+						</div>
+				</div>			
+				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+					<div class="results__more-columns__menu__title">
+						<en>Choose what columns to display (up to 6)</en>
+						<he></he>
+					</div>
+					<div class="results__more-columns__menu__row" ng-repeat="(key, val) in ftreesCtrl.column_status">
+						<input type="checkbox" id="{{key}}-check" ng-model="ftreesCtrl.column_status[key]">
+						<label class="results__more-columns__menu__row__desc" for="{{key}}-check">{{ftreesCtrl.key_map[key]}}</label>
+					</div>
 				</div>
+			</div>
+			<div class="results__per-page">
+				<span class="results__per-page__indicator">
+					<en>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} of {{ftreesCtrl.individuals.length}}</en>
+					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
+				</span>
+				<span class="results__per-page__paginator">
+					<a href="" ng-click="ftreesCtrl.prev_page()">&#60;&#60;Previus</a><a href="" ng-click="ftreesCtrl.next_page()"> Next>><a>
+				</span>
+				<span class="results__per-page__selector">
+					<label for="individuals-per-page">
+						<en>Per page</en>
+						<he>לעמוד</he>
+					</label>
+					<select id="individuals-per-page" ng-model="ftreesCtrl.results_per_page">
+						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 50]">{{i}}</option>
+					</select>
+				</span>
 			</div>
 		</div>
 		<div id="tree-layout-mask" ng-show="ftreesCtrl.tree_view" ui-view>
