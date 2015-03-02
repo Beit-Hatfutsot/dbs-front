@@ -98,8 +98,6 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 
 	// init notifications
 	notification.clear();
-
-	window.$scope=$scope
 };
 
 MjsController.prototype = {
@@ -153,33 +151,13 @@ MjsController.prototype = {
 		this.mjs_items.assigned = [];
 
 		if (mjs_data.hasOwnProperty('unassigned') || mjs_data.hasOwnProperty('assigned')) {
-			// if (mjs_data.unassigned.length === 1) {
-			// 	item.get( mjs_data.unassigned[0] ).
-			// 		then(function(item_data) {
-			// 			self.mjs_items.unassigned = [item_data];
-			// 		});
-			// }
-			// else if (mjs_data.unassigned.length > 1) {
-				item.get_items( mjs_data.unassigned ).
-					then(function(item_data) {
-						self.mjs_items.unassigned = item_data;
-					});	
-			// }
+			item.get_items( mjs_data.unassigned ).
+				then(function(item_data) {
+					self.mjs_items.unassigned = item_data;
+				});	
 
 			if (mjs_data.assigned.length > 0) {
 				mjs_data.assigned.forEach(function(branch) {
-					// if (branch.items.length === 1) {
-					// 	var b = {
-					// 		name: branch.name,
-					// 		items: {}
-					// 	};
-					// 	self.mjs_items.assigned.push(b);
-					// 	item.get( branch.items[0] ).
-					// 		then(function(item_data) {
-					// 			b.items = self.sort_items([item_data]);
-					// 		});
-					// }
-					// else if (branch.items.length > 1) {
 					if (branch.items.length > 0) {
 						var b = {
 							name: branch.name,
@@ -374,10 +352,31 @@ MjsController.prototype = {
 				'photoUnits': {
 					en: 'Images',
 					he: 'תמונות'
+				},
+				'genTreeIndividuals': {
+					en: 'Family Trees',
+					he: 'עצי משפחה'
+				},
+				'ugc': {
+					en: 'Uploaded Items',
+					he: 'פריטים שהועלו'
+				},
+				'default': {
+					en: 'Unknown',
+					hw: 'לא ידוע'
 				}
 			};
+
 			var type = this.itemTypeMap.get_type(collection[0].UnitType);
-			var display_type = display_type_map[type][this.langManager.lang];
+			if (!type) {
+				type = 'default';
+			}
+			try {
+				var display_type = display_type_map[type][this.langManager.lang];
+			}
+			catch(e) {
+				console.error('Could not find type: ' + type)
+			}
 			
 			return display_type ;
 		}

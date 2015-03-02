@@ -89,10 +89,18 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
             name: 'ftree-view',
             parent: 'ftrees',
             url: '/ftree_view?ind_index',
-            controller: 'FtreeViewController as ftreeViewCtrl'
+            controller: 'FtreeViewController as ftreeViewCtrl',
+            templateUrl: 'templates/main/ftrees/ftree-view.html'
         },
 
-         {
+        {
+            name: 'ftree-view.ftree-item',
+            url: '/ftree_item?individual_id&tree_number',
+            controller: 'FtreeItemController as ftreeItemCtrl',
+            templateUrl: 'templates/main/ftrees/ftree-item.html'
+        },
+        
+        {
             name: 'ftree-item',
             url: '/ftree_item?individual_id&tree_number',
             controller: 'FtreeItemController as ftreeItemCtrl',

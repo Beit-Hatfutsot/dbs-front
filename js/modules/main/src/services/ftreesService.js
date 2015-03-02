@@ -4,7 +4,7 @@ angular.module('main').
 
 		var ftrees = {
 			search: function(params) {
-				if (!in_progress) { 
+				//if (!in_progress) { 
 					in_progress = true;
 					var deferred = $q.defer();
 
@@ -20,7 +20,7 @@ angular.module('main').
 						});
 
 					return deferred.promise;
-				}
+				//}
 			},
 
 			get_data: function(tree_number) {
@@ -209,8 +209,8 @@ angular.module('main').
 				return name;
 			}
 
-			var n = name.split(' ');
-			var parsed_name = n[0] + ' ' + n[2].replace('/', '');
+			var n = name.split('/');
+			var parsed_name = n[0] + ' ' + n[1];
 			return parsed_name;
 		}
 

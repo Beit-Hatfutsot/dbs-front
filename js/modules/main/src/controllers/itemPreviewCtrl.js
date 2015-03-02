@@ -10,8 +10,13 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification) {
 
 ItemPreviewCtrl.prototype = {
 
-    goto_item: function(item_data) { 
-        this.$state.go('item-view', {item_string: this.item_string});
+    goto_item: function() { 
+        if (this.$scope.previewData.GTN) {
+            this.$state.go('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
+        }
+        else {
+            this.$state.go('item-view', {item_string: this.item_string});
+        }
     },
 
     remove_from_mjs: function($event) {

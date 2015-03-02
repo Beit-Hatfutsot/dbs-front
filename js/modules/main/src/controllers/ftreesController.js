@@ -56,11 +56,13 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		set: function(val) {
 			val = parseInt(val);
 
-			if (val > this.display_from_result) {
-				this.display_from_result = this.display_from_result - (val % this.display_from_result);
-			}
-			else {
-				this.display_from_result = this.display_from_result - (this.display_from_result % val);	
+			if (this.display_from_result) {
+				if (val > this.display_from_result) {
+					this.display_from_result = this.display_from_result - (val % this.display_from_result);
+				}
+				else {
+					this.display_from_result = this.display_from_result - (this.display_from_result % val);	
+				}
 			}
 			
 			this._results_per_page = val;
@@ -86,6 +88,12 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	Object.defineProperty(this, 'tree_view', {
 		get: function() {
 			return $state.includes('ftree-view');
+		}
+	});
+
+	Object.defineProperty(this, 'tree_item_view', {
+		get: function() {
+			return $state.includes('ftree-view.ftree-item');
 		}
 	});
 

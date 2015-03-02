@@ -1,0 +1,18 @@
+<div id="tree-layout-mask">
+	<div id="tree-layout-container">
+		<!--<ng-include src="'templates/main/item/add.html'"></ng-include>-->
+		<div class="tree-title-container">
+			<div class="tree-title">
+				<en>Goldman Family Tree</en>
+				<he>עץ המשפחה של גולדמן</he>
+			</div>
+		</div>
+		<div id="tree-layout">
+			<div ng-hide="ftreesCtrl.tree_item_view">
+				<mjs-widget item="ftreesCtrl.selected_individual"></mjs-widget>
+				<subtree individual="ftreesCtrl.selected_individual"></subtree>
+			</div>
+			<ui-view ng-show="ftreesCtrl.tree_item_view"></ui-view>
+		</div>
+	</div>
+</div>

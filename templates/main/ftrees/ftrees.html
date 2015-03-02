@@ -1,8 +1,8 @@
 <div id="family-trees-container" ng-class="{'tree-view': ftreesCtrl.tree_view}">
 	<div id="tree-sort">
 		<div class="title">
-			<en>Family Trees search Results for</en>
-			<he>תוצאות חיפוש עמי משפחה עבור</he>
+			<en>Family Trees search Results</en>
+			<he>תוצאות חיפוש עמי משפחה</he>
 		</div>
 		<form class="filters">
 			<div class="filters__title">
@@ -188,24 +188,11 @@
 						<he>לעמוד</he>
 					</label>
 					<select id="individuals-per-page" ng-model="ftreesCtrl.results_per_page">
-						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 50]">{{i}}</option>
+						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]">{{i}}</option>
 					</select>
 				</span>
 			</div>
 		</div>
-		<div id="tree-layout-mask" ng-show="ftreesCtrl.tree_view" ui-view>
-			<div id="tree-layout-container">
-				<ng-include src="'templates/main/item/add.html'"></ng-include>
-				<div class="tree-title-container">
-					<div class="tree-title">
-						<en>Goldman Family Tree</en>
-						<he>עץ המשפחה של גולדמן</he>
-					</div>
-				</div>
-				<div id="tree-layout">
-					<subtree individual="ftreesCtrl.selected_individual"></subtree>
-				</div>
-			</div>
-		</div>
+		<ui-view ng-show="ftreesCtrl.tree_view"></ui-view>
 	</div>
 </div>

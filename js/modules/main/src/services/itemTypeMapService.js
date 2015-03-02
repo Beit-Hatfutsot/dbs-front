@@ -6,12 +6,23 @@ angular.module('main').service('itemTypeMap', function() {
 	};
 
 	this.get_type = function(description_code) {
-		return map[description_code];
+		var type;
+		if (description_code) {
+			type = map[description_code];
+		}
+		else {
+			type = 'genTreeIndividuals';
+		} 
+
+		return type;
 	};
 
 	this.get_collection_name = function(item_data) {
 		if (item_data.ugc) {
 			return 'ugc';
+		}
+		else if (item_data.GTN) {
+			return 'genTreeIndividuals';
 		}
 		else {
 			return this.get_type(item_data.UnitType);

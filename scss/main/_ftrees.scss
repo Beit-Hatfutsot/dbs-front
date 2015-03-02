@@ -259,6 +259,7 @@
 				border-collapse: collapse;
 				table-layout: fixed;
 				width: 860px;
+				@include border-radius(5px);
 
 				thead, tbody {
 
@@ -284,9 +285,9 @@
 
 				thead {
 					display: table-header-group;
+					border-bottom: 2px solid #ffffff;
 
 					tr {
-						border-bottom: 2px solid #ffffff;
 
 						th {
 							position: relative;
@@ -492,7 +493,7 @@
 				}
 
 				&__paginator {
-					
+
 				}
 
 				&__selector {
