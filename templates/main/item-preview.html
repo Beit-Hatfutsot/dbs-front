@@ -1,6 +1,15 @@
 <div class="item-preview" ng-click="itemPreviewController.goto_item(previewData)">
 	<div class="type">
 		<ng-switch on="item_type">
+			<div ng-switch-when="genTreeIndividuals">
+				<div class="type-icon-container">
+					<div class="photo-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Family Tree</en>
+					<he>עץ משפחה</he>
+				</div>
+			</div>
 			<div ng-switch-when="familyNames">
 				<div class="type-icon-container">
 					<div class="surname-icon"></div>
@@ -30,18 +39,26 @@
 			</div>
 		</ng-switch>
 	</div>
-	<div class="header">
-		<en>{{previewData.Header.En}}</en>
-		<he>{{previewData.Header.He}}</he>
-	</div>
-	<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}" ng-if="!(hideText && previewData.thumbnail.data) ">
-		<en>{{previewData.UnitText1.En}}</en>
-		<he>{{previewData.UnitText1.He}}</he>
-	</div>
-	<div class="thumbnail" ng-if="previewData.thumbnail.data">
-		<img src="data:image/jpeg;base64,{{previewData.thumbnail.data}}" alt="Preview Image" fit-thumb />
-	</div>
-	<div class="remove" ng-if="removable && !(previewData.ugc)" ng-click="itemPreviewController.remove_from_mjs($event)">
-		<icon position="[-229, -104]"></icon>
-	</div>
+	<ng-switch on="previewData.hasOwnProperty('GTN')">
+		<div ng-switch-when="true" class="text text--nothumb">
+			{{previewData.FN}}<br>{{previewData.LN}}
+		</div>
+		<!-- regular items -->
+		<div ng-switch-default>
+			<div class="header">
+				<en>{{previewData.Header.En}}</en>
+				<he>{{previewData.Header.He}}</he>
+			</div>
+			<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}" ng-if="!(hideText && previewData.thumbnail.data) ">
+				<en>{{previewData.UnitText1.En}}</en>
+				<he>{{previewData.UnitText1.He}}</he>
+			</div>
+			<div class="thumbnail" ng-if="previewData.thumbnail.data">
+				<img src="data:image/jpeg;base64,{{previewData.thumbnail.data}}" alt="Preview Image" fit-thumb />
+			</div>
+		</div>
+		<div class="remove" ng-if="removable && !(previewData.ugc)" ng-click="itemPreviewController.remove_from_mjs($event)">
+			<icon position="[-229, -104]"></icon>
+		</div>
+	</ng-switch>
 </div>

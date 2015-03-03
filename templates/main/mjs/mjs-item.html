@@ -1,9 +1,18 @@
-<ng-switch on="item.thumbnail.data == ''">
-	<div class="item-thumbnail item-thumbnail--text" ng-switch-when="true" draggable data="item">
-		<en>{{item.Header.En}}</en>
-		<he>{{item.Header.He}}</he>
+<ng-switch on="item.hasOwnProperty('GTN')">
+	<!-- family trees / individuals -->
+	<div ng-switch-when="true" class="item-thumbnail item-thumbnail--text" draggable data="item">
+		{{item.FN + ' ' + item.LN}}
 	</div>
-	<div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" draggable data="item">
-		<img src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb />
+	<!-- regular items -->
+	<div ng-switch-default>
+		<ng-switch on="item.thumbnail.data == ''">
+			<div class="item-thumbnail item-thumbnail--text" ng-switch-when="true" draggable data="item">
+				<en>{{item.Header.En}}</en>
+				<he>{{item.Header.He}}</he>
+			</div>
+			<div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" draggable data="item">
+				<img src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb>
+			</div>
+		</ng-switch>
 	</div>
 </ng-switch>

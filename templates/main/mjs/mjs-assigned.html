@@ -1,8 +1,15 @@
 <ng-switch on="grouped" ng-click="mjsCtrl.select_collection(collection)">
 	<div class="assigned__single" ng-switch-when="false" ng-class="{'selected-collection': mjsCtrl.is_selected_collection(collection)}">
 		<div class="assigned__single__desc">
-			<en>{{collection[0].Header.En}}</en>
-			<he>{{collection[0].Header.He}}</he>
+			<ng-switch on ="collection[0].hasOwnProperty('GTN')">
+				<span ng-switch="true">
+					{{collection[0].FN}} {{collection[0].LN}}
+				</span>
+				<span ng-switch-default>
+					<en>{{collection[0].Header.En}}</en>
+					<he>{{collection[0].Header.He}}</he>
+				</span>
+			</nd-switch>
 		</div>
 		<mjs-item item="collection[0]"></mjs-item>
 	</div>
