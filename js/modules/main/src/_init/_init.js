@@ -15,8 +15,8 @@ angular.module('main', [
     'gedcomParser'
 ]).
 config([
-'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'flowFactoryProvider',
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, flowFactoryProvider) {
+'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide',
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide) {
 
     var states = [ 
         {
@@ -69,7 +69,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
-            controller: 'MjsController as mjsCtrl',
+            //controller: 'MjsController as mjsCtrl',
             onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionManager2', function(notification, plumbConnectionManager, plumbConnectionManager2) {
                 notification.clear();
                 plumbConnectionManager.connections = {};
@@ -152,6 +152,16 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, f
 
     angular.forEach(states, function(state) {
         $stateProvider.state(state);
+    });
+
+    $provide.decorator('$state', function($delegate, $stateParams) {
+        var old_go = $delegate.go;
+        $delegate.go = function(state_name, state_params, config) {
+            $delegate.lastState = $delegate.current;
+            $delegate.lastStateParams = $delegate.params;
+            return old_go.apply($delegate, [state_name, state_params, config]);
+        };
+        return $delegate;
     });
 
     $urlRouterProvider.otherwise('/404');

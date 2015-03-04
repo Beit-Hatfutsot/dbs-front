@@ -4,14 +4,14 @@ angular.module('auth').
 	'$modal', '$state', '$http', 'apiClient', '$q', '$window', 'user',
 	function($modal, $state, $http, apiClient, $q, $window, user) {
 		var auth, in_progress;
-
+		
 		in_progress = false;
 
 	  	auth = {
 
-	  		authenticate: function(next_state, config) {
+	  		authenticate: function(config) {
 
-	  			if ( !(this.signedin_user) ) {
+	  			if ( !(this.is_signedin()) ) {
 				    
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
@@ -20,15 +20,25 @@ angular.module('auth').
 				    });
 
 				    authModalInstance.result.then(function(user_data) {
-				    	$state.go(next_state);
+				    	if (config.next_state) {
+				    		$state.go(config.next_state);
+				    	} else {
+				    		$state.go($state.current, $state.params, {reload: true, notify:true, inherit:false});
+				    	}
 				    }, function(dismiss_reason) {
-				    	if (config.mandatory === false) {
-				    		$state.go(next_state);
+				    	if (config.fallback_state) {
+				    		$state.go(config.fallback_state, config.fallback_state_params);
 				    	}
 				    });
 				} 
 				else {
-					$state.go(next_state);
+					if ( !(config.mandatory) ) {
+						if (config.next_state) {
+							$state.go(config.next_state);
+				    	} else {
+				    		$state.go($state.current, $state.params, {reload: true});
+				    	}
+			    	}
 				} 
 		  	},
 

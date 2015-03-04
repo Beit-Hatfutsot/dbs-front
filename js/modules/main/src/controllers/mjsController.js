@@ -1,10 +1,13 @@
-var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager) {
+var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager, auth) {
 	var self = this;
 
 	header.sub_header_state = 'closed';
 
 	this.notification = notification;
 	this.mjs = mjs;
+
+	mjs.data.$get();
+	
 	this.itemTypeMap = itemTypeMap;
 	this.item = item;
 	this.plumbConnectionManager = plumbConnectionManager;
@@ -94,7 +97,6 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 			self.dragging = false;
 		});
 	});
-
 
 	// init notifications
 	notification.clear();
@@ -386,4 +388,4 @@ MjsController.prototype = {
 	}
 };
 
-angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', MjsController]);
+angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', 'auth', MjsController]);
