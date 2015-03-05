@@ -1,5 +1,6 @@
 angular.module('main').service('itemTypeMap', function() {
 	var map = {
+		0: 'genTreeIndividuals',
 		1: 'photoUnits',
     	5: 'places',
     	6: 'familyNames'

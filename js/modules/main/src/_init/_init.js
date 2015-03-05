@@ -111,7 +111,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'upload',
             abstract: true,
             url: '/upload',
-            controller: 'UploadController as uploadCtrl',
             templateUrl: 'templates/main/upload/upload.html'
         },
 

@@ -5,13 +5,14 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification) {
     this.notification = notification;
 
     this.item_string = itemTypeMap.get_item_string($scope.previewData);
-    $scope.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+    this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+    this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
 };
 
 ItemPreviewCtrl.prototype = {
 
     goto_item: function() { 
-        if (this.$scope.previewData.GTN) {
+        if (this.collection_name === 'genTreeIndividuals') {
             this.$state.go('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
         }
         else {

@@ -1,4 +1,4 @@
-<ng-switch on="item.hasOwnProperty('GTN')">
+<ng-switch on="mjsItemCtrl.collection_name == 'genTreeIndividuals'">
 	<!-- family trees / individuals -->
 	<div ng-switch-when="true" class="item-thumbnail item-thumbnail--text" draggable data="item">
 		{{item.FN + ' ' + item.LN}}

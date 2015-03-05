@@ -1,6 +1,6 @@
 <div class="item-preview" ng-click="itemPreviewController.goto_item(previewData)">
 	<div class="type">
-		<ng-switch on="item_type">
+		<ng-switch on="itemPreviewController.item_type">
 			<div ng-switch-when="genTreeIndividuals">
 				<div class="type-icon-container">
 					<div class="photo-icon"></div>
@@ -39,9 +39,9 @@
 			</div>
 		</ng-switch>
 	</div>
-	<ng-switch on="previewData.hasOwnProperty('GTN')">
+	<ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
 		<div ng-switch-when="true" class="text text--nothumb">
-			{{previewData.FN}}<br>{{previewData.LN}}
+			{{previewData.FN}}<br>{{previewData.LN}}}
 		</div>
 		<!-- regular items -->
 		<div ng-switch-default>
