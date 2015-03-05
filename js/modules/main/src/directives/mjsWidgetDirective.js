@@ -6,9 +6,6 @@ angular.module('main').
 			controller: 'MjsWidgetController as mjsWidgetCtrl',
 			scope: {
 				item: '='
-			},
-			link: function(scope, element, attrs, ctrl) {
-				scope.ctrl = ctrl;
 			}
 		};
 	}]);

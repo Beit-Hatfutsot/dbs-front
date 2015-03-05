@@ -9,7 +9,7 @@ angular.module('main').
 			data: mjsResource.get(),
 
 			refresh: function() {
-				this.data.$get();
+				return this.data.$get();
 			},
 
 			add: function(item_string) {

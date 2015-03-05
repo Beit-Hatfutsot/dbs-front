@@ -22,9 +22,7 @@ angular.module('auth').
 				    authModalInstance.result.then(function(user_data) {
 				    	if (config.next_state) {
 				    		$state.go(config.next_state);
-				    	} else {
-				    		$state.go($state.current, $state.params, {reload: true, notify:true, inherit:false});
-				    	}
+				    	} 
 				    }, function(dismiss_reason) {
 				    	if (config.fallback_state) {
 				    		$state.go(config.fallback_state, config.fallback_state_params);
@@ -36,7 +34,7 @@ angular.module('auth').
 						if (config.next_state) {
 							$state.go(config.next_state);
 				    	} else {
-				    		$state.go($state.current, $state.params, {reload: true});
+				    		$state.go($state.current, $state.params);
 				    	}
 			    	}
 				} 

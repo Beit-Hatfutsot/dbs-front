@@ -1,6 +1,6 @@
-<ng-switch on="ctrl.in_mjs">
-	<div class="mjs-widget-wrapper" dropdown>
-		<div class="mjs-widget" ng-click="ctrl.push_to_mjs()" ng-switch-when="false" dropdown-toggle>
+<ng-switch on="mjsWidgetCtrl.in_mjs">
+	<div class="mjs-widget-wrapper" dropdown is-open="mjsWidgetCtrl.item_added">
+		<div class="mjs-widget" ng-click="mjsWidgetCtrl.push_to_mjs()" ng-switch-when="false">
 			<div class="mjs-widget__icon">
 				<icon position="[-418, -87]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
 			</div>
@@ -24,14 +24,14 @@
 			</span>
 			<span ng-if="!(item.ugc)">
 				<span class="mjs-widget-dialog__separator">|</span> 
-				<span class="mjs-widget-dialog__remove" ng-click="ctrl.remove_from_mjs()">
+				<span class="mjs-widget-dialog__remove" ng-click="mjsWidgetCtrl.remove_from_mjs()">
 					<en>Remove Item</en>
 					<he>הורד</he>
 				</span>
 			</span>
 		</div>
 	</div>
-	<div class="mjs-widget" ng-click="ctrl.remove_from_mjs()" ng-switch-when="true">
+	<div class="mjs-widget" ng-click="mjsWidgetCtrl.remove_from_mjs()" ng-switch-when="true">
 		<div class="mjs-widget__icon">
 			<icon position="[-418, -115]" alt-text="{en: 'Add to My Story', he: 'הוסף לסיפור שלי'}"></icon>
 		</div>

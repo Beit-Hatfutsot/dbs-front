@@ -5,9 +5,6 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 
 	this.notification = notification;
 	this.mjs = mjs;
-
-	mjs.data.$get();
-	
 	this.itemTypeMap = itemTypeMap;
 	this.item = item;
 	this.plumbConnectionManager = plumbConnectionManager;
@@ -46,6 +43,21 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 	Object.defineProperty(this, 'selected_collection_type', {
 		get: function() {
 			return this.get_collection_type(this.selected_collection);
+		}
+	});
+
+	Object.defineProperty(this, 'signedin', {
+		get: function() {
+			return auth.is_signedin();
+		}
+	});
+	
+	$scope.$watch(function() {
+		return self.signedin;
+	},
+	function(signedin) {
+		if (signedin) {
+			mjs.refresh();
 		}
 	});
 

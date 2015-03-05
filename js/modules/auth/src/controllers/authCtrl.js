@@ -1,6 +1,7 @@
-var AuthCtrl = function($modalInstance, langManager, auth) {
+var AuthCtrl = function($rootScope, $modalInstance, langManager, auth) {
     var self = this;
 
+    this.$rootScope = $rootScope;
     this.$modalInstance = $modalInstance;
     this.auth = auth;
 
@@ -28,6 +29,7 @@ AuthCtrl.prototype = {
     	this.auth.signin(this.iare, this.ias).
             then(function() {    
                 self.message = 'Sign in succeeded';
+                self.$rootScope.$broadcast('signin');
                 self.$modalInstance.close();
             }, function() {
                 self.message = 'Sign in failed';
@@ -39,5 +41,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$modalInstance', 'langManager', 'auth', '$http', AuthCtrl]);
+angular.module('auth').controller('AuthCtrl', ['$rootScope', '$modalInstance', 'langManager', 'auth', '$http', AuthCtrl]);
 

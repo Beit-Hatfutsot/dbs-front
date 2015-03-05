@@ -12,7 +12,7 @@
 						<he>{{itemController.item_data.Header.He}}</he>
 					</div>
 				</div>
-				<ng-include src="'templates/main/item/add.html'"></ng-include>
+				<mjs-widget item="itemController.item_data"></mjs-widget>
 				<div class="item__type">
 					<ng-switch on="itemController.item_type">
 						<div ng-switch-when="familyNames">

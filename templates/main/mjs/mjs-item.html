@@ -4,7 +4,7 @@
 		{{item.FN + ' ' + item.LN}}
 	</div>
 	<!-- regular items -->
-	<div ng-switch-default>
+	<span ng-switch-default>
 		<ng-switch on="item.thumbnail.data == ''">
 			<div class="item-thumbnail item-thumbnail--text" ng-switch-when="true" draggable data="item">
 				<en>{{item.Header.En}}</en>
@@ -14,5 +14,5 @@
 				<img src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb>
 			</div>
 		</ng-switch>
-	</div>
+	</span>
 </ng-switch>
