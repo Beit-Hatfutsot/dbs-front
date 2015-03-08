@@ -1,12 +1,12 @@
 <div class="auth-modal">
-	<form class="auth">
+	<form name="signin" class="auth">
 		<div class="field">
-			<label for="iare">User Name</label>
-			<input type="text" id="iare" class="lang-float {{authController.lang}}" ng-model="authController.iare"></input>
+			<label for="iare">Email</label>
+			<input type="text" id="iare" class="lang-float {{authController.lang}}" ng-model="authController.signin_data.email"></input>
 		</div>
 		<div class="field">
 			<label for="ias">Password</label>
-			<input type="text" id="ias" class="lang-float {{authController.lang}}" ng-model="authController.ias"></input>
+			<input type="text" id="ias" class="lang-float {{authController.lang}}" ng-model="authController.signin_data.ps"></input>
 		</div>
 		<br>
 		<div ng-show="authController.in_process">Processing...</div>
@@ -14,6 +14,28 @@
 		<br>
 		<div class="buttons lang-float {{authController.lang}}">
 			<button ng-click="authController.signin()">Sign in</button>
+			<button ng-click="authController.dismiss()">Cancel</button>
+		</div>
+	</form>
+	<form name="register">
+		<div class="field">
+			<label for="register-iare">Name</label>
+			<input type="text" id="register-iare" class="lang-float {{authController.lang}}" ng-model="authController.register_data.name"></input>
+		</div>
+		<div class="field">
+			<label for="register-imail">Email</label>
+			<input type="text" id="register-imail" class="lang-float {{authController.lang}}" ng-model="authController.register_data.email"></input>
+		</div>
+		<div class="field">
+			<label for="register-ias">Password</label>
+			<input type="text" id="register-ias" class="lang-float {{authController.lang}}" ng-model="authController.register_data.ps"></input>
+		</div>
+		<br>
+		<div ng-show="authController.in_process">Processing...</div>
+		<div>{{authController.message}}</div>
+		<br>
+		<div class="buttons lang-float {{authController.lang}}">
+			<button ng-click="authController.register()">Register</button>
 			<button ng-click="authController.dismiss()">Cancel</button>
 		</div>
 	</form>

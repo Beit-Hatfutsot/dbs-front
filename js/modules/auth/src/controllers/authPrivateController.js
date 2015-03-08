@@ -1,4 +1,4 @@
-var AuthPrivateController = function($scope, $state, $window, auth) {
+var AuthPrivateController = function($scope, $state, $window, auth, user) {
 	var self = this;
 
 	Object.defineProperty(this, 'signedin', {
@@ -8,7 +8,7 @@ var AuthPrivateController = function($scope, $state, $window, auth) {
 	});
 
 	$scope.$watch(function() {
-		return self.signedin;
+		return self.signedin || !(user.$resolved);
 	}, 
 	function(signedin) {
 		if (!signedin) {
@@ -25,4 +25,4 @@ AuthPrivateController.prototype = {
 
 };
 
-angular.module('auth').controller('AuthPrivateController', ['$scope', '$state', '$window', 'auth', AuthPrivateController]);
+angular.module('auth').controller('AuthPrivateController', ['$scope', '$state', '$window', 'auth', 'user', AuthPrivateController]);

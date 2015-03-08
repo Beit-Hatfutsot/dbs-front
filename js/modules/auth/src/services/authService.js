@@ -1,8 +1,8 @@
 angular.module('auth').
 
 	factory('auth', [
-	'$modal', '$state', '$http', 'apiClient', '$q', '$window', 'user',
-	function($modal, $state, $http, apiClient, $q, $window, user) {
+	'$modal', '$state', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
+	function($modal, $state, $http, apiClient, $q, $window, $rootScope, user) {
 		var auth, in_progress;
 		
 		in_progress = false;
@@ -10,7 +10,6 @@ angular.module('auth').
 	  	auth = {
 
 	  		authenticate: function(config) {
-
 	  			if ( !(this.is_signedin()) ) {
 				    
 				    var authModalInstance = $modal.open({
@@ -40,7 +39,7 @@ angular.module('auth').
 				} 
 		  	},
 
-		  	signin: function(username, password) {
+		  	signin: function(email, password) {
 		  		if ( !in_progress ) {
 		  			in_progress = true;
 
@@ -51,13 +50,16 @@ angular.module('auth').
 
 					try {
 				  		$http.post(apiClient.urls.auth, {
-				    		username: username, 
+				    		username: email, 
 				    		password: password 
 				    	}).
 				    	success(function(response) {
 				    		if (response.token) {
 				    			$window.localStorage.setItem('bhsclient_token', response.token);
-				    			signin_deferred.resolve();
+				    			user.$get().then(function() {
+				    				$rootScope.$broadcast('signin');
+					    			signin_deferred.resolve();
+				    			});
 				    		} else {
 				    			signin_deferred.reject();
 				    		}
@@ -77,21 +79,57 @@ angular.module('auth').
 		  		}
 		  	},
 
+		  	register: function(name, email, password) {
+		  		if (!in_progress) {
+		  			this.in_progress = true;
+		  			this.signout();
+
+		  			var self = this,
+					 	register_deferred = $q.defer(); 
+
+					try {
+				  		$http.post(apiClient.urls.user, {
+				  			name: name,
+				    		email: email, 
+				    		password: password 
+				    	}).
+				    	success(function(response) {
+				    		in_progress = false;
+				    		self.signin(email, password).then(function() {
+				    			register_deferred.resolve();
+				    		}, 
+				    		function() {
+				    			register_deferred.reject();	
+				    		});
+				    	}). 
+				    	error(function() {
+				    		in_progress = false;
+				    		register_deferred.reject();
+				    	});
+				    }
+				    catch(e) {
+				    	register_deferred.reject();
+				    }
+
+	  				return register_deferred.promise;
+		  		}
+		  	},
+
 		  	signout: function() {
 		  		$window.localStorage.removeItem('bhsclient_token');
 		  	},
 
 		  	is_signedin: function() {
-		  		if ( $window.localStorage.getItem('bhsclient_token') ) {
+		  		if ( $window.localStorage.getItem('bhsclient_token') && user.email ) {
 		  			return true;
 		  		}
 		  		else {
 		  			return false;
-		  		}
+		  		}	
 		  	},
 
 		  	get_token: function() {
-		  		return $window.localStorage.getItem('bhsclient_token') || false;
+		  		return this.is_signedin() ? $window.localStorage.getItem('bhsclient_token') : false;
 		  	}
 	  	};
 
@@ -115,7 +153,7 @@ angular.module('auth').
 		    },
 		    response: function (response) {
 		      	if (response.status === 401) {
-		        	// handle the case where the user is not authenticated
+		        	$window.localStorage.removeItem('bhsclient_token');
 		      	}
 		      	return response || $q.when(response);
 		    }

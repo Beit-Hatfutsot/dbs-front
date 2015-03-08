@@ -69,7 +69,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
-            //controller: 'MjsController as mjsCtrl',
             onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionManager2', function(notification, plumbConnectionManager, plumbConnectionManager2) {
                 notification.clear();
                 plumbConnectionManager.connections = {};

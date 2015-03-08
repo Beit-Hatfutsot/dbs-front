@@ -1,7 +1,6 @@
-var AuthCtrl = function($rootScope, $modalInstance, langManager, auth) {
+var AuthCtrl = function($scope, $modalInstance, langManager, auth) {
     var self = this;
 
-    this.$rootScope = $rootScope;
     this.$modalInstance = $modalInstance;
     this.auth = auth;
 
@@ -11,11 +10,16 @@ var AuthCtrl = function($rootScope, $modalInstance, langManager, auth) {
     	}
     });
 
-    // user name
-    this.iare = '';
+    this.signin_data = {
+        email:  '',
+        ps:     ''
+    };
 
-    // password
-    this.ias = '';
+    this.register_data = {
+        name:   '',
+        email:  '',
+        ps:     ''
+    };
 
     // auth message to display to the user
     this.message = '';
@@ -26,13 +30,24 @@ AuthCtrl.prototype = {
     signin: function() {
         var self = this;
 
-    	this.auth.signin(this.iare, this.ias).
+    	this.auth.signin(this.signin_data.email, this.signin_data.ps).
             then(function() {    
                 self.message = 'Sign in succeeded';
-                self.$rootScope.$broadcast('signin');
                 self.$modalInstance.close();
             }, function() {
                 self.message = 'Sign in failed';
+            });
+    },
+
+    register: function() {
+        var self = this;
+
+        this.auth.register(this.register_data.name, this.register_data.email, this.register_data.ps).
+            then(function() {    
+                self.message = 'Registered user' + self.register_data.email + ' successfuly';
+                self.$modalInstance.close();
+            }, function() {
+                self.message = 'Registration failed';
             });
     },
 
@@ -41,5 +56,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$rootScope', '$modalInstance', 'langManager', 'auth', '$http', AuthCtrl]);
+angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance', 'langManager', 'auth', '$http', AuthCtrl]);
 
