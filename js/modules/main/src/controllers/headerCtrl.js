@@ -55,6 +55,21 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs) {
 };
 
 HeaderCtrl.prototype = {
+    signin: function() {
+        this.authenticate();
+    },
+
+    signup: function() {
+        this.authenticate(true);
+    },
+
+    authenticate: function(register) {
+        this.auth.authenticate({
+            mandatory: false,
+            register: register
+        });
+    },
+
 	signout: function() {
         this.auth.signout();
     },

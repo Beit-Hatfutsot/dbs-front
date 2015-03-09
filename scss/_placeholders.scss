@@ -187,3 +187,76 @@
 		}
 	}
 }
+
+%bhs-fieldset {
+	
+	.bhf {
+		margin: 0;
+		padding: 0;
+		border: none;
+
+		&--en {
+			direction: ltr;
+
+			label {
+				left: 10px;
+			}
+
+			.bhf__field__error {
+				left: 10px;
+			}
+		}
+
+		&--he {
+			direction: rtl;
+
+			label {
+				right: 10px;
+			}
+
+			.bhf__field__error {
+				right: 10px;
+			}
+		}
+
+		&__field {
+			position: relative;
+
+			label {
+				opacity: 1;
+				position: absolute;
+				top: 10px;
+				font-size: 14px;
+				@include transition(all, 0.5s, linear);
+
+				&.ng-hide {
+					opacity: 0;
+					top: 24px;
+				}
+			}
+
+			input, textarea {
+				width: 100%;
+				border: 2px solid #d4d6d5;
+				@include border-radius(6px);
+				margin-bottom: 6px;
+				padding: 34px 10px 0;
+				font-size: 25px;
+			}
+
+			&__error {
+				opacity: 1;
+				position: absolute;
+				bottom: 12px;
+				font-size: 24px;
+				color: #c73420;
+				@include transition(all, 0.5s, linear);
+
+				&.ng-hide {
+					opacity: 0;
+					bottom: 0;
+				}
+			}
+		}
+	}
+}

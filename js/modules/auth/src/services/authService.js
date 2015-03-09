@@ -15,7 +15,12 @@ angular.module('auth').
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
 				     	controller: 'AuthCtrl as authController',
-				     	size: 'lg'
+				     	size: 'lg',
+				     	resolve: {
+				     		isRegister: function() {
+				     			return config.register;
+				     		}
+				     	}
 				    });
 
 				    authModalInstance.result.then(function(user_data) {
@@ -27,15 +32,6 @@ angular.module('auth').
 				    		$state.go(config.fallback_state, config.fallback_state_params);
 				    	}
 				    });
-				} 
-				else {
-					if ( !(config.mandatory) ) {
-						if (config.next_state) {
-							$state.go(config.next_state);
-				    	} else {
-				    		$state.go($state.current, $state.params);
-				    	}
-			    	}
 				} 
 		  	},
 

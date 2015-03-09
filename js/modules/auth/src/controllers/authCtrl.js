@@ -1,13 +1,20 @@
-var AuthCtrl = function($scope, $modalInstance, langManager, auth) {
+var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
     var self = this;
 
     this.$modalInstance = $modalInstance;
     this.auth = auth;
+    this.is_register = isRegister;
+
+    Object.defineProperty(this, '$scope', {
+    	get: function() {
+    		return $scope;
+    	}
+    });
 
     Object.defineProperty(this, 'lang', {
-    	get: function() {
-    		return langManager.lang;
-    	}
+        get: function() {
+            return langManager.lang;
+        }
     });
 
     this.signin_data = {
@@ -23,6 +30,24 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth) {
 
     // auth message to display to the user
     this.message = '';
+
+    this.placeholders = {
+        name: {
+            en: 'Name',
+            he: 'שם'
+        },
+
+        email: {
+            en: 'Email',
+            he: 'דוא"ל'
+        },
+
+        ps: {
+            en: 'Password',
+            he: 'ססמא'
+        }
+    }
+    window.$scope = $scope;
 }
 
 AuthCtrl.prototype = {
@@ -53,8 +78,15 @@ AuthCtrl.prototype = {
 
     dismiss: function() {
         this.$modalInstance.dismiss();
+    },
+
+    goto_register: function() {
+        this.is_register = true;
+    },
+
+    goto_signin: function() {
+        this.is_register = false;
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance', 'langManager', 'auth', '$http', AuthCtrl]);
-
+angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance', 'langManager', 'auth', 'isRegister', AuthCtrl]);

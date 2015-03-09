@@ -13,16 +13,52 @@
 		@include translate(-$view-width /2 + 5px, 0);
 	}
 
-	&__sign {
+	&__signin, 
+	&__signup, 
+	&__signout {
+		width: 75px;
 		display: inline-block;
-		vertical-align: top;
+		vertical-align: middle;
+		padding: 6px 10px;
+		border: 2px solid #5a6971;
+		font-size: 14px;
+		text-align: center;
 		@include hover-pointer();
+
+		&:hover {
+			border: 2px solid #939da6;
+			background: #eeeeee;
+		}
+	}
+
+	&__signin {
+		.en & {
+			margin-left: 12px;
+			margin-right: 5px;
+		}
+
+		.he & {
+			margin-right: 12px;
+			margin-left: 5px;
+		}
 	}
 
 	&__signup {
-		display: inline-block;
-		vertical-align: top;
-		@include hover-pointer();
+
+		.en & {
+			margin-right: 12px;
+			margin-left: 5px;
+		}
+
+		.he & {
+			margin-left: 12px;
+			margin-right: 5px;
+		}
+	}
+
+	&__signout {
+		width: 100px;
+		margin: 0 12px;
 	}
 
 	&__upload,

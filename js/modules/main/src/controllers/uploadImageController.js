@@ -159,8 +159,6 @@ var UploadImageController = function($scope, notification, auth, langManager, mj
             });
         }
     });
-
-    window.$scope=$scope
 };
 
 UploadImageController.prototype = {

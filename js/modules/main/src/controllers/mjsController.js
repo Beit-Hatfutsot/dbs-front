@@ -1,7 +1,5 @@
-var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager, auth) {
+var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager, auth, user) {
 	var self = this;
-
-	header.sub_header_state = 'closed';
 
 	this.notification = notification;
 	this.mjs = mjs;
@@ -9,30 +7,9 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 	this.item = item;
 	this.plumbConnectionManager = plumbConnectionManager;
 	this.langManager = langManager;
+	this.header = header;
 
-	this.content_loaded = false;
-	this.mjs_items = {
-		assigned: [],
-		unassigned: []
-	};
-	this.new_branch = {
-		name: 'new family branch'
-	}
-	this.selected_collection = [];
-	this.parse_in_progress = false;
 	this.dragging = false;
-	this.branch_edit_status = {
-		0: false,
-		1: false,
-		2: false,
-		3: false,
-	};
-	this.branch_rmdialog_status = {
-		0: false,
-		1: false,
-		2: false,
-		3: false,
-	};
 
 	Object.defineProperty(this, 'mjs_data', {
 		get: function() {
@@ -51,13 +28,18 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 			return auth.is_signedin();
 		}
 	});
+
+	this.init();
 	
 	$scope.$watch(function() {
 		return self.signedin;
 	},
 	function(signedin) {
 		if (signedin) {
-			mjs.refresh();
+			mjs.refresh().
+				then(function() {
+					self.parse_mjs_data();
+				});
 		}
 	});
 
@@ -73,48 +55,71 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 
 			return unassigned_count - assigned_count;
 		}
-	}, function(newVal, oldVal) {
-		notification.put({
-			en: 'Loading Story...',
-			he: 'טוען סיפור...'
-		});
-		self.parse_mjs_data();
+	}, 
+	function(newVal, oldVal) {
+		if (newVal != !oldVal) {
+			self.parse_mjs_data();
+		}
 	});
-
+	
 	$scope.$watch(function() {
 		if (self.mjs_data.$resolved) {
 			var	branches_count = self.mjs_data.assigned.length;
 			return branches_count;
 		}
-	}, function(newVal, oldVal) {
-		self.parse_mjs_data();
+	}, 
+	function(newVal, oldVal) {
+		if (newVal != oldVal) {
+			self.parse_mjs_data();
+		}
 	});
-
-
-
-	/*************************************************************************/
-
-
-	this.selected_branch = null;
-	this.dragging = false;
-
+	
 	$scope.$on('dragstart', function() {
 		$scope.$apply(function() {
 			self.selected_branch = null;
 			self.dragging = true;
 		});
 	});
+
 	$scope.$on('dragend', function() {
 		$scope.$apply(function() {
 			self.dragging = false;
 		});
 	});
-
-	// init notifications
-	notification.clear();
 };
 
 MjsController.prototype = {
+	init: function() {
+		var self = this;
+
+		this.header.sub_header_state = 'closed';
+		this.content_loaded = false;
+		this.mjs_items = {
+			assigned: [],
+			unassigned: []
+		};
+		this.new_branch = {
+			name: 'new family branch'
+		}
+		this.selected_branch = null;
+		this.selected_collection = [];
+		this.parse_in_progress = false;
+		this.dragging = false;
+		this.branch_edit_status = {
+			0: false,
+			1: false,
+			2: false,
+			3: false,
+		};
+		this.branch_rmdialog_status = {
+			0: false,
+			1: false,
+			2: false,
+			3: false,
+		};
+
+		this.notification.clear();
+	},
 
 	assign_item: function(branch_name, item) {
 		var self = this,
@@ -160,6 +165,11 @@ MjsController.prototype = {
 			item = this.item,
 			mjs_data = this.mjs_data;
 
+		this.notification.put({
+			en: 'Parsing Story...',
+			he: 'טוען סיפור...'
+		});
+
 		this.select_collection([]);
 		this.mjs_items.unassigned = [];
 		this.mjs_items.assigned = [];
@@ -192,14 +202,14 @@ MjsController.prototype = {
 					}
 				});	
 			}
-
-			this.content_loaded = true;
-
-			this.notification.put({
-				en: 'Story loaded successfuly',
-				he: 'סיפור נטען בהצלחה.'
-			});
 		}
+
+		this.content_loaded = true;
+
+		this.notification.put({
+			en: 'Story loaded successfuly',
+			he: 'סיפור נטען בהצלחה.'
+		});
 	},
 
 	sort_items: function(item_arr) {
@@ -400,4 +410,4 @@ MjsController.prototype = {
 	}
 };
 
-angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', 'auth', MjsController]);
+angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', 'auth', 'user', MjsController]);

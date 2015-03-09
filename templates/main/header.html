@@ -29,19 +29,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="dropdown-icons__sign">
-			<span ng-if="!(headerController.is_signedin)" need-auth="false">
-				<en>Sign In</en>
-				<he>כניסה</he>
-			</span>
-			<span ng-if="headerController.is_signedin" ng-click="headerController.signout()">
-				<en>Sign Out</en>
-				<he>יציאה</he>
-			</span>
+		<div class="dropdown-icons__signin" ng-if="!(headerController.is_signedin)" ng-click="headerController.signin()">
+			<en>Sign In</en>
+			<he>כניסה</he>
 		</div>
-		<div class="dropdown-icons__signup" ng-if="!(headerController.is_signedin)">
+		<div class="dropdown-icons__signup" ng-if="!(headerController.is_signedin)" ng-click="headerController.signup()">
 			<en>Sign Up</en>
 			<he>הרשמה</he>
+		</div>
+		<div class="dropdown-icons__signout" ng-if="headerController.is_signedin" ng-click="headerController.signout()">
+			<en>Sign Out</en>
+			<he>יציאה</he>
 		</div>
 		<div class="dropdown-icons__language-selector" dropdown is-open="headerController.language_menu_open">
 			<div dropdown-toggle>	
