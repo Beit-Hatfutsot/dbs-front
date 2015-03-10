@@ -51,6 +51,7 @@ MjsWidgetController.prototype = {
 		if (this.signedin) {
 			if ( this.content_loaded && !(this.in_mjs) ) {
 				this.mjs.add(this.item_string).then(function() {
+					// open pop-over
 					self.item_added = true;
 				});
 			}
@@ -58,11 +59,14 @@ MjsWidgetController.prototype = {
 		else {
 			var unbindCallback = self.$scope.$on('signin', function() {
 				self.mjs.add(self.item_string).then(function() {
+					// open pop-over
 					self.item_added = true;
 					unbindCallback();
 				});
 			});
-			this.auth.authenticate();
+			this.auth.authenticate({
+				mandatory: false
+			});
 		}
 	},
 

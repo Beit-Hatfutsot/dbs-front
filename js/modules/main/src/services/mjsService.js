@@ -13,7 +13,12 @@ angular.module('main').
 
 			add: function(item_string) {
 				if (this.data.$resolved && !this.in_mjs(item_string)) {
-					this.data.unassigned.push(item_string);
+					if (this.data.unassigned) {
+						this.data.unassigned.push(item_string);
+					}
+					else {
+						this.data.unassigned = [item_string];
+					}
 					return this.data.$put();
 				}
 			},
@@ -114,16 +119,19 @@ angular.module('main').
 
 		mjs.data.$promise.
 			then(function(mjs_data) {
-				if ( !(mjs_data.hasOwnProperty('unassigned')) ) {
-					mjs_data.unassigned = [];
+				if ( !(mjs_data.hasOwnProperty('unassigned')) || !(mjs_data.hasOwnProperty('assigned')) ) {
+					if ( !(mjs_data.hasOwnProperty('unassigned')) ) {
+						mjs_data.unassigned = [];
+					}
+					if ( !(mjs_data.hasOwnProperty('assigned')) ) {
+						mjs_data.assigned = [{
+							name: 'default',
+							items: []
+						}];
+					}
+					
+					mjs_data.$put();
 				}
-				if ( !(mjs_data.hasOwnProperty('assigned')) ) {
-					mjs_data.assigned = [{
-						name: 'default',
-						items: []
-					}];
-				}
-				mjs_data.$put();
 			});
 
 		return mjs;

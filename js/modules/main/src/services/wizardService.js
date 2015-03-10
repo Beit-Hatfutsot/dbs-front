@@ -95,9 +95,6 @@ angular.module('main').
 						self.result = result;
 						self.last_search.name = self.query.name;
 						self.last_search.place = self.query.place;
-						angular.forEach(result.bingo, function(item) {
-							cache.put(item)
-						});
 					
 						deferred.resolve(search_status);
 					}).

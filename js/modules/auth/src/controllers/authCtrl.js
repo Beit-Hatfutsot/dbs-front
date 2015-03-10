@@ -1,15 +1,9 @@
-var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
+var AuthCtrl = function($modalInstance, langManager, auth, isRegister) {
     var self = this;
 
     this.$modalInstance = $modalInstance;
     this.auth = auth;
     this.is_register = isRegister;
-
-    Object.defineProperty(this, '$scope', {
-    	get: function() {
-    		return $scope;
-    	}
-    });
 
     Object.defineProperty(this, 'lang', {
         get: function() {
@@ -47,7 +41,6 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
             he: 'ססמא'
         }
     }
-    window.$scope = $scope;
 }
 
 AuthCtrl.prototype = {
@@ -56,7 +49,7 @@ AuthCtrl.prototype = {
         var self = this;
 
     	this.auth.signin(this.signin_data.email, this.signin_data.ps).
-            then(function() {    
+            then(function() {
                 self.message = 'Sign in succeeded';
                 self.$modalInstance.close();
             }, function() {
@@ -89,4 +82,4 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance', 'langManager', 'auth', 'isRegister', AuthCtrl]);
+angular.module('auth').controller('AuthCtrl', ['$modalInstance', 'langManager', 'auth', 'isRegister', AuthCtrl]);

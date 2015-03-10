@@ -1,78 +1,138 @@
 <div class="auth-modal" ng-switch on="authController.is_register">
+	<div class="auth-modal__icon"></div>
 	<!-- registration form -->
-	<form name="register_form" class="auth-form" ng-switch-when="true" rc-submit="authController.register()" novalidate>
-		<fieldset class="bhf bhf--{{authController.lang}}">
-			<div class="bhf__field">
-				<input 	type="text" 
-						name="name" 
-						id="register-name" 
-						ng-model="authController.register_data.name"
-						placeholder="{{rc.register_form.needsAttention(register_form.name) ? '' : authController.placeholders.name[authController.lang]}}"
-						required>
-				<label for="register-name" ng-show="authController.register_data.name || rc.register_form.needsAttention(register_form.name)">Name</label>
-				<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.name)">Please enter a name</div>
-			</div>
-			<div class="bhf__field">
-				<input 	type="text" 
-						name="email" 
-						id="register-email" 
-						ng-model="authController.register_data.email"
-						placeholder="{{rc.register_form.needsAttention(register_form.email) ? '' : authController.placeholders.email[authController.lang]}}"
-						required>
-				<label for="register-email" ng-show="authController.register_data.email || rc.register_form.needsAttention(register_form.email)">Email</label>
-				<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.email)">Please enter a valid email</div>
-			</div>
-			<div class="bhf__field">
-				<input 	type="password" 
-						name="ps" 
-						id="register-ps" 
-						ng-model="authController.register_data.ps"
-						placeholder="{{rc.register_form.needsAttention(register_form.ps) ? '' : authController.placeholders.ps[authController.lang]}}"
-						required>
-				<label for="register-ps" ng-show="authController.register_data.ps || rc.register_form.needsAttention(register_form.ps)">Password</label>
-				<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.ps)">Please enter a password</div>
-			</div>
-		</fieldset>
-		<br>	
-		<div ng-show="authController.in_process">Processing...</div>
-		<div>{{authController.message}}</div>
-		<div class="buttons lang-float {{authController.lang}}">
-			<input type="submit" value="Register">
-			<button ng-click="authController.dismiss()">Cancel</button>
+	<div ng-switch-when="true">
+		<div class="auth-modal__title">
+			<en>Please register so we can create your story and save it for you</en>
+			<he>אנא הרשמו בכדי שנוכל ליצור את הסיפור שלכם ולשמור אותו בעבורכם</he>
 		</div>
-		<a href="" ng-click="authController.goto_signin()">sign in</a>
-	</form>
+		<div class="auth-modal__switch">
+			<en>Already have an account? </en>
+			<he>כבר יש לכם חשבון? </he>
+			<a href="" ng-click="authController.goto_signin()">
+				<en>Sign in</en>
+				<he>הכנסו</he>
+			</a>
+		</div>
+		<form name="register_form" class="auth-form" rc-submit="authController.register()" novalidate>
+			<fieldset class="bhf bhf--{{authController.lang}}">
+				<div class="bhf__field">
+					<input 	type="text" 
+							name="name" 
+							id="register-name" 
+							ng-model="authController.register_data.name"
+							placeholder="{{rc.register_form.needsAttention(register_form.name) ? '' : authController.placeholders.name[authController.lang]}}"
+							required>
+					<label for="register-name" ng-show="authController.register_data.name || rc.register_form.needsAttention(register_form.name)">
+						<en>Name</en>
+						<he>שם</he>
+					</label>
+					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.name)">
+						<en>Please enter a name</en>
+						<he>אנא הכניסו שם</he>
+					</div>
+				</div>
+				<div class="bhf__field">
+					<input 	type="text" 
+							name="email" 
+							id="register-email" 
+							ng-model="authController.register_data.email"
+							placeholder="{{rc.register_form.needsAttention(register_form.email) ? '' : authController.placeholders.email[authController.lang]}}"
+							required>
+					<label for="register-email" ng-show="authController.register_data.email || rc.register_form.needsAttention(register_form.email)">
+						<en>Email</en>
+						<he>דוא"ל</he>
+					</label>
+					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.email)">
+						<en>Please enter a valid email</en>
+						<he>אנא הכניסו כתובת דוא"ל תקנית</he>
+					</div>
+				</div>
+				<div class="bhf__field">
+					<input 	type="password" 
+							name="ps" 
+							id="register-ps" 
+							ng-model="authController.register_data.ps"
+							placeholder="{{rc.register_form.needsAttention(register_form.ps) ? '' : authController.placeholders.ps[authController.lang]}}"
+							required>
+					<label for="register-ps" ng-show="authController.register_data.ps || rc.register_form.needsAttention(register_form.ps)">
+						<en>Password</en>
+						<he>ססמא</he>
+					</label>
+					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.ps)">
+						<en>Please enter a password</en>
+						<he>אנא הכניסו ססמא</he>
+					</div>
+				</div>
+			</fieldset>
+			<div class="auth-form__terms">
+				<input type="checkbox" id="accept-terms" class="auth-form__terms__checkbox">
+				<label for="accept-terms">
+					<en>I accept the </en>
+					<he>אני מקבל את </he>
+					<a href="">
+						<en>terms and conditions</en>
+						<he>תנאי השימוש</he>
+					</a>
+				</label>
+			</div>
+			<div ng-show="authController.in_process">Processing...</div>
+			<div>{{authController.message}}</div>
+			<input class="auth-form__submit" type="submit" value="Register">
+		</form>
+	</div>
 	<!-- sign-in form -->
-	<form name="signin_form" class="auth-form" ng-switch-default rc-submit="authController.signin()" novalidate>
-		<fieldset class="bhf bhf--{{authController.lang}}">
-			<div class="bhf__field">
-				<input 	type="text" 
-						name="email" 
-						id="signin-name" 
-						ng-model="authController.signin_data.email"
-						placeholder="{{rc.signin_form.needsAttention(signin_form.email) ? '' : authController.placeholders.email[authController.lang]}}"
-						required>
-				<label for="signin-name" ng-show="authController.signin_data.email || rc.signin_form.needsAttention(signin_form.email)">Email</label>
-				<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.email)">Please enter an email</div>
-			</div>
-			<div class="bhf__field">
-				<input 	type="password" 
-						name="ps" 
-						id="signin-ps" 
-						ng-model="authController.signin_data.ps"
-						placeholder="{{rc.signin_form.needsAttention(signin_form.ps) ? '' : authController.placeholders.ps[authController.lang]}}"
-						required>
-				<label for="signin-ps" ng-show="authController.signin_data.ps || rc.signin_form.needsAttention(signin_form.ps)">Password</label>
-				<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.ps)">Please enter a password</div>
-			</div>
-		</fieldset>
-		<br>	
-		<div ng-show="authController.in_process">Processing...</div>
-		<div>{{authController.message}}</div>
-		<div class="buttons lang-float {{authController.lang}}">
-			<input type="submit" value="Sign in">
-			<button ng-click="authController.dismiss()">Cancel</button>
+	<div ng-switch-default>
+		<div class="auth-modal__title">
+			<en>Please sign in so we can create your story and save it for you</en>
+			<he>אנא הכנסו בכדי שנוכל ליצור את הסיפור שלכם ולשמור אותו בעבורכם</he>
 		</div>
-		<a href="" ng-click="authController.goto_register()">register</a>
-	</form>
+		<div class="auth-modal__switch">
+			<en>Haven't got an account yet? </en>
+			<he>אין לכם חשבון? </he>
+			<a href="" ng-click="authController.goto_register()">
+				<en>Register for free</en>
+				<he>הרשמו חינם</he>
+			</a>
+		</div>
+		<form name="signin_form" class="auth-form" rc-submit="authController.signin()" novalidate>
+			<fieldset class="bhf bhf--{{authController.lang}}">
+				<div class="bhf__field">
+					<input 	type="text" 
+							name="email" 
+							id="signin-name" 
+							ng-model="authController.signin_data.email"
+							placeholder="{{rc.signin_form.needsAttention(signin_form.email) ? '' : authController.placeholders.email[authController.lang]}}"
+							required>
+					<label for="signin-name" ng-show="authController.signin_data.email || rc.signin_form.needsAttention(signin_form.email)">
+						<en>Email</en>
+						<he>דוא"ל</he>
+					</label>
+					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.email)">
+						<en>Please enter an email</en>
+						<he>אנא הכניסו דוא"ל</he>
+					</div>
+				</div>
+				<div class="bhf__field">
+					<input 	type="password" 
+							name="ps" 
+							id="signin-ps" 
+							ng-model="authController.signin_data.ps"
+							placeholder="{{rc.signin_form.needsAttention(signin_form.ps) ? '' : authController.placeholders.ps[authController.lang]}}"
+							required>
+					<label for="signin-ps" ng-show="authController.signin_data.ps || rc.signin_form.needsAttention(signin_form.ps)">
+						<en>Password</en>
+						<he>ססמא</he>
+					</label>
+					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.ps)">
+						<en>Please enter a password</en>
+						<he>אנא הכניסו ססמא</he>
+					</div>
+				</div>
+			</fieldset>
+			<div ng-show="authController.in_process">Processing...</div>
+			<div>{{authController.message}}</div>
+			<input class="auth-form__submit" type="submit" value="Sign in">
+		</form>
+	</div>
 </div>

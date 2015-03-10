@@ -34,18 +34,18 @@ html {
 		overflow-x: hidden;
 		overflow-y: auto;
 
+		&.en {
+			direction: ltr;
+		}
+
+		&.he {
+			direction: rtl;
+		}
+
 		@at-root #app-container {
 			position: relative;
 			height: 100%;
 			background: #eeeeee;
-
-			&.en {
-				direction: ltr;
-			}
-
-			&.he {
-				direction: rtl;
-			}
 
 			.lang-float {
 

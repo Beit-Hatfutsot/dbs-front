@@ -60,11 +60,7 @@
 		vertical-align: top;
 		width: 144px;
 		height: 38px;
-		color: #f9f9f9;
-		font-size: 22px;
-		background: #5dc2d4;
-		border: none;
-		@include border-radius(2px);
+		@extend %submit-btn;
 
 		.en & {
 			margin-left: 35px;
