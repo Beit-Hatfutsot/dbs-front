@@ -44,8 +44,8 @@
 		</form>
 		<div class="results" ng-show="ftreesCtrl.individuals.isNotEmpty()">
 			<div class="results__title">
-				<en>Results {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} of {{ftreesCtrl.individuals.length}}</en>
-				<he>תוצאות {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
+				<en>Results {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
+				<he>תוצאות {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
 			</div>
 			<table class="results__individuals">
 				<thead>
@@ -180,7 +180,15 @@
 					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
 				</span>
 				<span class="results__per-page__paginator">
-					<a href="" ng-click="ftreesCtrl.prev_page()">&#60;&#60;Previus</a><a href="" ng-click="ftreesCtrl.next_page()"> Next>><a>
+					<a href="" ng-click="ftreesCtrl.prev_page()">&#60;&#60;Previus</a>
+					<span ng-if="ftreesCtrl.current_page != ftreesCtrl.low_page_bound">
+						<a href="" ng-click="ftreesCtrl.current_page = ftreesCtrl.low_page_bound">{{ftreesCtrl.low_page_bound}}</a> ... 
+					</span>
+					{{ftreesCtrl.current_page}}
+					<span ng-if="ftreesCtrl.current_page != ftreesCtrl.high_page_bound">
+						... <a href="" ng-click="ftreesCtrl.current_page = ftreesCtrl.high_page_bound">{{ftreesCtrl.high_page_bound}}</a>
+					</span>
+					<a href="" ng-click="ftreesCtrl.next_page()"> Next>><a>
 				</span>
 				<span class="results__per-page__selector">
 					<label for="individuals-per-page">
@@ -188,7 +196,7 @@
 						<he>לעמוד</he>
 					</label>
 					<select id="individuals-per-page" ng-model="ftreesCtrl.results_per_page">
-						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]">{{i}}</option>
+						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]" ng-if="i < ftreesCtrl.individuals.length">{{i}}</option>
 					</select>
 				</span>
 			</div>

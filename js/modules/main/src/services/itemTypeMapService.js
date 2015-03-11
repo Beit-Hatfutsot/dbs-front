@@ -31,8 +31,11 @@ angular.module('main').service('itemTypeMap', function() {
 	};
 
 	this.get_item_string = function(item_data) {
-		var collection_name = this.get_collection_name(item_data);
-
-		return collection_name + '.' + item_data._id;
+		if (item_data._id) {
+			var collection_name = this.get_collection_name(item_data);
+			return collection_name + '.' + item_data._id;
+		}
+		
+		return false;
 	};
 });

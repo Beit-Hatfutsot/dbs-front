@@ -33,7 +33,7 @@ var MjsWidgetController = function($scope, $state, mjs, itemTypeMap, auth) {
 	});
 
 	$scope.$watch('item', function(newVal, oldVal) {
-		if ( !(self.content_loaded) ) {
+		if ( newVal && !(self.content_loaded) ) {
 			self.item_string = itemTypeMap.get_item_string(self.item);
 			self.content_loaded = true; 
 		}

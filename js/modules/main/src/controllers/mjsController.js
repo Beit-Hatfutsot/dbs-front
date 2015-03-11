@@ -57,7 +57,7 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 		}
 	}, 
 	function(newVal, oldVal) {
-		if (newVal != !oldVal) {
+		if (newVal != oldVal) {
 			self.parse_mjs_data();
 		}
 	});

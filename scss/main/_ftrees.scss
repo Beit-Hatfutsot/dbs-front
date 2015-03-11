@@ -492,10 +492,7 @@
 
 				}
 
-				&__paginator {
-
-				}
-
+				&__paginator,
 				&__selector {
 
 					.en & {
@@ -505,6 +502,10 @@
 					.he & {
 						float: left;
 					}
+				}
+				
+				&__paginator {
+
 				}
 			}
 		}

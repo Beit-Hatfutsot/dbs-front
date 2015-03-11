@@ -48,6 +48,43 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.notification = notification;
 	this.musicalChairsFactory = musicalChairsFactory;
 
+	Object.defineProperty(this, 'page_count', {
+		get: function() {
+			return parseInt(this.individuals.length / this.results_per_page) + 1;
+		}
+	});
+
+	Object.defineProperty(this, 'current_page', {
+		get: function() {
+			return parseInt(this.display_from_result / this.results_per_page) + 1;
+		},
+
+		set: function(val) {
+			this.display_from_result = this.results_per_page * (val - 1);
+		}
+	});
+
+	Object.defineProperty(this, 'low_page_bound', {
+		get: function() {
+			var bound = this.current_page - 10; 
+			return bound > 0 ? bound : 1;
+		}
+	});
+
+	Object.defineProperty(this, 'high_page_bound', {
+		get: function() {
+			var bound = this.current_page + 10;
+			return bound < this.page_count ? bound : this.page_count;
+		}
+	});
+
+	Object.defineProperty(this, 'display_to_result', {
+		get: function() {
+			var to_result = this.results_per_page + this.display_from_result;
+			return to_result < this.individuals.length ? to_result : this.individuals.length;
+		}
+	});
+
 	Object.defineProperty(this, 'results_per_page', {
 		get: function() {
 			return this._results_per_page;
@@ -171,6 +208,11 @@ FtreesController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
+
+				if (self.results_per_page > individuals.length) {
+					self.results_per_page = individuals.length - individuals.length % 5;
+				}
+
 				self.sort('LN');
 
 				var keys = [];
