@@ -1,3 +1,4 @@
+<auth-private on="itemController.is_ugc_request">
 <div id="item-page-container">
 	<div id="item-page" ng-show="itemController.content_loaded">
 		<div class="related">
@@ -52,10 +53,7 @@
 					<he>{{itemController.item_data.UnitText1.He}}</he>
 				</div>
 				<div class="item__bottom-bar">
-					<ng-include src="'templates/main/item/add.html'"></ng-include>
-					<div class="flag">
-						<icon position="[-372, -25]" hover-offset="[0, -33]"></icon>
-					</div>
+					<mjs-widget item="itemController.item_data"></mjs-widget>
 				</div>
 			</div>
 		</div>
@@ -64,3 +62,4 @@
 		</div>
 	</div>
 </div>
+</auth-private>

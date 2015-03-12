@@ -11,7 +11,7 @@ var AuthPrivateController = function($scope, $state, $window, auth, user) {
 		return self.signedin || !(user.$resolved);
 	}, 
 	function(signedin) {
-		if (!signedin) {
+		if ( !signedin && self.on ) {
 			auth.authenticate({
 				mandatory: true,
 				fallback_state: $state.lastState.name ? $state.lastState : 'start',

@@ -1,7 +1,9 @@
-var HeaderCtrl = function($state, wizard, header, notification, auth, mjs) {
+var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache, recentlyViewed) {
 
     this.$state = $state;
     this.auth = auth;
+    this.cache = cache;
+    this.recentlyViewed = recentlyViewed;
 
 	this.langauage_menu_open = false;
 
@@ -72,6 +74,8 @@ HeaderCtrl.prototype = {
 
 	signout: function() {
         this.auth.signout();
+        this.cache.clear();
+        this.recentlyViewed.clear();
     },
 
     goto_state: function(state_name) {
@@ -79,4 +83,4 @@ HeaderCtrl.prototype = {
     }
 };
 
-angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', 'mjs', HeaderCtrl]);
+angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', 'mjs', 'cache', 'recentlyViewed', HeaderCtrl]);

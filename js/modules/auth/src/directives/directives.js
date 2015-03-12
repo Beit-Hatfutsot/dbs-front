@@ -47,8 +47,18 @@ angular.module('auth').
 		return {
 			restrict: 'E',
 			transclude: true,
-			scope: false,
 			templateUrl: 'templates/auth/auth-private.html',
-			controller: 'AuthPrivateController as authPrivateCtrl'
+			controller: 'AuthPrivateController as authPrivateCtrl',
+			scope: {
+				on: '='
+			},
+			link: function(scope, element, attrs, ctrl) {
+				if (scope.on === undefined) {
+					ctrl.on = true;
+				}
+				else {
+					ctrl.on = scope.on;
+				}
+			}
 		}
 	}]);

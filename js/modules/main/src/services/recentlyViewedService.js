@@ -25,6 +25,7 @@ angular.module('main').
 
 		var recently_viewed = {
 			items: JSON.parse(recent.getItem('recentlyViewed')) || [],
+			
 			put: function(item) {
 				var recent_item = this.items.filter(function(recent_item) {
 					return item._id == recent_item._id;
@@ -35,6 +36,10 @@ angular.module('main').
 				}
 				this.items.push(item);
 				recent.setItem('recentlyViewed', JSON.stringify(this.items));
+			},
+
+			clear: function() {
+				this.items = [];
 			}
 		};
 

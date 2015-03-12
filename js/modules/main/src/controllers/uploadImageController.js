@@ -200,11 +200,11 @@ UploadImageController.prototype = {
     },
 
     reset: function() {
-        $scope.uploadCtrl.reset_flow.apply(this);
+        this.$scope.uploadCtrl.reset_flow.apply(this);
     },
 
     remove_file: function() {
-        $scope.uploadCtrl.remove_file.apply(this);
+        this.$scope.uploadCtrl.remove_file.apply(this);
     },
 
     get_progress: function() {

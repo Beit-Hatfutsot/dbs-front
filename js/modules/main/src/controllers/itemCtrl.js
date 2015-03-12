@@ -1,20 +1,22 @@
-var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, previousState) {
+var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed) {
 	var self = this;
 
 	if (header.sub_header_state !== 'recently-viewed') {
 		header.sub_header_state = 'recently-viewed';
 	}
 
+	this.$stateParams = $stateParams;
+	this.item = item;
 	this.notification = notification;
-	this.mjs = mjs
+	this.mjs = mjs;
+	this.recentlyViewed = recentlyViewed;
 	
 	this.failed = false;
 	this.content_loaded = false;
 	this.item_data = {};
 	this.related_data = [];
-	this.in_mjs = false;
 	
-	if ( previousState.name === 'start' && wizard.result.individuals && wizard.result.individuals.isNotEmpty() ) {
+	if ( $state.lastState.name === 'start' && wizard.result.individuals && wizard.result.individuals.isNotEmpty() ) {
 		this.related_individuals = wizard.result.individuals; 
 
 		this.related_individuals_query_params = {}
@@ -27,36 +29,23 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 		}
 	}
 
-	item.get($stateParams.item_string).
-		then(function(item_data) {
-			recentlyViewed.put(item_data);
-
-			self.item_data = item_data;
-			self.item_string = $stateParams.item_string;
-			self.content_loaded = true;
-
-			item.get_items(item_data.related).
-				then(function(related_data) {
-					self.related_data = related_data;
-					notification.put({
-						en: 'Item loaded successfuly.',
-						he: 'הפריט נטען בהצלחה.' 
-					});
-				}, function() {
-					self.fail();
-				});
-
-			self.mjs.data.$promise.
-				then(function(mjs_data) {
-					self.in_mjs = mjs.in_mjs(self.item_string);
-				});
-		}, function() {
-			self.fail();
-		});
+	this.get_item();
+	
+	Object.defineProperty(this, 'is_ugc_request', {
+		get: function() {
+			return $stateParams.item_string.substring(0, 3) === 'ugc';
+		}
+	});
 
 	Object.defineProperty(this, 'item_type', {
 		get: function() {
 			return itemTypeMap.get_type( this.item_data.UnitType );
+		}
+	});
+
+	$scope.$on('signin', function() {
+		if (self.is_ugc_request) {
+			self.get_item();
 		}
 	});
 
@@ -67,33 +56,39 @@ var ItemCtrl = function($stateParams, item, notification, itemTypeMap, wizard, h
 };
 
 ItemCtrl.prototype = {
+	get_item: function() {
+		var self = this;
+
+		this.item.get(this.$stateParams.item_string).
+			then(function(item_data) {
+				self.recentlyViewed.put(item_data);
+
+				self.item_data = item_data;
+				self.item_string = self.$stateParams.item_string;
+				self.content_loaded = true;
+
+				self.item.get_items(item_data.related).
+					then(function(related_data) {
+						self.related_data = related_data;
+						self.notification.put({
+							en: 'Item loaded successfuly.',
+							he: 'הפריט נטען בהצלחה.' 
+						});
+					}, function() {
+						self.fail();
+					});
+			}, function() {
+				self.fail();
+			});
+	},
+
 	fail: function() {
 		this.failed = true;
 		this.notification.put({
 			en: 'Failed to fetch item.',
 			he: 'טעינת פריט נכשלה.'
 		});
-	},
-
-	push_to_mjs: function() {
-		if ( this.content_loaded && !(this.in_mjs) ) {
-			var self = this;
-			
-			this.mjs.add(this.item_string).then(function() {
-				self.in_mjs = true;
-			});
-		}
-	},
-
-	remove_from_mjs: function() {
-		if (this.in_mjs && !(this.item_data.ugc)) {
-			var self = this;		
-			
-			this.mjs.remove(this.item_string).then(function() {
-				self.in_mjs = false;
-			});
-		}
 	}
 };
 
-angular.module('main').controller('ItemCtrl', ['$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', 'recentlyViewed', 'previousState', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', 'recentlyViewed', ItemCtrl]);

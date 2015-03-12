@@ -1,15 +1,16 @@
 .dropdown-icons {
 	position: fixed;
 	height: 29px;
-	left: 50%;
 	top: 21px;
 	z-index: 3;
 
 	.en & {
+		right: 50%;
 		@include translate($view-width /2 - 5px, 0);
 	}
 
 	.he & {
+		left: 50%;
 		@include translate(-$view-width /2 + 5px, 0);
 	}
 
