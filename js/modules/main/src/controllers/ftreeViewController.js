@@ -1,7 +1,8 @@
-var FtreeViewController = function($scope, $stateParams) {
+var FtreeViewController = function($scope, $state, $stateParams) {
 	var self = this;
 
 	this.$scope = $scope;
+	this.$state = $state;
 	this.$stateParams = $stateParams;
 
 	if ($scope.ftreesCtrl.individuals.isNotEmpty()) {
@@ -14,14 +15,10 @@ var FtreeViewController = function($scope, $stateParams) {
 
 FtreeViewController.prototype = {
 	load: function() {
-		this.$scope.ftreesCtrl.select_individual( this.$scope.ftreesCtrl.individuals[this.$stateParams.ind_index] );
-		if (this.$stateParams.individual_id && this.$stateParams.tree_number) {
-			this.$state.go('ftree-view.ftree-item', {
-				individual_id: this.$stateParams.individual_id, 
-				tree_number: this.$stateParams.tree_number
-			});
+		if (this.$state.lastState.name !== 'ftrees' && this.$state.lastState.name !== 'ftree-view.ftree-item') {
+			this.$scope.ftreesCtrl.select_individual( this.$scope.ftreesCtrl.individuals[this.$stateParams.ind_index] );
 		}	
 	}
 };
 
-angular.module('main').controller('FtreeViewController', ['$scope', '$stateParams', FtreeViewController]);
+angular.module('main').controller('FtreeViewController', ['$scope', '$state', '$stateParams', FtreeViewController]);

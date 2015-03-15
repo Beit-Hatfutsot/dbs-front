@@ -255,37 +255,22 @@ FtreesController.prototype = {
 
 	select_individual: function(individual) {
 		var self = this;
-		
-		if (this.selected_individual && this.selected_individual._id && this.selected_individual._id === individual._id) {
-			//this.tree_view = false;
-			//this.selected_individual = null;	
+
+		if (this.is_selected(individual)) {
+			this.selected_index = null;	
+			delete(this.$stateParams['ind_index']);
+			delete(this.$stateParams['individual_id']);
+			delete(this.$stateParams['tree_number']);
+			this.$state.go('ftrees', this.$stateParams);
 		}
 		else {
-			this.notification.put({
-				en: 'Loading tree...',
-				he: 'טוען עץ...'
+			self.selected_index = self.individuals.indexOf(individual);
+
+			self.$state.go('ftree-view.ftree-item', {
+				ind_index: self.selected_index, 
+				individual_id: individual.II, 
+				tree_number: individual.GTN
 			});
-			this.ftrees.get_data(individual.GTN).
-				then(function(tree_data) {
-					self.selected_individual = self.ftrees.parse_individual(individual);
-
-					self.notification.put({
-						en: 'Family tree successfully loaded.',
-						he: 'עץ משפחה נטען בהצלחה.'
-					});
-
-					self.$state.go('ftree-view.ftree-item', {
-						ind_index: self.individuals.indexOf(individual), 
-						individual_id: individual.II, 
-						tree_number: individual.GTN
-					});	
-				}, function() {
-					console.log(individual)
-					self.notification.put({
-						en: 'Failed to load tree.',
-						he: 'טעינת עץ נכשלה.'
-					});
-				});
 		}
 	},
 
@@ -314,7 +299,7 @@ FtreesController.prototype = {
 	},
 
 	is_selected: function(individual) {
-		if (this.selected_individual && this.selected_individual._id && this.selected_individual._id === individual._id) {
+		if (this.selected_index === this.individuals.indexOf(individual)) {
 			return true;	
 		}
 

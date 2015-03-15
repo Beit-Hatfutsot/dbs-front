@@ -630,7 +630,6 @@
 					padding: 170px 130px 0; 
 
 					.node-container {
-						@include hover-pointer();
 						@extend %node-container;
 					}
 				}
