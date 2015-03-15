@@ -51,74 +51,95 @@
 				<thead>
 					<tr>
 						<th class="first-name" ng-click="ftreesCtrl.sort('FN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['FN']">
-							<en>First<br>Name</en>
-							<he>שם<br>פרטי</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="FN"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="FN_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>First<br>Name</en>
+								<he>שם<br>פרטי</he>
+							</div>
 						</th>
 						<th class="last-name" ng-click="ftreesCtrl.sort('LN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['LN']">
-							<en>Last<br>Name</en>
-							<he>שם<br>משפחה</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="LN"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="LN_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Last<br>Name</en>
+								<he>שם<br>משפחה</he>
+							</div>
 						</th>
 						<th class="birth-place" ng-click="ftreesCtrl.sort('BP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['BP']">
-							<en>Birth<br>Place</en>
-							<he>מקום<br>לידה</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="BP"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="BP_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Birth<br>Place</en>
+								<he>מקום<br>לידה</he>
+							</div>
 						</th>
 						<th class="birth-data" ng-click="ftreesCtrl.sort('BD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['BD']">
-							<en>Birth<br>Date</en>
-							<he>תאריך<br>לידה</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="BD"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="BD_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Birth<br>Date</en>
+								<he>תאריך<br>לידה</he>
+							</div>
 						</th>
 						<th class="marriage-place" ng-click="ftreesCtrl.sort('MP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['MP']">
-							<en>Marriage<br>Place</en>
-							<he>צקום<br>נישואין</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="MP"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="MP_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Marriage<br>Place</en>
+								<he>צקום<br>נישואין</he>
+							</div>
 						</th>
 						<th class="marriage-date" ng-click="ftreesCtrl.sort('MD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['MD']">
-							<en>Marriage<br>Date</en>
-							<he>תאריך<br>נישואין</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="MD"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="MD_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Marriage<br>Date</en>
+								<he>תאריך<br>נישואין</he>
+							</div>
 						</th>
-						<th class="death-place" ng-click="ftreesCtrl.sort('DP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['DP']">
-							<en>Death<br>Place</en>
-							<he>מקום<br>פטירה</he>
+						<th class="death-place" ng-click="ftreesCtrl.sort('DP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="
+						ftreesCtrl.column_status['DP']">
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="DP"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="DP_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Death<br>Place</en>
+								<he>מקום<br>פטירה</he>
+							</div>
 						</th>
 						<th class="death-date" ng-click="ftreesCtrl.sort('DD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['DD']">
-							<en>Death<br>Date</en>
-							<he>תאריך<br>פטירה</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="DD"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="DD_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Death<br>Date</en>
+								<he>תאריך<br>פטירה</he>
+							</div>
 						</th>
 						<th class="sex" ng-click="ftreesCtrl.sort('G')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['G']">
-							<en>Sex</en>
-							<he>מין</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="G"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="G_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Sex</en>
+								<he>מין</he>
+							</div>
 						</th>
 						<th class="tree-number" ng-click="ftreesCtrl.sort('GTN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['GTN']">
-							<en>Tree<br>Number</en>
-							<he>מספר<br>עץ</he>
 							<icon class="sort-arrow" position="[-380, -113]" ng-switch-when="GTN"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="GTN_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
+							<div class="column-title">
+								<en>Tree<br>Number</en>
+								<he>מספר<br>עץ</he>
+							</div>
 						</th>
 					</tr>
 				</thead>
@@ -180,7 +201,7 @@
 					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
 				</span>
 				<span class="results__per-page__paginator">
-					<a href="" ng-click="ftreesCtrl.prev_page()">&#60;&#60;Previus</a>
+					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.prev_page()"><</button>
 					<span ng-if="ftreesCtrl.current_page != ftreesCtrl.low_page_bound">
 						<a href="" ng-click="ftreesCtrl.current_page = ftreesCtrl.low_page_bound">{{ftreesCtrl.low_page_bound}}</a> ... 
 					</span>
@@ -188,7 +209,7 @@
 					<span ng-if="ftreesCtrl.current_page != ftreesCtrl.high_page_bound">
 						... <a href="" ng-click="ftreesCtrl.current_page = ftreesCtrl.high_page_bound">{{ftreesCtrl.high_page_bound}}</a>
 					</span>
-					<a href="" ng-click="ftreesCtrl.next_page()"> Next>><a>
+					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.next_page()">></button>
 				</span>
 				<span class="results__per-page__selector">
 					<label for="individuals-per-page">

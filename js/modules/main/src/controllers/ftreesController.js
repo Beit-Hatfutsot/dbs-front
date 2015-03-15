@@ -36,9 +36,19 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this._results_per_page = 15;
 	this.display_from_result = 0;
 	this.more_columns_menu = false;
-	this.result_column_manager = {
-		player_status: {}
-	};
+	
+	self.result_column_manager = musicalChairsFactory.create_game({
+		'FN': true,
+		'LN': true,
+		'BP': true,
+		'BD': true,
+		'MP': true,
+		'MD': true,
+		'DP': false,
+		'DD': false,
+		'G': false,
+		'GTN': false
+	}, 6);
 
 	this.$state = $state;
 	this.$stateParams = $stateParams;
@@ -161,7 +171,14 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	};
 	
 	$scope.$watch('tree_view', function(newVal, oldVal) {
-		if (!newVal) {
+		if (newVal) {
+			self.minimize_results_table();
+		}
+		else {
+			if (oldVal) {
+				self.maximize_results_table();
+			}
+
 			self.selected_individual = null;
 		}
 	});
@@ -215,23 +232,6 @@ FtreesController.prototype = {
 
 				self.sort('LN');
 
-				var keys = [];
-				for (var key in individuals[0]) {
-					keys.push(key);
-				}
-				self.result_column_manager = self.musicalChairsFactory.create_game({
-					'FN': true,
-					'LN': true,
-					'BP': true,
-					'BD': true,
-					'MP': true,
-					'MD': true,
-					'DP': false,
-					'DD': false,
-					'G': false,
-					'GTN': false
-				}, 6);
-
 				self.notification.put({
 					en: 'Family Trees Search has finished successfully.',
 					he: 'חיפוש בעצי משפחה הסתיים בהצלחה.'
@@ -274,7 +274,11 @@ FtreesController.prototype = {
 						he: 'עץ משפחה נטען בהצלחה.'
 					});
 
-					self.$state.go('ftree-view', {ind_index: self.individuals.indexOf(individual)});	
+					self.$state.go('ftree-view.ftree-item', {
+						ind_index: self.individuals.indexOf(individual), 
+						individual_id: individual.II, 
+						tree_number: individual.GTN
+					});	
 				}, function() {
 					console.log(individual)
 					self.notification.put({
@@ -283,6 +287,30 @@ FtreesController.prototype = {
 					});
 				});
 		}
+	},
+
+	minimize_results_table: function() {
+		for (var key in this.column_status) {
+			if (key === 'FN' || key === 'LN') {
+				this.column_status[key] = true;
+			}
+			else {
+				this.column_status[key] = false;
+			}
+		}
+	},
+
+	maximize_results_table: function() {
+		this.column_status['FN'] = true;
+		this.column_status['LN'] = true;
+		this.column_status['BP'] = true;
+		this.column_status['BD'] = true;
+		this.column_status['MP'] = true;
+		this.column_status['MD'] = true;
+		this.column_status['DP'] = false;
+		this.column_status['DD'] = false;
+		this.column_status['G'] = false;
+		this.column_status['GTN'] = false;
 	},
 
 	is_selected: function(individual) {
