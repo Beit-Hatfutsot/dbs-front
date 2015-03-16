@@ -1,6 +1,36 @@
-#ftree-item {
+#ftree-item-container {
+	width: 100%;
+	height: 100%;
+	padding: 10px 0 0;
 
-	.node-container {
-		@extend %node-container;
+	@at-root #ftree-item {
+		width: $view-width;
+		margin: 0 auto;
+		padding: 6px 0 0;
+		background: #ffffff;
+		@include border-radius(4px);
+
+		.mjs-widget-wrapper {
+			padding: 5px 12px;
+			background: #eeeeee;
+			@include border-radius(18px);
+
+			.en & {
+				margin-left: 30px;
+			}
+
+			.he & {
+				margin-right: 30px;
+			}
+		}
+
+
+		@at-root #subtree-container {
+			padding: 70px 130px 0;
+
+			.node-container {
+				@extend %node-container;
+			}
+		}
 	}
 }
