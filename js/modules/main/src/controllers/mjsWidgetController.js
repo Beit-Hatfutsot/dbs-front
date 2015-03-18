@@ -40,7 +40,17 @@ var MjsWidgetController = function($scope, $state, mjs, itemTypeMap, auth) {
 	});
 	
 	$scope.$on('signin', function() {
-		mjs.refresh();
+		mjs.refresh().
+			then(function() {
+				if (self.item_tobe_added) {
+					self.mjs.add(self.item_string).
+						then(function() {
+							// open pop-over
+							self.item_added = true;
+							self.item_tobe_added = false;
+						});
+				}
+			});
 	});
 };
 
@@ -57,13 +67,7 @@ MjsWidgetController.prototype = {
 			}
 		}
 		else {
-			var unbindCallback = self.$scope.$on('signin', function() {
-				self.mjs.add(self.item_string).then(function() {
-					// open pop-over
-					self.item_added = true;
-					unbindCallback();
-				});
-			});
+			this.item_tobe_added = true;
 			this.auth.authenticate({
 				mandatory: false
 			});

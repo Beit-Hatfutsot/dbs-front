@@ -116,7 +116,7 @@ angular.module('main').
 				return this.data.$put();
 			}
 		};
-
+		
 		mjs.data.$promise.
 			then(function(mjs_data) {
 				if ( !(mjs_data.hasOwnProperty('unassigned')) || !(mjs_data.hasOwnProperty('assigned')) ) {

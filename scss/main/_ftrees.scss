@@ -625,12 +625,32 @@
 					}
 				}
 
+				.expand-btn {
+					position: absolute;
+					width: 52px;
+					height: 42px;
+					top: -8px;
+					@include hover-pointer();
+
+					.en & {
+						right: 0;
+					}
+
+					.he & {
+						left: 0;
+					}
+				}
+
 				@at-root #tree-layout {
 					flex-grow: 1;
 					overflow: auto;
 
-					.node-container {
-						@extend %node-container;
+					#ftree-item-container {
+						// overflow: auto;
+					
+						.node-container {
+							@extend %node-container;
+						}
 					}
 				}
 			}

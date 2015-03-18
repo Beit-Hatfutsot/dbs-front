@@ -18,6 +18,10 @@ FtreeViewController.prototype = {
 		if (this.$state.lastState.name !== 'ftrees' && this.$state.lastState.name !== 'ftree-view.ftree-item') {
 			this.$scope.ftreesCtrl.select_individual( this.$scope.ftreesCtrl.individuals[this.$stateParams.ind_index] );
 		}	
+	},
+
+	expand: function() {
+		this.$state.go('ftree-item', {individual_id: this.$state.params.individual_id, tree_number: this.$state.params.tree_number});
 	}
 };
 
