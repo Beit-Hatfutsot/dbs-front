@@ -227,7 +227,12 @@ FtreesController.prototype = {
 				self.individuals = individuals;
 
 				if (self.results_per_page > individuals.length) {
-					self.results_per_page = individuals.length - individuals.length % 5;
+					if (individuals.length === 0) {
+						self.results_per_page = 15;
+					}
+					else {
+						self.results_per_page = individuals.length - individuals.length % 5;
+					}
 				}
 
 				self.sort('LN');

@@ -5,22 +5,26 @@
 
 	@at-root #ftree-item {
 		width: $view-width;
+		height: 100%;
 		margin: 0 auto;
 		padding: 6px 0 0;
 		background: #ffffff;
 		@include border-radius(4px);
 
-		.mjs-widget-wrapper {
-			padding: 5px 12px;
-			background: #eeeeee;
-			@include border-radius(18px);
+		@at-root #mjs-widget-container {
+			
+			.mjs-widget-wrapper {
+				padding: 5px 12px;
+				background: #eeeeee;
+				@include border-radius(18px);
 
-			.en & {
-				margin-left: 30px;
-			}
+				.en & {
+					margin-left: 30px;
+				}
 
-			.he & {
-				margin-right: 30px;
+				.he & {
+					margin-right: 30px;
+				}
 			}
 		}
 
