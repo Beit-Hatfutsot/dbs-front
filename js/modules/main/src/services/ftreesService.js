@@ -5,12 +5,14 @@ angular.module('main').
 		var ftrees = {
 			search: function(params) {
 				//if (!in_progress) { 
+					var self = this;
+
 					in_progress = true;
 					var deferred = $q.defer();
 
 					$http.get(apiClient.urls.ftrees_search, {params: params}).
 						success(function(individuals) {
-							var filtered_individuals = filter_individuals(individuals);
+							var filtered_individuals = self.filter_individuals(individuals);
 							deferred.resolve(filtered_individuals);
 						}).
 						error(function() {
@@ -201,6 +203,32 @@ angular.module('main').
 					parent_data: parent_data,
 					family_data: family_data
 				};
+			},
+
+			filter_individuals: function(individuals) {
+				var filtered = [];
+
+				individuals.forEach(function(individual) {
+					if ( is_alive(individual) ) {
+						var filtered_individual = {};
+
+						for (var prop in individual) {
+							if (prop === 'FN') {
+								filtered_individual[prop] = individual[prop];
+							}
+							else {
+								filtered_individual[prop] = null;
+							}
+						}
+						
+						filtered.push(filtered_individual);
+					}
+					else {
+						filtered.push(individual);
+					}
+				});
+
+				return filtered;
 			}
 		}
 
@@ -213,18 +241,6 @@ angular.module('main').
 			var n = name.split('/');
 			var parsed_name = n[0] + ' ' + n[1];
 			return parsed_name;
-		}
-
-		function filter_individuals(individuals) {
-			var filtered = [];
-
-			individuals.forEach(function(individual) {
-				if ( !is_alive(individual) ) {
-					filtered.push(individual);
-				}
-			});
-
-			return filtered;
 		}
 
 		function is_alive(individual) {

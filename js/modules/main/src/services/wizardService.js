@@ -1,5 +1,5 @@
 angular.module('main').
-	factory('wizard', ['$http', '$q', 'apiClient', 'cache', 'notification', function($http, $q, apiClient, cache, notification) {
+	factory('wizard', ['$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', function($http, $q, apiClient, cache, notification, ftrees) {
 
 		var wizard = {
 
@@ -57,7 +57,12 @@ angular.module('main').
 						// set search status
 						var search_status;
 
-		                if ( result.name.isNotEmpty() || result.place.isNotEmpty() )  {
+						// filter living individuals
+		                if ( result.individuals.isNotEmpty() ) {
+		                	result.individuals = ftrees.filter_individuals(result.individuals);
+		                }
+
+		                if ( result.name.isNotEmpty() || result.place.isNotEmpty() || result.individuals.isNotEmpty() )  {
 		                    
 		                	if (result.name.isNotEmpty()) { cache.put(result.name) }
 	                		if (result.place.isNotEmpty()) { cache.put(result.place) }

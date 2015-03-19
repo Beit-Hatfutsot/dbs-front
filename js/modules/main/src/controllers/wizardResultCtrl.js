@@ -13,6 +13,18 @@ var WizardResultCtrl = function(wizard) {
         }
     });
 
+    Object.defineProperty(this, 'query_name', {
+        get: function() {
+            return wizard.query.name;
+        }
+    });
+
+    Object.defineProperty(this, 'query_place', {
+        get: function() {
+            return wizard.query.place;
+        }
+    });
+
     Object.defineProperty(this, 'last_search_name', {
         get: function() {
             return wizard.last_search.name;

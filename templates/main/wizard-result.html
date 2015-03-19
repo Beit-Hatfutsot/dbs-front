@@ -7,7 +7,7 @@
 			<item-preview preview-data="wizardResultController.result.place" content="place"></item-preview>
 		</div>
 		<div class="items__individuals" ng-if="wizardResultController.result.individuals.isNotEmpty()">
-			<trees-preview individuals="wizardResultController.result.individuals" query-params="{last_name: wizardResultController.result.name.Header.En, birth_place: wizardResultController.result.place.Header.En}"></trees-preview>
+			<trees-preview individuals="wizardResultController.result.individuals" query-params="{last_name: wizardResultController.query_name, birth_place: wizardResultController.query_place}"></trees-preview>
 		</div>
 	</div>
 </div>
