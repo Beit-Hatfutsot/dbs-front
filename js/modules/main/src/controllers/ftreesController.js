@@ -8,16 +8,55 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.search_params = {};
 	
 	this.key_map = {
-		FN: 'First Name',
-		LN: 'Last Name',
-		BP: 'Birth Place',
-		BD: 'Birth Date',
-		MP: 'Marriage Place',
-		MD: 'Marriage Date',
-		DP: 'Death Place',
-		DD: 'Death Date',
-		G: 'Sex',
-		GTN: 'Tree Number'
+		FN: {
+			en: 'First Name',
+			he: 'שם פרטי',
+		},
+		
+		LN: {
+			en:'Last Name',
+			he: 'שם משפחה'
+		},
+
+		BP: {
+			en: 'Birth Place',
+			he: 'מקום לידה'
+		},
+
+		BD: {
+			en: 'Birth Date',
+			he: 'תאריך לידה'
+		},
+
+		MP: {
+			en: 'Marriage Place',
+			he: 'מקום נישואין'
+		},
+
+		MD: {
+			en: 'Marriage Date',
+			he: 'תאריך נישואין'
+		},
+
+		DP: {
+			en: 'Death Place',
+			he: 'מקום פטירה'
+		},
+
+		DD: {
+			en: 'Death Date',
+			he: 'מקום פטירה'
+		},
+
+		G: {
+			en: 'Sex',
+			he: 'מין'
+		},
+
+		GTN: {
+			en: 'Tree Number',
+			he: 'מספר עץ'
+		}
 	};
 	
 	this.search_modifiers = {

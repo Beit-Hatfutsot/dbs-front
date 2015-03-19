@@ -92,7 +92,7 @@
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon>
 							<div class="column-title">
 								<en>Marriage<br>Place</en>
-								<he>צקום<br>נישואין</he>
+								<he>מקום<br>נישואין</he>
 							</div>
 						</th>
 						<th class="marriage-date" ng-click="ftreesCtrl.sort('MD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['MD']">
@@ -191,7 +191,7 @@
 					</div>
 					<div class="results__more-columns__menu__row" ng-repeat="(key, val) in ftreesCtrl.column_status">
 						<input type="checkbox" id="{{key}}-check" ng-model="ftreesCtrl.column_status[key]">
-						<label class="results__more-columns__menu__row__desc" for="{{key}}-check">{{ftreesCtrl.key_map[key]}}</label>
+						<label class="results__more-columns__menu__row__desc" for="{{key}}-check">{{ftreesCtrl.key_map[key][lang]}}</label>
 					</div>
 				</div>
 			</div>
