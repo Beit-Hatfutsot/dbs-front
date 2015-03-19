@@ -10,7 +10,8 @@ angular.module('main').
 
 					$http.get(apiClient.urls.ftrees_search, {params: params}).
 						success(function(individuals) {
-							deferred.resolve(individuals);
+							var filtered_individuals = filter_individuals(individuals);
+							deferred.resolve(filtered_individuals);
 						}).
 						error(function() {
 							deferred.reject();
@@ -212,6 +213,43 @@ angular.module('main').
 			var n = name.split('/');
 			var parsed_name = n[0] + ' ' + n[1];
 			return parsed_name;
+		}
+
+		function filter_individuals(individuals) {
+			var filtered = [];
+
+			individuals.forEach(function(individual) {
+				if ( !is_alive(individual) ) {
+					filtered.push(individual);
+				}
+			});
+
+			return filtered;
+		}
+
+		function is_alive(individual) {
+			var alive = true;
+			var date = new Date();
+			var year = date.getFullYear();
+			var age = get_age(individual.BD, year);
+
+			if (individual.DD || individual.DP || age > 100 ) {
+				alive = false;
+			}
+
+			return alive
+		}
+
+		function get_age(bd, current_year) {
+			try {
+				var birth_year = parseInt( bd.substr(-4) );
+				var age = current_year - birth_year;
+
+				return age;
+			}
+			catch(e) {
+				return 0;
+			}
 		}
 
 		return ftrees;
