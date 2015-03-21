@@ -1,10 +1,21 @@
 <div id="ftree-item-container">
 	<div id="ftree-item">
+		<div class="ftree-title">
+			<en>Family Tree</en>
+			<he>עץ המשפחה</he>
+			<div class="ftree-type">
+				<div class="ftree-icon"></div>
+				<en>Family Tree</en>
+				<he>עץ משפחה</he>
+			</div>
+		</div>
 		<div id="mjs-widget-container">
 			<mjs-widget item="ftreeItemCtrl.individual"></mjs-widget>
 		</div>
-		<div id="subtree-container">
-			<subtree individual="ftreeItemCtrl.individual"></subtree>
+		<div id="ftree-layout-container">
+			<div id="ftree-layout">
+				<subtree individual="ftreeItemCtrl.individual"></subtree>
+			</div>
 		</div>
 	</div>
 </div>

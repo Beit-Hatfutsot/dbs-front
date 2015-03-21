@@ -1,17 +1,6 @@
 <div id="tree-layout-mask">
-	<div id="tree-layout-container">
-		<div class="tree-title">
-			<en>Family Tree</en>
-			<he>עץ המשפחה</he>
-			<div class="ftree-type">
-				<div class="tree-icon"></div>
-				<en>Family Tree</en>
-				<he>עץ משפחה</he>
-			</div>
-		</div>
-		<icon class="expand-btn" position="[-579, -36]" ng-click="ftreeViewCtrl.expand()" alt-text="{en: 'Expand', he: 'פתיחה'}"></icon>
-		<div id="tree-layout">
-			<ui-view ng-show="ftreesCtrl.tree_item_view"></ui-view>
-		</div>
+	<icon class="expand-btn" position="[-579, -36]" ng-click="ftreeViewCtrl.expand()" alt-text="{en: 'Expand', he: 'פתיחה'}"></icon>
+	<div id="tree-layout">
+		<ui-view ng-show="ftreesCtrl.tree_item_view"></ui-view>
 	</div>
 </div>
