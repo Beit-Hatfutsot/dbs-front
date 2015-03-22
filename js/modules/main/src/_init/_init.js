@@ -103,7 +103,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         {
             name: 'upload.image',
             url: '/image',
-            controller: 'UploadImageController as uploadImageCtrl',
             templateUrl: 'templates/main/upload/image.html'
         },
 

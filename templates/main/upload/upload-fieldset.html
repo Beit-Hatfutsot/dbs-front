@@ -1,26 +1,26 @@
 <fieldset class="upf upf--{{lang}}">
-	<div class="upf__field" ng-repeat="type in ctrl.meta_data_order">
+	<div class="upf__field" ng-repeat="type in metaData.order">
 		<input 	ng-if="type !== 'description'" 
 				type="text" 
 				id="upf-{{type}}-{{lang}}" 
 				class="upf__field__{{type}}" 
 				later-name="{{type}}_{{lang}}" 
-				placeholder="{{rc.upload_form.needsAttention(upload_form[type + '_' + lang]) ? '' : ctrl.meta_data_placeholders[type][lang][isRequired]}}"
-				ng-model="ctrl.meta_data[type][lang]" 
+				placeholder="{{rc.upload_form.needsAttention(upload_form[type + '_' + lang]) ? '' : metaData.placeholders[type][lang][isRequired]}}"
+				ng-model="metaData.values[type][lang]" 
 				ng-required="isRequired">
 		<textarea 	ng-if="type === 'description'" 
 					type="text" id="upf-{{type}}-{{lang}}" 
 					class="upf__field__{{type}}" 
 					later-name="{{type}}_{{lang}}" 
-					placeholder="{{rc.upload_form.needsAttention(upload_form[type + '_' + lang]) ? '' : ctrl.meta_data_placeholders[type][lang][isRequired]}}" 
-					ng-model="ctrl.meta_data[type][lang]" ng-required="isRequired">
+					placeholder="{{rc.upload_form.needsAttention(upload_form[type + '_' + lang]) ? '' : metaData.placeholders[type][lang][isRequired]}}" 
+					ng-model="metaData.values[type][lang]" ng-required="isRequired">
 		</textarea>
 		<label 	for="upf-{{type}}-{{lang}}" 
-				ng-show="ctrl.meta_data[type][lang] || rc.upload_form.needsAttention(upload_form[type + '_' + lang])">
-			{{ctrl.meta_data_placeholders[type][lang][isRequired]}}
+				ng-show="metaData.values[type][lang] || rc.upload_form.needsAttention(upload_form[type + '_' + lang])">
+			{{metaData.placeholders[type][lang][isRequired]}}
 		</label>
         <div class="upf__field__error" ng-show="rc.upload_form.needsAttention(upload_form[type + '_' + lang])">
-        	{{ctrl.validation_errors[type][lang]}}
+        	{{metaData.validation_errors[type][lang]}}
         </div>
 	</div>
 </fieldset>

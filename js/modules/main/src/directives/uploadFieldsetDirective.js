@@ -4,8 +4,8 @@ angular.module('main').
 			restrict: 'E',
 			templateUrl: 'templates/main/upload/upload-fieldset.html',
 			scope: {
-				ctrl: '=',
 				upload_form: '=uploadForm',
+				metaData: '=',
 				rc: '=',
 				lang: '@',
 				isRequired: '='
