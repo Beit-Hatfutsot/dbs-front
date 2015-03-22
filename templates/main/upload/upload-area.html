@@ -1,5 +1,5 @@
-<div class="upload-droparea" flow-init="flowInstanceInit" flow-name="ctrl.flow" flow-file-success="ctrl.onSuccess()" flow-file-error="ctrl.onError()" flow-drag-enter="style={'border-color': '#1ec3d2'}" flow-drag-leave="style={}" ng-style="style" flow-drop>
-	<div ng-show="!($flow.files[0])">
+<div class="upload-droparea" flow-init="flowInstanceInit" flow-name="ctrl.flow" flow-file-success="ctrl.onSuccess()" flow-file-error="ctrl.onError($file, $message)" flow-drag-enter="style={'border-color': '#1ec3d2'}" flow-drag-leave="style={}" ng-style="style" flow-drop>
+	<div ng-show="!($flow.files[0]) && !(ctrl.failed)">
 		<div class="upload-droparea__cloud"></div>
 	    <div class="upload-droparea__instructions">
 	    	<en>
@@ -16,9 +16,23 @@
 	    	<he>לחץ לפתיחה</he>
 	    </div>
 	</div>
-    <div ng-show="$flow.files[0] && !(ctrl.in_progress)">
-		<img flow-img="$flow.files[0]" />
-		<div ng-click="ctrl.remove_file()">REMOVE</div>
+    <div ng-show="$flow.files[0] && !(ctrl.in_progress) && !(ctrl.failed)">
+		<img class="upload-droparea__image" flow-img="$flow.files[0]">
+		<icon class="upload-droparea__remove" position="[-134, -321]" alt-text="{en: 'Remove', he: 'הסר'}" ng-click="ctrl.remove_file()"></icon>
+	</div>
+	<div ng-show="ctrl.failed && !(ctrl.in_progress)">
+		<div class="upload-droparea__rain-cloud"></div>
+		 <div class="upload-droparea__instructions">
+			<en>Ooops, </en>
+			<he>אופס, </he>
+			{{ctrl.fail_reason.get()}}
+		</div>
+		<div>
+			<button class="upload-droparea__try-again-btn" ng-click="ctrl.clear_form()">
+				<en>Try again</en>
+				<he>נסה שוב</he>
+			</button>
+		</div>
 	</div>
 	<div class="upload-droparea__progressbar" ng-show="ctrl.in_progress">
 		 <progressbar animate="false" value="ctrl.upload_progress" type="success"><b>{{ctrl.upload_progress}}%</b></progressbar>

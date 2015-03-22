@@ -148,6 +148,12 @@ var UploadImageController = function($scope, notification, auth, langManager, mj
         }
     });
 
+    Object.defineProperty(this, 'fail_reason', {
+        get: function() {
+            return notification;
+        }
+    });
+
     $scope.$watch(function() {
         return self.in_progress;
     }, 
@@ -166,7 +172,10 @@ UploadImageController.prototype = {
         if (this.flow.files.length > 0) {
             this.$scope.uploadCtrl.upload.apply(this);
         }
-        document.getElementsByClassName('upload-droparea')[0].scrollIntoView(false);
+        //document.getElementsByClassName('upload-droparea')[0].scrollIntoView(false);
+        jQuery('html, body').animate({
+            scrollTop: jQuery('.upload-droparea').offset().top - 110
+        }, 1000);    
 	},
 
     onSuccess: function() {
@@ -179,11 +188,20 @@ UploadImageController.prototype = {
         this.success = true;
     },
 
-    onError: function() {
-        this.notification.put({
-            en: 'Upload failed.',
-            he: 'העלאת הקובץ נכשלה.'
-        });
+    onError: function($file, $message) {
+        if ($message && JSON.parse($message).error.substr(-13) === 'not supported') {
+            this.notification.put({
+                en: 'This file type is not supported, please try uploading a supported file',
+                he: 'שוג הקובץ הזה אינו נתמך, אנא נסו להעלות קובץ מסוג נתמך'
+            });
+        }
+        else {
+            this.notification.put({
+                en: 'Something went wrong, please try uploading again',
+                he: 'משהו השתבש, אנא נסו שוב'
+            });
+        }
+
         this.failed = true;
     },
 
@@ -197,6 +215,9 @@ UploadImageController.prototype = {
             
             this.reset();
         }
+
+        this.failed = false;
+        this.notification.clear();
     },
 
     reset: function() {

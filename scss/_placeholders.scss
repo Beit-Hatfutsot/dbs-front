@@ -274,4 +274,5 @@
 	background: #5dc2d4;
 	border: none;
 	@include border-radius(2px);
+	@include hover-pointer();
 }

@@ -28,7 +28,7 @@
 		background: #eeeeee;
 
 		.tabs {
-			width: 640px;
+			width: 400px;
 			margin: 0 auto;
 
 			&__tab {
@@ -84,9 +84,8 @@
 
 			.upload-droparea {
 				width: 100%;
-				height: 250px;
 				margin-bottom: 20px;
-				padding: 18px 0 0;
+				padding: 18px 0;
 				border: 2px dashed #666666;
 				text-align: center;
 
@@ -95,6 +94,13 @@
 					height: 67px;
 					margin: 0 auto 16px;
 					@include bg_image("cloud.png");
+				}
+
+				&__rain-cloud {
+					width: 92px;
+					height: 91px;
+					margin: 0 auto 16px;
+					@include bg_image("rain_cloud.png");
 				}
 
 				&__instructions {
@@ -117,6 +123,22 @@
 					@include hover_pointer();
 				}
 
+				&__remove {
+					width: 65px;
+					height: 75px;
+					margin: 0 auto;
+					@include hover_pointer();
+				}
+
+				&__try-again-btn {
+					width: 220px;
+					height: 66px;
+					margin-top: 18px;
+					font-size: 18px;
+					@extend %submit-btn;
+					text-align: center;
+				}
+
 				&__progressbar {
 					
 					.progress{
@@ -128,7 +150,7 @@
 					}
 				}
 
-				img {
+				&__image {
 					max-width: 900px;
 					max-height: 210px;
 				}

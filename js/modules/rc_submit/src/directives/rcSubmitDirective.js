@@ -99,7 +99,10 @@ var rcSubmitDirective = {
  
               if (!formController.$valid) {
                 var first_invalid_name = formController.$error.required[0].$name;
-                document.getElementsByName(first_invalid_name)[0].scrollIntoView(false);
+                //document.getElementsByName(first_invalid_name)[0].scrollIntoView(false);
+                jQuery('html, body').animate({
+                  scrollTop: jQuery('[name=' + first_invalid_name + ']').offset().top - 110
+                }, 1000); 
                   
                 return false;
               }

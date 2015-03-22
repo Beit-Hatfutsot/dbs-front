@@ -192,7 +192,8 @@
 				.upload-icon {
 
 					&__image,
-					&__video {
+					&__video,
+					&__ftree {
 						display: inline-block;
 					}
 
@@ -215,6 +216,21 @@
 
 						.he & {
 							margin-right: -3px;
+						}
+					}
+
+					&__ftree {
+						position: relative;
+						top: 3px;
+						width: 16px;
+						height: 18px;
+
+						.en & {
+							margin-left: -1px;
+						}
+
+						.he & {
+							margin-right: -1px;
 						}
 					}
 				}

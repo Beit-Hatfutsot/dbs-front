@@ -14,8 +14,8 @@ angular.module('apiClient').
 	  			ftrees_search:	'http://127.0.0.1:5000/fsearch',
 	  			ftrees_get: 	'http://127.0.0.1:5000/get_ftree_url',
 	  			upload: 		'http://127.0.0.1:5000/upload'
-	  		}*/
-	  		
+	  		}
+	  		*/
 	  		urls: {
 	  			auth: 			'http://bhsapi.ezdr.net/auth',
 	  			user: 			'http://bhsapi.ezdr.net/user', 
