@@ -1,35 +1,52 @@
-<upload-area ctrl="uploadImageCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
-<form name="upload_form" id="upload-picture-form" rc-submit="uploadImageCtrl.submit()" novalidate>
-	<upload-fieldset	ng-if="uploadImageCtrl.lang === 'he'" 
-						ctrl="uploadImageCtrl" 
-						upload-form="upload_form" 
-						rc="rc" 
-						lang="he" 
-						is-required="true">
-	</upload-fieldset>
-	<div class="upf__alt-instructions" ng-if="uploadImageCtrl.lang === 'he'">
-		<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
-		<he>If you speak English, please fill the same details below</he>
+<div class="upload-success" ng-show="uploadCtrl.success">
+	<div class="upload-success__title">
+		<en>Yay! The file was successfuly sent</en>
 	</div>
-	<upload-fieldset 	ctrl="uploadImageCtrl" 
-						upload-form="upload_form" 
-						rc="rc" 
-						lang="en" 
-						is-required="uploadImageCtrl.lang === 'en' ? true : false">
-	</upload-fieldset>
-	<div class="upf__alt-instructions" ng-if="uploadImageCtrl.lang === 'en'">
-		<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
-		<he>If you speak English, please fill the same details below</he>
+	<div class="upload-success__text">
+		<en>
+			Once the picture is approved, we will send you an email with a link to it. In the mean time, you will find it at <a>My Story</a> where you can add it to a specific family branch.
+		</en>
 	</div>
-	<upload-fieldset 	ng-if="uploadImageCtrl.lang === 'en'" 
-						ctrl="uploadImageCtrl" 
-						upload-form="upload_form" 
-						rc="rc" 
-						lang="he" 
-						is-required="false">
-	</upload-fieldset>
-	<input type="submit" value="{{uploadImageCtrl.submit_value[uploadImageCtrl.lang]}}" class="upf__submit">
-	<div class="upf__in-progress" ng-show="uploadImageCtrl.in_progress">
-		<img src="images/progress.gif">
+	<div class="upload-success__instructions">
+		You can upload another file
 	</div>
-</form>
+	<button class="upload-success__button" ng-click="uploadCtrl.clear_form()">Upload another file</button>
+</div>
+<div ng-hide="uploadCtrl.success">
+	<upload-area ctrl="uploadCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
+	<!--<upload-form ctrl="uploadCtrl" meta-data="uploadCtrl.meta_data.image" type="image"></upload-form>-->
+	<form name="upload_form" id="upload-form" rc-submit="uploadCtrl.submit('image')" novalidate>
+		<upload-fieldset	ng-if="uploadCtrl.lang === 'he'" 
+							meta-data="uploadCtrl.meta_data.image" 
+							upload-form="upload_form" 
+							rc="rc" 
+							fieldset-lang="he" 
+							is-required="true">
+		</upload-fieldset>
+		<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'he'">
+			<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
+			<he>If you speak English, please fill the same details below</he>
+		</div>
+		<upload-fieldset 	meta-data="uploadCtrl.meta_data.image" 
+							upload-form="upload_form" 
+							rc="rc" 
+							fieldset-lang="en" 
+							is-required="uploadCtrl.lang === 'en' ? true : false">
+		</upload-fieldset>
+		<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'en'">
+			<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
+			<he>If you speak English, please fill the same details below</he>
+		</div>
+		<upload-fieldset 	ng-if="uploadCtrl.lang === 'en'" 
+							meta-data="uploadCtrl.meta_data.image" 
+							upload-form="upload_form" 
+							rc="rc" 
+							fieldset-lang="he" 
+							is-required="false">
+		</upload-fieldset>
+		<input type="submit" value="{{uploadCtrl.submit_value[uploadCtrl.lang]}}" class="upf__submit">
+		<div class="upf__in-progress" ng-show="uploadCtrl.in_progress">
+			<img src="images/progress.gif">
+		</div>
+	</form>
+</div>

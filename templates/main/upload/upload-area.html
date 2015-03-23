@@ -17,7 +17,10 @@
 	    </div>
 	</div>
     <div ng-show="$flow.files[0] && !(ctrl.in_progress) && !(ctrl.failed)">
-		<img class="upload-droparea__image" flow-img="$flow.files[0]">
+		<ng-switch on="ctrl.is_image">
+			<img ng-switch-when="true" class="upload-droparea__image" flow-img="$flow.files[0]">
+			<div ng-switch-default>{{$flow.files[0].file.name}}</div>
+		</ng-switch>
 		<icon class="upload-droparea__remove" position="[-134, -321]" alt-text="{en: 'Remove', he: 'הסר'}" ng-click="ctrl.remove_file()"></icon>
 	</div>
 	<div ng-show="ctrl.failed && !(ctrl.in_progress)">
