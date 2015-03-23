@@ -210,10 +210,11 @@ angular.module('main').
 
 				individuals.forEach(function(individual) {
 					if ( is_alive(individual) ) {
+						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN'];
 						var filtered_individual = {};
 
 						for (var prop in individual) {
-							if (prop === 'FN') {
+							if ( allowed_props.indexOf(prop) !== -1 ) {
 								filtered_individual[prop] = individual[prop];
 							}
 							else {

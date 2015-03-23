@@ -270,7 +270,7 @@ FtreesController.prototype = {
 						self.results_per_page = 15;
 					}
 					else {
-						self.results_per_page = individuals.length - individuals.length % 5;
+						self.results_per_page = (individuals.length - individuals.length % 5) || 5;
 					}
 				}
 

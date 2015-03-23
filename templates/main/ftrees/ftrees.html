@@ -197,8 +197,8 @@
 			</div>
 			<div class="results__per-page">
 				<span class="results__per-page__indicator">
-					<en>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} of {{ftreesCtrl.individuals.length}}</en>
-					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.results_per_page + ftreesCtrl.display_from_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
+					<en>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
+					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
 				</span>
 				<span class="results__per-page__paginator">
 					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.prev_page()"><</button>
@@ -217,7 +217,7 @@
 						<he>לעמוד</he>
 					</label>
 					<select id="individuals-per-page" ng-model="ftreesCtrl.results_per_page">
-						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]" ng-if="i < ftreesCtrl.individuals.length">{{i}}</option>
+						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]" ng-if="i < ftreesCtrl.individuals.length || i === 5">{{i}}</option>
 					</select>
 				</span>
 			</div>
