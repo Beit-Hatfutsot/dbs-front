@@ -1,7 +1,8 @@
-erver {
+server {
     listen 80;
-
-    root /home/danny/Projects/bh/bhs/bhsclient/public;
+    
+    # Change to bhsclient dir for local development
+    root /home/bhs/bhsclient/public;
     index index.html index.htm;
 
     server_name bhsclient;
