@@ -154,9 +154,12 @@ WizardFormCtrl.prototype = {
                 }
             }
             else if ($event.keyCode === 13) {
-                $event.preventDefault();
+                if (this.suggested[type + 's'][ this.suggested_index[type] ]) {
+                    $event.preventDefault();
+                    this.adopt(type);
+                }
+
                 this.close_suggested(type);
-                this.adopt(type);
             }
         }
     },
