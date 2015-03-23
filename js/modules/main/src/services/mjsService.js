@@ -18,6 +18,7 @@ angular.module('main').
 					}
 					else {
 						this.data.unassigned = [item_string];
+						this.data.assigned = [];
 					}
 					return this.data.$put();
 				}
