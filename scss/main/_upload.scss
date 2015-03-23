@@ -80,7 +80,38 @@
 		@at-root #upload-view {
 			width: 940px;
 			margin: 0 auto;
-			padding: 30px 0 0;
+			padding: 30px 0 10px;
+
+			.upload-success {
+				text-align: center;
+
+				&__title {
+					font-size: 38px;
+				}	
+
+				&__text,
+				&__instructions{
+					font-size: 18px;
+				}
+
+				&__text {
+					margin-top: 10px;
+				}
+
+				&__instructions {
+					margin-top: 45px;
+				}
+
+				&__button {
+					width: 268px;
+					height: 66px;
+					margin-top: 3px;
+					font-size: 18px;
+					@extend %submit-btn;
+					text-align: center;
+					border: 2px solid #d2d7d3;
+				}
+			}
 
 			.upload-droparea {
 				width: 100%;
@@ -137,6 +168,7 @@
 					font-size: 18px;
 					@extend %submit-btn;
 					text-align: center;
+					border: 2px solid #d2d7d3;
 				}
 
 				&__progressbar {

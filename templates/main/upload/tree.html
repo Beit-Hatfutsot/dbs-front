@@ -1,2 +1,52 @@
-<upload-area flow-instance-init="uploadCtrl.flow_init"></upload-area> 
-<upload-form name="" meta-data=""></upload-form>
+<div class="upload-success" ng-show="uploadCtrl.success">
+	<div class="upload-success__title">
+		<en>Yay! The file was successfuly sent</en>
+	</div>
+	<div class="upload-success__text">
+		<en>
+			Once the family tree is approved, we will send you an email with a link to it. In the mean time, you will find it at <a>My Story</a> where you can add it to a specific family branch.
+		</en>
+	</div>
+	<div class="upload-success__instructions">
+		You can upload another file
+	</div>
+	<button class="upload-success__button" ng-click="uploadCtrl.clear_form()">Upload another file</button>
+</div>
+<div ng-hide="uploadCtrl.success">
+	<upload-area ctrl="uploadCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
+	<!--<upload-form ctrl="uploadCtrl" meta-data="uploadCtrl.meta_data.image" type="image"></upload-form>-->
+	<form name="upload_form" id="upload-form" rc-submit="uploadCtrl.submit('ftree')" novalidate>
+		<upload-fieldset	ng-if="uploadCtrl.lang === 'he'" 
+							meta-data="uploadCtrl.meta_data.ftree" 
+							upload-form="upload_form" 
+							rc="rc" 
+							fieldset-lang="he" 
+							is-required="true">
+		</upload-fieldset>
+		<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'he'">
+			<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
+			<he>If you speak English, please fill the same details below</he>
+		</div>
+		<upload-fieldset 	meta-data="uploadCtrl.meta_data.ftree" 
+							upload-form="upload_form" 
+							rc="rc" 
+							fieldset-lang="en" 
+							is-required="uploadCtrl.lang === 'en' ? true : false">
+		</upload-fieldset>
+		<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'en'">
+			<en>במידה ואתם דוברי עברית, אנא מלאו את אותם הפרטים גם בעברית</en>
+			<he>If you speak English, please fill the same details below</he>
+		</div>
+		<upload-fieldset 	ng-if="uploadCtrl.lang === 'en'" 
+							meta-data="uploadCtrl.meta_data.ftree" 
+							upload-form="upload_form" 
+							rc="rc" 
+							fieldset-lang="he" 
+							is-required="false">
+		</upload-fieldset>
+		<input type="submit" value="{{uploadCtrl.submit_value[uploadCtrl.lang]}}" class="upf__submit">
+		<div class="upf__in-progress" ng-show="uploadCtrl.in_progress">
+			<img src="images/progress.gif">
+		</div>
+	</form>
+</div>

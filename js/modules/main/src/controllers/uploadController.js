@@ -184,17 +184,42 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
         },
 
         ftree: {
-            order: [],
+            order: ['title'],
 
             values: {
-
+                title: {
+                    en: '',
+                    he: ''
+                },
             },
 
             placeholders: {
-                
+                title:  {
+                    en: {
+                        true: '*Title',
+                        false: 'Title'
+                    },
+                    he: {
+                        true: '*כותרת',
+                        false: 'כותרת',
+                    }
+                },
+            },
+
+            validation_errors: {
+                title: {
+                    en: 'Yo, check it, you gots to have title',
+                    he: 'שדה זה הינו שדה חובה'
+                },
             }
         }
     }
+
+    Object.defineProperty(this, 'lang', {
+        get: function() {
+            return langManager.lang;
+        }
+    });
 
     Object.defineProperty(this, 'in_progress', {
         get: function() {
@@ -214,6 +239,22 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
         }
     });
 
+    Object.defineProperty(this, 'is_image', {
+        get: function() {
+            try {
+                if (this.flow.files[0].file.type.substr(0, 5) === 'image') {
+                    return true
+                }
+                else {
+                    return false;
+                }
+            }
+            catch(e) {
+                return false;
+            }
+        }
+    });
+
     $scope.$watch(function() {
         return self.in_progress;
     }, 
@@ -225,6 +266,8 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
             });
         }
     });
+
+    window.ctrl = this
 };
 
 UploadController.prototype = {
@@ -232,20 +275,16 @@ UploadController.prototype = {
         
     },
 
-	upload: function() {
+	upload: function(type) {
+        this.reset_flow_data();
+
         this.flow.opts.headers.Authorization = 'Bearer ' + this.auth.get_token();
-        this.flow.opts.query.title_en           = this.meta_data.title.en;
-        this.flow.opts.query.description_en     = this.meta_data.description.en;
-        this.flow.opts.query.location_en        = this.meta_data.location.en;
-        this.flow.opts.query.date_en            = this.meta_data.date.en;
-        this.flow.opts.query.creator_name_en    = this.meta_data.creator_name.en;
-        this.flow.opts.query.people_present_en  = this.meta_data.people_present.en;
-        this.flow.opts.query.title_he           = this.meta_data.title.he;
-        this.flow.opts.query.description_he     = this.meta_data.description.he;
-        this.flow.opts.query.location_he        = this.meta_data.location.he;
-        this.flow.opts.query.date_he            = this.meta_data.date.he;
-        this.flow.opts.query.creator_name_he    = this.meta_data.creator_name.he;
-        this.flow.opts.query.people_present_he  = this.meta_data.people_present.he;
+        
+        for (var field in this.meta_data[type].values) {
+            this.flow.opts.query[field + '_en'] = this.meta_data[type].values[field].en;
+            this.flow.opts.query[field + '_he'] = this.meta_data[type].values[field].he;
+        }
+
         this.flow.files[0].retry();
 	},
 
@@ -255,28 +294,26 @@ UploadController.prototype = {
 
     reset_flow: function() {
         this.flow.opts.headers.Authorization = '';
-        this.flow.opts.query.title_en           = '';
-        this.flow.opts.query.description_en     = '';
-        this.flow.opts.query.location_en        = '';
-        this.flow.opts.query.date_en            = '';
-        this.flow.opts.query.creator_name_en    = '';
-        this.flow.opts.query.people_present_en  = '';
-        this.flow.opts.query.title_he           = '';
-        this.flow.opts.query.description_he     = '';
-        this.flow.opts.query.location_he        = '';
-        this.flow.opts.query.date_he            = '';
-        this.flow.opts.query.creator_name_he    = '';
-        this.flow.opts.query.people_present_he  = '';
+        this.reset_flow_data();
         this.remove_file();
+    },
+
+    reset_flow_data: function() {
+        for (var type in this.meta_data) {
+            for (var field in this.meta_data[type].values) {
+                delete this.flow.opts.query[field + '_en'];
+                delete this.flow.opts.query[field + '_he'];
+            }
+        }
     },
 
     remove_file: function() {
         this.flow.removeFile( this.flow.files[0] );
     },
 
-    submit: function() {
+    submit: function(type) {
         if (this.flow.files.length > 0) {
-            this.upload();
+            this.upload(type);
         }
         //document.getElementsByClassName('upload-droparea')[0].scrollIntoView(false);
         jQuery('html, body').animate({
@@ -286,11 +323,11 @@ UploadController.prototype = {
 
     onSuccess: function() {
         this.mjs.refresh();
+        this.clear_form();
         this.notification.put({
             en: 'Upload succeeded.',
             he: 'העלאת הקובץ הסתיימה בהצלחה.'
         });
-        this.clear_form();
         this.success = true;
     },
 
@@ -312,22 +349,22 @@ UploadController.prototype = {
     },
 
     clear_form: function() {
-        for (var field in this.meta_data) {
-            for (var lang in this.meta_data[field]) {
-                this.meta_data[field][lang] = '';
+        for (var type in this.meta_data) {
+            for (var field in this.meta_data[type].values) {
+                for (var lang in this.meta_data[type].values[field]) {
+                    this.meta_data[type].values[field][lang] = '';
+                }
             }
-            this.$scope.rc.upload_form.attempted = false;
-            this.$scope.upload_form.$setPristine();
-            
-            this.reset();
         }
 
-        this.failed = false;
-        this.notification.clear();
-    },
+        this.uploadFormCtrl.$scope.rc.upload_form.attempted = false;
+        this.uploadFormCtrl.$scope.upload_form.$setPristine();
+        
+        this.reset_flow();
 
-    reset: function() {
-        this.$scope.uploadCtrl.reset_flow.apply(this);
+        this.failed = false;
+        this.success = false;
+        this.notification.clear();
     },
 
     get_progress: function() {
@@ -337,4 +374,4 @@ UploadController.prototype = {
     }
 };
 
-angular.module('main').controller('UploadController', ['$scope', '$state', 'auth', 'apiClient', 'langManager',UploadController]);
+angular.module('main').controller('UploadController', ['$scope', '$state', 'auth', 'apiClient', 'langManager', 'mjs', 'notification', UploadController]);

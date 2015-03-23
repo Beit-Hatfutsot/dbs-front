@@ -5,7 +5,8 @@ angular.module('main').
 			templateUrl: 'templates/main/upload/upload-form.html',
 			scope: {
 				ctrl: '=',
-				metaData: '='
+				metaData: '=',
+				type: '@'
 			}
 		}
 	}]);

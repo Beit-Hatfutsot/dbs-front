@@ -103,6 +103,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         {
             name: 'upload.image',
             url: '/image',
+            controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/image.html'
         },
 
@@ -123,7 +124,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         {
             name: 'upload.family_tree',
             url: '/family_tree',
-            //controller: 'PictureUploadController as pictureUploadCtrl',
+            controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
         },
 

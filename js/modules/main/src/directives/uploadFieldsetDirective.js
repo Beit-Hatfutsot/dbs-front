@@ -7,7 +7,7 @@ angular.module('main').
 				upload_form: '=uploadForm',
 				metaData: '=',
 				rc: '=',
-				lang: '@',
+				fieldsetLang: '@',
 				isRequired: '='
 			}
 		}
