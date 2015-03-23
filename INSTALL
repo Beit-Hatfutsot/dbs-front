@@ -1,9 +1,19 @@
 # Dependencies
-# Install node.js, npm, Ruby, sass, bower and grunt-cli
-#sudo apt-get install ruby
-#sudo gem install sass
-#sudo npm install -g grunt-cli
-#sudo npm install -g grunt-cli
+#
+# Install nginx, node.js, npm, Ruby, sass, bower and grunt-cli
+sudo apt-get install ruby
+sudo apt-get install nginx
+sudo gem install sass
+sudo npm install -g grunt-cli
 npm install
 bower install
-grunt build
+# Gedcom Viewer dependency - run once:
+# cd js/lib; rm -rf gedcom-js-viewer; git clone git@github.com:danidin/gedcom-js-viewer.git
+# Nginx config - run once:
+# sudo cp doc/config/bhs-nginx-site /etc/nginx/sites-available
+# Edit the file there to point site root to ./public/index.html and run:
+# sudo ln -s /etc/nginx/sites-available/bhs-nginx-site /etc/nginx/sites-enabled/; sudo service nginx reload
+# 
+# For local development replace the relevant comments in ./js/modules/api_client/src/services/apiClientService.js
+
+grunt build 
