@@ -1,6 +1,6 @@
 angular.module('plumb').
 	factory('plumbConnectionManager', ['$timeout', function($timeout) {
-		var connection_manager = {
+		var connection_set = {
 			connections: {},
 			
 			createConnection: function(connection_id, container_id) {
@@ -64,13 +64,18 @@ angular.module('plumb').
 	}]);
 
 angular.module('main').
-	factory('plumbConnectionManager2', [function() {
-		var connection_manager = {
+	factory('plumbConnectionSetManager', [function() {
+		
+		function ConnectionSet(container_id) {
 			
-			connections: {},
-			active_connections: {},
-			plumb: jsPlumb.getInstance(),
+			this.connections = {};
+			this.active_connections = {};
+			this.plumb = jsPlumb.getInstance();
 
+			this.plumb.setContainer(container_id);
+		}
+
+		ConnectionSet.prototype = {
 			registerConnection: function(connection_id, connection_params) {
 				if ( !this.connections.hasOwnProperty(connection_id) ) {
 					this.connections[connection_id] = connection_params;
@@ -111,6 +116,21 @@ angular.module('main').
 				this.plumb = jsPlumb.getInstance();
 			}
 		}
-		window.plumbConnectionManager2 = connection_manager
-		return connection_manager;
+		
+		var plumb_connection_set_manager = {
+			sets: {},
+			
+			getSet: function(container_id) {
+				if (this.sets[container_id]) {
+					return this.sets[container_id]
+				}
+				
+				var new_set =  new ConnectionSet(container_id);
+				this.sets[container_id] = new_set;
+
+				return new_set;
+			}
+		}
+
+		return plumb_connection_set_manager;
 	}]);

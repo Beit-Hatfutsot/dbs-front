@@ -17,23 +17,6 @@ angular.module('plumb').
 		}
 	}]).
 
-	directive('plumbContainer2', ['$timeout', 'plumbConnectionManager2', function($timeout, plumbConnectionManager) {
-		return {
-			restrict: 'A',
-			link: function(scope, element, attrs) {
-			    var id = element.attr('id');
-				var connection = plumbConnectionManager.connections[id] || plumbConnectionManager.createConnection(id);
-				$timeout(function() {
-					scope.$watch(attrs['connecton'], function(newVal, oldVal) {
-						connection.plumb.detachEveryConnection();	
-						connection.connect(newVal);
-						connection.plumb.repaintEverything();
-					});
-				});
-			}
-		}
-	}])
-
 	directive('plumbRoot', ['$timeout', 'plumbConnectionManager', function($timeout, plumbConnectionManager) {
 		return {
 			restrict: 'A',
@@ -68,15 +51,37 @@ angular.module('plumb').
 		};
 	}]).
 
+	directive('plumbSetContainer', ['plumbConnectionSetManager', function(plumbConnectionSetManager) {
+		return {
+			restrict: 'A',
 
-	directive('plumbConnect', ['$timeout', 'plumbConnectionManager2', function($timeout, plumbConnectionManager2) {
+			scope: {
+				reinstantiateOn: '='
+			},
+
+			link: function(scope, element, attrs) {
+				var id = attrs['id'];
+				var connection_set = plumbConnectionSetManager.getSet(id);
+
+				scope.$watch(scope.reinstantiateOn, function(newVal, oldVal) {
+					connection_set.reinstantiatePlumb();
+					connection_set.repaint();
+				});
+			}
+		}
+	}]).
+
+	directive('plumbConnect', ['$timeout', 'plumbConnectionSetManager', function($timeout, plumbConnectionSetManager) {
 		return {
 			restrict: 'A',
 			link: function(scope, element, attrs) {
+				var container_id = attrs['containerId'];
 				var	connection_id = attrs['connectionId'];
 				var connector = ['Straight'];
 				var anchors = [ [0.5, 0.5], [0.5, 0.5] ];
 				var endpoint = ['Dot'];
+
+				var connection_set = plumbConnectionSetManager.getSet(container_id);
 
 				if (attrs['connector'] === 'flowchart') {
 					connector = [ "Flowchart", {
@@ -91,7 +96,7 @@ angular.module('plumb').
 	                endpoint = ['Dot', {radius: 0.1}];
 				}
 
-				plumbConnectionManager2.registerConnection(connection_id, {
+				connection_set.registerConnection(connection_id, {
 					source: attrs['to'],
 					target: attrs['id'],
 					paintStyle:{ lineWidth: 1, strokeStyle: '#333333' },
@@ -103,30 +108,30 @@ angular.module('plumb').
 				if (attrs['connecton']) {
 					scope.$watch(attrs['connecton'], function(newVal, oldVal) {
 						if (newVal === scope.$index) {
-							if ( !(plumbConnectionManager2.active_connection(connection_id)) ) {
+							if ( !(connection_set.active_connection(connection_id)) ) {
 								console.log('creating');
 								$timeout(function() {
-									plumbConnectionManager2.connect(connection_id);
+									connection_set.connect(connection_id);
 								}, parseInt(attrs['delay']));
 							}
 							else {
 								console.log('repainting');
 								$timeout(function() {
-									plumbConnectionManager2.repaint(connection_id);
+									connection_set.repaint(connection_id);
 								}, parseInt(attrs['delay']));
 							}
 						}
 						else {
-							if ( plumbConnectionManager2.active_connection(connection_id) ) {
+							if ( connection_set.active_connection(connection_id) ) {
 								console.log('detaching');
-								plumbConnectionManager2.detach(connection_id);
+								connection_set.detach(connection_id);
 							}
 						}
 					});
 				}
 				else {
 					$timeout(function() {
-						plumbConnectionManager2.connect(connection_id);
+						connection_set.connect(connection_id);
 					}, attrs['delay']);
 				}
 			}	

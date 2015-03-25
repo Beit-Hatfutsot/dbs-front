@@ -77,9 +77,13 @@
 			@at-root #ftree-layout {
 				white-space: nowrap;
 
-				.node-container {
-					white-space: normal;
-					@extend %node-container;
+				@at-root #subtree {
+					position: relative;
+					
+					.node-container {
+						white-space: normal;
+						@extend %node-container;
+					}
 				}
 			}
 		}
