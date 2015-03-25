@@ -41,9 +41,49 @@
 		</div>
 	</ng-switch>
 	<div id="branch-content-{{$index}}" class="branch__content" ng-show="mjsCtrl.selected_branch === $index">
-		<mjs-assigned ng-if="branch.items.familyNames" id="assigned-first-{{$index}}" class="assigned assigned--first" collection-name="familyNames" icon-position="[-81, -266]" plumb-connect to="branch-head-border-{{$index}}" connection-id="familyNames-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
-		<mjs-assigned ng-if="branch.items.places" id="assigned-second-{{$index}}" class="assigned assigned--second" collection-name="places" icon-position="[-79, -192]" plumb-connect to="branch-head-border-{{$index}}" connection-id="places-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
-		<mjs-assigned ng-if="branch.items.genTreeIndividuals" id="assigned-third-{{$index}}" class="assigned assigned--third" collection-name="genTreeIndividuals" icon-position="[-79, -144]" plumb-connect to="branch-head-border-{{$index}}" connection-id="genTreeIndividuals-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
-		<mjs-assigned ng-if="branch.items.photoUnits" id="assigned-fourth-{{$index}}" class="assigned assigned--fourth" collection-name="photoUnits" icon-position="[-79, -348]" plumb-connect to="branch-head-border-{{$index}}" connection-id="photoUnits-{{$index}}" delay="1300" connecton="mjsCtrl.selected_branch"></mjs-assigned>
+		<mjs-assigned 	ng-if="branch.items.familyNames" 
+						id="assigned-first-{{$index}}" 
+						class="assigned assigned--first" 
+						collection-name="familyNames" 
+						icon-position="[-81, -266]" 
+						plumb-connect to="branch-head-border-{{$index}}"
+						container-id="molecules"
+						connection-id="familyNames-{{$index}}" 
+						delay="1300" 
+						connecton="mjsCtrl.selected_branch">
+		</mjs-assigned>
+		<mjs-assigned 	ng-if="branch.items.places" 
+						id="assigned-second-{{$index}}" 
+						class="assigned assigned--second" 
+						collection-name="places" 
+						icon-position="[-79, -192]" 
+						plumb-connect to="branch-head-border-{{$index}}" 
+						container-id="molecules"
+						connection-id="places-{{$index}}" 
+						delay="1300" 
+						connecton="mjsCtrl.selected_branch">
+		</mjs-assigned>
+		<mjs-assigned 	ng-if="branch.items.genTreeIndividuals" 
+						id="assigned-third-{{$index}}" 
+						class="assigned assigned--third" 
+						collection-name="genTreeIndividuals" 
+						icon-position="[-79, -144]" 
+						plumb-connect to="branch-head-border-{{$index}}"
+						container-id="molecules" 
+						connection-id="genTreeIndividuals-{{$index}}" 
+						delay="1300" 
+						connecton="mjsCtrl.selected_branch">
+		</mjs-assigned>
+		<mjs-assigned 	ng-if="branch.items.photoUnits" 
+						id="assigned-fourth-{{$index}}" 
+						class="assigned assigned--fourth" 
+						collection-name="photoUnits" 
+						icon-position="[-79, -348]" 
+						plumb-connect to="branch-head-border-{{$index}}" 
+						container-id="molecules"
+						connection-id="photoUnits-{{$index}}" 
+						delay="1300" 
+						connecton="mjsCtrl.selected_branch">
+		</mjs-assigned>
 	</div>
 </div>

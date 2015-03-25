@@ -56,10 +56,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
-            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionManager2', function(notification, plumbConnectionManager, plumbConnectionManager2) {
+            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
                 notification.clear();
                 plumbConnectionManager.connections = {};
-                plumbConnectionManager2.reinstantiatePlumb();
+                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
+                    connection_set.repaint();
+                });
             }]
         }, 
 

@@ -79,7 +79,7 @@ angular.module('plumb').
 				var	connection_id = attrs['connectionId'];
 				var connector = ['Straight'];
 				var anchors = [ [0.5, 0.5], [0.5, 0.5] ];
-				var endpoint = ['Dot'];
+				var endpoint = ['Dot', {radius: 0.1}];
 
 				var connection_set = plumbConnectionSetManager.getSet(container_id);
 
@@ -92,8 +92,6 @@ angular.module('plumb').
 	                } ];
 
 	                anchors = [ [0.5,1,0,1], [0.5,0,0,-1] ];
-
-	                endpoint = ['Dot', {radius: 0.1}];
 				}
 
 				connection_set.registerConnection(connection_id, {

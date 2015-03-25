@@ -1,6 +1,6 @@
 angular.module('plumb').
 	factory('plumbConnectionManager', ['$timeout', function($timeout) {
-		var connection_set = {
+		var connection_manager = {
 			connections: {},
 			
 			createConnection: function(connection_id, container_id) {
@@ -40,7 +40,8 @@ angular.module('plumb').
 								target: node_id,
 								paintStyle:{ lineWidth: 1, strokeStyle: '#333333' },
 								connector: ['Straight'],
-								anchor: 'Center'
+								anchor: 'Center',
+								endpoint: ['Dot', {radius: 0.1}]
 							});
 						}
 					}
@@ -124,7 +125,7 @@ angular.module('main').
 				if (this.sets[container_id]) {
 					return this.sets[container_id]
 				}
-				
+
 				var new_set =  new ConnectionSet(container_id);
 				this.sets[container_id] = new_set;
 
