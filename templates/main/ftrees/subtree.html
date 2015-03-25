@@ -1,7 +1,7 @@
 <div id="subtree" plumb-set-container reinstantiate-on="individual.id">
 	<div class="parent-family" ng-if="individual.parent_family.isNotEmpty()">
-		<div class="node-container" id="subtree-parent">
-			<div class="node">
+		<div class="node-container">
+			<div class="node" id="subtree-parent">
 				<span ng-if="individual.parent_family.husband.isNotEmpty()">
 					<individual data="individual.parent_family.husband" tree-number="individual.tree_number"></individual>
 				</span>
@@ -19,14 +19,14 @@
 			</div>
 		</div>
 	</div>
-	<div 	class="node-container" 
-			id="subtree-individual"
-			plumb-connect to="subtree-parent"
-			container-id="subtree"
-			connection-id="subtree-individual-parent"
-			connector="flowchart"
-			delay="1000">
-		<div class="node">
+	<div class="node-container">
+		<div 	class="node"
+				id="subtree-individual"
+				plumb-connect to="subtree-parent"
+				container-id="subtree"
+				connection-id="subtree-individual-parent"
+				connector="flowchart"
+				delay="1000">
 			<span ng-if="individual.sex === 'M'">
 				<individual data="individual" tree-number="individual.tree_number"></individual>
 			</span>
