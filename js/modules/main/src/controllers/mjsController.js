@@ -407,6 +407,18 @@ MjsController.prototype = {
 		else {
 			return '';
 		}
+	},
+
+	is_duplicate_branch_name: function(name) {
+		var count = 0;
+
+		this.mjs_items.assigned.forEach(function(branch) {
+			if (branch.name === name) {
+				count++;
+			}
+		});
+
+		return count > 1;
 	}
 };
 

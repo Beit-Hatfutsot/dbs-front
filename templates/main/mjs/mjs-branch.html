@@ -17,9 +17,15 @@
 				<icon position="[-226, -123]"></icon>
 			</div>
 			<div class="branch__edit-popover" dropdown is-open="mjsCtrl.branch_edit_status[$index]">
-				<en>Rename this Family Branch</en>
-				<he>שנה את שם הענף</he>
-				<input class="name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
+				<label for="edit-popover-name-{{$index}}">
+					<en>Rename this Family Branch</en>
+					<he>שנה את שם הענף</he>
+				</label>
+				<input id="edit-popover-name-{{$index}}" class="branch__edit-popover__name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
+				<div class="branch__edit-popover__error" ng-show="branch_name_error">
+					<en>You alredy have a branch with this name</en>
+					<he>כבר קיים ענף עם שם זה</he>
+				</div>
 			</div>
 			<div class="branch__remove" ng-show="mjsCtrl.selected_branch === $index" ng-click="mjsCtrl.toggle_branch_rmdialog($event, $index)">
 				<icon position="[-226, -102]"></icon>

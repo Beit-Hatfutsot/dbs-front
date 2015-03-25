@@ -4,11 +4,11 @@
 	</div>
 	<div class="wizard-form__field">
 		<div>
-			<input type="text" id="wizard-name" ng-model="wizardFormController.wizard_query.name" placeholder="{{wizardFormController.name_placeholder}}" ng-change="wizardFormController.get_suggestions('name')" ng-focus="wizardFormController.open_suggested('name')" ng-blur="wizardFormController.close_suggested('name')" ng-keydown="wizardFormController.handle_keyboard($event, 'name')">
+			<input type="text" id="wizard-name" ng-model="wizardFormController.wizard_query.name" placeholder="{{wizardFormController.name_placeholder}}" ng-change="wizardFormController.get_suggestions('name')" ng-focus="wizardFormController.open_suggested('name')" ng-blur="wizardFormController.close_suggested('name')" ng-keydown="wizardFormController.handle_keyboard($event, 'name')" autosuggest="off">
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
-			<div class="autosuggest" ng-show="wizardFormController.suggested_open['name']">
-				<div class="autosuggest__item" ng-class="{'autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}" ng-repeat="suggested_name in wizardFormController.suggested.names track by $index" ng-click="wizardFormController.adopt('name')" ng-mouseover="wizardFormController.select_suggested('name', suggested_name)">{{suggested_name}}</div>
+			<div class="wizard-form__field__autosuggest-wrapper__autosuggest" ng-show="wizardFormController.suggested_open['name']">
+				<div class="wizard-form__field__autosuggest-wrapper__autosuggest__item" ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}" ng-repeat="suggested_name in wizardFormController.suggested.names track by $index" ng-click="wizardFormController.adopt('name')" ng-mouseover="wizardFormController.select_suggested('name', suggested_name)">{{suggested_name}}</div>
 			</div>
 			<label for="wizard-place">
 				<en>Original family name of one of your ancestors</en>
@@ -18,11 +18,11 @@
 	</div>
 	<div class="wizard-form__field wizard-form__field--place">
 		<div>	
-			<input type="text" id="wizard-place" ng-model="wizardFormController.wizard_query.place" placeholder="{{wizardFormController.place_placeholder}}" ng-change="wizardFormController.get_suggestions('place')" ng-focus="wizardFormController.open_suggested('place')" ng-blur="wizardFormController.close_suggested('place')" ng-keydown="wizardFormController.handle_keyboard($event, 'place')">
+			<input type="text" id="wizard-place" ng-model="wizardFormController.wizard_query.place" placeholder="{{wizardFormController.place_placeholder}}" ng-change="wizardFormController.get_suggestions('place')" ng-focus="wizardFormController.open_suggested('place')" ng-blur="wizardFormController.close_suggested('place')" ng-keydown="wizardFormController.handle_keyboard($event, 'place')" autosuggest="off">
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
-			<div class="autosuggest autosuggest--places" ng-show="wizardFormController.suggested_open['place']">
-				<div class="autosuggest__item" ng-class="{'autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}" ng-repeat="suggested_place in wizardFormController.suggested.places track by $index" ng-click="wizardFormController.adopt('place')" ng-mouseover="wizardFormController.select_suggested('place', suggested_place)">{{suggested_place}}</div>
+			<div class="wizard-form__field__autosuggest-wrapper__autosuggest wizard-form__field__autosuggest-wrapper__autosuggest--places" ng-show="wizardFormController.suggested_open['place']">
+				<div class="wizard-form__field__autosuggest-wrapper__autosuggest__item" ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}" ng-repeat="suggested_place in wizardFormController.suggested.places track by $index" ng-click="wizardFormController.adopt('place')" ng-mouseover="wizardFormController.select_suggested('place', suggested_place)">{{suggested_place}}</div>
 			</div>
 			<label for="wizard-place">
 				<en>Town / Village they came from. If unknown, type country</en>
