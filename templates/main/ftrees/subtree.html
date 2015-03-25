@@ -1,5 +1,5 @@
 <div class="parent-family" ng-if="individual.parent_family.isNotEmpty()">
-	<div class="node-container">
+	<div class="node-container" id="subtree-parent">
 		<div class="node">
 			<span ng-if="individual.parent_family.husband.isNotEmpty()">
 				<individual data="individual.parent_family.husband" tree-number="individual.tree_number"></individual>
@@ -18,7 +18,12 @@
 		</div>
 	</div>
 </div>
-<div class="node-container">
+<div 	class="node-container" 
+		id="subtree-individual"
+		plumb-connect to="subtree-parent"
+		connection-id="subtree-individual-parent"
+		connector="flowchart"
+		delay="1000">
 	<div class="node">
 		<span ng-if="individual.sex === 'M'">
 			<individual data="individual" tree-number="individual.tree_number"></individual>
@@ -36,7 +41,14 @@
 		</span>
 	</div>
 </div>
-<div class="node-container" ng-repeat="sibling in individual.parent_family.children" ng-if="sibling.id != individual.id">
+<div 	class="node-container" 
+		id="subtree-sibling-{{$index}}"
+		ng-repeat="sibling in individual.parent_family.children" 
+		ng-if="sibling.id != individual.id"
+		plumb-connect to="subtree-parent"
+		connection-id="subtree-sibling-{{$index}}-parent"
+		connector="flowchart"
+		delay="0">
 	<div class="node">
 		<span ng-if="sibling.sex === 'M'">
 			<individual data="sibling" tree-number="individual.tree_number"></individual>
@@ -55,7 +67,13 @@
 	</div>
 </div>
 <div class="family" ng-if="individual.family.isNotEmpty()">
-	<div class="node-container" ng-repeat="child in individual.family.children">
+	<div 	class="node-container" 
+			id="child-{{$index}}"
+			ng-repeat="child in individual.family.children"
+			plumb-connect to="subtree-individual"
+			connection-id="subtree-child-{{$index}}-individual"
+			connector="flowchart"
+			delay="0">
 		<div class="node">
 			<span ng-if="child.sex === 'M'">
 				<individual data="child" tree-number="individual.tree_number"></individual>

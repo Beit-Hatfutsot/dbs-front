@@ -66,7 +66,7 @@ angular.module('plumb').
 angular.module('main').
 	factory('plumbConnectionManager2', [function() {
 		var connection_manager = {
-			container: "molecules",
+			
 			connections: {},
 			active_connections: {},
 			plumb: jsPlumb.getInstance(),
@@ -78,15 +78,24 @@ angular.module('main').
 			},
 
 			connect: function(connection_id) {
-				var connection_params = this.connections[connection_id],
-					connection = this.plumb.connect(connection_params);
+				var connection_params = this.connections[connection_id];
+				var connection = this.plumb.connect(connection_params);
 				this.active_connections[connection_id] = connection;
 
 				return connection;
 			},
 
 			repaint: function(connection_id) {
-				this.plumb.repaint(this.active_connections[connection_id]);
+				var self = this;
+
+				if (connection_id) {
+					this.plumb.repaint(this.active_connections[connection_id]);
+				}
+				else {
+					for (var connection_id in this.active_connections) {
+						this.plumb.repaint(this.active_connections[connection_id]);
+					}
+				}
 			},
 
 			detach: function(connection_id) {
@@ -102,6 +111,6 @@ angular.module('main').
 				this.plumb = jsPlumb.getInstance();
 			}
 		}
-
+		window.plumbConnectionManager2 = connection_manager
 		return connection_manager;
 	}]);
