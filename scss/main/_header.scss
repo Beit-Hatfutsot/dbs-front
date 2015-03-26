@@ -180,12 +180,9 @@
 			&__row {
 
 				&:hover {
-					
-					.upload-icon {
 
-						img {
-							@include translate(0, -30px);	
-						}
+					img {
+						@include translate(-28px, 0);	
 					}
 				}
 
