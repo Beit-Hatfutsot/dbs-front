@@ -94,7 +94,8 @@
 						<he>הסיפור שלי</he>
 					</div>
 				</div>
-				<div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'wizard'">
+				<!-- <div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'wizard'"> -->
+				<div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ui-sref="start">
 					<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]" offset-on="headerController.sub_header_state == 'wizard'"></icon>
 				</div>
 				<div class="recently-viewed-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'recently-viewed'">

@@ -23,8 +23,9 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'start',
             url: '/',
             templateUrl: 'templates/main/start.html',
-            onEnter: ['cache', 'wizard', function(cache, wizard) {
+            onEnter: ['cache', 'wizard', 'header', function(cache, wizard, header) {
                 wizard.clear();
+                header.sub_header_state = 'closed';
             }]
         },
 
