@@ -11,7 +11,7 @@
 					<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item" ng-class="{'selected-collection': mjsCtrl.is_selected_collection([item])}"></mjs-item>
 				</div>
 			</div>
-			<div id="molecules">
+			<div id="molecules" ng-class="{'molecules-top': mjsCtrl.molecules_top, 'molecules-bottom': mjsCtrl.molecules_bottom}">
 				<div id="silhouette" class="silhouette" plumb-root="molecules-main" root-container="molecules" connecton="mjsCtrl.mjs_items.assigned.length">
 					<div class="silhouette__icon">
 						<icon position="[-125, -148]"></icon>

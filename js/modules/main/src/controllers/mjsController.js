@@ -29,6 +29,26 @@ var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumb
 		}
 	});
 
+	Object.defineProperty(this, 'molecules_top', {
+		get: function() {
+			if (this.selected_branch === 0 || this.selected_branch === 1) {
+				return true;
+			}
+
+			return false;
+		}
+	});
+
+	Object.defineProperty(this, 'molecules_bottom', {
+		get: function() {
+			if (this.selected_branch === 2 || this.selected_branch === 3) {
+				return true;
+			}
+
+			return false;
+		}
+	});
+
 	this.init();
 	
 	$scope.$watch(function() {
