@@ -54,6 +54,12 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
             }
         }
     });
+
+    Object.defineProperty(this, 'is_mjs_state', {
+        get: function() {
+            return $state.includes('mjs');
+        }
+    });
 };
 
 HeaderCtrl.prototype = {

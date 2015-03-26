@@ -498,7 +498,7 @@
 								position: absolute;
 								z-index: 4;
 								height: 22px;
-								left: 0;
+								right: 0;
 								top: -22px;
 								padding: 4px 6px;
 								font-size: 9px; 
@@ -509,7 +509,7 @@
 
 								&:after, &:before {
 									top: 100%;
-									left: 30%;
+									right: 30%;
 									border: solid transparent;
 									content: " ";
 									height: 0;

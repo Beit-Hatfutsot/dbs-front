@@ -360,7 +360,8 @@
 					width: 122px;
 				}
 
-				&:hover {
+				&:hover,
+				&--active {
 					color: #48c3d3;
 
 					.mystory__icon {
