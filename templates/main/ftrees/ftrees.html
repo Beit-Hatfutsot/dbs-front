@@ -19,7 +19,16 @@
 					<he>נקה מסננים</he>
 				</div>
 			</div>
-			<filters-field class="filters__field" label-text-en="First Name" label-text-he="שם פרטי" model="first_name"></filters-field>
+			<div class="filters__field">
+				<div class="container">
+					<label>
+						<en>First Name</en>
+						<he>שם פרטי</he>
+					</label>
+					<input type="text" ng-model="ftreesCtrl.search_params.first_name">
+					<div class="info">?</div>
+				</div>
+			</div>
 			<filters-field class="filters__field" label-text-en="Last Name" label-text-he="שם משפחה" model="last_name"></filters-field>
 			<div class="filters__sex">
 				<div class="filters__sex__title">
