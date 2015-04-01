@@ -1,10 +1,10 @@
-<form class="wizard-form" ng-controller="WizardFormCtrl as wizardFormController">
+<form class="wizard-form" ng-controller="WizardFormCtrl as wizardFormController" autocomplete="off">
 	<div class="wizard-form__instructions">
 		<en>To get started, enter a family member's details</en>
 	</div>
 	<div class="wizard-form__field">
 		<div>
-			<input type="text" id="wizard-name" ng-model="wizardFormController.wizard_query.name" placeholder="{{wizardFormController.name_placeholder}}" ng-change="wizardFormController.get_suggestions('name')" ng-focus="wizardFormController.open_suggested('name')" ng-blur="wizardFormController.close_suggested('name')" ng-keydown="wizardFormController.handle_keyboard($event, 'name')" autosuggest="off">
+			<input type="text" id="wizard-name" ng-model="wizardFormController.wizard_query.name" placeholder="{{wizardFormController.name_placeholder}}" ng-change="wizardFormController.get_suggestions('name')" ng-focus="wizardFormController.open_suggested('name')" ng-blur="wizardFormController.close_suggested('name')" ng-keydown="wizardFormController.handle_keyboard($event, 'name')">
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
 			<div class="wizard-form__field__autosuggest-wrapper__autosuggest" ng-show="wizardFormController.suggested_open['name']">
@@ -18,7 +18,7 @@
 	</div>
 	<div class="wizard-form__field wizard-form__field--place">
 		<div>	
-			<input type="text" id="wizard-place" ng-model="wizardFormController.wizard_query.place" placeholder="{{wizardFormController.place_placeholder}}" ng-change="wizardFormController.get_suggestions('place')" ng-focus="wizardFormController.open_suggested('place')" ng-blur="wizardFormController.close_suggested('place')" ng-keydown="wizardFormController.handle_keyboard($event, 'place')" autosuggest="off">
+			<input type="text" id="wizard-place" ng-model="wizardFormController.wizard_query.place" placeholder="{{wizardFormController.place_placeholder}}" ng-change="wizardFormController.get_suggestions('place')" ng-focus="wizardFormController.open_suggested('place')" ng-blur="wizardFormController.close_suggested('place')" ng-keydown="wizardFormController.handle_keyboard($event, 'place')">
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
 			<div class="wizard-form__field__autosuggest-wrapper__autosuggest wizard-form__field__autosuggest-wrapper__autosuggest--places" ng-show="wizardFormController.suggested_open['place']">
