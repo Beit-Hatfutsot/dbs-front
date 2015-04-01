@@ -8,7 +8,30 @@
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
 			<div class="wizard-form__field__autosuggest-wrapper__autosuggest" ng-show="wizardFormController.suggested_open['name']">
-				<div class="wizard-form__field__autosuggest-wrapper__autosuggest__item" ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}" ng-repeat="suggested_name in wizardFormController.suggested.names track by $index" ng-click="wizardFormController.adopt('name')" ng-mouseover="wizardFormController.select_suggested('name', suggested_name)">{{suggested_name}}</div>
+				<div>STARTS WITH</div>
+				<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item"
+						ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
+						ng-click="wizardFormController.adopt('name')" 
+						ng-mouseover="wizardFormController.select_suggested('name', suggested_name)" 
+						ng-repeat="suggested_name in wizardFormController.suggested.names | limitTo: wizardFormController.suggested_distribution.names[0] track by $index">
+						{{suggested_name}}
+				</div>
+				<div>CONTAINS</div>
+				<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item"
+						ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
+						ng-click="wizardFormController.adopt('name')" 
+						ng-mouseover="wizardFormController.select_suggested('name', suggested_name)" 
+						ng-repeat="suggested_name in wizardFormController.suggested.names.slice(wizardFormController.suggested_distribution.names[0], wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1]) track by $index">
+						{{suggested_name}}
+				</div>
+				<div>SOUNDS LIKE</div>
+				<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item"
+						ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
+						ng-click="wizardFormController.adopt('name')" 
+						ng-mouseover="wizardFormController.select_suggested('name', suggested_name)" 
+						ng-repeat="suggested_name in wizardFormController.suggested.names.slice(wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1], wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1] + wizardFormController.suggested_distribution.names[2]) track by $index">
+						{{suggested_name}}
+				</div>
 			</div>
 			<label for="wizard-place">
 				<en>Original family name of one of your ancestors</en>
@@ -22,7 +45,30 @@
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
 			<div class="wizard-form__field__autosuggest-wrapper__autosuggest wizard-form__field__autosuggest-wrapper__autosuggest--places" ng-show="wizardFormController.suggested_open['place']">
-				<div class="wizard-form__field__autosuggest-wrapper__autosuggest__item" ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}" ng-repeat="suggested_place in wizardFormController.suggested.places track by $index" ng-click="wizardFormController.adopt('place')" ng-mouseover="wizardFormController.select_suggested('place', suggested_place)">{{suggested_place}}</div>
+					<div>STARTS WITH</div>
+					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item" 
+							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
+							ng-click="wizardFormController.adopt('place')" 
+							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
+							ng-repeat="suggested_place in wizardFormController.suggested.places | limitTo: wizardFormController.suggested_distribution.places[0] track by $index">
+							{{suggested_place}}
+					</div>
+					<div>CONTAINS</div>
+					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item" 
+							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
+							ng-click="wizardFormController.adopt('place')" 
+							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
+							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1]) track by $index">
+							{{suggested_place}}
+					</div>
+					<div>PHONETIC</div>
+					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item" 
+							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
+							ng-click="wizardFormController.adopt('place')" 
+							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
+							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2]) track by $index">
+							{{suggested_place}}
+					</div>
 			</div>
 			<label for="wizard-place">
 				<en>Town / Village they came from. If unknown, type country</en>

@@ -13,7 +13,11 @@ angular.module('main').
 
 			suggested: {
 				names: [],
-				places: []
+				places: [],
+				distribution: { 
+					names: [5, 5, 5],
+					places: [5, 5, 5]
+				}
 			},
 
 			suggest_names: function(name) {
@@ -29,15 +33,25 @@ angular.module('main').
 			if ( !(suggest.in_progress) ) {
 				suggest.in_progress = true;
 
+				var count;
+
 				return $http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
 					success(function(response) {
 						suggest.suggested[what] = [];
+						suggest.suggested.distribution[what] = [];
+
 						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
+							count = 0;
+
 							response[group].forEach(function(suggestion) {
 								if (suggest.suggested[what].indexOf(suggestion) === -1) {
-									suggest.suggested[what].push(suggestion)		
+									suggest.suggested[what].push(suggestion);
+									count++;		
 								}
 							});
+
+							// save the number of suggestions in group
+							suggest.suggested.distribution[what].push( count );
 						});
 					}).
 					error(function() {

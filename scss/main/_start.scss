@@ -2,13 +2,13 @@
 	position: relative;
 	width: 100%;
 	background: #eeeeee;
-	overflow-x: hidden;
+	//overflow-x: hidden;
 	margin-top: -$notification-bar-height;
 	//@include transition(all, 1s, linear);
 
 	@at-root #wizard-container {
 		position: relative;
-		min-height: 694px;
+		height: 810px;
 
 		@at-root #wizard {
 			position: absolute;

@@ -86,6 +86,15 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
             }
         }
     });
+
+    Object.defineProperty(this, 'suggested_distribution', {
+
+        get: function() {
+            return suggest.suggested.distribution;
+        }
+    });
+
+    window.WizardFormCtrl = this
 };
 
 WizardFormCtrl.prototype = {
@@ -113,7 +122,12 @@ WizardFormCtrl.prototype = {
 
             promise.
                 then(function() {
-                    self.open_suggested(type);
+                    if (self.suggested[type + 's'].length > 0) {
+                        self.open_suggested(type);
+                    }
+                    else {
+                        self.close_suggested(type);
+                    }
                 });
         }
         else {
