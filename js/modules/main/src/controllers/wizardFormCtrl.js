@@ -94,20 +94,27 @@ WizardFormCtrl.prototype = {
     },
 
     get_suggestions: function(type) {
+        var promise,
+            self = this;
+
         this.suggested_index[type] = -1;
 
         if ( this.wizard_query[type] ) {
             switch (type) {
                 case 'name':
-                    this.suggest.suggest_names(this.wizard_query.name);
+                    promise = this.suggest.suggest_names(this.wizard_query.name);
                     break;
                 case 'place':
-                    this.suggest.suggest_places(this.wizard_query.place);
+                    promise = this.suggest.suggest_places(this.wizard_query.place);
                     break;
                 default:
                     break;
             }
-            this.open_suggested(type);
+
+            promise.
+                then(function() {
+                    self.open_suggested(type);
+                });
         }
         else {
             this.close_suggested(type);
@@ -173,7 +180,9 @@ WizardFormCtrl.prototype = {
     },
 
     open_suggested: function(type) {
-        this.suggested_open[type] = true;
+        if ( this.suggested[type + 's'].length > 0 && this.wizard_query[type] ) {
+            this.suggested_open[type] = true;
+        }
     },
 
     close_suggested: function(type) {

@@ -17,11 +17,11 @@ angular.module('main').
 			},
 
 			suggest_names: function(name) {
-				get_suggestions('names', name);
+				return get_suggestions('names', name);
 			},
 
 			suggest_places: function(place) {
-				get_suggestions('places', place);	
+				return get_suggestions('places', place);	
 			}
 		};	
 
@@ -29,7 +29,7 @@ angular.module('main').
 			if ( !(suggest.in_progress) ) {
 				suggest.in_progress = true;
 
-				$http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
+				return $http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
 					success(function(response) {
 						suggest.suggested[what] = [];
 						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
