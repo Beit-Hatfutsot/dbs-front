@@ -9,8 +9,12 @@
 			<div class="item">
 				<div class="item__header">
 					<div class="text">
-						<en>{{itemController.item_data.Header.En}}</en>
-						<he>{{itemController.item_data.Header.He}}</he>
+						<en>
+							<pre>{{itemController.item_data.Header.En}}</pre>
+						</en>
+						<he>
+							<pre>{{itemController.item_data.Header.He}}</pre>
+						</he>
 					</div>
 				</div>
 				<mjs-widget item="itemController.item_data"></mjs-widget>
@@ -49,8 +53,12 @@
 					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.data">
 						<img src="data:image/jpeg;base64,{{itemController.item_data.thumbnail.data}}" alt="Item Image" />
 					</div>
-					<en>{{itemController.item_data.UnitText1.En}}</en>
-					<he>{{itemController.item_data.UnitText1.He}}</he>
+					<en>
+						<pre>{{itemController.item_data.UnitText1.En}}</pre>
+					</en>
+					<he>
+						<pre>{{itemController.item_data.UnitText1.He}}</pre>
+					</he>
 				</div>
 				<div class="item__bottom-bar">
 					<mjs-widget item="itemController.item_data"></mjs-widget>

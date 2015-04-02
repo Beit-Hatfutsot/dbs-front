@@ -72,7 +72,12 @@
 	@include border-radius(8px 8px 0 0);
 	@include item-shadow();
 	@include hover-pointer(); 
-		
+	
+	pre {
+		white-space: pre-wrap !important;
+		margin: 0 !important;
+	}
+
 	.type {
 		@extend %item-type;
 	}

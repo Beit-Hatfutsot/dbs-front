@@ -1,5 +1,6 @@
 angular.module('main').
-	factory('wizard', ['$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', function($http, $q, apiClient, cache, notification, ftrees) {
+	factory('wizard', ['$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', 
+	function($http, $q, apiClient, cache, notification, ftrees) {
 
 		var wizard = {
 

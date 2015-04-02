@@ -1,5 +1,6 @@
 angular.module('main').
-	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache', function($resource, $q, $rootScope, apiClient, cache) {
+	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache',
+	function($resource, $q, $rootScope, apiClient, cache) {
 		
 		var in_progress = false;
 

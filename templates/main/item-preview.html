@@ -46,12 +46,20 @@
 		<!-- regular items -->
 		<div ng-switch-default>
 			<div class="header">
-				<en>{{previewData.Header.En}}</en>
-				<he>{{previewData.Header.He}}</he>
+				<en>
+					<pre>{{previewData.Header.En}}</pre>
+				</en>
+				<he>
+					<pre>{{previewData.Header.He}}</pre>
+				</he>
 			</div>
 			<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}" ng-if="!(hideText && previewData.thumbnail.data) ">
-				<en>{{previewData.UnitText1.En}}</en>
-				<he>{{previewData.UnitText1.He}}</he>
+				<en>
+					<pre>{{previewData.UnitText1.En}}</pre>
+				</en>
+				<he>
+					<pre>{{previewData.UnitText1.He}}</pre>
+				</he>
 			</div>
 			<div class="thumbnail" ng-if="previewData.thumbnail.data">
 				<img src="data:image/jpeg;base64,{{previewData.thumbnail.data}}" alt="Preview Image" fit-thumb />
