@@ -5,18 +5,21 @@
 				id="upf-{{type}}-{{fieldsetLang}}" 
 				class="upf__field__{{type}}" 
 				later-name="{{type}}_{{fieldsetLang}}" 
-				placeholder="{{rc.upload_form.needsAttention(upload_form[type + '_' + fieldsetLang]) ? '' : metaData.placeholders[type][fieldsetLang][isRequired]}}"
+				ng-focus="select_field(type + '_' + fieldsetLang)"
+				ng-blur="select_field(null)"
 				ng-model="metaData.values[type][fieldsetLang]" 
 				ng-required="isRequired">
 		<textarea 	ng-if="type === 'description'" 
-					type="text" id="upf-{{type}}-{{fieldsetLang}}" 
+					id="upf-{{type}}-{{fieldsetLang}}" 
 					class="upf__field__{{type}}" 
 					later-name="{{type}}_{{fieldsetLang}}" 
-					placeholder="{{rc.upload_form.needsAttention(upload_form[type + '_' + fieldsetLang]) ? '' : metaData.placeholders[type][fieldsetLang][isRequired]}}" 
-					ng-model="metaData.values[type][fieldsetLang]" ng-required="isRequired">
+					ng-focus="select_field(type + '_' + fieldsetLang)"
+					ng-blur="select_field(null)"
+					ng-model="metaData.values[type][fieldsetLang]" 
+					ng-required="isRequired">
 		</textarea>
 		<label 	for="upf-{{type}}-{{fieldsetLang}}" 
-				ng-show="metaData.values[type][fieldsetLang] || rc.upload_form.needsAttention(upload_form[type + '_' + fieldsetLang])">
+				ng-class="{'upf__field__label--up': selected_field === type + '_' + fieldsetLang || metaData.values[type][fieldsetLang] || rc.upload_form.needsAttention(upload_form[type + '_' + fieldsetLang]), 'upf__field__label--down': selected_field !== type + '_' + fieldsetLang && !(metaData.values[type][fieldsetLang]) && !(rc.upload_form.needsAttention(upload_form[type + '_' + fieldsetLang]))}">
 			{{metaData.placeholders[type][fieldsetLang][isRequired]}}
 		</label>
         <div class="upf__field__error" ng-show="rc.upload_form.needsAttention(upload_form[type + '_' + fieldsetLang])">

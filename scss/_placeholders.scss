@@ -231,13 +231,24 @@
 			label {
 				opacity: 1;
 				position: absolute;
-				top: 10px;
-				font-size: 14px;
 				@include transition(all, 0.5s, linear);
 
 				&.ng-hide {
 					opacity: 0;
 					top: 24px;
+				}
+			}
+
+			&__label {
+
+				&--up {
+					top: 10px;
+					font-size: 14px;
+				}
+
+				&--down {
+					top: 36px;
+					font-size: 25px;
 				}
 			}
 

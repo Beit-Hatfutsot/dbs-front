@@ -79,6 +79,10 @@ AuthCtrl.prototype = {
 
     goto_signin: function() {
         this.is_register = false;
+    },
+
+    select_field: function(type) {
+        this.selected_field = type;
     }
 }
 

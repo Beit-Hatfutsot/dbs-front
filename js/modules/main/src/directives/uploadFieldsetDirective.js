@@ -9,6 +9,11 @@ angular.module('main').
 				rc: '=',
 				fieldsetLang: '@',
 				isRequired: '='
-			}
+			},
+			controller: ['$scope', function($scope) {
+				$scope.select_field = function(type) {
+					$scope.selected_field = type;
+				}
+			}]
 		}
 	}]);
