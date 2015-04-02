@@ -9,7 +9,6 @@ angular.module('main').
 		suggest = {
 
 			failed: false,
-			in_progress: false,
 
 			suggested: {
 				names: [],
@@ -30,8 +29,6 @@ angular.module('main').
 		};	
 
 		function get_suggestions(what, value) {
-			if ( !(suggest.in_progress) ) {
-				suggest.in_progress = true;
 
 				var count;
 
@@ -61,7 +58,6 @@ angular.module('main').
 					finally(function() {
 						suggest.in_progress = false;
 					});
-			}
 		}
 
 		return suggest;

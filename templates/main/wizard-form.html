@@ -8,7 +8,7 @@
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
 			<div class="wizard-form__field__autosuggest-wrapper__autosuggest" ng-show="wizardFormController.suggested_open['name']">
-				<div>STARTS WITH</div>
+				<div ng-show="wizardFormController.suggested_distribution.names[0] > 0">STARTS WITH</div>
 				<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item"
 						ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
 						ng-click="wizardFormController.adopt('name')" 
@@ -16,7 +16,7 @@
 						ng-repeat="suggested_name in wizardFormController.suggested.names | limitTo: wizardFormController.suggested_distribution.names[0] track by $index">
 						{{suggested_name}}
 				</div>
-				<div>CONTAINS</div>
+				<div ng-show="wizardFormController.suggested_distribution.names[1] > 0">CONTAINS</div>
 				<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item"
 						ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
 						ng-click="wizardFormController.adopt('name')" 
@@ -24,7 +24,7 @@
 						ng-repeat="suggested_name in wizardFormController.suggested.names.slice(wizardFormController.suggested_distribution.names[0], wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1]) track by $index">
 						{{suggested_name}}
 				</div>
-				<div>SOUNDS LIKE</div>
+				<div ng-show="wizardFormController.suggested_distribution.names[2] > 0">SOUNDS LIKE</div>
 				<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item"
 						ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
 						ng-click="wizardFormController.adopt('name')" 
@@ -45,7 +45,7 @@
 		</div>
 		<div class="wizard-form__field__autosuggest-wrapper">
 			<div class="wizard-form__field__autosuggest-wrapper__autosuggest wizard-form__field__autosuggest-wrapper__autosuggest--places" ng-show="wizardFormController.suggested_open['place']">
-					<div>STARTS WITH</div>
+					<div ng-show="wizardFormController.suggested_distribution.places[0] > 0">STARTS WITH</div>
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item" 
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
@@ -53,7 +53,7 @@
 							ng-repeat="suggested_place in wizardFormController.suggested.places | limitTo: wizardFormController.suggested_distribution.places[0] track by $index">
 							{{suggested_place}}
 					</div>
-					<div>CONTAINS</div>
+					<div ng-show="wizardFormController.suggested_distribution.places[1] > 0">CONTAINS</div>
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item" 
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
@@ -61,7 +61,7 @@
 							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1]) track by $index">
 							{{suggested_place}}
 					</div>
-					<div>PHONETIC</div>
+					<div ng-show="wizardFormController.suggested_distribution.places[2] > 0">PHONETIC</div>
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__item" 
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
