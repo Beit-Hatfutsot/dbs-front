@@ -23,6 +23,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'start',
             url: '/',
             templateUrl: 'templates/main/start.html',
+            controller: 'StartController as startCtrl',
             onEnter: ['cache', 'wizard', 'header', function(cache, wizard, header) {
                 wizard.clear();
                 header.sub_header_state = 'closed';

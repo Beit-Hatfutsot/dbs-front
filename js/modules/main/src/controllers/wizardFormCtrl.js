@@ -78,7 +78,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
     Object.defineProperty(this, 'submit_disabled', {
 
         get: function() {
-            if (this.wizard_query_name == '' && this.wizard_query_place == '') {
+            if (this.wizard_query.name == '' && this.wizard_query.place == '') {
                 return true;
             }
             else {

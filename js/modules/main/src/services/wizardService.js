@@ -1,6 +1,6 @@
 angular.module('main').
-	factory('wizard', ['$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', 
-	function($http, $q, apiClient, cache, notification, ftrees) {
+	factory('wizard', ['$rootScope', '$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', 
+	function($rootScope, $http, $q, apiClient, cache, notification, ftrees) {
 
 		var wizard = {
 
@@ -101,7 +101,7 @@ angular.module('main').
 						self.result = result;
 						self.last_search.name = self.query.name;
 						self.last_search.place = self.query.place;
-					
+
 						deferred.resolve(search_status);
 					}).
 					error(function() {
@@ -114,6 +114,7 @@ angular.module('main').
 					}).
 		  			finally(function() {
 						self.in_progress = false;
+						$rootScope.$broadcast('wizard-search-end');
 					});
 
 		  			return deferred.promise;
