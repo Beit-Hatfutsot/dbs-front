@@ -3,6 +3,7 @@
 	<div id="item-page" ng-show="itemController.content_loaded">
 		<div class="related">
 			<trees-preview ng-if="itemController.related_individuals" individuals="itemController.related_individuals" query-params="itemController.related_individuals_query_params"></trees-preview>
+			<item-preview ng-if="itemController.wizard_name.isNotEmpty()" preview-data="itemController.wizard_name"></item-preview>
 			<item-preview ng-repeat="r_data in itemController.related_data | limitTo: 3" preview-data="r_data"></item-preview>
 		</div>
 		<div class="item-container">
@@ -66,6 +67,7 @@
 			</div>
 		</div>
 		<div class="related">
+			<item-preview ng-if="itemController.wizard_place.isNotEmpty()" preview-data="itemController.wizard_place"></item-preview>
 			<item-preview ng-repeat="r_data in itemController.related_data.slice(3, 6)" preview-data="r_data"></item-preview>
 		</div>
 	</div>

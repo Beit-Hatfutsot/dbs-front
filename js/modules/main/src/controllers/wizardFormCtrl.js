@@ -153,6 +153,10 @@ WizardFormCtrl.prototype = {
     handle_keyboard: function($event, type) {
         var suggested_count = this.suggested[type + 's'].length;
 
+        if ( !this.suggested_open[type] ) {
+            return true;
+        }
+
         if (suggested_count > 0) {
             if($event.keyCode === 40) {
                 $event.preventDefault();

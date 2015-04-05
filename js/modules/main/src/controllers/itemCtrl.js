@@ -5,7 +5,9 @@ var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTy
 		header.sub_header_state = 'recently-viewed';
 	}
 
+	this.$state = $state;
 	this.$stateParams = $stateParams;
+	this.wizard = wizard;
 	this.item = item;
 	this.notification = notification;
 	this.mjs = mjs;
@@ -15,19 +17,10 @@ var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTy
 	this.content_loaded = false;
 	this.item_data = {};
 	this.related_data = [];
+	this.wizard_name = {};
+	this.wizard_place = {};
 	
-	if ( $state.lastState.name === 'start' && wizard.result.individuals && wizard.result.individuals.isNotEmpty() ) {
-		this.related_individuals = wizard.result.individuals; 
-
-		this.related_individuals_query_params = {}
-		if ( wizard.result.name && wizard.result.name.isNotEmpty() ) {
-			this.related_individuals_query_params.last_name = wizard.result.name.Header.En;
-		}
-
-		if ( wizard.result.place && wizard.result.place.isNotEmpty() ) {
-			this.related_individuals_query_params.birth_place = wizard.result.place.Header.En;	
-		}
-	}
+	this.pull_wizard_related();
 
 	this.get_item();
 	
@@ -69,15 +62,17 @@ ItemCtrl.prototype = {
 
 				self.item.get_items(item_data.related).
 					then(function(related_data) {
-						self.related_data = related_data;
+						self.parse_related_data(related_data);	
 						self.notification.put({
 							en: 'Item loaded successfuly.',
 							he: 'הפריט נטען בהצלחה.' 
 						});
-					}, function() {
+					}, 
+					function() {
 						self.fail();
 					});
-			}, function() {
+			}, 
+			function() {
 				self.fail();
 			});
 	},
@@ -87,6 +82,45 @@ ItemCtrl.prototype = {
 		this.notification.put({
 			en: 'Failed to fetch item.',
 			he: 'טעינת פריט נכשלה.'
+		});
+	},
+
+	pull_wizard_related: function() {
+		var _id = this.$stateParams.item_string.split('.')[1];
+
+		if ( this.$state.lastState.name === 'start' ) {
+		
+			if ( this.wizard.result.individuals && this.wizard.result.individuals.isNotEmpty() ) {
+				this.related_individuals = this.wizard.result.individuals; 
+
+				this.related_individuals_query_params = {}
+				if ( this.wizard.result.name && this.wizard.result.name.isNotEmpty() ) {
+					this.related_individuals_query_params.last_name = this.wizard.result.name.Header.En;
+				}
+
+				if ( this.wizard.result.place && this.wizard.result.place.isNotEmpty() ) {
+					this.related_individuals_query_params.birth_place = this.wizard.result.place.Header.En;	
+				}
+			}
+
+			if ( this.wizard.result.name && this.wizard.result.name.isNotEmpty() && this.wizard.result.name._id !== _id) {
+				this.wizard_name = angular.copy(this.wizard.result.name);
+			}
+
+			if ( this.wizard.result.place && this.wizard.result.place.isNotEmpty() && this.wizard.result.place._id !== _id ) {
+				this.wizard_place = angular.copy(this.wizard.result.place);
+			}
+		}
+	},
+
+	parse_related_data: function(related_data) {
+		var self = this;
+
+		related_data.forEach(function(related_item) {
+			// push related items after checking they were not pulled from wizard result
+			if ( self.wizard_name._id !== related_item._id && self.wizard_place._id !== related_item._id ) {
+				self.related_data.push(related_item);
+			}
 		});
 	}
 };
