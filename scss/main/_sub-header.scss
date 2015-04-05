@@ -178,6 +178,19 @@
 					}
 				}
 
+				&__items {
+					display: inline-block;
+					width: 952px;
+					white-space: nowrap;
+					vertical-align: top;
+					overflow: hidden;
+
+					&__scroll {
+						position: relative;
+						@include transition(all, 0.5s, ease);
+					}
+				}
+
 				.item-thumbnail {
 					position: relative;
 					display: inline-block;
@@ -188,13 +201,13 @@
 					@include border-radius(4px);
 					@include hover-pointer();
 					overflow: hidden; 
-
+					
 					.en & {
-						left: -10px;
+						margin-right: 4px;
 					}
 
 					.he & {
-						right: -10px;
+						margin-left: 4px;
 					}
 
 					&--text {

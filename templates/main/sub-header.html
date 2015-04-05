@@ -1,4 +1,5 @@
-<div ng-controller="SubHeaderController as subHeaderCtrl" class="sub-header-container" ng-class="{'sub-header-container--closed': subHeaderCtrl.sub_header_state == 'closed' || isCurrentState('start'), 'sub-header-container--wizard': subHeaderCtrl.sub_header_state == 'wizard' && !(isCurrentState('start')), 'sub-header-container--recently-viewed': subHeaderCtrl.sub_header_state == 'recently-viewed' && !(isCurrentState('start'))}">
+<div 	ng-controller="SubHeaderController as subHeaderCtrl" 
+		class="sub-header-container" ng-class="{'sub-header-container--closed': subHeaderCtrl.sub_header_state == 'closed' || isCurrentState('start'), 'sub-header-container--wizard': subHeaderCtrl.sub_header_state == 'wizard' && !(isCurrentState('start')), 'sub-header-container--recently-viewed': subHeaderCtrl.sub_header_state == 'recently-viewed' && !(isCurrentState('start'))}">
 	<div id="sub-header">
 		<div class="border-adhoc">
 			<div class="header-wizard" ng-show="subHeaderCtrl.sub_header_state == 'wizard'">
@@ -6,7 +7,15 @@
 			</div>
 			<div class="recently-viewed" ng-show="subHeaderCtrl.sub_header_state == 'recently-viewed'" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
 				<div class="recently-viewed__title">Recently visited</div>
-				<mjs-item ng-repeat="item in recentlyViewedCtrl.items track by item._id" item="item" ng-click="recentlyViewedCtrl.goto_item(item)"></mjs-item>
+				<div class="recently-viewed__items">
+					<span ng-click="recentlyViewedCtrl.scroll_left()">LEFT</span>
+					<div class="recently-viewed__items__scroll" ng-style="{left: recentlyViewedCtrl.scroll_offset + 'px'}">
+						<mjs-item 	ng-repeat="item in recentlyViewedCtrl.items track by item._id" 
+									item="item" ng-click="recentlyViewedCtrl.goto_item(item)">
+						</mjs-item>
+					</div>
+					<span ng-click="recentlyViewedCtrl.scroll_right()">RIGHT</span>
+				</div>
 			</div>
 		</div>
 	</div>
