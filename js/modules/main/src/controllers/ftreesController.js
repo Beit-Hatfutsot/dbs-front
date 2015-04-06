@@ -223,8 +223,9 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	});
 
 	//search
-	this.search();
-	window.ctrl = this
+	if ($stateParams.last_name !== undefined || $stateParams.birth_place !== undefined) {
+		this.search();
+	}
 };
 
 FtreesController.prototype = {
