@@ -1,6 +1,7 @@
 angular.module('main').
 	factory('recentlyViewed', ['$window', function($window) {
 		var recent;
+		var max_items = 50;
 
 		if( $window.sessionStorage !== undefined ) {
 			recent = $window.sessionStorage;
@@ -34,7 +35,12 @@ angular.module('main').
 					var index = this.items.indexOf(recent_item);
 					this.items.splice(index, 1);
 				}
+				else if (this.items.length > max_items) {
+					this.items.splice(0, 1);
+				}
+
 				this.items.push(item);
+				
 				recent.setItem('recentlyViewed', JSON.stringify(this.items));
 			},
 
