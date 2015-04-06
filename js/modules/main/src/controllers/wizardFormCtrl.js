@@ -27,7 +27,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
     this.suggested_open = {
         name: false,
         place: false
-    }
+    };
 
     Object.defineProperty(this, 'name_placeholder', {
 
@@ -93,8 +93,6 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
             return suggest.suggested.distribution;
         }
     });
-
-    window.WizardFormCtrl = this
 };
 
 WizardFormCtrl.prototype = {
@@ -210,6 +208,20 @@ WizardFormCtrl.prototype = {
             self.suggested_open[type] = false;
         }, 200);
     },
+
+    get_active_title: function(type) {
+        if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0]) {
+            if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0] + this.suggested_distribution[type + 's'][1]) {
+                return 2;
+            }
+            else {
+                return 1;
+            }
+        }
+        else {
+            return 0;
+        }
+    }
 };
 
 angular.module('main').controller('WizardFormCtrl', ['$timeout', 'langManager', 'wizard', 'suggest', WizardFormCtrl]);

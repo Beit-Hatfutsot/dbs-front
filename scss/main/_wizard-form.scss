@@ -39,16 +39,42 @@
 			&__autosuggest {
 				position: absolute;
 				width: 100%;
+				padding: 8px;
 				background: #ffffff;
 				border-left: 2px solid #a09e9b;
 				border-right: 2px solid #a09e9b;
 				border-bottom: 2px solid #a09e9b;
-			
-				&__item {
-					@include hover_pointer();
+				
+				&__type {
+					margin-bottom: 12px;
+
+					&__title {
+						color: #666666;
+
+						&--selected {
+							color: #5dc2d4;
+						}
+					}
+
+					&__item {
+						position: relative;
+						top: 3px;
+						width: 250px;
+						height: 100%;
+						@include hover_pointer();
+						padding: 0 3px;
 					
-					&--selected {
-						background: grey;
+						.en & {
+							left: 24px;
+						}
+
+						.he & {
+							right: 24px;
+						}
+
+						&--selected {
+							background: #ccd0d2;
+						}
 					}
 				}
 			}
