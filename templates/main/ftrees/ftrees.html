@@ -4,7 +4,7 @@
 			<en>Family Trees search results</en>
 			<he>תוצאות חיפוש עמי משפחה</he>
 		</div>
-		<form class="filters">
+		<form class="filters" name="filters">
 			<div class="filters__title">
 				<en>Search Filters</en>
 				<he>מסנני חיפוש</he>
@@ -51,7 +51,7 @@
 				Update
 			</button>
 		</form>
-		<div class="results" ng-show="ftreesCtrl.individuals.isNotEmpty()">
+		<div class="results">
 			<div class="results__title">
 				<en>Results {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
 				<he>תוצאות {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
@@ -204,7 +204,31 @@
 					</div>
 				</div>
 			</div>
-			<div class="results__per-page">
+			<div class="results__people-arrow" ng-show="ftreesCtrl.individuals.isEmpty() && filters.$pristine">
+				<en>
+					<div class="results__people-arrow__text">
+						<div class="results__people-arrow__text__title">
+							Nothing here yet
+						</div>
+						Start your search<br>
+						by filling out some of the fields to the left<br>
+						and gradually add more to refine your search
+					</div>
+					<img src="images/arrow_people.png">
+				</en>
+				<he>
+					<div class="results__people-arrow__text">
+						<div class="results__people-arrow__text__title">
+							Nothing here yet
+						</div>
+						Start your search<br>
+						by filling out some of the fields to the left<br>
+						and gradually add more to refine your search
+					</div>
+					<img src="images/arrow_people_he.png">
+				</he>
+			</div>
+			<div class="results__per-page" ng-hide="ftreesCtrl.individuals.isEmpty()">
 				<span class="results__per-page__indicator">
 					<en>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
 					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
