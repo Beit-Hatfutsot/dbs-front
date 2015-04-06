@@ -161,6 +161,7 @@
 				&__title {
 					@include rotate();
 					display: inline-block;
+					vertical-align: top;
 					width: 76px;
 					height: 33px;
 					text-align: center;
@@ -178,15 +179,86 @@
 					}
 				}
 
+				.arrow-right, .arrow-left {
+					display: inline-block;
+					vertical-align: middle;
+					@include hover-pointer();
+
+					&--disabled {
+
+						&:hover {
+							cursor: default;
+						}
+					}
+				}
+
+				.arrow-right {
+					width: 0; 
+					height: 0; 
+					border-top: 15px solid transparent;
+					border-bottom: 15px solid transparent;
+
+					.en & {
+						border-left: 15px solid #666666;
+						margin-left: 5px;
+					}
+
+					.he & {
+						border-right: 15px solid #666666;
+						margin-right: 5px;
+					}
+
+					&--disabled {
+
+						.en & {
+							border-left: 15px solid #999999;						
+						}
+
+						.he & {
+							border-right: 15px solid #999999;						
+						}
+					}
+				}
+
+				.arrow-left {
+					width: 0; 
+					height: 0; 
+					border-top: 15px solid transparent;
+					border-bottom: 15px solid transparent; 
+
+					.en & {
+						border-right: 15px solid #666666; 
+						margin-right: 5px;
+					}
+
+					.he & {
+						border-left: 15px solid #666666; 
+						margin-left: 5px;
+					}
+
+					&--disabled {
+
+						.en & {
+							border-right: 15px solid #999999; 
+						}
+
+						.he & {
+							border-left: 15px solid #999999; 	
+						}
+					}
+				}
+
 				&__items {
 					display: inline-block;
 					width: 952px;
 					white-space: nowrap;
-					vertical-align: top;
+					vertical-align: middle;
 					overflow: hidden;
 
 					&__scroll {
 						position: relative;
+						display: inline-block;
+						vertical-align: middle;
 						@include transition(all, 0.5s, ease);
 					}
 				}

@@ -6,15 +6,26 @@
 				<ng-include src="'templates/main/wizard-form.html'"></ng-include>
 			</div>
 			<div class="recently-viewed" ng-show="subHeaderCtrl.sub_header_state == 'recently-viewed'" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
-				<div class="recently-viewed__title">Recently visited</div>
+				<div class="recently-viewed__title">
+					<en>Recently<br>visited</en>
+					<he>נצפו<br>לאחרונה</he>
+				</div>
+				<div 	class="arrow-left" 
+						ng-show="recentlyViewedCtrl.show_arrows" 
+						ng-click="recentlyViewedCtrl.scroll_left()"
+						ng-class="{'arrow-left--disabled': !recentlyViewedCtrl.can_scroll_left}">
+				</div>
 				<div class="recently-viewed__items">
-					<span ng-click="recentlyViewedCtrl.scroll_left()">LEFT</span>
-					<div class="recently-viewed__items__scroll" ng-style="{left: recentlyViewedCtrl.scroll_offset + 'px'}">
+					<div class="recently-viewed__items__scroll" ng-style="recentlyViewedCtrl.scroll_style">
 						<mjs-item 	ng-repeat="item in recentlyViewedCtrl.items track by item._id" 
 									item="item" ng-click="recentlyViewedCtrl.goto_item(item)">
 						</mjs-item>
 					</div>
-					<span ng-click="recentlyViewedCtrl.scroll_right()">RIGHT</span>
+				</div>
+				<div 	class="arrow-right" 
+						ng-show="recentlyViewedCtrl.show_arrows" 
+						ng-click="recentlyViewedCtrl.scroll_right()"
+						ng-class="{'arrow-right--disabled': !recentlyViewedCtrl.can_scroll_right}">
 				</div>
 			</div>
 		</div>
