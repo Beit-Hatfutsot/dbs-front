@@ -109,8 +109,8 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
                         false: 'Description'
                     },
                     he: {
-                        true: '*תאור',
-                        false: 'תאור'
+                        true: '*תיאור',
+                        false: 'תיאור'
                     }
                 },
                 location: {
@@ -149,35 +149,35 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
                         false: 'Names of people in this photo'
                     },
                     he: {
-                        true: '*שמות האנשים בתמונה זו',
-                        false: 'שמות האנשים בתמונה זו'
+                        true: '*מי בתמונה? שמות ושמות משפחה של המצולמים',
+                        false: 'מי בתמונה? שמות ושמות משפחה של המצולמים'
                     }
                 }
             },
 
             validation_errors: {
                 title: {
-                    en: 'Yo, check it, you gots to have title',
+                    en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
                 },
                 description: {
-                    en: 'You better check yourself',
+                    en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
                 },  
                 location: {
-                    en: 'before you wreck yourself',
+                    en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
                 },
                 date: {
                     en: 'Please fill in a date, or at least a decade',
-                    he: 'שדה זה הינו שדה חובה'
+                    he: 'אנא הזינו תאריך מדויק או לפחות שנה'
                 },
                 creator_name: {
                     en: 'Who should we credit for this photo?',
-                    he: 'שדה זה הינו שדה חובה'
+                    he: 'מי בעל הזכויות על התמונה?'
                 },
                 people_present: {
-                    en: 'Tag your friends yo',
+                    en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
                 }
             }

@@ -4,14 +4,14 @@
 	<div ng-switch-when="true">
 		<div class="auth-modal__title">
 			<en>Please register so we can create your story and save it for you</en>
-			<he>אנא הרשמו בכדי שנוכל ליצור את הסיפור שלכם ולשמור אותו בעבורכם</he>
+			<he>אנא הירשמו לאתר כדי שנוכל ליצור את הסיפור שלכם ולשמור אותו עבורכם</he>
 		</div>
 		<div class="auth-modal__switch">
 			<en>Already have an account? </en>
 			<he>כבר יש לכם חשבון? </he>
 			<a href="" ng-click="authController.goto_signin()">
 				<en>Sign in</en>
-				<he>הכנסו</he>
+				<he>היכנסו</he>
 			</a>
 		</div>
 		<form name="register_form" class="auth-form" rc-submit="authController.register()" novalidate>
@@ -43,11 +43,11 @@
 							required>
 					<label for="register-email" ng-class="{'bhf__field__label--up': authController.selected_field === 'email' || authController.register_data.email || rc.register_form.needsAttention(register_form.email), 'bhf__field__label--down': authController.selected_field !== 'email' && !(authController.register_data.email) && !(rc.register_form.needsAttention(register_form.email))}">
 						<en>Email</en>
-						<he>דוא"ל</he>
+						<he>מייל</he>
 					</label>
 					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.email)">
 						<en>Please enter a valid email</en>
-						<he>אנא הכניסו כתובת דוא"ל תקנית</he>
+						<he>אנא הכניסו כתובת מייל תקנית</he>
 					</div>
 				</div>
 				<div class="bhf__field">
@@ -60,11 +60,11 @@
 							required>
 					<label for="register-ps" ng-class="{'bhf__field__label--up': authController.selected_field === 'ps' || authController.register_data.ps || rc.register_form.needsAttention(register_form.ps), 'bhf__field__label--down': authController.selected_field !== 'ps' && !(authController.register_data.ps) && !(rc.register_form.needsAttention(register_form.ps))}">
 						<en>Password</en>
-						<he>ססמא</he>
+						<he>סיסמה</he>
 					</label>
 					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.ps)">
 						<en>Please enter a password</en>
-						<he>אנא הכניסו ססמא</he>
+						<he>אנא הכניסו סיסמה</he>
 					</div>
 				</div>
 			</fieldset>
@@ -72,7 +72,7 @@
 				<input type="checkbox" id="accept-terms" class="auth-form__terms__checkbox">
 				<label for="accept-terms">
 					<en>I accept the </en>
-					<he>אני מקבל את </he>
+					<he>אני מקבל/ת את </he>
 					<a href="">
 						<en>terms and conditions</en>
 						<he>תנאי השימוש</he>
@@ -80,22 +80,22 @@
 				</label>
 			</div>
 			<div ng-show="authController.in_process">Processing...</div>
-			<div>{{authController.message}}</div>
-			<input class="auth-form__submit" type="submit" value="Register">
+			<div>{{authController.message[authController.lang]}}</div>
+			<input class="auth-form__submit" type="submit" value="{{authController.submit_values.register[authController.lang]}}">
 		</form>
 	</div>
 	<!-- sign-in form -->
 	<div ng-switch-default>
 		<div class="auth-modal__title">
 			<en>Please sign in so we can create your story and save it for you</en>
-			<he>אנא הכנסו בכדי שנוכל ליצור את הסיפור שלכם ולשמור אותו בעבורכם</he>
+			<he>אנא היכנסו לאתר כדי שנוכל ליצור את הסיפור שלכם ולשמור אותו עבורכם</he>
 		</div>
 		<div class="auth-modal__switch">
 			<en>Haven't got an account yet? </en>
 			<he>אין לכם חשבון? </he>
 			<a href="" ng-click="authController.goto_register()">
 				<en>Register for free</en>
-				<he>הרשמו חינם</he>
+				<he>הירשמו חינם</he>
 			</a>
 		</div>
 		<form name="signin_form" class="auth-form" rc-submit="authController.signin()" novalidate>
@@ -127,17 +127,17 @@
 							required>
 					<label for="signin-ps" ng-class="{'bhf__field__label--up': authController.selected_field === 'ps' || authController.signin_data.ps || rc.signin_form.needsAttention(signin_form.ps), 'bhf__field__label--down': authController.selected_field !== 'ps' && !(authController.signin_data.ps) && !(rc.signin_form.needsAttention(signin_form.ps))}">
 						<en>Password</en>
-						<he>ססמא</he>
+						<he>סיסמה</he>
 					</label>
 					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.ps)">
 						<en>Please enter a password</en>
-						<he>אנא הכניסו ססמא</he>
+						<he>אנא הכניסו סיסמה</he>
 					</div>
 				</div>
 			</fieldset>
 			<div ng-show="authController.in_process">Processing...</div>
-			<div>{{authController.message}}</div>
-			<input class="auth-form__submit" type="submit" value="Sign in">
+			<div>{{authController.message[authController.lang]}}</div>
+			<input class="auth-form__submit" type="submit" value="{{authController.submit_values.signin[authController.lang]}}">
 		</form>
 	</div>
 </div>

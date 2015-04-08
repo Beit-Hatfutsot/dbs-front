@@ -6,7 +6,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
 
 	this.placeholders = { 
         name: {
-            en: 'Surname',
+            en: 'Family Name',
             he: 'שם משפחה'
         },
         place: {

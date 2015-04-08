@@ -23,7 +23,10 @@ var AuthCtrl = function($modalInstance, langManager, auth, isRegister) {
     };
 
     // auth message to display to the user
-    this.message = '';
+    this.message = {
+        en: '',
+        he: ''
+    };
 
     this.placeholders = {
         name: {
@@ -40,7 +43,19 @@ var AuthCtrl = function($modalInstance, langManager, auth, isRegister) {
             en: 'Password',
             he: 'ססמא'
         }
-    }
+    };
+
+    this.submit_values = {
+        register: {
+            en: 'Register', 
+            he: 'הרשמה'
+        },
+
+        signin: {
+            en: 'Sign In', 
+            he: 'כניסה'
+        }
+    };
 }
 
 AuthCtrl.prototype = {
@@ -50,10 +65,16 @@ AuthCtrl.prototype = {
 
     	this.auth.signin(this.signin_data.email, this.signin_data.ps).
             then(function() {
-                self.message = 'Sign in succeeded';
+                self.message = {
+                    en: 'Sign in succeeded',
+                    he: 'הכניסה התבצעה בהצלחה'
+                };
                 self.$modalInstance.close();
             }, function() {
-                self.message = 'Sign in failed';
+                self.message = {
+                    en: 'Sign in failed',
+                    he: 'הכניסה נכשלה'
+                };
             });
     },
 
@@ -62,10 +83,16 @@ AuthCtrl.prototype = {
 
         this.auth.register(this.register_data.name, this.register_data.email, this.register_data.ps).
             then(function() {    
-                self.message = 'Registered user' + self.register_data.email + ' successfuly';
+                self.message ={
+                    en: 'Registered user ' + self.register_data.email + ' successfuly',
+                    he: 'נרשם משתמש ' + self.register_data.email + ' בהצלחה'
+                };
                 self.$modalInstance.close();
             }, function() {
-                self.message = 'Registration failed';
+                self.message = {
+                    en: 'Registration failed',
+                    he: 'ההרשמה נכשלה'
+                };
             });
     },
 
