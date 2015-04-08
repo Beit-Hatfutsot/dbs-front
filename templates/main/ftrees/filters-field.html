@@ -8,10 +8,28 @@
 		</he>
 	</label>
 	<input type="text" ng-model="model">
-	<div class="info">?</div>
+	<!-- <div class="info">?</div> -->
 	<div class="modifiers-container">
-		<input type="radio" name="{{label_text_en}}" value="" ng-model="modifier_model"><label>Exact</label>
-		<input type="radio" name="{{label_text_en}}" value="prefix" ng-model="modifier_model"><label>Begins with</label>
-		<input type="radio" name="{{label_text_en}}" value="phonetic" ng-model="modifier_model"><label>Sounds like</label>
+		<div class="modifier">
+			<input type="radio" name="{{label_text_en}}" value="" ng-model="modifier_model">
+			<label>
+				<en>Exact</en>
+				<he>מדוייק</he>
+			</label>
+		</div>
+		<div class="modifier">
+			<input type="radio" name="{{label_text_en}}" value="prefix" ng-model="modifier_model">
+			<label>
+				<en>Begins with</en>
+				<he>מתחיל ב</he>
+			</label>
+		</div>
+		<div class="modifier">
+			<input type="radio" name="{{label_text_en}}" value="phonetic" ng-model="modifier_model">
+			<label>
+				<en>Sounds like</en>
+				<he>נשמע כמו</he>
+			</label>
+		</div>
 	</div>
 </div>

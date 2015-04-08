@@ -262,6 +262,10 @@ FtreesController.prototype = {
 			}
 		}
 
+		// avoid conflict with prameter from state ftree-view.ftree-item
+		search_params.tree_number = search_params.filters_tree_number;
+		delete search_params.filters_tree_number;
+
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;

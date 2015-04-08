@@ -119,17 +119,25 @@
 
 					.modifiers-container {
 						width: 275px;
-						height: 13px;
-						margin: 0 auto;
+						margin: 0 auto;	
 
-						label {
+						.modifier {
 							display: inline-block;
-						}
+							text-align: center;
 
-						input[type=radio] {
-							width: 15px;
-							height: 15px;
-							display: inline;
+							.en & {
+								margin-right: 33px;
+							}
+
+							.he & {
+								margin-left: 48px;
+							}
+
+							input[type=radio] {
+								width: 15px;
+								height: 15px;
+								display: inline;
+							}
 						}
 					}
 				}

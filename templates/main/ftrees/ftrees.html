@@ -26,7 +26,7 @@
 						<he>שם פרטי</he>
 					</label>
 					<input type="text" ng-model="ftreesCtrl.search_params.first_name">
-					<div class="info">?</div>
+					<!-- <div class="info">?</div> -->
 				</div>
 			</div>
 			<filters-field class="filters__field" label-text-en="Last Name" label-text-he="שם משפחה" model="last_name"></filters-field>
@@ -46,9 +46,19 @@
 			<filters-fudge class="filters__fudge-field" label-text-en="Year of Birth" label-text-he="שנת לידה" model="birth_year"></filters-fudge>
 			<filters-fudge class="filters__fudge-field" label-text-en="Year of Marriage" label-text-he="שנת נישואין" model="marriage_year"></filters-fudge>
 			<filters-fudge class="filters__fudge-field" label-text-en="Year of Death" label-text-he="שנת פטירה" model="death_year"></filters-fudge>
-			<filters-field class="filters__field" label-text-en="Tree Number" label-text-he="מספר עץ" model="tree_number"></filters-field>
+			<div class="filters__field">
+				<div class="container">
+					<label>
+						<en>Tree Number</en>
+						<he>מספר עץ</he>
+					</label>
+					<input type="text" ng-model="ftreesCtrl.search_params.filters_tree_number">
+					<!-- <div class="info">?</div> -->
+				</div>
+			</div>
 			<button class="filters__update" ng-click="ftreesCtrl.search()">
-				Update
+				<en>Update</en>
+				<he>עדכן</he>
 			</button>
 		</form>
 		<div class="results">
@@ -219,11 +229,11 @@
 				<he>
 					<div class="results__people-arrow__text">
 						<div class="results__people-arrow__text__title">
-							Nothing here yet
+							אין מה לראות עדיין
 						</div>
-						Start your search<br>
-						by filling out some of the fields to the left<br>
-						and gradually add more to refine your search
+						התחילו את החיפוש שלכם<br>
+						על ידי מילוי השדות מימין<br>
+						וזקקו את התוצאות בהדרגה
 					</div>
 					<img src="images/arrow_people_he.png">
 				</he>
