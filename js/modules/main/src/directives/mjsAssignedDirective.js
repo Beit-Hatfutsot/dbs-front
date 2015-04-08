@@ -4,7 +4,6 @@ angular.module('main').directive('mjsAssigned', function() {
 		templateUrl: 'templates/main/mjs/mjs-assigned.html',
 		scope: true,
 		link: function(scope, element, attrs, ctrl) {
-			console.log(scope.branch)
 			scope.icon_position = JSON.parse(attrs['iconPosition']);
 			Object.defineProperty(scope, 'collection', {
 				get: function() {

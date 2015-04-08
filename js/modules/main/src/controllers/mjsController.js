@@ -1,6 +1,7 @@
-var MjsController = function($scope, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager, auth, user) {
+var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager, auth, user) {
 	var self = this;
 
+	this.$q = $q;
 	this.notification = notification;
 	this.mjs = mjs;
 	this.itemTypeMap = itemTypeMap;
@@ -250,16 +251,29 @@ MjsController.prototype = {
 	},
 
 	insert_new_branch: function() {
+		var insert_deferred = this.$q.defer();
+
 		if (this.mjs_items.assigned.length < 4) {			
 			var self = this;
+			var name = this.generate_unique_branch_name();
 
-			this.mjs.add_branch(this.new_branch.name).
+			this.mjs.add_branch(name).
 				then(function() {
 					var index = self.mjs_items.assigned.length-1;
 					self.select_branch(index);
 					self.branch_edit_status[index] = true;
-			});
+
+					insert_deferred.resolve(name);
+				}, 
+				function() {
+					insert_deferred.reject();
+				});
 		}
+		else {
+			insert_deferred.reject();
+		}
+
+		return insert_deferred.$promise;
 	},
 
 	remove_branch: function($event, branch_name) {
@@ -354,9 +368,11 @@ MjsController.prototype = {
 	},
 
 	create_n_assign: function(branch_name, item) {
-		//this.dragging = false;
-		this.insert_new_branch();	
-		this.assign_item(branch_name, item);
+		this.dragging = false;
+		this.insert_new_branch(branch_name).
+			then(function(new_name) {
+				this.assign_item(new_name, item);
+			});	
 	},
 
 	remove: function($event, branch_name) {
@@ -429,7 +445,7 @@ MjsController.prototype = {
 		}
 	},
 
-	is_duplicate_branch_name: function(name) {
+	count_branches_named: function(name) {
 		var count = 0;
 
 		this.mjs_items.assigned.forEach(function(branch) {
@@ -438,8 +454,30 @@ MjsController.prototype = {
 			}
 		});
 
-		return count > 1;
+		return count;
+	},
+
+	is_duplicate_branch_name: function(name) {
+		return this.count_branches_named(name) > 1;
+	},
+
+	is_branch_name: function(name) {
+		return this.count_branches_named(name) > 0;
+	},
+
+	generate_unique_branch_name: function() {
+		var new_name = this.new_branch.name;
+		var i = 1;
+	
+		var is_duplicate = this.is_branch_name(new_name);
+		while (is_duplicate) {
+			new_name = this.new_branch.name + ' ' + i;
+			is_duplicate = this.is_branch_name(new_name);
+			i++;
+		}
+
+		return new_name;
 	}
 };
 
-angular.module('main').controller('MjsController', ['$scope', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', 'auth', 'user', MjsController]);
+angular.module('main').controller('MjsController', ['$scope', '$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', 'auth', 'user', MjsController]);

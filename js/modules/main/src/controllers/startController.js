@@ -21,8 +21,23 @@ var StartController = function($scope, $state, wizard, itemTypeMap) {
 
 StartController.prototype = {
 	choose_result: function() {
-		if (this.wizard.result.place.isNotEmpty()) {
-			return this.itemTypeMap.get_item_string(this.wizard.result.place);
+		var name = this.wizard.result.name,
+			place = this.wizard.result.place;
+
+		if ( name.isNotEmpty() && place.isNotEmpty() ) {
+
+			if ( !name.thumbnail.data && place.thumbnail.data ) {
+				return this.itemTypeMap.get_item_string(place);
+			}
+			else {
+				return this.itemTypeMap.get_item_string(name);
+			}
+		}
+		else if ( name.isEmpty() ) {
+			return this.itemTypeMap.get_item_string(place);
+		}
+		else if ( place.isEmpty() ) {
+			return this.itemTypeMap.get_item_string(name);
 		}
 		else {
 			return null;
