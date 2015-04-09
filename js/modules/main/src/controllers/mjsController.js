@@ -273,7 +273,7 @@ MjsController.prototype = {
 			insert_deferred.reject();
 		}
 
-		return insert_deferred.$promise;
+		return insert_deferred.promise;
 	},
 
 	remove_branch: function($event, branch_name) {
@@ -368,10 +368,12 @@ MjsController.prototype = {
 	},
 
 	create_n_assign: function(branch_name, item) {
+		var self = this;
+
 		this.dragging = false;
 		this.insert_new_branch(branch_name).
 			then(function(new_name) {
-				this.assign_item(new_name, item);
+				self.assign_item(new_name, item);
 			});	
 	},
 

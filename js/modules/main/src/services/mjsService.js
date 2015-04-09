@@ -97,7 +97,6 @@ angular.module('main').
 			},
 
 			add_branch: function(branch_name) {
-				console.log(branch_name)
 				if (this.data['assigned'].length < 4) {
 					this.data['assigned'].push({
 						name: branch_name,
