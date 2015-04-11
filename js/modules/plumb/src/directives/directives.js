@@ -29,9 +29,11 @@ angular.module('plumb').
 				
 				$timeout(function() {
 					scope.$watch(attrs['connecton'], function(newVal, oldVal) {
-						connection.plumb.detachEveryConnection();	
-						connection.connect(newVal);
-						connection.plumb.repaintEverything();
+						$timeout(function() {
+							connection.plumb.detachEveryConnection();	
+							connection.connect(newVal);
+							connection.plumb.repaintEverything();
+						});
 					});
 				});
 		    }
