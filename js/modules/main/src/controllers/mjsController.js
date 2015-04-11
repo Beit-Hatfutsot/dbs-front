@@ -51,12 +51,17 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, p
 	});
 
 	this.init();
-
-	$scope.$on('signin', function() {
-		mjs.refresh().
-			then(function() {
-				self.parse_mjs_data();
-			});
+	
+	$scope.$watch(function() {
+		return self.signedin;
+	},
+	function(signedin) {
+		if (signedin) {
+			mjs.refresh().
+				then(function() {
+					self.parse_mjs_data();
+				});
+		}
 	});
 
 	$scope.$watch(function() {
