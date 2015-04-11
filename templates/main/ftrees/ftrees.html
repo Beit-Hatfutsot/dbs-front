@@ -63,8 +63,8 @@
 		</form>
 		<div class="results">
 			<div class="results__title">
-				<en>Results {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
-				<he>תוצאות {{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
+				<en>Results {{ftreesCtrl.display_from_result + ftreesCtrl.individuals.isEmpty() ? 0 : 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
+				<he>תוצאות {{ftreesCtrl.display_from_result + ftreesCtrl.individuals.isEmpty() ? 0 : 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
 			</div>
 			<table class="results__individuals">
 				<thead>
@@ -206,7 +206,7 @@
 				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
 					<div class="results__more-columns__menu__title">
 						<en>Choose what columns to display (up to 6)</en>
-						<he></he>
+						<he>בחר אלו עמודות להציג (עד 6)</he>
 					</div>
 					<div class="results__more-columns__menu__row" ng-repeat="(key, val) in ftreesCtrl.column_status">
 						<input type="checkbox" id="{{key}}-check" ng-model="ftreesCtrl.column_status[key]">
