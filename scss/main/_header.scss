@@ -59,7 +59,32 @@
 
 	&__signout {
 		width: 100px;
-		margin: 0 12px;
+		vertical-align: top;
+
+		.en & {
+			margin-right: 12px;
+		}
+
+		.he & {
+			margin-left: 12px;
+		}
+	}
+
+	&__user {
+		position: relative;
+		display: inline-block;
+		vertical-align: middle;
+		margin: -5px 12px;
+
+		&__pic {
+			width: 29px;
+			height: 29px;
+			margin: 2px auto 0;
+		}
+
+		&__name {
+			position: relative;
+		}
 	}
 
 	&__upload,
@@ -144,11 +169,11 @@
 			top: 12px;
 			
 			.en & {
-				left: -277px;
+				left: -279px;
 			}
 
 			.he & {
-				right: -277px;
+				right: -279px;
 			}
 
 			&:before {

@@ -7,7 +7,7 @@
 			<div class="upload-menu">
 				<div class="upload-menu__title">
 					<en>Upload your item</en>
-					<he>בחרו שפה</he>
+					<he>העלו את הפריט שלכם</he>
 				</div>
 				<div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
 					<div class="upload-icon__image">
@@ -37,10 +37,16 @@
 			<en>Sign Up</en>
 			<he>הרשמה</he>
 		</div>
-		<div class="dropdown-icons__signout" ng-if="headerController.is_signedin" ng-click="headerController.signout()">
-			<en>Sign Out</en>
-			<he>יציאה</he>
-		</div>
+		<span ng-if="headerController.is_signedin">
+			<div class="dropdown-icons__user">
+				<icon class="dropdown-icons__user__pic" position="[-269, -85]"></icon>
+				<div class="dropdown-icons__user__name">{{headerController.username}}</div>
+			</div>
+			<div class="dropdown-icons__signout" ng-click="headerController.signout()">
+				<en>Sign Out</en>
+				<he>יציאה</he>
+			</div>
+		</span>
 		<div class="dropdown-icons__language-selector" dropdown is-open="headerController.language_menu_open">
 			<div dropdown-toggle>	
 				<div class="language-icon">

@@ -1,4 +1,4 @@
-var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache, recentlyViewed) {
+var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache, recentlyViewed, user) {
 
     this.$state = $state;
     this.auth = auth;
@@ -60,6 +60,12 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
             return $state.includes('mjs');
         }
     });
+
+    Object.defineProperty(this, 'username', {
+        get: function() {
+            return user.name;
+        }
+    });
 };
 
 HeaderCtrl.prototype = {
@@ -89,4 +95,4 @@ HeaderCtrl.prototype = {
     }
 };
 
-angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', 'mjs', 'cache', 'recentlyViewed', HeaderCtrl]);
+angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', 'mjs', 'cache', 'recentlyViewed', 'user', HeaderCtrl]);
