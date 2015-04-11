@@ -6,22 +6,24 @@ angular.module('main').
 				data: '='
 			},
 			link: function(scope, element) {
-				var el = element[0];
-		        el.draggable = true;
+				if (attrs['draggable'] === 'true') {
+					var el = element[0];
+			        el.draggable = true;
 
-		        el.addEventListener('dragstart', function(e) {
-	                e.dataTransfer.effectAllowed = 'move';
-	                e.dataTransfer.setData('data', JSON.stringify(scope.data));
-	                scope.$emit('dragstart');
-	                this.classList.add('drag');
-	                return false;
-	            }, false);
+			        el.addEventListener('dragstart', function(e) {
+		                e.dataTransfer.effectAllowed = 'move';
+		                e.dataTransfer.setData('data', JSON.stringify(scope.data));
+		                scope.$emit('dragstart');
+		                this.classList.add('drag');
+		                return false;
+		            }, false);
 
-		        el.addEventListener('dragend', function(e) {
-		            scope.$emit('dragend');
-		            this.classList.remove('drag');
-		            return false;
-		        }, false);
+			        el.addEventListener('dragend', function(e) {
+			            scope.$emit('dragend');
+			            this.classList.remove('drag');
+			            return false;
+			        }, false);
+			   	}
 			}
 		};
 	}]);
