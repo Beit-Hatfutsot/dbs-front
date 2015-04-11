@@ -5,7 +5,7 @@ angular.module('main').
 			scope: {
 				data: '='
 			},
-			link: function(scope, element) {
+			link: function(scope, element, attrs) {
 				if (attrs['draggable'] === 'true') {
 					var el = element[0];
 			        el.draggable = true;
