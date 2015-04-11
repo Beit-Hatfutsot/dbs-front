@@ -11,7 +11,7 @@
 				</span>
 			</nd-switch>
 		</div>
-		<mjs-item item="collection[0]"></mjs-item>
+		<mjs-item item="collection[0]" non-draggable="true"></mjs-item>
 	</div>
 	<div class="assigned__grouped" ng-switch-when="true" ng-class="{'selected-collection': mjsCtrl.is_selected_collection(collection)}">
 		<div class="assigned__grouped__desc">{{mjsCtrl.get_collection_type(collection)}} collection ({{collection.length}})</div>
