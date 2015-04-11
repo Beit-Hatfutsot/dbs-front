@@ -45,6 +45,14 @@
     transform: translate($x, $y);
 }
 
+@mixin important-translate($x, $y) {
+	-webkit-transform: translate($x, $y) !important;
+    -moz-transform: translate($x, $y) !important;
+    -o-transform: translate($x, $y) !important;
+    -ms-transform: translate($x, $y) !important;
+    transform: translate($x, $y) !important;
+}
+
 @mixin translateX($x) {
 	-webkit-transform: translateX($x);
     -moz-transform: translateX($x);

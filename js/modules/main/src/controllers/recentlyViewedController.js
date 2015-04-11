@@ -1,5 +1,6 @@
-var RecentlyViewedController = function($state, recentlyViewed, itemTypeMap, langManager) {
-
+var RecentlyViewedController = function($scope, $state, recentlyViewed, itemTypeMap, langManager) {
+    var self = this;
+    
 	this.$state = $state;
 	this.itemTypeMap = itemTypeMap;
 
@@ -51,7 +52,11 @@ var RecentlyViewedController = function($state, recentlyViewed, itemTypeMap, lan
     this.max_items_inscroll = 14;
     this.view_index = this.items.length > this.max_items_inscroll ? this.items.length - this.max_items_inscroll : 0;
 
-    window.recentlyViewedCtrl = this;
+    $scope.$watch(function() {return self.items.length}, function(newVal, oldVal) {
+        if (newVal === oldVal + 1) {
+            self.scroll_right();
+        }
+    });
 };	
 
 RecentlyViewedController.prototype = {
@@ -74,5 +79,5 @@ RecentlyViewedController.prototype = {
     }
 };
 
-angular.module('main').controller('RecentlyViewedController', ['$state', 'recentlyViewed', 'itemTypeMap', 'langManager', RecentlyViewedController]);
+angular.module('main').controller('RecentlyViewedController', ['$scope', '$state', 'recentlyViewed', 'itemTypeMap', 'langManager', RecentlyViewedController]);
 
