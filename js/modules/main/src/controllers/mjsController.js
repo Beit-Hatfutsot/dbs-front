@@ -351,7 +351,7 @@ MjsController.prototype = {
 		}, 100);
 		setTimeout(function() {
 			clearInterval(repaint);
-		}, 1000);
+		}, 2000);
 	},
 
 	get_branch_index: function(branch_name) {
