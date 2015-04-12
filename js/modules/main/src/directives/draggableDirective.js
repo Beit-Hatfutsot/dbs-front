@@ -12,7 +12,12 @@ angular.module('main').
 
 			        el.addEventListener('dragstart', function(e) {
 		                e.dataTransfer.effectAllowed = 'move';
-		                e.dataTransfer.setData('data', JSON.stringify(scope.data));
+		                try{
+			                e.dataTransfer.setData('data', JSON.stringify(scope.data));
+			            }
+			            catch(exception) {
+			                e.dataTransfer.setData('text', JSON.stringify(scope.data));
+			            }
 		                scope.$emit('dragstart');
 		                this.classList.add('drag');
 		                return false;
@@ -58,12 +63,19 @@ angular.module('main').
 				}, false);
 
 				el.addEventListener('drop', function(e) {
+					var item;
+
 			        // Stops some browsers from redirecting.
 			        if (e.stopPropagation) e.stopPropagation();
 
 			        this.classList.remove('over');
 
-			        var item = JSON.parse(e.dataTransfer.getData('data'));
+			        try {
+			        	item = JSON.parse(e.dataTransfer.getData('data'));
+				    }
+				    catch(exception) {
+				    	item = JSON.parse(e.dataTransfer.getData('text'));
+				    }
 			        scope.$apply(function(scope) {
 					    var fn = scope.ondrop();
 					    if ('undefined' !== typeof fn) {
