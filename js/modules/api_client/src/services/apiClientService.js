@@ -1,5 +1,4 @@
 angular.module('apiClient').
-
 	factory('apiClient', function() {
 	
 	  	return {

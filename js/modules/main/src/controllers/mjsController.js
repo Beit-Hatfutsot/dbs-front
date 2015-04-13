@@ -113,6 +113,11 @@ MjsController.prototype = {
 	init: function() {
 		var self = this;
 
+		this.notification.put({
+			en: 'Loding Story...',
+			he: 'טוען את הסיפור...'
+		});
+
 		this.header.sub_header_state = 'closed';
 		this.content_loaded = false;
 		this.mjs_items = {
@@ -138,8 +143,6 @@ MjsController.prototype = {
 			2: false,
 			3: false,
 		};
-
-		this.notification.clear();
 	},
 
 	assign_item: function(branch_name, item) {
@@ -184,7 +187,11 @@ MjsController.prototype = {
 	parse_mjs_data: function() {
 		var self = this,
 			item = this.item,
-			mjs_data = this.mjs_data;
+			mjs_data = this.mjs_data,
+			unassigned_deferred,
+			assigned_deferred = [],
+			all_promises = [],
+			parse_promise;
 
 		this.notification.put({
 			en: 'Parsing Story...',
@@ -194,43 +201,58 @@ MjsController.prototype = {
 		this.select_collection([]);
 		this.mjs_items.unassigned = [];
 		this.mjs_items.assigned = [];
-
-		if (mjs_data.hasOwnProperty('unassigned') || mjs_data.hasOwnProperty('assigned')) {
+		
+		if ( mjs_data.hasOwnProperty('unassigned') && mjs_data.unassigned.length > 0 ) {
+			unassigned_deferred = this.$q.defer();
+			all_promises.push(unassigned_deferred.promise);
 			item.get_items( mjs_data.unassigned ).
 				then(function(item_data) {
 					self.mjs_items.unassigned = item_data;
+					unassigned_deferred.resolve(item_data);
 				});	
-
-			if (mjs_data.assigned.length > 0) {
-				mjs_data.assigned.forEach(function(branch) {
-					if (branch.items.length > 0) {
-						var b = {
-							name: branch.name,
-							items: {}
-						};
-						self.mjs_items.assigned.push(b);
-						item.get_items( branch.items ).
-							then(function(item_data) {
-								b.items = self.sort_items(item_data)	;
-							});
-					}
-					else {
-						var b = {
-							name: branch.name,
-							items: []
-						};
-						self.mjs_items.assigned.push(b); 
-					}
-				});	
-			}
 		}
 
-		this.content_loaded = true;
+		if ( mjs_data.hasOwnProperty('assigned') && mjs_data.assigned.length > 0 ) {
+			mjs_data.assigned.forEach(function(branch, index) {
+				assigned_deferred[index] = self.$q.defer();
+				if (branch.items.length > 0) {
+					var b = {
+						name: branch.name,
+						items: {}
+					};
+					self.mjs_items.assigned.push(b);
+					item.get_items( branch.items ).
+						then(function(item_data) {
+							b.items = self.sort_items(item_data);
+							assigned_deferred[index].resolve(item_data);
+						});
+				}
+				else {
+					var b = {
+						name: branch.name,
+						items: []
+					};
+					self.mjs_items.assigned.push(b); 
+					assigned_deferred[index].resolve(null);
+				}
+			});	
 
-		this.notification.put({
-			en: 'Story loaded successfuly',
-			he: 'סיפור נטען בהצלחה.'
-		});
+			assigned_deferred.forEach(function(ad) {
+				all_promises.push(ad.promise);
+			});
+		}
+		
+		parse_promise = this.$q.all(all_promises);
+		parse_promise.
+			then(function() {
+				self.notification.put({
+					en: 'Story loaded successfuly.',
+					he: 'הסיפור נטען בהצלחה'
+				});
+				self.content_loaded = true;
+			});
+
+		return parse_promise;
 	},
 
 	sort_items: function(item_arr) {
