@@ -51,13 +51,23 @@ module.exports = function(grunt) {
                     'css/bhsclient.css' : 'scss/bhsclient.scss'
                 }
                 */
-                files: [{
-                    src: ['scss/bhsclient.scss'],
-                    dest: public_dir + 'css/',
-                    expand: true,
-                    flatten: true, 
-                    ext: '.css'
-                }]
+                files: [
+                    {
+                        src: ['scss/bhsclient.scss'],
+                        dest: public_dir + 'css/',
+                        expand: true,
+                        flatten: true, 
+                        ext: '.css'
+                    },
+
+                    {
+                        src: ['under_construction/scss/uc.scss'],
+                        dest: public_dir + 'under_construction/css/',
+                        expand: true,
+                        flatten: true, 
+                        ext: '.css'
+                    }
+                ]
             }
         },
 
@@ -75,13 +85,15 @@ module.exports = function(grunt) {
                     {expand: true, src: ['templates/**/**'], dest: public_dir},
                     {expand: true, src: ['images/**'], dest: public_dir},
                     {expand: true, src: ['index.html'], dest: public_dir, filter: 'isFile'},
+                    {expand: true, src: ['under_construction/images/**'], dest: public_dir},
+                    {expand: true, src: ['under_construction/*.html'], dest: public_dir, filter: 'isFile'}
                 ]
             }
         },
 
         watch: {
             main: {
-                files: ['js/modules/**/src/**/*.js', 'scss/**', 'templates/**', 'index.html'],
+                files: ['js/modules/**/src/**/*.js', 'scss/**', 'templates/**', 'index.html', 'under_construction/**'],
                 tasks: ['build']
             }
         },

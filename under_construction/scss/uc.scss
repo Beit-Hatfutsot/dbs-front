@@ -1,0 +1,24 @@
+* {
+	font-family: Helvetica, Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+	width: 100%;
+
+	body {
+		height: 100%;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		color: #333333;
+		background: #eeeeee;
+		padding-top: 110px;
+		
+		.container {
+	 		text-align: center;
+			font-size: 32px;
+		}
+	}
+}
