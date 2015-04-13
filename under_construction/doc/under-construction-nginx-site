@@ -1,0 +1,35 @@
+server {
+    listen 80;
+    
+    # Change to bhsclient dir for local development
+    root /home/bhs/bhsclient/public/under_construction;
+    index under_construction.html;
+
+    server_name bhsclient;
+
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to index.
+        try_files $uri $uri/ /under_construction.html;
+        autoindex on;
+        expires off;
+    }
+
+    error_page 404 /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    location ~ /\.ht {
+        deny all;
+    }
+}
+

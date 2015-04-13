@@ -1,2 +1,3 @@
 This is a stand-alone website. It serves as an 'under-construction' page.
-In order to use it set the directory containing this file as the server root dir and navigate to index.html.
+In order to use it, set the directory containing this file as the server root dir, and set under_construction.html as the index and fallback.
+See doc for example nginx site file.
