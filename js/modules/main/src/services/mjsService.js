@@ -46,6 +46,8 @@ angular.module('main').
 			},
 
 			assign: function(branch_name, item_string) {
+				var self = this;
+
 				if (this.data.$resolved) {
 					var index = this.data.unassigned.indexOf(item_string);
 					this.data.unassigned.splice(index, 1);
@@ -55,7 +57,11 @@ angular.module('main').
 					})[0];
 					
 					branch.items.push(item_string);
-					return this.data.$put();
+					return this.data.$put().
+						then(null, function() {
+							self.data.unassigned.splice(index, 0, item_string);
+							branch.items.splice(branch.items.indexOf(item_string), 1); 
+						});
 				}
 			},
 

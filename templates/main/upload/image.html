@@ -1,14 +1,19 @@
 <div class="upload-success" ng-show="uploadCtrl.success">
 	<div class="upload-success__title">
 		<en>Yay! The file was successfuly sent</en>
+		<he>הקובץ הועלה בהצלחה. </he>
 	</div>
 	<div class="upload-success__text">
 		<en>
-			Once the picture is approved, we will send you an email with a link to it. In the mean time, you will find it at <a>My Story</a> where you can add it to a specific family branch.
+			Once the picture is approved, we will send you an email with a link to it. In the mean time, you will find it at <a href="" ui-sref="mjs">My Story</a> where you can add it to a specific family branch.
 		</en>
+		<he>
+			ברגע שהתמונה תאושר, אנו נשלח לכם מייל עם לינק אליה. בינתיים, תוכלו למצוא אותה <a href="" ui-sref="mjs">בסיפור שלי</a> שם תוכלו להוסיף אותה לענף משפחה.
+		</he>
 	</div>
 	<div class="upload-success__instructions">
-		You can upload another file
+		<en>You can upload another file</en>
+		<he>באפשרותכם להעלות קובץ נוסף</he>
 	</div>
 	<button class="upload-success__button" ng-click="uploadCtrl.clear_form()">Upload another file</button>
 </div>

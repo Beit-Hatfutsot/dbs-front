@@ -94,7 +94,7 @@ angular.module('main').
 		                    self.search_status =  'none';
 		                    notification.put({
                                 en: 'We have not found a surname and a community to match your search.',
-                                he: 'לא מצאנו את שם המפשחה והקהילה שחיפשתם.'
+                                he: 'לא מצאנו את שם המשפחה והקהילה שחיפשתם.'
                             });
 		                }
 
