@@ -10,12 +10,16 @@ angular.module('auth').
 	  	auth = {
 
 	  		authenticate: function(config) {
+	  			var body = document.getElementsByTagName('body')[0];
+
 	  			if ( !(this.is_signedin()) ) {
-				    
+	  				body.addClassName('auth');
+				    angular.element()
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
 				     	controller: 'AuthCtrl as authController',
 				     	size: 'lg',
+				     	modalClass: 'auth-modal',
 				     	resolve: {
 				     		isRegister: function() {
 				     			return config.register;
@@ -28,6 +32,7 @@ angular.module('auth').
 				    		$state.go(config.next_state);
 				    	} 
 				    }, function(dismiss_reason) {
+				    	body.removeClassName('auth');
 				    	if (config.fallback_state) {
 				    		$state.go(config.fallback_state, config.fallback_state_params);
 				    	}

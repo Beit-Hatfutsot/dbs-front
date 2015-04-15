@@ -42,6 +42,14 @@ html {
 			direction: rtl;
 		}
 
+		&.auth {
+			overflow: hidden;
+		}
+
+		.modal {
+			overflow: auto;
+		}
+
 		@at-root #app-container {
 			position: relative;
 			height: 100%;
