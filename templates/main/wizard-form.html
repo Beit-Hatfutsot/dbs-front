@@ -100,8 +100,8 @@
 						ng-show="wizardFormController.suggested_distribution.places[0] > 0">
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type__title"
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__title--selected': wizardFormController.get_active_title('place') === 0}">
-							<en>STARTS WITH:</en>
-							<he>מתחיל ב:</he>
+							<en>EXACT MATCH:</en>
+							<he>התאמה מלאה:</he>
 					</div>
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type__item" 
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
@@ -115,8 +115,8 @@
 						ng-show="wizardFormController.suggested_distribution.places[1] > 0">
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type__title"
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__title--selected': wizardFormController.get_active_title('place') === 1}">
-							<en>CONTAINS:</en>
-							<he>מכיל:</he>
+							<en>STARTS WITH:</en>
+							<he>מתחיל מ:</he>
 					</div>
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type__item" 
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
@@ -130,6 +130,21 @@
 						ng-show="wizardFormController.suggested_distribution.places[2] > 0">
 					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type__title"
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__title--selected': wizardFormController.get_active_title('place') === 2}">
+							<en>CONTAINS:</en>
+							<he>מכיל:</he>
+					</div>
+					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type__item" 
+							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
+							ng-click="wizardFormController.adopt('place')" 
+							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
+							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2]) track by $index">
+							{{suggested_place}}
+					</div>
+				</div>
+				<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type" 
+						ng-show="wizardFormController.suggested_distribution.places[3] > 0">
+					<div 	class="wizard-form__field__autosuggest-wrapper__autosuggest__type__title"
+							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__title--selected': wizardFormController.get_active_title('place') === 3}">
 							<en>SOUNDS LIKE:</en>
 							<he>נשמע כמו:</he>
 					</div>
@@ -137,7 +152,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
 							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
-							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2]) track by $index">
+							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2] + wizardFormController.suggested_distribution.places[3]) track by $index">
 							{{suggested_place}}
 					</div>
 				</div>
