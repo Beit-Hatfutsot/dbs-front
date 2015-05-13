@@ -211,6 +211,9 @@ WizardFormCtrl.prototype = {
 
     get_active_title: function(type) {
         if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0]) {
+            if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0] + this.suggested_distribution[type + 's'][1] + this.suggested_distribution[type + 's'][2]) {
+                return 3;
+            }
             if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0] + this.suggested_distribution[type + 's'][1]) {
                 return 2;
             }

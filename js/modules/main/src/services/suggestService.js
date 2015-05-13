@@ -30,18 +30,22 @@ angular.module('main').
 
 		function get_suggestions(what, value) {
 
-				var count;
+				var count, exact;
 
 				return $http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
 					success(function(response) {
 						suggest.suggested[what] = [];
-						suggest.suggested.distribution[what] = [];
+						suggest.suggested.distribution[what] = [0];
+						exact = null;
 
 						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
 							count = 0;
 
 							response[group].forEach(function(suggestion) {
-								if (suggest.suggested[what].indexOf(suggestion) === -1) {
+								if (suggestion === value) {
+									exact = suggestion;
+								}
+								else if (suggest.suggested[what].indexOf(suggestion) === -1) {
 									suggest.suggested[what].push(suggestion);
 									count++;		
 								}
@@ -50,6 +54,11 @@ angular.module('main').
 							// save the number of suggestions in group
 							suggest.suggested.distribution[what].push( count );
 						});
+
+						if (exact) {
+							suggest.suggested[what].splice(0, 0, exact);
+							suggest.suggested.distribution[what][0] = 1;
+						}
 					}).
 					error(function() {
 						suggest.failed = true;
