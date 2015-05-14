@@ -27,7 +27,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
 							ng-click="wizardFormController.adopt('name')" 
 							ng-mouseover="wizardFormController.select_suggested('name', suggested_name)" 
-							ng-repeat="suggested_name in wizardFormController.suggested.names | limitTo: wizardFormController.suggested_distribution.names[0] track by $index">
+							ng-repeat="suggested_name in wizardFormController.raw_suggested.names.exact track by $index">
 							{{suggested_name}}
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
 							ng-click="wizardFormController.adopt('name')" 
 							ng-mouseover="wizardFormController.select_suggested('name', suggested_name)" 
-							ng-repeat="suggested_name in wizardFormController.suggested.names.slice(wizardFormController.suggested_distribution.names[0], wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1]) track by $index">
+							ng-repeat="suggested_name in wizardFormController.raw_suggested.names.starts_with track by $index">
 							{{suggested_name}}
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
 							ng-click="wizardFormController.adopt('name')" 
 							ng-mouseover="wizardFormController.select_suggested('name', suggested_name)" 
-							ng-repeat="suggested_name in wizardFormController.suggested.names.slice(wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1], wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1] + wizardFormController.suggested_distribution.names[2]) track by $index">
+							ng-repeat="suggested_name in wizardFormController.raw_suggested.names.contains track by $index">
 							{{suggested_name}}
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('name', suggested_name)}"  
 							ng-click="wizardFormController.adopt('name')" 
 							ng-mouseover="wizardFormController.select_suggested('name', suggested_name)" 
-							ng-repeat="suggested_name in wizardFormController.suggested.names.slice(wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1] + wizardFormController.suggested_distribution.names[2], wizardFormController.suggested_distribution.names[0] + wizardFormController.suggested_distribution.names[1] + wizardFormController.suggested_distribution.names[2] + wizardFormController.suggested_distribution.names[3]) track by $index">
+							ng-repeat="suggested_name in wizardFormController.raw_suggested.names.phonetic track by $index">
 							{{suggested_name}}
 					</div>
 				</div>
@@ -107,7 +107,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
 							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
-							ng-repeat="suggested_place in wizardFormController.suggested.places | limitTo: wizardFormController.suggested_distribution.places[0] track by $index">
+							ng-repeat="suggested_place in wizardFormController.raw_suggested.places.exact track by $index">
 							{{suggested_place}}
 					</div>
 				</div>
@@ -122,7 +122,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
 							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
-							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1]) track by $index">
+							ng-repeat="suggested_place in wizardFormController.raw_suggested.places.starts_with track by $index">
 							{{suggested_place}}
 					</div>
 				</div>
@@ -137,7 +137,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
 							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
-							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2]) track by $index">
+							ng-repeat="suggested_place in wizardFormController.raw_suggested.places.contains track by $index">
 							{{suggested_place}}
 					</div>
 				</div>
@@ -152,7 +152,7 @@
 							ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type__item--selected': wizardFormController.isSelectedSuggested('place', suggested_place)}"  
 							ng-click="wizardFormController.adopt('place')" 
 							ng-mouseover="wizardFormController.select_suggested('place', suggested_place)"
-							ng-repeat="suggested_place in wizardFormController.suggested.places.slice(wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2], wizardFormController.suggested_distribution.places[0] + wizardFormController.suggested_distribution.places[1] + wizardFormController.suggested_distribution.places[2] + wizardFormController.suggested_distribution.places[3]) track by $index">
+							ng-repeat="suggested_place in wizardFormController.raw_suggested.places.phonetic track by $index">
 							{{suggested_place}}
 					</div>
 				</div>

@@ -11,11 +11,17 @@ angular.module('main').
 			failed: false,
 
 			suggested: {
-				names: [],
-				places: [],
-				distribution: { 
-					names: [5, 5, 5],
-					places: [5, 5, 5]
+				names: {
+					exact: [],
+					starts_with: [],
+					contains: [],
+					phonetic: []
+				},
+				places: {
+					exact: [],
+					starts_with: [],
+					contains: [],
+					phonetic: []
 				}
 			},
 
@@ -30,39 +36,50 @@ angular.module('main').
 
 		function get_suggestions(what, value) {
 
-				var count, exact;
+				var count, exact, all_suggestions;
 
 				return $http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
 					success(function(response) {
-						suggest.suggested[what] = [];
-						suggest.suggested.distribution[what] = [0];
+						suggest.suggested = {
+							names: {
+								exact: [],
+								starts_with: [],
+								contains: [],
+								phonetic: []
+							},
+							places: {
+								exact: [],
+								starts_with: [],
+								contains: [],
+								phonetic: []
+							}
+						};
 						exact = null;
+						all_suggestions = [];
 
 						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
-							count = 0;
-
 							response[group].forEach(function(suggestion) {
 								if (suggestion === value) {
 									exact = suggestion;
 								}
-								else if (suggest.suggested[what].indexOf(suggestion) === -1) {
-									suggest.suggested[what].push(suggestion);
-									count++;		
+								else {
+									all_suggestions	= suggest.suggested[what].starts_with.
+										concat(suggest.suggested[what].contains.
+											concat(suggest.suggested[what].phonetic)
+										); 
+									if (all_suggestions.indexOf(suggestion) === -1) {
+										suggest.suggested[what][group].push(suggestion);
+									}
 								}
 							});
-
-							// save the number of suggestions in group
-							suggest.suggested.distribution[what].push( count );
 						});
 
 						if (exact) {
-							suggest.suggested[what].splice(0, 0, exact);
-							suggest.suggested.distribution[what][0] = 1;
+							suggest.suggested[what].exact.push(exact);
 						}
 					}).
 					error(function() {
 						suggest.failed = true;
-						suggest.suggested[what] = [];
 					}).
 					finally(function() {
 						suggest.in_progress = false;

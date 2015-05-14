@@ -65,18 +65,33 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
 
     Object.defineProperty(this.suggested, 'names', {
         get: function() {
-            return suggest.suggested.names;
+            return suggest.suggested.names.exact.
+                concat(suggest.suggested.names.starts_with.
+                    concat(suggest.suggested.names.contains.
+                        concat(suggest.suggested.names.phonetic)
+                    )
+                );
         }
     });
 
     Object.defineProperty(this.suggested, 'places', {
         get: function() {
-            return suggest.suggested.places;
+            return suggest.suggested.places.exact.
+                concat(suggest.suggested.places.starts_with.
+                    concat(suggest.suggested.places.contains.
+                        concat(suggest.suggested.places.phonetic)
+                    )
+                );
+        }
+    });
+
+    Object.defineProperty(this, 'raw_suggested', {
+        get: function() {
+            return suggest.suggested;
         }
     });
 
     Object.defineProperty(this, 'submit_disabled', {
-
         get: function() {
             if (this.wizard_query.name == '' && this.wizard_query.place == '') {
                 return true;
@@ -88,9 +103,21 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
     });
 
     Object.defineProperty(this, 'suggested_distribution', {
-
         get: function() {
-            return suggest.suggested.distribution;
+            return { 
+                names: [
+                    suggest.suggested.names.exact.length, 
+                    suggest.suggested.names.starts_with.length, 
+                    suggest.suggested.names.contains.length,
+                    suggest.suggested.names.phonetic.length
+                ], 
+                places: [
+                    suggest.suggested.places.exact.length, 
+                    suggest.suggested.places.starts_with.length, 
+                    suggest.suggested.places.contains.length,
+                    suggest.suggested.places.phonetic.length
+                ]
+            }
         }
     });
 };
