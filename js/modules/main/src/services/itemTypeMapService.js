@@ -3,7 +3,8 @@ angular.module('main').service('itemTypeMap', function() {
 		0: 'genTreeIndividuals',
 		1: 'photoUnits',
     	5: 'places',
-    	6: 'familyNames'
+    	6: 'familyNames',
+    	8: 'personalities'
 	};
 
 	this.get_type = function(description_code) {
