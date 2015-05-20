@@ -11,22 +11,22 @@
 	<!-- <div class="info">?</div> -->
 	<div class="modifiers-container">
 		<div class="modifier">
-			<input type="radio" name="{{label_text_en}}" value="" ng-model="modifier_model">
-			<label>
+			<input type="radio" name="{{label_text_en}}" value="" ng-model="modifier_model" id="exact" checked="checked">
+			<label class="modif-label"for="exact">
 				<en>Exact</en>
 				<he>מדוייק</he>
 			</label>
 		</div>
 		<div class="modifier">
-			<input type="radio" name="{{label_text_en}}" value="prefix" ng-model="modifier_model">
-			<label>
+			<input type="radio" name="{{label_text_en}}" value="prefix" ng-model="modifier_model" id="begins-with">
+			<label class="modif-label" for="begins-with">
 				<en>Begins with</en>
 				<he>מתחיל ב</he>
 			</label>
 		</div>
 		<div class="modifier">
-			<input type="radio" name="{{label_text_en}}" value="phonetic" ng-model="modifier_model">
-			<label>
+			<input type="radio" name="{{label_text_en}}" value="phonetic" ng-model="modifier_model" id="sounds-like">
+			<label class="modif-label" for="sounds-like">
 				<en>Sounds like</en>
 				<he>נשמע כמו</he>
 			</label>
