@@ -52,6 +52,14 @@
 				text-align: center;
 				font-size: 16px;
 			}
+			&__xsign {
+				position: absolute;
+				top: -45px;
+				right: -58px;
+				width: 30px;
+				height: 30px;
+
+			}
 
 			.auth-form {
 				width: 425px;
