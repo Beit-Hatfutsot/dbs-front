@@ -5,63 +5,94 @@
 
 	@at-root #tree-sort {
 		position: relative;
-		width: $view-width;
+		/*width: $view-width;*/
+		width: 1170px;
 		min-height: 870px;
 		margin: 0 auto;
 		background: #ffffff;
 		padding: 24px 18px 10px;
+		/*box-shadow: 0px 2px 4px 2px #888888;*/
+		@include item-shadow();
 
 		.tree-view & {
 			padding: 11px;
 		}
 
 		.title {
-			width: 100%;
-			font-size: 24px;
-			padding-bottom: 17px;
 			background-color: #999999;
-			color: #ffffff;
-			left: -26px;
-			/*margin-left: -24px;*/
+			width: 100%;
+			height: 47px;
+			margin-left: -25px;
 			position: relative;
-
-
 
 			.tree-view & {
 				display: none;
 			}
+
 			&__tree-icon {
-				float: left;
-				width: 43px;
-				height: 43px;
-			}	
-		}
-		.title:after {
-			content:'';
-			position: absolute;
-			right: -20px;
-			top:0;
-			bottom:0;    
-			width:0px;
-			height:0px;
-			border-top: 45px solid #999999;
-			border-right: 20px solid transparent; 
+				width: 29px;
+				height: 40px;
+				top: 5px;
+				left: 25px;
+			}
+
+			&__arrow {
+				width: 0;
+				height: 0;
+				line-height: 0;
+				border-left: 7px solid transparent;
+				border-top: 6px solid #666666;
+				top: 101%;
+				position: absolute;
+				left: 0;
+			}
+
+			&__text {
+					position: relative;
+					color: #ffffff;
+					font-size: 24px;
+					margin-top: -35px;
+					left: 60px;
+				.en {
+					float: left;
+				}
+				.he {
+					float: right;
+				}	
+			}
 		}
 
+				.title:after {
+				content:'';
+				position: absolute;
+				top:0;
+				bottom:0;
+				right: -30px;    
+				width:0px;
+				height:0px;
+				border-top: 48px solid #999;
+				border-right: 30px solid transparent; 
+			}
+			
 		.filters {
 			display: inline-block;
 			vertical-align: top;
 			width: 230px;
-			padding: 8px 5px 2px;
+			/*padding: 8px 5px 2px;*/
+			/*margin: 15px 10px;*/
+			margin-top: 15px;
 
 			&__update {
+				border: none;
 				background: #bf311a;
 				color: #efcdc7;
 				text-align: center;
 				padding: 5px 0;
-				width: 200px;
-				height: 42px;
-				font-size: 13px;
+				width: 220px;
+				height: 45px;
+				font-size: 17px;
+				/*margin: 15px auto;*/
+				@include hover-pointer();
 			}
 
 			.tree-view & {
@@ -103,6 +134,7 @@
 
 					input[type="text"] {
 						border: 2px solid #9a9a9a;
+						overflow: hidden;
 						/*@include border-radius(3px);*/
 						
 						/*.en & {
@@ -114,7 +146,7 @@
 						}*/
 					}
 
-					.info {
+					/*.info {
 						display: inline-block;
 						width: 15px;
 						height: 15px;
@@ -122,7 +154,7 @@
 						text-align: center;
 						border: 2px solid #333333;
 						@include border-radius(50%);
-					}
+					}*/
 				}
 			}
 
@@ -133,39 +165,64 @@
 					
 					input[type="text"] {
 						display: inline-block;
-						width: 200px;
-						height: 24px;
+						width: 220px;
+						height: 20px;
 						padding: 0 6px;
 						border-color: #efcdc7;
 					}
 
 					.modifiers-container {
-						width: 275px;
-						margin: 0 auto;	
+						width: 220px;
+						margin-top: 1px;
+						
+							
 
 						.modifier {
 							display: inline-block;
-							text-align: center;
+							/*text-align: center;*/
 
 							.en & {
-								margin-right: 33px;
+								margin-right: 2px;
 							}
 
 							.he & {
-								margin-left: 48px;
+								margin-left: 2px;
 							}
 
 							input[type="radio"] {
+
 								display: none;
 							}
 							input[type="radio"]:checked + .modif-label {
 								background-color: #efcdc7;
+								/*border-top: 8px solid #ffffff;
+								border-right: 38px solid transparent;
+								border-left: 30px solid transparent;*/
+								/*margin-top: -3px;*/
+								/*overflow: hidden;*/
+
+							
+							.modifier-arrow {
+								width: 0;
+								height: 0;
+								line-height: 0;
+								border-right: 36px solid transparent;
+								border-top: 6px solid white;
+								border-left: 32px solid transparent;
+							}
+							}
+							.modif-label:hover {
+								background-color: #d6d6d6;
 							}
 							.modif-label {
 								background-color: #eeecec;
 								display: inline-block;
-								width: 50px;
+								width: 68px;
 								height: 20px;
+								margin-top: -2px;
+								/*padding-top: 7px;*/
+								/*padding-top: 3px;*/
+								/*overflow: hidden;*/
 
 							}
 						}
@@ -187,7 +244,7 @@
 
 				&__choices {
 
-					/*input[type="radio"] {
+					input[type="radio"] {
 
 						.en & {
 							margin-right: 10px;
@@ -196,7 +253,7 @@
 						.he & {
 							margin-left: 10px;
 						}
-					}*/
+					}
 					input[type="radio"] {
 						display: none;
 					}
@@ -206,7 +263,7 @@
 					.label-sex {
 						background-color: #eeecec;
 						display: inline-block;
-						width: 60px;
+						width: 63px;
 						height: 20px;
 					}
 				}
@@ -232,6 +289,8 @@
 							display: inline-block;
 							width: 80px;
 							height: 24px;
+							
+
 						}
 					}
 
@@ -262,7 +321,7 @@
 			display: inline-block;
 			vertical-align: top;
 			width: 860px;
-			margin-top: 10px;
+			margin-top: 15px;
 			box-sizing: content-box;
 
 			.en & {
@@ -333,26 +392,28 @@
 				.tree-view & {
 					width: 258px;
 				}
-
+				.arrow1 {
+							width: 0px;
+							height: 0px;
+							line-height: 0;
+							border-top: 13px solid #f5e1dd;
+							border-left: 81px solid transparent;
+							border-right: 40px solid transparent;
+							top: 106%;
+							position: absolute;
+							left: -5px;
+							
+						}
 				thead, tbody {
-
 
 					tr {
 						font-size: 15px;
+						
 
 						th, td {
-							overflow: hidden;
+							/*overflow: hidden;*/
 							vertical-align:middle;
 
-							/*.en & {
-								border-left: 10px solid transparent;
-								border-right: 20px solid transparent;
-							}
-
-							.he & {
-								border-left: 20px solid transparent;
-								border-right: 10px solid transparent;
-							}*/
 							.en & {
 								border-left: 5px solid #ffffff;
 								border-right: 5px solid #ffffff;
@@ -369,6 +430,7 @@
 				thead {
 					display: table-header-group;
 					background-color: #f5e1dd;
+					/*margin-bottom: 10px;*/
 					/*border-bottom: 2px solid #ffffff;*/
 					tr {
 
@@ -466,6 +528,7 @@
 			&__more-columns {
 				position: absolute;
 				top: 72px;
+				background-color: #ss;
 
 				.en & {
 					right: 3px;
@@ -498,8 +561,8 @@
 					}
 
 					&__icon {
-						width: 21px;
-						height: 19px;
+						width: 10px;
+						height: 12px;
 					}
 				}
 
@@ -559,7 +622,7 @@
 
 					&__row {
 						&:hover {
-							//color: #5dc2d4;
+							color: #5dc2d4;
 						}
 
 						&__desc {

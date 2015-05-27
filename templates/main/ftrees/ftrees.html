@@ -1,9 +1,12 @@
 <div id="family-trees-container" ng-class="{'tree-view': ftreesCtrl.tree_view}">
 	<div id="tree-sort">
-		<div class="title">
-			<icon class="title__tree-icon" position="[-80, -435]"></icon>
-			<en>Family Trees Search Results</en>
-			<he>תוצאות חיפוש עמי משפחה</he>
+		<div class="title"> 
+			<span class="title__arrow"></span>
+			<icon class="title__tree-icon" position="[-84, -439]"></icon>
+			<div class="title__text">
+				<en>Family Trees Search Results</en>
+				<he>תוצאות חיפוש עמי משפחה</he>
+			</div>
 		</div>
 		<form class="filters" name="filters">
 				<button class="filters__update" ng-click="ftreesCtrl.search()">
@@ -78,7 +81,8 @@
 							<!-- <icon class="sort-arrow" position="[-380, -113]" ng-switch-when="FN"></icon>
 							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="FN_inverse"></icon>
 							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon> -->
-							<div class="column-title">
+							<span class="arrow1"></span>
+							<div tree-viewclass="column-title">
 								<en>First<br>Name</en>
 								<he>שם<br>פרטי</he>
 							</div>
@@ -173,9 +177,10 @@
 					</tr>
 				</tbody>
 			</table>
+
 			<div class="results__more-columns" dropdown is-open="ftreesCtrl.more_columns_menu">
 				<div class="results__more-columns__trigger" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
-					<icon class="results__more-columns__trigger__icon" position="[-378, -136]"></icon>
+					<icon class="results__more-columns__trigger__icon" position="[-195, -665]"></icon>
 						<div>
 							<en>MORE</en>
 							<he>עוד</he>
@@ -183,8 +188,8 @@
 				</div>			
 				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
 					<div class="results__more-columns__menu__title">
-						<en>Choose what columns to display (up to 6)</en>
-						<he>בחר אלו עמודות להציג (עד 6)</he>
+						<en>Choose what columns to display (up to 5)</en>
+						<he>בחר אלו עמודות להציג (עד 5)</he>
 					</div>
 					<div class="results__more-columns__menu__row" ng-repeat="(key, val) in ftreesCtrl.column_status">
 						<input type="checkbox" id="{{key}}-check" ng-model="ftreesCtrl.column_status[key]">
@@ -192,6 +197,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="results__people-arrow" ng-show="ftreesCtrl.individuals.isEmpty() && filters.$pristine">
 				<en>
 					<div class="results__people-arrow__text">
@@ -222,7 +228,7 @@
 					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
 				</span>
 				<span class="results__per-page__paginator">
-					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.prev_page()"><</button>
+					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.prev_page()">></button>
 					<span ng-if="ftreesCtrl.current_page != ftreesCtrl.low_page_bound">
 						<a href="" ng-click="ftreesCtrl.current_page = ftreesCtrl.low_page_bound">{{ftreesCtrl.low_page_bound}}</a> ... 
 					</span>
