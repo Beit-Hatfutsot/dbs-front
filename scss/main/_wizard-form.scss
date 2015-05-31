@@ -18,7 +18,7 @@
 			width: 100%;
 			height: 38px;
 			padding: 0 8px;
-			border: 2px solid #a09e9b;
+			border: 1px solid #a09e9b;
 			@include border-radius(3px);
 		}
 	
@@ -36,44 +36,48 @@
 		&__autosuggest-wrapper {
 			position: relative;
 
+			&__instuctions {
+				width: 100%;
+				color: #ffffff;
+				background-color: #999999;
+				padding: 0 8px;
+			}
+
 			&__autosuggest {
 				position: absolute;
 				width: 100%;
-				padding: 8px;
+				padding: 0;
 				background: #ffffff;
-				border-left: 2px solid #a09e9b;
-				border-right: 2px solid #a09e9b;
-				border-bottom: 2px solid #a09e9b;
-				
-				&__type {
-					margin-bottom: 12px;
+				border-left: 1px solid #a09e9b;
+				border-right: 1px solid #a09e9b;
+				border-bottom: 1px solid #a09e9b;
 
-					&__title {
-						color: #666666;
+				&__type-wrapper {
+					padding: 0 5px;
 
-						&--selected {
-							color: #5dc2d4;
-						}
-					}
+					&__type {
+						margin: 5px auto;
 
-					&__item {
-						position: relative;
-						top: 3px;
-						width: 250px;
-						height: 100%;
-						@include hover_pointer();
-						padding: 0 3px;
-					
-						.en & {
-							left: 24px;
+						&__title {
+							color: #b0b0b0;
+							font-weight: bold;
+							padding: 0 3px;
+
+							&--selected {
+								color: #68d1d7;
+							}
 						}
 
-						.he & {
-							right: 24px;
-						}
-
-						&--selected {
-							background: #ccd0d2;
+						&__item {
+							width: 100%;
+							padding: 0 33px;
+							margin: 0 auto;
+							@include hover_pointer();
+							
+							&--selected {
+								background: #c4edf1;
+								width: 100%;
+							}
 						}
 					}
 				}
