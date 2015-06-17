@@ -20,7 +20,6 @@
 						<he>שם פרטי</he>
 					</label>
 					<input type="text" ng-model="ftreesCtrl.search_params.first_name" placeholder="as Moshe, Liat...">
-					<!-- <div class="info">?</div> -->
 				</div>
 			</div>
 			<filters-field class="filters__field" label-text-en="Last Name" label-text-he="שם משפחה" model="last_name"></filters-field>
@@ -34,53 +33,54 @@
 					<input type="radio" name="sex" value="m" ng-model="ftreesCtrl.search_params.sex" id="choice-male" checked="checked">
 					<label class="label-sex" for="choice-male">
 						<en>Male</en>
+						<he>זכר</he>
 					</label>
 					<input type="radio" name="sex" value="f" ng-model="ftreesCtrl.search_params.sex" id="choice-female">
 					<label class="label-sex" for="choice-female">
 						<en>Female</en>
+						<he>נקבה</he>
 					</label>
 					<input type="radio" name="sex" value="n" ng-model="ftreesCtrl.search_params.sex" id="choice-nm">
 					<label class="label-sex" for="choice-nm">
 						<en>Never mind</en>
+						<he>לא משנה</he>
 					</label>
 				</div>
 			</div>
-
-			<filters-field class="filters__field" label-text-en="Place of Birth" label-text-he="מקום לידה" model="birth_place"></filters-field>
-			<filters-field class="filters__field" label-text-en="Place of Marriage" label-text-he="מקום נישואין" model="marriage_place"></filters-field>
-			<filters-field class="filters__field" label-text-en="Place of Death" label-text-he="מקום פטירה" model="death_place"></filters-field>
-			<filters-fudge class="filters__fudge-field" label-text-en="Year of Birth" label-text-he="שנת לידה" model="birth_year"></filters-fudge>
-			<filters-fudge class="filters__fudge-field" label-text-en="Year of Marriage" label-text-he="שנת נישואין" model="marriage_year"></filters-fudge>
-			<filters-fudge class="filters__fudge-field" label-text-en="Year of Death" label-text-he="שנת פטירה" model="death_year"></filters-fudge>
+			<filters-field class="filters__field" label-text-en="Place of Birth" label-text-he="מקום לידה" model="birth_place" placeholder="Israel, Tel-Aviv..."></filters-field>
+			<filters-field class="filters__field" label-text-en="Place of Marriage" label-text-he="מקום נישואין" model="marriage_place" placeholder="Israel, Tel-Aviv..."></filters-field>
+			<filters-field class="filters__field" label-text-en="Place of Death" label-text-he="מקום פטירה" model="death_place" placeholder="Israel, Tel-Aviv..."></filters-field>
+			<filters-fudge class="filters__fudge-field" label-text-en="Year of Birth" label-text-he="שנת לידה" model="birth_year" placeholder="1948.."></filters-fudge>
+			<filters-fudge class="filters__fudge-field" label-text-en="Year of Marriage" label-text-he="שנת נישואין" model="marriage_year" placeholder="1948.."></filters-fudge>
+			<filters-fudge class="filters__fudge-field" label-text-en="Year of Death" label-text-he="שנת פטירה" model="death_year" placeholder="1948.."></filters-fudge>
 			<div class="filters__field">
 				<div class="container">
 					<label>
 						<en>Tree Number</en>
 						<he>מספר עץ</he>
 					</label>
-					<input type="text" ng-model="ftreesCtrl.search_params.filters_tree_number">
-					<!-- <div class="info">?</div> -->
+					<input type="text" ng-model="ftreesCtrl.search_params.filters_tree_number" placeholder="12345">
+					<div class="info">
+						<en>*Commited by filling additional field</en>
+						<he>*Commited by filling additional field</he>
+					</div>
 				</div>
 			</div>
 			<button class="filters__update" ng-click="ftreesCtrl.search()">
 				<en>Update</en>
 				<he>עדכן</he>
 			</button>
+			<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()">
+					<en>Clear filters</en>
+					<he>נקה מסננים</he>
+			</a>
 		</form>
 
 		<div class="results">
-			<!-- <div class="results__title">
-				<en>Results {{ftreesCtrl.display_from_result + ftreesCtrl.individuals.isEmpty() ? 0 : 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
-				<he>תוצאות {{ftreesCtrl.display_from_result + ftreesCtrl.individuals.isEmpty() ? 0 : 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
-			</div> -->
 			<table class="results__individuals">
-
 				<thead>
 					<tr>
 						<th class="first-name" ng-click="ftreesCtrl.sort('FN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['FN']">
-							<!-- <icon class="sort-arrow" position="[-380, -113]" ng-switch-when="FN"></icon>
-							<icon class="sort-arrow sort-arrow--upside" position="[-380, -113]" ng-switch-when="FN_inverse"></icon>
-							<icon class="sort-arrow" position="[-380, -125]" ng-switch-default></icon> -->
 							<span class="arrow1"></span>
 							<div tree-viewclass="column-title">
 								<en>First<br>Name</en>
@@ -88,6 +88,7 @@
 							</div>
 						</th>
 						<th class="last-name" ng-click="ftreesCtrl.sort('LN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['LN']">
+							<!-- <span class="last-name-arrow"></span> -->
 								<en>Last<br>Name</en>
 								<he>שם<br>משפחה</he>
 							</div>
@@ -116,8 +117,7 @@
 								<he>תאריך<br>נישואין</he>
 							</div>
 						</th>
-						<th class="death-place" ng-click="ftreesCtrl.sort('DP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="
-						ftreesCtrl.column_status['DP']">
+						<th class="death-place" ng-click="ftreesCtrl.sort('DP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['DP']">
 							<div class="column-title">
 								<en>Death<br>Place</en>
 								<he>מקום<br>פטירה</he>
@@ -151,6 +151,7 @@
 						</td>
 						<td class="last-name" ng-show="ftreesCtrl.column_status['LN']">
 							{{indi.LN}}
+							<span class="last-name-arrow"></span>
 						</td>
 						<td class="birth-place" ng-show="ftreesCtrl.column_status['BP']">
 							{{indi.BP}}
@@ -180,20 +181,22 @@
 
 			<div class="results__more-columns" dropdown is-open="ftreesCtrl.more_columns_menu">
 				<div class="results__more-columns__trigger" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
-					<icon class="results__more-columns__trigger__icon" position="[-195, -665]"></icon>
+					<en><icon class="results__more-columns__trigger__icon" position="[-195, -665]"></icon></en>
+					<he><icon class="results__more-columns__trigger__icon" position="[-194, -684]"></icon></he>
 						<div>
-							<en>MORE</en>
+							<en>More</en>
 							<he>עוד</he>
 						</div>
 				</div>			
 				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
 					<div class="results__more-columns__menu__title">
-						<en>Choose what columns to display (up to 5)</en>
-						<he>בחר אלו עמודות להציג (עד 5)</he>
+						<en>Choose what columns to display (up to 6)</en>
+						<he>בחר אלו עמודות להציג (עד 6)</he>
 					</div>
 					<div class="results__more-columns__menu__row" ng-repeat="(key, val) in ftreesCtrl.column_status">
-						<input type="checkbox" id="{{key}}-check" ng-model="ftreesCtrl.column_status[key]">
-						<label class="results__more-columns__menu__row__desc" for="{{key}}-check">{{ftreesCtrl.key_map[key][lang]}}</label>
+						<label id="fancyArrow-label" for="{{key}}-check" class="results__more-columns__menu__row__fancyArrow" ng-class="{selected:ftreesCtrl.column_status[key]}"></label>
+						<input type="checkbox"  ng-model="ftreesCtrl.column_status[key]" id="{{key}}-check">
+						<label for="{{key}}-check" class="results__more-columns__menu__row__desc">{{ftreesCtrl.key_map[key][lang]}}</label>
 					</div>
 				</div>
 			</div>
@@ -222,31 +225,50 @@
 					<img src="images/arrow_people_he.png">
 				</he>
 			</div>
+
 			<div class="results__per-page" ng-hide="ftreesCtrl.individuals.isEmpty()">
-				<span class="results__per-page__indicator">
-					<en>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} of {{ftreesCtrl.individuals.length}}</en>
-					<he>{{ftreesCtrl.display_from_result + 1}} - {{ftreesCtrl.display_to_result}} מתןך {{ftreesCtrl.individuals.length}}</he>
-				</span>
 				<span class="results__per-page__paginator">
-					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.prev_page()">></button>
-					<span ng-if="ftreesCtrl.current_page != ftreesCtrl.low_page_bound">
-						<a href="" ng-click="ftreesCtrl.current_page = ftreesCtrl.low_page_bound">{{ftreesCtrl.low_page_bound}}</a> ... 
-					</span>
-					{{ftreesCtrl.current_page}}
-					<span ng-if="ftreesCtrl.current_page != ftreesCtrl.high_page_bound">
-						... <a href="" ng-click="ftreesCtrl.current_page = ftreesCtrl.high_page_bound">{{ftreesCtrl.high_page_bound}}</a>
-					</span>
-					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.next_page()">></button>
+					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.prev_page()">
+						<en><icon class="results__per-page__paginator__arrow__icon" position="[-234, -684]"></icon></en>
+						<he><icon class="results__per-page__paginator__arrow__icon" position="[-235, -665]"></icon></he>
+					</button>
+					<en>Page {{ftreesCtrl.current_page}} of {{ftreesCtrl.page_count}}</en>
+					<he>Page {{ftreesCtrl.current_page}} of {{ftreesCtrl.page_count}}</he>
+					<button href="" class="results__per-page__paginator__arrow" ng-click="ftreesCtrl.next_page()">
+						<en><icon class="results__per-page__paginator__arrow__icon" position="[-235, -665]"></icon></en>
+						<he><icon class="results__per-page__paginator__arrow__icon" position="[-234, -684]"></icon></he>
+					</button>
 				</span>
+
 				<span class="results__per-page__selector">
 					<label for="individuals-per-page">
-						<en>Per page</en>
-						<he>לעמוד</he>
+						<en>Results Per Page:</en>
+						<he>תוצאות לעמוד:</he>
 					</label>
 					<select id="individuals-per-page" ng-model="ftreesCtrl.results_per_page">
 						<option ng-repeat="i in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]" ng-if="i < ftreesCtrl.individuals.length || i === 5">{{i}}</option>
 					</select>
+					<span class="results__per-page__selector__fancyArrow">
+						<icon  class="results__per-page__selector__fancyArrow__selectbox-icon" position="[-217, -661]"></icon>
+					</span>
+					
 				</span>
+
+				<span class="results__per-page__go-to-page">
+					<label>
+						<en>Go to Page</en>
+						<he>Go to Page</he>
+					</label>
+					<input type="text" class="results__per-page__go-to-page__number" ng-model="ftreesCtrl.candidate_page">
+					<button href="" class="results__per-page__go-to-page__go-button" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></button>
+					<en><icon class="results__per-page__go-to-page__icon" position="[-195, -665]" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></icon></en>
+					<he><icon class="results__per-page__go-to-page__icon" position="[-194, -684]" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></icon></he>
+					<span class="results__per-page__go-to-page__go-text" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)">
+						<en>GO</en>
+						<he>GO</he>
+					</span>
+				</span>
+
 			</div>
 		</div>
 		<ui-view></ui-view>

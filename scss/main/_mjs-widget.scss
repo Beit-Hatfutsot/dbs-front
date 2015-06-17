@@ -1,6 +1,8 @@
 .mjs-widget-wrapper {
 	position: relative;
 	display: inline-block;
+	float: right;
+
 
 	&.open {
 
@@ -112,22 +114,12 @@
 	}
 }
 
-.mjs-widget {
+.mjs-widget-icon{
 	display: inline-block;
-	color: #f9af37;
+	width: 65px;
+	height: 64px;
+	position: absolute;
+    top: -68px;
+    right: -4px;
 	@include hover-pointer();
-
-	&__icon {
-		width: 21px;
-		height: 21px;
-		display: inline-block;
-	}
-
-	&__text {
-		padding: 0 2px 5px 0;
-		font-size: 12px;
-		font-weight: bold;
-		display: inline-block;
-		vertical-align: bottom;
-	}
 }

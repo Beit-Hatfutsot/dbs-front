@@ -75,6 +75,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this._results_per_page = 15;
 	this.display_from_result = 0;
 	this.more_columns_menu = false;
+	this.candidate_page = '';
 	
 	self.result_column_manager = musicalChairsFactory.create_game({
 		'FN': true,
@@ -82,12 +83,12 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		'BP': true,
 		'BD': true,
 		'MP': true,
-		'MD': false,
+		'MD': true,
 		'DP': false,
 		'DD': false,
 		'G': false,
 		'GTN': false
-	}, 5);
+	}, 6);
 
 	this.$state = $state;
 	this.$stateParams = $stateParams;
@@ -102,6 +103,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 			return parseInt(this.individuals.length / this.results_per_page) + 1;
 		}
 	});
+
 
 	Object.defineProperty(this, 'current_page', {
 		get: function() {
@@ -301,6 +303,20 @@ FtreesController.prototype = {
 				}
 			});
 	},
+
+
+	go_to_page: function(page_number) {
+		if(page_number <= this.page_count && page_number >= 1) {
+			this.current_page  = page_number;
+		}
+				
+	},
+	clear_filters: function() {
+		for (var modifier in this.search_modifiers) {
+			this.search_params[modifier] = '';
+		}
+	},
+
 
 	select_individual: function(individual) {
 		var self = this;

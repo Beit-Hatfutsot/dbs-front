@@ -152,29 +152,58 @@
 		width: 100%;
 		min-height: 53px;
 		padding: 0 8px;
-		background: #f5f5f5;
-		border: 1px solid #f0f0f0;
-		@include border-radius(4px);
+		/*
+		border: 1px solid #f0f0f0;*/
+		
+
+		
 
 		.individual {
+			position: relative;
+			background: #ddf0f4;
 			display: inline-block;
 			vertical-align: top;
 			margin-top: -11px;
+			@include border-radius(50px);
+			width: 210px;
+			height: 58px;
+
+			&.female {
+				background-color: #f6e1de;
+			}
+			
 
 			&__icon {
-				margin: 0 auto;
-				width: 31px;
-				height: 31px;
-				overflow: hidden;
+				position: absolute;
+				width: 58px;
+				height: 58px;
+				margin: 0px 2px;
+				z-index: 1;
 			}
 
 			&__name {
 				max-width: 71px;
-				text-align: center;
-				font-size: 15px;
-				font-weight: bold;
+				text-align: left;
+				font-size: 12px;
 				word-wrap: break-word;
 				word-spacing: 100px;
+				float: right;
+				margin-top: 4px;
+			}
+			&__dates {
+				background-color: #8FDCE4;
+				max-width: 50px;
+				text-align: left;
+				font-size: 12px;
+				margin-top: 4px;
+				position: absolute;
+				left: 52px;
+				height: 58px;
+				top: -4px;
+
+				&.female {
+					background-color: #e6ada2;
+				}
 			}
 		}
 

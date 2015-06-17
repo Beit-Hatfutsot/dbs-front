@@ -24,6 +24,7 @@ angular.module('main').
 
 				scope.label_text_en = attrs['labelTextEn'];
 				scope.label_text_he = attrs['labelTextHe'];
+				scope.placeholder= attrs['placeholder'];
 				if (attrs['supportTextEn']) {
 					scope.support_text_en = attrs['supportTextEn'];
 				}

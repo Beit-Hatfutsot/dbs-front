@@ -91,7 +91,9 @@ angular.module('main').
 					name: individual.FN + ' ' + individual.LN,
 					sex: individual.G,
 					parent_family: subset.parent_family,
-					family: subset.family
+					family: subset.family,
+					// birth_year: individual.BD.substr(-4), //added 16.06
+					// death_year: individual.DD.substr(-4)
 				};
 
 				return parsed_individual;
@@ -132,6 +134,7 @@ angular.module('main').
 					parsed_parent.husband.id = parent_data.husb.id;
 					parsed_parent.husband.name = parse_name( parent_data.husb.getValue('name') );
 					parsed_parent.husband.sex = parent_data.husb.getValue('sexe');	
+
 				}
 				if(parent_data.wife) {
 					parsed_parent.wife.id = parent_data.wife.id;
@@ -210,8 +213,8 @@ angular.module('main').
 
 				individuals.forEach(function(individual) {
 					if ( is_alive(individual) ) {
-						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', '_id'];
-						var filtered_individual = {};
+						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', '_id']; 
+ 						var filtered_individual = {};
 
 						for (var prop in individual) {
 							if ( allowed_props.indexOf(prop) !== -1 ) {
@@ -256,6 +259,26 @@ angular.module('main').
 
 			return alive
 		}
+
+		// function get_dates (individual) {
+		// 	var birth_year = parseInt(individual.BD.substr(-4));
+		// 	var death_year = parseInt(individual.DD.substr(-4));
+		// 	if (birth_year == 0) {
+		// 		birth_year == "?";
+		// 	}
+		// 	else {
+		// 		return birth_year;
+		// 	}
+		// 	if (!individual.is_alive) {
+		// 		if (death_year == 0) {
+		// 			death_year == "?";
+		// 		}
+		// 		else {
+		// 			return death_year;
+		// 		}
+		// 	}
+
+		// }
 
 		function get_age(bd, current_year) {
 			try {
