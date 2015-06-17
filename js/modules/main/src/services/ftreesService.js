@@ -92,8 +92,8 @@ angular.module('main').
 					sex: individual.G,
 					parent_family: subset.parent_family,
 					family: subset.family,
-					// birth_year: individual.BD.substr(-4), //added 16.06
-					// death_year: individual.DD.substr(-4)
+					birth_year: individual.BD ? individual.BD.substr(-4) : null,
+					death_year: individual.DD ? individual.DD.substr(-4) : null
 				};
 
 				return parsed_individual;
@@ -133,13 +133,21 @@ angular.module('main').
 				if (parent_data.husb) {
 					parsed_parent.husband.id = parent_data.husb.id;
 					parsed_parent.husband.name = parse_name( parent_data.husb.getValue('name') );
-					parsed_parent.husband.sex = parent_data.husb.getValue('sexe');	
+					parsed_parent.husband.sex = parent_data.husb.getValue('sexe');
+					var birth = parent_data.husb.getValue('birt');
+					parsed_parent.husband.birth_year = birth ? birth.date : null;
+					var death = parent_data.husb.getValue('deat');
+					parsed_parent.husband.death_year = death ? death.date : null;	
 
 				}
 				if(parent_data.wife) {
 					parsed_parent.wife.id = parent_data.wife.id;
 					parsed_parent.wife.name = parse_name( parent_data.wife.getValue('name') );
 					parsed_parent.wife.sex = parent_data.wife.getValue('sexe');
+					var birth = parent_data.wife.getValue('birt');
+					parsed_parent.wife.birth_year = birth ? birth.date : null;
+					var death = parent_data.wife.getValue('deat');
+					parsed_parent.wife.death_year = death ? death.date : null;	
 				}
 
 				parent_data.childs.forEach(function(child) {
@@ -150,7 +158,7 @@ angular.module('main').
 					};
 					parsed_parent.children.push(child_obj);
 				});
-
+				
 				return parsed_parent;
 			},
 
@@ -171,7 +179,11 @@ angular.module('main').
 				if (spouse) {
 					parsed_family.spouse.id = spouse.id;
 					parsed_family.spouse.name = parse_name( spouse.getValue('name') );
-					parsed_family.spouse.sex = spouse.getValue('sexe');	
+					parsed_family.spouse.sex = spouse.getValue('sexe');
+					var birth = spouse.getValue('birt');
+					parsed_family.spouse.birth_year = birth ? birth.date : null;
+					var death = spouse.getValue('deat');
+					parsed_family.spouse.death_year = death ? death.date : null;
 				}
 				
 				family_data.childs.forEach(function(child) {
@@ -180,6 +192,11 @@ angular.module('main').
 						name: parse_name( child.getValue('name') ),
 						sex: child.getValue('sexe')
 					};
+					var birth = child.getValue('birt');
+					child_obj.birth_year = birth ? birth.date : null;
+					var death = child.getValue('deat');
+					child_obj.death_year = death ? death.date : null;
+
 					var child_family_data = self.get_individual_data(child.id).family_data;
 					if (child_family_data) {
 						child_obj.family = self.parse_family(child_family_data);
@@ -195,8 +212,7 @@ angular.module('main').
 
 			get_individual_data: function(individual_id) {
 				var raw_data = gedcomParser.getData(individual_id);
-				window.parser = gedcomParser;
-				window.raw_data = raw_data;
+
 				if (raw_data) {
 					var parent_data = raw_data.getValue('familleParent'),
 						family_data = raw_data.getValue('familles')[0];

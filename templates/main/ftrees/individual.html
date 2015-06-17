@@ -1,4 +1,4 @@
-<div class="individual" ng-click="goto_ftree_item(individual.id, treeNumber)" ng-class="{female: individual.sex === 'F'}">
+<div class="individual" ng-click="goto_ftree_item(individual.id, treeNumber)" ng-class="{'individual--female': individual.sex === 'F'}">
 	<ng-switch on="individual.sex">
 		<div class="individual__icon" ng-switch-when="M">
 			<icon position="[-198, -408]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
@@ -10,7 +10,7 @@
 	<div class="individual__name">
 		{{individual.name}}
 	</div>
-	<div class="individual__dates" ng-class="{female: individual.sex === 'F'}">
+	<div class="individual__dates" ng-class="{'individual__dates--female': individual.sex === 'F'}">
 		{{individual.birth_year}}
 		<span ng-if="!individual.is_alive()">
 			{{individual.death_year}}
