@@ -5,10 +5,11 @@ sudo apt-get install ruby
 sudo apt-get install nginx
 sudo gem install sass
 sudo npm install -g grunt-cli
+sudo npm install -g bower
 npm install
 bower install
 # Gedcom Viewer dependency - run once:
-# cd js/lib; rm -rf gedcom-js-viewer; git clone git@github.com:danidin/gedcom-js-viewer.git
+# pushd js/lib; rm -rf gedcom-js-viewer; git clone https://github.com/danidin/gedcom-js-viewer.git; popd
 # Nginx config - run once:
 # sudo cp doc/config/bhs-nginx-site /etc/nginx/sites-available
 # Edit the file there to point site root to ./public/index.html and run:
