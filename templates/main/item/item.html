@@ -52,7 +52,7 @@
 				</div>
 				<div class="item__content">
 					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.data">
-						<img src="data:image/jpeg;base64,{{itemController.item_data.thumbnail.data}}" alt="Item Image" />
+						<img src="{{itemController.item_data.main_image_url}}" alt="Item Image" />
 					</div>
 					<en>
 						<pre>{{itemController.item_data.UnitText1.En}}</pre>

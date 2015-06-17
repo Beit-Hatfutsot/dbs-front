@@ -90,6 +90,7 @@ angular.module('main').
 					tree_number: individual.GTN,
 					name: individual.FN + ' ' + individual.LN,
 					sex: individual.G,
+					editor_remarks: individual.EditorRemarks,
 					parent_family: subset.parent_family,
 					family: subset.family
 				};
@@ -210,7 +211,7 @@ angular.module('main').
 
 				individuals.forEach(function(individual) {
 					if ( is_alive(individual) ) {
-						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', '_id'];
+						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', 'EditorRemarks', '_id'];
 						var filtered_individual = {};
 
 						for (var prop in individual) {
