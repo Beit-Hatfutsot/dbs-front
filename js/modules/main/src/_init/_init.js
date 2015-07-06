@@ -5,6 +5,7 @@ angular.module('main', [
     'ngAnimate',
     'ui.bootstrap',
     'ui.router',
+    'config',
     'flow',
     'lang',
     'auth',

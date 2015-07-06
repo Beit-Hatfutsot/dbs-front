@@ -14,7 +14,41 @@ bower install
 # sudo cp doc/config/bhs-nginx-site /etc/nginx/sites-available
 # Edit the file there to point site root to ./public/index.html and run:
 # sudo ln -s /etc/nginx/sites-available/bhs-nginx-site /etc/nginx/sites-enabled/; sudo service nginx reload
-# 
-# For local development replace the relevant comments in ./js/modules/api_client/src/services/apiClientService.js
+
+# Configuration files:
+vim /etc/bhs/client/config.json
+
+```
+{
+	"baseUrl":			"api.myjewishidentity.org",
+	"auth": 			"auth",
+	"user": 			"user",
+	"mjs":				"mjs",
+	"wizard_search": 	"wsearch",
+	"item":				"item",
+	"suggest":			"suggest",
+	"ftrees_search":	"fsearch",
+	"ftrees_get": 		"get_ftree_url",
+	"upload": 			"upload"
+}
+```
+
+vim /etc/bhs/client/config.js
+
+```
+angular.module('config', []).
+    constant('apiConfig', {
+        baseUrl:        '@@baseUrl',
+        auth:           '@@auth',
+        user:           '@@user', 
+        mjs:            '@@mjs', 
+        wizard_search:  '@@wizard_search',
+        item:           '@@item',
+        suggest:        '@@suggest',
+        ftrees_search:  '@@ftrees_search',
+        ftrees_get:     '@@ftrees_get',
+        upload:         '@@upload'
+    });
+```
 
 grunt build 

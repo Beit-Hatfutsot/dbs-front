@@ -1,19 +1,19 @@
 angular.module('apiClient').
-	factory('apiClient', function() {
+	factory('apiClient', function(apiConfig) {
 
 	  	var api_client = {
-	  		base_url: 'http://api.myjewishidentity.org/',
+	  		base_url: 'http://' + apiConfig.baseUrl,
 
 	  		endpoints: {
-	  			auth: 			'auth',
-	  			user: 			'user', 
-	  			mjs: 			'mjs', 
-	  			wizard_search: 	'wsearch',
-	  			item: 			'item',
-	  			suggest: 		'suggest',
-	  			ftrees_search:	'fsearch',
-	  			ftrees_get: 	'get_ftree_url',
-	  			upload: 		'upload'
+	  			auth: 			apiConfig.auth,
+	  			user: 			apiConfig.user, 
+	  			mjs: 			apiConfig.mjs, 
+	  			wizard_search: 	apiConfig.wizard_search,
+	  			item: 			apiConfig.item,
+	  			suggest: 		apiConfig.suggest,
+	  			ftrees_search:	apiConfig.ftrees_search,
+	  			ftrees_get: 	apiConfig.ftrees_get,
+	  			upload: 		apiConfig.upload
 	  		},
 
 	  		urls: {}
@@ -22,7 +22,7 @@ angular.module('apiClient').
 	  	angular.forEach(api_client.endpoints, function(endpoint, endpoint_key) {
 		  	Object.defineProperty(api_client.urls, endpoint_key, {
 				get: function() {
-					return api_client.base_url + api_client.endpoints[endpoint_key];
+					return api_client.base_url + '/' + api_client.endpoints[endpoint_key];
 				}  		
 			});
 		});
