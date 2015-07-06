@@ -19,12 +19,10 @@ angular.module('apiClient').
 	  		urls: {}
 	  	};
 
-	  	angular.forEach(api_client.endpoints, function(endpoint) {
-	  		var endpoint_name = endpoint;
-
-		  	Object.defineProperty(api_client.urls, endpoint, {
+	  	angular.forEach(api_client.endpoints, function(endpoint, endpoint_key) {
+		  	Object.defineProperty(api_client.urls, endpoint_key, {
 				get: function() {
-					return api_client.base_url + api_client.endpoints[endpoint_name];
+					return api_client.base_url + api_client.endpoints[endpoint_key];
 				}  		
 			});
 		});
