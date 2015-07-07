@@ -16,7 +16,6 @@
 @mixin icon($position: 0 0) {
 	background: url($images + "icons.png") $position no-repeat;
 	background-size: 1024px 768px;
-	
 }
 
 @mixin border-radius($radius) {

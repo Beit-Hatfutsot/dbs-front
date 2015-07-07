@@ -40,19 +40,6 @@
 
 				&__type {
 					@extend %item-type;
-					margin-bottom: 20px;
-	
-					.en & {
-						margin-right: 11px;
-					}
-
-					.he & {
-						margin-left: 11px;	
-					}
-
-					.type-icon-container {
-						padding-top: 7px;
-					}
 				}
 
 				&__header {
