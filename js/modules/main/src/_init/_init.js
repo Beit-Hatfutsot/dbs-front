@@ -16,8 +16,8 @@ angular.module('main', [
     'gedcomParser'
 ]).
 config([
-'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide',
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide) {
+'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide', '$sceDelegateProvider',
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider) {
 
     var states = [ 
         {
@@ -157,6 +157,11 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode(true);
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        new RegExp('^http[s]?:\/\/storage.googleapis.com\/bhs.*\.mp4$')
+    ]);
 }]).
 run(['$state', '$rootScope', 'langManager', function ($state, $rootScope, langManager) {
     

@@ -51,8 +51,13 @@
 					</ng-switch>
 				</div>
 				<div class="item__content">
-					<div class="item__content__image-container" ng-if="itemController.item_data.thumbnail.data">
-						<img src="{{itemController.item_data.main_image_url}}" alt="Item Image" />
+					<div 	class="item__content__media-container"
+							ng-class="{'item__content__media-container--movie': itemController.item_type === 'movies'}" 
+							ng-if="itemController.item_data.video_url || itemController.item_data.main_image_url">
+						<ng-switch on="itemController.item_type">
+							<video 	ng-switch-when="movies" ng-src="{{itemController.item_data.video_url}}" controls autoplay type="video/mp4"></video>
+							<img ng-switch-default ng-src="{{itemController.item_data.main_image_url}}" alt="Item Image">
+						</ng-switch>
 					</div>
 					<en>
 						<pre>{{itemController.item_data.UnitText1.En}}</pre>

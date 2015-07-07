@@ -209,12 +209,16 @@
 					padding-bottom: 12px;
 					line-height: 20px;
 
-					&__image-container {
+					&__media-container {
 						position: relative;
 						width: 660px;
 						height: 290px;
 						overflow: hidden;
 						margin: 0 0 20px 0;
+
+						&--movie {
+							height: auto;
+						}
 
 						img {
 							position: absolute;
@@ -223,6 +227,10 @@
 							left: 50%;
 							top: 50%;
 							@include translate(-50%, -50%);
+						}
+
+						video {
+							width: 660px;
 						}
 					}
 				}

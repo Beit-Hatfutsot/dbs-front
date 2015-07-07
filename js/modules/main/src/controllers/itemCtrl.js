@@ -1,4 +1,5 @@
-var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed) {
+var ItemCtrl = function($scope, $state, $stateParams, item, notification, 
+						itemTypeMap, wizard, header, mjs, recentlyViewed) {
 	var self = this;
 
 	if (header.sub_header_state !== 'recently-viewed') {
@@ -125,4 +126,6 @@ ItemCtrl.prototype = {
 	}
 };
 
-angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 'notification', 'itemTypeMap','wizard', 'header', 'mjs', 'recentlyViewed', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
+											   'notification', 'itemTypeMap','wizard', 'header', 
+											   'mjs', 'recentlyViewed', ItemCtrl]);
