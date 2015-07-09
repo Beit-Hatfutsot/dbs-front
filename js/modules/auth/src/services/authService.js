@@ -32,10 +32,12 @@ angular.module('auth').
 				    		$state.go(config.next_state);
 				    	} 
 				    }, function(dismiss_reason) {
-				    	body.removeClassName('auth');
 				    	if (config.fallback_state) {
 				    		$state.go(config.fallback_state, config.fallback_state_params);
 				    	}
+				    }).
+				    finally(function() {
+				    	body.removeClassName('auth');
 				    });
 				} 
 		  	},
