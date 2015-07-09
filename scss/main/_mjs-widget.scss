@@ -13,7 +13,7 @@
 		display: none;
 		position: absolute;
 		z-index: 1;
-		top: 14px;
+		top: 42px;
 		width: 336px;
 		height: 92px;
 		background: #f5f5f5;
@@ -23,11 +23,11 @@
 		font-size: 14px;
 
 		.en & {
-			left: -15px;
+			left: -19px;
 		}
 
 		.he & {
-			right: -15px;
+			right: -19px;
 		}
 
 		&:after, &:before {
