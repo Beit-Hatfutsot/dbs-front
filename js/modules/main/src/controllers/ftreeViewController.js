@@ -23,6 +23,7 @@ FtreeViewController.prototype = {
 	expand: function() {
 		this.$state.go('ftree-item', {individual_id: this.$state.params.individual_id, tree_number: this.$state.params.tree_number});
 	}
+		
 };
 
 angular.module('main').controller('FtreeViewController', ['$scope', '$state', '$stateParams', FtreeViewController]);

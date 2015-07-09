@@ -141,7 +141,7 @@
 }
 
 %node-container {
-	@include hover-pointer();
+	
 	display: inline-block;
 	min-width: 52px;
 	min-height: 76px;
@@ -152,24 +152,36 @@
 		width: 100%;
 		min-height: 53px;
 		padding: 0 8px;
-		/*
-		border: 1px solid #f0f0f0;*/
 		
-
-		
-
 		.individual {
 			position: relative;
 			background: #ddf0f4;
 			display: inline-block;
 			vertical-align: top;
-			margin-top: -11px;
+			margin-top: 16px;
 			@include border-radius(50px);
 			width: 210px;
 			height: 58px;
+			z-index: 1;
+
+			.en & {
+				margin-right: 20px;	
+			}
+			.he & {
+				margin-left: 20px;
+			}
+			
 
 			&--female {
 				background-color: #f6e1de;
+			}
+
+			&--selected {
+				border: 1px solid #ffb14c;
+				z-index: 2;
+				&:hover {
+					border: 1px solid #e98909;
+				}
 			}
 			
 
@@ -177,51 +189,172 @@
 				position: absolute;
 				width: 58px;
 				height: 58px;
-				margin: 0px 2px;
+				margin: -1px 0px;
 				z-index: 1;
 			}
 
 			&__name {
 				max-width: 71px;
-				text-align: left;
 				font-size: 12px;
 				word-wrap: break-word;
 				word-spacing: 100px;
-				float: right;
 				margin-top: 4px;
+
+				.en & {
+					text-align: left;
+					float: right;
+				}
+				.he & {
+					text-align: right;
+					float: left;
+				}
 			}
 			&__dates {
 				background-color: #8FDCE4;
-				max-width: 50px;
-				text-align: left;
+				word-wrap: break-word;
+				word-spacing: 100px;
+				text-align: center;
+				width: 40px;
 				font-size: 12px;
-				margin-top: 4px;
 				position: absolute;
-				left: 52px;
 				height: 58px;
-				top: -4px;
+				line-height: 231%;
+
+				.en & {
+					left: 52px;
+				}
+				.he & {
+					right: 52px;
+				}
 
 				&--female {
+					width: 40px;
 					background-color: #e6ada2;
 				}
+
+				&--selected {
+					.en & {
+						border-right: 1px solid #ffb14c;
+					}
+					.he & {
+						border-left: 1px solid #ffb14c;
+					}
+					
+					&:hover {
+						.en & {
+							border-right: 1px solid #e98909;
+						}
+						.he & {
+							border-left: 1px solid #e98909;
+						}
+					}
+				}
 			}
+			.notAlive {
+					width: 20px;
+					height: 58px;
+					background-color: #000000;
+					position: absolute;
+					
+					.en & {
+						left: 32px;
+					}
+					.he & {
+						right: 32px;
+					}
+				}
+
+			&__more-info {
+			    position: relative;				
+				top: 22px;	
+
+				.en & {
+					left: 86px;
+				}
+				.he & {
+					left: 86px;
+				}
+
+				&.open {
+					.individual__more-info__person-info {
+						display: block;
+					}
+				}
+
+				&__icon {
+					width: 11px;
+					height: 11px;	
+					top: 22px;	
+					overflow: hidden;
+					@include hover-pointer();
+
+					.en & {
+						left: 86px;
+					}
+					.he & {
+						right: 86px;
+					}
+				}
+
+				&__person-info {
+					position: absolute;
+					z-index: 2;
+					display: none;
+					width: 210px;
+					height: 167px;
+					color: #666666;
+					background-color: #fee1b5;
+					border-bottom: 3px solid ;
+					top: 4px;
+					@include border-radius(7px);
+				}
+			}
+
 		}
 
 		.rings {
 			position: absolute;
+			z-index: 100;
 			left: 50%;
 			top: 0;
 			@include translate(-50%, -2px);
 
+			&.open {
+				.rings__marriageInfo {
+					display: block;
+				}
+			}
+
+			&__no-details {
+				width: 12px;
+				height: 12px;
+				background-color: #999999;
+				@include border-radius(7px);
+			}
+
 			&__icon {
-				width: 16px;
-				height: 15px;
+				width: 20px;
+				height: 20px;
 				overflow: hidden;
 				margin: 0 auto;
+				@include hover-pointer();
+			}
+			&__marriageInfo {
+				position: relative;
+				z-index: 2;
+				display: none;
+				width: 210px;
+				height: 105px;
+				color: #666666;
+				background-color: #fee1b5;
+				border: 3px solid transparent;
+				top: 4px;
+				@include border-radius(7px);
 			}
 		}
 	}
 }
+
 
 %bhs-fieldset {
 	

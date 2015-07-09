@@ -87,14 +87,24 @@ angular.module('main').
 				var parsed_individual = {
 					_id: individual._id,
 					id: individual_id,
+					name: individual.FN + " " + individual.LN,
 					tree_number: individual.GTN,
-					name: individual.FN + ' ' + individual.LN,
+					last_name: individual.LN,
+					first_name: individual.FN,
 					sex: individual.G,
 					parent_family: subset.parent_family,
 					family: subset.family,
 					birth_year: individual.BD ? individual.BD.substr(-4) : null,
-					death_year: individual.DD ? individual.DD.substr(-4) : null
+					birth_date: individual.BD,
+					birth_place: individual.BP,
+					death_year: individual.DD ? individual.DD.substr(-4) : null,
+					death_date: individual.DD,
+					death_place: individual.DP,
+					marriage_date: individual.MD,
+					marriage_place: individual.MP
 				};
+
+				parsed_individual.alive = is_alive_parsed(parsed_individual);
 
 				return parsed_individual;
 			},
@@ -127,7 +137,7 @@ angular.module('main').
 				var parsed_parent = {
 					husband: {},
 					wife: {},
-					children: []
+					children: [],
 				};
 				
 				if (parent_data.husb) {
@@ -135,27 +145,44 @@ angular.module('main').
 					parsed_parent.husband.name = parse_name( parent_data.husb.getValue('name') );
 					parsed_parent.husband.sex = parent_data.husb.getValue('sexe');
 					var birth = parent_data.husb.getValue('birt');
-					parsed_parent.husband.birth_year = birth ? birth.date : null;
+					parsed_parent.husband.birth_year = birth ? birth.date.substr(-4) : null;
+					parsed_parent.husband.birth_date = birth ? birth.date : null;
 					var death = parent_data.husb.getValue('deat');
-					parsed_parent.husband.death_year = death ? death.date : null;	
-
+					parsed_parent.husband.death_year = death ? death.date.substr(-4) : null;
+					parsed_parent.husband.death_date = death ? death.date : null;	
+					parsed_parent.husband.death_place = death ? death.place : null;
+					parsed_parent.husband.alive = is_alive_parsed(parsed_parent.husband);
+					parsed_parent.husband.marriage_place = parent_data.marr.place;
+					parsed_parent.husband.marriage_date = parent_data.marr.date;
 				}
 				if(parent_data.wife) {
 					parsed_parent.wife.id = parent_data.wife.id;
 					parsed_parent.wife.name = parse_name( parent_data.wife.getValue('name') );
 					parsed_parent.wife.sex = parent_data.wife.getValue('sexe');
 					var birth = parent_data.wife.getValue('birt');
-					parsed_parent.wife.birth_year = birth ? birth.date : null;
+					parsed_parent.wife.birth_year = birth ? birth.date.substr(-4) : null;
+					parsed_parent.wife.birth_date = birth ? birth.date : null;
 					var death = parent_data.wife.getValue('deat');
-					parsed_parent.wife.death_year = death ? death.date : null;	
+					parsed_parent.wife.death_year = death ? death.date.substr(-4) : null;
+					parsed_parent.wife.death_date = death ? death.date : null;	
+					parsed_parent.wife.death_place = death ? death.place : null;
+					parsed_parent.wife.alive = is_alive_parsed(parsed_parent.wife);
 				}
 
 				parent_data.childs.forEach(function(child) {
 					var child_obj = {
 						id: child.id,
 						name: parse_name( child.getValue('name') ),
-						sex: child.getValue('sexe')
+						sex: child.getValue('sexe'),
+						// spouse : child.getValue(''),
 					};
+
+					var birth = child.getValue('birt')
+					child_obj.birth_year = birth? birth.date.substr(-4) : null;
+					var death = child.getValue('deat');
+					child_obj.death_year = death ? death.date.substr(-4) : null;
+					child_obj.alive = is_alive_parsed(child_obj)
+
 					parsed_parent.children.push(child_obj);
 				});
 				
@@ -181,9 +208,11 @@ angular.module('main').
 					parsed_family.spouse.name = parse_name( spouse.getValue('name') );
 					parsed_family.spouse.sex = spouse.getValue('sexe');
 					var birth = spouse.getValue('birt');
-					parsed_family.spouse.birth_year = birth ? birth.date : null;
+					parsed_family.spouse.birth_year = birth ? birth.date.substr(-4) : null;
 					var death = spouse.getValue('deat');
-					parsed_family.spouse.death_year = death ? death.date : null;
+					parsed_family.spouse.death_year = death ? death.date.substr(-4) : null;
+					parsed_family.spouse.death_place = death ? death.place : null;
+					parsed_family.spouse.alive = is_alive_parsed(parsed_family.spouse);
 				}
 				
 				family_data.childs.forEach(function(child) {
@@ -193,9 +222,11 @@ angular.module('main').
 						sex: child.getValue('sexe')
 					};
 					var birth = child.getValue('birt');
-					child_obj.birth_year = birth ? birth.date : null;
+					child_obj.birth_year = birth ? birth.date.substr(-4) : null;
 					var death = child.getValue('deat');
-					child_obj.death_year = death ? death.date : null;
+					child_obj.death_year = death ? death.date.substr(-4) : null;
+					child_obj.death_place = death? death.place : null;
+					child_obj.alive = is_alive_parsed(child_obj);
 
 					var child_family_data = self.get_individual_data(child.id).family_data;
 					if (child_family_data) {
@@ -229,7 +260,7 @@ angular.module('main').
 
 				individuals.forEach(function(individual) {
 					if ( is_alive(individual) ) {
-						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', '_id']; 
+						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', '_id', 'BD', 'MP', 'MD']; 
  						var filtered_individual = {};
 
 						for (var prop in individual) {
@@ -276,25 +307,20 @@ angular.module('main').
 			return alive
 		}
 
-		// function get_dates (individual) {
-		// 	var birth_year = parseInt(individual.BD.substr(-4));
-		// 	var death_year = parseInt(individual.DD.substr(-4));
-		// 	if (birth_year == 0) {
-		// 		birth_year == "?";
-		// 	}
-		// 	else {
-		// 		return birth_year;
-		// 	}
-		// 	if (!individual.is_alive) {
-		// 		if (death_year == 0) {
-		// 			death_year == "?";
-		// 		}
-		// 		else {
-		// 			return death_year;
-		// 		}
-		// 	}
+		function is_alive_parsed(individual) {
+			var alive = true;
+			var date = new Date();
+			var current_year = date.getFullYear();
+			var birth_year = individual.birth_year;
+			var age = birth_year ? current_year - birth_year : 0;
 
-		// }
+
+			if (individual.death_year || individual.death_place || age > 100 ) {
+				alive = false;
+			}
+
+			return alive	
+		}
 
 		function get_age(bd, current_year) {
 			try {

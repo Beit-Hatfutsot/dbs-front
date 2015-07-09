@@ -2,13 +2,23 @@
 	<div id="ftree-item">
 		<div class="ftree-title">
 			<icon class="ftree-title__tree-icon" position="[-84, -439]"></icon>
-			<en>Family Tree</en>
+			<en> {{ftreeItemCtrl.individual.last_name + " "}}Family Tree - {{ftreeItemCtrl.tree_number}}</en>
 			<he>עץ המשפחה</he>
 			<!-- <div class="ftree-type">
 				<div class="ftree-icon"></div>
 				<en>Family Tree</en>
 				<he>עץ משפחה</he>
 			</div> -->
+			<div ng-click="ftreeItemCtrl.print()">
+			<icon class="ftree-title__print-icon" position="[-83, -643]"></icon>
+			</div>
+			<span ng-if="ftreeItemCtrl.previous_state">
+				<div class="ftree-title__back" ng-click="ftreeItemCtrl.back()">
+					<icon class="ftree-title__back__back-icon" position="[-84, -491]"></icon>
+					<span class="ftree-title__back__back-text"><en>Back</en></span>	
+					<he>חזור</he>
+				</div>
+			</span>
 		</div>
 		<div id="mjs-widget-container">
 			<mjs-widget item="ftreeItemCtrl.individual"></mjs-widget>

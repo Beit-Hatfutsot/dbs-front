@@ -5,7 +5,7 @@
 			<icon class="title__tree-icon" position="[-84, -439]"></icon>
 			<div class="title__text">
 				<en>Family Trees Search Results</en>
-				<he>תוצאות חיפוש עמי משפחה</he>
+				<he>תוצאות חיפוש עצי משפחה</he>
 			</div>
 		</div>
 		<form class="filters" name="filters">
@@ -33,7 +33,7 @@
 					<input type="radio" name="sex" value="m" ng-model="ftreesCtrl.search_params.sex" id="choice-male" checked="checked">
 					<label class="label-sex" for="choice-male">
 						<en>Male</en>
-						<he>זכר</he>
+						<he>זכר</he>tree-view
 					</label>
 					<input type="radio" name="sex" value="f" ng-model="ftreesCtrl.search_params.sex" id="choice-female">
 					<label class="label-sex" for="choice-female">
@@ -71,8 +71,8 @@
 				<he>עדכן</he>
 			</button>
 			<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()">
-					<en>Clear filters</en>
-					<he>נקה מסננים</he>
+				<en>Clear filters</en>
+				<he>נקה מסננים</he>
 			</a>
 		</form>
 
@@ -82,13 +82,12 @@
 					<tr>
 						<th class="first-name" ng-click="ftreesCtrl.sort('FN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['FN']">
 							<span class="arrow1"></span>
-							<div tree-viewclass="column-title">
+							<div tree-view class="column-title">
 								<en>First<br>Name</en>
 								<he>שם<br>פרטי</he>
 							</div>
 						</th>
 						<th class="last-name" ng-click="ftreesCtrl.sort('LN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['LN']">
-							<!-- <span class="last-name-arrow"></span> -->
 								<en>Last<br>Name</en>
 								<he>שם<br>משפחה</he>
 							</div>
@@ -183,10 +182,10 @@
 				<div class="results__more-columns__trigger" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
 					<en><icon class="results__more-columns__trigger__icon" position="[-195, -665]"></icon></en>
 					<he><icon class="results__more-columns__trigger__icon" position="[-194, -684]"></icon></he>
-						<div>
-							<en>More</en>
-							<he>עוד</he>
-						</div>
+					<div>
+						<en>More</en>
+						<he>עוד</he>
+					</div>
 				</div>			
 				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
 					<div class="results__more-columns__menu__title">
@@ -255,21 +254,25 @@
 				</span>
 
 				<span class="results__per-page__go-to-page">
-					<label>
+					<label class="results__per-page__go-to-page__label">
 						<en>Go to Page</en>
 						<he>Go to Page</he>
 					</label>
 					<input type="text" class="results__per-page__go-to-page__number" ng-model="ftreesCtrl.candidate_page">
-					<button href="" class="results__per-page__go-to-page__go-button" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></button>
-					<en><icon class="results__per-page__go-to-page__icon" position="[-195, -665]" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></icon></en>
-					<he><icon class="results__per-page__go-to-page__icon" position="[-194, -684]" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></icon></he>
-					<span class="results__per-page__go-to-page__go-text" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)">
-						<en>GO</en>
-						<he>GO</he>
-					</span>
+					<div class="results__per-page__go-to-page__go-button" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)">
+						<en><icon class="goToPage_icon" position="[-195, -665]" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></icon></en>
+						<he><icon class="goToPage_icon" position="[-194, -684]" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)"></icon></he>
+						<span class="goToPage_go-text" ng-click="ftreesCtrl.go_to_page(ftreesCtrl.candidate_page)">
+							<en>GO</en>
+							<he>GO</he>
+						</span>
+					</div>
 				</span>
-
 			</div>
+			<button class="BackToSearch" ng-click="ftreesCtrl.back_to_search_filters()" ng-if="ftreesCtrl.tree_view">
+				<en>Back to Search Filters</en>
+				<he>Back to Search Filters</he>
+			</button>
 		</div>
 		<ui-view></ui-view>
 	</div>

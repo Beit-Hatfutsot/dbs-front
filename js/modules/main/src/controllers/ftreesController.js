@@ -6,6 +6,33 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.selected_individual = null;
 	this.selected_individual_data = {};
 	this.search_params = {};
+
+	this.person_info = {
+		name: {
+			en: 'Name',
+			he: 'שם'
+		},
+
+		birth_date: {
+			en: 'Birth Date',
+			he: 'תאריך לידה'
+		},
+
+		birth_place: {
+			en: 'Birth Place',
+			he: 'מקום לידה'
+		},
+
+		death_date: {
+			en: 'Death Place',
+			he: 'מקום פטירה'
+		},
+		death_place: {
+			en: 'Death Place',
+			he: 'מקום פטירה'
+		}
+
+	};
 	
 	this.key_map = {
 		FN: {
@@ -58,7 +85,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 			he: 'מספר עץ'
 		}
 	};
-	
+
 	this.search_modifiers = {
 		first_name: 	'',
 		last_name: 		'',
@@ -75,7 +102,9 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this._results_per_page = 15;
 	this.display_from_result = 0;
 	this.more_columns_menu = false;
+	this.marriage_info = false;
 	this.candidate_page = '';
+	this.more_indi_info = false;
 	
 	self.result_column_manager = musicalChairsFactory.create_game({
 		'FN': true,
@@ -83,11 +112,11 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		'BP': true,
 		'BD': true,
 		'MP': true,
-		'MD': true,
+		'MD': false	,
 		'DP': false,
 		'DD': false,
 		'G': false,
-		'GTN': false
+		'GTN': true
 	}, 6);
 
 	this.$state = $state;
@@ -264,7 +293,7 @@ FtreesController.prototype = {
 			}
 		}
 
-		// avoid conflict with prameter from state ftree-view.ftree-item
+		// avoid conflict with parameter from state ftree-view.ftree-item
 		search_params.tree_number = search_params.filters_tree_number;
 		delete search_params.filters_tree_number;
 
@@ -311,6 +340,12 @@ FtreesController.prototype = {
 		}
 				
 	},
+
+	back_to_search_filters: function () {
+		var self = this;
+		self.$state.go('ftrees');
+	}, 
+
 	clear_filters: function() {
 		for (var modifier in this.search_modifiers) {
 			this.search_params[modifier] = '';
@@ -320,17 +355,10 @@ FtreesController.prototype = {
 
 	select_individual: function(individual) {
 		var self = this;
-
-		if (this.is_selected(individual)) {
-			this.selected_index = null;	
-			delete(this.$stateParams['ind_index']);
-			delete(this.$stateParams['individual_id']);
-			delete(this.$stateParams['tree_number']);
-			this.$state.go('ftrees', this.$stateParams);
-		}
-		else {
+		var already_selected = self.is_selected(individual);
+		 
+		if (!already_selected) {
 			self.selected_index = self.individuals.indexOf(individual);
-
 			self.$state.go('ftree-view.ftree-item', {
 				ind_index: self.selected_index, 
 				individual_id: individual.II, 

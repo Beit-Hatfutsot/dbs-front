@@ -1,4 +1,5 @@
 <div id="subtree" plumb-set-container reinstantiate-on="individual.id">
+
 	<div class="parent-family" ng-if="individual.parent_family.isNotEmpty()">
 		<div class="node-container">
 			<div class="node" id="subtree-parent">
@@ -6,11 +7,18 @@
 					<individual data="individual.parent_family.husband" tree-number="individual.tree_number"></individual>
 				</span>
 				<span ng-if="individual.parent_family.wife.isNotEmpty() && individual.parent_family.husband.isNotEmpty()">
-					<div class="rings">
-						<div class="rings__icon">
-							<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+						<div class="rings" dropdown is-open="ftreesCtrl.marriage_info">
+							<div class="rings__no-details"></div>
+							<span ng-if="individual.parent_family.husband.marriage_date !== null && individual.parent_family.husband.marriage_place !== null">
+								<div class="rings__icon" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
+									<icon position="[-216, -607]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+								</div>
+								<div class="rings__marriageInfo" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+									<en>Date of marriage:<en> <he>Date of marriage:</he></br>{{individual.parent_family.husband.marriage_date}}<br/>
+									<en>Place of marriage:<en><he>Place of marriage:</he></br>{{individual.parent_family.husband.marriage_place}}
+								</div>
+							</span>
 						</div>
-					</div>
 					<individual data="individual.parent_family.wife" tree-number="individual.tree_number"></individual>
 				</span>
 				<span ng-if="individual.parent_family.wife.isNotEmpty() && individual.parent_family.husband.isEmpty()">
@@ -28,13 +36,58 @@
 				connection-id="subtree-individual-parent"
 				connector="flowchart"
 				delay="1000">
+
+			<span ng-if="individual.sex === 'M'">
+				<div class="spouse" id="husband">
+					<individual data="individual" tree-number="individual.tree_number" is-selected="true"></individual>
+				</div>
+			</span>
+			<span ng-if="individual.family.spouse.isNotEmpty()">
+					<div class="rings" dropdown is-open="ftreesCtrl.marriage_info">
+						<div class="rings__no-details"></div>
+						<span ng-if="individual.marriage_date !== null && individual.marriage.place !== null">
+							<div class="rings__icon" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
+								<icon position="[-216, -607]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+							</div>
+							<div class="rings__marriageInfo" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+								<en>Date of marriage:<en> <he>Date of marriage:</he> {{individual.marriage_date}} <br/>
+								<en>Place of marriage:<en><he>Place of marriage:</he>{{individual.marriage_place}}
+							</div>
+						</span>
+					</div>
+				<div class="spouse"
+					  plumb-connect to="husband"
+				      container-id="subtree-spouse"
+				      connection-id="subtree-individual-spouse"
+				   	  connector="flowchart" >
+					<individual data="individual.family.spouse" tree-number="individual.tree_number"></individual>
+				</div>
+			</span>
+			</span>
+			<span ng-if="individual.sex === 'F'">
+				<individual data="individual" tree-number="individual.tree_number" is-selected="true"></individual>
+			</span>
+		</div>
+
+
+<!-- 		<div 	class="node"
+				id="subtree-individual"
+				plumb-connect to="subtree-parent"
+				container-id="subtree"
+				connection-id="subtree-individual-parent"
+				connector="flowchart"
+				delay="1000">
 			<span ng-if="individual.sex === 'M'">
 				<individual data="individual" tree-number="individual.tree_number"></individual>
 			</span>
 			<span ng-if="individual.family.spouse.isNotEmpty()">
-				<div class="rings">
-					<div class="rings__icon">
-						<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+				<div class="rings" dropdown is-open="ftreesCtrl.marriage_info">
+					<div class="rings__icon" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
+						<icon position="[-216, -607]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+					</div>
+					<div class="rings__marriageInfo" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+						<en>Date of marriage:<en> {{individual.marriage_date}} <br/>
+						<en>Place of marriage:<en>{{individual.marriage_place}}
 					</div>
 				</div>
 				<individual data="individual.family.spouse" tree-number="individual.tree_number"></individual>
@@ -42,7 +95,9 @@
 			<span ng-if="individual.sex === 'F'">
 				<individual data="individual" tree-number="individual.tree_number"></individual>
 			</span>
-		</div>
+		</div> -->
+
+
 	</div>
 
 	<div 	class="node-container" 
@@ -56,21 +111,26 @@
 			delay="0">
 		<div class="node">
 			<span ng-if="sibling.sex === 'M'">
-				<individual data="sibling" tree-number="individual.tree_number"></individual>
+					<individual data="sibling" tree-number="individual.tree_number"></individual>
 			</span>
-			<span ng-if="sibling.family.spouse.isNotEmpty()">
-				<div class="rings">
-					<div class="rings__icon">
-						<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+			<!-- <span ng-if="sibling.family.spouse.isNotEmpty()">
+				<div class="rings" dropdown is-open="ftreesCtrl.marriage_info">
+					<div class="rings__icon" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
+						<icon position="[-216, -607]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+					</div>
+					<div class="rings__marriageInfo" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+						<en>Date of marriage:<en> {{individual.marriage_date}}<br/>
+						<en>Place of marriage:<en>{{individual.marriage_place}}
 					</div>
 				</div>
-				<individual data="sibling.family.spouse" tree-number="individual.tree_number"></individual>
-			</span>
+					<individual data="sibling.family.spouse" tree-number="individual.tree_number"></individual>
+			</span> -->
 			<span ng-if="sibling.sex === 'F'">
 				<individual data="sibling" tree-number="individual.tree_number"></individual>
 			</span>
 		</div>
 	</div>
+
 	<div class="family" ng-if="individual.family.isNotEmpty()">
 		<div 	class="node-container" 
 				id="child-{{$index}}"
@@ -85,12 +145,22 @@
 					<individual data="child" tree-number="individual.tree_number"></individual>
 				</span>
 				<span ng-if="child.family.spouse.isNotEmpty()">
-					<div class="rings">
-						<div class="rings__icon">
-							<icon position="[-723, -42]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
-						</div>
+					<div class="rings" dropdown is-open="ftreesCtrl.marriage_info">
+					<div class="rings__icon" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
+						<icon position="[-216, -607]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
 					</div>
+					<div class="rings__marriageInfo" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+						<en>Date of marriage:<en> {{individual.marriage_date}}<br/>
+						<en>Place of marriage:<en>{{individual.marriage_place}}
+					</div>
+				</div>
+				<div class="spouse"
+					  plumb-connect to="husband"
+				      container-id="subtree-spouse"
+				      connection-id="subtree-individual-spouse"
+				   	  connector="flowchart" >
 					<individual data="child.family.spouse" tree-number="individual.tree_number"></individual>
+				</div>
 				</span>
 				<span ng-if="child.sex === 'F'">
 					<individual data="child" tree-number="individual.tree_number"></individual>

@@ -116,7 +116,7 @@
 
 				&__update {
 					border: none;
-					background: #bf311a;
+					background: #47c3d3;
 					color: #ffffff;
 					text-align: center;
 					padding: 5px 0;
@@ -130,9 +130,9 @@
 					}
 				}
 
-			.tree-view & {
-				display: none;
-			}	
+				.tree-view & {
+					display: none;
+				}	
 
 
 				&__clear {
@@ -237,20 +237,18 @@
 								display: none;
 								}
 
-							
-
 							input[type="radio"]:checked + .modifiers-container__modifier__modif-label {
 								background-color: #efcdc7;
 								color: #333333;
 
 								.modifiers-container__modifier__modif-label__arrow {
+									position: absolute;
 									width: 0;
 									height: 0;
 									line-height: 0;
 									border-top: 7px solid #ffffff;
 									border-right: 38px solid transparent;
 									border-left: 28px solid transparent;
-									position: absolute;
 									top: -3px;
 									left: 10px;	
 								}
@@ -404,7 +402,26 @@
 				margin-top: 0;
 				margin-left: 0;
 				margin-right: 0;
+				margin-bottom: 208px;
 
+			}
+			.BackToSearch {
+				border: none;
+				background: #47c3d3;
+				color: #ffffff;
+				text-align: center;
+				padding: 5px 0;
+				width: 257px;
+				height: 50px;
+				font-size: 20px;
+				position: absolute;
+				top: 100%;
+				left: 7px;
+				@include hover-pointer();
+
+				&:hover {
+					background-color: #666666;
+				}
 			}
 
 
@@ -418,6 +435,9 @@
 				position: relative;
 				top: 19px;
 				height: 940px;
+				.tree-view & {
+					display: none;
+				}
 
 				&__text {
 
@@ -451,8 +471,6 @@
 				table-layout: fixed;
 				text-transform: capitalize;
 
-
-
 				.tree-view & {
 					width: 270px;
 				}
@@ -461,12 +479,12 @@
 					width: 0px;
 					height: 0px;
 					line-height: 0;
-					border-top: 16px solid #F5E1DD;
-					border-left: 44px solid transparent;
-					border-right: 40px solid transparent;
-				    top: 101%;
-				    position: absolute;
-				    left: -1px;
+					border-top: 16px solid #fde2b5;
+					border-left: 59px solid transparent;
+					border-right: 59px solid transparent;
+					top: 101%;
+					position: absolute;
+					left: 1%;
 
 				    .tree-view & {
 				    	border-top: 16px solid #999999;
@@ -498,7 +516,7 @@
 
 				thead {
 					display: table-header-group;
-					background-color: #f5e1dd;
+					background-color: #fde2b5;
 
 					.tree-view & {
 						background-color: #999999;
@@ -561,7 +579,7 @@
 							font-weight: bold;
 							
 							.tree-view & {
-								background-color: #efcec7;
+								background-color: #fde2b5;
 
 								.last-name-arrow {
 									position: absolute;
@@ -569,9 +587,16 @@
 									height: 0px;
 									border-top: 28px solid transparent;
 									border-bottom: 29px solid transparent;
-									border-left: 22px solid #efcec7;
-									left: 101%;
-									top: -2px;
+									top: 0px;
+
+									.en & {
+										border-left: 22px solid #fde2b5;
+										left: 100%;
+									}
+									.he & {
+										border-right: 22px solid #fde2b5;
+										right: 100%;
+									}
 								}
 							}
 						}
@@ -599,7 +624,7 @@
 				}
 
 				&__trigger {
-					background: #f5e1dd;
+					background: #fde2b5;
 					font-size: 15px;
 					position: absolute;
 					top: -40px;
@@ -691,9 +716,10 @@
 						
 					}*/
 					&__title {
-						background-color: #f5e1dd;
+						background-color: #999999;
+						color: #ffffff;
 						height: 46px;
-						font-size: 10px;
+						font-size: 12px;
 						border: 2px solid transparent;
 						@include border-radius(5px);
 						.en & {
@@ -756,8 +782,7 @@
 
 						&:hover {
 							color: #333333;
-							/*&__fancyArrow{*/
-								#fancyArrow-label {
+							#fancyArrow-label {
 								background-color: #bf311a;
 							}	
 						}
@@ -787,13 +812,12 @@
 			}
 
 			&__per-page {
+				position: relative;
 
 				&__selector select {
-					outline: none;
 					display: inline-block;
 				    height: 17px;
 				    width: 55px;
-				    outline: none;
 				    color: #adadad;
 				    border: none;
 				    background: #efcdc7; 
@@ -809,8 +833,6 @@
 					}
 				}
 				
-
-
 				&__selector {
 					position: relative;
 
@@ -854,10 +876,13 @@
 				}
 				&__selector {
 					.en & {
-						margin-left: 17px;
+						margin-left: 135px;
 					}
 					.he & {
-						margin-right: 17px;
+						margin-right: 135px;
+					}
+					.tree-view & {
+						display: none;
 					}
 					
 				}
@@ -866,24 +891,24 @@
 				&__selector, 
 				&__go-to-page {
 					font-size: 11px;
-
-					.tree-view & {
-						display: none;
-					}
 				}
 				
 				&__paginator {
+					position: absolute;
 					.en & {
-						
-						margin-left: 4px;
+						left: 6px;
 					}
 					.he & {
-						
-						margin-right: 4px;
+						right: 6px;
 					}
 
 					.tree-view & {
-						float: none;
+						.en & {
+							float: left;
+						}
+						.he & {
+							float: right;
+						}
 					}
 
 					&__arrow {
@@ -905,17 +930,25 @@
 				}
 
 				&__go-to-page {
+					/*position: absolute;*/
 
-					/*.tree-view & {
-						float: none;
-					}*/
 					.en & {
-						float: right;	
-						margin-right: 14px;
+						float: right;
+  						margin-right: 55px;
 					}
 					.he & {
 						float: left;
-						margin-left: 14px;
+						margin-left: 55px;
+					}
+					.tree-view & {
+						.en & {
+							float: left;
+   							margin-left: 130px;
+						}
+						.he & {
+							float: right;
+   							margin-right: 130px;
+						}
 					}
 
 					&__number {
@@ -927,40 +960,51 @@
 					}
 
 					&__go-button {
-						border: none;
-						width: 36px;
-						height: 20px;
-						padding-top: 9px;
-						background-color: #bf311a;
-						@include hover-pointer();
-					}
+						  position: relative;
+						  width: 36px;
+						  height: 20px;
+						  padding-top: 9px;
+						  background-color: #bf311a;
+						  top: -20px;
+						  @include hover-pointer();
 
-					&__go-text {
-						position: absolute;
-						color: #ffffff;
-						margin-top: -17px;
-						font-size: 96%;
-						@include hover-pointer();
+						  .en & {
+						  	right: -100px;
+						  }
+						  .he & {
+						  	left: -100px;
+						  }
 
-						.en & {
-							margin-left: 100px;
+						.goToPage_go-text {
+							position: absolute;
+							color: #ffffff;
+						    top: 3px;
+						    font-size: 96%;
+							@include hover-pointer();
+
+							.en & {
+								right: 16px;
+							}
+							.he & {
+								left: 100px;
+							}
 						}
-						.he & {
-							margin-right: 100px;
-						}
-					}
 
-					&__icon {
-						width: 10px;
-						height: 12px;
-						position: absolute;
-						margin-top: -16px;
-
-						.en & {
-							margin-left: 120px;
-						}
-						.he & {
-							margin-right: 120px;
+						.goToPage_icon {
+							position: absolute;
+							width: 10px;
+							height: 12px;
+							top: 3px;
+							
+							.en & {
+								right: 4px;
+							}
+							.he & {
+								left: 4px;
+							}
+							.tree-view & {
+							display: none;
+							}
 						}
 					}
 				}
@@ -983,6 +1027,7 @@
 				left: 0;
 				border-right: 12px solid #eeeeee;
 			}
+			
 
 			.expand-btn {
 				position: absolute;
@@ -1004,9 +1049,15 @@
 				position: absolute;
 				color: #Ffffff;
 				font-size: 10px;
-				right: 114px;
 				top: 31px;
 				z-index: 1;
+
+				.en & {
+					right: 114px;
+				}
+				.he & {
+					left: 114px;;
+				}
 			}
 			
 			#ftree-item-container {

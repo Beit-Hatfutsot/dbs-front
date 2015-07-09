@@ -115,11 +115,18 @@
 }
 
 .mjs-widget-icon{
+	position: absolute;
 	display: inline-block;
 	width: 65px;
 	height: 64px;
-	position: absolute;
     top: -68px;
-    right: -4px;
+
+    .en & {
+    	right: 9px;
+    }
+    .he & {
+    	right: 762px;
+    }
+    
 	@include hover-pointer();
 }
