@@ -91,5 +91,27 @@
 						delay="1300" 
 						connecton="mjsCtrl.selected_branch">
 		</mjs-assigned>
+		<mjs-assigned 	ng-if="branch.items.personalities" 
+						id="assigned-fifth-{{$index}}" 
+						class="assigned assigned--fifth" 
+						collection-name="personalities" 
+						icon-position="[-79, -348]" 
+						plumb-connect to="branch-head-border-{{$index}}" 
+						container-id="molecules"
+						connection-id="personalities-{{$index}}" 
+						delay="1300" 
+						connecton="mjsCtrl.selected_branch">
+		</mjs-assigned>
+		<mjs-assigned 	ng-if="branch.items.movies" 
+						id="assigned-sixth-{{$index}}" 
+						class="assigned assigned--sixth" 
+						collection-name="movies" 
+						icon-position="[-79, -348]" 
+						plumb-connect to="branch-head-border-{{$index}}" 
+						container-id="molecules"
+						connection-id="movies-{{$index}}" 
+						delay="1300" 
+						connecton="mjsCtrl.selected_branch">
+		</mjs-assigned>
 	</div>
 </div>

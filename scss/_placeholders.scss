@@ -7,28 +7,23 @@
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 	font-size: 11px;
+	margin-bottom: 20px;
+	padding: 5px 5px 2px;
 
 	.en & {
+		margin-right: 11px;
 		padding-right: 5px;
 		float: right;
 	}
 
 	.he & {
+		margin-left: 11px;
 		padding-left: 5px;
 		float: left;
 	}
 
 	.type-icon-container {
 		display: inline-block;
-		padding-top: 3px;
-
-		.en & {
-			padding-left: 5px;
-		}
-
-		.he & {
-			padding-right: 5px;	
-		}
 
 		.surname-icon {
 			position: relative;
@@ -39,15 +34,33 @@
 		}
 
 		.place-icon {
-			width: 19px;
+			width: 15px;
 			height: 17px;
 			@include icon(-30px -106px);
 		}
 
+		.photo-icon {
+			width: 17px;
+			height: 17px;
+			@include icon(-29px -218px);
+		}
+
 		.tree-icon {
-			width: 19px;
+			width: 14px;
 			height: 17px;
 			@include icon(-28px -68px);
+		}
+
+		.movie-icon {
+			width: 22px;
+			height: 17px;
+			@include icon(-26px -192px);
+		}
+
+		.personality-icon {
+			width: 16px;
+			height: 17px;
+			@include icon(-29px -132px);
 		}
 	}
 
@@ -55,7 +68,7 @@
 		position: relative;
 		display: inline-block;
 		vertical-align: top;
-		padding: 5px 0;
+		padding: 2px 0;
 	}
 }
 

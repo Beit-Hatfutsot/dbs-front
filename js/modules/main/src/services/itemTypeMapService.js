@@ -4,7 +4,8 @@ angular.module('main').service('itemTypeMap', function() {
 		1: 'photoUnits',
     	5: 'places',
     	6: 'familyNames',
-    	8: 'personalities'
+    	8: 'personalities',
+    	9: 'movies'
 	};
 
 	this.get_type = function(description_code) {

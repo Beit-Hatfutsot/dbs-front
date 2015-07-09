@@ -6,6 +6,27 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        clean: { 
+            public: [public_dir],
+            bower: ['bower_components/']
+        },
+
+        replace: {
+            config: {
+                options: {
+                    patterns: [{
+                        json: grunt.file.readJSON('/etc/bhs/client/config.json')
+                    }]
+                },
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: ['/etc/bhs/client/config.js'],
+                    dest: 'js/modules/config'
+                }]
+            }
+        },
+
         concat: {
             options: {
                 // define a string to put between each file in the concatenated output
@@ -15,6 +36,7 @@ module.exports = function(grunt) {
                 // the files to concatenate
                 src: [
                     'js/modules/main/src/**/*.js',
+                    'js/modules/config/*.js',
                     'js/modules/lang/src/**/*.js',
                     'js/modules/api_client/src/**/*.js',
                     'js/modules/auth/src/**/*.js',
@@ -71,11 +93,6 @@ module.exports = function(grunt) {
             }
         },
 
-        clean: { 
-            public: [public_dir],
-            bower: ['bower_components/']
-        },
-
         copy: {
             main: {
                 files: [
@@ -106,6 +123,7 @@ module.exports = function(grunt) {
     });
 
     // Load plugins
+    grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
@@ -115,5 +133,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['clean:public', 'sass', 'concat', 'uglify', 'copy']);
+    grunt.registerTask('build', ['replace:config', 'clean:public', 'sass', 'concat', 'uglify', 'copy']);
 };

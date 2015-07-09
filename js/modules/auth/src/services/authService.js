@@ -138,13 +138,16 @@ angular.module('auth').
 	}]);
 
 angular.module('auth').
-	factory('authInterceptor', ['$q', '$window', function ($q, $window) {
+	factory('authInterceptor', ['$q', '$window', 'apiClient', function ($q, $window, apiClient) {
 	  	return {
 		    request: function (config) {
+		    	var base_url = apiClient.base_url;
+		    	var base_url_regex = new RegExp(base_url, 'i');
+		    	
 		    	config.headers = config.headers || {};
 		    	delete config.headers.Authorization;
 
-		    	if ( /bhsapi/.test(config.url) || /127.0.0.1/.test(config.url) ) {
+		    	if ( base_url_regex.test(config.url) ) {
 			    	if ( $window.localStorage.getItem('bhsclient_token') ) {
 			        	config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('bhsclient_token');
 			    	}

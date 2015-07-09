@@ -92,6 +92,7 @@ angular.module('main').
 					last_name: individual.LN,
 					first_name: individual.FN,
 					sex: individual.G,
+					editor_remarks: individual.EditorRemarks,
 					parent_family: subset.parent_family,
 					family: subset.family,
 					birth_year: individual.BD ? individual.BD.substr(-4) : null,
@@ -260,8 +261,9 @@ angular.module('main').
 
 				individuals.forEach(function(individual) {
 					if ( is_alive(individual) ) {
-						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', '_id', 'BD', 'MP', 'MD']; 
- 						var filtered_individual = {};
+
+						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', 'EditorRemarks', '_id'];
+						var filtered_individual = {};
 
 						for (var prop in individual) {
 							if ( allowed_props.indexOf(prop) !== -1 ) {
