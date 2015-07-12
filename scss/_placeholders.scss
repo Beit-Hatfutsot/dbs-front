@@ -228,7 +228,7 @@
 				width: 40px;
 				font-size: 12px;
 				position: absolute;
-				height: 58px;
+				height: 100%;
 				line-height: 231%;
 
 				.en & {
@@ -262,11 +262,11 @@
 				}
 			}
 			.notAlive {
-					width: 20px;
-					height: 58px;
-					background-color: #000000;
 					position: absolute;
-					
+					width: 20px;
+					height: 100%;
+					background-color: #000000;
+
 					.en & {
 						left: 32px;
 					}
@@ -276,14 +276,13 @@
 				}
 
 			&__more-info {
-			    position: relative;				
-				top: 22px;	
+			    position: relative;					
 
 				.en & {
 					left: 86px;
 				}
 				.he & {
-					left: 86px;
+					right: 86px;
 				}
 
 				&.open {
@@ -293,31 +292,66 @@
 				}
 
 				&__icon {
+					position: absolute;
 					width: 11px;
 					height: 11px;	
 					top: 22px;	
-					overflow: hidden;
 					@include hover-pointer();
 
 					.en & {
-						left: 86px;
+						left: 0px;
 					}
 					.he & {
-						right: 86px;
+						right: 0px;
 					}
 				}
 
 				&__person-info {
-					position: absolute;
-					z-index: 2;
+					position: relative;
+					z-index: -1;
 					font-weight: 10px;
 					display: none;
-					width: 210px;
-					height: 167px;
+					width: 100%;
 					color: #666666;
 					background-color: #fee1b5;
 					border-bottom: 5px solid #fbb034;
-					top: 4px;
+					top: 8px;
+					padding-top: 30px;
+					padding-bottom: 10px;
+					overflow: hidden;
+
+					.en & {
+						right: 85px;
+						padding-left: 10px;
+					}
+					.he & {
+						left: 85px;
+						padding-right: 10px;
+					}
+					&__close-button {
+						position: absolute;
+						width: 20px;
+						height: 20px;
+						background-color: #fbb034;
+						@include border-radius(10px);
+
+						.en & {
+							left: 46%;
+						}
+						.he & {
+							right: 46%;
+						}
+					}
+					&__arrow-up {
+						position: absolute;
+						width: 0; 
+						height: 0; 
+						border-left: 7px solid transparent;
+						border-right: 7px solid transparent;
+						border-bottom: 7px solid #ffffff;
+						left: 48%;
+						bottom: 0px;
+					}
 				}
 			}
 
