@@ -24,24 +24,19 @@
 			<div class="individual__more-info__icon" dropdown-toggle dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
 				<icon position="[-220, -634]"></icon>
 			</div>
-			<!-- <div class="individual__more-info__person-info" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
-				<div ng-repeat="i in ftreesCtrl.person_info[key][lang]" ng-if="individual[i] !== null && individual[i] !== ''">
-					{{i + "individual[i]"}}
-				</div> -->
-				<div>
-					<label><en>Name:</en> <he>שם:</he></label></br>
-					<put-value value="individual.name"></put-value></br>
-					<label><en>Date of birth:</en><he>Date of birth:</he></label></br>
-					<put-value value="individual.birth_date"></put-value></br>
-					<label><en>Place of birth:</en><he>Place of birth:</he></label></br>
-					<put-value value="individual.birth_place"></put-value></br>
-					<span ng-if="!individual.alive">
-						<label><en>Date of death:</en><he>Date of death:</he></label></br>
-						<put-value value="individual.death_date"></put-value></br>
-						<label><en>Place of death:</en><he>Place of death:</he></label></br>
-						<put-value value="individual.death_place"></put-value></en>
-					</span>
-				</div>
+			<div class="individual__more-info__person-info" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+				<div><en>Name:</en> <he>שם:</he></br>
+				{{individual.name}}</div>
+				<div ng-if="individual.birth_date !== null"><en>Date of birth:</en><he>Date of birth:</he></br>
+				{{individual.birth_date}}</div>
+				<div ng-if="individual.birth_place !== null"><en>Place of birth:</en><he>Place of birth:</he></br>
+				{{individual.birth_place}}</div>
+				<span ng-if="!individual.alive">
+					<div ng-if="individual.death_date !== null"><en>Date of death:</en><he>Date of death:</he></br>
+					{{individual.death_date}}</div>
+					<div ng-if="individual.death_place !== null"><en>Place of death:</en><he>Place of death:</he>
+					{{individual.death_place}}</div>
+				</span>
 			</div>
 		</div>
 	</span>

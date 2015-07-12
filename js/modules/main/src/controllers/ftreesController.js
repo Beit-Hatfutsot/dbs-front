@@ -7,32 +7,32 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.selected_individual_data = {};
 	this.search_params = {};
 
-	this.person_info = {
-		name: {
-			en: 'Name',
-			he: 'שם'
-		},
+	// this.person_info = {
+	// 	name: {
+	// 		en: 'Name',
+	// 		he: 'שם'
+	// 	},
 
-		birth_date: {
-			en: 'Birth Date',
-			he: 'תאריך לידה'
-		},
+	// 	birth_date: {
+	// 		en: 'Birth Date',
+	// 		he: 'תאריך לידה'
+	// 	},
 
-		birth_place: {
-			en: 'Birth Place',
-			he: 'מקום לידה'
-		},
+	// 	birth_place: {
+	// 		en: 'Birth Place',
+	// 		he: 'מקום לידה'
+	// 	},
 
-		death_date: {
-			en: 'Death Place',
-			he: 'מקום פטירה'
-		},
-		death_place: {
-			en: 'Death Place',
-			he: 'מקום פטירה'
-		}
+	// 	death_date: {
+	// 		en: 'Death Place',
+	// 		he: 'מקום פטירה'
+	// 	},
+	// 	death_place: {
+	// 		en: 'Death Place',
+	// 		he: 'מקום פטירה'
+	// 	}
 
-	};
+	// };
 	
 	this.key_map = {
 		FN: {
@@ -361,7 +361,8 @@ FtreesController.prototype = {
 			self.selected_index = self.individuals.indexOf(individual);
 			self.$state.go('ftree-view.ftree-item', {
 				ind_index: self.selected_index, 
-				individual_id: individual.II, 
+				individual_id: '@' + individual.II + '@',
+				// individual_id: '@' + individual.II + '@',
 				tree_number: individual.GTN
 			});
 		}

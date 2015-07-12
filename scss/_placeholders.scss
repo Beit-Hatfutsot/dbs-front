@@ -312,14 +312,14 @@
 				&__person-info {
 					position: absolute;
 					z-index: 2;
+					font-weight: 10px;
 					display: none;
 					width: 210px;
 					height: 167px;
 					color: #666666;
 					background-color: #fee1b5;
-					border-bottom: 3px solid ;
+					border-bottom: 5px solid #fbb034;
 					top: 4px;
-					@include border-radius(7px);
 				}
 			}
 

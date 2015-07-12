@@ -2,7 +2,6 @@ var FtreeItemController = function($state, $stateParams, ftrees, notification) {
 	this.ftrees = ftrees;
 	this.notification = notification;
 	this.$state = $state;
-
 	this.individual_id = this.strip_id( $stateParams.individual_id );
 	this.tree_number = parseInt($stateParams.tree_number);
 	this.previous_state = this.previous_state();
@@ -47,9 +46,9 @@ FtreeItemController.prototype = {
 		if (id[0] == '@') {
 			return id.replace('@', '').replace('@', '');
 		}
-
 		return id;
 	}, 
+	
 	previous_state: function () {
 		if (this.$state.lastState.name === "ftree-view.ftree-item") {
 			return true;
