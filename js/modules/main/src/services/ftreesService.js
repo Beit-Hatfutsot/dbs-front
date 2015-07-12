@@ -9,7 +9,7 @@ angular.module('main').
 
 					in_progress = true;
 					var deferred = $q.defer();
-
+					
 					$http.get(apiClient.urls.ftrees_search, {params: params}).
 						success(function(individuals) {
 							var filtered_individuals = self.filter_individuals(individuals);
@@ -81,8 +81,8 @@ angular.module('main').
 			},
 
 			parse_individual: function(individual) {
-				var individual_id = individual.II[0] === '@' ? individual.II : '@' + individual.II + '@';
-				var subset = this.get_individuals_subset(individual_id);
+				var	individual_id = individual.II[0] === '@' ? individual.II : '@' + individual.II + '@',
+					subset = this.get_individuals_subset(individual_id); 
 
 				var parsed_individual = {
 					_id: individual._id,

@@ -157,13 +157,11 @@
 	
 	display: inline-block;
 	min-width: 52px;
-	min-height: 76px;
 	margin: 15px 10px;
 
 	.node {
 		position: relative;
 		width: 100%;
-		min-height: 53px;
 		padding: 0 8px;
 		
 		.individual {
@@ -171,7 +169,7 @@
 			background: #ddf0f4;
 			display: inline-block;
 			vertical-align: top;
-			margin-top: 16px;
+			//margin-top: 16px;
 			@include border-radius(50px);
 			width: 210px;
 			height: 58px;
@@ -323,47 +321,6 @@
 				}
 			}
 
-		}
-
-		.rings {
-			position: absolute;
-			z-index: 100;
-			left: 50%;
-			top: 0;
-			@include translate(-50%, -2px);
-
-			&.open {
-				.rings__marriageInfo {
-					display: block;
-				}
-			}
-
-			&__no-details {
-				width: 12px;
-				height: 12px;
-				background-color: #999999;
-				@include border-radius(7px);
-			}
-
-			&__icon {
-				width: 20px;
-				height: 20px;
-				overflow: hidden;
-				margin: 0 auto;
-				@include hover-pointer();
-			}
-			&__marriageInfo {
-				position: relative;
-				z-index: 2;
-				display: none;
-				width: 210px;
-				height: 105px;
-				color: #666666;
-				background-color: #fee1b5;
-				border: 3px solid transparent;
-				top: 4px;
-				@include border-radius(7px);
-			}
 		}
 	}
 }
