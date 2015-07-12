@@ -74,7 +74,10 @@
 							ng-if="itemController.item_data.video_url || itemController.item_data.main_image_url">
 						<ng-switch on="itemController.item_type">
 							<video 	ng-switch-when="movies" ng-src="{{itemController.item_data.video_url}}" controls autoplay type="video/mp4"></video>
-							<img ng-switch-default ng-src="{{itemController.item_data.main_image_url}}" alt="Item Image">
+							<img 	ng-switch-default 
+									ng-src="{{itemController.item_data.main_image_url}}" 
+									alt="Item Image"
+									prevent-rightclick>
 						</ng-switch>
 					</div>
 					<en>
