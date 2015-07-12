@@ -146,27 +146,56 @@ angular.module('main').
 					parsed_parent.husband.name = parse_name( parent_data.husb.getValue('name') );
 					parsed_parent.husband.sex = parent_data.husb.getValue('sexe');
 					var birth = parent_data.husb.getValue('birt');
-					parsed_parent.husband.birth_year = birth.date ? birth.date.substr(-4) : null;
-					parsed_parent.husband.birth_date = birth ? birth.date : null;
+					if (birth) {
+						if (birth.date) {
+							parsed_parent.husband.birth_year = birth.date.substr(-4);
+							parsed_parent.husband.birth_date = birth.date;
+						}
+						if (birth.place) {
+							parsed_parent.husband.birth_place = birth.place
+						}
+					}
 					var death = parent_data.husb.getValue('deat');
-					parsed_parent.husband.death_year = death.date ? death.date.substr(-4) : null;
-					parsed_parent.husband.death_date = death ? death.date : null;	
-					parsed_parent.husband.death_place = death ? death.place : null;
+					if (death) {
+						if (death.date) {
+							parsed_parent.husband.death_year = death.date.substr(-4);
+							parsed_parent.husband.death_date = death.date;	
+						}
+						if (death.place) {
+							parsed_parent.husband.death_place = death.place;
+						}
+					}
 					parsed_parent.husband.alive = is_alive_parsed(parsed_parent.husband);
-					parsed_parent.husband.marriage_place = parent_data.marr.place;
-					parsed_parent.husband.marriage_date = parent_data.marr.date;
+					var marr = parent_data.marr;
+					if (marr) {
+						parsed_parent.husband.marriage_place = parent_data.marr.place;
+						parsed_parent.husband.marriage_date = parent_data.marr.date;
+					}
 				}
 				if(parent_data.wife) {
 					parsed_parent.wife.id = parent_data.wife.id;
 					parsed_parent.wife.name = parse_name( parent_data.wife.getValue('name') );
 					parsed_parent.wife.sex = parent_data.wife.getValue('sexe');
 					var birth = parent_data.wife.getValue('birt');
-					parsed_parent.wife.birth_year = birth.date ? birth.date.substr(-4) : null;
-					parsed_parent.wife.birth_date = birth ? birth.date : null;
+					if (birth) {
+						if (birth.date) {
+							parsed_parent.wife.birth_year = birth.date.substr(-4);
+							parsed_parent.wife.birth_date = birth.date;
+						}
+						if (birth.place) {
+							parsed_parent.wife.birth_place = birth.place;
+						}
+					}
 					var death = parent_data.wife.getValue('deat');
-					parsed_parent.wife.death_year = death.date ? death.date.substr(-4) : null;
-					parsed_parent.wife.death_date = death ? death.date : null;	
-					parsed_parent.wife.death_place = death ? death.place : null;
+					if (death) {
+						if (death.date) {
+							parsed_parent.wife.death_year = death.date.substr(-4);
+							parsed_parent.wife.death_date = death.date;	
+						}
+						if (death.place) {
+							parsed_parent.wife.death_place = death.place;
+						}
+					}
 					parsed_parent.wife.alive = is_alive_parsed(parsed_parent.wife);
 				}
 
@@ -178,10 +207,26 @@ angular.module('main').
 						// spouse : child.getValue(''),
 					};
 
-					var birth = child.getValue('birt')
-					child_obj.birth_year = birth.date? birth.date.substr(-4) : null;
+					var birth = child.getValue('birt');
+					if (birth) {
+						if (birth.date) {
+							child_obj.birth_year = birth.date.substr(-4);
+							child_obj.birth_date = birth.date;
+						}
+						if (birth.place) {
+							child_obj.birth_place = birth.place;
+						}
+					}
 					var death = child.getValue('deat');
-					child_obj.death_year = death.date ? death.date.substr(-4) : null;
+					if (death) {
+						if (death.date) {
+							child_obj.death_year = death.date.substr(-4);
+							child_obj.death_date = death.date;
+						}
+						if (death.place) {
+							child_obj.death_place = death.place;
+						}
+					}
 					child_obj.alive = is_alive_parsed(child_obj)
 
 					parsed_parent.children.push(child_obj);
@@ -209,10 +254,25 @@ angular.module('main').
 					parsed_family.spouse.name = parse_name( spouse.getValue('name') );
 					parsed_family.spouse.sex = spouse.getValue('sexe');
 					var birth = spouse.getValue('birt');
-					parsed_family.spouse.birth_year = birth.date ? birth.date.substr(-4) : null;
+					if (birth) {
+						if (birth.date) {
+							parsed_family.spouse.birth_year = birth.date.substr(-4);
+							parsed_family.spouse.birth_date = birth.date;
+						}
+						if (birth.place) {
+							parsed_family.spouse.birth_place = birth.place;
+						}
+					}
 					var death = spouse.getValue('deat');
-					parsed_family.spouse.death_year = death.date ? death.date.substr(-4) : null;
-					parsed_family.spouse.death_place = death ? death.place : null;
+					if (death) {
+						if (death.date) {
+							parsed_family.spouse.death_year = death.date.substr(-4);
+							parsed_family.spouse.death_date = death.date;
+						}
+						if (death.place) {
+							parsed_family.spouse.death_place = death.place;
+						}
+					}
 					parsed_family.spouse.alive = is_alive_parsed(parsed_family.spouse);
 				}
 				
@@ -223,10 +283,25 @@ angular.module('main').
 						sex: child.getValue('sexe')
 					};
 					var birth = child.getValue('birt');
-					child_obj.birth_year = birth.date ? birth.date.substr(-4) : null;
+					if (birth) {
+						if (birth.date) {
+							child_obj.birth_year = birth.date.substr(-4);
+							child_obj.birth_date = birth.date;
+						}
+						if (birth.place) {
+							child_obj.birth_place = birth.place;
+						}
+					}
 					var death = child.getValue('deat');
-					child_obj.death_year = death.date ? death.date.substr(-4) : null;
-					child_obj.death_place = death? death.place : null;
+					if (death) {
+						if (death.date) {
+							child_obj.death_year = death.date.substr(-4);
+							child_obj.death_place = death.place;
+						}
+						if (death.place) {
+							child_obj.death_place = death.place;
+						}
+					}
 					child_obj.alive = is_alive_parsed(child_obj);
 
 					var child_family_data = self.get_individual_data(child.id).family_data;
