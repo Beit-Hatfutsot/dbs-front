@@ -357,12 +357,11 @@ FtreesController.prototype = {
 		var self = this;
 		var already_selected = self.is_selected(individual);
 		 
-		if (!already_selected) {
+		if (!already_selected && individual) {
 			self.selected_index = self.individuals.indexOf(individual);
 			self.$state.go('ftree-view.ftree-item', {
 				ind_index: self.selected_index, 
 				individual_id: '@' + individual.II + '@',
-				// individual_id: '@' + individual.II + '@',
 				tree_number: individual.GTN
 			});
 		}
