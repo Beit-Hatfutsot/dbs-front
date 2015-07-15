@@ -1,4 +1,4 @@
-<div id="subtree" plumb-set-container reinstantiate-on="individual.id">
+<div id="subtree" plumb-set-container reinstantiate-on="[individual.id]" force-repaint-on="lang">
 	<div id="subtree-parent" class="parent-family" ng-if="individual.parent_family.isNotEmpty()">
 		<div class="node-container">
 			<div 	ng-if="individual.parent_family.husband.isNotEmpty()"

@@ -58,16 +58,25 @@ angular.module('plumb').
 			restrict: 'A',
 
 			scope: {
-				reinstantiateOn: '='
+				reinstantiateOn: '=',
+				forceRepaintOn: '='
 			},
 
 			link: function(scope, element, attrs) {
 				var id = attrs['id'];
 				var connection_set = plumbConnectionSetManager.getSet(id);
-
-				scope.$watch(scope.reinstantiateOn, function(newVal, oldVal) {
-					connection_set.reinstantiatePlumb();
-					connection_set.repaint();
+				
+				scope.$watchCollection('reinstantiateOn', function(newVal, oldVal) {
+					if (newVal !== oldVal) {
+						connection_set.reinstantiatePlumb();
+						connection_set.repaint();
+					}
+				});
+				scope.$watch('forceRepaintOn', function(newVal, oldVal) {
+					if (newVal !== oldVal) {
+						connection_set.reinstantiatePlumb();
+						connection_set.forceRepaint();
+					}
 				});
 			}
 		}

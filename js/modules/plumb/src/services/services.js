@@ -92,8 +92,6 @@ angular.module('main').
 			},
 
 			repaint: function(connection_id) {
-				var self = this;
-
 				if (connection_id) {
 					this.plumb.repaint(this.active_connections[connection_id]);
 				}
@@ -104,12 +102,33 @@ angular.module('main').
 				}
 			},
 
-			detach: function(connection_id) {
-				this.plumb.detach(this.active_connections[connection_id]);
-				delete this.active_connections[connection_id];
+			forceRepaint: function() {
+				if (connection_id) {
+					this.detachAndDeregister(connection_id);
+					this.connect(connection_id);
+				}
+				else {
+					for (var connection_id in this.active_connections) {
+						this.detachAndDeregister(connection_id);
+						this.connect(connection_id);
+					}
+				}	
 			},
 
-			active_connection: function(connection_id) {
+			detach: function(connection_id) {
+				if (this.active_connection(connection_id)) {
+					this.plumb.detach(this.active_connections[connection_id]);
+				}
+			},
+
+			detachAndDeregister: function(connection_id) {
+				if (this.activeConnection(connection_id)) {
+					this.plumb.detach(this.active_connections[connection_id]);
+					delete this.active_connections[connection_id];
+				}
+			},
+
+			activeConnection: function(connection_id) {
 				return this.active_connections.hasOwnProperty(connection_id);
 			},
 
