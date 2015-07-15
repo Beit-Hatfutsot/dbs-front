@@ -205,7 +205,7 @@
 			}
 
 			&__name {
-				max-width: 71px;
+				max-width: 96px;
 				font-size: 12px;
 				word-wrap: break-word;
 				word-spacing: 100px;
@@ -349,8 +349,14 @@
 						border-left: 7px solid transparent;
 						border-right: 7px solid transparent;
 						border-bottom: 7px solid #ffffff;
-						left: 48%;
 						bottom: 0px;
+
+						.en & {
+							left: 48%;
+						}
+						.he & {
+							right: 47%;
+						}
 					}
 				}
 			}

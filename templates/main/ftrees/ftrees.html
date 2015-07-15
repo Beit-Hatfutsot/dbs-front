@@ -81,7 +81,7 @@
 				<thead>
 					<tr>
 						<th class="first-name" ng-click="ftreesCtrl.sort('FN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['FN']">
-							<span class="arrow1"></span>
+							<!-- <span class="arrow1"></span> -->
 							<div tree-view class="column-title">
 								<en>First<br>Name</en>
 								<he>שם<br>פרטי</he>
@@ -143,7 +143,7 @@
 					</tr>
 				</thead>
 
-				<tbody>
+				<tbody ng-hide="ftreesCtrl.individuals.isEmpty()">
 					<tr ng-repeat="indi in ftreesCtrl.individuals.slice(ftreesCtrl.display_from_result) | limitTo: ftreesCtrl.results_per_page" ng-class="{dark: $index % 2 !== 0, selected: ftreesCtrl.is_selected(indi)}" ng-click="ftreesCtrl.select_individual(indi)">
 						<td class="first-name" ng-show="ftreesCtrl.column_status['FN']">
 							{{indi.FN}}
@@ -187,7 +187,7 @@
 						<he>עוד</he>
 					</div>
 				</div>			
-				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
+				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)"f>
 					<div class="results__more-columns__menu__title">
 						<en>Choose what columns to display (up to 6)</en>
 						<he>בחר אלו עמודות להציג (עד 6)</he>
@@ -250,7 +250,6 @@
 					<span class="results__per-page__selector__fancyArrow">
 						<icon  class="results__per-page__selector__fancyArrow__selectbox-icon" position="[-217, -661]"></icon>
 					</span>
-					
 				</span>
 
 				<span class="results__per-page__go-to-page">
@@ -269,7 +268,7 @@
 					</div>
 				</span>
 			</div>
-			<button class="BackToSearch" ng-click="ftreesCtrl.back_to_search_filters()" ng-if="ftreesCtrl.tree_view">
+			<button class="BackToSearch" ng-click="ftreesCtrl.back_to_search_filters()" ng-if="ftreesCtrl.tree_view" ng-hide="ftreesCtrl.individuals.isEmpty()">
 				<en>Back to Search Filters</en>
 				<he>Back to Search Filters</he>
 			</button>

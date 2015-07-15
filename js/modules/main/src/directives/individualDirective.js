@@ -19,6 +19,17 @@ angular.module('main').
 							$state.go('ftree-view.ftree-item', {individual_id: individual_id, tree_number: tree_number});	
 						}
 					}
+				};
+
+				$scope.display_more_info = function() {
+					var display = false;
+					var indiProperties = ["birth_date", "birth_place", "death_date", "death_place"];
+					indiProperties.forEach(function(prop) {
+						if ($scope.individual[prop] !== null) {
+							display = true;
+						}
+					});
+					return display;
 				}
 			}]
 		};

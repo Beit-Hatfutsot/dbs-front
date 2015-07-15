@@ -122,11 +122,19 @@
     top: -68px;
 
     .en & {
-    	right: 9px;
+    	right: 267px;
     }
     .he & {
-    	right: 762px;
+    	right: 772px;
     }
+    .tree-view & {
+		.en & {
+			right: 3px;
+		}
+		.he & {
+			right: 763px;
+		}
+	}
     
 	@include hover-pointer();
 }

@@ -89,6 +89,14 @@
 				.tree-view & {
 					display: none;
 				}
+				.relocate & {
+					.en & {
+						right: 23px;
+					}
+					.he & {
+						left: 23px;
+					}
+				}
 
 			}
 
@@ -111,7 +119,7 @@
 					&:after {
 						border-top: 46px solid #666666;
 					}
-					}
+				}
 
 				&:after {
 					content:'';
@@ -215,6 +223,57 @@
 			}
 		}*/
 
+		.balylonLogo {
+			position: relative;
+			top: -59px;
+			
+			.en & {
+				left: 934px;
+			}
+			.he & {
+				right: -179px;
+			}
+
+			&:hover {
+				.balylonLogo__desc {
+					display: inline-block;
+				}
+			}
+
+			&__desc {
+				display: none;
+				position: absolute;
+				background-color: #e98909;
+				color: #ffffff;
+				width: 168px;
+				top: -18px;
+				padding: 3px 10px;
+				font-size: 80%;
+
+				 .en & {
+				 	left: 29px;
+				 }
+				 .he & {
+				 	right: 21px;
+				 }
+			}
+			img {
+				position: absolute;
+				width: 107px;
+				height: auto;
+				top: 10px;
+
+				.en & {
+					left: 82px;
+				}
+				.he & {
+					right: 82px;
+				}
+			}
+			.tree-view & {
+					display: none;
+				}
+		}
 
 		@at-root #ftree-layout-container {
 			padding: 70px 130px 25px;
