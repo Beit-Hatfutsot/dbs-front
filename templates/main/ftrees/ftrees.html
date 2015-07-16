@@ -81,61 +81,71 @@
 				<thead>
 					<tr>
 						<th class="first-name" ng-click="ftreesCtrl.sort('FN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['FN']">
-							<!-- <span class="arrow1"></span> -->
+							<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'FN'"></span>
 							<div tree-view class="column-title">
 								<en>First<br>Name</en>
 								<he>שם<br>פרטי</he>
 							</div>
 						</th>
 						<th class="last-name" ng-click="ftreesCtrl.sort('LN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['LN']">
+							<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'LN'"></span>
+							<div>
 								<en>Last<br>Name</en>
 								<he>שם<br>משפחה</he>
 							</div>
 						</th>
-						<th class="birth-place" ng-click="ftreesCtrl.sort('BP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['BP']">
+						<th class="birth-place" ng-click="ftreesCtrl.sort('BP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['BP']" ng-class="{'th--selected': ftreesCtrl.sorted_by == 'BP'}">
+							<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'BP'"></span>
 							<div class="column-title">
 								<en>Birth<br>Place</en>
 								<he>מקום<br>לידה</he>
 							</div>
 						</th>
-						<th class="birth-data" ng-click="ftreesCtrl.sort('BD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['BD']">
+						<th class="birth-data" ng-click="ftreesCtrl.sort('BD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['BD']" ng-class="{'selected': ftreesCtrl.sorted_by == 'BD'}">
+							<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'BD'"></span>
 							<div class="column-title">
 								<en>Birth<br>Date</en>
 								<he>תאריך<br>לידה</he>
 							</div>
 						</th>
 						<th class="marriage-place" ng-click="ftreesCtrl.sort('MP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['MP']">
-							<div class="column-title">
+							<div class="column-title" ng-class="{'selected': ftreesCtrl.sorted_by == 'MP'}">
+								<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'MP'"></span>
 								<en>Marriage<br>Place</en>
 								<he>מקום<br>נישואין</he>
 							</div>
 						</th>
 						<th class="marriage-date" ng-click="ftreesCtrl.sort('MD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['MD']">
-							<div class="column-title">
+							<div class="column-title" ng-class="{'selected': ftreesCtrl.sorted_by == 'MD'}">
+								<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'MD'"></span>
 								<en>Marriage<br>Date</en>
 								<he>תאריך<br>נישואין</he>
 							</div>
 						</th>
 						<th class="death-place" ng-click="ftreesCtrl.sort('DP')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['DP']">
-							<div class="column-title">
+							<div class="column-title" ng-class="{'selected': ftreesCtrl.sorted_by == 'DP'}">
+								<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'DP'"></span>
 								<en>Death<br>Place</en>
 								<he>מקום<br>פטירה</he>
 							</div>
 						</th>
 						<th class="death-date" ng-click="ftreesCtrl.sort('DD')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['DD']">
-							<div class="column-title">
+							<div class="column-title" ng-class="{'selected': ftreesCtrl.sorted_by == 'DD'}">
+								<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'DD'"></span>
 								<en>Death<br>Date</en>
 								<he>תאריך<br>פטירה</he>
 							</div>
 						</th>
 						<th class="sex" ng-click="ftreesCtrl.sort('G')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['G']">
-							<div class="column-title">
+							<div class="column-title" ng-class="{'selected': ftreesCtrl.sorted_by == 'G'}">
+								<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'G'"></span>
 								<en>Sex</en>
 								<he>מין</he>
 							</div>
 						</th>
 						<th class="tree-number" ng-click="ftreesCtrl.sort('GTN')" ng-switch on="ftreesCtrl.sorted_by" ng-show="ftreesCtrl.column_status['GTN']">
-							<div class="column-title">
+							<div class="column-title" ng-class="{'selected': ftreesCtrl.sorted_by == 'GTN'}">
+								<span class="thArrowDown" ng-if="ftreesCtrl.sorted_by == 'GTN'"></span>
 								<en>Tree<br>Number</en>
 								<he>מספר<br>עץ</he>
 							</div>

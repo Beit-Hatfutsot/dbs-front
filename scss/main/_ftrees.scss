@@ -484,7 +484,7 @@
 					width: 270px;
 				}
 				
-				.arrow1 {
+				.thArrowDown {
 					width: 0px;
 					height: 0px;
 					border-top: 16px solid #fde2b5;
@@ -535,26 +535,17 @@
 							font-weight: normal;
 							@include hover-pointer();
 
-							&:after {
-								width: 0; 
-								height: 0; 
-								position: absolute;
-								border-left: 20px solid transparent;
-								border-right: 20px solid transparent;
-								border-top: 20px solid green;
-								top: 100%;
-							}
-
 							&:hover  {                        
 								background-color: #d6d6d6;
 
-								.arrow1 {
+								.thArrowDown {
 									border-top-color: #d6d6d6;
 								}
 							}
 
 							.column-title {
 								display: inline-block;
+									padding: 5px;
 							}
 						}
 					}
