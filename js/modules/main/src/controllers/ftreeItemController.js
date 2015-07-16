@@ -1,10 +1,10 @@
-var FtreeItemController = function($state, $stateParams, ftrees, notification) {
+var FtreeItemController = function($state, $stateParams, ftrees, notification, fromFtreeView) {
 	this.ftrees = ftrees;
 	this.notification = notification;
 	this.$state = $state;
 	this.individual_id = this.strip_id( $stateParams.individual_id);
 	this.tree_number = parseInt($stateParams.tree_number);
-	this.previous_state = this.previous_state();
+	this.from_ftree_view = fromFtreeView;
 	this.editor_remarks_matches = {
 		'azrieli': 'images\/babylon.jpg',
 		'GED': ''
@@ -62,14 +62,7 @@ FtreeItemController.prototype = {
 			return id.replace('@', '').replace('@', '');
 		}
 		return id;
-	}, 
-	
-	previous_state: function () {
-		if (this.$state.lastState.name === "ftree-view.ftree-item") {
-			return true;
-		}
-		return false;
 	}
 };
 
-angular.module('main').controller('FtreeItemController', ['$state', '$stateParams', 'ftrees', 'notification', FtreeItemController]);
+angular.module('main').controller('FtreeItemController', ['$state', '$stateParams', 'ftrees', 'notification', 'fromFtreeView', FtreeItemController]);

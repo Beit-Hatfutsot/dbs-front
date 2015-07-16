@@ -88,14 +88,32 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'ftree-view.ftree-item',
             url: '/ftree_item?individual_id&tree_number',
             controller: 'FtreeItemController as ftreeItemCtrl',
-            templateUrl: 'templates/main/ftrees/ftree-item.html'
+            templateUrl: 'templates/main/ftrees/ftree-item.html',
+            resolve: {
+                fromFtreeView: ['$state', function($state) {
+                    return $state.lastState.name === 'ftree-view.ftree-item';
+                }]
+            },
         },
         
         {
             name: 'ftree-item',
             url: '/ftree_item?individual_id&tree_number',
             controller: 'FtreeItemController as ftreeItemCtrl',
-            templateUrl: 'templates/main/ftrees/ftree-item.html'
+            templateUrl: 'templates/main/ftrees/ftree-item.html',
+            resolve: {
+                fromFtreeView: ['$state', function($state) {
+                    return $state.lastState.name === 'ftree-view.ftree-item';
+                }]
+            },
+            onEnter: ['header', 'fromFtreeView', function(header, fromFtreeView) {
+                if (fromFtreeView) {
+                    header.is_visible = false;
+                }
+            }],
+            onExit: ['header', function(header) {    
+                header.is_visible = true;
+            }]
         },            
 
         {
@@ -163,7 +181,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         new RegExp('^http[s]?:\/\/storage.googleapis.com\/bhs.*\.mp4$')
     ]);
 }]).
-run(['$state', '$rootScope', 'langManager', function ($state, $rootScope, langManager) {
+run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootScope, langManager, header) {
     
     Object.defineProperty($rootScope, 'lang', {
         get: function() {
@@ -172,6 +190,12 @@ run(['$state', '$rootScope', 'langManager', function ($state, $rootScope, langMa
 
         set: function(language) {
             langManager.lang = language;
+        }
+    });
+
+    Object.defineProperty($rootScope, 'header_visible', {
+        get: function() {
+            return header.is_visible;
         }
     });
 

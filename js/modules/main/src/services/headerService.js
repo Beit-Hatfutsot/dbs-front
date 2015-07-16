@@ -3,6 +3,8 @@ angular.module('main').
 		var _sub_header_state = 'closed';
 
 		var header = {
+			is_visible: true,
+
 			get sub_header_state() {
 				return _sub_header_state;
 			},

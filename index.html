@@ -33,7 +33,7 @@
 		<div id="app-container">
 			<ng-include src="'templates/main/header.html'"></ng-include>
 			<div id="below-header">
-				<ng-include src="'templates/main/sub-header.html'"></ng-include>
+				<ng-include src="'templates/main/sub-header.html'" ng-if="header_visible"></ng-include>
 				<div id="view" ui-view></div>
 			</div>	
 			<ng-include src="'templates/main/footer.html'"></ng-include>
