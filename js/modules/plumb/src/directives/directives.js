@@ -108,7 +108,7 @@ angular.module('plumb').
 				connection_set.registerConnection(connection_id, {
 					source: attrs['to'],
 					target: attrs['id'],
-					paintStyle:{ lineWidth: 1, strokeStyle: '#333333' },
+					paintStyle:{ lineWidth: 3, strokeStyle: '#999999' },
 					connector: connector,
 					anchors: anchors,
 					endpoint: endpoint

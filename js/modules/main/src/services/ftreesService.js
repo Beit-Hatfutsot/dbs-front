@@ -306,7 +306,7 @@ angular.module('main').
 
 					var child_family_data = self.get_individual_data(child.id).family_data;
 					if (child_family_data) {
-						child_obj.family = self.parse_family(child_family_data);
+						child_obj.family = self.parse_family(child_family_data, child_obj.id);
 					}
 					else {
 						child_obj.family = {};
