@@ -1,4 +1,6 @@
-bhsclient_path = /home/bhs/client/bhsclient
+bhsclient_path ?= /home/bhs/client/bhsclient
+
+branch ?= master
 
 all: test-user backup pull install build copy clean
 
@@ -14,7 +16,7 @@ backup:
 	fi
 
 pull:
-	cd $(bhsclient_path) && git pull origin master
+	cd $(bhsclient_path) && git checkout $(branch) && git pull origin $(branch)
 
 install:
 	npm install && bower install

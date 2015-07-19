@@ -10,6 +10,6 @@
     "angular-bootstrap": "~0.12.1",
     "jquery": "~2.1.3",
     "ng-flow": "~2",
-    "jsplumb": "~1.7.4"
+    "jsplumb": "1.7.5"
   }
 }
