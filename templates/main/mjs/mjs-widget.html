@@ -5,27 +5,19 @@
 		</div>
 		<div class="mjs-widget-dialog">
 			<div class="mjs-widget-dialog__title">Item added</div>
-			<span class="mjs-widget-dialog__view" ui-sref="mjs">
-				<en>view in</en>
-				<he>צפה ב</he>  
-				<div class="mystory">
-					<div class="mystory__icon">
-						<icon alt-text="{en: 'My Story', he: 'הסיפור שלי'}" position="[-83, -24]"></icon>
-					</div>
-				</div>
-				<en>My Story</en>
-				<he>סיפור שלי</he>
-			</span>
+			<div class="mjs-widget-dialog__view" ui-sref="mjs">
+				<en>View in my story</en>
+				<he>צפה ב סיפור שלי</he>  
+			</div>
 			<span ng-if="!(item.ugc)">
-				<span class="mjs-widget-dialog__separator">|</span> 
-				<span class="mjs-widget-dialog__remove" ng-click="mjsWidgetCtrl.remove_from_mjs()">
-					<en>Remove Item</en>
+				<div class="mjs-widget-dialog__remove" ng-click="mjsWidgetCtrl.remove_from_mjs()">
+					<en>Remove item</en>
 					<he>הורד</he>
-				</span>
+				</div>
 			</span>
 		</div>
 		<div class="mjs-widget-icon" ng-click="mjsWidgetCtrl.remove_from_mjs()" ng-switch-when="true">
-			<icon position="[-84, -532]" alt-text="{en: 'Remove from My Story', he: 'הורד מהסיפור שלי'}"></icon>
+			<icon position="[-5, -607]" alt-text="{en: 'Remove from My Story', he: 'הורד מהסיפור שלי'}"></icon>
 		</div>
 	</div>
 </ng-switch>
