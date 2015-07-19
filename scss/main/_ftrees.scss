@@ -1039,7 +1039,7 @@
 				position: absolute;
 				width: 31px;
 				height: 31px;
-				top: 20px;
+				top: 29px;
 				z-index: 1;
 				@include hover-pointer();
 
@@ -1051,11 +1051,12 @@
 					left: 156px;
 				}
 			}
+
 			.expand-btn-text {
 				position: absolute;
 				color: #Ffffff;
 				font-size: 10px;
-				top: 31px;
+				top: 39px;
 				z-index: 1;
 
 				.en & {
