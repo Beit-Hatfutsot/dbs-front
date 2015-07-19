@@ -18,22 +18,19 @@
 	}
 
 	.mjs-widget-dialog {
-		//display: none;
+		display: none;
 		position: absolute;
 		z-index: 1;
-		top: 75px;
-		//width: 336px;
-		//height: 92px;
+		top: 85px;
 		text-align: center;
-		/*padding: 15px 0 25px;*/
 		font-size: 14px;
 
 		.en & {
-			left: 0;
+			right: -33px;
 		}
 
 		.he & {
-			right: 0;
+			left: -33px;
 		}
 
 		&__title {
@@ -55,19 +52,31 @@
 				border-style: solid;
 				border-color: transparent transparent #999999;
 				top: -16px;
-				left: 0px;
+				 .en & {
+				 	left: 0px;
+				 }
+				 .he & {
+				 	right: 0px;
+				 }
 			}
 		}
 
 		&__view, &__remove {
 			padding: 10px 15px;
-			text-align: left;
 			background-color: #d6d6d6;
 			width: 140px;
 			color: #959595;
 			text-decoration: none;
 
 			@include hover-pointer();
+
+			.en & {
+				text-align: left;
+			}
+			.he & {
+				text-align: right;
+			}
+
 
 			&:hover {
 				color: #474747;
