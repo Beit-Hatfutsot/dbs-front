@@ -2,9 +2,6 @@ bhsclient_path ?= /home/bhs/client/bhsclient
 
 branch ?= master
 
-test:
-	$(info $$BRANCH is [${BRANCH}])
-
 all: test-user backup pull install build copy clean
 
 test-user:
