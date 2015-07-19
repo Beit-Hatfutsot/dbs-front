@@ -5,12 +5,8 @@
 	@at-root #ftree-item {
 		width: $view-width;
 		margin: 0 auto;
-		padding: 25px 10px 0;
 		background: #ffffff;
 		@include border-radius(4px);
-		// display: flex;
-		// flex-direction: column;
-		// align-content: stretch;
 
 		.rings {
 			position: relative;
@@ -112,6 +108,7 @@
 
 		.ftree-title {
 			position: relative;
+			display: inline-block;
 			width: 726px;
 			height: 48px; 
 			font-size: 22px;
@@ -272,54 +269,14 @@
 				}
 
 			}
-
-			/*.ftree-type {
-				display: inline-block;
-				position: absolute;
-				width: 105px;
-				height: 22px;
-				padding: 2px 6px;
-				background: #f6f6f6;
-				font-size: 12px;
-				color: #999999;
-
-				.en & {
-					right: 0;
-					top: 50px;
-				}
-
-				.he & {
-					left: 0;
-					top: 50px;
-				}
-
-				.ftree-icon {
-					display: inline-block;
-					vertical-align: bottom;
-					width: 19px;
-					height: 17px;
-					@include icon(-28px -68px);
-				}
-			}*/
 		}
 
-		/*@at-root #mjs-widget-container {
-			
-			.mjs-widget-wrapper {
-				margin-top: 10px;
-				padding: 5px 12px;
-				background: #eeeeee;
-				@include border-radius(18px);
-
-				.en & {
-					margin-left: 30px;
-				}
-
-				.he & {
-					margin-right: 30px;
-				}
-			}
-		}*/
+		@at-root #mjs-widget-container {
+			display: inline-block;
+			position: relative;
+			top: 17px;
+			margin: 0 38px;
+		}
 
 		.balylonLogo {
 			position: relative;
@@ -375,7 +332,6 @@
 
 		@at-root #ftree-layout-container {
 			padding: 70px 130px 25px;
-			flex-grow: 1;
 			overflow: auto;
 
 			@at-root #ftree-layout {

@@ -1,8 +1,6 @@
 .mjs-widget-wrapper {
 	position: relative;
 	display: inline-block;
-	float: right;
-
 
 	&.open {
 
@@ -11,11 +9,19 @@
 		}
 	}
 
+	.mjs-widget-icon{
+		display: inline-block;
+		width: 65px;
+		height: 64px;
+	    
+		@include hover-pointer();
+	}
+
 	.mjs-widget-dialog {
 		display: none;
 		position: absolute;
 		z-index: 1;
-		top: 14px;
+		top: 75px;
 		width: 336px;
 		height: 92px;
 		background: #f5f5f5;
@@ -25,11 +31,11 @@
 		font-size: 14px;
 
 		.en & {
-			left: -15px;
+			left: 0;
 		}
 
 		.he & {
-			right: -15px;
+			right: 0;
 		}
 
 		&:after, &:before {
@@ -112,29 +118,4 @@
 			}
 		}
 	}
-}
-
-.mjs-widget-icon{
-	position: absolute;
-	display: inline-block;
-	width: 65px;
-	height: 64px;
-    top: -68px;
-
-    .en & {
-    	right: 267px;
-    }
-    .he & {
-    	right: 772px;
-    }
-    .tree-view & {
-		.en & {
-			right: 3px;
-		}
-		.he & {
-			right: 763px;
-		}
-	}
-    
-	@include hover-pointer();
 }
