@@ -9,75 +9,69 @@
 		}
 	}
 
+	.mjs-widget-icon{
+		display: inline-block;
+		width: 65px;
+		height: 64px;
+	    
+		@include hover-pointer();
+	}
+
 	.mjs-widget-dialog {
-		display: none;
+		//display: none;
 		position: absolute;
 		z-index: 1;
-		top: 42px;
-		width: 336px;
-		height: 92px;
-		background: #f5f5f5;
-		border: 2px solid #c4c4c4;
+		top: 75px;
+		//width: 336px;
+		//height: 92px;
 		text-align: center;
-		padding: 15px 0 25px;
+		/*padding: 15px 0 25px;*/
 		font-size: 14px;
 
 		.en & {
-			left: -19px;
+			left: 0;
 		}
 
 		.he & {
-			right: -19px;
-		}
-
-		&:after, &:before {
-			bottom: 100%;
-			border: solid transparent;
-			content: " ";
-			height: 0;
-			width: 0;
-			position: absolute;
-			pointer-events: none;
-		}
-
-		&:before {
-			border-bottom-color: #c4c4c4;
-			border-width: 9px;
-			
-			.en & {
-				left: 19px;
-			}
-
-			.he & {
-				right: 19px;
-			}
-		}
-
-		&:after {
-			border-bottom-color: #f5f5f5;
-			border-width: 6px;
-
-			.en & {
-				left: 22px;
-			}
-
-			.he & {
-				right: 22px;
-			}
+			right: 0;
 		}
 
 		&__title {
-			font-size: 20px;
-			margin-bottom: 8px;
+			position: relative;
+			text-align: center;
+			background-color: #999999;
+			color: white;
+			width: 140px;
+			font-size: 16px;
+			padding: 3px auto;
+			margin-bottom: 2px;
+
+			&:before {
+				content: "";
+				position: absolute;
+				height: 0;
+				width: 0;
+				border-width: 0 70px 16px;
+				border-style: solid;
+				border-color: transparent transparent #999999;
+				top: -16px;
+				left: 0px;
+			}
 		}
 
 		&__view, &__remove {
-			text-decoration: underline;
-			@include hover-pointer();
-		}
+			padding: 10px 15px;
+			text-align: left;
+			background-color: #d6d6d6;
+			width: 140px;
+			color: #959595;
+			text-decoration: none;
 
-		&__separator {
-			margin: 0 3px;
+			@include hover-pointer();
+
+			&:hover {
+				color: #474747;
+			}
 		}
 
 		.mystory {
@@ -109,25 +103,5 @@
 				//text-decoration: underline;
 			}
 		}
-	}
-}
-
-.mjs-widget {
-	display: inline-block;
-	color: #f9af37;
-	@include hover-pointer();
-
-	&__icon {
-		width: 21px;
-		height: 21px;
-		display: inline-block;
-	}
-
-	&__text {
-		padding: 0 2px 5px 0;
-		font-size: 12px;
-		font-weight: bold;
-		display: inline-block;
-		vertical-align: bottom;
 	}
 }
