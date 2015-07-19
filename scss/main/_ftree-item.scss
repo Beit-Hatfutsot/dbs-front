@@ -275,7 +275,14 @@
 			display: inline-block;
 			position: relative;
 			top: 17px;
-			margin: 0 38px;
+
+			.en & {
+				margin-left: 38px;
+			}
+
+			.he & {
+				margin-right: 38px;
+			}
 		}
 
 		.balylonLogo {
