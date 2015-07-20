@@ -72,7 +72,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'ftrees',
             url: '/ftrees?first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
             controller: 'FtreesController as ftreesCtrl',
-            reloadOnSearch: false,
             templateUrl: 'templates/main/ftrees/ftrees.html'
         },
 

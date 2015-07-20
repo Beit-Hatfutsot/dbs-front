@@ -198,27 +198,6 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 			return $stateParams;
 		}
 	});
-
-	// read state params & update bound objects to update view accordingly
-	for (var param in $stateParams) {
-		if ( $stateParams[param] !== undefined ) {
-
-			// handle search modifiers & fudge factors in query string
-			if ( $stateParams[param].indexOf('~') !== -1 ) {
-				var parts = $stateParams[param].split('~');
-				this.search_params[param] = parts[0];
-				this.fudge_factors[param] = parts[1];
-			}
-			else if ( $stateParams[param].indexOf(';') !== -1 ) {
-				var parts = $stateParams[param].split(';');
-				this.search_params[param] = parts[0];	
-				this.search_modifiers[param] = parts[1];
-			}
-			else {
-				this.search_params[param] = $stateParams[param];
-			}
-		}
-	};
 	
 	$scope.$watch('tree_view', function(newVal, oldVal) {
 		if (newVal) {
@@ -248,7 +227,29 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	try {
 		Object.keys($stateParams).forEach(function(key) {
 			if ($stateParams[key]) {
-				self.search();
+
+				// read state params & update bound objects to update view accordingly
+				for (var param in $stateParams) {
+					if ( $stateParams[param] !== undefined ) {
+
+						// handle search modifiers & fudge factors in query string
+						if ( $stateParams[param].indexOf('~') !== -1 ) {
+							var parts = $stateParams[param].split('~');
+							self.search_params[param] = parts[0];
+							self.fudge_factors[param] = parts[1];
+						}
+						else if ( $stateParams[param].indexOf(';') !== -1 ) {
+							var parts = $stateParams[param].split(';');
+							self.search_params[param] = parts[0];	
+							self.search_modifiers[param] = parts[1];
+						}
+						else {
+							self.search_params[param] = $stateParams[param];
+						}
+					}
+				};
+
+				self.search($stateParams);
 				throw BreakException;
 			}
 		});
@@ -259,42 +260,13 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 };
 
 FtreesController.prototype = {
-	search: function() {
-		var self = this, 
-			search_params = angular.copy(this.search_params);
-
-		for (var param in search_params) {
-			if (search_params[param] === '') {
-				delete search_params[param];
-			}
-		}
+	search: function(search_params) {
+		var self = this;
 
 		this.notification.put({
 			en:'Searching family trees...',
 			he: 'מחפש בעצי משפחה...'			
 		});
-
-		if (search_params.ind_index) {
-			delete(search_params.ind_index);
-		}
-
-		// insert search modifiers & fudge_factors into query string
-		for (var modifier in this.search_modifiers) {
-			var modifier_string = this.search_modifiers[modifier]; 
-			if (search_params[modifier] !== undefined && modifier_string !== '') {
-				search_params[modifier] += ';' + modifier_string;
-			}
-		}
-		for (var factor in this.fudge_factors) {
-			var fudge_val = this.fudge_factors[factor];	
-			if (search_params[factor] !== undefined && fudge_val !== 0) {
-				search_params[factor] += '~' + fudge_val;
-			}
-		}
-
-		// avoid conflict with parameter from state ftree-view.ftree-item
-		search_params.tree_number = search_params.filters_tree_number;
-		delete search_params.filters_tree_number;
 
 		this.ftrees.search(search_params).
 			then(function(individuals) {
@@ -324,14 +296,44 @@ FtreesController.prototype = {
 					en: 'Family Trees Search has failed.',
 					he: 'חיפוש בעצי משפחה נכשל.'
 				});
-			}).
-			finally(function() {
-				for (var param in self.search_params) {
-					self.$stateParams[param] = search_params[param];
-				}
 			});
 	},
 
+	update: function() {
+		var search_params = angular.copy(this.search_params);
+
+		for (var param in search_params) {
+			if (search_params[param] === '') {
+				delete search_params[param];
+			}
+		}
+
+		if (search_params.ind_index) {
+			delete(search_params.ind_index);
+		}
+
+		// insert search modifiers & fudge_factors into query string
+		for (var modifier in this.search_modifiers) {
+			var modifier_string = this.search_modifiers[modifier]; 
+			if (search_params[modifier] !== undefined && modifier_string !== '') {
+				search_params[modifier] += ';' + modifier_string;
+			}
+		}
+		for (var factor in this.fudge_factors) {
+			var fudge_val = this.fudge_factors[factor];	
+			if (search_params[factor] !== undefined && fudge_val !== 0) {
+				search_params[factor] += '~' + fudge_val;
+			}
+		}
+
+		// avoid conflict with parameter from state ftree-view.ftree-item
+		search_params.tree_number = search_params.filters_tree_number;
+		delete search_params.filters_tree_number;
+
+		for (var param in this.search_params) {
+			this.$location.search(param, search_params[param]);
+		}
+	},
 
 	go_to_page: function(page_number) {
 		if(page_number <= this.page_count && page_number >= 1) {
@@ -341,8 +343,7 @@ FtreesController.prototype = {
 	},
 
 	back_to_search_filters: function () {
-		var self = this;
-		self.$state.go('ftrees');
+		this.$state.go('ftrees');
 	}, 
 
 	clear_filters: function() {
