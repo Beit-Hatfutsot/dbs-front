@@ -346,6 +346,7 @@
 
 				@at-root #subtree {
 					position: relative;
+					z-index: 0;
 					
 					.node-container {
 						white-space: normal;

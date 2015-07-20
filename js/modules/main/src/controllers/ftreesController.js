@@ -193,6 +193,12 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		}
 	});
 
+	Object.defineProperty($scope, '$stateParams', {
+		get: function() {
+			return $stateParams;
+		}
+	});
+
 	// read state params & update bound objects to update view accordingly
 	for (var param in $stateParams) {
 		if ( $stateParams[param] !== undefined ) {
@@ -227,9 +233,28 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		}
 	});
 
+	$scope.$watchCollection('$stateParams', function (newParams) {
+	    var search = $location.search();
+
+	    if (angular.isObject(newParams)) {
+	      angular.extend(search, newParams);
+	    }
+
+	    $location.search(search).replace();
+	});
+
 	//search
-	if (Object.keys($stateParams).length > 0) {
-		this.search();
+	var BreakException= {};
+	try {
+		Object.keys($stateParams).forEach(function(key) {
+			if ($stateParams[key]) {
+				self.search();
+				throw BreakException;
+			}
+		});
+	}
+	catch(e) {
+		 if (e !== BreakException) throw e;
 	}
 };
 
@@ -302,7 +327,7 @@ FtreesController.prototype = {
 			}).
 			finally(function() {
 				for (var param in self.search_params) {
-					self.$location.search(param, search_params[param]);	
+					self.$stateParams[param] = search_params[param];
 				}
 			});
 	},

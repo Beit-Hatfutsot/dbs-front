@@ -1,6 +1,6 @@
 var FtreeViewController = function($scope, $state, $stateParams) {
 	var self = this;
-
+	
 	this.$scope = $scope;
 	this.$state = $state;
 	this.$stateParams = $stateParams;
