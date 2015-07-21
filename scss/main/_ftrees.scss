@@ -417,9 +417,13 @@
 				font-size: 20px;
 				position: absolute;
 				top: 100%;
-				left: 4px;
 				@include hover-pointer();
-
+				.en & {
+					left: 4px;
+				}
+				.he & {
+					right: 4px;
+				}
 				&:hover {
 					background-color: #666666;
 				}
@@ -852,11 +856,11 @@
 					    pointer-events: none;
 
 					    .en & {
-					    	margin-left: -16px;
+					    	right: 0px;
 					    }
 
 					    .he & {
-					    	margin-right: -16px;
+					    	left: 0px;
 					    }
 
 					    &__selectbox-icon {
@@ -936,15 +940,15 @@
 				}
 
 				&__go-to-page {
-					/*position: absolute;*/
 
 					.en & {
 						float: right;
-  						margin-right: 55px;
+  						margin-right: 57px;
 					}
+
 					.he & {
 						float: left;
-						margin-left: 55px;
+						margin-left: 57px;
 					}
 					.tree-view & {
 						.en & {
@@ -992,7 +996,15 @@
 								right: 16px;
 							}
 							.he & {
-								left: 9px;
+								left: 16px;
+							}
+							.tree-view & {
+								.en & {
+									left: 8px;
+								}
+								.he & {
+									right: 8px;
+								}
 							}
 						}
 
@@ -1065,6 +1077,140 @@
 				.he & {
 					left: 114px;;
 				}
+			}
+
+			.babylonLogoFtree {
+				position: relative;
+				display: inline-block;
+				top: 178px;
+				background: #ffffff;
+				border: 2px solid #999999;
+				height: 132px;
+				width: 152px;
+
+				.en & {
+					left: 708px;
+				}
+				.he & {
+					right: 708px;
+				}
+
+				&:after {
+					position: absolute;
+				  	content: " ";
+				  	height: 0;
+				  	width: 0;
+				  	border-bottom: 133px #999999 solid;
+				  	top: -3px;
+
+				  	.en & {
+				  		right: 101%;
+				  		border-left: 47px transparent solid;
+				  	}
+				  	.he & {
+				  		left: 101%;
+				  		border-right: 47px transparent solid;
+				  	}
+				}
+
+				&:before {
+					position: absolute;
+				  	content: " ";
+				  	height: 0;
+				  	width: 0;
+				  	border-bottom: 128px #ffffff solid;
+				  	top: 0px;
+				  	z-index: 1;
+
+				  	.en & {
+				  		border-left: 46px transparent solid;
+				  		right: 100%;
+				  	}
+				  	.he & {
+				  		border-right: 46px transparent solid;
+				  		left: 100%;
+				  	}
+				}
+
+				&:hover {
+					.babylonLogoFtree__desc {
+						display: inline-block;
+					}
+				}
+
+				&__desc {
+					display: none;
+					position: absolute;
+					background-color: #e98909;
+					color: #ffffff;
+					width: 204px;
+					bottom: 0px;
+					font-size: 13px;
+					z-index: 1;
+
+					 .en & {
+					 	left: -56px;
+					 	padding-left: 30px;
+					 }
+					 .he & {
+					 	right: -56px;
+					 	padding-right: 30px;
+					 }	
+				}
+
+				&__bottom-triangle {
+					position: absolute;
+					width: 0;
+					height: 0;
+					line-height: 0;
+					border-top: 7px solid #8C8A8A;
+					top: 101%;
+
+					.en & {
+						border-right: 11px solid transparent;
+						right: -1px;
+					}
+					.he & {
+						left: -1px;
+						border-left: 11px solid transparent;
+					}
+				}
+
+				&__left-triangle {
+					position: absolute;
+				 	width: 0;
+				 	height: 0;
+				 	line-height: 0;
+				 	border-top: 20px solid #ffffff;
+				 	top: 88%;
+				 	z-index: 2;
+
+				 	.en & {
+				 		left: -59px;
+				 		border-right: 7px solid transparent;
+				 		border-left: 10px solid #ffffff;
+				 	}
+				 	.he & {
+				 		right: -59px;
+				 		border-left: 7px solid transparent;
+				 		border-right: 10px solid #ffffff;
+				 	}
+				}
+
+				img {
+					position: absolute;
+					width: 107px;
+					height: auto;
+					top: 35px;
+
+					.en & {
+						left: 40px;
+					}
+					.he & {
+						right: 40px;
+					}
+				}
+
 			}
 			
 			#ftree-item-container {

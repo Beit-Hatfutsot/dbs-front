@@ -1,8 +1,27 @@
 angular.module('main').
 	factory('ftrees', ['$http', '$q', 'apiClient', 'gedcomParser', function($http, $q, apiClient, gedcomParser) {
 		var in_progress = false;
+		var editor_remarks_matches = {
+			'SD': 'images\/babylon.jpg'
+		};
 
 		var ftrees = {
+
+			get_contributor_path: function(individual) {
+				if (individual) {
+					// check for editor remarks
+					var editor_remarks = individual.editor_remarks || individual.EditorRemarks;
+
+					for (var key in editor_remarks_matches) {
+						var regex = new RegExp(key);
+						if (regex.exec(editor_remarks) !== null) {
+							return editor_remarks_matches[key];	
+						}
+						
+					}
+				}
+			},
+
 			search: function(params) {
 				//if (!in_progress) { 
 					var self = this;

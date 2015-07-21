@@ -3,6 +3,7 @@
 	padding: 10px 0 0;
 
 	@at-root #ftree-item {
+		position: relative;
 		width: $view-width;
 		margin: 0 auto;
 		background: #ffffff;
@@ -285,19 +286,23 @@
 			}
 		}
 
-		.balylonLogo {
-			position: relative;
-			top: -59px;
+		.babylonLogo {
+			position: absolute;
+			top: 13px;
+			display: inline-block;
 			
 			.en & {
-				left: 934px;
+				right: 189px;
 			}
 			.he & {
-				right: -179px;
+				left: -189px;
+			}
+			.tree-view & {
+				display: none;
 			}
 
 			&:hover {
-				.balylonLogo__desc {
+				.babylonLogo__desc {
 					display: inline-block;
 				}
 			}
@@ -308,12 +313,12 @@
 				background-color: #e98909;
 				color: #ffffff;
 				width: 168px;
-				top: -18px;
+				top: -13px;
 				padding: 3px 10px;
 				font-size: 80%;
 
 				 .en & {
-				 	left: 29px;
+				 	left: 21px;
 				 }
 				 .he & {
 				 	right: 21px;
@@ -332,9 +337,6 @@
 					right: 82px;
 				}
 			}
-			.tree-view & {
-					display: none;
-				}
 		}
 
 		@at-root #ftree-layout-container {
@@ -347,7 +349,7 @@
 				@at-root #subtree {
 					position: relative;
 					z-index: 0;
-					
+
 					.node-container {
 						white-space: normal;
 						@extend %node-container;

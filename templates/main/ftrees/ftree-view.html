@@ -7,4 +7,13 @@
 	<div id="tree-layout">
 		<ui-view ng-show="ftreesCtrl.tree_item_view"></ui-view>
 	</div>
+	<div class="babylonLogoFtree" ng-if="ftreeViewCtrl.get_contributor_path()">
+		<span class="babylonLogoFtree__desc">
+			<en>Family tree contributed by</en>
+			<he>עץ משפחה נתרם על ידי</he>
+		</span>
+		<img ng-src="{{ftreeViewCtrl.get_contributor_path()}}">
+		<span class="babylonLogoFtree__bottom-triangle"></span>
+		<span class="babylonLogoFtree__left-triangle"></span>
+	</div>
 </div>

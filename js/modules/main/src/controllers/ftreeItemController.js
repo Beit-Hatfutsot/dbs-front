@@ -5,11 +5,7 @@ var FtreeItemController = function($state, $stateParams, ftrees, notification, f
 	this.individual_id = this.strip_id( $stateParams.individual_id);
 	this.tree_number = parseInt($stateParams.tree_number);
 	this.from_ftree_view = fromFtreeView;
-	this.editor_remarks_matches = {
-		'azrieli': 'images\/babylon.jpg',
-		'GED': ''
-	},
-	this.load();	
+	this.load();
 };
 
 FtreeItemController.prototype = {
@@ -37,18 +33,6 @@ FtreeItemController.prototype = {
 			});
 	},
 
-	get_contributor_path: function() {
-		if (this.individual) {
-			for (var key in this.editor_remarks_matches) {
-				var regex = new RegExp(key);
-				if (regex.exec(this.individual.editor_remarks) !== null) {
-					return this.editor_remarks_matches[key];	
-				}
-				
-			}
-		}
-	},
-
 	back: function () {
 		this.$state.go(this.$state.lastState, this.$state.lastStateParams );	
 	},
@@ -62,6 +46,10 @@ FtreeItemController.prototype = {
 			return id.replace('@', '').replace('@', '');
 		}
 		return id;
+	},
+
+	get_contributor_path: function() {
+		return this.ftrees.get_contributor_path(this.individual);
 	}
 };
 
