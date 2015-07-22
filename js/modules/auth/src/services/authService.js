@@ -1,3 +1,12 @@
+/**
+ * @ngdoc service
+ * @name auth
+ * @module auth
+ *
+ * @description
+ * A service to handle user signin, signout & registration.
+ */
+
 angular.module('auth').
 
 	factory('auth', [
@@ -9,6 +18,21 @@ angular.module('auth').
 
 	  	auth = {
 
+	  		/**
+	  		 * @ngdoc method
+		     * @name auth#authenticate
+			 * 
+			 * @param {Object} config 
+			 * Configuration object
+			 * Configuration parameters:
+			 *  - **register** – `{boolean}` – set to true to open a Register dialog.
+		     *  - **next_state** – `{String}` – Name of state to go to upon succesful signin/registration.
+		     *  - **fallback_state** – `{String}` – Fallback state name to go to upon failed authentication.
+		     *  - **fallback_state_params** – `{Object}`.
+			 *
+			 * @description
+			 * A call to this method opens a Sign-in/Register dialog (modal). 
+		     */
 	  		authenticate: function(config) {
 	  			var body = document.getElementsByTagName('body')[0];
 
@@ -42,6 +66,21 @@ angular.module('auth').
 				} 
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#signin
+		     * 
+		     * @param email {String} user email
+		     * @param password {String} user password
+			 * 
+			 * @description
+			 * Sign a user in:
+			 * Sends a request to the auth API endpoint with user credentials.
+			 * Upon success, saves the authorization token on localStorage, and gets user data from {@link user}.
+			 *
+			 * @returns
+			 * {Promise}
+			 */
 		  	signin: function(email, password) {
 		  		if ( !in_progress ) {
 		  			in_progress = true;
@@ -82,6 +121,22 @@ angular.module('auth').
 		  		}
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#register
+		     * 
+		     * @param name {String} user name
+		     * @param email {String} user email
+		     * @param password {String} user password
+			 * 
+			 * @description
+			 * Registers a new user:
+			 * Sends a POST request to the user API endpoint with user credentials.
+			 * Upon success, signs the user in.
+			 *
+			 * @returns
+			 * {Promise}
+			 */
 		  	register: function(name, email, password) {
 		  		if (!in_progress) {
 		  			this.in_progress = true;
@@ -118,10 +173,27 @@ angular.module('auth').
 		  		}
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#signout
+			 * 
+			 * @description
+			 * Signs a signed-in user out.
+			 */
 		  	signout: function() {
 		  		$window.localStorage.removeItem('bhsclient_token');
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#is_signedin
+			 * 
+			 * @description
+			 * Checks localStorage for data indicating a signed-in user.
+			 *
+			 * @returns
+			 * {boolean}
+			 */
 		  	is_signedin: function() {
 		  		if ( $window.localStorage.getItem('bhsclient_token') && user.email ) {
 		  			return true;

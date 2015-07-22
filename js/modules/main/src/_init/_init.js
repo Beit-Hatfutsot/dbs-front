@@ -1,5 +1,15 @@
 'use strict';
 
+/**
+ * @ngdoc module
+ * @name main
+ * @module main
+ *
+ * @description
+ * # BHSClient main module
+ * This is the main module for the BHS client.
+ * It contains the ui.router state configurations.
+ */
 angular.module('main', [
     'ngResource',
     'ngAnimate',

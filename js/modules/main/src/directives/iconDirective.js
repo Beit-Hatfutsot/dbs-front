@@ -1,13 +1,29 @@
 angular.module('main').directive('icon', ['langManager', function(langManager) {
+	/**
+	 * @ngdoc directive
+	 * @module main
+	 * @name icon
+	 * @restrict E
+	 * 	 
+	 * @description
+	 * This directive is an API that enables to use icons located on a sprite image.
+	 * 
+	 * @scope
+	 * @param {String} source Source URL for the sprite image. Default is ```images/icons.png```
+	 * @param {Array} position Position of the icon on the sprite (both coordinates should be negative).
+	 * @param {Array} hoverOffset Offset of the icon to be displayed on hover, relative to the original icon position.
+	 * @param {Object} altText English and Hebrew alt text for the icon img element; eg. ``` {en: 'english text', he:'טקסט בעברית'}``` 
+	 * @param {expression} offsetOn Expression to listen to and offset icon on change. 
+	 */
 	return {
 		restrict: 'E',
 		replace: true,
 		templateUrl: 'templates/main/icon.html',
 		scope: {
 			source: '@',
-			altText: '=',
 			position: '=',
 			hoverOffset: '=',
+			altText: '=',
 			offsetOn: '='
 		},
 		link: function(scope, element, attrs, ctrl) {

@@ -12,7 +12,11 @@ describe('apiClient', function() {
 	}));
 
 	
-	it('should return the api url', function() {
+	it('should have a urls object', function() {
 		expect(apiClient.urls).toBeDefined();
+	});
+
+	it('should have a base_url', function() {
+		expect(apiClient.base_url).toBeDefined();
 	});
 });
