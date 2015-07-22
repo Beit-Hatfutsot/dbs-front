@@ -116,7 +116,7 @@ angular.module('main').
 			},
 
 			detach: function(connection_id) {
-				if (this.active_connection(connection_id)) {
+				if (this.activeConnection(connection_id)) {
 					this.plumb.detach(this.active_connections[connection_id]);
 				}
 			},
