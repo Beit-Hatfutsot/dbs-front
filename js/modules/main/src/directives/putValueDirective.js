@@ -1,5 +1,5 @@
 angular.module('main').
-	directive('putValue', ['$compile', function($compile) {
+	directive('putValue', [function() {
 		return {
 			restrict: 'E',
 			template: '<span>{{value}}</span>',

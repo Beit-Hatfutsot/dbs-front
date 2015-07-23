@@ -12,7 +12,6 @@
 		margin: 0 auto;
 		background: #ffffff;
 		padding: 24px 18px 10px;
-		/*box-shadow: 0px 2px 4px 2px #888888;*/
 		@include item-shadow();
 
 		.tree-view & {
@@ -745,8 +744,6 @@
 						font-size: 14px;
 						padding: 10px 12px 0;
 						background: #d6d6d6;
-						/*border: 2px solid transparent;
-						@include border-radius(5px);*/
 
 						&__fancyArrow {
 							content: "";
@@ -977,6 +974,10 @@
 						  background-color: #bf311a;
 						  top: -20px;
 						  @include hover-pointer();
+
+						  &:hover {
+						    	background-color: #d6d6d6;
+						    }
 
 						  .en & {
 						  	right: -100px;
