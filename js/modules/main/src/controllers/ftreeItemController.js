@@ -18,7 +18,8 @@ FtreeItemController.prototype = {
 			}).
 			then(function(individuals) {
 				self.ftrees.get_data(individuals[0].GTN).
-					then(function() {
+					then(function(tree_data) {
+						self.individual_count = tree_data.options.length;
 						self.individual = self.ftrees.parse_individual(individuals[0]);
 						self.notification.put({
 							en: 'Family tree successfully loaded.',

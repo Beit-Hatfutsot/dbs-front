@@ -22,6 +22,9 @@
 			</span>
 			<img ng-src="{{ftreeItemCtrl.get_contributor_path()}}">
 		</div>
+		<div ng-if="ftreeItemCtrl.individual_count">
+			This tree contains {{ftreeItemCtrl.individual_count}} individuals, click on any of them to navigate the tree.
+		</div>
 		<div id="ftree-layout-container">
 			<div id="ftree-layout">
 				<subtree individual="ftreeItemCtrl.individual"></subtree>
