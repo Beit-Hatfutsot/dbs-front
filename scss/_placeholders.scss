@@ -156,30 +156,29 @@
 %node-container {
 	display: inline-block;
 	min-width: 52px;
-	margin: 15px 10px;
+	margin: 15px 22px;
 
 	.node {
 		position: relative;
 		width: 100%;
-		padding: 0 8px;
+		// padding: 0 8px;
 		
 		.individual {
 			position: relative;
 			background: #ddf0f4;
 			display: inline-block;
 			vertical-align: top;
-			//margin-top: 16px;
 			@include border-radius(50px);
 			width: 210px;
 			height: 58px;
 			z-index: 1;
 
-			.en & {
-				margin-right: 20px;	
-			}
-			.he & {
-				margin-left: 20px;
-			}
+			// .en & {
+			// 	margin-right: 20px;	
+			// }
+			// .he & {
+			// 	margin-left: 20px;
+			// }
 			
 
 			&--female {
