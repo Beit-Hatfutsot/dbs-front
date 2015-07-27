@@ -1,7 +1,6 @@
 /**
  * @ngdoc service
  * @name user
- * @module auth
  *
  * @description
  * A service to handle user data.

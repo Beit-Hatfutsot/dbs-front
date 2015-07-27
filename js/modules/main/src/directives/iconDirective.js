@@ -1,7 +1,6 @@
 angular.module('main').directive('icon', ['langManager', function(langManager) {
 	/**
 	 * @ngdoc directive
-	 * @module main
 	 * @name icon
 	 * @restrict E
 	 * 	 

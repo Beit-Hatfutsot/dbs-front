@@ -1,7 +1,6 @@
 /**
  * @ngdoc service
  * @name apiClient
- * @module apiClient
  * @requires apiConfig
  * 
  * @description

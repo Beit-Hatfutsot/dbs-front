@@ -1,7 +1,6 @@
 /**
  * @ngdoc module
  * @name auth
- * @module auth
  *
  * @description
  * This module handles user authentication & data.

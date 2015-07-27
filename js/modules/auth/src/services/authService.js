@@ -1,7 +1,6 @@
 /**
  * @ngdoc service
  * @name auth
- * @module auth
  *
  * @description
  * A service to handle user signin, signout & registration.
