@@ -1,48 +1,67 @@
 'use strict';
 
-describe('auth-directives', function() {
+ddescribe('auth-directives', function() {
 
 	beforeEach(function() {
-		module('ui.router');
-		module('lang');
 		module('auth');
 		module(function($provide) {
-			$provide.provider('authManager', function () { 
+			$provide.provider('auth', function () { 
 		        this.$get = function () {
 		            return {
-		                authenticate: jasmine.createSpy('authManager.authenticate')
+		            	is_signedin: function() {return false},
+		                authenticate: jasmine.createSpy('auth.authenticate')
+		            };
+		        }
+		    });
+		});
+		module(function($provide) {
+			$provide.provider('$state', function () { 
+		        this.$get = function () {
+		            return {
+		            	lastState: {
+		            		name: 'test-fallback-state',
+		            	},
+		            	lastStateParams: {
+		            		test_param: 'test-param'
+		            	}
+		            };
+		        }
+		    });
+		});
+		module(function($provide) {
+			$provide.provider('user', function () { 
+		        this.$get = function () {
+		            return {
+		            	$resolved: true
 		            };
 		        }
 		    });
 		});
 	});
 
-	describe('needAuth', function() {
-		var scope, $compile, authManager;
+	describe('authPrivate', function() {
+		var scope, $compile, auth;
 
-		beforeEach(inject(function (_$compile_, $rootScope, _authManager_) {
+		beforeEach(inject(function (_$compile_, $rootScope, _auth_, $templateCache) {
 			$compile = _$compile_;
+			$templateCache.put('templates/auth/auth-private.html', '<div></div>');
 	       	scope = $rootScope.$new();
-	       	authManager = _authManager_;
+	       	auth = _auth_;
 	    }));
 
-	    it('should call authenticate with correct arguments when next-state attribute is not present', function() {
-	    	var element = angular.element('<button need-auth="true"></button>');
+	    it('should call authenticate with correct config argument', function() {
+	    	var element = angular.element('<auth-private><div></div></auth-private>');
 	    	$compile(element)(scope);
-	    	
-	 		element.triggerHandler('click');
-
-	    	expect(authManager.authenticate).toHaveBeenCalledWith('', { mandatory: true });
-	    });
-
-
-	    it('should call authenticate with correct arguments when next-state attribute is present', function() {
-	    	var element = angular.element('<button need-auth="false" next-state="testState"></button>');
-	    	$compile(element)(scope);
-	    	
-	 		element.triggerHandler('click');
-
-	    	expect(authManager.authenticate).toHaveBeenCalledWith('testState', { mandatory: false });
+	    	scope.$digest()
+	    	expect(auth.authenticate).toHaveBeenCalledWith({ 
+	    		mandatory: true, 
+	    		fallback_state: {
+	    			name: 'test-fallback-state'
+	    		}, 
+	    		fallback_state_params: {
+	    			test_param: 'test-param'
+	    		}
+	    	});
 	    });
 	});
 });

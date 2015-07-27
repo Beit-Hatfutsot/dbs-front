@@ -8,7 +8,7 @@
  * the auth modal opens.
  */
 
-var AuthPrivateController = function($scope, $state, $window, auth, user) {
+var AuthPrivateController = function($scope, $state, auth, user) {
 	var self = this;
 
 	/**
@@ -44,4 +44,4 @@ AuthPrivateController.prototype = {
 
 };
 
-angular.module('auth').controller('AuthPrivateController', ['$scope', '$state', '$window', 'auth', 'user', AuthPrivateController]);
+angular.module('auth').controller('AuthPrivateController', ['$scope', '$state', 'auth', 'user', AuthPrivateController]);

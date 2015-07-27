@@ -1,6 +1,6 @@
 'use strict';
 
-describe('auth-services', function() {
+ddescribe('auth-services', function() {
 
 	describe('auth', function() {
 		var auth, apiClient, $httpBackend, $window, requestHeaders;
