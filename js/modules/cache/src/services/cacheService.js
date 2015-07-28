@@ -12,8 +12,8 @@ angular.module('cache').
 			 * @name cached_items
 			 *
 			 * @description
-			 * An object to serve as a fallback cache when the `window.sessionStorage` is not defined.
-			 * (See {@link module:cache.service:cache}).
+			 * A private object of the {@link module:cache.service:cache} service. 
+			 * Serves as a fallback cache mechanism when the `window.sessionStorage` is not defined.
 			 * It implements some methods from the `sessionStorage` API.
 			 */
 			cached_items = {
