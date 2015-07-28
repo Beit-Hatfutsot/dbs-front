@@ -1,4 +1,15 @@
 angular.module('lang').
+	
+	/**
+	 * @ngdoc directive
+	 * @name en
+	 * @restrict E
+	 * 
+	 * @description
+	 * Shows transcluded content iff the language is set to English. 
+	 *
+	 * @scope 
+	 */
 	directive('en', ['langManager', function(langManager) {
 		return {
 			restrict: 'E',
@@ -17,6 +28,16 @@ angular.module('lang').
 		};
 	}]).
 
+	/**
+	 * @ngdoc directive
+	 * @name he
+	 * @restrict E
+	 * 
+	 * @description
+	 * Shows transcluded content iff the language is set to Hebrew. 
+	 *
+	 * @scope 
+	 */
 	directive('he', ['langManager', function(langManager) {
 		return {
 			restrict: 'E',

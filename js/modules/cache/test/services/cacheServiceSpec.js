@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('cache', function() {
+describe('cache', function() {
 
 	var cache;
 
