@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('auth-directives', function() {
+describe('auth-directives', function() {
 
 	beforeEach(function() {
 		module('auth');

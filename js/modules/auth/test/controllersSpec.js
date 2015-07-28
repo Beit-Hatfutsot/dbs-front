@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('auth-controllers', function() {
+describe('auth-controllers', function() {
 
     beforeEach(function() {
         module('lang');
