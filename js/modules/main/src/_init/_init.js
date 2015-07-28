@@ -134,10 +134,18 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
+            name: 'verify_email',
+            url: '/verify_email/:verification_token',
+            controller: 'VerifyEmailController as verifyEmailCtrl',
+            templateUrl: 'templates/main/verify_email.html'
+        },
+
+        {
             name: '404',
             url: '/404',
             templateUrl: 'templates/main/404.html'
         }
+
     ];
 
     angular.forEach(states, function(state) {
