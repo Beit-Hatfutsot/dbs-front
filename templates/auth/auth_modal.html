@@ -14,12 +14,12 @@
 				<he>היכנסו</he>
 			</a>
 		</div>
-		<form name="register_form" class="auth-form" rc-submit="authController.register()" novalidate>
+		<form ng-switch on="authController.auth_in_progress" name="register_form" class="auth-form" rc-submit="authController.register()" novalidate>
 			<fieldset class="bhf bhf--{{authController.lang}}">
 				<div class="bhf__field">
-					<input 	type="text" 
-							name="name" 
-							id="register-name" 
+					<input 	type="text"
+							name="name"
+							id="register-name"
 							ng-model="authController.register_data.name"
 							required
 							ng-focus="authController.select_field('name')"
@@ -34,9 +34,9 @@
 					</div>
 				</div>
 				<div class="bhf__field">
-					<input 	type="text" 
-							name="email" 
-							id="register-email" 
+					<input 	type="text"
+							name="email"
+							id="register-email"
 							ng-model="authController.register_data.email"
 							ng-focus="authController.select_field('email')"
 							ng-blur="authController.select_field(null)"
@@ -51,9 +51,9 @@
 					</div>
 				</div>
 				<div class="bhf__field">
-					<input 	type="password" 
-							name="ps" 
-							id="register-ps" 
+					<input 	type="password"
+							name="ps"
+							id="register-ps"
 							ng-model="authController.register_data.ps"
 							ng-focus="authController.select_field('ps')"
 							ng-blur="authController.select_field(null)"
@@ -79,9 +79,8 @@
 					</a>
 				</label>
 			</div>
-			<div ng-show="authController.in_process">Processing...</div>
-			<div>{{authController.message[authController.lang]}}</div>
-			<input class="auth-form__submit" type="submit" value="{{authController.submit_values.register[authController.lang]}}">
+			<input ng-switch-when="true" disabled class="auth-form__submit auth-form__submit--processing" type="submit" value="{{authController.submit_values.processing[authController.lang]}}">
+			<input ng-switch-default class="auth-form__submit" type="submit" value="{{authController.submit_values.register[authController.lang]}}">
 		</form>
 	</div>
 	<!-- sign-in form -->
@@ -101,9 +100,9 @@
 		<form name="signin_form" class="auth-form" rc-submit="authController.signin()" novalidate>
 			<fieldset class="bhf bhf--{{authController.lang}}">
 				<div class="bhf__field">
-					<input 	type="text" 
-							name="email" 
-							id="signin-name" 
+					<input 	type="text"
+							name="email"
+							id="signin-name"
 							ng-model="authController.signin_data.email"
 							ng-focus="authController.select_field('email')"
 							ng-blur="authController.select_field(null)"
@@ -118,9 +117,9 @@
 					</div>
 				</div>
 				<div class="bhf__field">
-					<input 	type="password" 
-							name="ps" 
-							id="signin-ps" 
+					<input 	type="password"
+							name="ps"
+							id="signin-ps"
 							ng-model="authController.signin_data.ps"
 							ng-focus="authController.select_field('ps')"
 							ng-blur="authController.select_field(null)"
@@ -135,7 +134,6 @@
 					</div>
 				</div>
 			</fieldset>
-			<div ng-show="authController.in_process">Processing...</div>
 			<div>{{authController.message[authController.lang]}}</div>
 			<input class="auth-form__submit" type="submit" value="{{authController.submit_values.signin[authController.lang]}}">
 		</form>

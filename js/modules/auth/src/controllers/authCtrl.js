@@ -11,6 +11,12 @@ var AuthCtrl = function($modalInstance, langManager, auth, isRegister) {
         }
     });
 
+    Object.defineProperty(this, 'auth_in_progress', {
+        get: function() {
+            return auth.in_progress;
+        }
+    });
+
     this.signin_data = {
         email:  '',
         ps:     ''
@@ -47,13 +53,18 @@ var AuthCtrl = function($modalInstance, langManager, auth, isRegister) {
 
     this.submit_values = {
         register: {
-            en: 'Register', 
+            en: 'Register',
             he: 'הרשמה'
         },
 
         signin: {
-            en: 'Sign In', 
+            en: 'Sign In',
             he: 'כניסה'
+        },
+
+        processing: {
+            en: 'Processing...',
+            he: 'עובד...'
         }
     };
 }
@@ -82,7 +93,7 @@ AuthCtrl.prototype = {
         var self = this;
 
         this.auth.register(this.register_data.name, this.register_data.email, this.register_data.ps).
-            then(function() {    
+            then(function() {
                 self.message ={
                     en: 'Registered user ' + self.register_data.email + ' successfuly',
                     he: 'נרשם משתמש ' + self.register_data.email + ' בהצלחה'
