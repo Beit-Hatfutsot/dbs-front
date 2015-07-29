@@ -28,4 +28,4 @@ copy:
 	cd $(bhsclient_path)/../ && cp -r $(bhsclient_path)/public public
 
 clean: 
-	cd $(bhsclient_path) && rm -r public && rm -r bower_components
+	cd $(bhsclient_path) && rm -r public && rm -r node_modules && rm -r bower_components
