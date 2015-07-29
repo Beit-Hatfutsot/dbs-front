@@ -29,6 +29,7 @@ config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide', '$sceDelegateProvider',
 function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider) {
 
+    /*** State definitions go here ***/
     var states = [ 
         {
             name: 'start',
@@ -154,6 +155,9 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         $stateProvider.state(state);
     });
 
+    /*** End of state definitions ***/
+
+    // Add current state data to $state when calling $state.go
     $provide.decorator('$state', function($delegate, $stateParams) {
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {

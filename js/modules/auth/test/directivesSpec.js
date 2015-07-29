@@ -4,6 +4,7 @@ describe('auth-directives', function() {
 
 	beforeEach(function() {
 		module('auth');
+		module('templates');
 		module(function($provide) {
 			$provide.provider('auth', function () { 
 		        this.$get = function () {
@@ -42,9 +43,8 @@ describe('auth-directives', function() {
 	describe('authPrivate', function() {
 		var scope, $compile, auth;
 
-		beforeEach(inject(function (_$compile_, $rootScope, _auth_, $templateCache) {
+		beforeEach(inject(function (_$compile_, $rootScope, _auth_) {
 			$compile = _$compile_;
-			$templateCache.put('templates/auth/auth-private.html', '<div></div>');
 	       	scope = $rootScope.$new();
 	       	auth = _auth_;
 	    }));

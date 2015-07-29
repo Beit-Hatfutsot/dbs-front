@@ -1,10 +1,11 @@
 'use strict';
 
-describe('wizard', function() {
+ddescribe('wizard', function() {
 	var wizard, apiClient, $httpBackend, wizard_search_url, query_url, cache;
 
 	beforeEach(function() {
 		module('main');
+		module('templates')
 	});
 
 	beforeEach(inject(function(_wizard_, _apiClient_, _$httpBackend_, _cache_) { 
@@ -13,41 +14,44 @@ describe('wizard', function() {
 		$httpBackend 	= _$httpBackend_;
 		cache 			= _cache_;
 
-		$httpBackend.expectGET('templates/main/start.html').respond('');
-
 		wizard_search_url = apiClient.urls.wizard_search;
 		query_url = wizard_search_url + '?name=test-name&place=test-place';
 		$httpBackend.whenGET(query_url).
 			respond(200, {
-				bingo: {
-					name: {
-						header:'test-name', 
-						_id: { $oid: 'name-id' }
-					}, 
-					place: {
-						header: 'test-place', 
-						_id: { $oid: 'place-id' }
-					}
-				}
+				name: {
+					header:'test-name', 
+					_id: 'name-id'
+				}, 
+				place: {
+					header: 'test-place', 
+					_id: 'place-id'
+				},
+				individuals: {}
 			});
 	}));
 
 	
 	it('should wizard search', function() {
 		$httpBackend.expectGET(query_url);
-
-		wizard.search('test-name', 'test-place')
+		wizard.query = {
+			name: 'test-name',
+			place:'test-place'
+		};
+		wizard.search();
 		$httpBackend.flush();
 
-		expect(wizard.result.bingo.name.header).toEqual('test-name');
-		expect(wizard.result.bingo.place.header).toEqual('test-place');
+		expect(wizard.result.name.header).toEqual('test-name');
+		expect(wizard.result.place.header).toEqual('test-place');
 	});
 
 
 	it('should cache search results', function() {
 		$httpBackend.expectGET(query_url);
-
-		wizard.search('test-name', 'test-place')
+		wizard.query = {
+			name: 'test-name',
+			place:'test-place'
+		};
+		wizard.search();
 		$httpBackend.flush();
 
 		expect(cache.get('name-id').header).toEqual('test-name');
@@ -56,8 +60,11 @@ describe('wizard', function() {
 
 	it('should save last_search input', function() {
 		$httpBackend.expectGET(query_url);
-
-		wizard.search('test-name', 'test-place')
+		wizard.query = {
+			name: 'test-name',
+			place:'test-place'
+		};
+		wizard.search();
 		$httpBackend.flush();
 
 		expect(wizard.last_search.name).toEqual('test-name');
