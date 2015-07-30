@@ -1,11 +1,3 @@
-/**
- * @ngdoc service
- * @name auth
- *
- * @description
- * A service to handle user signin, signout & registration.
- */
-
 angular.module('auth').
 
 	factory('auth', [
@@ -13,8 +5,15 @@ angular.module('auth').
 	function($modal, $state, $http, apiClient, $q, $window, $rootScope, user) {
 		var auth;
 
+		/**
+		 * @ngdoc service
+		 * @name auth
+		 *
+		 * @description
+		 * A service to handle user signin, signout & registration.
+		 */
 		auth = {
-			
+
 			/**
 		     * @ngdoc property
 		     * @name auth#in_progress
@@ -209,6 +208,19 @@ angular.module('auth').
 		  		}
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#get_token
+			 * 
+			 * @description
+			 * We use JWT for user authentication.
+			 * Once recieved, the JWT token is saved in `localStorage`,
+			 * and is added to every subsequent request to the API.
+			 * This method retrieves the JWT token from `localStorage`.
+			 *
+			 * @returns
+			 * {String} JWT token, or `false` if not signed-in.
+			 */
 		  	get_token: function() {
 		  		return this.is_signedin() ? $window.localStorage.getItem('bhsclient_token') : false;
 		  	}
@@ -219,27 +231,76 @@ angular.module('auth').
 
 angular.module('auth').
 	factory('authInterceptor', ['$q', '$window', 'apiClient', function ($q, $window, apiClient) {
+	  	
+	  	/**
+		 * @ngdoc service
+		 * @name authInterceptor
+		 *
+		 * @description
+		 * A request interceptor that adds the JWT token to API requests.
+		 */
 	  	return {
-		    request: function (config) {
-		    	var base_url = apiClient.base_url;
-		    	var base_url_regex = new RegExp(base_url, 'i');
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name authInterceptor#request
+			 * 
+			 * @description
+			 * We use JWT for user authentication.
+			 * Once recieved, the JWT token is saved in `localStorage`,
+			 * and is added to every subsequent request to the API.
+			 * This method retrieves the JWT token from `localStorage`,
+			 * and adds it to the Authorization header of the request.
+			 *
+			 * @returns
+			 * {Object} Request config object
+			 */
+		    request: function (config) {
 		    	config.headers = config.headers || {};
 		    	delete config.headers.Authorization;
 
-		    	if ( base_url_regex.test(config.url) ) {
+		    	if ( is_api_url(config.url) ) {
 			    	if ( $window.localStorage.getItem('bhsclient_token') ) {
 			        	config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('bhsclient_token');
 			    	}
 			    }
-
 			    return config;
 		    },
+
+		    /**
+	  		 * @ngdoc method
+		     * @name authInterceptor#response
+			 * 
+			 * @description
+			 * Removes JWT token from `localStorage` 
+			 * if a response with status 401 is recieved from the API.
+			 *
+			 * @returns
+			 * {Promise} Response promise
+			 */
 		    response: function (response) {
-		      	if (response.status === 401) {
+		      	if ( is_api_url(response.url) && response.status === 401) {
 		        	$window.localStorage.removeItem('bhsclient_token');
 		      	}
 		      	return response || $q.when(response);
 		    }
 	  	};
-}]);
+
+	  	/**
+	  	 * @ngdoc function
+	  	 * @name is_api_url
+	  	 * @module auth
+	  	 * 
+	  	 * @description
+	  	 * Tests whether a string is an API url or not.
+	  	 *
+	  	 * @returns
+	  	 * {boolean}
+	  	 */
+	  	function is_api_url(url) {
+	  		var base_api_url = apiClient.base_url,
+	    		base_api_url_regex = new RegExp(base_api_url, 'i');
+
+	    	return base_api_url_regex.test(url);
+	  	}
+	}]);
