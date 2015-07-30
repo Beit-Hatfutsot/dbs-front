@@ -29,7 +29,6 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
         }
     });
 
-
     /**
      * @ngdoc property
      * @name AuthCtrl#selected_field
@@ -39,6 +38,12 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
      * Used to toggle input label class.
      */
     this.selected_field = null;
+
+    Object.defineProperty(this, 'auth_in_progress', {
+        get: function() {
+            return auth.in_progress;
+        }
+    });
 
     /**
      * @ngdoc property
@@ -112,13 +117,18 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
      */
     this.submit_values = {
         register: {
-            en: 'Register', 
+            en: 'Register',
             he: 'הרשמה'
         },
 
         signin: {
-            en: 'Sign In', 
+            en: 'Sign In',
             he: 'כניסה'
+        },
+
+        processing: {
+            en: 'Processing...',
+            he: 'עובד...'
         }
     };
 }
@@ -163,7 +173,7 @@ AuthCtrl.prototype = {
         var self = this;
 
         this.auth.register(this.register_data.name, this.register_data.email, this.register_data.ps).
-            then(function() {    
+            then(function() {
                 self.message ={
                     en: 'Registered user ' + self.register_data.email + ' successfully',
                     he: 'נרשם משתמש ' + self.register_data.email + ' בהצלחה'

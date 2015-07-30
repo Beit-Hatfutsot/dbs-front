@@ -81,6 +81,10 @@
 					height: 40px;
 					margin: 0 auto;
 					@extend %submit-btn;
+
+					&--processing {
+						background: #808080;
+					}
 				}
 			}
 		}

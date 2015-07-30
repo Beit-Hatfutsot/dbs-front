@@ -11,11 +11,10 @@ angular.module('auth').
 	factory('auth', [
 	'$modal', '$state', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
 	function($modal, $state, $http, apiClient, $q, $window, $rootScope, user) {
-		var auth, in_progress;
-		
-		in_progress = false;
+		var auth;
 
-	  	auth = {
+		auth = {
+				in_progress: false,
 
 	  		/**
 	  		 * @ngdoc method
@@ -53,7 +52,7 @@ angular.module('auth').
 				    authModalInstance.result.then(function(user_data) {
 				    	if (config.next_state) {
 				    		$state.go(config.next_state);
-				    	} 
+				    	}
 				    }, function(dismiss_reason) {
 				    	if (config.fallback_state) {
 				    		$state.go(config.fallback_state, config.fallback_state_params);
@@ -62,7 +61,7 @@ angular.module('auth').
 				    finally(function() {
 				    	body.removeClassName('auth');
 				    });
-				} 
+				}
 		  	},
 
 		  	/**
@@ -81,18 +80,18 @@ angular.module('auth').
 			 * {Promise}
 			 */
 		  	signin: function(email, password) {
-		  		if ( !in_progress ) {
-		  			in_progress = true;
+		  		if ( !this.in_progress ) {
+		  			this.in_progress = true;
 
 		  			this.signout();
 
 			  		var self = this,
-					 	signin_deferred = $q.defer(); 
+					 	signin_deferred = $q.defer();
 
 					try {
 				  		$http.post(apiClient.urls.auth, {
-				    		username: email, 
-				    		password: password 
+				    		username: email,
+				    		password: password
 				    	}).
 				    	success(function(response) {
 				    		if (response.token) {
@@ -104,12 +103,12 @@ angular.module('auth').
 				    		} else {
 				    			signin_deferred.reject();
 				    		}
-				    	}). 
+				    	}).
 				    	error(function() {
 				    		signin_deferred.reject();
 				    	}).
 				    	finally(function() {
-							in_progress = false;
+								self.in_progress = false;
 		  				});
 				    }
 				    catch(e) {
@@ -137,30 +136,30 @@ angular.module('auth').
 			 * {Promise}
 			 */
 		  	register: function(name, email, password) {
-		  		if (!in_progress) {
+		  		if (!this.in_progress) {
 		  			this.in_progress = true;
 		  			this.signout();
 
 		  			var self = this,
-					 	register_deferred = $q.defer(); 
+					 	register_deferred = $q.defer();
 
 					try {
 				  		$http.post(apiClient.urls.user, {
 				  			name: name,
-				    		email: email, 
-				    		password: password 
+				    		email: email,
+				    		password: password
 				    	}).
 				    	success(function(response) {
-				    		in_progress = false;
+				    		self.in_progress = false;
 				    		self.signin(email, password).then(function() {
 				    			register_deferred.resolve();
-				    		}, 
+				    		},
 				    		function() {
-				    			register_deferred.reject();	
+				    			register_deferred.reject();
 				    		});
-				    	}). 
+				    	}).
 				    	error(function() {
-				    		in_progress = false;
+				    		self.in_progress = false;
 				    		register_deferred.reject();
 				    	});
 				    }
@@ -199,7 +198,7 @@ angular.module('auth').
 		  		}
 		  		else {
 		  			return false;
-		  		}	
+		  		}
 		  	},
 
 		  	get_token: function() {
@@ -216,7 +215,7 @@ angular.module('auth').
 		    request: function (config) {
 		    	var base_url = apiClient.base_url;
 		    	var base_url_regex = new RegExp(base_url, 'i');
-		    	
+
 		    	config.headers = config.headers || {};
 		    	delete config.headers.Authorization;
 
@@ -225,7 +224,7 @@ angular.module('auth').
 			        	config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('bhsclient_token');
 			    	}
 			    }
-			     
+
 			    return config;
 		    },
 		    response: function (response) {
