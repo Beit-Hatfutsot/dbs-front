@@ -14,7 +14,15 @@ angular.module('auth').
 		var auth;
 
 		auth = {
-				in_progress: false,
+			
+			/**
+		     * @ngdoc property
+		     * @name auth#in_progress
+		     *
+		     * @description
+		     * Indicates that an auth request is in progress.
+		     */
+			in_progress: false,
 
 	  		/**
 	  		 * @ngdoc method
@@ -108,7 +116,7 @@ angular.module('auth').
 				    		signin_deferred.reject();
 				    	}).
 				    	finally(function() {
-								self.in_progress = false;
+							self.in_progress = false;
 		  				});
 				    }
 				    catch(e) {

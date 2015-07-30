@@ -39,6 +39,13 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
      */
     this.selected_field = null;
 
+    /**
+     * @ngdoc property
+     * @name AuthCtrl#auth_in_progress
+     *
+     * @description
+     * Indicates that an auth request is in progress.
+     */
     Object.defineProperty(this, 'auth_in_progress', {
         get: function() {
             return auth.in_progress;
