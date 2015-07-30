@@ -252,6 +252,8 @@ angular.module('auth').
 			 * This method retrieves the JWT token from `localStorage`,
 			 * and adds it to the Authorization header of the request.
 			 *
+			 * @param {Object} config Request config object
+			 *
 			 * @returns
 			 * {Object} Request config object
 			 */
@@ -275,6 +277,8 @@ angular.module('auth').
 			 * Removes JWT token from `localStorage` 
 			 * if a response with status 401 is recieved from the API.
 			 *
+			 * @param {Object} response Response object
+			 *
 			 * @returns
 			 * {Promise} Response promise
 			 */
@@ -293,6 +297,8 @@ angular.module('auth').
 	  	 * 
 	  	 * @description
 	  	 * Tests whether a string is an API url or not.
+	  	 *
+	  	 * @param {String} url Url to test
 	  	 *
 	  	 * @returns
 	  	 * {boolean}

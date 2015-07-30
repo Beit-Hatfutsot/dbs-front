@@ -45,6 +45,8 @@ StartController.prototype = {
 	 * @description
 	 * Chooses result from wizard results (name/place),
 	 * according to specified logic (e.g choose name over place if result contains both).
+	 * This method taps into the wizard search result, bypassing the wizard search status,
+	 * which is something worth considering changing.
 	 *
 	 * @returns {String} Formatted item string for the selcted item (collection_name._id)
 	 */
