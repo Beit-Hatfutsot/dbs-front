@@ -1,0 +1,74 @@
+
+
+<h1>
+  <code>cache</code>
+</h1>
+
+<p>Module to handle all cache related stuff.
+We might want to replace it with some of Angular&#39;s built-in cache capabilities.</p>
+
+
+
+  <h2>Installation</h2>
+
+  <p>First include <code>undefined</code> javascript file in your HTML:</p>
+
+  <p>You can download this file from the following places:</p>
+  <ul>
+    <li>
+      <a href="http://bower.io">Bower</a><br>
+      e.g. <pre><code>bower install angular </code></pre>
+    </li>
+  </ul>
+  <p>Then load the module in your application by adding it as a dependent module:</p>
+  <pre><code>angular.module(&#39;app&#39;, [&#39;cache&#39;]);</code></pre>
+
+  <p>With that you&apos;re ready to get started!</p>
+
+
+<div class="component-breakdown">
+  <h2>Module Components</h2>
+  
+  <div>
+    <h3 class="component-heading" id="object">Object</h3>
+    <table class="definition-table">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      
+      <tr>
+        <td><a href="api/cache/object/cached_items">cached_items</a></td>
+        <td><p>A private object of the <a href="api/cache/service/cache"><code>cache</code></a> service. 
+Serves as a fallback cache mechanism when the <code>window.sessionStorage</code> is not defined.
+It implements some methods from the <code>sessionStorage</code> API.</p>
+</td>
+      </tr>
+      
+    </table>
+  </div>
+  
+  <div>
+    <h3 class="component-heading" id="service">Service</h3>
+    <table class="definition-table">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      
+      <tr>
+        <td><a href="api/cache/service/cache">cache</a></td>
+        <td><p>Custom cache service.
+The cache service uses browser&#39;s sessionStorage if available,
+and falls back to storing cached object (<a href="api/cache/object/cached_items"><code>cached_items</code></a>) in memory, if not.</p>
+</td>
+      </tr>
+      
+    </table>
+  </div>
+  
+</div>
+
+
+
+
