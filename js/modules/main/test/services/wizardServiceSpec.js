@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('wizard', function() {
+describe('wizard', function() {
 	var wizard, apiClient, $httpBackend, wizard_search_url, query_url, cache;
 
 	beforeEach(function() {

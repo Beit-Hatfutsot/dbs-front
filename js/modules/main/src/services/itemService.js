@@ -1,6 +1,6 @@
 angular.module('main').
-	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache',
-	function($resource, $q, $rootScope, apiClient, cache) {
+	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache', 'itemTypeMap',
+	function($resource, $q, $rootScope, apiClient, cache, itemTypeMap) {
 		
 		var in_progress = false;
 
@@ -10,11 +10,13 @@ angular.module('main').
 
 			get: function(item_string) {
 				if ( !in_progress ) {
-					var self 		= this,
-						deferred	= $q.defer(),
-						item_id		= item_string.split('.')[1],
-						cached		= cache.get(item_id); 
-					
+					var self 				= this,
+						deferred			= $q.defer(),
+						item_string_split 	= item_string.split('.'),
+						collection_name		= item_string_split[0],
+						item_id				= item_string_split[1],
+						cached				= cache.get(item_id, collection_name); 
+
 					if (cached.isNotEmpty()) {
 						deferred.resolve(cached);
 						$rootScope.$broadcast('item-load');
@@ -23,7 +25,8 @@ angular.module('main').
 						try {
 							itemResource.query({items: item_string}).$promise.
 								then(function(item_data) {
-									cache.put(item_data);
+									var collection_name = itemTypeMap.get_collection_name(item_data[0]);
+									cache.put(item_data[0], collection_name);
 									deferred.resolve(item_data[0]);
 									$rootScope.$broadcast('item-load');
 								},
@@ -51,8 +54,10 @@ angular.module('main').
 						not_cached_items	= [];
 
 					items_arr.forEach(function(item_string) {
-						var item_id	= item_string.split('.')[1],
-							cached = cache.get(item_id);
+						var item_string_split	= item_string.split('.'),
+							collection_name 	= item_string_split[0],
+							item_id				= item_string_split[1],
+							cached 				= cache.get(item_id, collection_name);
 
 						if (cached.isNotEmpty()) {
 							cached_items.push(cached);
@@ -72,7 +77,8 @@ angular.module('main').
 							itemResource.query({items: not_cached_item_strings}).$promise.
 								then(function(item_data_arr) {
 									item_data_arr.forEach(function(item_data) {
-										cache.put(item_data);
+										var collection_name = itemTypeMap.get_collection_name(item_data);
+										cache.put(item_data, collection_name);
 									});
 									deferred.resolve( item_data_arr.concat(cached_items) );
 									$rootScope.$broadcast('items-load');
