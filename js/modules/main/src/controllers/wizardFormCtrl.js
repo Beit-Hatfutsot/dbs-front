@@ -1,9 +1,23 @@
+/**
+ * @ngdoc object
+ * @name main.controller:WizardFormCtrl
+ *
+ * @description
+ * Wizard form controller.
+ */
 var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
 
     this.$timeout = $timeout;
 	this.wizard = wizard;
     this.suggest = suggest;
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#placeholders
+     *
+     * @description
+     * Place holder texts (English & hebrew) for the wizard search fields.
+     */
 	this.placeholders = { 
         name: {
             en: 'Family Name',
@@ -15,20 +29,57 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
         }
     };
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#wizard_query
+     *
+     * @description
+     * Current wizard query (see {@link wizard})
+     */
     this.wizard_query = {};
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#suggested
+     *
+     * @description
+     * Holds the suggested names & places.
+     */
     this.suggested = {};
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#suggested_index
+     *
+     * @description
+     * The indices of the selected name & place suggstions.
+     * When none is selected the index is `-1`.
+     */
     this.suggested_index = {
         name: -1,
         place: -1
     };
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#suggested_open
+     *
+     * @description
+     * Indicates that a name/place suggestion popover is opened 
+     * (twoway binding - setting one of the properties to true will open a suggestion popover).
+     */
     this.suggested_open = {
         name: false,
         place: false
     };
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#name_placeholder
+     *
+     * @description
+     * Returns the name field placeholder text according to the currently selected language.
+     */
     Object.defineProperty(this, 'name_placeholder', {
 
         get: function() {
@@ -36,6 +87,13 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
         }
     });
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#place_placeholder
+     *
+     * @description
+     * Returns the place field placeholder text according to the currently selected language.
+     */
     Object.defineProperty(this, 'place_placeholder', {
 
         get: function() {
@@ -43,6 +101,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
         }
     });
 
+    // getters & setters for wizard query. the wizard form inputs bind to this. 
     Object.defineProperty(this.wizard_query, 'name', {
         get: function() {
             return wizard.query.name;
@@ -52,7 +111,6 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
             wizard.query.name = new_name;
         }
     });
-
     Object.defineProperty(this.wizard_query, 'place', {
         get: function() {
             return wizard.query.place;
@@ -63,6 +121,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
         }
     });
 
+    // getters & setters for suggested names & places.
     Object.defineProperty(this.suggested, 'names', {
         get: function() {
             return suggest.suggested.names.exact.
@@ -73,7 +132,6 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
                 );
         }
     });
-
     Object.defineProperty(this.suggested, 'places', {
         get: function() {
             return suggest.suggested.places.exact.
@@ -85,12 +143,27 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
         }
     });
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#raw_suggested
+     *
+     * @description
+     * Getter. Returns suggest.suggested (see {@link suggest})
+     */
     Object.defineProperty(this, 'raw_suggested', {
         get: function() {
             return suggest.suggested;
         }
     });
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#submit_disabled
+     *
+     * @description
+     * Controls whether the wizard form submit button is disabled.
+     * The wizard form should allow submit only if at least one of its inputs holds a value.
+     */
     Object.defineProperty(this, 'submit_disabled', {
         get: function() {
             if (this.wizard_query.name == '' && this.wizard_query.place == '') {
@@ -102,6 +175,19 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
         }
     });
 
+    /**
+     * @ngdoc property
+     * @name WizardFormCtrl#sggested_distribution
+     *
+     * @description
+     * Defines suggestion categories within the `suggest.suggested` array.
+     * Returns suggestion type distribution.
+     * For example, if the suggestions for name contain 1 exact match, 2 "starts-with",
+     * 3 "contains" and 1 "sounds like", `suggested_distribution.names` will be: `[1, 2, 3, 1]`.
+     *
+     * TODO: Condider moving this functionality to `get_suggetions()`, 
+     * in order to not run the getter function when there was no change in the suggestions.
+     */
     Object.defineProperty(this, 'suggested_distribution', {
         get: function() {
             return { 
@@ -123,10 +209,28 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
 };
 
 WizardFormCtrl.prototype = {
+
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#search
+     *
+     * @description
+     * Trigger a wizard search.
+     */
 	search: function() {
         this.wizard.search();
     },
 
+
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#get_suggestions
+     *
+     * @param type {String} suggestion type (name or place).
+     *
+     * @description
+     * Get suggestions for name or place.
+     */
     get_suggestions: function(type) {
         var promise,
             self = this;
@@ -160,7 +264,15 @@ WizardFormCtrl.prototype = {
         }
     },
 
-    // adopt a suggestion for a place or a name
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#adopt
+     *
+     * @param type {String} suggestion type (name or place).
+     *
+     * @description
+     * Adopt a suggestion for a place or a name.
+     */
     adopt: function(type) {
         
         switch(type) {
@@ -175,6 +287,17 @@ WizardFormCtrl.prototype = {
         }
     },
 
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#handle_keyboard
+     *
+     * @param $event {Object} event object.
+     * @param type {String} suggestion type (name or place).
+     *
+     * @description
+     * Hanlder for keyboard events in the wizard formm input context.
+     * Used to trigger suggestions dropdown openning, and suggestion picking & adopting.
+     */
     handle_keyboard: function($event, type) {
         var suggested_count = this.suggested[type + 's'].length;
 
@@ -214,20 +337,59 @@ WizardFormCtrl.prototype = {
         }
     },
 
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#isSelectedSuggested
+     *
+     * @param type {String} suggestion type (name or place).
+     * @param value {String} suggestion to check.
+     *
+     * @description
+     * Check whether a suggestion is selected by the user.
+     */
     isSelectedSuggested: function(type, value) {
         return this.suggested[type + 's'].indexOf(value) === this.suggested_index[type];
     },
 
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#select_suggested
+     *
+     * @param type {String} suggestion type (name or place).
+     * @param value {String} suggestion to select.
+     *
+     * @description
+     * Mark a suggestion as selected (highlighted).
+     */
     select_suggested: function(type, value) {
         this.suggested_index[type] = this.suggested[type + 's'].indexOf(value); 
     },
 
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#open_suggested
+     *
+     * @param type {String} suggestion type (name or place).
+     *
+     * @description
+     * Open suggestions dropdown for name or place.
+     */
     open_suggested: function(type) {
         if ( this.suggested[type + 's'].length > 0 && this.wizard_query[type] ) {
             this.suggested_open[type] = true;
         }
     },
 
+
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#close_suggested
+     *
+     * @param type {String} suggestion type (name or place).
+     *
+     * @description
+     * Close suggestions dropdown for name or place.
+     */
     close_suggested: function(type) {
         var self = this;
 
@@ -236,6 +398,17 @@ WizardFormCtrl.prototype = {
         }, 200);
     },
 
+
+    /**
+     * @ngdoc method
+     * @name WizardFormCtrl#get_active_title
+     *
+     * @param type {String} suggestion type (name or place).
+     *
+     * @description
+     * Deduce from `suggested_distribution` & `suggested_index` 
+     * what type of suggestion ("starts with", "contains" or "sounds like") is sleceted. 
+     */
     get_active_title: function(type) {
         if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0]) {
             if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0] + this.suggested_distribution[type + 's'][1] + this.suggested_distribution[type + 's'][2]) {
