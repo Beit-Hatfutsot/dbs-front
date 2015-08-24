@@ -1,8 +1,8 @@
 angular.module('main').
 	factory('ftrees', ['$http', '$q', 'apiClient', 'gedcomParser', function($http, $q, apiClient, gedcomParser) {
 		var in_progress = false;
-		var editor_remarks_matches = {
-			'SD': 'images\/babylon.jpg'
+		var contributor_images = {
+			'babylonjewry.org.il': 'images\/babylon.jpg'
 		};
 
 		var ftrees = {
@@ -11,15 +11,17 @@ angular.module('main').
 				if (individual) {
 					// check for editor remarks
 					var editor_remarks = individual.editor_remarks || individual.EditorRemarks;
-
-					for (var key in editor_remarks_matches) {
-						var regex = new RegExp(key);
-						if (regex.exec(editor_remarks) !== null) {
-							return editor_remarks_matches[key];	
-						}
-						
-					}
-				}
+                    // Check for the contributor path metadata in the format of
+                    // <source:contributor_id>
+                    var contibutor_source_regex = new RegExp("<source:.+>");
+                    var contributor_md_match = contibutor_source_regex.exec(editor_remarks);
+                    if (contributor_md_match) {
+                        var contributor_id = contributor_md_match[0].split(':')[1].split('>')[0];
+				        if (contributor_id in contributor_images) {
+					        return contributor_images[contributor_id];	
+				        }
+				    }
+                }
 			},
 
 			search: function(params) {
