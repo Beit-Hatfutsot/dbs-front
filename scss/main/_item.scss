@@ -249,20 +249,32 @@
 						.white-part {
 							position: absolute;
 							border-top: 367px solid white;
-							border-left: 105px solid transparent;
 							height: 0;
 							width: 191px;
-							right: 0;
 							transition: width 1s;
 							-webkit-transition: width 1s;
 
-						.diagonal-separator {
-							position: absolute;
-							top: -367px;
-							height: 300px;
-							width: 10px;
-							@include skew(16deg);
-							background: #FAAE34;
+							.en & {
+								border-left: 105px solid transparent;
+								right: 0;
+							}
+							.he & {
+								border-right: 105px solid transparent;
+								left: 0;
+							}
+						
+						.diagonal-block {
+							.he & {
+								@include flip ();
+							}
+							.diagonal-separator {
+								position: absolute;
+								top: -367px;
+								height: 300px;
+								width: 10px;
+								background: #FAAE34;
+								@include skew(16deg);
+							}
 						}
 						
 						}
