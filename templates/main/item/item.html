@@ -131,10 +131,10 @@
 			</div>
 		</div>
 		<div class="right-side">
-			<div class="search-results">
+			<div ng-if="itemController.search_result" class="search-results">
 				<div class="search-results__header">
 					<en>Your Search Results:</en>
-					<he>Your Search Results:</he>
+					<he>תוצאות חיפוש:</he>
 				</div>
 				<div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
 					<en><span>{{itemController.search_result.name.Header.En}}</span></en>

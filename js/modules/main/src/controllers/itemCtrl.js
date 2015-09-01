@@ -13,7 +13,7 @@ var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTy
 	this.mjs = mjs;
 	this.recentlyViewed = recentlyViewed;
 	this.$window = $window;
-	this.modalShown = false;	
+	this.modalShown = false;
 	this.failed = false;
 	this.content_loaded = false;
 	this.item_data = {};
@@ -23,13 +23,13 @@ var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTy
 	this.itemTypeMap = itemTypeMap;
 	this.pull_wizard_related();
 	this.parsed_wsearch_results = [];
-	
-	if(this.$window.localStorage.wizard_result) {
-		this.search_result = JSON.parse(this.$window.localStorage.wizard_result);	
+
+	if(this.$window.sessionStorage.wizard_result) {
+		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
 
 	this.get_item();
-	
+
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
 			return $stateParams.item_string.substring(0, 3) === 'ugc';

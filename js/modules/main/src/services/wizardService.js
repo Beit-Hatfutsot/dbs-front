@@ -104,8 +104,8 @@ angular.module('main').
 			search: function() {
 	  			if ( !(this.in_progress) ) {
 
-	  				if ($window.localStorage.wizard_result) {
-	  					$window.localStorage.removeItem("wizard_result");
+	  				if ($window.sessionStorage.wizard_result) {
+	  					$window.sessionStorage.removeItem("wizard_result");
 	  				}
 
 	  				this.in_progress = true;
@@ -182,7 +182,7 @@ angular.module('main').
 		                }
 
 						self.result = result;
-						$window.localStorage.setItem('wizard_result', JSON.stringify(result));
+						$window.sessionStorage.setItem('wizard_result', JSON.stringify(result));
 						self.last_search.name = self.query.name;
 						self.last_search.place = self.query.place;
 
