@@ -8,65 +8,8 @@
 			<div  class="diagonal-separator" style="right:-10px; opacity:0.7" ng-show="$index == 0 || previewData.Pictures.length > 1"></div>
 			<div  class="diagonal-separator" style="right:2px; opacity:0.4" ng-show="$index == 0 || previewData.Pictures.length > 1"></div>
 		</div>
-		<div class="type" ng-class="{'type--nothumb': !(previewData.thumbnail.data)}">
-		<ng-switch on="itemPreviewController.item_type">
-			<div ng-switch-when="genTreeIndividuals">
-				<div class="type-icon-container">
-					<div class="photo-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Family Tree</en>
-					<he>עץ משפחה</he>
-				</div>
-			</div>
-			<div ng-switch-when="familyNames">
-				<div class="type-icon-container">
-					<div class="surname-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Surname Origin</en>
-					<he>פירוש שם משפחה</he>
-				</div>
-			</div>
-			<div ng-switch-when="places">
-				<div class="type-icon-container">
-					<div class="place-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Place</en>
-					<he>מקום</he>
-				</div>
-			</div>
-			<div ng-switch-when="photoUnits">
-				<div class="type-icon-container">
-					<div class="photo-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Image</en>
-					<he>תמונה</he>
-				</div>
-			</div>
-			<div ng-switch-when="movies">
-				<div class="type-icon-container">
-					<div class="movie-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Movie</en>
-					<he>סרט</he>
-				</div>
-			</div>
-				<div ng-switch-when="personalities">
-				<div class="type-icon-container">
-					<div class="personality-icon"></div>
-				</div>
-				<div class="type-desc-container">
-					<en>Personality</en>
-					<he></he>
-				</div>
-			</div>
-		</ng-switch>
-	</div>
-		<!-- <div class="diagonal-separator" ng-repeat="right in [-22, -10, 2]" ng-show="$index == 0 || previewData.Pictures.length > 1" style="right:{{right}}px;"></div> -->
+    <item-type type="itemPreviewController.item_type"
+               image="previewData.thumbnail.data"></item-type>
 		<ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
 			<div ng-switch-when="true" class="text text--nothumb">
 				{{previewData.FN}}<br>{{previewData.LN}}}

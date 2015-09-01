@@ -1,0 +1,59 @@
+		<div class="type" ng-class="{'type--nothumb': !(image)}">
+		<ng-switch on="type">
+			<div ng-switch-when="genTreeIndividuals">
+				<div class="type-icon-container">
+					<div class="photo-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Family Tree</en>
+					<he>עץ משפחה</he>
+				</div>
+			</div>
+			<div ng-switch-when="familyNames">
+				<div class="type-icon-container">
+					<div class="surname-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Surname Origin</en>
+					<he>פירוש שם משפחה</he>
+				</div>
+			</div>
+			<div ng-switch-when="places">
+				<div class="type-icon-container">
+					<div class="place-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Place</en>
+					<he>מקום</he>
+				</div>
+			</div>
+			<div ng-switch-when="photoUnits">
+				<div class="type-icon-container">
+					<div class="photo-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Image</en>
+					<he>תמונה</he>
+				</div>
+			</div>
+			<div ng-switch-when="movies">
+				<div class="type-icon-container">
+					<div class="movie-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Movie</en>
+					<he>סרט</he>
+				</div>
+			</div>
+				<div ng-switch-when="personalities">
+				<div class="type-icon-container">
+					<div class="personality-icon"></div>
+				</div>
+				<div class="type-desc-container">
+					<en>Personality</en>
+					<he></he>
+				</div>
+			</div>
+		</ng-switch>
+	</div>
+
