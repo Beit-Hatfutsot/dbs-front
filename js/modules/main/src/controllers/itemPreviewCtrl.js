@@ -1,9 +1,8 @@
 var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification) {
     this.$state = $state;
-    this.$scope = $scope;
     this.mjs = mjs;
+    this.$scope = $scope;
     this.notification = notification;
-
     this.item_string = itemTypeMap.get_item_string($scope.previewData);
     this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);

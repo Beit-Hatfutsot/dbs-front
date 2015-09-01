@@ -76,6 +76,12 @@
     transition: $property $duration $timing-function $delay;
 }
 
+@mixin skew($degrees) {
+	-webkit-transform: skew($degrees);
+	-moz-transform: skew($degrees);
+	-o-transform: skew($degrees);
+}
+
 @mixin rotate($degrees:90deg) {
 	-webkit-transform: rotate($degrees);
     -moz-transform: rotate($degrees);

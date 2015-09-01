@@ -13,8 +13,9 @@ angular.module('main', [
     'cache',
     'plumb',
     'rcSubmit',
-    'gedcomParser'
-]).
+    'gedcomParser',
+    // 'angulike'
+    ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide', '$sceDelegateProvider',
 function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider) {
@@ -178,6 +179,8 @@ run(['$state', '$rootScope', 'langManager', function ($state, $rootScope, langMa
     $rootScope.isCurrentState = function(state_name) {
         return $state.includes(state_name);
     };
+    
+    // $rootScope.facebookAppId = 666465286777871;
 
 
     $state.go('start');

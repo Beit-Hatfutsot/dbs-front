@@ -1,7 +1,7 @@
 angular.module('main').
 	factory('ftrees', ['$http', '$q', 'apiClient', 'gedcomParser', function($http, $q, apiClient, gedcomParser) {
 		var in_progress = false;
-
+		
 		var ftrees = {
 			search: function(params) {
 				//if (!in_progress) { 

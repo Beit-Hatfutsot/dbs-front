@@ -1,25 +1,195 @@
+%modal-dialog {
+	.modal-dialog-overlay {
+		position: fixed;
+  		z-index:9999;
+  		top:0;
+		left:0;
+  		width:100%;
+ 		height:100%;
+  		background-color:#000000;
+  		opacity: 0.8;
+  		cursor: url(/images/x.png) 0 0, pointer;
+
+  		/*position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: blue;
+		opacity: 0;
+		@include transition(all, 0.8s, ease-in);
+
+		&.fade.in {
+			opacity: 0.7;
+		}*/
+	}
+	.gallery-modal-dialog {
+		z-index: 10000;
+		position: absolute;
+		width: 34.5%;
+		top: 10%;
+	  	left: 50%;
+	  	transform: translate(-50%, -50%);
+	 	-webkit-transform: translate(-50%, -50%);
+	  	-moz-transform: translate(-50%, -50%);
+	  	background-color: #ffffff;
+	  	@include item-shadow();
+	  	overflow: hidden;
+
+	  	&__title {
+	  		position: relative;
+	  		width: 100%;
+	  		padding: 12px 22px;
+	  		background-color: #fff;
+	  		font-size: 25px;
+	  		font-weight: bold;
+	  		color: red;
+
+	  		.close-sign {
+	  			position: absolute;
+	  			top: 15px;
+	  			right: 15px;
+	  			cursor: pointer;
+	  		}
+	  	}
+
+	  	&__main {
+	  		position: relative;
+	  		text-align: center;
+	  		background-color: grey;
+
+	  		.arrow-left, .arrow-right {
+	  			position: absolute;
+	  			top: 50%;
+	  			width: 0;
+				height: 0;
+				border-top: 15px solid transparent;
+				border-bottom: 15px solid transparent;
+				cursor: pointer;
+				opacity: 0.2;
+
+				&:hover {
+					opacity: 1;
+				}
+	  		}
+	  		.arrow-left {
+	  			border-right: 25px solid red;
+	  			left: 5%;
+	  		}
+	  		.arrow-right {
+				border-left: 25px solid red;
+				right: 5%;
+			}
+	  	}
+
+	  	&__nav {
+	  		width: 100%;
+	  		position: relative;
+
+	  		&__title {
+	  			padding: 12px 58px;
+	  			font-weight: bold;
+	  			color: red;
+	  		}
+
+	  		.arrow-left, .arrow-right {
+	  			position: absolute;
+	  			top: 50%;
+	  			width: 0;
+				height: 0;
+				border-top: 15px solid transparent;
+				border-bottom: 15px solid transparent;
+				cursor: pointer;
+				opacity: 0.2;
+
+				&:hover {
+					opacity: 1;
+				}
+	  		}
+	  		.arrow-left {
+	  			border-right: 25px solid red;
+	  			left: 5%;
+	  		}
+	  		.arrow-right {
+				border-left: 25px solid red;
+				right: 5%;
+			}
+			&__preview-picture {
+				padding: 0px 0px;
+				display: inline-block;
+				white-space: nowrap;
+				overflow: hidden;
+				width: 80%;
+				vertical-align: middle;
+				margin-left: 10%;
+			} 
+
+	  		li {
+	  			margin: 0 10px;
+	  			display: inline-block;
+	  		}
+
+	  		li.active {
+	  			border: 1px solid blue;
+	  		}
+
+	  		img {
+	  			width: 80px;
+	  			height: auto;
+	  			cursor: pointer;
+	  			vertical-align: middle;
+	  		}
+	  	}
+	}
+}
+
 %item-type {
+	position: absolute;
 	display: inline-block;
-	width: auto;
-	height: auto;
-	background: #f5f5f5;
+	width: 60px;
+	height: 26px;
+	background: #f6f6f6;
 	color: #b4b4b4; 
-	border-bottom-right-radius: 3px;
-	border-bottom-left-radius: 3px;
 	font-size: 11px;
-	margin-bottom: 20px;
+	bottom: 10px;
 	padding: 5px 5px 2px;
+	top: 111px;
+	border: 1px solid #DADADA;
+	transition: width 1s;
 
 	.en & {
-		margin-right: 11px;
-		padding-right: 5px;
-		float: right;
+		right: -24px;
 	}
 
 	.he & {
-		margin-left: 11px;
-		padding-left: 5px;
-		float: left;
+		left: -24px;
+	}
+
+	&:after {
+		position: absolute;
+		content: "";
+		width: 0;
+		height: 0;
+		border-top: solid 27px transparent;
+		border-left: solid 8px #f6f6f6;
+		left: 100%;
+		bottom: 0;
+	}
+
+	&--nothumb {
+		width: 116px;
+		right: -8px;
+
+		&:after {
+			position: absolute;
+			content: "";
+			width: 0;
+			height: 0;
+			border-top: 4px solid #A2A2A2;
+			border-right: 8px solid transparent;
+			top: 100%;
+			right: 0;
+		}
 	}
 
 	.type-icon-container {
@@ -65,61 +235,106 @@
 	}
 
 	.type-desc-container {
-		position: relative;
-		display: inline-block;
-		vertical-align: top;
-		padding: 2px 0;
+		position: absolute;
+		display: block;
+		left: 28px;
+		top: 6px;
+		transition: opacity 0.8s;
+		transition-timing-function: ease-out;
 	}
 }
 
 %item-preview {
+	position: relative;
 	display: inline-block;
 	vertical-align: middle;
-	width: 200px;
-	height: auto;
-	background: #ffffff;
-	overflow: hidden;
-	margin: 0 0 18px;
-	padding: 0 10px 10px;
-	@include item-bottom-border();
-	@include border-radius(8px 8px 0 0);
+	width: 306px;
+	height: 150px;
+	margin: 0 0 26px;
 	@include item-shadow();
 	@include hover-pointer(); 
-	
-	pre {
-		white-space: pre-wrap !important;
-		margin: 0 !important;
+
+	&:hover {
+		.white-part1 {
+			width: 248px;
+			&--nothumb {
+				width: initial;
+			}
+		}
+
+		%item-type {
+			width: 28px;
+		}
+		.type-desc-container {
+			opacity: 0;
+		}
 	}
 
+	.white-part1 {
+		position: relative;
+	  	border-bottom: 150px solid #ffffff;
+	  	border-right: 42px solid transparent;
+	  	transition: width 1s;
+	  	width: 292px;
+	  	top: 0px;
+
+	  	&--nothumb {
+			width: 100%;
+			border-right: 42px solid #ffffff;
+		}
+
+		.diagonal-separator {
+			position: absolute;
+			height: 150px;
+			width: 8px;
+			@include skew(16deg);
+			background: #FAAE34;
+			/*.i0 {opacity: 1;}
+			.i1 {opacity: 0.7;}
+			.i2 {opacity: 0.4;}*/
+		}
+	}
+	
 	.type {
 		@extend %item-type;
 	}
 
 	.header {
-		margin: 36px 0 12px;
-		font-size: 12px;
-		font-weight: bold;
-		clear: both;
+		position: absolute;
+		color: #B2361A;
+		font-weight: 600;
+		margin: 10px 15px 10px;
+		font-size: 13px;
+		width: 164px;
+		max-height: 36px;
+  		overflow: hidden;
+
+		&--nothumb {
+			width: 100%;
+		}
 	}
 
 	.text {
-		color: #474747;
-		overflow: hidden;
-		font-size: 11px;
-		height: 50px;
-		line-height: 16px;
-		margin: 0 0 15px;
+		position: absolute;
+	    overflow: hidden;
+		color: #666666;
+		font-size: 14px;
+		height: 86px;
+		line-height: 17px;
+		margin: 50px 15px 0;
+		width: 200px;
 
 		&--nothumb {
-			height: 100px;
+			height: 88px;
+			width: 100%;
 		}
 	}	
 
 	.thumbnail {
-		position: relative;
-		width: 180px;
-		height: 180px;
-		margin: 0 auto;
+		position: absolute;
+		width: 50%;
+		height: 100%;
+		right: 0px;
 		overflow: hidden;
 
 		&--trees {
@@ -131,9 +346,7 @@
 
 		img {
 			position: absolute;
-			left: 50%;
-			top: 50%;
-			@include translate(-50%, -50%);
+			right: 0px;
 		}
 	}
 

@@ -1,5 +1,4 @@
-var ItemCtrl = function($scope, $state, $stateParams, item, notification, 
-						itemTypeMap, wizard, header, mjs, recentlyViewed) {
+var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout) {
 	var self = this;
 
 	if (header.sub_header_state !== 'recently-viewed') {
@@ -13,15 +12,21 @@ var ItemCtrl = function($scope, $state, $stateParams, item, notification,
 	this.notification = notification;
 	this.mjs = mjs;
 	this.recentlyViewed = recentlyViewed;
-	
+	this.$window = $window;
+	this.modalShown = false;	
 	this.failed = false;
 	this.content_loaded = false;
 	this.item_data = {};
 	this.related_data = [];
 	this.wizard_name = {};
 	this.wizard_place = {};
-	
+	this.itemTypeMap = itemTypeMap;
 	this.pull_wizard_related();
+	this.parsed_wsearch_results = [];
+	
+	if(this.$window.localStorage.wizard_result) {
+		this.search_result = JSON.parse(this.$window.localStorage.wizard_result);	
+	}
 
 	this.get_item();
 	
@@ -94,7 +99,7 @@ ItemCtrl.prototype = {
 			if ( this.wizard.result.individuals && this.wizard.result.individuals.isNotEmpty() ) {
 				this.related_individuals = this.wizard.result.individuals; 
 
-				this.related_individuals_query_params = {}
+				this.related_individuals_query_params = {};
 				if ( this.wizard.result.name && this.wizard.result.name.isNotEmpty() ) {
 					this.related_individuals_query_params.last_name = this.wizard.result.name.Header.En;
 				}
@@ -123,9 +128,39 @@ ItemCtrl.prototype = {
 				self.related_data.push(related_item);
 			}
 		});
+	},
+
+	goto_item: function(item_data) {
+		var self = this;
+
+		var collection_name = self.itemTypeMap.get_collection_name(item_data);
+    	var item_string = collection_name + '.' + item_data._id; 
+        this.$state.go('item-view', {item_string: item_string});
+    },
+
+    goto_tree: function() {
+       	this.wsearch_individuals_query_params = {};
+       	if(this.search_result_name && this.search_result_name.isNotEmpty()){
+       		this.wsearch_individuals_query_params.last_name = this.search_result_name.Header.En;	
+       	}
+       	if(this.search_result_place && this.search_result_place.isNotEmpty()) {
+       		this.wsearch_individuals_query_params.birth_place = this.search_result_place.Header.En;	
+       	}
+    	this.$state.go('ftrees', this.wsearch_individuals_query_params);
+	},
+
+	toggleModal: function() {
+		this.modalShown = !this.modalShown;
+
 	}
+
+    // goto_trees: function(query_params) { 
+    //     this.$state.go('ftrees', query_params);
+    // },
+
+
 };
 
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
 											   'notification', 'itemTypeMap','wizard', 'header', 
-											   'mjs', 'recentlyViewed', ItemCtrl]);
+											   'mjs', 'recentlyViewed', '$window', '$timeout', ItemCtrl]);

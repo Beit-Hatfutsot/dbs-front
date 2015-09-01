@@ -7,14 +7,18 @@
 		<base href="/">
 		<title>BHS</title>
 		<link href="css/bhsclient.css" rel="stylesheet" type="text/css" media="all">
-		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet'>
+		<link href='http://fonts.googleapis.com/earlyaccess/opensanshebrew.css' rel='stylesheet'>
+		
 		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 		<script src="bower_components/angular-animate/angular-animate.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 		<script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
 		<script src="bower_components/jsplumb/dist/js/dom.jsPlumb-1.7.5-min.js"></script>
+		
 
 		<!-- Gedcom stuff -->
 		<!-- Libraries -->
@@ -27,6 +31,8 @@
 		<script type="text/javascript" src="js/lib/gedcom-js-viewer/js/gedcom/plugins.js"></script>
 		<script type="text/javascript" src="js/lib/gedcom-js-viewer/js/gedcom/viewer.js"></script>
 		<script type="text/javascript" src="js/lib/gedcom-js-viewer/js/gedcom/entities.js"></script>
+		
+
 
 	</head>
 	<body class="{{lang}}" lang="{{lang}}" ng-cloak flow-prevent-drop item-scroll>
@@ -38,6 +44,9 @@
 			</div>	
 			<ng-include src="'templates/main/footer.html'"></ng-include>
 		</div>
+		<!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
+		<!--<script type="text/javascript" src="bower_components/angulike/angulike.js"></script>-->
 		<script src="js/bhsclient.js"></script>
+		
 	</body>
 </html>

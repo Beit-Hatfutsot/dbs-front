@@ -1,0 +1,36 @@
+<div class='modal-dialog'  ng-show="show" >
+    <div class='modal-dialog-overlay' ng-click='hideModal()'></div>
+    <div class='gallery-modal-dialog'>
+        <div class="gallery-modal-dialog__title">
+           <en>{{picturesGallery.Header.En}} Pictures</en> 
+           <he>{{picturesGallery.Header.En}} Pictures</he>
+           <img class="close-sign" ng-src="/images/x.png" class='gallery-modal-dialog__close' ng-click='hideModal()'/>
+        </div>
+        <div class="gallery-modal-dialog__main">
+            <img ng-repeat="pic in picturesGallery.Pictures" ng-show="isActive($index)" ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" alt="More Images"/> 
+            <div class="arrow-left" ng-click="showPrev()"></div>
+            <div class="arrow-right" ng-click="showNext()"></div>
+        </div>
+        <div>
+            <en>Title: {{picturesGallery.Header.En}}</en></br>   
+            <en>Description:</en></br>
+            <en>Photo source: {{picturesGallery.EditorRemarks}}</en></br>
+            <en>License type: © All Rights Reserved</en></br></br>
+        </div>
+        <div class="gallery-modal-dialog__nav">
+            <div>
+                <div class="arrow-left" ng-click="showPrev()" ></div>  
+                <div class="arrow-right" ng-click="showNext()"></div>
+            </div>
+            <div class="gallery-modal-dialog__nav__title">
+                <en>More {{picturesGallery.Header.En}} Pictures</en>
+                <he>More {{picturesGallery.Header.He}} Pictures</he>
+            </div>
+            <ul class="gallery-modal-dialog__nav__preview-picture">
+                <li ng-repeat="pic in picturesGallery.Pictures" ng-class="{'active':isActive($index)}" ng-hide="isHidden($index)">
+                    <img ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" ng-click="showPhoto($index)"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

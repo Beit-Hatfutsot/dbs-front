@@ -1,100 +1,169 @@
 <auth-private on="itemController.is_ugc_request">
 <div id="item-page-container">
+	<modal-dialog pictures-gallery="itemController.item_data" show="itemController.modalShown"></modal-dialog> 
 	<div id="item-page" ng-show="itemController.content_loaded">
-		<div class="related">
-			<trees-preview ng-if="itemController.related_individuals" individuals="itemController.related_individuals" query-params="itemController.related_individuals_query_params"></trees-preview>
-			<item-preview ng-if="itemController.wizard_name.isNotEmpty()" preview-data="itemController.wizard_name"></item-preview>
-			<item-preview ng-repeat="r_data in itemController.related_data | limitTo: 3" preview-data="r_data"></item-preview>
-		</div>
 		<div class="item-container">
 			<div class="item">
 				<div class="item__header">
 					<div class="text">
 						<en>
-							<pre>{{itemController.item_data.Header.En}}</pre>
+							<span><span ng-if="itemController.search_result.place.Header.En == itemController.item_data.Header.En || itemController.search_result.name.Header.En == itemController.item_data.Header.En">Your Search Result for </span>{{itemController.item_data.Header.En}} </span>
 						</en>
 						<he>
-							<pre>{{itemController.item_data.Header.He}}</pre>
+							<span><pre ng-if="itemController.search_result.name.Header.He == itemController.item_data.Header.He || itemController.search_result.name.Header.He == itemController.item_data.Header.He">Your Search Result for </pre> 
+								{{itemController.item_data.Header.He}}</span>
 						</he>
 					</div>
 				</div>
-				<mjs-widget item="itemController.item_data"></mjs-widget>
-				<div class="item__type">
-					<ng-switch on="itemController.item_type">
-						<div ng-switch-when="familyNames">
-							<div class="type-icon-container">
-								<div class="surname-icon"></div>
+				<div class="item-wrapper">
+					<div class="item__content">
+						<div 	class="item__content__media-container"
+								ng-class="{'item__content__media-container--movie': itemController.item_type === 'movies'}" 
+								ng-if="itemController.item_data.video_url || itemController.item_data.main_image_url">
+							<ng-switch on="itemController.item_type">
+								<video 	ng-switch-when="movies" ng-src="{{itemController.item_data.video_url}}" controls autoplay type="video/mp4"></video>
+								<img 	ng-switch-default 
+										ng-src="{{itemController.item_data.main_image_url}}" 
+										alt="Item Image"
+										ng-click="itemController.toggleModal()"
+										prevent-rightclick>
+								
+							</ng-switch>
+							<div class="white-part">
+								<div class="pictures-info">
+									{{itemController.item_data.Pictures.length}} <div class="photo-icon"></div>
+								</div>
+								<!-- <div  class="diagonal-separator" ng-class="i$index" ng-repeat="left in [-63, -43, -23]" ng-show="$index == 0 || itemController.item_data.Pictures.length > 1" style="left:{{left}}px;"></div> -->
+								<div ng-show="itemController.item_data.Pictures">
+									<div  class="diagonal-separator" style="left:-63px; opacity:1"></div>
+									<div  class="diagonal-separator" style="left:-43px; opacity:0.7" ng-show="itemController.item_data.Pictures.length > 1"></div>
+									<div  class="diagonal-separator" style="left:-23px; opacity:0.4" ng-show="itemController.item_data.Pictures.length > 1"></div>
+								</div>
 							</div>
-							<div class="type-desc-container">
-								<en>Surname Origin</en>
-								<he>פירוש שם משפחה</he>
-							</div>
+							<span ng-show="itemController.item_data.Pictures.length > 1" class="notification">
+								<en>Click for more pictures</en>
+								<he>Click for more pictures</he>
+							</span>
 						</div>
-						<div ng-switch-when="places">
-							<div class="type-icon-container">
-								<div class="place-icon"></div>
-							</div>
-							<div class="type-desc-container">
-								<en>Place</en>
-								<he>מקום</he>
-							</div>
+						<div class="item__type">
+							<ng-switch on="itemController.item_type">
+								<div ng-switch-when="familyNames">
+									<div class="type-icon-container">
+										<div class="surname-icon"></div>
+									</div>
+									<div class="type-desc-container">
+										<en>Surname Origin</en>
+										<he>פירוש שם משפחה</he>
+									</div>
+								</div>
+								<div ng-switch-when="places">
+									<div class="type-icon-container">
+										<div class="place-icon"></div>
+									</div>
+									<div class="type-desc-container">
+										<en>Place</en>
+										<he>מקום</he>
+									</div>
+								</div>
+								<div ng-switch-when="photoUnits">
+									<div class="type-icon-container">
+										<div class="photo-icon"></div>
+									</div>
+									<div class="type-desc-container">
+										<en>Image</en>
+										<he>תמונה</he>
+									</div>
+								</div>
+								<div ng-switch-when="movies">
+									<div class="type-icon-container">
+										<div class="movie-icon"></div>
+									</div>
+									<div class="type-descwizard-container">
+										<en>Movie</en>
+										<he>סרט</he>
+									</div>
+								</div>
+								<div ng-switch-when="personalities">
+									<div class="type-icon-container">
+										<div class="personality-icon"></div>
+									</div>
+									<div class="type-desc-container">
+										<en>Personality</en>
+										<he></he>
+									</div>
+								</div>
+							</ng-switch>
 						</div>
-						<div ng-switch-when="photoUnits">
-							<div class="type-icon-container">
-								<div class="photo-icon"></div>
-							</div>
-							<div class="type-desc-container">
-								<en>Image</en>
-								<he>תמונה</he>
-							</div>
+						<mjs-widget item="itemController.item_data"></mjs-widget>
+						<h2 class="item__article-header">
+							<en>{{itemController.item_data.Header.En}}</en>
+							<he>{{itemController.item_data.Header.He}}</he>
+						</h2>
+						<div class="item__article-text">
+							<en>{{itemController.item_data.UnitText1.En}}</en>
+							<he>{{itemController.item_data.UnitText1.He}}</he>
 						</div>
-						<div ng-switch-when="movies">
-							<div class="type-icon-container">
-								<div class="movie-icon"></div>
-							</div>
-							<div class="type-desc-container">
-								<en>Movie</en>
-								<he>סרט</he>
-							</div>
+						<div class="scrol-to-top"onclick="window.scroll(0, 0)">
+							<en>Back to top</en>
+							<he>Back to top</he>
 						</div>
-						<div ng-switch-when="personalities">
-							<div class="type-icon-container">
-								<div class="personality-icon"></div>
-							</div>
-							<div class="type-desc-container">
-								<en>Personality</en>
-								<he></he>
-							</div>
-						</div>
-					</ng-switch>
-				</div>
-				<div class="item__content">
-					<div 	class="item__content__media-container"
-							ng-class="{'item__content__media-container--movie': itemController.item_type === 'movies'}" 
-							ng-if="itemController.item_data.video_url || itemController.item_data.main_image_url">
-						<ng-switch on="itemController.item_type">
-							<video 	ng-switch-when="movies" ng-src="{{itemController.item_data.video_url}}" controls autoplay type="video/mp4"></video>
-							<img 	ng-switch-default 
-									ng-src="{{itemController.item_data.main_image_url}}" 
-									alt="Item Image"
-									prevent-rightclick>
-						</ng-switch>
 					</div>
-					<en>
-						<pre>{{itemController.item_data.UnitText1.En}}</pre>
-					</en>
-					<he>
-						<pre>{{itemController.item_data.UnitText1.He}}</pre>
-					</he>
-				</div>
-				<div class="item__bottom-bar">
-					<mjs-widget item="itemController.item_data"></mjs-widget>
-				</div>
+					<div class="item__bottom-bar">
+						<div class="footer">
+							<div class="share-item">
+								<div class="share-item_header">
+									<en>Share this item</en>
+									<he>Share this item</he>
+								</div>
+								<!-- <div fb-like></div> -->
+							</div>
+						</div>
+						<mjs-widget item="itemController.item_data"></mjs-widget>
+						<div class="check-related">
+							<div class="check-related__text">
+								<en>Check the<br>related items</en>
+								<he>Check the<br>related items</he>
+							</div>
+							<div class="check-related__right-arrow"></div>
+						</div>
+					</div>
+				</div>	
 			</div>
 		</div>
-		<div class="related">
-			<item-preview ng-if="itemController.wizard_place.isNotEmpty()" preview-data="itemController.wizard_place"></item-preview>
-			<item-preview ng-repeat="r_data in itemController.related_data.slice(3, 6)" preview-data="r_data"></item-preview>
+		<div class="right-side">
+			<div class="search-results">
+				<div class="search-results__header">
+					<en>Your Search Results:</en>
+					<he>Your Search Results:</he>
+				</div>
+				<div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
+					<en><span>{{itemController.search_result.name.Header.En}}</span></en>
+					<he><span>{{itemController.search_result.name.Header.He}}</span></he>
+					</div>
+				<div class="search-results__field" ng-if="itemController.search_result.place.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.place)">
+					<en><span>{{itemController.search_result.place.Header.En}}</span></en>
+					<he><span>{{itemController.search_result.place.Header.He}}</span></he>
+				</div>
+				<div class="search-results__field" ng-if="itemController.search_result.individuals.isNotEmpty()" ng-click="itemController.goto_tree()">
+					<span ng-if="itemController.search_result.name.isNotEmpty()">
+						<en><span>{{itemController.search_result.name.Header.En}}</span></en>
+						<he><span>{{itemController.search_result.name.Header.He}}</span></he>
+					</span>
+					<span ng-if="itemController.search_result.name.isEmpty()">
+						<en><span>{{itemController.search_result.place.Header.En}}</span></en>
+						<he><span>{{itemController.search_result.place.Header.He}}</span></he>
+					</span>
+				</div>
+			</div>
+
+			<div class="related">
+				<div class="related__header">
+					<en>Related Items</en>
+					<he>Related Items</he>
+				</div>
+				<trees-preview ng-if="itemController.related_individuals" individuals="itemController.related_individuals" query-params="itemController.related_individuals_query_params"></trees-preview>
+				<item-preview ng-repeat="r_data in itemController.related_data | limitTo: 6" preview-data="r_data"></item-preview> 
+			</div>
 		</div>
 	</div>
 </div>

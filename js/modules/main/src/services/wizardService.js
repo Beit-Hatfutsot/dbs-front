@@ -1,6 +1,6 @@
 angular.module('main').
-	factory('wizard', ['$rootScope', '$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', 
-	function($rootScope, $http, $q, apiClient, cache, notification, ftrees) {
+	factory('wizard', ['$rootScope', '$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', '$window',
+	function($rootScope, $http, $q, apiClient, cache, notification, ftrees, $window) {
 
 		var wizard = {
 
@@ -29,7 +29,11 @@ angular.module('main').
 			
 			search: function() {
 	  			if ( !(this.in_progress) ) {
-	  				
+
+	  				if ($window.localStorage.wizard_result) {
+	  					$window.localStorage.removeItem("wizard_result");
+	  				}
+
 	  				this.in_progress = true;
 
 					notification.put({
@@ -65,8 +69,13 @@ angular.module('main').
 
 		                if ( result.name.isNotEmpty() || result.place.isNotEmpty() || result.individuals.isNotEmpty() )  {
 		                    
-		                	if (result.name.isNotEmpty()) { cache.put(result.name) }
-	                		if (result.place.isNotEmpty()) { cache.put(result.place) }
+		                	if (result.name.isNotEmpty()) {
+		                		cache.put(result.name);
+		                	}
+		                	
+	                		if (result.place.isNotEmpty()) {
+		                		cache.put(result.place)
+		                    }
 
 		                    if ( result.name.isNotEmpty() && result.place.isEmpty() ) {
 		                        self.search_status = 'bingo-name';
@@ -99,6 +108,7 @@ angular.module('main').
 		                }
 
 						self.result = result;
+						$window.localStorage.setItem('wizard_result', JSON.stringify(result));
 						self.last_search.name = self.query.name;
 						self.last_search.place = self.query.place;
 
