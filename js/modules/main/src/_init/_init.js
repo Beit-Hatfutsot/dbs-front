@@ -64,7 +64,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'item-view',
             url: '/item/:item_string',
             controller: 'ItemCtrl as itemController',
-            templateUrl: 'templates/main/item/item.html'
+            templateUrl: 'templates/main/item.html'
         },
 
         {
