@@ -156,7 +156,7 @@ MjsController.prototype = {
 				self.select_branch(index);
 			}
 			self.notification.put({
-				en: 'Item successfuly added to branch ' + branch_name,
+				en: 'Item successfully added to branch ' + branch_name,
 				he: 'הפריט הוסף לענף ' + branch_name +  ' בהצלחה'
 			});
 		}, function() {
@@ -173,7 +173,7 @@ MjsController.prototype = {
 
 		this.mjs.unassign(branch_name, item_string).then(function() {
 			self.notification.put({
-				en: 'Item successfuly removed from branch ' + branch_name,
+				en: 'Item successfully removed from branch ' + branch_name,
 				he: 'הפריט הורד מענף ' + branch_name +  ' בהצלחה'
 			});
 		}, function() {
@@ -246,7 +246,7 @@ MjsController.prototype = {
 		parse_promise.
 			then(function() {
 				self.notification.put({
-					en: 'Story loaded successfuly.',
+					en: 'Story loaded successfully.',
 					he: 'הסיפור נטען בהצלחה'
 				});
 				self.content_loaded = true;

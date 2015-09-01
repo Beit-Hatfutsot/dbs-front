@@ -1,9 +1,23 @@
+/**
+ * @ngdoc service
+ * @name apiClient
+ * @module apiClient
+ * @requires apiConfig
+ * 
+ * @description
+ * Provides access to API endpoints. 
+ *
+ * @property {String} base_url The base URL for the BHS API.
+ * @property {Object} endpoints Maps endpoint names to values from {@link config.apiConfig}.
+ * @property {Object} urls An object that maps API endpoint names to full endpoint URLs.
+ */
 angular.module('apiClient').
 	factory('apiClient', function(apiConfig) {
 
 	  	var api_client = {
 	  		base_url: 'http://' + apiConfig.baseUrl,
 
+	  		
 	  		endpoints: {
 	  			auth: 			apiConfig.auth,
 	  			user: 			apiConfig.user, 

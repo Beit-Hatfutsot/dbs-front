@@ -1,3 +1,11 @@
+/**
+ * @ngdoc service
+ * @name suggest
+ * @module main
+ * 
+ * @description
+ * Handles search suggestions.
+ */
 angular.module('main').
 	factory('suggest', ['$http', 'apiClient', function($http, apiClient) {
 

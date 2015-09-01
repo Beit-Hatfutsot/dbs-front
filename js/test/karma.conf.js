@@ -14,21 +14,39 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+
+        //dependencies
         'bower_components/angular/angular.min.js',
         'bower_components/angular-resource/angular-resource.min.js',
         'bower_components/angular-animate/angular-animate.min.js',
         'bower_components/angular-ui-router/release/angular-ui-router.min.js',
         'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/ng-flow/dist/ng-flow-standalone.min.js',
+
+        // gedcomParser dependencies & scripts
+        'js/lib/gedcom-js-viewer/js/lib/prototype.js',
+        'js/lib/gedcom-js-viewer/js/gedcom/const.js',
+        'js/lib/gedcom-js-viewer/js/gedcom/lang.js',
+        'js/lib/gedcom-js-viewer/js/gedcom/toolbox.js',
+        'js/lib/gedcom-js-viewer/js/gedcom/parser.js',
+        'js/lib/gedcom-js-viewer/js/gedcom/plugins.js',
+        'js/lib/gedcom-js-viewer/js/gedcom/viewer.js',
+        'js/lib/gedcom-js-viewer/js/gedcom/entities.js',
+
+        // app modules & tests
         {pattern: 'js/modules/**/**/*.js/', included: true},
         {pattern: 'js/modules/**/test/*.js', included: true},
         {pattern: 'js/modules/**/test/**/*.js', included: true},
+
+        'templates/**/*.html',
+        'templates/main/**/*.html'
     ],
 
 
     // list of files to exclude
     exclude: [
-      
+        
     ],
 
 
@@ -36,6 +54,20 @@ module.exports = function(config) {
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
     reporters: ['progress'],
 
+    preprocessors: {
+        'templates/**/*.html': ['ng-html2js'],
+        'templates/main/**/*.html': ['ng-html2js']
+    },
+
+    ngHtml2JsPreprocessor: {
+        // If your build process changes the path to your templates,
+        // use stripPrefix and prependPrefix to adjust it.
+        //stripPrefix: "source/path/to/templates/.*/",
+        //prependPrefix: "web/path/to/templates/",
+
+        // the name of the Angular module to create
+        moduleName: 'templates'
+    },
 
     // web server port
     port: 9876,

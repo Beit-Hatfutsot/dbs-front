@@ -2,31 +2,105 @@ angular.module('main').
 	factory('wizard', ['$rootScope', '$http', '$q', 'apiClient', 'cache', 'notification', 'ftrees', '$window',
 	function($rootScope, $http, $q, apiClient, cache, notification, ftrees, $window) {
 
+		/**
+		 * @ngdoc service
+		 * @name wizard
+		 *
+		 * @description
+		 * The Wizard service is in charge of wizard-searching & of keeping search state.
+		 */
 		var wizard = {
 
+			/**
+			 * @ngdoc property
+			 * @name wizard#in_progress
+			 *
+			 * @description
+			 * Indicates that the wizard service is busy.
+			 */
 			in_progress: false,
 
+
+			/**
+			 * @ngdoc property
+			 * @name wizard#failed
+			 *
+			 * @description
+			 * Indicates that a wizard operation has failed.
+			 */
 			failed: false,
 
+			/**
+			 * @ngdoc property
+			 * @name wizard#query
+			 *
+			 * @description
+			 * An object representing the current wizard query.
+			 * Once a wizard search is triggered, this query will be used.
+			 * The query holds two strings: a name and a place.
+			 */
 			query: {
 				name: '',
 				place: ''
 			},
 
+			/**
+			 * @ngdoc property
+			 * @name wizard#result
+			 *
+			 * @description
+			 * The result of the last wizard search.
+			 */
 			result: {},
 			
+
+			/**
+			 * @ngdoc property
+			 * @name wizard#search_status
+			 *
+			 * @description
+			 * Wizard search status.
+			 */
 			search_status: '',
 
+
+			/**
+			 * @ngdoc property
+			 * @name wizard#last_search
+			 *
+			 * @description
+			 * Last wizard search.
+			 */
 			last_search: {
 				name: '',
 				place: ''
 			},
 			
+			/**
+			 * @ngdoc method
+			 * @name wizard#clear
+			 *
+			 * @description
+			 * Clear wizard result and search status.
+			 */
 			clear: function() {
 				this.result = {};
 				this.search_status = '';
 			},
 			
+			/**
+			 * @ngdoc method
+			 * @name wizard#search
+			 *
+			 * @description
+			 * Triggers a wizard search using the wizard query.
+			 * Sets search_status, last_search, result.
+			 * Filters (live) individual data.
+			 * It also handles notifications.
+			 * 
+			 * @returns
+			 * {Promise}
+			 */
 			search: function() {
 	  			if ( !(this.in_progress) ) {
 
@@ -94,7 +168,7 @@ angular.module('main').
 		                    else {
 		                        self.search_status = 'bingo';
 		                        notification.put({
-	                                en: 'Search finished successfuly.',
+	                                en: 'Search finished successfully.',
 	                                he: 'החיפוש הסתיים בהצלחה.'
 	                            });
 		                    }

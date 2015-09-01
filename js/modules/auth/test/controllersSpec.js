@@ -4,13 +4,12 @@ describe('auth-controllers', function() {
 
     beforeEach(function() {
         module('lang');
-        module('apiClient');
         module('auth');
     });
 
     describe('AuthCtrl', function() {
 
-        var scope, modalInstance, $timeout, authManager;
+        var scope, modalInstance, $timeout, auth;
 
         beforeEach(inject(function($rootScope, $controller, $q, _$timeout_) {
             $timeout = _$timeout_;
@@ -24,12 +23,17 @@ describe('auth-controllers', function() {
                 }
             };
 
-            authManager = {};
-            authManager.signin = function() {
+            auth = {};
+            auth.signin = function(email, password) {
                 var deferred = $q.defer();
 
                 $timeout(function() {
-                    deferred.resolve();
+                    if (email == 'test@email' && password == 'test-password') {
+                        deferred.resolve();    
+                    }
+                    else {
+                        deferred.reject();
+                    }
                 });
 
                 return deferred.promise; 
@@ -38,15 +42,30 @@ describe('auth-controllers', function() {
             $controller('AuthCtrl as authController', {
                 $scope: scope, 
                 $modalInstance: modalInstance,
-                authManager: authManager
+                auth: auth,
+                isRegister: false
             });
         }));
 
         it('should initiate a signin, close modal after success', function() {
+            scope.authController.signin_data = {
+                email: 'test@email',
+                ps: 'test-password'
+            };
             scope.authController.signin();
             $timeout.flush();
             expect(modalInstance.close).toHaveBeenCalled();
-            expect(scope.authController.message).not.toEqual('');    
+            expect(scope.authController.message).not.toEqual({en: '', he: ''});    
+        });
+
+        it('should initiate a signin, display error message on failure', function() {
+            scope.authController.signin_data = {
+                email: 'test@email',
+                ps: 'wrong-password'
+            };
+            scope.authController.signin();
+            $timeout.flush();
+            expect(scope.authController.message).not.toEqual({en: '', he: ''});    
         });
 
         it('should close modal after dsimissal', function() {

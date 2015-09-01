@@ -1,29 +1,4 @@
 angular.module('auth').
-	directive('needAuth', ['$state', 'auth', function($state, auth) {
-		return {
-			restrict: 'A',
-			scope: {
-				nextState: '@',
-				isMandatory: '@needAuth'
-			},
-			link: function(scope, element) {
-				element.bind('click', function() {
-					var nextState,
-						isMandatory = JSON.parse(scope.isMandatory);
-					
-					if (scope.nextState === undefined) {
-						nextState = $state.current.name;
-					} else {
-						nextState = scope.nextState;
-					}
-
-					auth.authenticate(nextState, { mandatory: isMandatory });
-				});
-			}
-		}
-	}]);
-
-angular.module('auth').
 	directive('authTrigger', ['$state', 'auth', function($state, auth) {
 		return {
 			restrict: 'EA',
@@ -42,6 +17,17 @@ angular.module('auth').
 		}
 	}]);
 
+/**
+ * @ngdoc directive
+ * @name authPrivate
+ * @restrict E
+ * 
+ * @description
+ * Protects transcluded content with authentication modal. 
+ *
+ * @scope
+ * @param {boolean} on Switches the directive on & off (for example, iff some property is true, request authentication). 
+ */
 angular.module('auth').
 	directive('authPrivate' ,[function() {
 		return {

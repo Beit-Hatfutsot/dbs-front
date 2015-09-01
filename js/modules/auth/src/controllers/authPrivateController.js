@@ -1,6 +1,25 @@
-var AuthPrivateController = function($scope, $state, $window, auth, user) {
+/**
+ * @ngdoc object
+ * @name auth.controller:AuthPrivateController
+ *
+ * @description
+ * Controller for the {@link module:auth.directive:authPrivate} directive.
+ * Mainly, just sets a watcher on its `signin` property, so when no user is signed in
+ * the auth modal opens.
+ */
+
+var AuthPrivateController = function($scope, $state, auth, user) {
 	var self = this;
 
+	/**
+	 * @ngdoc property 
+	 * @name AuthPrivateController#signedin
+	 *
+	 * @description
+	 * Returns `true` if user is signed-in, `false` otherwise.
+	 * 
+	 * @returns {boolean}
+	 */
 	Object.defineProperty(this, 'signedin', {
 		get: function() {
 			return auth.is_signedin();
@@ -25,4 +44,4 @@ AuthPrivateController.prototype = {
 
 };
 
-angular.module('auth').controller('AuthPrivateController', ['$scope', '$state', '$window', 'auth', 'user', AuthPrivateController]);
+angular.module('auth').controller('AuthPrivateController', ['$scope', '$state', 'auth', 'user', AuthPrivateController]);

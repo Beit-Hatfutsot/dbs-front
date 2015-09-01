@@ -5,9 +5,7 @@ describe('item', function() {
 	var item, item_data, item_url, cache, $httpBackend, $timeout;
 
 	beforeEach(function() {
-		//module('ngResource');
-		//module('apiClient');
-		//module('cache');
+		module('templates');
 		module('main');
 	});
 
@@ -17,29 +15,25 @@ describe('item', function() {
 		$httpBackend = _$httpBackend_;
 		$timeout = _$timeout_;
 
-		$httpBackend.expectGET('templates/main/start.html').respond('');
-
 		item_data = {
-			_id: { $oid: 'test-id' },
+			_id: 'test-id',
 			data: 'test-data'
 		};
 
-		item_url = apiClient.urls.item + '/non-cached-id';
+		item_url = apiClient.urls.item + '/places.non-cached-id';
 		$httpBackend.whenGET(item_url).
-			respond(200, {
-				item_data: {
-					_id: { $oid: 'non-cached-id' },
-					data: 'non-cached-data'
-				}
-			});
+			respond(200, [{
+				_id: 'non-cached-id',
+				data: 'non-cached-data',
+				UnitType: 5 //place
+			}]);
 	}));
 
 	it('should fetch items from cache', function() {
 		var retrieved;
 
-		cache.put(item_data);
-
-		item.get(item_data._id.$oid).
+		cache.put(item_data, 'test-collection');
+		item.get('test-collection.' + item_data._id).
 			then(function(data) {
 				retrieved = data;
 			}); 
@@ -48,27 +42,28 @@ describe('item', function() {
 		expect(retrieved).toEqual(item_data);
 	});
 
-	it('should fetch items from server', function() {
+	it('should fetch items from server, & cache them', function() {
 		var retrieved;
 
 		cache.clear();
 		$httpBackend.expectGET(item_url);
 
-		item.get('non-cached-id').
+		item.get('places.non-cached-id').
 			then(function(data) {
 				retrieved = data;
 			});
 		$httpBackend.flush();
 
-		expect(retrieved._id.$oid).toEqual('non-cached-id');
+		expect(retrieved._id).toEqual('non-cached-id');
 
 		retrieved = {};
-		item.get('non-cached-id').
+		item.get('places.non-cached-id').
 			then(function(data) {
 				retrieved = data;
 			});
 		$timeout.flush();
 
-		expect(retrieved._id.$oid).toEqual('non-cached-id');
+		expect(retrieved._id).toEqual('non-cached-id');
+		$httpBackend.verifyNoOutstandingRequest();
 	});
 });

@@ -1,13 +1,6 @@
-if (Object.prototype.isEmpty === undefined) {
-    /*
-    Object.prototype.isEmpty = function() {
-        if (Object.keys(this).length === 0) {
-            return true;
-        }
+// A bunch of polyfills for Object.prototype to check for empty arrays and objects
 
-        return false;
-    }
-    */
+if (Object.prototype.isEmpty === undefined) {
     Object.defineProperty(Object.prototype, 'isEmpty', {
         enumerable: false,
         configurable: false,
@@ -23,15 +16,6 @@ if (Object.prototype.isEmpty === undefined) {
 }
 
 if (Object.prototype.isNotEmpty === undefined) {
-    /*
-    Object.prototype.isNotEmpty = function() {
-        if (Object.keys(this).length === 0) {
-            return false;
-        }
-
-        return true;
-    }
-    */
     Object.defineProperty(Object.prototype, 'isNotEmpty', {
         enumerable: false,
         configurable: false,
@@ -47,15 +31,6 @@ if (Object.prototype.isNotEmpty === undefined) {
 }
 
 if (Array.prototype.isEmpty === undefined) {
-    /*
-    Array.prototype.isEmpty = function() {
-        if (this.length === 0) {
-            return true;
-        }
-
-        return false;
-    }
-    */
     Object.defineProperty(Array.prototype, 'isEmpty', {
         enumerable: false,
         configurable: false,
@@ -71,15 +46,6 @@ if (Array.prototype.isEmpty === undefined) {
 }
 
 if (Array.prototype.isNotEmpty === undefined) {
-    /*
-    Array.prototype.isNotEmpty = function() {
-        if (this.length === 0) {
-            return false;
-        }
-
-        return true;
-    }
-    */
     Object.defineProperty(Array.prototype, 'isNotEmpty', {
         enumerable: false,
         configurable: false,
@@ -94,6 +60,7 @@ if (Array.prototype.isNotEmpty === undefined) {
     });
 }
 
+// Find the index of an object with a given property with a given value in an array of objects
 if (!Array.prototype.deepIndexOf) {
     Object.defineProperty(Array.prototype, 'deepIndexOf', {
         enumerable: false,

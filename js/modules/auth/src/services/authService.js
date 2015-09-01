@@ -5,9 +5,39 @@ angular.module('auth').
 	function($modal, $state, $http, apiClient, $q, $window, $rootScope, user) {
 		var auth;
 
+		/**
+		 * @ngdoc service
+		 * @name auth
+		 *
+		 * @description
+		 * A service to handle user signin, signout & registration.
+		 */
 		auth = {
-				in_progress: false,
 
+			/**
+		     * @ngdoc property
+		     * @name auth#in_progress
+		     *
+		     * @description
+		     * Indicates that an auth request is in progress.
+		     */
+			in_progress: false,
+
+	  		/**
+	  		 * @ngdoc method
+		     * @name auth#authenticate
+			 * 
+			 * @param {Object} config 
+			 * Configuration object
+			 * Configuration parameters:
+			 *  - **register** – `{boolean}` – set to true to open a Register dialog.
+		     *  - **next_state** – `{String}` – Name of state to go to upon succesful signin/registration.
+		     *  - **fallback_state** – `{String}` – Fallback state name to go to upon failed authentication.
+		     *  - **fallback_state_params** – `{Object}`.
+			 *
+			 * @description
+			 * A call to this method opens a Sign-in/Register dialog (modal). 
+		     */
 	  		authenticate: function(config) {
 	  			var body = document.getElementsByTagName('body')[0];
 
@@ -41,6 +71,21 @@ angular.module('auth').
 				}
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#signin
+		     * 
+		     * @param email {String} user email
+		     * @param password {String} user password
+			 * 
+			 * @description
+			 * Sign a user in:
+			 * Sends a request to the auth API endpoint with user credentials.
+			 * Upon success, saves the authorization token on localStorage, and gets user data from {@link user}.
+			 *
+			 * @returns
+			 * {Promise}
+			 */
 		  	signin: function(email, password) {
 		  		if ( !this.in_progress ) {
 		  			this.in_progress = true;
@@ -70,7 +115,7 @@ angular.module('auth').
 				    		signin_deferred.reject();
 				    	}).
 				    	finally(function() {
-								self.in_progress = false;
+							self.in_progress = false;
 		  				});
 				    }
 				    catch(e) {
@@ -81,6 +126,22 @@ angular.module('auth').
 		  		}
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#register
+		     * 
+		     * @param name {String} user name
+		     * @param email {String} user email
+		     * @param password {String} user password
+			 * 
+			 * @description
+			 * Registers a new user:
+			 * Sends a POST request to the user API endpoint with user credentials.
+			 * Upon success, signs the user in.
+			 *
+			 * @returns
+			 * {Promise}
+			 */
 		  	register: function(name, email, password) {
 		  		if (!this.in_progress) {
 		  			this.in_progress = true;
@@ -117,10 +178,27 @@ angular.module('auth').
 		  		}
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#signout
+			 * 
+			 * @description
+			 * Signs a signed-in user out.
+			 */
 		  	signout: function() {
 		  		$window.localStorage.removeItem('bhsclient_token');
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#is_signedin
+			 * 
+			 * @description
+			 * Checks localStorage for data indicating a signed-in user.
+			 *
+			 * @returns
+			 * {boolean}
+			 */
 		  	is_signedin: function() {
 		  		if ( $window.localStorage.getItem('bhsclient_token') && user.email ) {
 		  			return true;
@@ -130,6 +208,19 @@ angular.module('auth').
 		  		}
 		  	},
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name auth#get_token
+			 * 
+			 * @description
+			 * We use JWT for user authentication.
+			 * Once recieved, the JWT token is saved in `localStorage`,
+			 * and is added to every subsequent request to the API.
+			 * This method retrieves the JWT token from `localStorage`.
+			 *
+			 * @returns
+			 * {String} JWT token, or `false` if not signed-in.
+			 */
 		  	get_token: function() {
 		  		return this.is_signedin() ? $window.localStorage.getItem('bhsclient_token') : false;
 		  	}
@@ -140,27 +231,82 @@ angular.module('auth').
 
 angular.module('auth').
 	factory('authInterceptor', ['$q', '$window', 'apiClient', function ($q, $window, apiClient) {
+	  	
+	  	/**
+		 * @ngdoc service
+		 * @name authInterceptor
+		 *
+		 * @description
+		 * A request interceptor that adds the JWT token to API requests.
+		 */
 	  	return {
-		    request: function (config) {
-		    	var base_url = apiClient.base_url;
-		    	var base_url_regex = new RegExp(base_url, 'i');
 
+		  	/**
+	  		 * @ngdoc method
+		     * @name authInterceptor#request
+			 * 
+			 * @description
+			 * We use JWT for user authentication.
+			 * Once recieved, the JWT token is saved in `localStorage`,
+			 * and is added to every subsequent request to the API.
+			 * This method retrieves the JWT token from `localStorage`,
+			 * and adds it to the Authorization header of the request.
+			 *
+			 * @param {Object} config Request config object
+			 *
+			 * @returns
+			 * {Object} Request config object
+			 */
+		    request: function (config) {
 		    	config.headers = config.headers || {};
 		    	delete config.headers.Authorization;
 
-		    	if ( base_url_regex.test(config.url) ) {
+		    	if ( is_api_url(config.url) ) {
 			    	if ( $window.localStorage.getItem('bhsclient_token') ) {
 			        	config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('bhsclient_token');
 			    	}
 			    }
-
 			    return config;
 		    },
+
+		    /**
+	  		 * @ngdoc method
+		     * @name authInterceptor#response
+			 * 
+			 * @description
+			 * Removes JWT token from `localStorage` 
+			 * if a response with status 401 is recieved from the API.
+			 *
+			 * @param {Object} response Response object
+			 *
+			 * @returns
+			 * {Promise} Response promise
+			 */
 		    response: function (response) {
-		      	if (response.status === 401) {
+		      	if ( is_api_url(response.url) && response.status === 401) {
 		        	$window.localStorage.removeItem('bhsclient_token');
 		      	}
 		      	return response || $q.when(response);
 		    }
 	  	};
-}]);
+
+	  	/**
+	  	 * @ngdoc function
+	  	 * @name is_api_url
+	  	 * @module auth
+	  	 * 
+	  	 * @description
+	  	 * Tests whether a string is an API url or not.
+	  	 *
+	  	 * @param {String} url Url to test
+	  	 *
+	  	 * @returns
+	  	 * {boolean}
+	  	 */
+	  	function is_api_url(url) {
+	  		var base_api_url = apiClient.base_url,
+	    		base_api_url_regex = new RegExp(base_api_url, 'i');
+
+	    	return base_api_url_regex.test(url);
+	  	}
+	}]);
