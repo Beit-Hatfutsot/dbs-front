@@ -1,34 +1,43 @@
-<div class="item-preview" ng-click="itemPreviewController.goto_item(previewData)">
+<div class="item-preview"
+	 ng-click="itemPreviewController.goto_item(previewData)">
 	<div class="thumbnail" ng-if="previewData.thumbnail.data">
-		<img ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}" alt="Preview Image" fit-thumb />
+		<img ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
+			 alt="Preview Image" fit-thumb />
 	</div>
 	<div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data)}">
 		<div ng-show="previewData.thumbnail.data">
 			<div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
-			<div  class="diagonal-separator" style="right:-10px; opacity:0.7" ng-show="$index == 0 || previewData.Pictures.length > 1"></div>
-			<div  class="diagonal-separator" style="right:2px; opacity:0.4" ng-show="$index == 0 || previewData.Pictures.length > 1"></div>
+			<div  class="diagonal-separator" style="right:-10px; opacity:0.7"
+				  ng-show="$index == 0 || previewData.Pictures.length > 1">
+			</div>
+			<div  class="diagonal-separator" style="right:2px; opacity:0.4"
+				  ng-show="$index == 0 || previewData.Pictures.length > 1">
+			</div>
 		</div>
-    <item-type type="itemPreviewController.item_type"
-               image="previewData.thumbnail.data"></item-type>
 		<ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
 			<div ng-switch-when="true" class="text text--nothumb">
 				{{previewData.FN}}<br>{{previewData.LN}}}
 			</div>
 			<div ng-switch-default>
-				<div class="header" ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
+				<div class="header" 
+					 ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
 					<en>{{previewData.Header.En}}</en>
 					<he>{{previewData.Header.He}}</he>
 				</div>
-				<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}"> <!-- ng-if="!(hideText && previewData.thumbnail.data) " -->
+				<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}"> 	
 					<div>
 						<en>{{previewData.UnitText1.En}}</en>
 						<he>{{previewData.UnitText1.He}}</he>
 					</div>
 				</div>
 			</div>
-			<!-- <div class="remove" ng-if="removable && !(previewData.ugc)" ng-click="itemPreviewController.remove_from_mjs($event)">
+			<div class="remove" ng-if="removable && !(previewData.ugc)"
+				 ng-click="itemPreviewController.remove_from_mjs($event)">
 				<icon position="[-229, -104]"></icon>
-			</div> -->
+			</div>
 		</ng-switch>
-	</div>	
+		<item-type type="itemPreviewController.item_type"
+   			   image="previewData.thumbnail.data"> 
+	</item-type>
+	</div>
 </div>

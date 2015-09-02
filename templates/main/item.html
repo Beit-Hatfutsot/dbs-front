@@ -45,60 +45,14 @@
 								<he>Click for more pictures</he>
 							</span>
 						</div>
-						<div class="item__type">
-							<ng-switch on="itemController.item_type">
-								<div ng-switch-when="familyNames">
-									<div class="type-icon-container">
-										<div class="surname-icon"></div>
-									</div>
-									<div class="type-desc-container">
-										<en>Surname Origin</en>
-										<he>פירוש שם משפחה</he>
-									</div>
-								</div>
-								<div ng-switch-when="places">
-									<div class="type-icon-container">
-										<div class="place-icon"></div>
-									</div>
-									<div class="type-desc-container">
-										<en>Place</en>
-										<he>מקום</he>
-									</div>
-								</div>
-								<div ng-switch-when="photoUnits">
-									<div class="type-icon-container">
-										<div class="photo-icon"></div>
-									</div>
-									<div class="type-desc-container">
-										<en>Image</en>
-										<he>תמונה</he>
-									</div>
-								</div>
-								<div ng-switch-when="movies">
-									<div class="type-icon-container">
-										<div class="movie-icon"></div>
-									</div>
-									<div class="type-descwizard-container">
-										<en>Movie</en>
-										<he>סרט</he>
-									</div>
-								</div>
-								<div ng-switch-when="personalities">
-									<div class="type-icon-container">
-										<div class="personality-icon"></div>
-									</div>
-									<div class="type-desc-container">
-										<en>Personality</en>
-										<he></he>
-									</div>
-								</div>
-							</ng-switch>
-						</div>
 						<mjs-widget item="itemController.item_data"></mjs-widget>
-						<h2 class="item__article-header">
-							<en>{{itemController.item_data.Header.En}}</en>
-							<he>{{itemController.item_data.Header.He}}</he>
-						</h2>
+						<div class="header-wrapper">
+							<h2 class="item__article-header">
+								<en>{{itemController.item_data.Header.En}}</en>
+								<he>{{itemController.item_data.Header.He}}</he>
+							</h2>
+							<item-type type="itemController.item_type" image="itemController.item_data.thumbnail.data"></item-type>
+						</div>
 						<div class="item__article-text">
 							<en>{{itemController.item_data.UnitText1.En}}</en>
 							<he>{{itemController.item_data.UnitText1.He}}</he>
@@ -115,7 +69,6 @@
 									<en>Share this item</en>
 									<he>Share this item</he>
 								</div>
-								<!-- <div fb-like></div> -->
 							</div>
 						</div>
 						<mjs-widget item="itemController.item_data"></mjs-widget>
@@ -139,19 +92,18 @@
 				<div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
 					<en><span>{{itemController.search_result.name.Header.En}}</span></en>
 					<he><span>{{itemController.search_result.name.Header.He}}</span></he>
-					</div>
+					<item-type type="'places'"></item-type>
+				</div>
 				<div class="search-results__field" ng-if="itemController.search_result.place.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.place)">
 					<en><span>{{itemController.search_result.place.Header.En}}</span></en>
 					<he><span>{{itemController.search_result.place.Header.He}}</span></he>
+					<item-type type="'familyNames'"></item-type>
 				</div>
 				<div class="search-results__field" ng-if="itemController.search_result.individuals.isNotEmpty()" ng-click="itemController.goto_tree()">
 					<span ng-if="itemController.search_result.name.isNotEmpty()">
 						<en><span>{{itemController.search_result.name.Header.En}}</span></en>
 						<he><span>{{itemController.search_result.name.Header.He}}</span></he>
-					</span>
-					<span ng-if="itemController.search_result.name.isEmpty()">
-						<en><span>{{itemController.search_result.place.Header.En}}</span></en>
-						<he><span>{{itemController.search_result.place.Header.He}}</span></he>
+						<item-type type="'genTreeIndividuals'"></item-type>
 					</span>
 				</div>
 			</div>

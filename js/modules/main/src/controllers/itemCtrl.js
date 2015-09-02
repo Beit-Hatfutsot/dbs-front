@@ -61,11 +61,9 @@ ItemCtrl.prototype = {
 		this.item.get(this.$stateParams.item_string).
 			then(function(item_data) {
 				self.recentlyViewed.put(item_data);
-
 				self.item_data = item_data;
 				self.item_string = self.$stateParams.item_string;
 				self.content_loaded = true;
-
 				self.item.get_items(item_data.related).
 					then(function(related_data) {
 						self.parse_related_data(related_data);	

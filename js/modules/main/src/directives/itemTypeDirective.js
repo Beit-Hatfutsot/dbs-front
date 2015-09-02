@@ -6,7 +6,6 @@ angular.module('main').directive('itemType', function() {
 			type: '=',
 			image: '=',
 		},
-		// controller: 'ModalDialogCtrl as modalDialogController'
 	};
 });
 

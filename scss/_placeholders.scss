@@ -146,23 +146,23 @@
 %item-type {
 	position: absolute;
 	display: inline-block;
-	width: 60px;
+	width: 116px;
 	height: 26px;
 	background: #f6f6f6;
 	color: #b4b4b4; 
 	font-size: 11px;
-	bottom: 10px;
 	padding: 5px 5px 2px;
-	top: 111px;
-	border: 1px solid #DADADA;
 	transition: width 1s;
+	white-space: nowrap;
+	line-height: 14px;
+	border: 1px solid #CBCBCB;
 
 	.en & {
-		right: -24px;
+		right: -9px;
 	}
 
 	.he & {
-		left: -24px;
+		left: -9px;
 	}
 
 	&:after {
@@ -170,25 +170,31 @@
 		content: "";
 		width: 0;
 		height: 0;
-		border-top: solid 27px transparent;
-		border-left: solid 8px #f6f6f6;
-		left: 100%;
-		bottom: 0;
+		border-top: 4px solid #A2A2A2;
+		border-right: 8px solid transparent;
+		top: 100%;
+		right: 0;
 	}
 
-	&--nothumb {
-		width: 116px;
-		right: -8px;
+	&--thumbData {
+		width: 60px;
+
+		.en & {
+			right: -26px;
+		}
+		.he & {
+			left: -26px;
+		}
 
 		&:after {
 			position: absolute;
 			content: "";
 			width: 0;
 			height: 0;
-			border-top: 4px solid #A2A2A2;
-			border-right: 8px solid transparent;
-			top: 100%;
-			right: 0;
+			border-top: solid 26px transparent;
+			border-left: solid 7px #f6f6f6;
+			left: 100%;
+			top: -2px;
 		}
 	}
 
@@ -235,11 +241,13 @@
 	}
 
 	.type-desc-container {
+		width: 78px;
+		overflow: hidden;
 		position: absolute;
 		display: block;
 		left: 28px;
 		top: 6px;
-		transition: opacity 0.8s;
+		transition: opacity 0.8s, width 0.8s;
 		transition-timing-function: ease-out;
 	}
 }
@@ -267,6 +275,7 @@
 		}
 		.type-desc-container {
 			opacity: 0;
+			width: 0;
 		}
 	}
 
@@ -280,7 +289,7 @@
 
 	  	&--nothumb {
 			width: 100%;
-			border-right: 42px solid #ffffff;
+			border-right: 0px solid #ffffff;
 		}
 
 		.diagonal-separator {
@@ -289,14 +298,15 @@
 			width: 8px;
 			@include skew(16deg);
 			background: #FAAE34;
-			/*.i0 {opacity: 1;}
-			.i1 {opacity: 0.7;}
-			.i2 {opacity: 0.4;}*/
 		}
-	}
-	
-	.type {
-		@extend %item-type;
+		.type {
+			@extend %item-type;
+			top: 118px;
+
+			&--thumbData {
+	            @extend %item-type--thumbData;
+	        }
+		}
 	}
 
 	.header {
@@ -326,7 +336,7 @@
 
 		&--nothumb {
 			height: 88px;
-			width: 100%;
+			width: 90%;
 		}
 	}	
 

@@ -299,6 +299,13 @@
                             width: 660px;
                         }
                     }
+
+                    .type {
+                        @extend %item-type;
+                    }
+                }
+                .header-wrapper {
+                    position: relative;
                 }
                 &__article-header {
                     margin: 0px 26px;
@@ -390,6 +397,7 @@
                 margin-bottom: 15px;
             }
             &__field {
+                position: relative;
                 width: 306px;
                 height: 46px;
                 color: #B2361A;
@@ -399,6 +407,21 @@
                 margin-bottom: 15px;
                 font-weight: 600;
                 @include hover-pointer();
+
+                .type {
+                    @extend %item-type;
+                    bottom: 10px;
+                }
+
+                &:hover {
+                    %item-type {
+                        width: 28px;
+                    }
+                    .type-desc-container {
+                        opacity: 0;
+                        width: 0; 
+                    }
+                }
 
             }
         }
