@@ -320,16 +320,31 @@
                     margin: 0px 26px;
                     color: #666666;
                     font-size: 18px;
+                    
+                    .en & {
+                        .mjs-widget-wrapper { float:right; }
+                    }
+                    .he & {
+                        .mjs-widget-wrapper { float:left; }
+                    }
                 }
 
                 &__bottom-bar {
                     position: relative;
                     display: inline-flex;
+                    justify-content: space-between;
                     left: 0;
                     bottom: -4px;
                     width: 100%;
                     height: 66px;
                     padding-top: 6px;
+
+                    .en & {
+                        padding-right: 10px;
+                    }
+                    .he & {
+                        padding-left: 10px;
+                    }
 
                     .footer {
                         width: 590px;
