@@ -427,58 +427,213 @@
 }
 
 %node-container {
-	@include hover-pointer();
 	display: inline-block;
 	min-width: 52px;
-	min-height: 76px;
-	margin: 15px 10px;
+	margin: 15px 22px;
 
 	.node {
 		position: relative;
 		width: 100%;
-		min-height: 53px;
-		padding: 0 8px;
-		background: #f5f5f5;
-		border: 1px solid #f0f0f0;
-		@include border-radius(4px);
-
+		// padding: 0 8px;
+		
 		.individual {
+			position: relative;
+			background: #ddf0f4;
 			display: inline-block;
 			vertical-align: top;
-			margin-top: -11px;
+			@include border-radius(50px);
+			width: 210px;
+			height: 58px;
+			z-index: 1;
 
+			// .en & {
+			// 	margin-right: 20px;	
+			// }
+			// .he & {
+			// 	margin-left: 20px;
+			// }
+			
+
+			&--female {
+				background-color: #f6e1de;
+			}
+
+			&--selected {
+				border: 1px solid #ffb14c;
+				z-index: 2;
+				&:hover {
+					border: 1px solid #e98909;
+				}
+			}
+			
 			&__icon {
-				margin: 0 auto;
-				width: 31px;
-				height: 31px;
-				overflow: hidden;
+				position: absolute;
+				width: 57px;
+				height: 57px;
+				z-index: 1;
 			}
 
 			&__name {
-				max-width: 71px;
-				text-align: center;
-				font-size: 15px;
-				font-weight: bold;
+				max-width: 96px;
+				font-size: 12px;
 				word-wrap: break-word;
 				word-spacing: 100px;
-			}
-		}
+				margin-top: 4px;
 
-		.rings {
-			position: absolute;
-			left: 50%;
-			top: 0;
-			@include translate(-50%, -2px);
-
-			&__icon {
-				width: 16px;
-				height: 15px;
-				overflow: hidden;
-				margin: 0 auto;
+				.en & {
+					text-align: left;
+					float: right;
+				}
+				.he & {
+					text-align: right;
+					float: left;
+				}
 			}
+			&__dates {
+				background-color: #8FDCE4;
+				word-wrap: break-word;
+				word-spacing: 100px;
+				text-align: center;
+				width: 40px;
+				font-size: 12px;
+				position: absolute;
+				height: 100%;
+				line-height: 231%;
+
+				.en & {
+					left: 52px;
+				}
+				.he & {
+					right: 52px;
+				}
+
+				&--female {
+					width: 40px;
+					background-color: #e6ada2;
+				}
+
+				&--selected {
+					.en & {
+						border-right: 1px solid #ffb14c;
+					}
+					.he & {
+						border-left: 1px solid #ffb14c;
+					}
+					
+					&:hover {
+						.en & {
+							border-right: 1px solid #e98909;
+						}
+						.he & {
+							border-left: 1px solid #e98909;
+						}
+					}
+				}
+			}
+			.notAlive {
+					position: absolute;
+					width: 20px;
+					height: 100%;
+					background-color: #000000;
+
+					.en & {
+						left: 32px;
+					}
+					.he & {
+						right: 32px;
+					}
+				}
+
+			&__more-info {
+			    position: relative;					
+
+				.en & {
+					left: 86px;
+				}
+				.he & {
+					right: 86px;
+				}
+
+				&.open {
+					.individual__more-info__person-info {
+						display: block;
+					}
+				}
+
+				&__icon {
+					position: absolute;
+					width: 11px;
+					height: 11px;	
+					top: 22px;	
+					@include hover-pointer();
+
+					.en & {
+						left: 0px;
+					}
+					.he & {
+						right: 0px;
+					}
+				}
+
+				&__person-info {
+					position: relative;
+					z-index: -1;
+					font-weight: 10px;
+					display: none;
+					width: 100%;
+					color: #666666;
+					background-color: #fee1b5;
+					border-bottom: 5px solid #fbb034;
+					top: 8px;
+					padding-top: 30px;
+					padding-bottom: 10px;
+					overflow: hidden;
+
+					.en & {
+						right: 85px;
+						padding-left: 10px;
+					}
+					.he & {
+						left: 85px;
+						padding-right: 10px;
+					}
+					&__close-button {
+						position: absolute;
+						width: 20px;
+						height: 20px;
+						background-color: #fbb034;
+						@include border-radius(10px);
+
+						.en & {
+							left: 46%;
+						}
+						.he & {
+							right: 46%;
+						}
+					}
+					&__arrow-up {
+						position: absolute;
+						width: 0; 
+						height: 0; 
+						border-left: 7px solid transparent;
+						border-right: 7px solid transparent;
+						border-bottom: 7px solid #ffffff;
+						bottom: 0px;
+
+						.en & {
+							left: 48%;
+						}
+						.he & {
+							right: 47%;
+						}
+					}
+				}
+			}
+
 		}
 	}
 }
+
 
 %bhs-fieldset {
 	

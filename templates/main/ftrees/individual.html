@@ -1,13 +1,47 @@
-<div class="individual" ng-click="goto_ftree_item(individual.id, treeNumber)">
+<div class="individual" ng-click="goto_ftree_item(individual.id, treeNumber)" ng-class="{'individual--female': individual.sex === 'F', 'individual--selected' : isSelected}">
 	<ng-switch on="individual.sex">
 		<div class="individual__icon" ng-switch-when="M">
-			<icon position="[-679, -34]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
+			<icon position="[-197, -404]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
 		</div>
 		<div class="individual__icon" ng-switch-when="F">
-			<icon position="[-753, -34]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+			<icon position="[-197, -473]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
 		</div>
 	</ng-switch>
 	<div class="individual__name">
-		{{individual.name}}
+		<put-value value="individual.name"></put-value>
 	</div>
+	<div class="individual__dates" ng-class="{'individual__dates--female': individual.sex === 'F', 'individual__dates--selected' : isSelected}">
+		<put-value value="individual.birth_year"></put-value>
+		<span ng-if="!individual.alive">
+			<put-value value="individual.death_year"></put-value>
+		</span>
+	</div>
+	<span ng-if="!individual.alive">
+		<div class="notAlive"></div>
+	</span>
+	<span ng-if="isSelected">
+		<span ng-if="display_more_info()">
+			<div  class="individual__more-info" dropdown>
+				<div class="individual__more-info__icon" dropdown-toggle ng-if="!(ftreesCtrl.tree_view)">
+					<icon position="[-220, -634]"></icon>
+				</div>
+				<div class="individual__more-info__person-info">
+					<div><en>Name:</en> <he>שם:</he></br>
+					{{individual.name}}</div>
+					<div ng-if="individual.birth_date"><en>Date of birth:</en><he>Date of birth:</he></br>
+					{{individual.birth_date}}</div>
+					<div ng-if="individual.birth_place"><en>Place of birth:</en><he>Place of birth:</he></br>
+					{{individual.birth_place}}</div>
+					<span ng-if="!individual.alive">
+						<div ng-if="individual.death_date"><en>Date of death:</en><he>Date of death:</he></br>
+						{{individual.death_date}}</div>
+						<div ng-if="individual.death_place"><en>Place of death:</en><he>Place of death:</he></br>
+						{{individual.death_place}}</div>
+					</span>
+					<div class="individual__more-info__person-info__close-button"></div>
+					<div class="individual__more-info__person-info__arrow-up"> </div>
+				</div>
+			</div>
+		</span>
+	</span>
 </div>

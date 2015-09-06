@@ -19,7 +19,7 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
-	cursor: url(/images/x.png) 0 0, pointer;
+	cursor: url(/images/X.png) 0 0, pointer; 	
 
 	.modal-dialog {
 		position: relative;
@@ -51,6 +51,15 @@
 			&__switch {
 				text-align: center;
 				font-size: 16px;
+			}
+			&__xsign {
+				position: absolute;
+				top: 5px;
+				right: 5px;
+				width: 31px;
+				height: 31px;
+				@include hover-pointer();
+
 			}
 
 			.auth-form {

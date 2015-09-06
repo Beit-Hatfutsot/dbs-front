@@ -27,7 +27,8 @@ angular.module('apiClient').
 	  			suggest: 		apiConfig.suggest,
 	  			ftrees_search:	apiConfig.ftrees_search,
 	  			ftrees_get: 	apiConfig.ftrees_get,
-	  			upload: 		apiConfig.upload
+	  			upload: 		apiConfig.upload,
+	  			verify_email: 	apiConfig.verify_email
 	  		},
 
 	  		urls: {}

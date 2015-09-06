@@ -7,26 +7,28 @@
 			{{label_text_he}}
 		</he>
 	</label>
-	<input type="text" ng-model="model">
-	<!-- <div class="info">?</div> -->
+	<input type="text" ng-model="model" placeholder="{{placeholder}}">
 	<div class="modifiers-container">
-		<div class="modifier">
-			<input type="radio" name="{{label_text_en}}" value="" ng-model="modifier_model">
-			<label>
+		<div class="modifiers-container__modifier">
+			<input type="radio" name="{{label_text_en}}" value="" ng-model="modifier_model" id="exact{{label_text_en}}" checked="checked">
+			<label class="modifiers-container__modifier__modif-label" for="exact{{label_text_en}}">
+				<span class="modifiers-container__modifier__modif-label__arrow"></span>
 				<en>Exact</en>
 				<he>מדוייק</he>
 			</label>
 		</div>
-		<div class="modifier">
-			<input type="radio" name="{{label_text_en}}" value="prefix" ng-model="modifier_model">
-			<label>
+		<div class="modifiers-container__modifier">
+			<input type="radio" name="{{label_text_en}}" value="prefix" ng-model="modifier_model" id="begins-with{{label_text_en}}">
+			<label class="modifiers-container__modifier__modif-label" for="begins-with{{label_text_en}}">
+				<span class="modifiers-container__modifier__modif-label__arrow"></span>
 				<en>Begins with</en>
 				<he>מתחיל ב</he>
 			</label>
 		</div>
-		<div class="modifier">
-			<input type="radio" name="{{label_text_en}}" value="phonetic" ng-model="modifier_model">
-			<label>
+		<div class="modifiers-container__modifier">
+			<input type="radio" name="{{label_text_en}}" value="phonetic" ng-model="modifier_model" id="sounds-like{{label_text_en}}">
+			<label class="modifiers-container__modifier__modif-label" for="sounds-like{{label_text_en}}">
+				<span class="modifiers-container__modifier__modif-label__arrow"></span>
 				<en>Sounds like</en>
 				<he>נשמע כמו</he>
 			</label>

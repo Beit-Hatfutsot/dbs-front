@@ -1,16 +1,29 @@
 <div id="ftree-item-container">
 	<div id="ftree-item">
 		<div class="ftree-title">
-			<en>Family Tree</en>
-			<he>עץ המשפחה</he>
-			<div class="ftree-type">
-				<div class="ftree-icon"></div>
-				<en>Family Tree</en>
-				<he>עץ משפחה</he>
-			</div>
+			<icon class="ftree-title__tree-icon" position="[-84, -439]"></icon>
+			<en>{{ftreeItemCtrl.individual.last_name + " "}}Family Tree - {{ftreeItemCtrl.tree_number}}</en>
+			<he>{{ftreeItemCtrl.individual.last_name + " "}}עץ המשפחה - {{ftreeItemCtrl.tree_number}}</he>
+			<icon class="ftree-title__print-icon" position="[-22, -722]" ng-click="ftreeItemCtrl.print()" ng-class="{'relocate': !ftreeItemCtrl.previous_state}" hover-offset="[-1, 37]"></icon>
+			<span ng-if="ftreeItemCtrl.from_ftree_view">
+				<div class="ftree-title__back" ng-click="ftreeItemCtrl.back()">
+					<icon class="ftree-title__back__back-icon" position="[-313, -735]" hover-offset="[0, 35]"></icon>
+					<span class="ftree-title__back__back-text"><en>Back</en><he>חזור</he></span>	
+				</div>
+			</span>
 		</div>
 		<div id="mjs-widget-container">
 			<mjs-widget item="ftreeItemCtrl.individual"></mjs-widget>
+		</div>
+		<div class="babylonLogo" ng-if="ftreeItemCtrl.get_contributor_path()">
+			<span class="babylonLogo__desc">
+				<en>Family tree contributed by</en>
+				<he>עץ משפחה נתרם על ידי</he>
+			</span>
+			<img ng-src="{{ftreeItemCtrl.get_contributor_path()}}">
+		</div>
+		<div ng-if="ftreeItemCtrl.individual_count">
+			This tree contains {{ftreeItemCtrl.individual_count}} individuals, click on any of them to navigate the tree.
 		</div>
 		<div id="ftree-layout-container">
 			<div id="ftree-layout">

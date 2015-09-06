@@ -3,75 +3,339 @@
 	padding: 10px 0 0;
 
 	@at-root #ftree-item {
+		position: relative;
 		width: $view-width;
 		margin: 0 auto;
-		padding: 25px 10px 0;
 		background: #ffffff;
 		@include border-radius(4px);
-		// display: flex;
-		// flex-direction: column;
-		// align-content: stretch;
+
+		.rings {
+			position: relative;
+			display: inline-block;
+			vertical-align: middle;
+			width: 12px;
+			height: 12px;
+			z-index: 100;
+			top: 20px;
+
+			&.open {
+				.rings__marriageInfo {
+					display: block;
+					position: absolute;
+					top: 67px;
+
+					.en & {
+						right: -96px;
+					}
+					.he & {
+						left: -96px;
+					}
+				}
+			}
+
+			&__no-details {
+				position: relative;
+				width: 12px;
+				height: 12px;
+				background-color: #999999;
+				@include border-radius(7px);
+			}
+
+			&__icon {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				@include translate(-50%, -50%);
+				width: 20px;
+				height: 20px;
+				@include hover-pointer();
+			}
+			&__marriageInfo {
+				position: relative;
+				display: none;
+				width: 210px;
+				color: #666666;
+				background-color: #fee1b5;
+				top: 55px;
+				border-bottom: 5px solid #fbb034;
+				padding: 10px;
+
+				&:before {
+					content: "";
+				    position: absolute;
+				    height: 0;
+				    width: 0;
+				    top: -47px;
+				    border-style: solid;
+			    	border-color: transparent transparent #fee1b5;
+			    	border-width: 0px 105px 47px;
+			    	.en & {
+			    		left: 0px;
+			    	}
+			    	.he & {
+			    		right: 0px;
+			    	}
+				}
+
+				&__close-button {
+					position: absolute;
+					width: 21px;
+					height: 15px;
+					background-color: #fbb034;
+					@include border-radius(8px);
+
+					.en & {
+						left: 46%;
+					}
+					.he & {
+						right: 46%;
+					}
+				}
+				&__arrow-up {
+					position: absolute;
+					width: 0; 
+					height: 0; 
+					border-left: 7px solid transparent;
+					border-right: 7px solid transparent;
+					border-bottom: 7px solid #ffffff;
+					bottom: 0px;
+
+					.en & {
+						left: 48%;
+					}
+					.he & {
+						right: 47%;
+					}
+				}
+			}
+		}
 
 		.ftree-title {
 			position: relative;
-			width: 100%;
-			height: 50px; 
-			font-size: 24px;
-			padding: 0 25px 20px;
+			display: inline-block;
+			width: 726px;
+			height: 48px; 
+			font-size: 22px;
+			padding: 9px 46px  20px;
 			border-bottom: 2px solid #f5f5f5;
+			background-color: #999999;
+			color: #ffffff;
+			top: -12px;
 
-			.ftree-type {
-				display: inline-block;
+			.en & {
+				padding: 9px 46px  20px;
+			}
+			.he & {
+				padding: 9px auto 20px 46px;
+			}
+
+			&:after {
+				content:'';
 				position: absolute;
-				width: 105px;
-				height: 22px;
-				padding: 2px 6px;
-				background: #f6f6f6;
-				font-size: 12px;
-				color: #999999;
+				top:0;
+				bottom:0;
+				width:0px;
+				height:0px;
+				border-top: 46px solid #999999;
 
 				.en & {
-					right: 0;
-					top: 50px;
+					right: -30px;    
+					border-right: 30px solid transparent; 
 				}
 
 				.he & {
-					left: 0;
-					top: 50px;
+					left: -30px;    
+					border-left: 30px solid transparent; 	
+				}
+			}
+
+			&__tree-icon {
+				position: absolute;
+				width: 29px;
+				height: 40px;
+				top: 4px;
+
+				.en & {
+					left: 9px;
 				}
 
-				.ftree-icon {
-					display: inline-block;
-					vertical-align: bottom;
-					width: 19px;
-					height: 17px;
-					@include icon(-28px -68px);
+				.he & {
+					right: 9px;
 				}
+			}
+
+			&__print-icon {
+				position: absolute;
+				width: 31px;
+				height: 31px;
+  				top: 8px;	
+
+  				.en & {
+  					right: 138px;
+  				}
+  				.he & {
+  					left: 138px;
+  				}
+
+				.tree-view & {
+					display: none;
+				}
+				.relocate & {
+					.en & {
+						right: 23px;
+					}
+					.he & {
+						left: 23px;
+					}
+				}
+
+			}
+
+			&__back {
+				position: absolute;
+			  	background-color: #bf311a;
+				width: 125px;
+				height: 100%;
+				top: 0px;
+
+				.en & {
+					right: 0px;
+				}
+				.he & {
+					left: 0px;
+				}
+
+				&:hover {
+					background-color: #666666;
+					&:after {
+						border-top: 46px solid #666666;
+					}
+				}
+
+				&:after {
+					content:'';
+					position: absolute;
+					top:0;
+					bottom:0;
+					width:0px;
+					height:0px;
+					border-top: 46px solid #bf311a;
+					z-index: 1;
+
+					.en & {
+						right: -30px;    
+						border-right: 30px solid transparent; 
+					}
+
+					.he & {
+						left: -30px;    
+						border-left: 30px solid transparent; 	
+					}
+				}
+
+				.tree-view & {
+					display: none;
+				}
+
+				&__back-icon {
+					position: relative;
+					width: 31px;
+					height: 30px;
+  					top: 7px;
+
+  					.en & {
+  						right: -7px;
+  					}
+  					.he & {
+  						left: -7px;
+  					}
+				}
+				&__back-text {
+					position: relative;
+					font-size: 33px;
+					color: #ffffff;
+					top: -28px;
+
+					.en & {
+						right: -47px;
+					}
+					.he & {
+						left: -47px;
+					}
+				}
+
 			}
 		}
 
 		@at-root #mjs-widget-container {
+			display: inline-block;
+			position: relative;
+			top: 17px;
+
+			.en & {
+				margin-left: 38px;
+			}
+
+			.he & {
+				margin-right: 38px;
+			}
+		}
+
+		.babylonLogo {
+			position: absolute;
+			top: 13px;
+			display: inline-block;
 			
-			.mjs-widget-wrapper {
-				margin-top: 10px;
-				padding: 5px 12px;
-				background: #eeeeee;
-				@include border-radius(18px);
+			.en & {
+				right: 189px;
+			}
+			.he & {
+				left: -189px;
+			}
+			.tree-view & {
+				display: none;
+			}
+
+			&:hover {
+				.babylonLogo__desc {
+					display: inline-block;
+				}
+			}
+
+			&__desc {
+				display: none;
+				position: absolute;
+				background-color: #e98909;
+				color: #ffffff;
+				width: 168px;
+				top: -13px;
+				padding: 3px 10px;
+				font-size: 80%;
+
+				 .en & {
+				 	left: 21px;
+				 }
+				 .he & {
+				 	right: 21px;
+				 }
+			}
+			img {
+				position: absolute;
+				width: 107px;
+				height: auto;
+				top: 10px;
 
 				.en & {
-					margin-left: 30px;
+					left: 82px;
 				}
-
 				.he & {
-					margin-right: 30px;
+					right: 82px;
 				}
 			}
 		}
 
-
 		@at-root #ftree-layout-container {
 			padding: 70px 130px 25px;
-			flex-grow: 1;
 			overflow: auto;
 
 			@at-root #ftree-layout {
@@ -79,7 +343,8 @@
 
 				@at-root #subtree {
 					position: relative;
-					
+					z-index: 0;
+
 					.node-container {
 						white-space: normal;
 						@extend %node-container;

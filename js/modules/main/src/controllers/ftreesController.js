@@ -58,7 +58,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 			he: 'מספר עץ'
 		}
 	};
-	
+
 	this.search_modifiers = {
 		first_name: 	'',
 		last_name: 		'',
@@ -75,6 +75,9 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this._results_per_page = 15;
 	this.display_from_result = 0;
 	this.more_columns_menu = false;
+	this.marriage_info = false;
+	this.candidate_page = '';
+	this.more_indi_info = false;
 	
 	self.result_column_manager = musicalChairsFactory.create_game({
 		'FN': true,
@@ -82,11 +85,11 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		'BP': true,
 		'BD': true,
 		'MP': true,
-		'MD': true,
+		'MD': false	,
 		'DP': false,
 		'DD': false,
 		'G': false,
-		'GTN': false
+		'GTN': true
 	}, 6);
 
 	this.$state = $state;
@@ -102,6 +105,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 			return parseInt(this.individuals.length / this.results_per_page) + 1;
 		}
 	});
+
 
 	Object.defineProperty(this, 'current_page', {
 		get: function() {
@@ -189,25 +193,11 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		}
 	});
 
-	for (var param in $stateParams) {
-		if ( $stateParams[param] !== undefined ) {
-
-			// handle search modifiers & fudge factors in query string
-			if ( $stateParams[param].indexOf('~') !== -1 ) {
-				var parts = $stateParams[param].split('~');
-				this.search_params[param] = parts[0];
-				this.fudge_factors[param] = parts[1];
-			}
-			else if ( $stateParams[param].indexOf(';') !== -1 ) {
-				var parts = $stateParams[param].split(';');
-				this.search_params[param] = parts[0];	
-				this.search_modifiers[param] = parts[1];
-			}
-			else {
-				this.search_params[param] = $stateParams[param];
-			}
+	Object.defineProperty($scope, '$stateParams', {
+		get: function() {
+			return $stateParams;
 		}
-	};
+	});
 	
 	$scope.$watch('tree_view', function(newVal, oldVal) {
 		if (newVal) {
@@ -222,49 +212,61 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		}
 	});
 
+	$scope.$watchCollection('$stateParams', function (newParams) {
+	    var search = $location.search();
+
+	    if (angular.isObject(newParams)) {
+	      angular.extend(search, newParams);
+	    }
+
+	    $location.search(search).replace();
+	});
+
 	//search
-	if ($stateParams.last_name !== undefined || $stateParams.birth_place !== undefined) {
-		this.search();
+	var BreakException= {};
+	try {
+		Object.keys($stateParams).forEach(function(key) {
+			if ($stateParams[key]) {
+
+				// read state params & update bound objects to update view accordingly
+				for (var param in $stateParams) {
+					if ( $stateParams[param] !== undefined ) {
+
+						// handle search modifiers & fudge factors in query string
+						if ( $stateParams[param].indexOf('~') !== -1 ) {
+							var parts = $stateParams[param].split('~');
+							self.search_params[param] = parts[0];
+							self.fudge_factors[param] = parts[1];
+						}
+						else if ( $stateParams[param].indexOf(';') !== -1 ) {
+							var parts = $stateParams[param].split(';');
+							self.search_params[param] = parts[0];	
+							self.search_modifiers[param] = parts[1];
+						}
+						else {
+							self.search_params[param] = $stateParams[param];
+						}
+					}
+				};
+
+				self.search($stateParams);
+				throw BreakException;
+			}
+		});
+	}
+	catch(e) {
+		 if (e !== BreakException) throw e;
 	}
 };
 
 FtreesController.prototype = {
-	search: function() {
-		var self = this, 
-			search_params = angular.copy(this.search_params);
-
-		for (var param in search_params) {
-			if (search_params[param] === '') {
-				delete search_params[param];
-			}
-		}
+	search: function(search_params) {
+		var self = this;
 
 		this.notification.put({
 			en:'Searching family trees...',
 			he: 'מחפש בעצי משפחה...'			
 		});
-
-		if (search_params.ind_index) {
-			delete(search_params.ind_index);
-		}
-
-		// insert search modifiers & fudge_factors into query string
-		for (var modifier in this.search_modifiers) {
-			var modifier_string = this.search_modifiers[modifier]; 
-			if (search_params[modifier] !== undefined && modifier_string !== '') {
-				search_params[modifier] += ';' + modifier_string;
-			}
-		}
-		for (var factor in this.fudge_factors) {
-			var fudge_val = this.fudge_factors[factor];	
-			if (search_params[factor] !== undefined && fudge_val !== 0) {
-				search_params[factor] += '~' + fudge_val;
-			}
-		}
-
-		// avoid conflict with prameter from state ftree-view.ftree-item
-		search_params.tree_number = search_params.filters_tree_number;
-		delete search_params.filters_tree_number;
 
 		this.ftrees.search(search_params).
 			then(function(individuals) {
@@ -294,30 +296,72 @@ FtreesController.prototype = {
 					en: 'Family Trees Search has failed.',
 					he: 'חיפוש בעצי משפחה נכשל.'
 				});
-			}).
-			finally(function() {
-				for (var param in self.search_params) {
-					self.$location.search(param, search_params[param]);	
-				}
 			});
 	},
 
+	update: function() {
+		var search_params = angular.copy(this.search_params);
+
+		for (var param in search_params) {
+			if (search_params[param] === '') {
+				delete search_params[param];
+			}
+		}
+
+		if (search_params.ind_index) {
+			delete(search_params.ind_index);
+		}
+
+		// insert search modifiers & fudge_factors into query string
+		for (var modifier in this.search_modifiers) {
+			var modifier_string = this.search_modifiers[modifier]; 
+			if (search_params[modifier] !== undefined && modifier_string !== '') {
+				search_params[modifier] += ';' + modifier_string;
+			}
+		}
+		for (var factor in this.fudge_factors) {
+			var fudge_val = this.fudge_factors[factor];	
+			if (search_params[factor] !== undefined && fudge_val !== 0) {
+				search_params[factor] += '~' + fudge_val;
+			}
+		}
+
+		// avoid conflict with parameter from state ftree-view.ftree-item
+		search_params.tree_number = search_params.filters_tree_number;
+		delete search_params.filters_tree_number;
+
+		for (var param in this.search_params) {
+			this.$location.search(param, search_params[param]);
+		}
+	},
+
+	go_to_page: function(page_number) {
+		if(page_number <= this.page_count && page_number >= 1) {
+			this.current_page  = page_number;
+		}
+				
+	},
+
+	back_to_search_filters: function () {
+		this.$state.go('ftrees');
+	}, 
+
+	clear_filters: function() {
+		for (var modifier in this.search_modifiers) {
+			this.search_params[modifier] = '';
+		}
+	},
+
+
 	select_individual: function(individual) {
 		var self = this;
-
-		if (this.is_selected(individual)) {
-			this.selected_index = null;	
-			delete(this.$stateParams['ind_index']);
-			delete(this.$stateParams['individual_id']);
-			delete(this.$stateParams['tree_number']);
-			this.$state.go('ftrees', this.$stateParams);
-		}
-		else {
+		var already_selected = self.is_selected(individual);
+		 
+		if (!already_selected && individual) {
 			self.selected_index = self.individuals.indexOf(individual);
-
 			self.$state.go('ftree-view.ftree-item', {
 				ind_index: self.selected_index, 
-				individual_id: individual.II, 
+				individual_id: individual.II,
 				tree_number: individual.GTN
 			});
 		}

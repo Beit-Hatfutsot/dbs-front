@@ -1,6 +1,19 @@
 <div id="tree-layout-mask">
-	<icon class="expand-btn" position="[-579, -36]" ng-click="ftreeViewCtrl.expand()" alt-text="{en: 'Expand', he: 'פתיחה'}"></icon>
+	<icon class="expand-btn" position="[-84, -491]" ng-click="ftreeViewCtrl.expand()" alt-text="{en: 'Expand', he: 'פתיחה'}" hover-offset="[-91, -243]"></icon>
+	<div class="expand-btn-text">
+		<en>Enlarge</en>
+		<he>Enlarge</he>
+	</div>
 	<div id="tree-layout">
 		<ui-view ng-show="ftreesCtrl.tree_item_view"></ui-view>
+	</div>
+	<div class="babylonLogoFtree" ng-if="ftreeViewCtrl.get_contributor_path()">
+		<span class="babylonLogoFtree__desc">
+			<en>Family tree contributed by</en>
+			<he>עץ משפחה נתרם על ידי</he>
+		</span>
+		<img ng-src="{{ftreeViewCtrl.get_contributor_path()}}">
+		<span class="babylonLogoFtree__bottom-triangle"></span>
+		<span class="babylonLogoFtree__left-triangle"></span>
 	</div>
 </div>
