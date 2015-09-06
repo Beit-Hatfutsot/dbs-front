@@ -198,12 +198,12 @@
                     line-height: 20px;
                     background-color: #ffffff;
 
-                    .scrol-to-top {
+                    .scroll-to-top {
                         color: #BE3217;
                           text-decoration: underline;
                           font-weight: 600;
                           display: block;
-                          margin: 0 26px 10px;
+                          margin: 10px 26px;
                     }
 
                     &__media-container {
@@ -263,19 +263,20 @@
                                 left: 0;
                             }
                         
-                        .diagonal-block {
-                            .he & {
-                                @include flip ();
+                            .diagonal-block {
+                                .he & {
+                                    @include flip ();
+                                }
+                                .diagonal-separator {   
+                                    position: absolute;
+                                    top: -367px;
+                                    height: 300px;
+                                    width: 10px;
+                                    background: #FAAE34;
+                                    @include skew(16deg);
+                                    box-shadow: 17px 312px 29px 8px rgba(0,0,0,0.75);
+                                }
                             }
-                            .diagonal-separator {
-                                position: absolute;
-                                top: -367px;
-                                height: 300px;
-                                width: 10px;
-                                background: #FAAE34;
-                                @include skew(16deg);
-                            }
-                        }
                         
                         }
 
@@ -283,14 +284,16 @@
                             display: flex;
                             position: absolute;
                             top: -346px;
-                            right: 50%;
-                            font-size: 38px;
+                            line-height: 1.5;
                             color: #999999;
+                            font-weight: 600;
+                            width: 94px;
 
-                            .photo-icon {
-                                width: 17px;
-                                height: 17px;
-                                @include icon(-30px -219px);
+                            .en & {
+                                right: 10px;
+                            }
+                            .he & {
+                                left: 10px;
                             }
 
                         }
@@ -333,22 +336,40 @@
                         height: 66px;
                         position: relative;
                         background-color: #48C3D3;
+                        padding: 0 26px;
 
                         &:after {
                             border-top: solid 66px #48C3D3;
-                            border-right: solid 30px transparent;
                             position: absolute;
                             content: "";
                             width: 0;
                             height: 0;
                             top: 0;
-                            left: 100%;
+
+                            .en & {
+                                border-right: solid 30px transparent;
+                                left: 100%;
+                            }
+                            .he & {
+                                border-left: solid 30px transparent;
+                                right: 100%;
+                            }
                         }
                         .share-item {
-                            position: absolute;
-                            top: 50%;
-                            transform: translate(26%, -50%);
+
+                            width: 230px;
+                            display: flex;
+                            justify-content: space-between;
                             color: #ffffff;
+                        }
+                        .share-item-header {
+                            .en & {
+                                margin-right: 10px;    
+                            }
+                            .he & {
+                                margin-left: 10px;
+                            }
+                            
                         }
                     }
 
@@ -363,12 +384,19 @@
                             &:after {
                                 position: absolute;
                                 content: "";
-                                left: 100%;
                                 width: 0;
                                 height: 0;
                                 border-top: 6px solid transparent;
-                                border-left: 6px solid #FBB033;
                                 border-bottom: 6px solid transparent;
+
+                                .en & {
+                                    left: 100%;
+                                    border-left: 6px solid #FBB033;
+                                }
+                                .he & {
+                                    right: 100%;
+                                    border-right: 6px solid #FBB033;
+                                }
                             }
                         }
                     }
@@ -401,11 +429,11 @@
                 width: 306px;
                 height: 46px;
                 color: #B2361A;
-                padding: 15px;
                 @include item-shadow();
                 background-color: #ffffff;
                 margin-bottom: 15px;
                 font-weight: 600;
+                padding: 0 15px;
                 @include hover-pointer();
 
                 .type {
@@ -444,4 +472,12 @@
             }
         }
     }
+}
+.vertical-middle {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-top: 0;
+    margin-bottom: 0;
+
 }

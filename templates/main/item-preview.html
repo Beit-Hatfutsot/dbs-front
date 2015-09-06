@@ -5,7 +5,7 @@
 			 alt="Preview Image" fit-thumb />
 	</div>
 	<div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data)}">
-		<div ng-show="previewData.thumbnail.data">
+		<div class="diagonal-block" ng-show="previewData.thumbnail.data">
 			<div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
 			<div  class="diagonal-separator" style="right:-10px; opacity:0.7"
 				  ng-show="$index == 0 || previewData.Pictures.length > 1">

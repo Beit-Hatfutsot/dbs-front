@@ -138,11 +138,11 @@ ItemCtrl.prototype = {
 
     goto_tree: function() {
        	this.wsearch_individuals_query_params = {};
-       	if(this.search_result_name && this.search_result_name.isNotEmpty()){
-       		this.wsearch_individuals_query_params.last_name = this.search_result_name.Header.En;	
+       	if(this.search_result.name && this.search_result.name.isNotEmpty()){
+       		this.wsearch_individuals_query_params.last_name = this.search_result.name.Header.En;	
        	}
-       	if(this.search_result_place && this.search_result_place.isNotEmpty()) {
-       		this.wsearch_individuals_query_params.birth_place = this.search_result_place.Header.En;	
+       	if(this.search_result.place && this.search_result.place.isNotEmpty()) {
+       		this.wsearch_individuals_query_params.birth_place = this.search_result.place.Header.En;	
        	}
     	this.$state.go('ftrees', this.wsearch_individuals_query_params);
 	},
@@ -151,11 +151,6 @@ ItemCtrl.prototype = {
 		this.modalShown = !this.modalShown;
 
 	}
-
-    // goto_trees: function(query_params) { 
-    //     this.$state.go('ftrees', query_params);
-    // },
-
 
 };
 

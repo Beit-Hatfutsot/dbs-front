@@ -10,7 +10,7 @@
 							<span><span ng-if="itemController.search_result.place.Header.En == itemController.item_data.Header.En || itemController.search_result.name.Header.En == itemController.item_data.Header.En">Your Search Result for </span>{{itemController.item_data.Header.En}} </span>
 						</en>
 						<he>
-							<span><pre ng-if="itemController.search_result.name.Header.He == itemController.item_data.Header.He || itemController.search_result.name.Header.He == itemController.item_data.Header.He">Your Search Result for </pre> 
+							<span><span ng-if="itemController.search_result.name.Header.He == itemController.item_data.Header.He || itemController.search_result.name.Header.He == itemController.item_data.Header.He">תוצאות חיפוש עבור </span> 
 								{{itemController.item_data.Header.He}}</span>
 						</he>
 					</div>
@@ -22,16 +22,16 @@
 								ng-if="itemController.item_data.video_url || itemController.item_data.main_image_url">
 							<ng-switch on="itemController.item_type">
 								<video 	ng-switch-when="movies" ng-src="{{itemController.item_data.video_url}}" controls autoplay type="video/mp4"></video>
-								<img 	ng-switch-default 
-										ng-src="{{itemController.item_data.main_image_url}}" 
-										alt="Item Image"
-										ng-click="itemController.toggleModal()"
-										prevent-rightclick>
-								
+									<img 	ng-switch-default 
+											ng-src="{{itemController.item_data.main_image_url}}" 
+											alt="Item Image"
+											ng-click="itemController.toggleModal()"
+											prevent-rightclick>
 							</ng-switch>
 							<div class="white-part">
 								<div class="pictures-info">
-									{{itemController.item_data.Pictures.length}} <div class="photo-icon"></div>
+									<en> + {{itemController.item_data.Pictures.length-1}} pictures<br/>Click to view</en>
+									<he> + {{itemController.item_data.Pictures.length-1}} pictures<br/>ליחצו לצפייה</he> 
 								</div>
 								<!-- <div  class="diagonal-separator" ng-class="i$index" ng-repeat="left in [-63, -43, -23]" ng-show="$index == 0 || itemController.item_data.Pictures.length > 1" style="left:{{left}}px;"></div> -->
 								<div class="diagonal-block" ng-show="itemController.item_data.Pictures">
@@ -41,8 +41,8 @@
 								</div>
 							</div>
 							<span ng-show="itemController.item_data.Pictures.length > 1" class="notification">
-								<en>Click for more pictures</en>
-								<he>Click for more pictures</he>
+								<en>Click to view</en>
+								<he>ליחצו לצפייה</he>
 							</span>
 						</div>
 						<mjs-widget item="itemController.item_data"></mjs-widget>
@@ -57,28 +57,27 @@
 							<en>{{itemController.item_data.UnitText1.En}}</en>
 							<he>{{itemController.item_data.UnitText1.He}}</he>
 						</div>
-						<div class="scrol-to-top"onclick="window.scroll(0, 0)">
+						<div class="scroll-to-top"onclick="window.scroll(0, 0)">
 							<en>Back to top</en>
-							<he>Back to top</he>
+							<he>בחזרה לכותרת</he>
 						</div>
 					</div>
 					<div class="item__bottom-bar">
 						<div class="footer">
-							<div class="share-item">
-								<div class="share-item_header">
+							<div class="share-item vertical-middle">
+								<div class="share-item-header">
 									<en>Share this item</en>
-									<he>Share this item</he>
-                </div>
-                <tweet text=""></tweet>
-                <fb-share></fb-share>
-                <send-mail url="'http://bh.org.il'"></send-mail>
+									<he>פרסמו</he>
+				                </div>
+				                <tweet text=""></tweet>
+				                <fb-share></fb-share>
 							</div>
 						</div>
 						<mjs-widget item="itemController.item_data"></mjs-widget>
 						<div class="check-related">
 							<div class="check-related__text">
 								<en>Check the<br>related items</en>
-								<he>Check the<br>related items</he>
+								<he>באותו עניין</he>
 							</div>
 							<div class="check-related__right-arrow"></div>
 						</div>
@@ -93,30 +92,44 @@
 					<he>תוצאות חיפוש:</he>
 				</div>
 				<div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
-					<en><span>{{itemController.search_result.name.Header.En}}</span></en>
-					<he><span>{{itemController.search_result.name.Header.He}}</span></he>
+					<p class="vertical-middle">
+						<en>{{itemController.search_result.name.Header.En}}</en>
+						<he>{{itemController.search_result.name.Header.He}}</he>
+					</p>
 					<item-type type="'places'"></item-type>
 				</div>
 				<div class="search-results__field" ng-if="itemController.search_result.place.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.place)">
-					<en><span>{{itemController.search_result.place.Header.En}}</span></en>
-					<he><span>{{itemController.search_result.place.Header.He}}</span></he>
+					<p class="vertical-middle">
+						<en>{{itemController.search_result.place.Header.En}}</en>
+						<he>{{itemController.search_result.place.Header.He}}</he>
+					</p>
 					<item-type type="'familyNames'"></item-type>
 				</div>
-				<div class="search-results__field" ng-if="itemController.search_result.individuals.isNotEmpty()" ng-click="itemController.goto_tree()">
-					<span ng-if="itemController.search_result.name.isNotEmpty()">
-						<en><span>{{itemController.search_result.name.Header.En}}</span></en>
-						<he><span>{{itemController.search_result.name.Header.He}}</span></he>
-						<item-type type="'genTreeIndividuals'"></item-type>
-					</span>
+				<div class="search-results__field" ng-if="itemController.search_result.individuals" ng-click="itemController.goto_tree()">
+					<p class="vertical-middle">
+						<span ng-if="itemController.search_result.name.isNotEmpty()">
+							<en>{{itemController.search_result.name.Header.En}}</en>
+							<he>{{itemController.search_result.name.Header.He}}</he>
+						</span>
+						<span ng-if="itemController.search_result.name.isNotEmpty() && itemController.search_result.place.isNotEmpty()">
+							<br />
+							<en>at</en>
+							<he>מ</he>
+						</span>
+						<span ng-if="itemController.search_result.place.isNotEmpty()">
+							<en>{{itemController.search_result.place.Header.En}}</en>
+							<he>{{itemController.search_result.place.Header.He}}</he>
+						</span>
+					</p>
+					<item-type type="'genTreeIndividuals'"></item-type>
 				</div>
 			</div>
-
 			<div class="related">
 				<div class="related__header">
 					<en>Related Items</en>
-					<he>Related Items</he>
+					<he>פרטים קשורים</he>
 				</div>
-				<trees-preview ng-if="itemController.related_individuals" individuals="itemController.related_individuals" query-params="itemController.related_individuals_query_params"></trees-preview>
+				<!-- <trees-preview ng-if="itemController.related_individuals" individuals="itemController.related_individuals" query-params="itemController.related_individuals_query_params"></trees-preview> -->
 				<item-preview ng-repeat="r_data in itemController.related_data | limitTo: 6" preview-data="r_data"></item-preview> 
 			</div>
 		</div>

@@ -171,9 +171,16 @@
 		width: 0;
 		height: 0;
 		border-top: 4px solid #A2A2A2;
-		border-right: 8px solid transparent;
 		top: 100%;
-		right: 0;
+
+		.en & {
+			border-right: 8px solid transparent;
+			right: 0;
+		}
+		.he & {
+			border-left: 8px solid transparent;
+			left: 0;
+		}
 	}
 
 	&--thumbData {
@@ -192,9 +199,17 @@
 			width: 0;
 			height: 0;
 			border-top: solid 26px transparent;
-			border-left: solid 7px #f6f6f6;
-			left: 100%;
+			
 			top: -2px;
+
+			.en & {
+				border-left: solid 7px #f6f6f6;
+				left: 100%;
+			}
+			.he & {
+				border-right: solid 7px #f6f6f6;
+				right: 100%;
+			}
 		}
 	}
 
@@ -202,8 +217,6 @@
 		display: inline-block;
 
 		.surname-icon {
-			position: relative;
-			top: 0;
 			width: 19px;
 			height: 16px;
 			@include icon(-28px -161px);
@@ -245,10 +258,15 @@
 		overflow: hidden;
 		position: absolute;
 		display: block;
-		left: 28px;
 		top: 6px;
 		transition: opacity 0.8s, width 0.8s;
 		transition-timing-function: ease-out;
+		.en & {
+			left: 28px;
+		}
+		.he & {
+			right: 28px;
+		}
 	}
 }
 
@@ -265,6 +283,7 @@
 	&:hover {
 		.white-part1 {
 			width: 248px;
+
 			&--nothumb {
 				width: initial;
 			}
@@ -282,22 +301,41 @@
 	.white-part1 {
 		position: relative;
 	  	border-bottom: 150px solid #ffffff;
-	  	border-right: 42px solid transparent;
 	  	transition: width 1s;
 	  	width: 292px;
 	  	top: 0px;
 
+	  	.en & {
+	  		border-right: 42px solid transparent;
+	  	}
+
+	  	.he & {
+	  		border-left: 42px solid transparent;
+	  	}
+
 	  	&--nothumb {
 			width: 100%;
-			border-right: 0px solid #ffffff;
+
+			.en & {
+				border-right: 0px solid #ffffff;
+			}
+			.he & {
+				border-left: 0px solid #ffffff;
+			}
 		}
 
-		.diagonal-separator {
-			position: absolute;
-			height: 150px;
-			width: 8px;
-			@include skew(16deg);
-			background: #FAAE34;
+		.diagonal-block {
+            .he & {
+                @include flip ();
+            }
+
+			.diagonal-separator {
+				position: absolute;
+				height: 150px;
+				width: 8px;
+				@include skew(16deg);
+				background: #FAAE34;
+			}
 		}
 		.type {
 			@extend %item-type;
@@ -344,19 +382,31 @@
 		position: absolute;
 		width: 50%;
 		height: 100%;
-		right: 0px;
 		overflow: hidden;
+		.en & {
+			right: 0;
+		}
 
-		&--trees {
+		.he & {
+			left: 0;
+		}
+
+		/*&--trees {
 			width: 92px;
 			height: 83px;
 			margin-top: 35px;
 			@include icon(-125px -225px);
-		}
+		}*/
 
 		img {
 			position: absolute;
-			right: 0px;
+			.en & {
+				right: 0px;
+			}
+
+			.he & {
+				left: 0;
+			}
 		}
 	}
 
