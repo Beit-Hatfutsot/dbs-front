@@ -33,7 +33,7 @@ describe('item', function() {
 		var retrieved;
 
 		cache.put(item_data, 'test-collection');
-		item.get('test-collection.' + item_data._id).
+		item.get('test-collection', item_data._id).
 			then(function(data) {
 				retrieved = data;
 			}); 
@@ -48,7 +48,7 @@ describe('item', function() {
 		cache.clear();
 		$httpBackend.expectGET(item_url);
 
-		item.get('places.non-cached-id').
+		item.get('places', 'non-cached-id').
 			then(function(data) {
 				retrieved = data;
 			});
@@ -57,7 +57,7 @@ describe('item', function() {
 		expect(retrieved._id).toEqual('non-cached-id');
 
 		retrieved = {};
-		item.get('places.non-cached-id').
+		item.get('places' ,'non-cached-id').
 			then(function(data) {
 				retrieved = data;
 			});
