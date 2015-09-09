@@ -47,8 +47,7 @@ angular.module('auth').
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
 				     	controller: 'AuthCtrl as authController',
-				     	size: 'lg',
-				     	modalClass: 'auth-modal',
+				     	size: 'sm',
 				     	resolve: {
 				     		isRegister: function() {
 				     			return config.register;

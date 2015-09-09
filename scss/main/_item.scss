@@ -3,10 +3,6 @@
     background: #F6F6F6;
     overflow: auto;
 
-    .modal-dialog {
-            @extend %modal-dialog;
-        }
-
     @at-root #item-page {
         width: $view-width + 168px;
         margin: 0 auto;
@@ -25,6 +21,7 @@
         }
 
         .item-container {
+            position: relative;
             width: 800px;
             height: auto;
             margin: 20px 16px 20px 88px;
@@ -211,7 +208,7 @@
                         width: 800px;
                         height: 300px;
                         overflow: hidden;
-                        margin: 0 0 20px 0;
+                        background-color: #666666;
 
                         &:hover {
                             .white-part {
@@ -237,12 +234,19 @@
                         }
 
                         .notification {
-                            opacity: 0;
                             position: absolute;
+                            top: 50%;
+                            opacity: 0;
                             color: #ffffff;
-                            margin: 16% 34%;
-                            font-size: 26px;
+                            font-size: 34px;
                             transition: opacity 1s;
+
+                            .en & {
+                                left: 40%;
+                            }
+                            .he & {
+                                 right: 40%;
+                            }
 
                         }
 
@@ -309,11 +313,14 @@
                 }
                 .header-wrapper {
                     position: relative;
+                    padding-top: 26px;
                 }
                 &__article-header {
+                    position: absolute;
                     margin: 0px 26px;
                     color: #BE3217;
                     font-weight: 600;
+                    max-width: 640px;
                 }
                 &__article-text {
                     white-space: pre-line;
@@ -371,11 +378,16 @@
                             }
                         }
                         .share-item {
-
-                            width: 230px;
                             display: flex;
                             justify-content: space-between;
                             color: #ffffff;
+
+                            .en & {
+                                width: 230px;
+                            }
+                            .he & {
+                                width: 166px;
+                            }
                         }
                         .share-item-header {
                             .en & {
@@ -390,6 +402,11 @@
 
                     .check-related {
                         color: #9a9a9a;
+                        
+                        .he & {
+                            margin-top: 10px;
+                        }
+
                         &__right-arrow {
                             position: relative;
                             width: 84px;

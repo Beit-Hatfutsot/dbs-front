@@ -1,10 +1,10 @@
-var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout) {
+function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal) {
 	var self = this;
 
 	if (header.sub_header_state !== 'recently-viewed') {
 		header.sub_header_state = 'recently-viewed';
 	}
-
+	this.$modal = $modal;
 	this.$state = $state;
 	this.$stateParams = $stateParams;
 	this.wizard = wizard;
@@ -13,7 +13,6 @@ var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTy
 	this.mjs = mjs;
 	this.recentlyViewed = recentlyViewed;
 	this.$window = $window;
-	this.modalShown = false;
 	this.failed = false;
 	this.content_loaded = false;
 	this.item_data = {};
@@ -139,21 +138,37 @@ ItemCtrl.prototype = {
     goto_tree: function() {
        	this.wsearch_individuals_query_params = {};
        	if(this.search_result.name && this.search_result.name.isNotEmpty()){
-       		this.wsearch_individuals_query_params.last_name = this.search_result.name.Header.En;	
+       		this.wsearch_individuals_query_params.last_name = this.search_result.name.Header.En;
        	}
        	if(this.search_result.place && this.search_result.place.isNotEmpty()) {
-       		this.wsearch_individuals_query_params.birth_place = this.search_result.place.Header.En;	
+       		this.wsearch_individuals_query_params.birth_place = this.search_result.place.Header.En;
        	}
     	this.$state.go('ftrees', this.wsearch_individuals_query_params);
 	},
 
-	toggleModal: function() {
-		this.modalShown = !this.modalShown;
+	open_gallery: function() {
+		var body = document.getElementsByTagName('body')[0],
+			gallery = this.item_data;
+		body.addClassName('gallery');
+	    angular.element()
+	    var authModalInstance = this.$modal.open({
+	     	templateUrl: 'templates/main/gallery-modal.html',
+	     	controller: 'GalleryModalCtrl as galleryModalController',
+	     	size: 'lg',
+	     	resolve : {
+	     		gallery: function () {
+	     			return gallery
+	     	}}
+	    });
 
-	}
+	    authModalInstance.result.
+	    finally(function() {
+	    	body.removeClassName('gallery');
+	    });
+		}
 
 };
 
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
 											   'notification', 'itemTypeMap','wizard', 'header', 
-											   'mjs', 'recentlyViewed', '$window', '$timeout', ItemCtrl]);
+											   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', ItemCtrl]);
