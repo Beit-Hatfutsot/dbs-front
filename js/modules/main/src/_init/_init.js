@@ -13,6 +13,7 @@
 angular.module('main', [
     'ngResource',
     'ngAnimate',
+    'ngSanitize',
     'ui.bootstrap',
     'ui.router',
     'config',
@@ -24,7 +25,6 @@ angular.module('main', [
     'plumb',
     'rcSubmit',
     'gedcomParser',
-    // 'angulike'
     ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide', '$sceDelegateProvider',

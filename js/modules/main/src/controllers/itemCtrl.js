@@ -60,6 +60,10 @@ ItemCtrl.prototype = {
 
 		this.item.get(this.$stateParams.item_string).
 			then(function(item_data) {
+				var converter = new showdown.Converter();
+
+				item_data.textEn = converter.makeHtml(item_data.UnitText1.En);
+				item_data.textHe = converter.makeHtml(item_data.UnitText1.He);
 				self.recentlyViewed.put(item_data);
 				self.item_data = item_data;
 				self.item_string = self.$stateParams.item_string;
