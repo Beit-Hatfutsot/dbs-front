@@ -1,146 +1,113 @@
-%modal-dialog {
-	.modal-dialog-overlay {
-		position: fixed;
-  		z-index:9999;
-  		top:0;
-		left:0;
-  		width:100%;
- 		height:100%;
-  		background-color:#000000;
-  		opacity: 0.8;
-  		cursor: url(/images/x.png) 0 0, pointer;
+.gallery-modal {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
 
-  		/*position: fixed;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		background: blue;
-		opacity: 0;
-		@include transition(all, 0.8s, ease-in);
-
-		&.fade.in {
-			opacity: 0.7;
-		}*/
+	.xsign {
+		@extend %xsign;
 	}
-	.gallery-modal-dialog {
-		z-index: 10000;
-		position: absolute;
-		width: 34.5%;
-		top: 10%;
-	  	left: 50%;
-	  	transform: translate(-50%, -50%);
-	 	-webkit-transform: translate(-50%, -50%);
-	  	-moz-transform: translate(-50%, -50%);
-	  	background-color: #ffffff;
-	  	@include item-shadow();
-	  	overflow: hidden;
 
-	  	&__title {
-	  		position: relative;
-	  		width: 100%;
-	  		padding: 12px 22px;
-	  		background-color: #fff;
-	  		font-size: 25px;
-	  		font-weight: bold;
-	  		color: red;
+  	&__header {
+  		width: 100%;
+  		padding: 12px 22px;
+  		background-color: #fff;
+  		font-size: 25px;
+  		font-weight: 600;
+  		color: #BA3218;
+  	}
 
-	  		.close-sign {
-	  			position: absolute;
-	  			top: 15px;
-	  			right: 15px;
-	  			cursor: pointer;
-	  		}
-	  	}
+  	&__stage {
+  		position: relative;
+  		background-color: #676767;
+  		height: 530px;
+  		overflow: hidden;
 
-	  	&__main {
-	  		position: relative;
-	  		text-align: center;
-	  		background-color: grey;
+  		&:hover {
+  			.arrow-left, .arrow-right {
+  				opacity: 1;
+  			}	
+		}
 
-	  		.arrow-left, .arrow-right {
-	  			position: absolute;
-	  			top: 50%;
-	  			width: 0;
-				height: 0;
-				border-top: 15px solid transparent;
-				border-bottom: 15px solid transparent;
-				cursor: pointer;
-				opacity: 0.2;
+  		img {
+            position: absolute;
+            width: inherit;
+            height: auto;
+            left: 50%;
+            top: 50%;
+            @include translate(-50%, -50%);
+        }
 
-				&:hover {
-					opacity: 1;
-				}
-	  		}
-	  		.arrow-left {
-	  			border-right: 25px solid red;
-	  			left: 5%;
-	  		}
-	  		.arrow-right {
-				border-left: 25px solid red;
-				right: 5%;
-			}
-	  	}
+  		.arrow-left, .arrow-right {
+  			position: absolute;
+  			top: 50%;
+  			width: 0;
+			height: 0;
+			border-top: 15px solid transparent;
+			border-bottom: 15px solid transparent;
+			cursor: pointer;
+			opacity: 0.2;
+			transition: opacity 0.8s;
+  		}
 
-	  	&__nav {
-	  		width: 100%;
-	  		position: relative;
+  		.arrow-left {
+  			border-right: 25px solid #FEB032;
+  			left: 5%;
+  		}
+  		.arrow-right {
+			border-left: 25px solid #FEB032;
+			right: 5%;
+		}
+  	}
 
-	  		&__title {
-	  			padding: 12px 58px;
+  	&__info {
+  		width: 100%;
+  		display: flex;
+
+  		&__picture-info {
+  			width: 400px;
+  			color: #888888;
+  			padding: 14px;
+  		}
+
+  		&__gallery-preview {
+  			background-color: #E6E6E6;
+  			width: 400px;
+
+  			&__title {
+	  			width: 100%;
+				background-color: #D98376;
+				color: #ffffff;
 	  			font-weight: bold;
-	  			color: red;
+	  			padding: 14px;
 	  		}
 
-	  		.arrow-left, .arrow-right {
-	  			position: absolute;
-	  			top: 50%;
-	  			width: 0;
-				height: 0;
-				border-top: 15px solid transparent;
-				border-bottom: 15px solid transparent;
-				cursor: pointer;
-				opacity: 0.2;
-
-				&:hover {
-					opacity: 1;
-				}
-	  		}
-	  		.arrow-left {
-	  			border-right: 25px solid red;
-	  			left: 5%;
-	  		}
-	  		.arrow-right {
-				border-left: 25px solid red;
-				right: 5%;
-			}
-			&__preview-picture {
-				padding: 0px 0px;
+	  		&__minified-picture {
+	  			padding: 0px 0px;
 				display: inline-block;
 				white-space: nowrap;
 				overflow: hidden;
 				width: 80%;
 				vertical-align: middle;
 				margin-left: 10%;
-			} 
 
-	  		li {
-	  			margin: 0 10px;
-	  			display: inline-block;
-	  		}
+				li {
+		  			margin: 0 10px;
+		  			display: inline-block;
+		  		}
 
-	  		li.active {
-	  			border: 1px solid blue;
-	  		}
+		  		li.active {
+		  			border: 2px solid #FEB032;
+		  		}
 
-	  		img {
-	  			width: 80px;
-	  			height: auto;
-	  			cursor: pointer;
-	  			vertical-align: middle;
+		  		img {
+		  			width: auto;
+		  			height: 50px;
+		  			cursor: pointer;
+		  			vertical-align: middle;
+		  		}
 	  		}
-	  	}
-	}
+  		}
+  	}
 }
 
 %item-type {
@@ -358,7 +325,7 @@
   		overflow: hidden;
 
 		&--nothumb {
-			width: 100%;
+			width: 94%;
 		}
 	}
 
