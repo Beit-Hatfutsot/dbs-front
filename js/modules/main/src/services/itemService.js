@@ -8,13 +8,11 @@ angular.module('main').
 
 		var item_service = {
 
-			get: function(item_string) {
+			get: function(collection_name, item_id) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
-						item_string_split 	= item_string.split('.'),
-						collection_name		= item_string_split[0],
-						item_id				= item_string_split[1],
+						item_string 		= [collection_name, item_id].join('.'),
 						cached				= cache.get(item_id, collection_name); 
 
 					if (cached.isNotEmpty()) {

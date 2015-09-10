@@ -31,7 +31,8 @@ var StartController = function($scope, $state, wizard, itemTypeMap) {
 		var item_string = self.choose_result(); 
 
 		if (item_string) {
-			$state.go('item-view', {item_string: item_string});
+			var parts = item_string.split('.')
+			$state.go('item-view', {collection: parts[0], id: parts[1]});
 		}
 	});
 };
