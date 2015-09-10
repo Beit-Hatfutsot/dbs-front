@@ -32,7 +32,7 @@ var ItemCtrl = function($scope, $state, $stateParams, item, notification, itemTy
 
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
-			return $stateParams.item_string.substring(0, 3) === 'ugc';
+			return $stateParams.collection === 'ugc';
 		}
 	});
 
@@ -58,7 +58,7 @@ ItemCtrl.prototype = {
 	get_item: function() {
 		var self = this;
 
-		this.item.get(this.$stateParams.item_string).
+		this.item.get(this.$stateParams.collection, this.$stateParams.id).
 			then(function(item_data) {
 				var converter = new showdown.Converter();
 
@@ -66,7 +66,6 @@ ItemCtrl.prototype = {
 				item_data.textHe = converter.makeHtml(item_data.UnitText1.He);
 				self.recentlyViewed.put(item_data);
 				self.item_data = item_data;
-				self.item_string = self.$stateParams.item_string;
 				self.content_loaded = true;
 				self.item.get_items(item_data.related).
 					then(function(related_data) {
@@ -94,7 +93,7 @@ ItemCtrl.prototype = {
 	},
 
 	pull_wizard_related: function() {
-		var _id = this.$stateParams.item_string.split('.')[1];
+		var _id = this.$stateParams.id;
 
 		if ( this.$state.lastState.name === 'start' ) {
 		
@@ -136,8 +135,8 @@ ItemCtrl.prototype = {
 		var self = this;
 
 		var collection_name = self.itemTypeMap.get_collection_name(item_data);
-    	var item_string = collection_name + '.' + item_data._id; 
-        this.$state.go('item-view', {item_string: item_string});
+        this.$state.go('item-view', {collection: collection_name,
+					   id: item_data._id});
     },
 
     goto_tree: function() {
