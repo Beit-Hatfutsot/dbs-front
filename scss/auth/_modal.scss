@@ -1,10 +1,18 @@
+%xsign {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 31px;
+	height: 31px;
+	@include hover-pointer();
+}
 .modal-backdrop {
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
-	background: #ffffff;
+	background: #000;
 	opacity: 0;
 	@include transition(all, 0.8s, ease-in);
 
@@ -12,7 +20,6 @@
 		opacity: 0.7;
 	}
 }
-
 .modal {
 	position: fixed;
 	top: 0;
@@ -20,18 +27,17 @@
 	bottom: 0;
 	right: 0;
 	cursor: url(/images/X.png) 0 0, pointer; 	
+	.modal-sm { width: 630px; }
+	.modal-lg { width: 800px; }
 
 	.modal-dialog {
 		position: relative;
-		width: 630px;
 		margin: 110px auto;
-		padding: 40px 0 55px;
 		background: #fefefe;
-		border: 4px solid #d6d8d7;
-		@include border-radius(10px);
 		cursor: default;
 
 		.auth-modal {
+			padding: 40px 0 55px;
 			width: 515px;
 			margin: 0 auto;
 
@@ -52,14 +58,8 @@
 				text-align: center;
 				font-size: 16px;
 			}
-			&__xsign {
-				position: absolute;
-				top: 5px;
-				right: 5px;
-				width: 31px;
-				height: 31px;
-				@include hover-pointer();
-
+			.xsign {
+				@extend %xsign;
 			}
 
 			.auth-form {

@@ -1,0 +1,46 @@
+<div class='gallery-modal'>
+   <icon class="xsign" position="[-220, -363]" ng-click="dismiss()"></icon>
+    <div class="gallery-modal__header">
+       <en>{{gallery.Header.En}} Pictures</en> 
+       <he>{{gallery.Header.En}} Pictures</he>
+    </div>
+    <div class="gallery-modal__stage">
+        <img ng-repeat="pic in gallery.Pictures" ng-show="isActive($index)" ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" alt="More Images"/> 
+        <div class="arrow-left" ng-click="showPrev()"></div>
+        <div class="arrow-right" ng-click="showNext()"></div>
+    </div>
+
+    <div class="gallery-modal__info">
+        <div class="gallery-modal__info__picture-info">
+            <en>Title: {{gallery.Header.En}}</en><br/>
+            <en>Description:</en><br/>
+            <en>Photo source: {{gallery.EditorRemarks}}</en><br/>
+            <en>License type: © All Rights Reserved</en>
+        </div> 
+        <div class="gallery-modal__info__gallery-preview">
+            <div class="gallery-modal__info__gallery-preview__title">
+                <en>{{gallery.Header.En}} Pictures ({{gallery.Pictures.length}} found)</en>
+                <he>{{gallery.Header.He}} Pictures ({{gallery.Pictures.length}} found)</he>
+            </div>
+             <ul class="gallery-modal__info__gallery-preview__minified-picture">
+                <li ng-repeat="pic in gallery.Pictures" ng-class="{'active':isActive($index)}" ng-hide="isHidden($index)">
+                    <img ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" ng-click="showPhoto($index)"/>
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="gallery-modal__info__bottom-bar">
+            <div class="footer">
+                <div class="share-item vertical-middle">
+                    <div class="share-item-header">
+                        <en>Share this item</en>
+                        <he>פרסמו</he>
+                    </div>
+                    <tweet text=""></tweet>
+                    <fb-share></fb-share>
+                </div>
+            </div>
+            <mjs-widget item="itemController.item_data"></mjs-widget>
+        </div> -->
+    </div>
+
+</div>
