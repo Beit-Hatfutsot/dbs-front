@@ -320,7 +320,12 @@
                     margin: 0px 26px;
                     color: #666666;
                     font-size: 18px;
-                    
+                    a, a:visited {
+                        color: #666666;
+                    }
+                    a:hover, a:active {
+                        color: #444444;
+                    }
                     .en & {
                         .mjs-widget-wrapper { float:right; }
                     }
