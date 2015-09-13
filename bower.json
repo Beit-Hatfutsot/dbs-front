@@ -6,6 +6,7 @@
     "angular-mocks": "1.4.5",
     "angular-resource": "1.4.5",
     "angular-animate": "1.4.5",
+    "angular-sanitize": "1.4.5",
     "angular-ui-router": "~0.2.15",
     "angular-bootstrap": "~0.13.4",
     "jquery": "~2.1.3",
