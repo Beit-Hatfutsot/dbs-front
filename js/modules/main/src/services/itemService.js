@@ -82,7 +82,8 @@ angular.module('main').
 									$rootScope.$broadcast('items-load');
 								},
 								function() {
-									deferred.reject();
+									deferred.resolve( cached_items );
+									$rootScope.$broadcast('items-load');
 								}).
 								finally(function() {
 									in_progress = false;
