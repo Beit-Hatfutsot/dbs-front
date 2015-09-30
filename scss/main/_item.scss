@@ -196,6 +196,7 @@
                     background-color: #ffffff;
 
                     .scroll-to-top {
+                        @include hover-pointer();
                         color: #BE3217;
                           text-decoration: underline;
                           font-weight: 600;
