@@ -17,7 +17,7 @@ angular.module('main').
 
 					if (cached.isNotEmpty()) {
 						deferred.resolve(cached);
-						$rootScope.$broadcast('item-load');
+						$rootScope.$broadcast('item-load', cached);
 					} 
 					else {
 						try {
@@ -26,7 +26,7 @@ angular.module('main').
 									var collection_name = itemTypeMap.get_collection_name(item_data[0]);
 									cache.put(item_data[0], collection_name);
 									deferred.resolve(item_data[0]);
-									$rootScope.$broadcast('item-load');
+									$rootScope.$broadcast('item-load', item_data[0]);
 								},
 								function() {
 									deferred.reject();

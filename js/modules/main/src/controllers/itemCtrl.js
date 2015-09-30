@@ -1,4 +1,4 @@
-function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal) {
+function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal, $rootScope) {
 	var self = this;
 
 	if (header.sub_header_state !== 'recently-viewed') {
@@ -27,8 +27,16 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
 
+	var unwatch_item_load = $rootScope.$on('item-load', function(event, item) {
+		$rootScope.title = item.Header[{'en': 'En', 'he': 'He'}[$rootScope.lang]];
+		unwatch_item_load();
+	});
 	this.get_item();
 
+	$rootScope.$on('language-changed', function (event, lang) {
+		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
+		
+	})
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
 			return $stateParams.collection === 'ugc';
@@ -174,4 +182,4 @@ ItemCtrl.prototype = {
 
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
 											   'notification', 'itemTypeMap','wizard', 'header', 
-											   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', ItemCtrl]);
+											   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope', ItemCtrl]);

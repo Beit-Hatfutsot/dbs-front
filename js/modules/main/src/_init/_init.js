@@ -34,6 +34,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     var states = [ 
         {
             name: 'start',
+			title: 'Home Page',
             url: '/',
             templateUrl: 'templates/main/start.html',
             controller: 'StartController as startCtrl',
@@ -227,6 +228,9 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
     
     // $rootScope.facebookAppId = 666465286777871;
 
-
     $state.go('start');
+	$rootScope.$on('$stateChangeSuccess',
+		function(event, toState, toParams, fromState, fromParams){
+			$rootScope.title = ('title' in toState)?toState.title:"";
+	})
 }]);
