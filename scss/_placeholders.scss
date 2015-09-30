@@ -221,13 +221,14 @@
 	}
 
 	.type-desc-container {
-		width: 78px;
+		width: 84px;
 		overflow: hidden;
 		position: absolute;
 		display: block;
 		top: 6px;
 		transition: opacity 0.8s, width 0.8s;
 		transition-timing-function: ease-out;
+        font-weight: normal;
 		.en & {
 			left: 28px;
 		}
