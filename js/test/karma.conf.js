@@ -24,6 +24,7 @@ module.exports = function(config) {
         'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/ng-flow/dist/ng-flow-standalone.js',
 		'bower_components/angular-sanitize/angular-sanitize.js',
+		'bower_components/marked/marked.min.js',
 
         // gedcomParser dependencies & scripts
         'js/lib/gedcom-js-viewer/js/lib/prototype.js',

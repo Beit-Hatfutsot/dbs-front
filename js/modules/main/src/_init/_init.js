@@ -232,5 +232,7 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
 	$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
-	})
+	});
+	marked.setOptions({ breaks: true })
+
 }]);
