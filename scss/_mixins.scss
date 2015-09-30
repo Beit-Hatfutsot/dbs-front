@@ -88,6 +88,8 @@
 	-webkit-transform: skew($degrees);
 	-moz-transform: skew($degrees);
 	-o-transform: skew($degrees);
+	-ms-transform: skew($degrees);
+	transform: skew($degrees);
 }
 
 @mixin rotate($degrees:90deg) {
