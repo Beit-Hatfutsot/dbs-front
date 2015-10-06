@@ -344,7 +344,15 @@
 			height: 88px;
 			width: 90%;
 		}
-	}	
+        p {
+            display: inline; 
+            a {
+                pointer-events: none;
+                text-decoration: none;
+                color: #666666;
+            }
+	    }
+    }	
 
 	.thumbnail {
 		position: absolute;
