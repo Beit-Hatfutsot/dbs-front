@@ -8,18 +8,16 @@ angular.module('main').
 
 		var item_service = {
 
-			get: function(item_string) {
+			get: function(collection_name, item_id) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
-						item_string_split 	= item_string.split('.'),
-						collection_name		= item_string_split[0],
-						item_id				= item_string_split[1],
+						item_string 		= [collection_name, item_id].join('.'),
 						cached				= cache.get(item_id, collection_name); 
 
 					if (cached.isNotEmpty()) {
 						deferred.resolve(cached);
-						$rootScope.$broadcast('item-load');
+						$rootScope.$broadcast('item-load', cached);
 					} 
 					else {
 						try {
@@ -28,7 +26,7 @@ angular.module('main').
 									var collection_name = itemTypeMap.get_collection_name(item_data[0]);
 									cache.put(item_data[0], collection_name);
 									deferred.resolve(item_data[0]);
-									$rootScope.$broadcast('item-load');
+									$rootScope.$broadcast('item-load', item_data[0]);
 								},
 								function() {
 									deferred.reject();
@@ -84,7 +82,8 @@ angular.module('main').
 									$rootScope.$broadcast('items-load');
 								},
 								function() {
-									deferred.reject();
+									deferred.resolve( cached_items );
+									$rootScope.$broadcast('items-load');
 								}).
 								finally(function() {
 									in_progress = false;

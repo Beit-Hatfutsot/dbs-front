@@ -52,8 +52,8 @@
 						</div>
 						<div class="item__article-text">
 							<mjs-widget item="itemController.item_data"></mjs-widget>
-							<en>{{itemController.item_data.UnitText1.En}}</en>
-							<he>{{itemController.item_data.UnitText1.He}}</he>
+              <en ng-bind-html="itemController.item_data.textEn"></en>
+              <he ng-bind-html="itemController.item_data.textHe"></he>
 						</div>
 						<div class="scroll-to-top"onclick="window.scroll(0, 0)">
 							<en>Back to top</en>
@@ -67,7 +67,7 @@
 									<en>Share this item</en>
 									<he>פרסמו</he>
 				                </div>
-				                <tweet text=""></tweet>
+                        <tweet text="{{title}} via @BeitHatfutsot"></tweet>
 				                <fb-share></fb-share>
 							</div>
 						</div>

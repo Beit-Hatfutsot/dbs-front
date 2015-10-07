@@ -13,6 +13,7 @@
 angular.module('main', [
     'ngResource',
     'ngAnimate',
+    'ngSanitize',
     'ui.bootstrap',
     'ui.router',
     'config',
@@ -24,7 +25,6 @@ angular.module('main', [
     'plumb',
     'rcSubmit',
     'gedcomParser',
-    // 'angulike'
     ]).
 config([
 '$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide', '$sceDelegateProvider',
@@ -34,6 +34,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     var states = [ 
         {
             name: 'start',
+			title: 'Home Page',
             url: '/',
             templateUrl: 'templates/main/start.html',
             controller: 'StartController as startCtrl',
@@ -62,7 +63,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         
         {
             name: 'item-view',
-            url: '/item/:item_string',
+            url: '/item/:collection/:id',
             controller: 'ItemCtrl as itemController',
             templateUrl: 'templates/main/item.html'
         },
@@ -227,6 +228,11 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
     
     // $rootScope.facebookAppId = 666465286777871;
 
-
     $state.go('start');
+	$rootScope.$on('$stateChangeSuccess',
+		function(event, toState, toParams, fromState, fromParams){
+			$rootScope.title = ('title' in toState)?toState.title:"";
+	});
+	marked.setOptions({ breaks: true })
+
 }]);

@@ -15,7 +15,8 @@ ItemPreviewCtrl.prototype = {
             this.$state.go('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
         }
         else {
-            this.$state.go('item-view', {item_string: this.item_string});
+			var parts = this.item_string.split('.')
+			this.$state.go('item-view', {collection: parts[0], id: parts[1]});
         }
     },
 

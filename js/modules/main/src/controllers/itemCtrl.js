@@ -1,4 +1,4 @@
-function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal) {
+function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal, $rootScope) {
 	var self = this;
 
 	if (header.sub_header_state !== 'recently-viewed') {
@@ -27,11 +27,19 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
 
+	var unwatch_item_load = $rootScope.$on('item-load', function(event, item) {
+		$rootScope.title = item.Header[{'en': 'En', 'he': 'He'}[$rootScope.lang]];
+		unwatch_item_load();
+	});
 	this.get_item();
 
+	$rootScope.$on('language-changed', function (event, lang) {
+		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
+		
+	})
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
-			return $stateParams.item_string.substring(0, 3) === 'ugc';
+			return $stateParams.collection === 'ugc';
 		}
 	});
 
@@ -57,11 +65,13 @@ ItemCtrl.prototype = {
 	get_item: function() {
 		var self = this;
 
-		this.item.get(this.$stateParams.item_string).
+		this.item.get(this.$stateParams.collection, this.$stateParams.id).
 			then(function(item_data) {
+
+				item_data.textEn = marked(item_data.UnitText1.En);
+				item_data.textHe = marked(item_data.UnitText1.He);
 				self.recentlyViewed.put(item_data);
 				self.item_data = item_data;
-				self.item_string = self.$stateParams.item_string;
 				self.content_loaded = true;
 				self.item.get_items(item_data.related).
 					then(function(related_data) {
@@ -89,7 +99,7 @@ ItemCtrl.prototype = {
 	},
 
 	pull_wizard_related: function() {
-		var _id = this.$stateParams.item_string.split('.')[1];
+		var _id = this.$stateParams.id;
 
 		if ( this.$state.lastState.name === 'start' ) {
 		
@@ -131,8 +141,8 @@ ItemCtrl.prototype = {
 		var self = this;
 
 		var collection_name = self.itemTypeMap.get_collection_name(item_data);
-    	var item_string = collection_name + '.' + item_data._id; 
-        this.$state.go('item-view', {item_string: item_string});
+        this.$state.go('item-view', {collection: collection_name,
+					   id: item_data._id});
     },
 
     goto_tree: function() {
@@ -171,4 +181,4 @@ ItemCtrl.prototype = {
 
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
 											   'notification', 'itemTypeMap','wizard', 'header', 
-											   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', ItemCtrl]);
+											   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope', ItemCtrl]);

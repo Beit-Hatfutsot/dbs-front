@@ -48,7 +48,7 @@ angular.module('main')
 		  return {
 			  restrict: 'E',
 			  scope: {
-				  text: '=',
+				  text: '@',
 				  href: '='
 			  },
 			  link: function (scope, element, attrs) {
@@ -70,7 +70,6 @@ angular.module('main')
 						  var unbindWatch = scope.$watch('tweet', function (newValue, oldValue) {
 							  if (newValue) {
 								  renderTweetButton();
-							  
 								  // only need to run once
 								  unbindWatch();
 							  }

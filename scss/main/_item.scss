@@ -196,6 +196,7 @@
                     background-color: #ffffff;
 
                     .scroll-to-top {
+                        @include hover-pointer();
                         color: #BE3217;
                           text-decoration: underline;
                           font-weight: 600;
@@ -313,7 +314,7 @@
                 }
                 .header-wrapper {
                     position: relative;
-                    padding-top: 26px;
+                    padding: 26px 0;
                 }
                 &__article-header {
                     position: absolute;
@@ -323,11 +324,23 @@
                     max-width: 640px;
                 }
                 &__article-text {
-                    white-space: pre-line;
+                    white-space: normal;
+                    line-height:26px;
                     margin: 0px 26px;
                     color: #666666;
                     font-size: 18px;
-                    
+                    br {
+                       margin-bottom: 20px;
+                    }
+                    p {
+                        margin: 18px 0;
+                    }
+                    a, a:visited {
+                        color: #666666;
+                    }
+                    a:hover, a:active {
+                        color: #444444;
+                    }
                     .en & {
                         .mjs-widget-wrapper { float:right; }
                     }
