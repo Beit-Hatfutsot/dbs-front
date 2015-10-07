@@ -149,7 +149,7 @@ ItemCtrl.prototype = {
 	open_gallery: function() {
 		var body = document.getElementsByTagName('body')[0],
 			gallery = this.item_data;
-		body.addClassName('gallery');
+		body.addClassName('backdrop');
 	    angular.element()
 	    var authModalInstance = this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
@@ -163,7 +163,7 @@ ItemCtrl.prototype = {
 
 	    authModalInstance.result.
 	    finally(function() {
-	    	body.removeClassName('gallery');
+	    	body.removeClassName('backdrop');
 	    });
 		}
 

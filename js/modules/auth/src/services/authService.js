@@ -42,7 +42,7 @@ angular.module('auth').
 	  			var body = document.getElementsByTagName('body')[0];
 
 	  			if ( !(this.is_signedin()) ) {
-	  				body.addClassName('auth');
+	  				body.addClassName('backdrop');
 				    angular.element()
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
@@ -65,7 +65,7 @@ angular.module('auth').
 				    	}
 				    }).
 				    finally(function() {
-				    	body.removeClassName('auth');
+				    	body.removeClassName('backdrop');
 				    });
 				}
 		  	},

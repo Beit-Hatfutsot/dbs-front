@@ -4,15 +4,13 @@
 	min-height: 94px;
 	width: 100%;
 	margin-top: -100px;
-	border-top: 2px solid #d6d6d6;
 	
 	@include transition(margin, 1s, ease); 
 	
 	&--wizard, &--recently-viewed {
-		margin-top: -$notification-bar-height;
+		margin-top: 10px;
 		z-index: 2;
 		@include box-shadow(0 3px 5px 1px #b0b0b0);
-		border-bottom: 4px solid #5ec5d6;
 		background: #f5f5f5;
 	}
 
@@ -78,27 +76,6 @@
 		position: relative;
 		width: $view-width;
 
-		&:before, &:after {
-			bottom: 100%;
-			border: solid transparent;
-			content: " ";
-			height: 0;
-			width: 0;
-			position: absolute;
-			pointer-events: none;
-			@include transition(all, 1s, ease);
-		}
-		
-		&:before {
-			border-bottom-color: #d6d6d6;
-			border-width: 11px;
-		}
-
-		&:after {
-			border-bottom-color: #f5f5f5;
-			border-width: 8px;
-		}
-
 		@at-root #sub-header {
 			width: $view-width;
 			margin: 0 auto;
@@ -152,12 +129,7 @@
 				&.ng-hide {
 					opacity: 0;
 				}
-				/*
-				&.ng-hide-remove {
-					height: 0;
-					opacity: 0;
-				}
-				*/
+
 				&__title {
 					@include rotate();
 					display: inline-block;
