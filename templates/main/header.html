@@ -1,4 +1,4 @@
-<div ng-controller="HeaderCtrl as headerController">
+<div class="main-header" ng-controller="HeaderCtrl as headerController">
 	<div class="upper-container">
 		<div class="sub-upper-container">	
 			<div class="sites">
@@ -60,45 +60,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="header-element newsletter-popup" dropdown>
+
+				<div class="header-element newsletter-popup">
 					<div class="newsletter-popup__button">
-						<button class="label" dropdown-toggle>
+						<button class="label" ng-controller="NewletterPopoverCtrl" popover-template="'templates/enews-popover.html'" popover-is-open="popover.isOpen">
 							<en>ENews</en>
 							<he>ניוזלטר</he>
 						</button>
 					</div>
-					<div class="newsletter-popup__content">
-						<h2 class="title">
-							<en>Are you part of the story?</en>
-							<he></he>
-						</h2>
-						<div class="widgetcontent">
-							<div class="pretext">
-								<en>Add your email and you will never miss out on family events, exhibition openings and deals on our shops!</en>
-								<he>הוסיפו את המייל שלכם כדי לא להחמיץ עדכונים, חידושים, המון סיפורים מרחקים ועוד...</he>
-							</div>
-							<form method="post">
-								<small>
-									<en>Your Email:</en>
-									<he></he>
-								</small>
-								<input id="" type="test" type="hidden" placeholder="Email Address">
-								<div>
-									<en>Email address is missing or incorrect</en>
-									<he></he>
-								</div>
-								<div>
-									<small>
-										<en>Choose Language:</en>
-										<he></he>
-									</small>
-									<input type="checkbox" name="widget-active_trail_newsletter[4][mm_key][]" id="widget-active_trail_newsletter-4-mm_key[registration-form-en]" value="registration-form-en">
-								</div>
-
-							</form>
-						</div>
-					</div>
 				</div>
+				
 				<div class="header-element dropdown-icons__language-selector">
 					<div class="language-icon">
 						<en>
@@ -120,9 +91,10 @@
 	</div>
 	<div class="bottom-container" ng-show="!(isCurrentState('start'))">
 		<div id="header-container">
-			<nav id="top-header">
+			<nav class="menu">
 				<ul class="nav">
 					<li class="logo" ui-sref="start">
+						<!-- <span class="item-before"></span> -->
 						<div>
 							<en>Home</en>
 							<he>ראשי</he>
@@ -189,4 +161,5 @@
 			</div>
 		</div>
 	</div>
+	
 </div>

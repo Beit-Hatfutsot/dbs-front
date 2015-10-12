@@ -1,575 +1,831 @@
-.upper-container {
+.main-header {
     position: fixed;
-    z-index: 2;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: #ffffff;
-    border-bottom-width: 10px;
-    border-bottom-style: solid;
-    border-bottom-color: $mjs-color;
+    background-color: #FFF;
+    z-index: 1000;
 
-    .sub-upper-container {
-        position: relative;
-        margin: 0 auto;
-        padding: 0 6px 17px;
-        max-width: 1140px;
-        height: 70px;
+    .upper-container {
+        //z-index: 3;
+        width: 100%;
+        border-bottom-width: 10px;
+        border-bottom-style: solid;
+        border-bottom-color: $mjs-color;
+
+        .sub-upper-container {
+            position: relative;
+            margin: 0 auto;
+            padding: 0 6px 17px;
+            max-width: 1140px;
+            height: 70px;
 
 
-        /************/
-        /* BH sites */
-        /************/
+            /************/
+            /* BH sites */
+            /************/
 
-        .sites {
-            ul {
-                margin: 0;
-                list-style: none;
+            .sites {
+                ul {
+                    margin: 0;
+                    list-style: none;
 
-                .site-item {
-                    
-                    .en & {
-                        float: left;
-                        margin: 30px 15px 0 0;  
-                    }
-                    .he & {
-                        float: right;
-                        margin: 30px 0 0 15px;
-                    }
-
-                    a {
-                        width: 66px;
-                        height: 40px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: block;
-                        @include hover-pointer();
-
-                        .title {
-                            line-height: 16px;
-                            font-size: 16px;
-                            font-weight: 700;
-                            color: #ffffff;
-                        }
-
-                        .icon {
-                            margin: 0 auto;
-                            display: none;
-                        }
-
-                        .title,
-                        .icon {
-                            position: relative;
-                            top: 50%;
-                            @include translate(0, -50%);
-                        }
-                    }
-
-                    &:hover {
+                    .site-item {
                         
                         .en & {
-                            margin: 18px 4px 0 -11px;
+                            float: left;
+                            margin: 30px 15px 0 0;  
                         }
                         .he & {
-                            margin: 18px -11px 0 4px;
+                            float: right;
+                            margin: 30px 0 0 15px;
                         }
 
                         a {
-                            width: 88px;
-                            height: 52px;
-                        }
-                    }
+                            width: 66px;
+                            height: 40px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: block;
 
-                    &.active {
-                        
-                        .en & {
-                            margin: 0 15px 0 0;
-                        }
-                        .he & {
-                            margin: 0 0 0 15px;
-                        }
-
-                        a {
-                            width: 120px;
-                            height: 70px;
-                        }
-                    }
-
-                    &:hover,
-                    &.active {
-                        a {
                             .title {
-                                display: none;
+                                line-height: 16px;
+                                font-size: 16px;
+                                font-weight: 600;
+                                color: #ffffff;
                             }
 
                             .icon {
-                                display: block;
+                                margin: 0 auto;
+                                display: none;
+                            }
+
+                            .title,
+                            .icon {
+                                position: relative;
+                                top: 50%;
+                                @include translate(0, -50%);
+                            }
+                        }
+
+                        &:hover {
+                            
+                            .en & {
+                                margin: 18px 4px 0 -11px;
+                            }
+                            .he & {
+                                margin: 18px -11px 0 4px;
+                            }
+
+                            a {
+                                width: 88px;
+                                height: 52px;
+                            }
+                        }
+
+                        &.active {
+                            
+                            .en & {
+                                margin: 0 15px 0 0;
+                            }
+                            .he & {
+                                margin: 0 0 0 15px;
+                            }
+
+                            a {
+                                width: 120px;
+                                height: 70px;
+                            }
+                        }
+
+                        &:hover,
+                        &.active {
+                            a {
+                                .title {
+                                    display: none;
+                                }
+
+                                .icon {
+                                    display: block;
+
+                                    .en & {
+                                        @include icon (-388px -179px);
+                                        width: 78px;
+                                        height: 58px;
+                                    }
+                                    .he & {
+                                        @include icon (-304px -182px);
+                                        width: 72px;
+                                        height: 53px;
+                                    }
+                                }
+                            }
+                        }
+
+                        &.museum {
+                            background-color: $museum-color;
+
+                            &:hover .icon {
+
                                 .en & {
-                                    @include icon (-388px -179px);
-                                    width: 78px;
-                                    height: 58px;
+                                    @include icon (-390px -258px);
+                                    width: 63px;
+                                    height: 45px;
                                 }
                                 .he & {
-                                    @include icon (-304px -182px);
-                                    width: 72px;
-                                    height: 53px;
+                                    @include icon (-311px -260px);
+                                    width: 49px;
+                                    height: 42px;
                                 }
                             }
                         }
-                    }
 
-                    &.museum {
-                        background-color: $museum-color;
+                        &.shop {
+                            background-color: $shop-color;
 
-                        &:hover .icon {
-                            .en & {
-                                @include icon (-390px -258px);
-                                width: 63px;
-                                height: 45px;
-                            }
-                            .he & {
-                                @include icon (-311px -260px);
-                                width: 49px;
-                                height: 42px;
-                            }
-                        }
-                    }
-
-                    &.shop {
-                        background-color: $shop-color;
-
-                        &:hover .icon {
-                            .en & {
-                                @include icon (-392px -321px);
-                                width: 68px;
-                                height: 31px;
-                            }
-                            .he & {
-                                @include icon (-305px -322px);
-                                width: 62px;
-                                height: 32px;
+                            &:hover .icon {
+                                .en & {
+                                    @include icon (-392px -321px);
+                                    width: 68px;
+                                    height: 31px;
+                                }
+                                .he & {
+                                    @include icon (-305px -322px);
+                                    width: 62px;
+                                    height: 32px;
+                                }
                             }
                         }
-                    }
 
-                    &.mjs {
-                        background-color: $mjs-color;
+                        &.mjs {
+                            background-color: $mjs-color;
+                            cursor: default;
+                        }
                     }
                 }
             }
-        }
 
-        .dropdown-icons {
-            position: fixed;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            z-index: 2;
-            
-            .en & {
-                right: 50%;
-                @include translate($view-width /2 - 5px, 0);
-            }
-
-            .he & {
-                left: 50%;
-                @include translate(-$view-width /2 + 5px, 0);
-            }
-
-            .header-element {
+            .dropdown-icons {
+                position: fixed;
+                height: 70px;
+                display: flex;
+                align-items: center;
+                z-index: 2;
+                
                 .en & {
-                    margin-left: 15px;
+                    right: 50%;
+                    @include translate($view-width /2 - 5px, 0);
                 }
+
                 .he & {
-                    margin-right: 15px;
+                    left: 50%;
+                    @include translate(-$view-width /2 + 5px, 0);
                 }
-            }
 
-            .newsletter-popup {
-                z-index: 100;
-                display: inline-block;
+                .header-element {
+                    .en & {
+                        margin-left: 15px;
+                    }
+                    .he & {
+                        margin-right: 15px;
+                    }
+                }
 
-                &__button {
-                    .label {
-                        background-color: #fbb034;
-                        padding: 0 5px;
+                .newsletter-popup {
+                    position: relative;
+                    display: inline-block;
+
+
+                    &__button {
+                        .label {
+                            background-color: #fbb034;
+                            padding: 0 5px;
+                            line-height: 30px;
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: #fff;
+                            border: none;
+                            outline: none;
+                            @include hover-pointer();
+
+                            &:hover {
+                                background-color: #ea8a0a !important;
+                            }
+
+                            &.active {
+                                background-color: #ea8a0a !important;
+                            }
+                        }
+                    }
+                    &__content {
+                        position: absolute;
+                        top: 35px;
+                        width: 340px;
+                        line-height: normal;
+                        border: 1px solid #c2c2c2;
+                        @include border-radius(3px);
+                        background-color: #e6e6e6;
+                        @include item-shadow();
+
+                        .en & {
+                            left: -144px;
+                        }
+                        .he & {
+                            right: -144px;
+                        }
+
+                        .widgettitle {
+                            position: relative;
+                            margin: 0;
+                            line-height: 34px;
+                            font-size: 18px;
+                            font-weight: 600;
+                            color: #ffffff;
+                            background-color: #999999;
+                            text-align: center;
+
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                top: 3px;
+                                width: 22px;
+                                height: 27px;
+                                @include icon(-273px -366px);
+
+                                .en & {
+                                    left: 10px;
+                                }
+                                .he & {
+                                    right: 10px;
+                                }
+                            }
+                        }
+
+                        .widgetcontent {
+                            padding: 7px 15px;
+                            color: #666;
+
+                            .pre-text {
+                                margin-bottom: 15px;
+                                font-size: 14px;
+                            }
+                            form {
+                                overflow: hidden;
+
+                                .mm_newemail {
+                                    padding: 0 5px;
+                                    width: 100%;
+                                    height: 36px;
+                                    font-size: 14px;
+                                    background-color: #fff;
+                                    border: 3px solid #999;
+                                }
+                                .newsletter-groups {
+                                    margin-top: 15px;
+                                    overflow: hidden;
+                                
+                                    small {
+                                        margin-bottom: 5px;
+                                        display: block;
+                                    }
+                                    label {
+                                        position: relative;
+                                        width: 20px;
+                                        height: 20px;
+                                        background-color: #999;
+                                        border-radius: 50px;
+                                        @include hover-pointer;
+
+                                        .en & {
+                                            margin-right: 80px;
+                                        }
+                                        .he & {
+                                            margin-left: 80px;
+                                        }
+
+                                        .en & {
+                                            float: left;
+                                        }
+                                        .he & {
+                                            float: right;
+                                        }
+                                        
+                                        &:hover {
+                                            background-color: #47c3d3;
+                                        }
+
+                                        span {
+                                            position: relative;
+                                            top: -2px;
+                                            font-size: 13px;
+                                            font-weight: 400;
+
+                                            .en & {
+                                                left: 25px;
+                                            }
+                                            .he & {
+                                                right: 25px;
+                                            }
+                                        }
+
+                                        &:after {
+                                            content: '';
+                                            position: absolute;
+                                            top: 6px;
+                                            width: 11px;
+                                            height: 6px;
+                                            border: 3px solid #fff;
+                                            border-top: none;
+                                            border-right: none;
+                                            background: transparent;
+                                            opacity: 0;
+                                            box-sizing: border-box;
+                                            @include rotate($degrees:-45deg);
+
+
+                                            .en & {
+                                                left: 4px;
+                                            }
+                                            .he & {
+                                                right: 4px;                                            }
+                                        }
+                                    }
+                                    input[type=checkbox] {
+                                        display: none;
+                                        
+                                        &:checked + label {
+                                            background-color: #47c3d3;
+                                        }
+
+                                        &:checked + label:after {
+                                            opacity: 1;
+                                        }
+                                    }
+                                }
+                                small {
+                                    margin-bottom: 5px;
+                                    font-size: 12px;
+                                    display: block;
+                                }
+                                .errph {
+                                    margin: 5px 0;
+                                    font-size: 12px;
+                                    color: #ed1c24;
+                                }
+                                
+                                .newsletter-submit {
+                                    margin-top: 15px;
+                                    width: 186px;
+                                    line-height: 30px;
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    color: #fff;
+                                    background-color: #47c3d3;
+                                    outline: none;
+                                    border: none;
+                                    @include hover-pointer();
+
+                                    .en & {
+                                        float: right;
+                                    }
+                                    .he & {
+                                        float: left;
+                                    }
+
+
+                                    &:hover {
+                                        background-color: #009db2;
+                                    }
+                                }
+                            }
+                            .result-container {
+                                position: relative;
+
+                                .loader {
+                                    position: absolute;
+                                    top: -28px;
+                                    
+                                    .en & {
+                                        right: 196px;
+                                    }
+                                    .he & {
+                                        left: 196px;
+                                    }
+                                    
+                                    &:before {
+                                        display: none;
+                                    }
+
+                                    img {
+                                        width: 20px;
+                                    }
+                                }
+                                .result {
+                                    padding-top: 5px;
+                                    font-size: 12px;
+                                    text-align: center;
+                                    
+                                    &.success {
+                                        color: green;
+                                    }
+                                    
+                                    &.error {
+                                        color: red;
+                                    }
+                                }
+                            }
+                        }
+
+                        .close-button {
+                            content: "";
+                            position: absolute;
+                            top: 6px;
+                            width: 22px;
+                            height: 22px;
+                            @include hover-pointer();
+
+                            .en & {
+                                right: 10px;
+                            }
+                            .he & {
+                                left: 10px;
+                            }
+                        }   
+                    }
+                }
+
+
+                .logo {
+                    display: inline-block;
+                    vertical-align: bottom;
+                    top: 10px;
+                    width: 114px;
+                    height: 57px;
+                    z-index: 1;
+
+                    .en &{
+                        width: 114px;
+                        height: 57px;
+                    }
+                    .he & {
+                        width: 126px;
+                        height: 57px;
+                    }
+                }
+
+                &__my-account {
+
+                    &.open {
+                        .my-account-menu {
+                            display: block;
+                        }
+                        .my-account-label {
+                            background-color: #676767 !important;
+                        }
+                    }
+
+                    &.signed {
+                        .my-account-label {
+                            border-radius: 20px;
+                        }
+                    }
+
+                    .my-account-label {
+                        background-color: #47C3D3;
+                        padding: 0 10px;
                         line-height: 30px;
                         font-size: 13px;
                         font-weight: 600;
                         color: #fff;
                         border: none;
                         outline: none;
+                        position: relative;
+                        @include hover-pointer();
 
                         &:hover {
-                            background-color: #ea8a0a !important;
+                            background-color: #676767 !important;
                         }
 
-                        &.active {
-                            background-color: #ea8a0a !important;
+                        .caret {
+                            display: inline-block;
+                            width: 0;
+                            height: 0;
+                            vertical-align: middle;
+                            border-top: 9px solid;
+                            border-right: 4px solid transparent;
+                            border-left: 4px solid transparent;
                         }
                     }
-                }
-                &__content {
-                    display: block;
-                    position: absolute;
-                    top: 35px;
-                    width: 340px;
-                    line-height: normal;
-                    border: 1px solid #c2c2c2;
-                    border-radius: 3px;
-                    background-color: #e6e6e6;
-                    display: none;
-                    height: 100px;
-                }
-            }
-
-
-            .logo {
-                display: inline-block;
-                vertical-align: bottom;
-                top: 10px;
-                width: 114px;
-                height: 57px;
-                z-index: 1;
-
-                .en &{
-                    width: 114px;
-                    height: 57px;
-                }
-                .he & {
-                    width: 126px;
-                    height: 57px;
-                }
-            }
-
-            &__my-account {
-
-                &.open {
                     .my-account-menu {
-                        display: block;
-                    }
-                    .my-account-label {
-                        background-color: #676767 !important;
-                    }
-                }
-
-                &.signed {
-                    .my-account-label {
-                        border-radius: 20px;
-                    }
-                }
-
-                .my-account-label {
-                    background-color: #47C3D3;
-                    padding: 0 10px;
-                    line-height: 30px;
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: #fff;
-                    border: none;
-                    outline: none;
-                    position: relative;
-
-                    &:hover {
-                        background-color: #676767 !important;
-                    }
-
-                    .caret {
-                        display: inline-block;
-                        width: 0;
-                        height: 0;
-                        vertical-align: middle;
-                        border-top: 9px solid;
-                        border-right: 4px solid transparent;
-                        border-left: 4px solid transparent;
-                    }
-                }
-                .my-account-menu {
-                    position: absolute;
-                    margin-top: 6px;
-                    display: none;
-
-                    &.signed {
-                        left: -38px;
-                    }
-
-                    &__row {
-                        font-size: 16px;
-                        padding: 4px 5px;
-                        color: #666666;
-                        background-color: #e6e6e6;
-                        @include hover-pointer();
+                        position: absolute;
+                        margin-top: 6px;
+                        display: none;
 
                         &.signed {
-                            margin-bottom: 6px;
-                            @include border-radius(4x);
-                            @include item-shadow();
-                            padding: 4px 94px 4px 16px;
-                        }
-
-                        &:hover {
-                            background-color: #c8c8c8;
-                        }
-                    }
-                }
-            }
-
-            &__user {
-                display: inline-block;
-                vertical-align: middle;
-
-                &__pic {
-                    width: 25px;
-                    height: 25px;
-                    
-                    .en & {
-                        margin: 0px 2px 0 -8px;
-                    }
-                    .he & {
-                        margin: 0px -8px 0 2px;
-                    }
-
-                    &.signed {
-                        width: 55px;
-                        height: 54px;
-                        display: inline-block;
-                    }
-                }
-
-                &__name {
-                    display: inline-block;
-                    @include translate (0, -100%);
-
-                }
-            }
-
-            &__language-selector {
-                position: relative;
-                display: inline-block;
-                vertical-align: top;
-                color: #f9f9f9;
-
-                .language-icon {
-                    width: 30px;
-                    height: 30px;
-                    display: inline-block;
-                    @include hover-pointer();
-                }
-            }
-        }
-
-    }
-}
-
-.bottom-container {
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    top: 80px;
-    background: #e6e6e6;
-
-    #header-container {
-        position: relative;
-        margin: 0 auto;
-        max-width: 1140px;
-        height: 40px;
-
-
-        @at-root #top-header {
-            position: relative;
-            margin: 0 auto;
-            padding: 0 6px 17px;
-            max-width: $view-width;
-            height: 100%;
-            background: inherit;
-
-            ul.nav {
-                margin-top: 0;
-
-                li {
-                    position: relative;
-                    display: inline-block;
-                    text-decoration: none;
-                    color: #666;
-
-                    &:before {
-                        position: absolute;
-                        top: 40px;
-                        left: 0;
-                        width: 100%;
-                        height: 0;
-                        border-left: solid transparent;
-                        border-right: solid transparent;
-                        border-top: 10px solid;
-                        z-index: 1;
-                        display: none;
-                        border-left-width: 50%;
-                        border-right-width: 50%;
-                        border-top-color: #47c3d3;
-                        content: "";
-                    }
-
-                    div {
-                        padding: 0 25px;
-                        line-height: 40px;
-                        font-size: 21px;
-                    }
-                    &:hover {
-                        background-color: $mjs-color;
-                        color: #fff;
-                    }
-                }
-                li.recently-viewed-trigger {
-
-                    &--active {
-                        background-color: $mjs-color;
-                        color: #fff;
-                    }
-                } 
-
-            }
-        }
-
-        .dropdown-icons {
-            z-index: 2;
-
-            &__upload {
-                position: relative;
-                margin: 0 auto;
-                background-color: #BF311a;
-                color: #fff;
-                display: inline-block;
-
-                    .en & {
-                        float: right;
-                    }
-                    .he & {
-                        float: left
-                    }
-
-                    &.open {
-
-                        .upload-label {
-                            background-color: #91190B;
-                        }
-
-                        .upload-menu {
-                            display: block;
-                        }
-                    }
-
-                    .upload-label {
-                        margin-top: -50px;
-                        padding: 0 40px;
-                        line-height: 50px;
-                        font-size: 21px;
-                        font-weight: 700;
-                        color: #ffffff;
-                        background-color: #BF3119;
-                        @include hover-pointer();
-                            
-                        &:hover {
-                            background-color: #90190b;
-                        }
-                    }
-
-                    .upload-menu {
-                        position: absolute;
-                        width: 100%;
-                        z-index: 3;
-                        top: 6px;
-                        background: #e6e6e6;
-                        display: none;
-
-                        &__title, &__row {
-                            font-size: 16px;
-
                             .en & {
-                                padding: 4px 14px 4px;
+                                left: -38px;
                             }
                             .he & {
-                                padding: 4px 12px 4px;
+                                right: -38px;
                             }
-                        }
-
-                        &__title {
-                            color: #ffffff;
-                            background: #BF3119; 
+                            
                         }
 
                         &__row {
+                            font-size: 16px;
+                            padding: 4px 5px;
                             color: #666666;
+                            background-color: #e6e6e6;
                             @include hover-pointer();
+
+                            &.signed {
+                                margin-bottom: 6px;
+                                @include border-radius(4x);
+                                @include item-shadow();
+                               
+                                .en & {
+                                    padding: 4px 94px 4px 16px;
+                                }
+                                .he & {
+                                    padding: 4px 16px 4px 94px;
+                                }
+                            }
 
                             &:hover {
                                 background-color: #c8c8c8;
-
-                                img {
-                                    @include translate(-28px, 0);   
-                                }
-                            }
-
-                            &__desc {
-                                position: relative;
-                                display: inline-block;
-                                height: 100%;
-                                width: auto;
-
-                                .en & {
-                                    right: -5px;
-                                }
-
-                                .he & {
-                                    left: -5px; 
-                                }
-                            }
-
-                            .upload-icon {
-                                &__image,
-                                &__video,
-                                &__ftree {
-                                    display: inline-block;
-                                }
-
-                                &__image {
-                                    position: relative;
-                                    top: 3px;
-                                    width: 17px;
-                                    height: 18px;
-                                }
-
-                                &__video {
-                                    position: relative;
-                                    top: 3px;
-                                    width: 22px;
-                                    height: 17px;
-
-                                    .en & {
-                                        margin-left: -3px;
-                                    }
-
-                                    .he & {
-                                        margin-right: -3px;
-                                    }
-                                }
-
-                                &__ftree {
-                                    position: relative;
-                                    top: 3px;
-                                    width: 16px;
-                                    height: 18px;
-
-                                    .en & {
-                                        margin-left: -1px;
-                                    }
-
-                                    .he & {
-                                        margin-right: -1px;
-                                    }
-                                }
                             }
                         }
                     }
                 }
 
+                &__user {
+                    display: inline-block;
+                    vertical-align: middle;
+
+                    &__pic {
+                        width: 25px;
+                        height: 25px;
+                        
+                        .en & {
+                            margin: 0px 2px 0 -8px;
+                        }
+                        .he & {
+                            margin: 0px -8px 0 2px;
+                        }
+
+                        &.signed {
+                            width: 55px;
+                            height: 54px;
+                            display: inline-block;
+                        }
+                    }
+
+                    &__name {
+                        display: inline-block;
+                        color: #666666;
+                        font-weight: 600;
+                        font-size: 18px;
+                        @include translate (0, -100%);
+
+                        .en & {
+                            margin-left: 5px;
+                        }
+                        .he {
+                            margin-right: 5px;
+                        }
+
+                    }
+                }
+
+                &__language-selector {
+                    position: relative;
+                    display: inline-block;
+                    vertical-align: top;
+                    color: #f9f9f9;
+
+                    .language-icon {
+                        width: 30px;
+                        height: 30px;
+                        display: inline-block;
+                        @include hover-pointer();
+                    }
+                }
+            }
+
+        }
+    }
+
+    .bottom-container {
+        //z-index: 2;
+        width: 100%;
+        top: 80px;
+        background: #e6e6e6;
+
+        #header-container {
+            position: relative;
+            margin: 0 auto;
+            max-width: 1140px;
+            height: 40px;
+
+
+            @at-root .menu {
+                position: relative;
+                margin: 0 auto;
+                padding: 0 6px 17px;
+                max-width: $view-width;
+                height: 100%;
+                background: inherit;
+
+                ul.nav {
+                    margin-top: 0;
+
+                    li {
+                        position: relative;
+                        display: table-cell;
+                        text-decoration: none;
+                        color: #666;
+                        @include hover-pointer();
+                        padding: 0 25px;
+                        line-height: 40px;
+                        font-size: 21px;
+
+                        .item-before {
+                            position: absolute;
+                            top: 40px;
+                            left: 0;
+                            width: 100%;
+                            height: 0;
+                            border-left: solid transparent;
+                            border-right: solid transparent;
+                            border-top: 10px solid;
+                            border-top-color: $mjs-color;
+                            z-index: 1;
+                            //display: none;
+
+                            &.disable {
+                                display: none !important;
+                            }
+                        }
+
+                        /*div {
+                            padding: 0 25px;
+                            line-height: 40px;
+                            font-size: 21px;
+                        }*/
+                        &:hover {
+                            background-color: $mjs-color;
+                            color: #fff;
+                        }
+                    }
+                    li.recently-viewed-trigger {
+
+                        &--active {
+                            background-color: $mjs-color;
+                            color: #fff;
+                        }
+                    } 
+
+                }
+            }
+
+            .dropdown-icons {
+
+                &__upload {
+                    position: relative;
+                    margin: 0 auto;
+                    background-color: #BF311a;
+                    color: #fff;
+                    display: inline-block;
+
+                        .en & {
+                            float: right;
+                        }
+                        .he & {
+                            float: left
+                        }
+
+                        &.open {
+
+                            .upload-label {
+                                background-color: #91190B;
+                            }
+
+                            .upload-menu {
+                                display: block;
+                            }
+                        }
+
+                        .upload-label {
+                            margin-top: -50px;
+                            padding: 0 40px;
+                            line-height: 50px;
+                            font-size: 21px;
+                            font-weight: 700;
+                            color: #ffffff;
+                            background-color: #BF3119;
+                            @include hover-pointer();
+                                
+                            &:hover {
+                                background-color: #90190b;
+                            }
+                        }
+
+                        .upload-menu {
+                            position: absolute;
+                            width: 100%;
+                            z-index: 3;
+                            top: 6px;
+                            background: #e6e6e6;
+                            display: none;
+
+                            &__title, &__row {
+                                font-size: 16px;
+
+                                .en & {
+                                    padding: 4px 12px 4px;
+                                }
+                                .he & {
+                                    padding: 4px 10px 4px;
+                                }
+                            }
+
+                            &__title {
+                                color: #ffffff;
+                                background: #BF3119; 
+                            }
+
+                            &__row {
+                                color: #666666;
+                                @include hover-pointer();
+
+                                &:hover {
+                                    background-color: #c8c8c8;
+                                }
+
+                                &__desc {
+                                    position: relative;
+                                    display: inline-block;
+                                    height: 100%;
+                                    width: auto;
+
+                                    .en & {
+                                        right: -5px;
+                                    }
+
+                                    .he & {
+                                        left: -5px; 
+                                    }
+                                }
+
+                                .upload-icon {
+                                    &__image,
+                                    &__video,
+                                    &__ftree {
+                                        display: inline-block;
+                                    }
+
+                                    &__image {
+                                        position: relative;
+                                        top: 3px;
+                                        width: 17px;
+                                        height: 18px;
+                                    }
+
+                                    &__video {
+                                        position: relative;
+                                        top: 3px;
+                                        width: 22px;
+                                        height: 17px;
+
+                                        .en & {
+                                            margin-left: -3px;
+                                        }
+
+                                        .he & {
+                                            margin-right: -3px;
+                                        }
+                                    }
+
+                                    &__ftree {
+                                        position: relative;
+                                        top: 3px;
+                                        width: 16px;
+                                        height: 18px;
+
+                                        .en & {
+                                            margin-left: -1px;
+                                        }
+
+                                        .he & {
+                                            margin-right: -1px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+            }
         }
     }
 }
