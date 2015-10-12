@@ -63,22 +63,9 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
             return user.name;
         }
     });
-
-    //this.top_menu();
 };
 
 HeaderCtrl.prototype = {
-
-    /*top_menu : function() {
-        $('nav.menu ul.nav > li').each(function() {
-            var li_width            = $(this).width(),
-                item_before         = $(this).children('.item-before');
-
-            item_before.css('border-left-width', li_width/2);
-            item_before.css('border-right-width', li_width/2);
-            item_before.removeClass('disable');
-        });
-    },*/
 
     signin: function() {
         this.authenticate();

@@ -19,14 +19,6 @@ angular.module('main').
 						element[0].scrollTop = 0;
 					}
 				});
-
-/*				angular.element($window).bind('scroll', function() {
-					if (element[0].scrollTop != 0 && scope.sub_header_state != 'closed') {
-						scope.$apply(function(scope) {
-							scope.sub_header_state = 'closed';
-						});
-					}
-				});*/
 			}
 		}
 	}]);
