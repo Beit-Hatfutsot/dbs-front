@@ -9,7 +9,6 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, p
 	this.plumbConnectionManager = plumbConnectionManager;
 	this.langManager = langManager;
 	this.header = header;
-
 	this.dragging = false;
 
 	Object.defineProperty(this, 'mjs_data', {

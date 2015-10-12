@@ -1,0 +1,46 @@
+<div class="newsletter-popup__content">
+    <h2 class="widgettitle">
+        <en>Are you part of the story?</en>
+        <he>רוצים להיות חלק מהסיפור?</he>
+    </h2>
+    <div class="widgetcontent">
+        <div class="pre-text">
+            <en>Add your email and you will never miss out on family events, exhibition openings and deals on our shops!</en>
+            <he>הוסיפו את המייל שלכם כדי לא להחמיץ עדכונים, חידושים, המון סיפורים מרחקים ועוד...</he>
+        </div>
+        <form action="http://www.bh.org.il/wp-content/themes/bh/functions/widgets/active-trail-newsletter/newsletter-api.php" method="post">
+            <small>
+                <en>Your Email:</en>
+                <he>האימייל שלך:</he>
+            </small>
+            <input id="widget-active_trail_newsletter-4-mm_newemail" class="mm_newemail" name="widget-active_trail_newsletter[4][mm_newemail]" type="text" placeholder="{{(lang=='en')?'Email Address':'כתובת המייל'}}">
+            <!-- <div>
+                <en>Email address is missing or incorrect</en>
+                <he></he>
+            </div> -->
+            <div class="newsletter-groups">
+                <small>
+                    <en>Choose Language:</en>
+                    <he>בחר שפה:</he>
+                </small>
+                <input type="checkbox" name="widget-active_trail_newsletter[4][mm_key][]" id="widget-active_trail_newsletter-4-mm_key[registration-form-en]" value="registration-form-en">
+                <label for="widget-active_trail_newsletter-4-mm_key[registration-form-en]">
+                    <span>English</span>
+                </label>
+                <input type="checkbox" name="widget-active_trail_newsletter[4][mm_key][]" id="widget-active_trail_newsletter-4-mm_key[registration-form-sp]" value="registration-form-sp">
+                <label for="widget-active_trail_newsletter-4-mm_key[registration-form-sp]">
+                    <span>Español</span>
+                </label>
+                <input type="checkbox" name="widget-active_trail_newsletter[4][mm_key][]" id="widget-active_trail_newsletter-4-mm_key[registration-form-he]" value="registration-form-he">
+                <label for="widget-active_trail_newsletter-4-mm_key[registration-form-he]">
+                    <span>עברית</span>
+                </label>
+            </div>
+            <!-- <div id="widget-active_trail_newsletter-4-newsletterErr" class="errph hide">Please check at least one newsletter name</div> -->
+            <input class="newsletter-submit" type="submit" ng-value="(lang=='en')?'Register':'הרשמה'">
+        </form>
+    </div>
+    <div>  
+        <icon position="[-224, -306]" class="close-button" ng-click="popover.close()"></icon>
+    </div>
+</div>
