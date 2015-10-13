@@ -52,7 +52,7 @@
                     }
                 }
                 .item-wrapper {
-                    box-shadow: 0px 0px 3px #888888;
+                    @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
                     background: #ffffff;
                 }
 
@@ -279,7 +279,7 @@
                                     width: 10px;
                                     background: #FAAE34;
                                     @include skew(16deg);
-                                    box-shadow: 17px 312px 29px 8px rgba(0,0,0,0.75);
+                                    //box-shadow: 17px 312px 29px 8px rgba(0,0,0,0.75);
                                 }
                             }
                         
@@ -474,7 +474,7 @@
                 width: 306px;
                 height: 46px;
                 color: #B2361A;
-                @include item-shadow();
+                @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
                 background-color: #ffffff;
                 margin-bottom: 15px;
                 font-weight: 600;
@@ -514,6 +514,20 @@
 
             .item-preview {
                 @extend %item-preview;
+                .type {
+                    @extend %item-type;
+                    bottom: 10px;
+                }
+
+                &:hover {
+                    %item-type {
+                        width: 28px;
+                    }
+                    .type-desc-container {
+                        opacity: 0;
+                        width: 0; 
+                    }
+                }
             }
         }
     }

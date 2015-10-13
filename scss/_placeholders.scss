@@ -122,7 +122,7 @@
 	transition: width 1s;
 	white-space: nowrap;
 	line-height: 14px;
-	border: 1px solid #CBCBCB;
+	@include box-shadow(0 -1px 6px 0 rgba(0,0,0,0.2));
 
 	.en & {
 		right: -9px;
@@ -151,7 +151,7 @@
 	}
 
 	&--thumbData {
-		width: 60px;
+		width: 76px;
 
 		.en & {
 			right: -26px;
@@ -166,8 +166,7 @@
 			width: 0;
 			height: 0;
 			border-top: solid 26px transparent;
-			
-			top: -2px;
+			top: 0;
 
 			.en & {
 				border-left: solid 7px #f6f6f6;
@@ -245,7 +244,7 @@
 	width: 306px;
 	height: 150px;
 	margin: 0 0 26px;
-	@include item-shadow();
+	@include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
 	@include hover-pointer(); 
 
 	&:hover {
@@ -255,14 +254,6 @@
 			&--nothumb {
 				width: initial;
 			}
-		}
-
-		%item-type {
-			width: 28px;
-		}
-		.type-desc-container {
-			opacity: 0;
-			width: 0;
 		}
 	}
 

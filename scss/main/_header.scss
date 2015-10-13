@@ -225,7 +225,7 @@
                         border: 1px solid #c2c2c2;
                         @include border-radius(3px);
                         background-color: #e6e6e6;
-                        @include item-shadow();
+                        @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
 
                         .en & {
                             left: -144px;
@@ -520,8 +520,10 @@
                         position: absolute;
                         margin-top: 6px;
                         display: none;
+                        @include box-shadow(0 0 6px 1px rgba(0,0,0,0.2));
 
                         &.signed {
+                            box-shadow: none;
                             .en & {
                                 left: -38px;
                             }
@@ -541,7 +543,7 @@
                             &.signed {
                                 margin-bottom: 6px;
                                 @include border-radius(4x);
-                                @include item-shadow();
+                                @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
                                
                                 .en & {
                                     padding: 4px 94px 4px 16px;
@@ -736,6 +738,7 @@
                             z-index: 3;
                             top: 6px;
                             background: #e6e6e6;
+                            @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
                             display: none;
 
                             &__title, &__row {
