@@ -66,7 +66,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'item-view',
             url: '/item/:collection/:id',
             controller: 'ItemCtrl as itemController',
-            templateUrl: 'templates/main/item.html'
+			templateUrl: function(params) {
+				return 'templates/item/'+params.collection+'.html'
+			}
+
         },
 
         {
