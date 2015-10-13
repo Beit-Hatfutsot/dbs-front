@@ -25,10 +25,11 @@ angular.module('main', [
     'plumb',
     'rcSubmit',
     'gedcomParser',
+	'hc.marked'
     ]).
-config([
-'$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', '$provide', '$sceDelegateProvider',
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider) {
+config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
+	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider',
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider) {
 
     /*** State definitions go here ***/
     var states = [ 
@@ -65,7 +66,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'item-view',
             url: '/item/:collection/:id',
             controller: 'ItemCtrl as itemController',
-            templateUrl: 'templates/main/item.html'
+			templateUrl: function(params) {
+				return 'templates/item/'+params.collection+'.html'
+			}
+
         },
 
         {
@@ -203,6 +207,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         'self',
         new RegExp('^http[s]?:\/\/storage.googleapis.com\/bhs.*\.mp4$')
     ]);
+
+	markedProvider.setOptions({ breaks: true })
 }]).
 run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootScope, langManager, header) {
     
@@ -233,6 +239,5 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
 	});
-	marked.setOptions({ breaks: true })
 
 }]);

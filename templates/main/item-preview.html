@@ -25,10 +25,8 @@
 					<he>{{previewData.Header.He}}</he>
 				</div>
 				<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}"> 	
-					<div>
-						<en>{{previewData.UnitText1.En}}</en>
-						<he>{{previewData.UnitText1.He}}</he>
-					</div>
+            <en><span marked="previewData.UnitText1.En"></span></en>
+            <he><span marked="previewData.UnitText1.He"></span></he>
 				</div>
 			</div>
 			<div class="remove" ng-if="removable && !(previewData.ugc)"
