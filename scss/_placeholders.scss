@@ -1,3 +1,25 @@
+%arrows {
+	.arrow-left, .arrow-right {
+		position: absolute;
+		top: 50%;
+		width: 0;
+		height: 0;
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;
+		cursor: pointer;
+		opacity: 0;
+	}
+
+	.arrow-left {
+		border-right: 25px solid #FEB032;
+		left: 5%;
+	}
+	.arrow-right {
+		border-left: 25px solid #FEB032;
+		right: 5%;
+	}
+}
+
 .gallery-modal {
 	position: relative;
 	width: 100%;
@@ -8,6 +30,7 @@
 	}
 
   	&__header {
+  		position: relative;
   		width: 100%;
   		padding: 12px 22px;
   		background-color: #fff;
@@ -19,7 +42,7 @@
   	&__stage {
   		position: relative;
   		background-color: #676767;
-  		height: 530px;
+  		height: 800px;
   		overflow: hidden;
 
   		&:hover {
@@ -36,42 +59,41 @@
             top: 50%;
             @include translate(-50%, -50%);
         }
-
-  		.arrow-left, .arrow-right {
-  			position: absolute;
-  			top: 50%;
-  			width: 0;
-			height: 0;
-			border-top: 15px solid transparent;
-			border-bottom: 15px solid transparent;
-			cursor: pointer;
-			opacity: 0.2;
-			transition: opacity 0.8s;
-  		}
-
-  		.arrow-left {
-  			border-right: 25px solid #FEB032;
-  			left: 5%;
-  		}
-  		.arrow-right {
-			border-left: 25px solid #FEB032;
-			right: 5%;
-		}
+        .arrows{
+        	@extend %arrows;
+        }
   	}
 
   	&__info {
   		width: 100%;
   		display: flex;
+  		position: relative;
+  		margin-bottom: -70px;
+
 
   		&__picture-info {
-  			width: 400px;
+  			width: 50%;
   			color: #888888;
-  			padding: 14px;
+  			padding: 14px 14px 0;
+  			@include box-shadow (0px -2px 7px 0 #999);
+  			font-size: 14px;
+  			line-height: 26px;
+
+  			.title {
+  				font-weight: 600;
+  				color: #666;
+  			}
+
+  			.en & {
+  				margin-bottom: 10px;
+  			}
   		}
 
   		&__gallery-preview {
   			background-color: #E6E6E6;
-  			width: 400px;
+  			width: 50%;
+  			padding-bottom: 98px;
+  			@include box-shadow (-1px -2px 7px 0 #999);
 
   			&__title {
 	  			width: 100%;
@@ -84,29 +106,38 @@
 	  		&__minified-picture {
 	  			padding: 0px 0px;
 				display: inline-block;
-				white-space: nowrap;
-				overflow: hidden;
-				width: 80%;
-				vertical-align: middle;
-				margin-left: 10%;
+				margin: 24px;
 
 				li {
 		  			margin: 0 10px;
 		  			display: inline-block;
+		  			padding: 4px;
 		  		}
 
 		  		li.active {
-		  			border: 2px solid #FEB032;
+
+		  			img {
+		  				border: 2px solid #feb032;
+		  				@include box-shadow(0 0 10px -1px #000);
+		  			}
 		  		}
 
 		  		img {
 		  			width: auto;
-		  			height: 50px;
+		  			height: 90px;
 		  			cursor: pointer;
 		  			vertical-align: middle;
+		  			
+		  			&:hover {
+		  				@include box-shadow(0 0 10px -1px #000);
+		  			}
 		  		}
 	  		}
   		}
+  	}
+
+  	&__bottom-bar {
+  		@extend %bottom-bar;
   	}
 }
 
@@ -116,13 +147,12 @@
 	width: 116px;
 	height: 26px;
 	background: #f6f6f6;
-	color: #b4b4b4; 
-	font-size: 11px;
-	padding: 3px 5px 2px;
+	color: #999; 
+	font-size: 10px;
 	transition: width 1s;
 	white-space: nowrap;
-	line-height: 14px;
-	@include box-shadow(0 -1px 6px 0 rgba(0,0,0,0.2));
+	line-height: 16px;
+	@include box-shadow(0 0 6px 0 #999);
 
 	.en & {
 		right: -9px;
@@ -151,7 +181,12 @@
 	}
 
 	&--thumbData {
-		width: 76px;
+		width: 80px;
+
+		.type-desc-container {
+			width: 54px;
+			transition: width 1s;
+		}
 
 		.en & {
 			right: -26px;
@@ -181,6 +216,7 @@
 
 	.type-icon-container {
 		display: inline-block;
+		margin: 0 5px;
 
 		.surname-icon {
 			width: 19px;
@@ -223,11 +259,9 @@
 		width: 84px;
 		overflow: hidden;
 		position: absolute;
-		display: block;
+		display: inline-block;
 		top: 6px;
-		transition: opacity 0.8s, width 0.8s;
-		transition-timing-function: ease-out;
-        font-weight: normal;
+		transition: width 1s;
 		.en & {
 			left: 28px;
 		}
@@ -244,12 +278,12 @@
 	width: 306px;
 	height: 150px;
 	margin: 0 0 26px;
-	@include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
+	@include box-shadow(0 0 6px 0 #999);
 	@include hover-pointer(); 
 
 	&:hover {
 		.white-part1 {
-			width: 248px;
+			width: 240px;
 
 			&--nothumb {
 				width: initial;

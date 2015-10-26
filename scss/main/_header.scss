@@ -50,7 +50,7 @@
 
                             .title {
                                 line-height: 16px;
-                                font-size: 16px;
+                                font-size: 15px;
                                 font-weight: 600;
                                 color: #ffffff;
                             }
@@ -225,7 +225,7 @@
                         border: 1px solid #c2c2c2;
                         @include border-radius(3px);
                         background-color: #e6e6e6;
-                        @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
+                        @include box-shadow(0 0 6px 0 #999);
 
                         .en & {
                             left: -144px;
@@ -520,7 +520,7 @@
                         position: absolute;
                         margin-top: 6px;
                         display: none;
-                        @include box-shadow(0 0 6px 1px rgba(0,0,0,0.2));
+                        @include box-shadow(0 0 6px 1px #999);
 
                         &.signed {
                             box-shadow: none;
@@ -543,7 +543,7 @@
                             &.signed {
                                 margin-bottom: 6px;
                                 @include border-radius(4x);
-                                @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
+                                @include box-shadow(0 0 6px 0 #999);
                                
                                 .en & {
                                     padding: 4px 94px 4px 16px;
@@ -577,7 +577,7 @@
 
                         &.signed {
                             width: 55px;
-                            height: 54px;
+                            height: 55px;
                             display: inline-block;
                         }
                     }
@@ -738,7 +738,7 @@
                             z-index: 3;
                             top: 6px;
                             background: #e6e6e6;
-                            @include box-shadow(0 0 6px 0 rgba(0,0,0,0.2));
+                            @include box-shadow(0 0 6px 0 #999);
                             display: none;
 
                             &__title, &__row {

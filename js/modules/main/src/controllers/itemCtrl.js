@@ -23,6 +23,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.itemTypeMap = itemTypeMap;
 	this.pull_wizard_related();
 	this.parsed_wsearch_results = [];
+	this._Index = 0;
 
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
@@ -155,11 +156,26 @@ ItemCtrl.prototype = {
     	this.$state.go('ftrees', this.wsearch_individuals_query_params);
 	},
 
+	showPrev: function () {
+		this._Index = (this._Index > 0) ? --this._Index : this.item_data.Pictures.length - 1;
+	},
+
+	showNext: function () {
+		this._Index = (this._Index < this.item_data.Pictures.length - 1) ? ++this._Index : 0;
+	},
+
+	isActive: function (index) {
+		return this._Index === index;
+	},
+	showPhoto: function (index) {
+		this._Index = index;
+	},
+
 	open_gallery: function() {
 		var body = document.getElementsByTagName('body')[0],
 			gallery = this.item_data;
 		body.addClassName('backdrop');
-	    angular.element()
+	    //angular.element()
 	    var authModalInstance = this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
@@ -174,7 +190,20 @@ ItemCtrl.prototype = {
 	    finally(function() {
 	    	body.removeClassName('backdrop');
 	    });
+	},
+
+	print: function () {
+		window.print();
+	},
+
+	put_additional_pic: function () {
+		for (var i = 0; i < this.item_data.Pictures.length; i++) {
+			var pic = this.item_data.Pictures[i];
+			if (pic.IsPreview == "0") {
+				return "https://storage.googleapis.com/bhs-flat-pics/" + pic.PictureId + ".jpg";
+			}
 		}
+	}
 
 };
 

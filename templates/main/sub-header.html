@@ -8,10 +8,6 @@
 				<ng-include src="'templates/main/wizard-form.html'"></ng-include>
 			</div>
 			<div class="recently-viewed" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
-				<div class="recently-viewed__title">
-					<en>Recently<br>visited</en>
-					<he>נצפו<br>לאחרונה</he>
-				</div>
 				<div 	class="recently-arrow" 
 						ng-show="recentlyViewedCtrl.show_arrows" 
 						ng-click="recentlyViewedCtrl.scroll_left()"

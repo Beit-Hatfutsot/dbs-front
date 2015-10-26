@@ -35,7 +35,6 @@
 									<en> + {{itemController.item_data.Pictures.length-1}} pictures<br/>Click to view</en>
 									<he> + {{itemController.item_data.Pictures.length-1}} pictures<br/>ליחצו לצפייה</he> 
 								</div>
-								<!-- <div  class="diagonal-separator" ng-class="i$index" ng-repeat="left in [-63, -43, -23]" ng-show="$index == 0 || itemController.item_data.Pictures.length > 1" style="left:{{left}}px;"></div> -->
 								<div class="diagonal-block">
 									<div  class="diagonal-separator" style="left:-63px; opacity:1;"></div>
 									<div  class="diagonal-separator" style="left:-43px; opacity:0.7;"></div>
@@ -67,13 +66,13 @@
 									<en>Share this item</en>
 									<he>פרסמו</he>
 				                </div>
-                        <tweet text="{{title}} via @BeitHatfutsot"></tweet>
+                        		<tweet text="{{title}} via @BeitHatfutsot"></tweet>
 				                <fb-share></fb-share>
 							</div>
 						</div>
 						<mjs-widget item="itemController.item_data"></mjs-widget>
 						<div class="check-related">
-							<div class="check-related__text">
+							<div class="check-related__text vertical-middle">
 								<en>Check the<br>related items</en>
 								<he>באותו עניין</he>
 							</div>
@@ -86,8 +85,8 @@
 		<div class="right-side">
 			<div ng-if="itemController.search_result" class="search-results">
 				<div class="search-results__header">
-					<en>Your Search Results:</en>
-					<he>תוצאות חיפוש:</he>
+					<en>Your Search Results</en>
+					<he>תוצאות חיפוש</he>
 				</div>
 				<div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
 					<p class="vertical-middle">

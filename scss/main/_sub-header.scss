@@ -129,27 +129,6 @@
 					opacity: 0;
 				}
 
-				&__title {
-					@include rotate();
-					display: inline-block;
-					vertical-align: top;
-					width: 76px;
-					height: 33px;
-					text-align: center;
-					margin-top: 18px;
-					font-size: 12px;
-
-					.en & {
-						padding-top: 6px;
-						border-top: 1px solid #d9d9d9; 
-					}
-
-					.he & {
-						padding-bottom: 6px;
-						border-bottom: 1px solid #d9d9d9; 
-					}
-				}
-
 				.recently-arrow {
 					display: inline-block;
 					vertical-align: middle;
@@ -260,31 +239,61 @@
 					position: relative;
 					display: inline-block;
 					vertical-align: top;
-					width: 60px;
-					height: 60px;
+					width: 70px;
+					height: 50px;
 					margin: 6px 0;
 					@include border-radius(4px);
 					@include hover-pointer();
 					overflow: hidden; 
+					@include box-shadow(0 0 5px 0 #999);
+					background-color: #f4f4f4;
 					
 					.en & {
-						margin-right: 4px;
+						margin-right: 8px;
 					}
 
 					.he & {
-						margin-left: 4px;
+						margin-left: 8px;
 					}
 
+					.title {
+							position: absolute;
+							max-width: 60px;
+							max-height: 40px;
+							white-space: normal;
+							visibility: hidden;
+							font-size: 9px;
+  							overflow: hidden;
+  							left: 50%;
+  							top: 50%;
+  							@include translate(-50%, -50%);
+						}
+
 					&--text {
-						padding: 16px 8px;
-						font-size: 9px;
-						background: #ffffff;
-						@include box-shadow(0 0 3px 1px #eaeaea);
+
+						.title {
+								visibility: visible;
+							}
+
+						&:hover {
+							background-color: #e6e6e6;
+						}
 					}
 
 					&--pic {
 						position: relative;
 						overflow: hidden;
+
+						&:hover {
+
+							img {
+								opacity: 0.3;
+							}
+
+							.title {
+								visibility: visible;
+							}
+						}
 
 						img {
 							position: absolute;

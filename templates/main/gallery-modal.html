@@ -1,13 +1,15 @@
 <div class='gallery-modal'>
-   <icon class="xsign" position="[-220, -363]" ng-click="dismiss()"></icon>
     <div class="gallery-modal__header">
-       <en>{{gallery.Header.En}} Pictures</en> 
-       <he>{{gallery.Header.En}} Pictures</he>
+       <en>{{gallery.Header.En}}</en> 
+       <he>{{gallery.Header.He}}</he>
+       <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
     <div class="gallery-modal__stage">
         <img ng-repeat="pic in gallery.Pictures" ng-show="isActive($index)" ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" alt="More Images"/> 
-        <div class="arrow-left" ng-click="showPrev()"></div>
-        <div class="arrow-right" ng-click="showNext()"></div>
+        <div class="arrows" ng-if="gallery.Pictures.length > 1">
+            <div class="arrow-left" ng-click="showPrev()"></div>
+            <div class="arrow-right" ng-click="showNext()"></div>
+        </div>
     </div>
 
     <div class="gallery-modal__info">
@@ -19,28 +21,36 @@
         </div> 
         <div class="gallery-modal__info__gallery-preview">
             <div class="gallery-modal__info__gallery-preview__title">
-                <en>{{gallery.Header.En}} Pictures ({{gallery.Pictures.length}} found)</en>
-                <he>{{gallery.Header.He}} Pictures ({{gallery.Pictures.length}} found)</he>
+                <en>{{gallery.Header.En}} ({{gallery.Pictures.length}} Pictures found)</en>
+                <he>{{gallery.Header.He}} ({{gallery.Pictures.length}} תמונות נמצאו)</he>
             </div>
              <ul class="gallery-modal__info__gallery-preview__minified-picture">
-                <li ng-repeat="pic in gallery.Pictures" ng-class="{'active':isActive($index)}" ng-hide="isHidden($index)">
+                <li ng-repeat="pic in gallery.Pictures" ng-class="{'active':isActive($index)}">
                     <img ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" ng-click="showPhoto($index)"/>
                 </li>
             </ul>
         </div>
-        <!-- <div class="gallery-modal__info__bottom-bar">
-            <div class="footer">
-                <div class="share-item vertical-middle">
-                    <div class="share-item-header">
-                        <en>Share this item</en>
-                        <he>פרסמו</he>
-                    </div>
-                    <tweet text=""></tweet>
-                    <fb-share></fb-share>
-                </div>
-            </div>
-            <mjs-widget item="itemController.item_data"></mjs-widget>
-        </div> -->
     </div>
-
+    <div class="gallery-modal__bottom-bar">
+        <div class="footer modal-gallery">
+            <div class="share-item vertical-middle">
+                <div class="share-item-header">
+                    <en>Share this item</en>
+                    <he>פרסמו</he>
+                </div>
+                <tweet text="{{title}} via @BeitHatfutsot"></tweet>
+                <fb-share></fb-share>
+            </div>
+            <div id="printbutton"class="print-icon-wrapper vertical-middle modal-gallery" ng-click="itemController.print_item()">
+                <span class="print-descr">
+                    <en>Print</en>
+                    <he>הדפסה<he>
+                </span>
+                <span class="print-icon">
+                    <icon position="[-411, -408]" alt-text="{en: 'Print', he: 'הדפסה'}" hover-offset="[0, -35]"></icon>
+                </span>
+            </div>
+        </div>
+        <mjs-widget item="gallery.Pictures"></mjs-widget>
+    </div>
 </div>

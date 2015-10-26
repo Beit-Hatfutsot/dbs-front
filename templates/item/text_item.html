@@ -3,30 +3,37 @@
 		<div class="item-container">
 			<div class="item">
 				<div class="item__header">
-					<div class="text">
-						<en>
-							<span><span ng-if="itemController.search_result.place.Header.En == itemController.item_data.Header.En || itemController.search_result.name.Header.En == itemController.item_data.Header.En">Your Search Result for </span>{{itemController.item_data.Header.En}} </span>
-						</en>
-						<he>
-							<span><span ng-if="itemController.search_result.name.Header.He == itemController.item_data.Header.He || itemController.search_result.name.Header.He == itemController.item_data.Header.He">תוצאות חיפוש עבור </span> 
-							{{itemController.item_data.Header.He}}</span>
-						</he>
-					</div>
-				</div>
+                    <div class="text">
+                        <en>
+                            <span><span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
+                                Your search result for {{itemController.item_data.Header.En}}</span>Your selected item</span>
+                        </en>
+                        <he>
+                            <span><span ng-if="(itemController.search_result.name.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
+                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}</span>נושא הנבחר</span>
+                        </he>
+                    </div>
+                </div>
 				<div class="item-wrapper">
-					<div class="item__content">
+					<div id="printSection" class="item__content">
 						<div 	class="item__content__media-container"
-								ng-class="{'item__content__media-container--movie': itemController.item_type === 'movies'}" 
 								ng-click="itemController.open_gallery()"
-								ng-if="itemController.item_data.video_url || itemController.item_data.main_image_url">
-							<ng-switch on="itemController.item_type">
-								<video 	ng-switch-when="movies" ng-src="{{itemController.item_data.video_url}}" controls autoplay type="video/mp4"></video>
-									<img 	ng-switch-default 
+								ng-if="itemController.item_data.main_image_url">
+								<div class="main-img-wrapper" ng-class="{'main-img-wrapper--display-more': itemController.item_data.Pictures.length > 1}">
+									<img 	class="picture"
+											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
 											ng-src="{{itemController.item_data.main_image_url}}" 
 											alt="Item Image"
 											prevent-rightclick>
-							</ng-switch>
-							<div class="notification vertical-middle" ng-hide="itemController.item_type === 'movies'">
+								</div>
+								<div class="add-img-wrapper" ng-if="itemController.item_data.Pictures.length > 1">
+									<img  	class="picture"
+											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
+											prevent-rightclick
+											ng-src="{{itemController.put_additional_pic()}}">
+									<div  class="image-separator"></div>
+								</div>
+							<div class="notification vertical-middle">
 								<en>Click to view</en>
 								<he>ליחצו לצפייה</he>
 							</div>
@@ -35,7 +42,6 @@
 									<en> + {{itemController.item_data.Pictures.length-1}} pictures<br/>Click to view</en>
 									<he> + {{itemController.item_data.Pictures.length-1}} pictures<br/>ליחצו לצפייה</he> 
 								</div>
-								<!-- <div  class="diagonal-separator" ng-class="i$index" ng-repeat="left in [-63, -43, -23]" ng-show="$index == 0 || itemController.item_data.Pictures.length > 1" style="left:{{left}}px;"></div> -->
 								<div class="diagonal-block">
 									<div  class="diagonal-separator" style="left:-63px; opacity:1;"></div>
 									<div  class="diagonal-separator" style="left:-43px; opacity:0.7;"></div>
@@ -49,11 +55,11 @@
 								<he>{{itemController.item_data.Header.He}}</he>
 							</h2>
 							<item-type type="itemController.item_type" image="itemController.item_data.thumbnail.data"></item-type>
+							<mjs-widget item="itemController.item_data"></mjs-widget>
 						</div>
 						<div class="item__article-text">
-							<mjs-widget item="itemController.item_data"></mjs-widget>
-              <en><span marked="itemController.item_data.UnitText1.En"></span></en>
-              <he><span marked="itemController.item_data.UnitText1.He"></span></he>
+			            	<en><span marked="itemController.item_data.UnitText1.En"></span></en>
+			              	<he><span marked="itemController.item_data.UnitText1.He"></span></he>
 						</div>
 						<div class="scroll-to-top"onclick="window.scroll(0, 0)">
 							<en>Back to top</en>
@@ -61,33 +67,41 @@
 						</div>
 					</div>
 					<div class="item__bottom-bar">
-						<div class="footer">
-							<div class="share-item vertical-middle">
-								<div class="share-item-header">
-									<en>Share this item</en>
-									<he>פרסמו</he>
-				                </div>
-                        <tweet text="{{title}} via @BeitHatfutsot"></tweet>
-				                <fb-share></fb-share>
+                        <div class="footer">
+                            <div class="share-item vertical-middle">
+                                <div class="share-item-header">
+                                    <en>Share this item</en>
+                                    <he>פרסמו</he>
+                                </div>
+                                <tweet text="{{title}} via @BeitHatfutsot"></tweet>
+                                <fb-share></fb-share>
+                            </div>
+                            <div id="printbutton" class="print-icon-wrapper vertical-middle" ng-click="itemController.print()">
+                            	<span class="print-descr">
+                            		<en>Print</en>
+                            		<he>הדפסה<he>
+                            	</span>
+                            	<span class="print-icon" ng-click="window.print()">
+                            		<icon position="[-411, -408]" alt-text="{en: 'Print', he: 'הדפסה'}" hover-offset="[0, -35]"></icon>
+                            	</span>
 							</div>
-						</div>
-						<mjs-widget item="itemController.item_data"></mjs-widget>
-						<div class="check-related">
-							<div class="check-related__text">
+                        </div>
+                        <mjs-widget item="itemController.item_data"></mjs-widget>
+                        <div class="check-related vertical-middle">
+                           <div class="check-related__text vertical-middle">
 								<en>Check the<br>related items</en>
 								<he>באותו עניין</he>
 							</div>
-							<div class="check-related__right-arrow"></div>
-						</div>
-					</div>
+                        </div>
+                    </div>
 				</div>	
 			</div>
 		</div>
 		<div class="right-side">
 			<div ng-if="itemController.search_result" class="search-results">
 				<div class="search-results__header">
-					<en>Your Search Results:</en>
-					<he>תוצאות חיפוש:</he>
+					<en>Your Search Results</en>
+					<he>תוצאות חיפוש</he>
 				</div>
 				<div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
 					<p class="vertical-middle">
@@ -103,7 +117,7 @@
 					</p>
 					<item-type type="'places'"></item-type>
 				</div>
-				<div class="search-results__field" ng-if="itemController.search_result.individuals" ng-click="itemController.goto_tree()">
+				<div class="search-results__field" ng-if="itemController.search_result.individuals.isNotEmpty()" ng-click="itemController.goto_tree()">
 					<p class="vertical-middle">
 						<span ng-if="itemController.search_result.name.isNotEmpty()">
 							<en>{{itemController.search_result.name.Header.En}}</en>
