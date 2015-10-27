@@ -7,7 +7,8 @@
     <div class="gallery-modal__stage">
         <img ng-repeat="pic in gallery.Pictures" 
              ng-show="isActive($index)" 
-             ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" alt="More Images"
+             ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
+             alt="More Images"
              prevent-rightclick/> 
         <div class="arrows" ng-if="gallery.Pictures.length > 1">
             <div class="arrow-left" ng-click="showPrev()"></div>

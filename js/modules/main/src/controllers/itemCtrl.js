@@ -66,7 +66,6 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 ItemCtrl.prototype = {
 	get_item: function() {
 		var self = this;
-
 		this.item.get(this.$stateParams.collection, this.$stateParams.id).
 			then(function(item_data) {
 
@@ -172,19 +171,29 @@ ItemCtrl.prototype = {
 		this._Index = index;
 	},
 
-	open_gallery: function() {
+	open_gallery: function (index) {
+		console.log(index);
+		if (index == undefined) {
+			index = this._Index;
+		}
 		var body = document.getElementsByTagName('body')[0],
 			gallery = this.item_data;
+
 		body.addClassName('backdrop');
 	    //angular.element()
 	    var authModalInstance = this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
 	     	size: 'lg',
+
 	     	resolve : {
 	     		gallery: function () {
 	     			return gallery
-	     	}}
+	     	},
+	     		index: function () {
+	     			return index
+	     		}
+	     	}
 	    });
 
 	    authModalInstance.result.
@@ -197,13 +206,26 @@ ItemCtrl.prototype = {
 		window.print();
 	},
 
-	put_additional_pic: function () {
+	get_main_pic_index: function() {
+		for (var i = 0; i < this.item_data.Pictures.length; i++) {
+			var pic = this.item_data.Pictures[i];
+			if (pic.IsPreview == "1") {
+				return i;
+			}
+		}
+	},
+
+	get_additional_pic_index: function() {
 		for (var i = 0; i < this.item_data.Pictures.length; i++) {
 			var pic = this.item_data.Pictures[i];
 			if (pic.IsPreview == "0") {
-				return "https://storage.googleapis.com/bhs-flat-pics/" + pic.PictureId + ".jpg";
+				return i;
 			}
 		}
+	},
+
+	put_additional_pic: function () {
+		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
 	}
 
 };
