@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="item-wrapper">
-                    <div class="item__content">
+                    <div printSection class="item__content">
                         <div    class="item__content__media-container"
                                 ng-class="{'item__content__media-container--photoUnit': itemController.item_type === 'photoUnits'}">
                             <img    class="picture"
@@ -45,8 +45,6 @@
                             <div class="gallery-modal__info__picture-info">
                                 <en><span class="title">Description: </span>{{itemController.item_data.UnitText1.En}}</en><br/>
                                 <he><span class="title">תיאור: </span>{{itemController.item_data.Header.En}}</he>
-                                <en><span class="title">Photo Date: </span>{{itemController.item_data.PeriodDesc.En}}</en><br/>
-                                <he><span class="title">תאריך הצילום: </span>{{itemController.item_data.PeriodDesc.He}}</he>
                                 <en>© All Rights Reserved</en><br/>
                                 <he>© כל הזכויות שמורות</he>
                             </div> 

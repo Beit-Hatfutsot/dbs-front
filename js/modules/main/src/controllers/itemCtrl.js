@@ -167,6 +167,7 @@ ItemCtrl.prototype = {
 	isActive: function (index) {
 		return this._Index === index;
 	},
+	
 	showPhoto: function (index) {
 		this._Index = index;
 	},

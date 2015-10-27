@@ -1,4 +1,3 @@
-<!-- <ng-include src="'templates/item/text_item.html'"></ng-include> -->
 <div id="item-page-container">
     <div id="item-page" ng-show="itemController.content_loaded">
         <div class="item-container">
@@ -16,13 +15,10 @@
                     </div>
                 </div>
                 <div class="item-wrapper">
-                    <div class="item__content">
+                    <div id="printSection" class="item__content">
                         <div    class="item__content__media-container"
                                 ng-class="{'item__content__media-container--movie': itemController.item_type === 'movies'}">
                                 <video ng-src="{{itemController.item_data.video_url}}" controls type="video/mp4" prevent-rightclick autoplay></video>
-                            <div class="notification vertical-middle" ng-hide="itemController.item_type === 'movies'">
-                                <span></span><!-- //add video sign -->
-                            </div>
                         </div> 
                         <div class="header-wrapper">
                             <h2 class="item__article-header">
@@ -34,10 +30,18 @@
                         </div>
                         <div class="gallery-modal__info">
                             <div class="gallery-modal__info__picture-info">
-                                <en>Title: {{gallery.Header.En}}</en><br/>
-                                <en>Description:</en><br/>
-                                <en>Photo source: {{gallery.EditorRemarks}}</en><br/>
-                                <en>License type: © All Rights Reserved</en>
+                                <en><span class="title">Title: </span>{{itemController.item_data.Header.En}}</en><br/>
+                                <he><span class="title">כותרת: </span>{{itemController.item_data.Header.He}}</he>
+                                <en><span class="title">In this film: </span>{{itemController.item_data.UnitText1.En}}</en><br/>
+                                <he><span class="title">מה בסרט: </span>{{itemController.item_data.UnitText1.He}}</he>
+                                <en><span class="title">Film Length: </span>{{itemController.item_data.Minutes}}</en><br/>
+                                <he><span class="title">אורך הסרט: </span>{{itemController.item_data.Minutes}}</he>
+                                <en><span class="title">Production company: </span>{{itemController.item_data.ProductionCompany.En}}</en><br/>
+                                <he><span class="title">חברת הפקה: </span>{{itemController.item_data.ProductionCompany.He}}</he>
+                                <en><span class="title">Production Date: </span>{{itemController.item_data.ProductionYear}}</en><br/>
+                                <he><span class="title">תאריך הפקה: </span>{{itemController.item_data.ProductionYear}}</he>
+                                <en>© All Rights Reserved</en><br/>
+                                <he>© כל הזכויות שמורות</he>
                             </div> 
                             <div class="gallery-modal__info__gallery-preview">
                                 <div class="gallery-modal__info__gallery-preview__title">

@@ -18,6 +18,9 @@ var GalleryModalCtrl = function($scope, langManager, gallery, $modalInstance) {
 	$scope.dismiss = function () {
         $modalInstance.dismiss();
      };
+     $scope.print = function () {
+		window.print();
+	}
 };
 
 angular.module('main').controller('GalleryModalCtrl', ['$scope', 'langManager', 'gallery', '$modalInstance', GalleryModalCtrl]);
