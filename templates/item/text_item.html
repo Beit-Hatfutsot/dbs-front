@@ -17,20 +17,21 @@
 				<div class="item-wrapper">
 					<div id="printSection" class="item__content">
 						<div 	class="item__content__media-container"
-								ng-click="itemController.open_gallery()"
 								ng-if="itemController.item_data.main_image_url">
 								<div class="main-img-wrapper" ng-class="{'main-img-wrapper--display-more': itemController.item_data.Pictures.length > 1}">
 									<img 	class="picture"
 											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
 											ng-src="{{itemController.item_data.main_image_url}}" 
 											alt="Item Image"
+											ng-click="itemController.open_gallery(itemController.get_main_pic_index())"
 											prevent-rightclick>
 								</div>
 								<div class="add-img-wrapper" ng-if="itemController.item_data.Pictures.length > 1">
 									<img  	class="picture"
 											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
-											prevent-rightclick
-											ng-src="{{itemController.put_additional_pic()}}">
+											ng-click="itemController.open_gallery(itemController.get_additional_pic_index())"
+											ng-src="{{itemController.get_additional_pic_url()}}"
+											prevent-rightclick>
 									<div  class="image-separator"></div>
 								</div>
 							<div class="notification vertical-middle">

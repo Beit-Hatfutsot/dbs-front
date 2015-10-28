@@ -1,11 +1,15 @@
-<div class='gallery-modal'>
+<div id="printSection" class='gallery-modal'>
     <div class="gallery-modal__header">
        <en>{{gallery.Header.En}}</en> 
        <he>{{gallery.Header.He}}</he>
        <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
     <div class="gallery-modal__stage">
-        <img ng-repeat="pic in gallery.Pictures" ng-show="isActive($index)" ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" alt="More Images"/> 
+        <img ng-repeat="pic in gallery.Pictures" 
+             ng-show="isActive($index)" 
+             ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
+             alt="More Images"
+             prevent-rightclick/> 
         <div class="arrows" ng-if="gallery.Pictures.length > 1">
             <div class="arrow-left" ng-click="showPrev()"></div>
             <div class="arrow-right" ng-click="showNext()"></div>
@@ -14,17 +18,17 @@
 
     <div class="gallery-modal__info">
         <div class="gallery-modal__info__picture-info">
-            <en>Title: {{gallery.Header.En}}</en><br/>
-            <en>Description:</en><br/>
-            <en>Photo source: {{gallery.EditorRemarks}}</en><br/>
-            <en>License type: © All Rights Reserved</en>
+            <en><span class="title">Description: </span>{{gallery.UnitText1.En}}</en><br/>
+            <he><span class="title">תיאור: </span>{{gallery.item_data.Header.En}}</he>
+            <en>© All Rights Reserved</en><br/>
+            <he>© כל הזכויות שמורות</he>
         </div> 
         <div class="gallery-modal__info__gallery-preview">
             <div class="gallery-modal__info__gallery-preview__title">
                 <en>{{gallery.Header.En}} ({{gallery.Pictures.length}} Pictures found)</en>
                 <he>{{gallery.Header.He}} ({{gallery.Pictures.length}} תמונות נמצאו)</he>
             </div>
-             <ul class="gallery-modal__info__gallery-preview__minified-picture">
+            <ul class="gallery-modal__info__gallery-preview__minified-picture">
                 <li ng-repeat="pic in gallery.Pictures" ng-class="{'active':isActive($index)}">
                     <img ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" ng-click="showPhoto($index)"/>
                 </li>
@@ -41,7 +45,7 @@
                 <tweet text="{{title}} via @BeitHatfutsot"></tweet>
                 <fb-share></fb-share>
             </div>
-            <div id="printbutton"class="print-icon-wrapper vertical-middle modal-gallery" ng-click="itemController.print_item()">
+            <div id="printbutton"class="print-icon-wrapper vertical-middle modal-gallery" ng-click="print()">
                 <span class="print-descr">
                     <en>Print</en>
                     <he>הדפסה<he>
