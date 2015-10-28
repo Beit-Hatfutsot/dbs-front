@@ -1,10 +1,11 @@
+<div>
 <div id="printSection" class='gallery-modal'>
     <div class="gallery-modal__header">
        <en>{{gallery.Header.En}}</en> 
        <he>{{gallery.Header.He}}</he>
        <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
-    <div class="gallery-modal__stage">
+    <div class="gallery-modal__stage noselect">
         <img ng-repeat="pic in gallery.Pictures" 
              ng-show="isActive($index)" 
              ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
