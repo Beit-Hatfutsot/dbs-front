@@ -3,14 +3,22 @@
         <div class="item-container">
             <div class="item">
                 <div class="item__header">
-                    <div class="text">
+                   <div class="text">
                         <en>
-                            <span><span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
-                                Your search result for {{itemController.item_data.Header.En}}</span>Your selected item</span>
+                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
+                                Your search result for {{itemController.item_data.Header.En}} 
+                            </span>
+                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">
+                                Your selected item
+                            </span>
                         </en>
                         <he>
-                            <span><span ng-if="(itemController.search_result.name.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
-                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}</span>נושא הנבחר</span>
+                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
+                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}
+                            </span>
+                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">
+                                נושא הנבחר
+                            <span>
                         </he>
                     </div>
                 </div>
