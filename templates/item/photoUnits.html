@@ -1,4 +1,4 @@
-<div id="item-page-container">
+]<div id="item-page-container">
     <div id="item-page" ng-show="itemController.content_loaded">
         <div class="item-container">
             <div class="item">
@@ -43,8 +43,8 @@
                         </div>
                         <div class="gallery-modal__info">
                             <div class="gallery-modal__info__picture-info">
-                                <en><span class="title">Description: </span>{{itemController.item_data.UnitText1.En}}</en><br/>
-                                <he><span class="title">תיאור: </span>{{itemController.item_data.Header.En}}</he>
+                                <en><span class="title" ng-if="itemController.item_data.UnitText1.En.isNotEmpty()">Description: </span>{{itemController.item_data.UnitText1.En}}</en><br/>
+                                <he><span class="title" ng-if="itemController.item_data.UnitText1.He.isNotEmpty()">תיאור: </span>{{itemController.item_data.UnitText.He}}</he>
                                 <en>© All Rights Reserved</en><br/>
                                 <he>© כל הזכויות שמורות</he>
                             </div> 
