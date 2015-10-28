@@ -223,7 +223,7 @@ ItemCtrl.prototype = {
 		}
 	},
 
-	get_additional_pic: function () {
+	get_additional_pic_url: function () {
 		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
 	}
 
