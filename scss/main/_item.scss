@@ -452,15 +452,28 @@
                                   position: absolute;
                                   height: 100%;
                                   width: 370px;
-                                  transform: skew(16deg);
                                   display: inline-block;
-                                  left: -43px;
                                   overflow: hidden;
+
+                                  .en & {
+                                    transform: skew(16deg);
+                                    left: -43px;
+                                  }
+                                  .he & {
+                                    transform: skew(-16deg);
+                                    right: -43px;
+                                  }
 
                                 .picture {
 
                                     &--display-more {
-                                        transform: translate(-38%, -50%) skew(-16deg);
+                                        
+                                        .en & {
+                                            transform: translate(-38%, -50%) skew(-16deg);
+                                        }
+                                        .he & {
+                                            transform: translate(-38%, -50%) skew(16deg);
+                                        }
                                     }
 
                                     &:hover {
@@ -473,15 +486,28 @@
                                 background-color: #666666;
                                 height: 100%;
                                 width: 357px;
-                                transform: skew(16deg);
-                                left: 327px;
                                 display: inline-block;
                                 position: absolute;
                                 overflow: hidden;
 
+                                .en & {
+                                    transform: skew(16deg);
+                                    left: 327px;
+                                }
+                                .he & {
+                                    transform: skew(-16deg);
+                                    right: 327px;
+                                }
+
                                 .picture {
                                     &--display-more {
-                                        transform: translate(-50%, -50%) skew(-16deg);
+                                        
+                                        .en & {
+                                            transform: translate(-50%, -50%) skew(-16deg);
+                                        }
+                                        .he & {
+                                            transform: translate(-50%, -50%) skew(16deg);
+                                        }
                                     }
 
                                     &:hover {
@@ -494,7 +520,13 @@
                                 height: 100%;
                                 width: 10px;
                                 background: #FAAE34;
-                                left: 0;
+
+                                .en & {
+                                    left: 0;
+                                }
+                                .he & {
+                                    right: 0;
+                                }
                             }
                         }
 
