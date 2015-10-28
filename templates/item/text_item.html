@@ -30,7 +30,7 @@
 									<img  	class="picture"
 											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
 											ng-click="itemController.open_gallery(itemController.get_additional_pic_index())"
-											ng-src="{{itemController.put_additional_pic()}}"
+											ng-src="{{itemController.get_additional_pic_url()}}"
 											prevent-rightclick>
 									<div  class="image-separator"></div>
 								</div>

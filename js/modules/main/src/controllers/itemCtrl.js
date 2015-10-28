@@ -172,7 +172,6 @@ ItemCtrl.prototype = {
 	},
 
 	open_gallery: function (index) {
-		console.log(index);
 		if (index == undefined) {
 			index = this._Index;
 		}
@@ -224,7 +223,7 @@ ItemCtrl.prototype = {
 		}
 	},
 
-	put_additional_pic: function () {
+	get_additional_pic: function () {
 		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
 	}
 
