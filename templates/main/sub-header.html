@@ -1,55 +1,70 @@
 <div 	ng-controller="SubHeaderController as subHeaderCtrl" 
 		class="sub-header-container" 
 		ng-hide="isCurrentState('start')"
-		ng-class="{'sub-header-container--closed': subHeaderCtrl.sub_header_state == 'closed' || isCurrentState('start'), 'sub-header-container--wizard': subHeaderCtrl.sub_header_state == 'wizard' && !(isCurrentState('start')), 'sub-header-container--recently-viewed': subHeaderCtrl.sub_header_state == 'recently-viewed' && !(isCurrentState('start'))}">
+		ng-class="{'sub-header-container--closed': subHeaderCtrl.sub_header_state == 'closed' || isCurrentState('start'), 'sub-header-container--general-search': subHeaderCtrl.sub_header_state == 'general-search' && !(isCurrentState('start')), 'sub-header-container--recently-viewed': subHeaderCtrl.sub_header_state == 'recently-viewed' && !(isCurrentState('start'))}">
 	<div id="sub-header">
 		<div class="border-adhoc">
-			<div class="header-wizard" ng-show="subHeaderCtrl.sub_header_state == 'wizard'">
-				<ng-include src="'templates/main/wizard-form.html'"></ng-include>
-			</div>
-			<div class="recently-viewed" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
-				<div 	class="recently-arrow" 
-						ng-show="recentlyViewedCtrl.show_arrows" 
-						ng-click="recentlyViewedCtrl.scroll_left()"
-						ng-class="{'recently-arrow--disabled': !recentlyViewedCtrl.can_scroll_left}">
-						<he>
-							<ng-switch on="recentlyViewedCtrl.can_scroll_left">
-								<icon class="recently-arrow__icon" ng-switch-when="false" position="[-615, -258]"></icon>
-								<icon class="recently-arrow__icon" ng-switch-default position="[-615, -180]"></icon>
-							</ng-switch>
-						</he>
-						<en>
-							<ng-switch on="recentlyViewedCtrl.can_scroll_left">
-								<icon class="recently-arrow__icon" ng-switch-when="false" position="[-588, -258]"></icon>
-								<icon class="recently-arrow__icon" ng-switch-default position="[-588, -180]"></icon>
-							</ng-switch>
-						</en>
+			<ng-switch on="subHeaderCtrl.sub_header_state">
+				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.sub_header_state == 'general-search'">
+					<label for="search-input">
+				        <en>General Search: </en>
+				        <he>חיפוש כללי: </he>
+				    </label>
+				    <input id="search-input" ng-model="generalSearchCtrl.search_string" name="email" type="text" placeholder="{{(lang=='en')?'Continue explore...':'להמשיך לחקור...'}}"> 
+				    <div class="search-button-back" ng-click="generalSearchCtrl.global_search()">
+				    	<div class="button">
+				    		<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
+			    		</div>
+				    </div>
+			        <span ui-sref="start" class="link-to-wizard">
+			            <en>Or <a>Search for your Story</a></en>
+			            <he>לעבור <a>לחיפוש שם משפחה ומקום</a></he>
+			        </span>
 				</div>
-				<div class="recently-viewed__items">
-					<div class="recently-viewed__items__scroll" ng-style="recentlyViewedCtrl.scroll_style">
-						<mjs-item 	ng-repeat="item in recentlyViewedCtrl.items track by item._id" 
-									item="item" ng-click="recentlyViewedCtrl.goto_item(item)">
-						</mjs-item>
+				<div ng-switch-when="recently-viewed" class="recently-viewed" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
+					<div 	class="recently-arrow" 
+							ng-show="recentlyViewedCtrl.show_arrows" 
+							ng-click="recentlyViewedCtrl.scroll_left()"
+							ng-class="{'recently-arrow--disabled': !recentlyViewedCtrl.can_scroll_left}">
+							<he>
+								<ng-switch on="recentlyViewedCtrl.can_scroll_left">
+									<icon class="recently-arrow__icon" ng-switch-when="false" position="[-615, -258]"></icon>
+									<icon class="recently-arrow__icon" ng-switch-default position="[-615, -180]"></icon>
+								</ng-switch>
+							</he>
+							<en>
+								<ng-switch on="recentlyViewedCtrl.can_scroll_left">
+									<icon class="recently-arrow__icon" ng-switch-when="false" position="[-588, -258]"></icon>
+									<icon class="recently-arrow__icon" ng-switch-default position="[-588, -180]"></icon>
+								</ng-switch>
+							</en>
+					</div>
+					<div class="recently-viewed__items">
+						<div class="recently-viewed__items__scroll" ng-style="recentlyViewedCtrl.scroll_style">
+							<mjs-item 	ng-repeat="item in recentlyViewedCtrl.items track by item._id" 
+										item="item" ng-click="recentlyViewedCtrl.goto_item(item)">
+							</mjs-item>
+						</div>
+					</div>
+					<div 	class="recently-arrow" 
+							ng-show="recentlyViewedCtrl.show_arrows" 
+							ng-click="recentlyViewedCtrl.scroll_right()"
+							ng-class="{'recently-arrow--disabled': !recentlyViewedCtrl.can_scroll_right}">
+							<en>
+								<ng-switch on="recentlyViewedCtrl.can_scroll_right">
+									<icon class="recently-arrow__icon" ng-switch-when="false" position="[-615, -258]"></icon>
+									<icon class="recently-arrow__icon" ng-switch-default position="[-615, -180]"></icon>
+								</ng-switch>
+							</en>
+							<he>
+								<ng-switch on="recentlyViewedCtrl.can_scroll_right">
+									<icon class="recently-arrow__icon" ng-switch-when="false" position="[-588, -258]"></icon>
+									<icon class="recently-arrow__icon" ng-switch-default position="[-588, -180]"></icon>
+								</ng-switch>
+							</he>
 					</div>
 				</div>
-				<div 	class="recently-arrow" 
-						ng-show="recentlyViewedCtrl.show_arrows" 
-						ng-click="recentlyViewedCtrl.scroll_right()"
-						ng-class="{'recently-arrow--disabled': !recentlyViewedCtrl.can_scroll_right}">
-						<en>
-							<ng-switch on="recentlyViewedCtrl.can_scroll_right">
-								<icon class="recently-arrow__icon" ng-switch-when="false" position="[-615, -258]"></icon>
-								<icon class="recently-arrow__icon" ng-switch-default position="[-615, -180]"></icon>
-							</ng-switch>
-						</en>
-						<he>
-							<ng-switch on="recentlyViewedCtrl.can_scroll_right">
-								<icon class="recently-arrow__icon" ng-switch-when="false" position="[-588, -258]"></icon>
-								<icon class="recently-arrow__icon" ng-switch-default position="[-588, -180]"></icon>
-							</ng-switch>
-						</he>
-				</div>
-			</div>
+			</ng-switch>	
 		</div>
 	</div>
 </div>

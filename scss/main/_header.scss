@@ -633,23 +633,26 @@
             @at-root .menu {
                 position: relative;
                 margin: 0 auto;
-                padding: 0 6px 17px;
-                max-width: $view-width;
+                padding: 0 6px;
                 height: 100%;
+                width: 100%;
                 background: inherit;
 
-                ul.nav {
-                    margin-top: 0;
+                &.gsearch {
+                      @include box-shadow(0 1px 5px 1px #b0b0b0);
+                }
 
-                    li {
+                ul.nav {
+                    margin: 0 auto;
+                    max-width: 1170px;
+
+                    li.menu-item, li.header-menu-item {
                         position: relative;
                         display: table-cell;
                         text-decoration: none;
                         color: #666;
                         @include hover-pointer();
-                        padding: 0 25px;
-                        line-height: 40px;
-                        font-size: 21px;
+                                             
 
                         .item-before {
                             position: absolute;
@@ -669,23 +672,64 @@
                             }
                         }
 
-                        /*div {
-                            padding: 0 25px;
-                            line-height: 40px;
-                            font-size: 21px;
-                        }*/
-                        &:hover {
-                            background-color: $mjs-color;
-                            color: #fff;
+                        &.ftree-tab {
+                            background-color: #c2c2c2;
                         }
                     }
-                    li.recently-viewed-trigger {
+                    li.menu-item {
+                        line-height: 20px;
+                        font-size: 18px;
+                        padding: 4px 25px;
+                        text-align: center;
+                        vertical-align: middle;
+
+                        &:hover {
+                                background-color: $shop-color;
+                                color: #fff;
+                                //font-weight: 600;
+                            }
+                        &--active {
+                            background-color: $shop-color;
+                            color: #fff;
+                            font-weight: 600;
+                        }
+                    }
+
+                    li.header-menu-item {
+                        line-height: 40px;
+                        padding: 0 25px;
+                        font-size: 21px; 
+
+                        &:hover {
+                            background-color: #c2c2c2;
+                            
+                            //font-weight: 600;
+                            //border-top: 10px solid grey;
+                                //bottom: 10px;
+                        }
+
+                        &--active {
+                            background-color: $mjs-color;
+                            color: #fff;
+                            font-weight: 600;
+
+
+                            &:hover {
+                                background-color: $mjs-color;
+
+                            }
+    
+                        }
+                    }
+
+
+                    /*li.general-search-trigger {
 
                         &--active {
                             background-color: $mjs-color;
                             color: #fff;
                         }
-                    } 
+                    } */
 
                 }
             }

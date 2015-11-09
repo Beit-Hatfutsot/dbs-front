@@ -1,0 +1,258 @@
+<div id="item-page-container" ng-controller="GeneralSearchController as generalSearchCtrl">
+    <nav class="menu gsearch">
+        <ul class="nav">
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'all-results'}" ng-click="generalSearchCtrl.collection ='all-results'">
+            <div>
+                <en>All results <br/>({{generalSearchCtrl.results.length}})</en>
+                <he>כל התוצאות</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'places'}" ng-click="generalSearchCtrl.collection = 'places'">
+                <div>
+                    <en>Places</en>   
+                    <he>מקומות</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'images-videos'}" ng-click="generalSearchCtrl.collection = 'images-videos'">
+                <div>
+                    <en>Images <br>&videos</en>
+                    <he>תמונות + וידאו</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'personalities'}" ng-click="generalSearchCtrl.collection = 'personalities'">
+                <div>
+                    <en>Personalities</en>   
+                    <he>אישים</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'family-names'}" ng-click="generalSearchCtrl.collection = 'family-names'">
+                <div>
+                    <en>Family names</en>   
+                    <he>שמות משפחה</he>
+                </div>
+            </li>
+            <li class="menu-item ftree-tab" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'family-tree'}" ng-click="generalSearchCtrl.collection = 'family-tree'"> 
+                <div>
+                    <en>Search in <br> Family trees</en>
+                    <he>חיפוש בעצי משפחה</he>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div  id="item-page">
+        <ng-switch on="generalSearchCtrl.collection">
+            <div class="search-results-page" ng-switch-when='all-results'>
+                <div class="about-bh">
+                    <div class="title">
+                        <span>
+                            <en>About Beit Hatfutsot databases:</br>The vision of Nahum Goldmann<br></en>
+                            <he>אודות מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן<br></he>
+                        </span>
+                        <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal(generalSearchCtrl.collection)">
+                            <en>Read about this databases</en>
+                            <he>קרא עוד על מאגר המידע</he>
+                        </span>
+                    </div>
+                </div> 
+                <div class="db-results-title">
+                    <en>Your Search results for ........ (All results - {{generalSearchCtrl.results.length}})</en>
+                    <he></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
+                    <div class="item-preview loader">
+                        <div class="add-sign">+</div>
+                        <div class="loader-desc">
+                            <en>See more<br></en>
+                            <he>See more</he>
+                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
+                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                                <he></he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Results for ........ from external sources ({{generalSearchCtrl.external_results.length}})</en>
+                    <he></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <item-preview ng-repeat="r_data in generalSearchCtrl.external_results | limitTo: 14" preview-data="r_data"></item-preview> 
+                    <div class="item-preview loader">
+                        <div class="add-sign">+</div>
+                        <div class="loader-desc">
+                            <en>See more<br></en>
+                            <he>See more</he>
+                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
+                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                                <he></he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="search-results-page" ng-switch-when='places'>
+                <div class="about-bh">
+                    <div class="title">
+                        <span>
+                            <en>About the Beit Hatfutsot Jewish<br>Communities Database</en>
+                            <he>אודות מאגר הקהילות<br>היהודיות של בית התפוצות</he>
+                        </span>
+                        <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
+                            <en>Read about this databases</en>
+                            <he>קרא עוד על מאגר המידע</he>
+                        </span>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Your Search results for ........ (Places - ?)</en>
+                    <he></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
+                    <div class="item-preview loader">
+                        <div class="add-sign">+</div>
+                        <div class="loader-desc">
+                            <en>See more<br></en>
+                            <he>See more</he>
+                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
+                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                                <he></he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Results for ........ from external sources ({{generalSearchCtrl.results.length}})</en>
+                    <he></he>
+                </div>
+            </div>
+
+            <div class="search-results-page" ng-switch-when='images-videos'>
+                <div class="about-bh">
+                    <div class="title">
+                        <span>
+                            <en>About Bernard H. and Miriam Oster<br>Visual Documentation Center</en>
+                            <he>אודות המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</he>
+                        </span>
+                        <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
+                            <en>Read about this databases</en>
+                            <he>קרא עוד על מאגר המידע</he>
+                        </span>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Your Search results for ........ (Images & videos - ?)</en>
+                    <he></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
+                    <div class="item-preview loader">
+                        <div class="add-sign">+</div>
+                        <div class="loader-desc">
+                            <en>See more<br></en>
+                            <he>See more</he>
+                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
+                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                                <he></he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Results for ........ from external sources ({{generalSearchCtrl.results.length}})</en>
+                    <he></he>
+                </div>
+            </div>
+
+            <div class="search-results-page" ng-switch-when='personalities'>
+                <div class="about-bh">
+                    <div class="title">
+                        <span>
+                            <en>About the Beit Hatfutsot Jewish<br>Personalities Database</en>
+                            <he>אודות מאגר האישים<br>של בית התפוצות</he>
+                        </span>
+                        <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
+                            <en>Read about this databases</en>
+                            <he>קרא עוד על מאגר המידע</he>
+                        </span>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Your Search results for ........ (Personalities - ?)</en>
+                    <he></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
+                    <div class="item-preview loader">
+                        <div class="add-sign">+</div>
+                        <div class="loader-desc">
+                            <en>See more<br></en>
+                            <he>See more</he>
+                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
+                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                                <he></he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Results for ........ from external sources ({{generalSearchCtrl.results.length}})</en>
+                    <he></he>
+                </div>
+            </div>
+
+            <div class="search-results-page" ng-switch-when="family-names">
+                <div class="about-bh">
+                    <div class="title">
+                        <span>
+                            <en>About the Memi De-Shalit Database<br>of Jewish Family Names</en>
+                            <he>אודות מאגר השמות<br>ע"ש ממי דה-שליט</he>
+                        </span>
+                        <span class="open-modallink" ng-click="generalSearchCtrl.open_modal()">
+                            <en>Read about this databases</en>
+                            <he>קרא עוד על מאגר המידע</he>
+                        </span>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Your Search results for ........ (Family names - ?)</en>
+                    <he></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
+                    <div class="item-preview loader">
+                        <div class="add-sign">+</div>
+                        <div class="loader-desc">
+                            <en>See more<br></en>
+                            <he>See more</he>
+                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
+                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                                <he></he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-results-title">
+                    <en>Results for ........ from external sources ({{generalSearchCtrl.results.length}})</en>
+                    <he></he>
+                </div>
+            </div>
+            <div class="search-results-page" ng-switch-when="family-tree">
+                <div class="about-bh">
+                    <div class="title">
+                        <span>
+                            <en>About Douglas E. Goldman Jewish<br>Genealogy Center databases</en>
+                            <he>אודות המרכז לגנאלוגיה יהודית<br>ע"ש דגלס א. גולדמן</he>
+                        </span>
+                        <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
+                            <en>Read about this databases</en>
+                            <he>קרא עוד על מאגר המידע</he>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </ng-switch>
+    </div>
+</div>

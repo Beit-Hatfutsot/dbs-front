@@ -7,9 +7,9 @@
 	
 	@include transition(margin, 1s, ease); 
 	
-	&--wizard, &--recently-viewed {
+	&--general-search, &--recently-viewed {
 		margin-top: 10px;
-		@include box-shadow(0 3px 5px 1px #b0b0b0);
+		@include box-shadow(0 1px 5px 1px #b0b0b0);
 		background: #f5f5f5;
 	}
 
@@ -19,8 +19,8 @@
 		min-height: 94px !important; 
 	}
 
-	&--wizard {
-		min-height: 160px;
+	&--general-search {
+		//min-height: 160px;
 
 		.border-adhoc:before {
 
@@ -81,7 +81,7 @@
 
 			.header-wizard {
 				position: relative;
-				width: 865px;
+				//width: 865px;
 				padding: 35px 0;
 				opacity: 1;
 				@include transition(all, 0.3s, ease);
@@ -114,6 +114,49 @@
 								@include hover-pointer();
 							}
 						}
+					}
+				}
+			}
+
+			.general-search {
+				color: #666;
+				padding: 35px 0;
+
+				label {
+					margin-right: 10px;
+				}
+
+				#search-input {
+					border: 3px solid #91dbe4;
+  					width: 600px;
+  					height: 34px;
+  					padding: 0 10px;
+  					margin-right: 20px;
+  					display: inline-block;
+				}
+
+				.search-button-back {
+					width: 40px;
+					height: 34px;
+					background-color: #91dbe4;
+					position: absolute;
+  					right: 408px;
+  					display: inline-block;
+
+  					.button {
+  						width: 18px;
+  						height: 18px;
+  						top: 50%;
+  						left: 50%;
+  						position: absolute;
+  						transform: translate(-50%, -50%);
+  					}
+				}
+
+				.link-to-wizard {
+					a {
+						text-decoration: underline;
+						@include hover-pointer();
 					}
 				}
 			}

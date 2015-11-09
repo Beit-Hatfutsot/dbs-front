@@ -73,6 +73,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
+            name: 'general-search',
+            url: '/search?q',
+            controller: 'GeneralSearchController as generalSearchCtrl',
+            templateUrl: 'templates/main/search-results.html'
+        },
+
+        {
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',

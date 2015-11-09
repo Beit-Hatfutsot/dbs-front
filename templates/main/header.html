@@ -93,27 +93,27 @@
 		<div id="header-container">
 			<nav class="menu">
 				<ul class="nav">
-					<li class="logo" ui-sref="start">
-						<!-- <span class="item-before"></span> -->
+					<li class="logo header-menu-item" ui-sref="start">
+						<span class="item_before" selector></span>
 						<div>
 							<en>Home</en>
 							<he>ראשי</he>
 						</div>
 					</li>
-					<li class="mystory"   ng-class="{'mystory--active': headerController.is_mjs_state}" ui-sref="mjs">
+					<li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
 						<div class="mystory__text">
 							<en>My Story</en>	
 							<he>הסיפור שלי</he>
 						</div>
 					</li>
 					<!-- <div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'wizard'"> -->
-					<li class="header-wizard-trigger"  ng-if="!(isCurrentState('start'))" ui-sref="start">
+					<li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.sub_header_state == 'general-search'}" ng-click="headerController.sub_header_state = 'general-search'">
 						<div>
 							<en>Search</en>
 							<he>חיפוש</he>
 						</div>
 					</li>
-					<li class="recently-viewed-trigger" ng-class="{'recently-viewed-trigger--active': headerController.sub_header_state == 'recently-viewed'}" ng-click="headerController.sub_header_state = 'recently-viewed'"> 
+					<li class="recently-viewed-trigger header-menu-item" ng-class="{'header-menu-item--active': headerController.sub_header_state == 'recently-viewed'}" ng-click="headerController.sub_header_state = 'recently-viewed'"> 
 						<div>
 							<en>Recently Viewed</en>
 							<he>נצפו לאחרונה</he>

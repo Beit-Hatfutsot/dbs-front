@@ -1,4 +1,4 @@
-<div class="item-preview"
+<div class="item-preview" ng-class="{'item-preview--general-search': itemPreviewController.$state.current.name == 'general-search'}"
 	 ng-click="itemPreviewController.goto_item(previewData)">
 	<div class="thumbnail" ng-if="previewData.thumbnail.data">
 		<img ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
@@ -16,7 +16,8 @@
 		</div>
 		<ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
 			<div ng-switch-when="true" class="text text--nothumb">
-				{{previewData.FN}}<br>{{previewData.LN}}}
+				{{previewData.FN}}<br>{{previewData.LN}}
+				dhfdjj
 			</div>
 			<div ng-switch-default>
 				<div class="header" 
@@ -25,8 +26,8 @@
 					<he>{{previewData.Header.He}}</he>
 				</div>
 				<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}"> 	
-            <en><span marked="previewData.UnitText1.En"></span></en>
-            <he><span marked="previewData.UnitText1.He"></span></he>
+		            <en><span marked="previewData.UnitText1.En"></span></en>
+		            <he><span marked="previewData.UnitText1.He"></span></he>
 				</div>
 			</div>
 			<div class="remove" ng-if="removable && !(previewData.ugc)"

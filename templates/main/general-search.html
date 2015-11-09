@@ -1,0 +1,15 @@
+<div    ng-controller="SubHeaderController as subHeaderCtrl"
+        class="sub-header-container"
+        ng-class="{'sub-header-container--closed': subHeaderCtrl.sub_header_state == 'closed' || isCurrentState('start') && !(isCurrentState('start')), 'sub-header-container--general-search': subHeaderCtrl.sub_header_state == 'general-search' && !(isCurrentState('start'))}">
+    <label for="general-search">
+        <en>General Search: </en>
+        <he>חיפוש כללי: </he>
+    </label>
+    <input id="general-search" class="" name="email" type="text" placeholder="{{(lang=='en')?'Continue explore...':'להמשיך לחקור...'}}"> 
+    <div>
+        <span>
+            <en>Or <a>Search for your Story</a></en>
+            <he>לעבור <a>לחיפוש שם משפחה ומקום</a></he>
+        </span>
+    </div>
+</div>
