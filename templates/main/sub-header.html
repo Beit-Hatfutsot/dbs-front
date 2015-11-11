@@ -5,13 +5,13 @@
 	<div id="sub-header">
 		<div class="border-adhoc">
 			<ng-switch on="subHeaderCtrl.sub_header_state">
-				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.sub_header_state == 'general-search'">
+				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.sub_header_state == 'general-search'" ng-controller="GeneralSearchController as generalSearchCtrl" ng-class="{'general-search--active': $state.current.name == 'general-search'}">
 					<label for="search-input">
 				        <en>General Search: </en>
 				        <he>חיפוש כללי: </he>
 				    </label>
-				    <input id="search-input" ng-model="generalSearchCtrl.search_string" name="email" type="text" placeholder="{{(lang=='en')?'Continue explore...':'להמשיך לחקור...'}}"> 
-				    <div class="search-button-back" ng-click="generalSearchCtrl.global_search()">
+				    <input id="search-input" ng-model="generalSearchCtrl.query" ng-blur="generalSearchCtrl.search()" type="text"> <!-- placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}" --> 
+				    <div class="search-button-back" ng-click="generalSearchCtrl.search()">
 				    	<div class="button">
 				    		<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
 			    		</div>

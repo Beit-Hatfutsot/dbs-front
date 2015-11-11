@@ -74,7 +74,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'general-search',
-            url: '/search?q',
+            url: '/search?q&size&from_&collection',
             controller: 'GeneralSearchController as generalSearchCtrl',
             templateUrl: 'templates/main/search-results.html'
         },
