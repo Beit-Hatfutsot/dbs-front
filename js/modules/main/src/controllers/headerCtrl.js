@@ -31,7 +31,8 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
             return true;
         }
     });
-
+    this.header = header;
+    /*
     Object.defineProperty(this, 'sub_header_state', {
         get: function() {
             return header.sub_header_state;
@@ -40,7 +41,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
         set: function(new_state) {
             header.sub_header_state = new_state;
         }
-    });
+    });*/
 
     Object.defineProperty(this, 'mjs_count', {
         get: function() {
@@ -58,13 +59,6 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
             return $state.includes('mjs');
         }
     });
-
-/*    Object.defineProperty(this, 'is_general-search_state', {
-        get: function() {
-            return $state.includes('general-search');
-        }
-    });*/
-
 
     Object.defineProperty(this, 'username', {
         get: function() {

@@ -1,4 +1,4 @@
-var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location) {
+var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header) {
     var self = this;
     this.results1 = [];    
     this.external_results = [];
@@ -7,6 +7,7 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.$location = $location;
     this.$http = $http;
     this.apiClient = apiClient;
+    header.show_search_box();
 
     Object.defineProperty(this, 'search_collection', {
         get: function() {
@@ -31,7 +32,7 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
 
 
     if ($stateParams.q !== undefined) {
-        this.query = $stateParams.q;
+        header.query = this.query = $stateParams.q;
 
         $http.get(apiClient.urls.search, {params: {q: this.query}})
         .success(function (r){
@@ -76,4 +77,4 @@ GeneralSearchController.prototype = {
     },
 };
 
-angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', GeneralSearchController]);

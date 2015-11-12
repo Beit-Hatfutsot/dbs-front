@@ -107,13 +107,15 @@
 						</div>
 					</li>
 					<!-- <div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'wizard'"> -->
-					<li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.sub_header_state == 'general-search'}" ng-click="headerController.sub_header_state = 'general-search'">
+					<li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'general-search'}"
+						ng-click="headerController.header.sub_header_state = 'general-search'">
 						<div>
 							<en>Search</en>
 							<he>חיפוש</he>
 						</div>
 					</li>
-					<li class="recently-viewed-trigger header-menu-item" ng-class="{'header-menu-item--active': headerController.sub_header_state == 'recently-viewed'}" ng-click="headerController.sub_header_state = 'recently-viewed'"> 
+					<li class="recently-viewed-trigger header-menu-item" ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'recently-viewed'}"
+						ng-click="headerController.header.sub_header_state = 'recently-viewed'"> 
 						<div>
 							<en>Recently Viewed</en>
 							<he>נצפו לאחרונה</he>

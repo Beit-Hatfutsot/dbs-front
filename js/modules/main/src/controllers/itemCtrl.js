@@ -2,9 +2,6 @@
 function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal, $rootScope) {
 	var self = this;
 
-	if (header.sub_header_state !== 'recently-viewed') {
-		header.sub_header_state = 'recently-viewed';
-	}
 	this.$modal = $modal;
 	this.$state = $state;
 	this.$stateParams = $stateParams;
@@ -179,7 +176,6 @@ ItemCtrl.prototype = {
 			gallery = this.item_data;
 
 		body.addClassName('backdrop');
-	    //angular.element()
 	    var authModalInstance = this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',

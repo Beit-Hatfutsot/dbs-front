@@ -1,16 +1,18 @@
 <div 	ng-controller="SubHeaderController as subHeaderCtrl" 
 		class="sub-header-container" 
 		ng-hide="isCurrentState('start')"
-		ng-class="{'sub-header-container--closed': subHeaderCtrl.sub_header_state == 'closed' || isCurrentState('start'), 'sub-header-container--general-search': subHeaderCtrl.sub_header_state == 'general-search' && !(isCurrentState('start')), 'sub-header-container--recently-viewed': subHeaderCtrl.sub_header_state == 'recently-viewed' && !(isCurrentState('start'))}">
+		ng-class="{'sub-header-container--closed': subHeaderCtrl.header.sub_header_state == 'closed' || isCurrentState('start'),
+				'sub-header-container--general-search': subHeaderCtrl.header.sub_header_state == 'general-search',
+				'sub-header-container--recently-viewed': subHeaderCtrl.header.sub_header_state == 'recently-viewed'}">
 	<div id="sub-header">
 		<div class="border-adhoc">
-			<ng-switch on="subHeaderCtrl.sub_header_state">
-				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.sub_header_state == 'general-search'" > <!-- ng-class="{'general-search--active': $state.current.name == 'general-search'}" -->
+			<ng-switch on="subHeaderCtrl.header.sub_header_state">
+				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.header.sub_header_state == 'general-search'" > <!-- ng-class="{'general-search--active': $state.current.name == 'general-search'}" -->
 					<label for="search-input">
 				        <en>General Search: </en>
 				        <he>חיפוש כללי: </he>
 				    </label>
-				    <input id="search-input" ng-model="subHeaderCtrl.query" ng-blur="subHeaderCtrl.search()" type="text"> <!-- placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}" --> 
+				    <input id="search-input" ng-model="subHeaderCtrl.header.query" ng-blur="subHeaderCtrl.search()" type="text"> <!-- placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}" --> 
 				    <div class="search-button-back" ng-click="subHeaderCtrl.search()">
 				    	<div class="button">
 				    		<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>

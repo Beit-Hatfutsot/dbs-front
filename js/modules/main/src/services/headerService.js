@@ -18,7 +18,13 @@ angular.module('main').
 		        else {
 		            _sub_header_state = new_state;
 				}
-			}
+			},
+
+			show_search_box: function() {
+				_sub_header_state = 'general-search';
+			},
+
+			query: ""
 		}
 
 		return header
