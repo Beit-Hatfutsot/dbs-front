@@ -1,4 +1,6 @@
-var SubHeaderController = function(header) {
+var SubHeaderController = function($state, header) {
+    this.query = "";
+    this.$state = $state;
 
 	Object.defineProperty(this, 'sub_header_state', {
         get: function() {
@@ -12,7 +14,9 @@ var SubHeaderController = function(header) {
 };
 
 SubHeaderController.prototype = {
-
+    search: function() {
+        this.$state.go('general-search', {q: this.query});
+    }
 };
 
-angular.module('main').controller('SubHeaderController', ['header', SubHeaderController]);
+angular.module('main').controller('SubHeaderController', ['$state', 'header', SubHeaderController]);

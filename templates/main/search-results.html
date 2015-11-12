@@ -3,7 +3,7 @@
         <ul class="nav">
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'all-results'}" ng-click="generalSearchCtrl.collection ='all-results'">
             <div>
-                <en>All results <br/>({{generalSearchCtrl.results[0].total + generalSearchCtrl.external_results.length}})</en>
+                <en>All results</en>
                 <he>כל התוצאות</he>
                 </div>
             </li>
@@ -60,16 +60,19 @@
                 </div>
                 <div class="item-preview-wrapper">
                     <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
-                    <div class="item-preview loader">
+                    <div class="item-preview loader" ng-if="generalSearchCtrl.results.hits.length == 14" ng-click="generalSearchCtrl.display_more()">
                         <div class="add-sign">+</div>
                         <div class="loader-desc">
                             <en>See more<br></en>
                             <he>See more</he>
-                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
-                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                            <span class="results-number">
+                                <en>(+{{generalSearchCtrl.results.total-14}} results)</en>
                                 <he></he>
                             </span>
                         </div>
+                    </div>
+                    <div ng-show="generalSearchCtrl.results.hits.length == 14">
+                        <item-preview ng-repeat="r_data in generalSearchCtrl.results1.hits" preview-data="r_data._source"></item-preview>
                     </div>
                 </div>
                 <div class="db-results-title">

@@ -1,6 +1,7 @@
 var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache, recentlyViewed, user) {
 
     this.$state = $state;
+    //console.log($state.includes('general-search'));
     this.auth = auth;
     this.cache = cache;
     this.recentlyViewed = recentlyViewed;
@@ -57,6 +58,13 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
             return $state.includes('mjs');
         }
     });
+
+/*    Object.defineProperty(this, 'is_general-search_state', {
+        get: function() {
+            return $state.includes('general-search');
+        }
+    });*/
+
 
     Object.defineProperty(this, 'username', {
         get: function() {
