@@ -1,5 +1,4 @@
-var GalleryModalCtrl = function($scope, langManager, gallery, index, $modalInstance, collection_name) {
-    $scope.collection_name = collection_name;
+var GalleryModalCtrl = function($scope, langManager, gallery, index, $modalInstance) {
     $scope.gallery = gallery;
     $scope.index = index;
 
@@ -24,4 +23,4 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $modalInsta
 	}
 };
 
-angular.module('main').controller('GalleryModalCtrl', ['$scope', 'langManager', 'gallery', 'index', '$modalInstance', 'collection_name', GalleryModalCtrl]);
+angular.module('main').controller('GalleryModalCtrl', ['$scope', 'langManager', 'gallery', 'index', '$modalInstance', GalleryModalCtrl]);

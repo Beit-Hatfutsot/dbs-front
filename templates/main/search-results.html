@@ -15,8 +15,8 @@
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'photoUnits'}" ng-click="generalSearchCtrl.collection = 'photoUnits'">
                 <div>
-                    <en>Images <br>&videos</en>
-                    <he>תמונות + וידאו</he>
+                    <en>Images</en>
+                    <he>תמונות</he>
                 </div>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'personalities'}" ng-click="generalSearchCtrl.collection = 'personalities'">
@@ -66,7 +66,7 @@
                         </span>
                     </div>
                 </div>
-                <div ng-switch-when='images-videos' class="about-bh">
+                <div ng-switch-when='photoUnits' class="about-bh">
                     <div class="title">
                         <span>
                             <en>About Bernard H. and Miriam Oster<br>Visual Documentation Center</en>
@@ -90,13 +90,13 @@
                         </span>
                     </div>
                 </div>
-                <div ng-switch-when="family-names" class="about-bh">
+                <div ng-switch-when="familyNames" class="about-bh">
                     <div class="title">
                         <span>
                             <en>About the Memi De-Shalit Database<br>of Jewish Family Names</en>
                             <he>אודות מאגר השמות<br>ע"ש ממי דה-שליט</he>
                         </span>
-                        <span class="open-modallink" ng-click="generalSearchCtrl.open_modal()">
+                        <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
                             <en>Read about this databases</en>
                             <he>קרא עוד על מאגר המידע</he>
                         </span>

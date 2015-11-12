@@ -1,16 +1,23 @@
-var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification) {
+var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification, $window) {
     this.$state = $state;
+    this.$window = $window;
     this.mjs = mjs;
     this.$scope = $scope;
     this.notification = notification;
     this.item_string = itemTypeMap.get_item_string($scope.previewData);
     this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+    this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
 };
 
 ItemPreviewCtrl.prototype = {
 
-    goto_item: function() { 
+    goto_item: function() {
+        console.log(this);
+        if (this.url !== undefined) {
+            this.$window.open(this.url);
+            return;
+        }
         if (this.collection_name === 'genTreeIndividuals') {
             this.$state.go('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
         }
@@ -40,4 +47,4 @@ ItemPreviewCtrl.prototype = {
     }
 };
 
-angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', 'mjs', 'notification', ItemPreviewCtrl]);
+angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', 'mjs', 'notification', '$window', ItemPreviewCtrl]);

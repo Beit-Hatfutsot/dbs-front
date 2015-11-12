@@ -9,6 +9,7 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.apiClient = apiClient;
     header.show_search_box();
     this.header = header;
+    this.$scope = $scope;
 
     Object.defineProperty(this, 'search_collection', {
         get: function() {
@@ -56,12 +57,11 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
                 for (var i=0;i < r.items.length;i++) {
                     var item = r.items[i];
                     if (item.title)
-                        self.external_results.push({Header:  {En: item.title}, ugc: true });
+                        self.external_results.push({Header:  {En: item.title[0]}, ugc: true, url: item.guid, UnitText1: {En: item.title[1]}});
                 }
             }
         })
     };
- 
 }; 
 
 GeneralSearchController.prototype = {
@@ -72,9 +72,9 @@ GeneralSearchController.prototype = {
         if (this.collection != 'all-results')
             params.collection = this.collection;
         params.from_ = this.results.hits.length;
-        console.log(params);
         return params;
     },  
+
     fetch_more: function() {
         var query_string = this.query_string, results = this.results;
 
@@ -89,13 +89,17 @@ GeneralSearchController.prototype = {
 
     open_modal: function (collection_name) {
         var body = document.getElementsByTagName('body')[0];
-        var scope = $scope.$new();
+        var scope = this.$scope.$new();
         scope.collection_name = this.collection;
         body.addClassName('backdrop');
         var authModalInstance = this.$modal.open({
             templateUrl: 'templates/main/allresults.html',
-            size: 'lg',
+            size: 'm',
             scope : scope
+        });
+        authModalInstance.result.
+        finally(function() {
+            body.removeClassName('backdrop');
         });
     },
 };
