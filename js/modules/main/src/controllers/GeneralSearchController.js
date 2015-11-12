@@ -1,13 +1,14 @@
 var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header) {
     var self = this, params = {};
     this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'all-results';
-    this.results1 = [];    
+    this.results = {hits: []};    
     this.external_results = [];
     this.$modal = $modal;
     this.$location = $location;
     this.$http = $http;
     this.apiClient = apiClient;
     header.show_search_box();
+    this.header = header;
 
     Object.defineProperty(this, 'search_collection', {
         get: function() {
@@ -26,7 +27,7 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
 
         set: function(new_query) {
             this.query_string = new_query;
-            self.results = [];
+            this.results = {hits: []};
         }
     });
 
@@ -43,11 +44,9 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
 
 
     if ($stateParams.q !== undefined) {
-        params.q = header.query = this.query = $stateParams.q;
-        if (this.collection != 'all-results')
-            params.collection = this.collection;
-
-        $http.get(apiClient.urls.search, {params: params})
+        header.query = this.query = $stateParams.q;
+ 
+        $http.get(apiClient.urls.search, {params: this.api_params()})
         .success(function (r){
             self.results = r.hits;
         });
@@ -67,12 +66,23 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
 
 GeneralSearchController.prototype = {
 
+    api_params: function () {
+        var params = {};
+        params.q = this.header.query;
+        if (this.collection != 'all-results')
+            params.collection = this.collection;
+        params.from_ = this.results.hits.length;
+        console.log(params);
+        return params;
+    },  
+    fetch_more: function() {
+        var query_string = this.query_string, results = this.results;
 
-    display_more: function() {
-        var query_string = this.query_string;
-        this.$http.get(this.apiClient.urls.search, {params: {q: query_string, from_: 14}})
+        this.$http.get(this.apiClient.urls.search, {params: this.api_params()})
         .success(function (r){
-            this.results1 = r.hits;
+            results.hits = results.hits.concat(r.hits.hits);
+                        console.log(results.hits);
+
         });
 
     },

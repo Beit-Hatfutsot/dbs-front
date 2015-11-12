@@ -121,19 +121,16 @@
             </div>
             <div class="item-preview-wrapper">
                 <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
-                <div class="item-preview loader" ng-if="generalSearchCtrl.results.hits.length == 14" ng-click="generalSearchCtrl.display_more()">
+                <div class="item-preview loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                     <div class="add-sign">+</div>
                     <div class="loader-desc">
                         <en>See more<br></en>
                         <he>See more</he>
                         <span class="results-number">
-                            <en>(+{{generalSearchCtrl.results.total-14}} results)</en>
+                            <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
                             <he></he>
                         </span>
                     </div>
-                </div>
-                <div ng-show="generalSearchCtrl.results.hits.length == 14">
-                    <item-preview ng-repeat="r_data in generalSearchCtrl.results1.hits" preview-data="r_data._source"></item-preview>
                 </div>
             </div>
             <div class="db-results-title">
