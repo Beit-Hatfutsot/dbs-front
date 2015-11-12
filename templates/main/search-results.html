@@ -13,7 +13,7 @@
                     <he>מקומות</he>
                 </div>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'images-videos'}" ng-click="generalSearchCtrl.collection = 'images-videos'">
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'photoUnits'}" ng-click="generalSearchCtrl.collection = 'photoUnits'">
                 <div>
                     <en>Images <br>&videos</en>
                     <he>תמונות + וידאו</he>
@@ -25,13 +25,13 @@
                     <he>אישים</he>
                 </div>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'family-names'}" ng-click="generalSearchCtrl.collection = 'family-names'">
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'familyNames'}" ng-click="generalSearchCtrl.collection = 'familyNames'">
                 <div>
                     <en>Family names</en>   
                     <he>שמות משפחה</he>
                 </div>
             </li>
-            <li class="menu-item ftree-tab" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'family-tree'}" ng-click="generalSearchCtrl.collection = 'family-tree'"> 
+            <li class="menu-item ftree-tab" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'family-tree'}"> 
                 <div>
                     <en>Search in <br> Family trees</en>
                     <he>חיפוש בעצי משפחה</he>
@@ -40,9 +40,9 @@
         </ul>
     </nav>
     <div  id="item-page">
-        <ng-switch on="generalSearchCtrl.collection">
-            <div class="search-results-page" ng-switch-when='all-results'>
-                <div class="about-bh">
+        <div class="search-results-page">
+            <ng-switch on="generalSearchCtrl.collection">
+                <div ng-switch-when='all-results' class="about-bh">
                     <div class="title">
                         <span>
                             <en>About Beit Hatfutsot databases:</br>The vision of Nahum Goldmann<br></en>
@@ -54,49 +54,7 @@
                         </span>
                     </div>
                 </div> 
-                <div class="db-results-title">
-                    <en>Your Search results for {{generalSearchCtrl.query}} (All results - {{generalSearchCtrl.results.total}})</en>
-                    <he></he>
-                </div>
-                <div class="item-preview-wrapper">
-                    <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
-                    <div class="item-preview loader" ng-if="generalSearchCtrl.results.hits.length == 14" ng-click="generalSearchCtrl.display_more()">
-                        <div class="add-sign">+</div>
-                        <div class="loader-desc">
-                            <en>See more<br></en>
-                            <he>See more</he>
-                            <span class="results-number">
-                                <en>(+{{generalSearchCtrl.results.total-14}} results)</en>
-                                <he></he>
-                            </span>
-                        </div>
-                    </div>
-                    <div ng-show="generalSearchCtrl.results.hits.length == 14">
-                        <item-preview ng-repeat="r_data in generalSearchCtrl.results1.hits" preview-data="r_data._source"></item-preview>
-                    </div>
-                </div>
-                <div class="db-results-title">
-                    <en>Results for {{generalSearchCtrl.query}} from external sources ({{generalSearchCtrl.external_results.length}})</en>
-                    <he></he>
-                </div>
-                <div class="item-preview-wrapper">
-                    <item-preview ng-repeat="r_data in generalSearchCtrl.external_results | limitTo: 14" preview-data="r_data"></item-preview> 
-                    <div class="item-preview loader">
-                        <div class="add-sign">+</div>
-                        <div class="loader-desc">
-                            <en>See more<br></en>
-                            <he>See more</he>
-                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
-                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
-                                <he></he>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-
-            <div class="search-results-page" ng-switch-when='places'>
-                <div class="about-bh">
+                <div ng-switch-when='places' class="about-bh">
                     <div class="title">
                         <span>
                             <en>About the Beit Hatfutsot Jewish<br>Communities Database</en>
@@ -108,32 +66,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="db-results-title">
-                    <en>Your Search results for {{generalSearchCtrl.query}} (Places - ?)</en>
-                    <he></he>
-                </div>
-                <div class="item-preview-wrapper">
-                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
-                    <div class="item-preview loader">
-                        <div class="add-sign">+</div>
-                        <div class="loader-desc">
-                            <en>See more<br></en>
-                            <he>See more</he>
-                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
-                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
-                                <he></he>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="db-results-title">
-                    <en>Results for {{generalSearchCtrl.query}} from external sources ({{generalSearchCtrl.results.length}})</en>
-                    <he></he>
-                </div>
-            </div>
-
-            <div class="search-results-page" ng-switch-when='images-videos'>
-                <div class="about-bh">
+                <div ng-switch-when='images-videos' class="about-bh">
                     <div class="title">
                         <span>
                             <en>About Bernard H. and Miriam Oster<br>Visual Documentation Center</en>
@@ -145,32 +78,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="db-results-title">
-                    <en>Your Search results for {{generalSearchCtrl.query}} (Images & videos - ?)</en>
-                    <he></he>
-                </div>
-                <div class="item-preview-wrapper">
-                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
-                    <div class="item-preview loader">
-                        <div class="add-sign">+</div>
-                        <div class="loader-desc">
-                            <en>See more<br></en>
-                            <he>See more</he>
-                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
-                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
-                                <he></he>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="db-results-title">
-                    <en>Results for {{generalSearchCtrl.query}} from external sources ({{generalSearchCtrl.results.length}})</en>
-                    <he></he>
-                </div>
-            </div>
-
-            <div class="search-results-page" ng-switch-when='personalities'>
-                <div class="about-bh">
+                <div ng-switch-when='personalities' class="about-bh">
                     <div class="title">
                         <span>
                             <en>About the Beit Hatfutsot Jewish<br>Personalities Database</en>
@@ -182,32 +90,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="db-results-title">
-                    <en>Your Search results for {{generalSearchCtrl.query}} (Personalities - ?)</en>
-                    <he></he>
-                </div>
-                <div class="item-preview-wrapper">
-                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
-                    <div class="item-preview loader">
-                        <div class="add-sign">+</div>
-                        <div class="loader-desc">
-                            <en>See more<br></en>
-                            <he>See more</he>
-                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
-                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
-                                <he></he>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="db-results-title">
-                    <en>Results for {{generalSearchCtrl.query}} from external sources ({{generalSearchCtrl.results.length}})</en>
-                    <he></he>
-                </div>
-            </div>
-
-            <div class="search-results-page" ng-switch-when="family-names">
-                <div class="about-bh">
+                <div ng-switch-when="family-names" class="about-bh">
                     <div class="title">
                         <span>
                             <en>About the Memi De-Shalit Database<br>of Jewish Family Names</en>
@@ -219,31 +102,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="db-results-title">
-                    <en>Your Search results for {{generalSearchCtrl.query}} (Family names - ?)</en>
-                    <he></he>
-                </div>
-                <div class="item-preview-wrapper">
-                    <item-preview ng-repeat="r_data in generalSearchCtrl.results | limitTo: 14" preview-data="r_data"></item-preview> 
-                    <div class="item-preview loader">
-                        <div class="add-sign">+</div>
-                        <div class="loader-desc">
-                            <en>See more<br></en>
-                            <he>See more</he>
-                            <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
-                                <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
-                                <he></he>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="db-results-title">
-                    <en>Results for {{generalSearchCtrl.query}} from external sources ({{generalSearchCtrl.results.length}})</en>
-                    <he></he>
-                </div>
-            </div>
-            <div class="search-results-page" ng-switch-when="family-tree">
-                <div class="about-bh">
+                <div ng-switch-when="family-tree" class="about-bh">
                     <div class="title">
                         <span>
                             <en>About Douglas E. Goldman Jewish<br>Genealogy Center databases</en>
@@ -255,7 +114,46 @@
                         </span>
                     </div>
                 </div>
+            </ng-switch>
+            <div class="db-results-title">
+                <en>Your Search results for {{generalSearchCtrl.query}} (All results - {{generalSearchCtrl.results.total}})</en>
+                <he></he>
             </div>
-        </ng-switch>
+            <div class="item-preview-wrapper">
+                <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
+                <div class="item-preview loader" ng-if="generalSearchCtrl.results.hits.length == 14" ng-click="generalSearchCtrl.display_more()">
+                    <div class="add-sign">+</div>
+                    <div class="loader-desc">
+                        <en>See more<br></en>
+                        <he>See more</he>
+                        <span class="results-number">
+                            <en>(+{{generalSearchCtrl.results.total-14}} results)</en>
+                            <he></he>
+                        </span>
+                    </div>
+                </div>
+                <div ng-show="generalSearchCtrl.results.hits.length == 14">
+                    <item-preview ng-repeat="r_data in generalSearchCtrl.results1.hits" preview-data="r_data._source"></item-preview>
+                </div>
+            </div>
+            <div class="db-results-title">
+                <en>Results for {{generalSearchCtrl.query}} from external sources ({{generalSearchCtrl.external_results.length}})</en>
+                <he></he>
+            </div>
+            <div class="item-preview-wrapper">
+                <item-preview ng-repeat="r_data in generalSearchCtrl.external_results | limitTo: 14" preview-data="r_data"></item-preview> 
+                <div class="item-preview loader">
+                    <div class="add-sign">+</div>
+                    <div class="loader-desc">
+                        <en>See more<br></en>
+                        <he>See more</he>
+                        <span class="results-number" ng-show="generalSearchCtrl.results.length > 14">
+                            <en>(+{{generalSearchCtrl.results.length-14}} results)</en>
+                            <he></he>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

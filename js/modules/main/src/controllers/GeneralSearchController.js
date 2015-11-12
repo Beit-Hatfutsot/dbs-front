@@ -1,9 +1,9 @@
 var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header) {
-    var self = this;
+    var self = this, params = {};
+    this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'all-results';
     this.results1 = [];    
     this.external_results = [];
     this.$modal = $modal;
-    this.collection  = 'all-results';
     this.$location = $location;
     this.$http = $http;
     this.apiClient = apiClient;
@@ -30,11 +30,24 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
         }
     });
 
+    Object.defineProperty(this, 'collection', {
+        get: function() {
+            return this._collection;
+        },
+
+        set: function(new_collection) {
+            this._collection = new_collection;
+            $state.go('general-search', {q: this.query, collection: new_collection});
+        }
+    });
+
 
     if ($stateParams.q !== undefined) {
-        header.query = this.query = $stateParams.q;
+        params.q = header.query = this.query = $stateParams.q;
+        if (this.collection != 'all-results')
+            params.collection = this.collection;
 
-        $http.get(apiClient.urls.search, {params: {q: this.query}})
+        $http.get(apiClient.urls.search, {params: params})
         .success(function (r){
             self.results = r.hits;
         });
