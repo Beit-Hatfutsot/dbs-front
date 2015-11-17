@@ -8,16 +8,18 @@
 		<div class="border-adhoc">
 			<ng-switch on="subHeaderCtrl.header.sub_header_state">
 				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.header.sub_header_state == 'general-search'"> 
-					<label for="search-input">
-				        <en>General Search: </en>
-				        <he>חיפוש כללי: </he>
-				    </label>
-				    <input id="search-input" ng-model="subHeaderCtrl.header.query" ng-keydown="subHeaderCtrl.search_on_enter()" type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
-				    <div class="search-button-back" ng-click="subHeaderCtrl.search()">
-				    	<div class="button">
-				    		<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
-			    		</div>
-				    </div>
+					<div class="gsearch-box-wrapper">
+						<label for="search-input">
+				        	<en>General Search: </en>
+				        	<he>חיפוש כללי: </he>
+				    	</label>
+				    	<input id="search-input" ng-model="subHeaderCtrl.header.query" ng-keydown="subHeaderCtrl.search_on_enter()" type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
+				    	<div class="search-button-back" ng-click="subHeaderCtrl.search()">
+				    		<div class="button">
+				    			<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
+			    			</div>
+				    	</div>
+			    	</div>
 			        <span ui-sref="start" class="link-to-wizard">
 			            <en>Or <a>Search for your Story</a></en>
 			            <he>לעבור <a>לחיפוש שם משפחה ומקום</a></he>

@@ -674,6 +674,11 @@
 
                         &.ftree-tab {
                             background-color: #c2c2c2;
+
+                            &:hover {
+                                background-color: $shop-color;
+                                color: #fff;
+                            }
                         }
                     }
                     li.menu-item {
@@ -684,9 +689,7 @@
                         vertical-align: middle;
 
                         &:hover {
-                                background-color: $shop-color;
-                                color: #fff;
-                                //font-weight: 600;
+                                background-color: #c2c2c2;
                             }
                         &--active {
                             background-color: $shop-color;
@@ -702,10 +705,6 @@
 
                         &:hover {
                             background-color: #c2c2c2;
-                            
-                            //font-weight: 600;
-                            //border-top: 10px solid grey;
-                                //bottom: 10px;
                         }
 
                         &--active {

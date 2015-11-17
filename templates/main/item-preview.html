@@ -20,7 +20,7 @@
 			</div>
 			<div ng-switch-default>
 				<div class="header" 
-					 ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
+					ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
 					<en>{{previewData.Header.En}}</en>
 					<he>{{previewData.Header.He}}</he>
 				</div>
@@ -34,6 +34,10 @@
 				<icon position="[-229, -104]"></icon>
 			</div>
 		</ng-switch>
+		<div ng-show="extResult == true" class="europeana-label">
+			<en>From: Europeana</en>
+			<he>Europeana</he>
+		</div>
 		<item-type type="itemPreviewController.item_type"
    			   image="previewData.thumbnail.data"> 
 		</item-type>

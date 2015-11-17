@@ -258,6 +258,11 @@
 			height: 17px;
 			@include icon(-29px -132px);
 		}
+		.text-icon {
+			width: 18px;
+			height: 16px;
+			@include icon (-28px -161px);
+		}
 	}
 
 	.type-desc-container {

@@ -5,7 +5,10 @@ angular.module('main').service('itemTypeMap', function() {
     	5: 'places',
     	6: 'familyNames',
     	8: 'personalities',
-    	9: 'movies'
+    	9: 'movies', 
+    	'IMAGE': 'photoUnits',
+    	'VIDEO': 'movies',
+    	'TEXT': 'text',
 	};
 
 	this.get_type = function(description_code) {

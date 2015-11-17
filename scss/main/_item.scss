@@ -3,6 +3,21 @@
 
     &--general-search {
         margin: 20px 37px;
+
+        .diagonal-separator {
+            background-color: #666;
+        }
+        .europeana-label {
+            background-color: #e6e6e6;
+            line-height: 26px;
+            width: 120px;
+            color: #666;
+            font-size: 12px;
+            top: 124px;
+            position: absolute;
+            font-weight: 600;
+            text-align: center;
+        }
     }
 
     .type {
@@ -17,8 +32,7 @@
             .type-desc-container {
                 width: 0; 
             }
-        }
-        
+        } 
     }
 }
             
@@ -221,11 +235,43 @@
         margin: 0 auto;
         background-color: #F6F6F6;
 
-        .search-results-page {
+        .title {
+            position: relative;
+            font-size: 16px;
+            color: #666;
+            line-height: 18px;
+            top: -50px;
+            @include hover-pointer();
 
-            .article {
-                display: none;
+            .en & {
+                float: right;
             }
+
+            .he & {
+                float: left;
+            }
+
+            .open-modal-link {
+                font-size: 12px;
+                font-weight: 600;
+                text-decoration: underline;
+                display: block;
+            }
+
+            &:before {
+                position: absolute;
+                right: 104%;
+                top: -8px;
+                width: 49px;
+                height: 57px;
+                //margin-top: 35px;
+                content: "";
+                @include icon(-314px -636px);
+            }
+        }
+
+        .search-results-page {
+            margin-top: 70px;
 
             .db-results-title {
                 background-color: #c2c2c2;
@@ -240,40 +286,18 @@
 
                 &:after {
                     position: absolute;
-                    left: 100%;
-                    border-left: 20px solid #c2c2c2;
                     border-top: 40px solid transparent;
                     content: '';
                     top: 0;
-                }
-            }
 
-            .about-bh {
-                position: relative;
-                float: right;
-                font-size: 16px;
-                color: #666;
-                line-height: 18px;
-                @include hover-pointer();
-
-               /* icon {
-                    width: 49px;
-                    height: 57px;
-                }*/
-                .open-modal-link {
-                    font-size: 12px;
-                    text-decoration: underline;
-                }
-
-                &:before {
-                    position: absolute;
-                    right: 104%;
-                    top: -8px;
-                    width: 49px;
-                    height: 57px;
-                    //margin-top: 35px;
-                    content: "";
-                    @include icon(-314px -636px);
+                    .en & {
+                        left: 100%;
+                        border-left: 20px solid #c2c2c2;
+                    }
+                    .he & {
+                        right: 100%;
+                        border-right: 20px solid #c2c2c2;
+                    }
                 }
             }
 
@@ -286,9 +310,6 @@
 
                 .add-sign {
                     font-size: 85px;
-                    /*font-weight: 700;
-                    text-align: center;
-                    color: #666;*/
                 }
                 .loader-desc {
                     margin-top: -28px;
@@ -305,31 +326,8 @@
             }
 
             .item-preview-wrapper {
-                margin-top: 26px;
+                margin: 20px auto; 
             } 
-
-            /*.dropdown-sign {
-                position: absolute;
-                width: 0;
-                height: 0;
-                border-top: 10px solid transparent;
-                border-left: 20px solid #444;
-                border-bottom: 10px solid transparent;
-            }
-
-            &.open {
-                .article {
-                    display: block;
-                }
-
-                .dropdown-sign {
-                    transform: rotate(90deg);
-                }
-            }
-
-            .article {
-                display: none;
-            }*/
         }
 
         .right-side {
