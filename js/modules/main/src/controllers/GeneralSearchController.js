@@ -11,6 +11,8 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.header = header;
     this.$scope = $scope;
     this.external_total = '';
+    this.loading = true;
+
 
     Object.defineProperty(this, 'search_collection', {
         get: function() {
@@ -51,11 +53,13 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
         $http.get(apiClient.urls.search, {params: this.api_params()})
         .success(function (r) {
             self.results = r.hits;
+            self.loading = false;
         });
         $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14&start=1", {params: this.api_params_ext()})
         .success(function(r) {
             self.external_total = r.totalResults;
             self.push_ext_items(r);
+            self.loading = false;
         })
     };
 }; 

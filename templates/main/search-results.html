@@ -120,6 +120,9 @@
                 <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}} (כל תוצאות  - {{generalSearchCtrl.results.total}})</he>
             </div>
             <div class="item-preview-wrapper">
+                <div class="spinner" ng-hide="generalSearchCtrl.loading == false">
+                    <img src="images/BH-Loading.gif">
+                </div>
                 <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
                 <div class="item-preview loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                     <div class="add-sign">+</div>
@@ -138,6 +141,9 @@
                 <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}}, ממקורות חיצונים ({{generalSearchCtrl.external_total}})</he>
             </div>
             <div class="item-preview-wrapper">
+                <div class="spinner" ng-hide="generalSearchCtrl.loading == false">
+                    <img src="images/BH-Loading.gif">
+                </div>
                 <item-preview ng-repeat="r_data in generalSearchCtrl.external_results" preview-data="r_data" ext-result = "true"></item-preview> 
                 <div class="item-preview loader" ng-click="generalSearchCtrl.fetch_more_ext()" ng-if="generalSearchCtrl.external_total>generalSearchCtrl.external_results.length">
                     <div class="add-sign">+</div>
