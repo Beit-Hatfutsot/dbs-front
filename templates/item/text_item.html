@@ -126,18 +126,20 @@
 					</p>
 					<item-type type="'places'"></item-type>
 				</div>
-				<div class="search-results__field" ng-if="itemController.search_result.individuals.isNotEmpty()" ng-click="itemController.goto_tree()">
+				<div class="search-results__field"
+          ng-if="itemController.search_result.ftree_args" ng-click="itemController.goto_tree()">
 					<p class="vertical-middle">
-						<span ng-if="itemController.search_result.name.isNotEmpty()">
+						<span ng-if="itemController.search_result.ftree_args.last_name">
 							<en>{{itemController.search_result.name.Header.En}}</en>
 							<he>{{itemController.search_result.name.Header.He}}</he>
 						</span>
-						<span ng-if="itemController.search_result.name.isNotEmpty() && itemController.search_result.place.isNotEmpty()">
+						<span ng-if="itemController.search_result.ftree_args.last_name &&
+              itemController.search_result.ftree_args.birth_place">
 							<br />
 							<en>at</en>
 							<he>מ</he>
 						</span>
-						<span ng-if="itemController.search_result.place.isNotEmpty()">
+						<span ng-if="itemController.search_result.ftree_args.birth_place">
 							<en>{{itemController.search_result.place.Header.En}}</en>
 							<he>{{itemController.search_result.place.Header.He}}</he>
 						</span>
@@ -150,7 +152,6 @@
 					<en>Related Items</en>
 					<he>פרטים קשורים</he>
 				</div>
-				<!-- <trees-preview ng-if="itemController.related_individuals" individuals="itemController.related_individuals" query-params="itemController.related_individuals_query_params"></trees-preview> -->
 				<item-preview ng-repeat="r_data in itemController.related_data | limitTo: 6" preview-data="r_data"></item-preview> 
 			</div>
 		</div>

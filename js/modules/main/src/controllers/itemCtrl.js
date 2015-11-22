@@ -19,11 +19,11 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.wizard_place = {};
 	this.itemTypeMap = itemTypeMap;
 	this.pull_wizard_related();
-	this.parsed_wsearch_results = [];
 	this._Index = 0;
 
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
+		console.log(this.search_result)
 	}
 
 	var unwatch_item_load = $rootScope.$on('item-load', function(event, item) {
@@ -99,19 +99,6 @@ ItemCtrl.prototype = {
 
 		if ( this.$state.lastState.name === 'start' ) {
 		
-			if ( this.wizard.result.individuals && this.wizard.result.individuals.isNotEmpty() ) {
-				this.related_individuals = this.wizard.result.individuals; 
-
-				this.related_individuals_query_params = {};
-				if ( this.wizard.result.name && this.wizard.result.name.isNotEmpty() ) {
-					this.related_individuals_query_params.last_name = this.wizard.result.name.Header.En;
-				}
-
-				if ( this.wizard.result.place && this.wizard.result.place.isNotEmpty() ) {
-					this.related_individuals_query_params.birth_place = this.wizard.result.place.Header.En;	
-				}
-			}
-
 			if ( this.wizard.result.name && this.wizard.result.name.isNotEmpty() && this.wizard.result.name._id !== _id) {
 				this.wizard_name = angular.copy(this.wizard.result.name);
 			}
@@ -142,14 +129,7 @@ ItemCtrl.prototype = {
     },
 
     goto_tree: function() {
-       	this.wsearch_individuals_query_params = {};
-       	if(this.search_result.name && this.search_result.name.isNotEmpty()){
-       		this.wsearch_individuals_query_params.last_name = this.search_result.name.Header.En;
-       	}
-       	if(this.search_result.place && this.search_result.place.isNotEmpty()) {
-       		this.wsearch_individuals_query_params.birth_place = this.search_result.place.Header.En;
-       	}
-    	this.$state.go('ftrees', this.wsearch_individuals_query_params);
+    	this.$state.go('ftrees', this.search_result.ftree_args);
 	},
 
 	showPrev: function () {
