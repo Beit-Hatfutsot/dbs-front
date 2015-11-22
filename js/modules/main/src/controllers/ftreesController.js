@@ -90,7 +90,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 		'DD': false,
 		'G': false,
 		'GTN': true
-	}, 6);
+	}, 6, 4);
 
 	this.$state = $state;
 	this.$stateParams = $stateParams;
