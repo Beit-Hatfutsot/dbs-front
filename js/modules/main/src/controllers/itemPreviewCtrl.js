@@ -13,7 +13,6 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification, $
 ItemPreviewCtrl.prototype = {
 
     goto_item: function() {
-        console.log(this);
         if (this.url !== undefined) {
             this.$window.open(this.url);
             return;

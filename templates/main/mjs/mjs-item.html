@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" draggable="{{nonDraggable ? false : true}}" data="item">
-				<img src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb>
+				<img ng-src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb>
 				<div class="title">
 					<en>{{item.Header.En}}</en>
 					<he>{{item.Header.He}}</he>
