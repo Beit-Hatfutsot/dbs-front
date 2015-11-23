@@ -1,13 +1,14 @@
 angular.module('main').
 	factory('musicalChairsFactory', [function() {
-		var Game = function(players, chair_count) {
+		var Game = function(players, chair_count, min_chairs) {
 			var self =this;
 
 			var status = players;
-			
+
 			this.chair_count = chair_count;
+			this.min_chairs = (min_chairs !== undefined)?min_chairs:0;
 			this.player_status = {};
-			
+
 			angular.forEach(status, function(val, key) {
 				Object.defineProperty(self.player_status, key, {
 					enumerable: true,
@@ -17,15 +18,14 @@ angular.module('main').
 					},
 
 					set: function(newVal) {
+						var sitting = self.count_sitting();
 						if (newVal) {
-							if ( self.count_sitting() >= self.chair_count ) {
+							if (sitting >= self.chair_count )
 								self.unsit_one();
-							}
 							status[key] = true;
 						}
-						else {
-							status[key] = false;
-						}
+						else if (sitting > self.min_chairs)
+								status[key] = false;
 					}
 				});
 			});
@@ -66,8 +66,8 @@ angular.module('main').
 		};
 
 		return {
-			create_game: function(players, chair_count) {
-				return new Game(players, chair_count);
+			create_game: function(players, chair_count, min_chairs) {
+				return new Game(players, chair_count, min_chairs);
 			}
 		};
 	}]);
