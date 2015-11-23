@@ -14,11 +14,9 @@
 				        	<he>חיפוש כללי: </he>
 				    	</label>
 				    	<input id="search-input" ng-model="subHeaderCtrl.header.query" ng-keydown="subHeaderCtrl.search_on_enter($event)" autofocus type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
-				    	<div class="search-button-back" ng-click="subHeaderCtrl.search()">
-				    		<div class="button">
-				    			<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
-			    			</div>
-				    	</div>
+				    	<button class="search-button-back" ng-click="subHeaderCtrl.search()" ng-disabled="subHeaderCtrl.header.query.length < 2">
+			    			<icon  class="button" alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
+				    	</button>
 			    	</div>
 			        <span ui-sref="start" class="link-to-wizard">
 			            <en>Or <a>Search for your Story</a></en>

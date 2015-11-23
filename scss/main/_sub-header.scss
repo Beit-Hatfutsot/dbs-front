@@ -156,6 +156,7 @@
 						background-color: #91dbe4;
 						position: absolute;
 	  				    top: 2px;
+	  				    border: none;
 	  				    @include hover-pointer();
 
 	  				    .en & {
@@ -163,6 +164,10 @@
 	  				    }
 	  				    .he & {
 	  				    	left: 2px;
+	  				    }
+
+	  				    &:disabled {
+	  				    	opacity: 0.5;
 	  				    }
 
 	  					.button {
