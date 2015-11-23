@@ -6,7 +6,7 @@ angular.module('main').directive('itemPreview', function() {
 			previewData: '=',
 			hideText: '=',
 			removable: '=',
-			extResult: '='
+			isExtResult: '='
 		},
 		controller: 'ItemPreviewCtrl as itemPreviewController'
 	};

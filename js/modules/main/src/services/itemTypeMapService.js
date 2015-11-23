@@ -9,6 +9,8 @@ angular.module('main').service('itemTypeMap', function() {
     	'IMAGE': 'photoUnits',
     	'VIDEO': 'movies',
     	'TEXT': 'text',
+    	'SOUND': 'audio',
+    	'3D': '3D'
 	};
 
 	this.get_type = function(description_code) {

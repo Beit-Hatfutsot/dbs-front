@@ -12,17 +12,8 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.$scope = $scope;
     this.external_total = '';
     this.loading = true;
+    this.loading_ext = true;
 
-
-    Object.defineProperty(this, 'search_collection', {
-        get: function() {
-            return this.collection;
-        },
-
-        set: function(new_collection) {
-            this.collection = new_collection;
-        }
-    });
 
     Object.defineProperty(this, 'query', {
         get: function() {
@@ -46,32 +37,36 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
         }
     });
 
-
     if ($stateParams.q !== undefined) {
         header.query = this.query = $stateParams.q;
  
         $http.get(apiClient.urls.search, {params: this.api_params()})
-        .success(function (r) {
+        .success(function (r) {  
             self.results = r.hits;
             self.loading = false;
         });
-        $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14&start=1", {params: this.api_params_ext()})
-        .success(function(r) {
-            self.external_total = r.totalResults;
-            self.push_ext_items(r);
-            self.loading = false;
-        })
+
+        if(this.collection == 'all-results' || this.collection == 'photoUnits,movies') {
+            $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14&start=1", {params: this.api_params_ext()})
+            .success(function(r) {
+                self.external_total = r.totalResults;
+                self.push_ext_items(r);
+                self.loading_ext = false;
+            })
+        }
     };
 }; 
-
+        
 GeneralSearchController.prototype = {
 
     push_ext_items: function(r) {
         if (r.items) {
-            for (var i=0;i < r.items.length;i++) {
+            for (var i=0; i < r.items.length; i++) {
                 var item = r.items[i];
-                if (item.title)
-                    this.external_results.push({UnitType: item.type, Header:  {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+                if (item.edmPreview)
+                    this.external_results.push({thumbnail: {data: item.edmPreview[0]}, UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+                else 
+                    this.external_results.push({UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
             }
         }
     },
@@ -98,8 +93,10 @@ GeneralSearchController.prototype = {
     api_params_ext: function () {
         var params = {};
         params.query = this.header.query;
-        if (this.collection != 'all-results')
-            params.collection = this.collection;
+
+        if (this.collection == 'photoUnits,movies')
+            params.qf = 'TYPE:(IMAGE OR VIDEO)';
+        
         params.start = this.external_results.length;
         return params;
     }, 
@@ -109,7 +106,7 @@ GeneralSearchController.prototype = {
             self = this;
 
         this.$http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14", {params: this.api_params_ext()})
-        .success(function (r) { self.push_ext_items(r) });
+        .success(function (r) { self.push_ext_items(r)});
 
     },
 

@@ -136,15 +136,15 @@
                     </div>
                 </div>
             </div>
-            <div class="db-results-title">
+            <div class="db-results-title" ng-if="generalSearchCtrl.external_total > 0">
                 <en>Results for {{generalSearchCtrl.query}} from external sources ({{generalSearchCtrl.external_total}})</en>
                 <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}}, ממקורות חיצונים ({{generalSearchCtrl.external_total}})</he>
             </div>
             <div class="item-preview-wrapper">
-                <div class="spinner" ng-hide="generalSearchCtrl.loading == false">
+                <div class="spinner" ng-hide="generalSearchCtrl.loading_ext == false || generalSearchCtrl.external_total == 0">
                     <img src="images/BH-Loading.gif">
                 </div>
-                <item-preview ng-repeat="r_data in generalSearchCtrl.external_results" preview-data="r_data" ext-result = "true"></item-preview> 
+                <item-preview ng-repeat="r_data in generalSearchCtrl.external_results" preview-data="r_data" is-ext-result = "true"></item-preview> 
                 <div class="item-preview loader" ng-click="generalSearchCtrl.fetch_more_ext()" ng-if="generalSearchCtrl.external_total>generalSearchCtrl.external_results.length">
                     <div class="add-sign">+</div>
                     <div class="loader-desc">

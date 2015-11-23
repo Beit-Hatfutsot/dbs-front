@@ -156,6 +156,7 @@
 						background-color: #91dbe4;
 						position: absolute;
 	  				    top: 2px;
+	  				    @include hover-pointer();
 
 	  				    .en & {
 	  				    	right: 2px;

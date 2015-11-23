@@ -88,7 +88,7 @@
   			font-size: 14px;
   			line-height: 26px;
 
-  			.title {
+  			.field-name {
   				font-weight: 600;
   				color: #666;
   			}
@@ -263,6 +263,11 @@
 			height: 16px;
 			@include icon (-28px -161px);
 		}
+		.audio-icon {
+			width: 15px;
+			height: 15px;
+			@include icon (-28px -244px);
+		}
 	}
 
 	.type-desc-container {
@@ -300,7 +305,20 @@
 			}
 		}
 	}
+	.diagonal-block {
+        .he & {
+            @include flip ();
+        }
 
+		.diagonal-separator {
+			position: absolute;
+			height: 150px;
+			width: 8px;
+			@include skew(16deg);
+			background: #FAAE34;
+		}
+	}
+		
 	.white-part1 {
 		position: relative;
 	  	border-bottom: 150px solid #ffffff;
@@ -327,19 +345,6 @@
 			}
 		}
 
-		.diagonal-block {
-            .he & {
-                @include flip ();
-            }
-
-			.diagonal-separator {
-				position: absolute;
-				height: 150px;
-				width: 8px;
-				@include skew(16deg);
-				background: #FAAE34;
-			}
-		}
 		.type {
 			@extend %item-type;
 			top: 118px;

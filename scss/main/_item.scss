@@ -1,22 +1,70 @@
+.europeana-label {
+    background-color: #e6e6e6;
+    line-height: 40px;
+    color: #666;
+    font-size: 14px;
+    top: 110px;
+    position: absolute;
+    font-weight: 600;
+    padding: 0 10px;
+}
+
 .item-preview {
     @extend %item-preview;
+
+    .diagonal-block--ext-result {
+
+        .diagonal-separator {
+            background: #666666;
+        }
+    }
 
     &--general-search {
         margin: 20px 37px;
 
-        .diagonal-separator {
-            background-color: #666;
+        .white-part1 {
+
+            &--nothumb {
+
+                .europeana-label {
+                    @extend .europeana-label;
+                    width: 100%;
+                }
+            }
+
+            &--thumbnail {
+
+                .europeana-label {
+                    @extend .europeana-label;
+                    width: 274px;
+                    transition: width 1s;
+
+                    &:after {
+                        position: absolute;
+                        content: "";
+                        border-bottom: solid 40px #e6e6e6;
+                        top: 0;
+
+                        .en & {
+                            border-right: solid 12px transparent;
+                            left: 100%;
+                        }
+
+                        .he & {
+                            border-left: solid 12px transparent;
+                            right: 100%;
+                        }
+                    }
+                }
+            }
         }
-        .europeana-label {
-            background-color: #e6e6e6;
-            line-height: 26px;
-            width: 120px;
-            color: #666;
-            font-size: 12px;
-            top: 124px;
-            position: absolute;
-            font-weight: 600;
-            text-align: center;
+
+        &:hover {
+            .white-part1--thumbnail {
+                .europeana-label {
+                    width: 222px;
+                }
+            }
         }
     }
 
