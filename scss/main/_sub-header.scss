@@ -210,11 +210,6 @@
 				width: 100%;
 				opacity: 1;
 				padding: 11px 0;
-				@include transition(all, 0.3s, ease);
-				
-				&.ng-hide {
-					opacity: 0;
-				}
 
 				.recently-arrow {
 					display: inline-block;
