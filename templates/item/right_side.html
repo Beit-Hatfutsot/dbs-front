@@ -30,12 +30,17 @@
         {{itemController.search_result.ftree_args.last_name[0]}}
       </span>
       <span ng-if="itemController.search_result.ftree_args.last_name &&
-        itemController.search_result.ftree_args.birth_place">
+        itemController.search_result.ftree_args.place">
         <br />
         <en>at</en>
         <he>מ</he>
       </span>
-      <span ng-if="itemController.search_result.ftree_args.birth_place">
+      <span ng-if="itemController.search_result.ftree_args.place &&
+                   !itemController.search_result.place.Header">
+        {{itemController.search_result.ftree_args.place[0]}}
+      </span>
+      <span ng-if="itemController.search_result.ftree_args.place &&
+                   itemController.search_result.place.Header">
         <en>{{itemController.search_result.place.Header.En}}</en>
         <he>{{itemController.search_result.place.Header.He}}</he>
       </span>

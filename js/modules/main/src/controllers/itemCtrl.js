@@ -23,7 +23,6 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
-		console.log(this.search_result)
 	}
 
 	var unwatch_item_load = $rootScope.$on('item-load', function(event, item) {
