@@ -183,7 +183,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: '404',
-            url: '/404',
+            abstract: true,
             templateUrl: 'templates/main/404.html'
         }
 
@@ -206,7 +206,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         return $delegate;
     });
 
-    $urlRouterProvider.otherwise('/404');
+    $urlRouterProvider.otherwise('/405');
 
     $locationProvider.html5Mode(true);
 
