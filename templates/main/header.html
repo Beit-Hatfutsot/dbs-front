@@ -106,7 +106,6 @@
 							<he>הסיפור שלי</he>
 						</div>
 					</li>
-					<!-- <div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'wizard'"> -->
 					<li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'general-search'}"
 						ng-click="headerController.header.sub_header_state = 'general-search'">
 						<div>
@@ -121,14 +120,13 @@
 							<he>נצפו לאחרונה</he>
 						</div>
 					</li>
-					<!-- <div class="search-area">
-						<form action="" class="search-area__form">
-							<input type="text" placeholder={{headerController.search_placeholders[lang]}} class="search-area__form__input" />
-							<div class="search-area__form__search-button">
-								<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-350, -24]"></icon>
-							</div>
-						</form>
-					</div> -->
+		            <li class="header-menu-item ftree-tab" ng-class="{'header-menu-item--active': isCurrentState('ftrees')}" 
+		            	ng-click="headerController.goto_state('ftrees')"> 
+		                <div>
+		                    <en>Family tree</en>
+		                    <he>עצ משפחה</he>
+		                </div>
+		            </li>
 				</ul>
 			</nav>
 			<div class="dropdown-icons__upload" dropdown is-open>

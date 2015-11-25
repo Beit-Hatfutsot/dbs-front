@@ -31,12 +31,6 @@
                     <he>שמות משפחה</he>
                 </div>
             </li>
-            <li class="menu-item ftree-tab" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'family-tree'}"> 
-                <div>
-                    <en>Search in <br> Family trees</en>
-                    <he>חיפוש בעצי משפחה</he>
-                </div>
-            </li>
         </ul>
     </nav>
     <div  id="item-page">
@@ -115,7 +109,7 @@
             </div>
         </ng-switch>
         <div class="search-results-page">
-            <div class="db-results-title">
+            <div class="db-results-title"  ng-if="generalSearchCtrl.results.total > 0">
                 <en>Your Search results for {{generalSearchCtrl.query}} (All results - {{generalSearchCtrl.results.total}})</en>
                 <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}} (כל תוצאות  - {{generalSearchCtrl.results.total}})</he>
             </div>
@@ -124,6 +118,7 @@
                     <img src="images/BH-Loading.gif">
                 </div>
                 <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
+                <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
                 <div class="item-preview loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                     <div class="add-sign">+</div>
                     <div class="loader-desc">
