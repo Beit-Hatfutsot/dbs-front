@@ -1,0 +1,44 @@
+<div class="db-results-title">
+    <en>Use your Google power:</en>
+    <he>השתמשו בכוחו של גוגל:</he>
+</div>
+<label for="search-input" class="search-button-label">
+    <en>Use your query phrase, combined with one or more of the following key words on Google:</en>
+    <he>השתמשו במילים שחיפשתם, יחד עם מילה אחת או יותר מהמיליםשמוצגות בגוגל:</he>
+</label>
+<div class="gsearch-box-wrapper">
+    <input id="search-input" ng-model="generalSearchCtrl.header.query" ng-keydown="subHeaderCtrl.search_on_enter($event)" autofocus type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
+    <button class="search-button-back" ng-click="subHeaderCtrl.search()" ng-disabled="subHeaderCtrl.header.query.length < 2">
+        <icon  class="button" alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
+    </button>
+</div>
+<ul class="google-key-words">
+    <li>
+        <en>Jewish</en>
+        <he>יהודים</he>
+    </li>
+    <li>
+        <en>Jews</en>
+        <he>יהודי</he>
+    </li>
+    <li>
+        <en>Judah</en>
+        <he>ישראל</he>
+    </li>
+     <li>
+        <en>Jewish</en>
+        <he>דגתכךדכ</he>
+    </li>
+    <li>
+        <en>Jews</en>
+        <he>גדגכדג</he>
+    </li>
+    <li>
+        <en>Judah</en>
+        <he>גדכדגכ</he>
+    </li>
+</ul>
+<button class="google-search">
+    <en><a>Search this</a></en>
+    <he><a>חיפוש</a></he>
+</button>

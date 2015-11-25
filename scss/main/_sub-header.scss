@@ -1,3 +1,70 @@
+.google_search {
+
+}
+.search-button-label {
+	color: #666;
+	.en & {
+		margin-right: 10px;
+	}
+	.he & {
+		margin-left: 10px;
+	}
+}	
+.gsearch-box-wrapper {
+	position: relative;
+	display: inline-block;
+
+	#search-input {
+		border: 3px solid #91dbe4;
+		width: 600px;
+		height: 34px;
+		color: #666;
+		text-transform: capitalize;
+		
+		.en & {
+			padding-left: 10px;
+		}
+		.he & {
+			padding-right: 10px;
+		}
+	}
+
+	.search-button-back {
+		width: 40px;
+		height: 30px;
+		background-color: #91dbe4;
+		position: absolute;
+	    top: 2px;
+	    border: none;
+	    @include hover-pointer();
+
+	    .en & {
+	    	right: 2px;
+	    }
+	    .he & {
+	    	left: 2px;
+	    }
+
+	    &:disabled {
+	    	opacity: 0.5;
+	    }
+
+		.button {
+			width: 18px;
+			height: 18px;
+			top: 50%;
+			position: absolute;
+			transform: translate(-50%, -50%);
+
+			.en & {
+				left: 50%;
+			}
+			.he & {
+				left: 50%;
+			}
+		}
+	}
+}
 .sub-header-container {	
 	position: relative;
 	z-index: 1;
@@ -121,72 +188,6 @@
 			.general-search {
 				color: #666;
 				padding: 35px 0;
-
-				.gsearch-box-wrapper {
-					position: relative;
-  					display: inline-block;
-
-					label {
-						.en & {
-							margin-right: 10px;
-						}
-						.he & {
-							margin-left: 10px;
-						}
-					}	
-
-					#search-input {
-						border: 3px solid #91dbe4;
-	  					width: 600px;
-	  					height: 34px;
-	  					color: #666;
-	  					text-transform: capitalize;
-	  					
-	  					.en & {
-	  						padding-left: 10px;
-	  					}
-	  					.he & {
-	  						padding-right: 10px;
-	  					}
-					}
-
-					.search-button-back {
-						width: 40px;
-						height: 30px;
-						background-color: #91dbe4;
-						position: absolute;
-	  				    top: 2px;
-	  				    border: none;
-	  				    @include hover-pointer();
-
-	  				    .en & {
-	  				    	right: 2px;
-	  				    }
-	  				    .he & {
-	  				    	left: 2px;
-	  				    }
-
-	  				    &:disabled {
-	  				    	opacity: 0.5;
-	  				    }
-
-	  					.button {
-	  						width: 18px;
-	  						height: 18px;
-	  						top: 50%;
-	  						position: absolute;
-	  						transform: translate(-50%, -50%);
-
-	  						.en & {
-	  							left: 50%;
-	  						}
-	  						.he & {
-	  							left: 50%;
-	  						}
-	  					}
-					}
-				
-				}
 
 				.link-to-wizard {
 

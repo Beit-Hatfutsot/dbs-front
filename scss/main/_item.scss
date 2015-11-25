@@ -9,6 +9,30 @@
     padding: 0 10px;
 }
 
+.google-key-words {
+    padding: 0;
+
+    li {
+        display: inline;
+        background-color: $blue4;
+        padding: 6px 10px;
+        margin-right: 24px;
+        @include hover-pointer();
+    }
+}
+
+.google-search {
+    width: 180px;
+    color: #fff;
+    background-color: #fbb034;
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    height: 38px;
+    border-radius: 4px;
+}
+
 .item-preview {
     @extend %item-preview;
 
@@ -361,7 +385,7 @@
                 }
                 .loader-desc {
                     margin-top: -28px;
-                    color: $mjs-color;
+                    color: $red3;
                     font-size: 24px;
                     line-height: 18px;
 
