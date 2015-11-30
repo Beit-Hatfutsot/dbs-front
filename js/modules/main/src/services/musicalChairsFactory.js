@@ -8,6 +8,7 @@ angular.module('main').
 			this.chair_count = chair_count;
 			this.min_chairs = (min_chairs !== undefined)?min_chairs:0;
 			this.player_status = {};
+			this.no_limits = false;
 
 			angular.forEach(status, function(val, key) {
 				Object.defineProperty(self.player_status, key, {
@@ -20,12 +21,12 @@ angular.module('main').
 					set: function(newVal) {
 						var sitting = self.count_sitting();
 						if (newVal) {
-							if (sitting >= self.chair_count )
+							if (!self.no_limits && sitting >= self.chair_count )
 								self.unsit_one();
 							status[key] = true;
 						}
-						else if (sitting > self.min_chairs)
-								status[key] = false;
+						else if (self.no_limits || sitting > self.min_chairs)
+							status[key] = false;
 					}
 				});
 			});
@@ -62,7 +63,16 @@ angular.module('main').
 						count++;
 					}
 				}
+			},
+
+			force: function(seats) {
+				this.no_limits = true;
+				for (var player in this.player_status)
+					this.player_status[player] = seats.indexOf(player) > -1;
+				this.no_limits = false;
+
 			}
+
 		};
 
 		return {
