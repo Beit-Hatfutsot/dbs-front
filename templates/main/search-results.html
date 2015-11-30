@@ -33,7 +33,7 @@
             </li>
         </ul>
     </nav>
-    <div  id="item-page">
+    <div  id="general-search-page">
         <ng-switch on="generalSearchCtrl.collection">
             <div ng-switch-when='all-results' class="about-bh">
                 <div class="title">
@@ -114,12 +114,12 @@
                 <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}} (כל תוצאות  - {{generalSearchCtrl.results.total}})</he>
             </div>
             <div class="item-preview-wrapper">
-                <div class="spinner" ng-hide="generalSearchCtrl.loading == false">
+                <div class="spinner" ng-if="generalSearchCtrl.loading">
                     <img src="images/BH-Loading.gif">
                 </div>
                 <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
                 <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
-                <div class="item-preview loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
+                <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                     <div class="add-sign">+</div>
                     <div class="loader-desc">
                         <en>See more<br></en>
@@ -136,20 +136,20 @@
                 <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}}, ממקורות חיצונים ({{generalSearchCtrl.external_total}})</he>
             </div>
             <div class="item-preview-wrapper">
-                <div class="spinner" ng-hide="generalSearchCtrl.loading_ext == false || generalSearchCtrl.external_total == 0">
+                <div class="spinner" ng-if="generalSearchCtrl.loading_ext || generalSearchCtrl.external_total == 0">
                     <img src="images/BH-Loading.gif">
                 </div>
                 <item-preview ng-repeat="r_data in generalSearchCtrl.external_results" preview-data="r_data" is-ext-result = "true"></item-preview> 
-                <div class="item-preview loader" ng-click="generalSearchCtrl.fetch_more_ext()" ng-if="generalSearchCtrl.external_total>generalSearchCtrl.external_results.length">
-                    <div class="add-sign">+</div>
-                    <div class="loader-desc">
-                        <en>See more<br></en>
-                        <he>See more<br></he>
-                        <span class="results-number">
-                            <en>(+{{generalSearchCtrl.external_total-generalSearchCtrl.external_results.length}} results)</en>
-                            <he>(+{{generalSearchCtrl.external_total-generalSearchCtrl.external_results.length}} תוצאות)</he>
-                        </span>
-                    </div>
+                <div class="loader" ng-click="generalSearchCtrl.fetch_more_ext()" ng-if="generalSearchCtrl.external_total>generalSearchCtrl.external_results.length">
+                <div class="add-sign">+</div>
+                <div class="loader-desc">
+                    <en>See more<br></en>
+                    <he>See more<br></he>
+                    <span class="results-number">
+                        <en>(+{{generalSearchCtrl.external_total-generalSearchCtrl.external_results.length}} results)</en>
+                        <he>(+{{generalSearchCtrl.external_total-generalSearchCtrl.external_results.length}} תוצאות)</he>
+                    </span>
+                </div>
                 </div>
             </div>
         </div>

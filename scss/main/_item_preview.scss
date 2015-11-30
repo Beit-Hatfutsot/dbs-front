@@ -4,7 +4,6 @@
 	vertical-align: middle;
 	width: 306px;
 	height: 150px;
-	margin: 0 0 26px;
 	@include box-shadow(0 0 6px 0 #999);
 	@include hover-pointer(); 
 
@@ -16,8 +15,26 @@
 				width: initial;
 			}
 		}
+        .type {
+            width: 26px;
+
+            .type-desc-container {
+                width: 0; 
+            }
+        } 
 	}
+
+    .type {
+        @extend %item-type;
+        top: 118px;
+
+        &--thumbData {
+            @extend %item-type--thumbData;
+        }
+    }
+
 	.diagonal-block {
+
         .he & {
             @include flip ();
         }
@@ -27,7 +44,7 @@
 			height: 150px;
 			width: 8px;
 			@include skew(16deg);
-			background: #FAAE34;
+			background: $yellow3;
 		}
 	}
 		
@@ -56,21 +73,12 @@
 				border-left: 0px solid #ffffff;
 			}
 		}
-
-		.type {
-			@extend %item-type;
-			top: 118px;
-
-			&--thumbData {
-	            @extend %item-type--thumbData;
-	        }
-		}
 	}
 
 	.header {
 		position: absolute;
-		color: #B2361A;
-		font-weight: 600;
+		color: $red2;
+		font-weight: 700;
 		margin: 10px 15px 10px;
 		font-size: 13px;
 		width: 164px;
@@ -85,7 +93,7 @@
 	.text {
 		position: absolute;
 	    overflow: hidden;
-		color: #666666;
+		color: $gray3;
 		font-size: 14px;
 		height: 86px;
 		line-height: 17px;
@@ -101,7 +109,7 @@
             a {
                 pointer-events: none;
                 text-decoration: none;
-                color: #666666;
+                color: $gray3;
             }
 	    }
     }	
@@ -145,79 +153,5 @@
 			float: left;
 		}
 	}
-}
-
-.item-preview {
-    @extend %item-preview;
-
-    .diagonal-block--ext-result {
-        .diagonal-separator {
-            background: #666666;
-        }
-    }
-
-    &--general-search {
-        margin: 20px 37px;
-
-        .white-part1 {
-
-            &--nothumb {
-
-                .europeana-label {
-                    @extend .europeana-label;
-                    width: 100%;
-                }
-            }
-
-            &--thumbnail {
-
-                .europeana-label {
-                    @extend .europeana-label;
-                    width: 274px;
-                    transition: width 1s;
-
-                    &:after {
-                        position: absolute;
-                        content: "";
-                        border-bottom: solid 40px #e6e6e6;
-                        top: 0;
-
-                        .en & {
-                            border-right: solid 12px transparent;
-                            left: 100%;
-                        }
-
-                        .he & {
-                            border-left: solid 12px transparent;
-                            right: 100%;
-                        }
-                    }
-                }
-            }
-        }
-
-        &:hover {
-            .white-part1--thumbnail {
-                .europeana-label {
-                    width: 222px;
-                }
-            }
-        }
-    }
-
-    .type {
-        @extend %item-type;
-        bottom: 10px;
-    }
-
-    &:hover {
-        %item-type {
-            width: 26px;
-
-            .type-desc-container {
-                width: 0; 
-            }
-        } 
-    }
 }
 
