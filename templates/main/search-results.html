@@ -111,7 +111,7 @@
         <div class="search-results-page">
             <div class="db-results-title"  ng-if="generalSearchCtrl.results.total > 0">
                 <en>Your Search results for <span class="cap-query">{{generalSearchCtrl.query}}</span> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].En}} - {{generalSearchCtrl.results.total}})</en>
-                <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}} ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}}  - {{generalSearchCtrl.results.total}})</he>
+                <he>תוצאות החיפוש עבור <span class="cap-query">{{generalSearchCtrl.query}}</span> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}}  - {{generalSearchCtrl.results.total}})</he>
             </div>
             <div class="item-preview-wrapper">
                 <div class="spinner" ng-if="generalSearchCtrl.loading">
@@ -123,7 +123,7 @@
                     <div class="add-sign">+</div>
                     <div class="loader-desc">
                         <en>See more<br></en>
-                        <he>See more<br></he>
+                        <he>לראות עוד<br></he>
                         <span class="results-number">
                             <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
                             <he>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
@@ -133,10 +133,10 @@
             </div>
             <div class="db-results-title" ng-if="generalSearchCtrl.external_total > 0">
                 <en>Results for <span class="cap-query">{{generalSearchCtrl.query}}</span> from external sources ({{generalSearchCtrl.external_total}})</en>
-                <he>תוצאות החיפוש עבור {{generalSearchCtrl.query}}, ממקורות חיצונים ({{generalSearchCtrl.external_total}})</he>
+                <he>תוצאות החיפוש עבור <span class="cap-query">{{generalSearchCtrl.query}}</span>, ממקורות חיצונים ({{generalSearchCtrl.external_total}})</he>
             </div>
-            <div class="item-preview-wrapper">
-                <div class="spinner" ng-if="generalSearchCtrl.loading_ext || generalSearchCtrl.external_total == 0">
+            <div class="item-preview-wrapper" ng-if="generalSearchCtrl.external_total > 0">
+                <div class="spinner" ng-if="generalSearchCtrl.loading_ext">
                     <img src="images/BH-Loading.gif">
                 </div>
                 <item-preview ng-repeat="r_data in generalSearchCtrl.external_results" preview-data="r_data" is-ext-result = "true"></item-preview> 
@@ -144,7 +144,7 @@
                 <div class="add-sign">+</div>
                 <div class="loader-desc">
                     <en>See more<br></en>
-                    <he>See more<br></he>
+                    <he>לראות עוד<br></he>
                     <span class="results-number">
                         <en>(+{{generalSearchCtrl.external_total-generalSearchCtrl.external_results.length}} results)</en>
                         <he>(+{{generalSearchCtrl.external_total-generalSearchCtrl.external_results.length}} תוצאות)</he>

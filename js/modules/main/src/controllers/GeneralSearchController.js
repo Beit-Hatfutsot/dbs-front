@@ -74,7 +74,7 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
             self.loading = false;
         });
 
-        if(this.collection == 'all-results' || this.collection == 'media') {
+        if(this.collection == 'allResults' || this.collection == 'media') {
             $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14&start=1", {params: this.api_params_ext()})
             .success(function(r) {
                 self.external_total = r.totalResults;
