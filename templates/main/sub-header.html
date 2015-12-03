@@ -13,7 +13,12 @@
 			        	<he>חיפוש כללי: </he>
 			    	</label>
 			    	<div class="gsearch-box-wrapper">
-				    	<input id="search-input" ng-model="subHeaderCtrl.header.query" ng-keydown="subHeaderCtrl.search_on_enter($event)" autofocus type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
+				    	<input 	id="search-input" 
+				    			ng-model="subHeaderCtrl.header.query"
+				    			autofocus
+				    			ng-keydown="subHeaderCtrl.search_on_enter($event)" 
+				    			type="text"
+				    			placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
 				    	<button class="search-button-back" ng-click="subHeaderCtrl.search()" ng-disabled="subHeaderCtrl.header.query.length < 2">
 			    			<icon  class="button" alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
 				    	</button>
