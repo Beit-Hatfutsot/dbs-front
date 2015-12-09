@@ -98,7 +98,6 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.$location = $location;
 	this.ftrees = ftrees;
 	this.notification = notification;
-	this.musicalChairsFactory = musicalChairsFactory;
 
 	Object.defineProperty(this, 'page_count', {
 		get: function() {
@@ -198,10 +197,10 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 			return $stateParams;
 		}
 	});
-	
+
 	$scope.$watch('tree_view', function(newVal, oldVal) {
 		if (newVal) {
-			self.minimize_results_table();
+			self.result_column_manager.force(['FN', 'LN']);
 		}
 		else {
 			if (oldVal) {
@@ -364,17 +363,6 @@ FtreesController.prototype = {
 				individual_id: individual.II,
 				tree_number: individual.GTN
 			});
-		}
-	},
-
-	minimize_results_table: function() {
-		for (var key in this.column_status) {
-			if (key === 'FN' || key === 'LN') {
-				this.column_status[key] = true;
-			}
-			else {
-				this.column_status[key] = false;
-			}
 		}
 	},
 
