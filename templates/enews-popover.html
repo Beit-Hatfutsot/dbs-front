@@ -1,4 +1,4 @@
-<div class="newsletter-popup__content">
+<div class="newsletter-popup__content"> 
     <h2 class="widgettitle">
         <en>Are you part of the story?</en>
         <he>רוצים להיות חלק מהסיפור?</he>
@@ -8,39 +8,45 @@
             <en>Add your email and you will never miss out on family events, exhibition openings and deals on our shops!</en>
             <he>הוסיפו את המייל שלכם כדי לא להחמיץ עדכונים, חידושים, המון סיפורים מרחקים ועוד...</he>
         </div>
-        <form action="http://www.bh.org.il/wp-content/themes/bh/functions/widgets/active-trail-newsletter/newsletter-api.php" method="post">
-            <small>
-                <en>Your Email:</en>
-                <he>האימייל שלך:</he>
-            </small>
-            <input id="widget-active_trail_newsletter-4-mm_newemail" class="mm_newemail" name="widget-active_trail_newsletter[4][mm_newemail]" type="text" placeholder="{{(lang=='en')?'Email Address':'כתובת המייל'}}">
-            <!-- <div>
+        <form name="myForm" ng-submit="enewsCtrl.submit()" novalidate>
+            <label for="widget-active_trail_newsletter-4-mm_newemail">
+                <small>
+                    <en>Your Email:</en>
+                    <he>האימייל שלך:</he>
+                </small>
+            </label>
+            <input ng-model="enewsCtrl.email" class="mm_newemail" name="email" type="email" placeholder="{{(lang=='en')?'Email Address':'כתובת המייל'}}" required />
+            <div ng-show="myForm.$dirty && myForm.email.$invalid" class="errph"> 
                 <en>Email address is missing or incorrect</en>
-                <he></he>
-            </div> -->
+                <he>כתובת מייל שגויה או חסרה</he>
+            </div>
             <div class="newsletter-groups">
                 <small>
                     <en>Choose Language:</en>
                     <he>בחר שפה:</he>
                 </small>
-                <input type="checkbox" name="widget-active_trail_newsletter[4][mm_key][]" id="widget-active_trail_newsletter-4-mm_key[registration-form-en]" value="registration-form-en">
-                <label for="widget-active_trail_newsletter-4-mm_key[registration-form-en]">
-                    <span>English</span>
-                </label>
-                <input type="checkbox" name="widget-active_trail_newsletter[4][mm_key][]" id="widget-active_trail_newsletter-4-mm_key[registration-form-sp]" value="registration-form-sp">
-                <label for="widget-active_trail_newsletter-4-mm_key[registration-form-sp]">
-                    <span>Español</span>
-                </label>
-                <input type="checkbox" name="widget-active_trail_newsletter[4][mm_key][]" id="widget-active_trail_newsletter-4-mm_key[registration-form-he]" value="registration-form-he">
-                <label for="widget-active_trail_newsletter-4-mm_key[registration-form-he]">
-                    <span>עברית</span>
-                </label>
+                <div ng-repeat="checkbox in enewsCtrl.checkboxes">
+                    <input id="enewsletter-lang-{{checkbox.name}}" type="checkbox" ng-model="checkbox.is_checked" name="{{checkbox.name}}"/>
+                    <label for="enewsletter-lang-{{checkbox.name}}">
+                        <span ng-bind="checkbox.label"></span>
+                    </label>
+                </div>
             </div>
-            <!-- <div id="widget-active_trail_newsletter-4-newsletterErr" class="errph hide">Please check at least one newsletter name</div> -->
-            <input class="newsletter-submit" type="submit" ng-value="(lang=='en')?'Register':'הרשמה'">
+            <div class="errph" ng-show="enewsCtrl.tried && enewsCtrl.no_languages()">
+                <div>
+                    <en>Please check at least one newsletter language</en>
+                    <he>יש לבחור לפחות שפה אחת</he>
+                </div>
+            </div>
+            <input  class="newsletter-submit" type="submit" ng-value="(lang=='en')?'Register':'הרשמה'" 
+                    ng-disabled="myForm.$invalid"/>
+            <div class="errph succes" ng-show="enewsCtrl.registered"> 
+                <en>Registration was successful, thank you!</en>
+                <he>הרישום בוצע בהצלחה, תודה רבה!</he>
+            </div>
         </form>
     </div>
     <div>  
-        <icon position="[-224, -306]" class="close-button" ng-click="popover.close()"></icon>
+        <icon position="[-224, -306]" class="close-button" ng-click="enewsCtrl.popover.close()"></icon>
     </div>
 </div>

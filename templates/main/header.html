@@ -63,7 +63,8 @@
 
 				<div class="header-element newsletter-popup">
 					<div class="newsletter-popup__button">
-						<button class="label" ng-controller="NewletterPopoverCtrl" popover-template="'templates/enews-popover.html'" popover-is-open="popover.isOpen">
+						<button class="label" ng-controller="NewsLetterPopoverCtrl as enewsCtrl" popover-template="'templates/enews-popover.html'" popover-is-open="enewsCtrl.popover.is_open"
+						 		ng-class="{'label--active': enewsCtrl.popover.is_open}">
 							<en>ENews</en>
 							<he>ניוזלטר</he>
 						</button>
