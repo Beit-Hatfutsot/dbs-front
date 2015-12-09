@@ -185,40 +185,6 @@
 		}
 	}
 
-	&--thumbData {
-		width: 80px;
-
-		.type-desc-container {
-			width: 54px;
-			transition: width 1s;
-		}
-
-		.en & {
-			right: -26px;
-		}
-		.he & {
-			left: -26px;
-		}
-
-		&:after {
-			position: absolute;
-			content: "";
-			width: 0;
-			height: 0;
-			border-top: solid 26px transparent;
-			top: 0;
-
-			.en & {
-				border-left: solid 7px #f6f6f6;
-				left: 100%;
-			}
-			.he & {
-				border-right: solid 7px #f6f6f6;
-				right: 100%;
-			}
-		}
-	}
-
 	.type-icon-container {
 		display: inline-block;
 		margin: 0 5px;
@@ -282,6 +248,40 @@
 		}
 		.he & {
 			right: 28px;
+		}
+	}
+
+	&--thumbData {
+		width: 80px;
+
+		.type-desc-container {
+			width: 54px;
+			transition: width 1s;
+		}
+
+		.en & {
+			right: -26px;
+		}
+		.he & {
+			left: -26px;
+		}
+
+		&:after {
+			position: absolute;
+			content: "";
+			width: 0;
+			height: 0;
+			border-top: solid 26px transparent;
+			top: 0;
+
+			.en & {
+				border-left: solid 7px #f6f6f6;
+				left: 100%;
+			}
+			.he & {
+				border-right: solid 7px #f6f6f6;
+				right: 100%;
+			}
 		}
 	}
 }

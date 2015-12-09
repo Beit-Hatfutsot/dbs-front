@@ -209,11 +209,11 @@
                             @include hover-pointer();
 
                             &:hover {
-                                background-color: $yellow2 !important;
+                                background-color: $gray3 !important;
                             }
 
-                            &.active {
-                                background-color: #ea8a0a !important;
+                            &--active {
+                                background-color: $yellow2 !important;
                             }
                         }
                     }
@@ -225,7 +225,7 @@
                         border: 1px solid $gray5;
                         @include border-radius(3px);
                         background-color: $gray6;
-                        @include box-shadow(0 0 6px 0 #999);
+                        @include box-shadow(0 0 6px 0 $gray4);
 
                         .en & {
                             left: -144px;
@@ -278,7 +278,8 @@
                                     height: 36px;
                                     font-size: 14px;
                                     background-color: #fff;
-                                    border: 3px solid #999;
+                                    border: 3px solid $gray4;
+                                    outline: none;
                                 }
                                 .newsletter-groups {
                                     margin-top: 15px;
@@ -298,15 +299,10 @@
 
                                         .en & {
                                             margin-right: 80px;
-                                        }
-                                        .he & {
-                                            margin-left: 80px;
-                                        }
-
-                                        .en & {
                                             float: left;
                                         }
                                         .he & {
+                                            margin-left: 80px;
                                             float: right;
                                         }
                                         
@@ -347,7 +343,8 @@
                                                 left: 4px;
                                             }
                                             .he & {
-                                                right: 4px;                                            }
+                                                right: 4px;
+                                            }
                                         }
                                     }
                                     input[type=checkbox] {
@@ -370,7 +367,12 @@
                                 .errph {
                                     margin: 5px 0;
                                     font-size: 12px;
-                                    color: $red2;
+                                    color: #ed1c24;
+                                    
+                                    &.succes {
+                                        color: #009e4b;
+                                        display: inline-block;
+                                    }
                                 }
                                 
                                 .newsletter-submit {
@@ -491,7 +493,7 @@
                     }
 
                     .my-account-label {
-                        background-color: #47C3D3;
+                        background-color: $blue3;
                         padding: 0 10px;
                         line-height: 30px;
                         font-size: 13px;
@@ -520,7 +522,7 @@
                         position: absolute;
                         margin-top: 6px;
                         display: none;
-                        @include box-shadow(0 0 6px 1px #999);
+                        @include box-shadow(0 0 6px 1px $gray4);
 
                         &.signed {
                             box-shadow: none;
@@ -537,13 +539,13 @@
                             font-size: 16px;
                             padding: 4px 5px;
                             color: $gray3;
-                            background-color: #e6e6e6;
+                            background-color: $gray6;
                             @include hover-pointer();
 
                             &.signed {
                                 margin-bottom: 6px;
                                 @include border-radius(4x);
-                                @include box-shadow(0 0 6px 0 #999);
+                                @include box-shadow(0 0 6px 0 $gray4);
                                
                                 .en & {
                                     padding: 4px 94px 4px 16px;
@@ -603,7 +605,7 @@
                     position: relative;
                     display: inline-block;
                     vertical-align: top;
-                    color: #f9f9f9;
+                    color: $gray7;
 
                     .language-icon {
                         width: 30px;
@@ -618,17 +620,15 @@
     }
 
     .bottom-container {
-        //z-index: 2;
         width: 100%;
         top: 80px;
-        background: #e6e6e6;
+        background: $gray6;
 
         #header-container {
             position: relative;
             margin: 0 auto;
             max-width: 1140px;
             height: 40px;
-
 
             @at-root .menu {
                 position: relative;
@@ -637,10 +637,6 @@
                 height: 100%;
                 width: 100%;
                 background: inherit;
-
-                &.gsearch {
-                      @include box-shadow(0 1px 5px 1px #b0b0b0);
-                }
 
                 ul.nav {
                     margin: 0 auto;
@@ -671,6 +667,7 @@
                             }
                         }
                     }
+
                     li.menu-item {
                         line-height: 20px;
                         font-size: 18px;
@@ -759,8 +756,8 @@
                             width: 100%;
                             z-index: 3;
                             top: 6px;
-                            background: #e6e6e6;
-                            @include box-shadow(0 0 6px 0 #999);
+                            background: $gray6;
+                            @include box-shadow(0 0 6px 0 $gray4);
                             display: none;
 
                             &__title, &__row {

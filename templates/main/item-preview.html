@@ -1,10 +1,9 @@
-<div class="item-preview" ng-class="{'item-preview--general-search': itemPreviewController.$state.current.name == 'general-search'}"
-	 ng-click="itemPreviewController.goto_item(previewData)">
+<div class="item-preview" ng-click="itemPreviewController.goto_item(previewData)">
 	<div class="thumbnail" ng-if="previewData.thumbnail.data">
 		<img ng-if="!isExtResult" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
-			 alt="Preview Image" fit-thumb />
+			 alt="Preview Image"/>
 		 <img ng-if="isExtResult" ng-src="{{previewData.thumbnail.data}}"
-			 alt="Preview Image" fit-thumb />
+			 alt="Preview Image"/>
 	</div>
 	<div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data), 'white-part1--thumbnail': previewData.thumbnail.data}">
 		<div class="diagonal-block" ng-if="previewData.thumbnail.data" ng-class="{'diagonal-block--ext-result': isExtResult}">

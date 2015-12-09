@@ -1,6 +1,6 @@
 var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header) {
     var self = this, params = {};
-    this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'all-results';
+    this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'allResults';
     this.results = {hits: []};    
     this.external_results = [];
     this.$modal = $modal;
@@ -14,6 +14,34 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.loading = true;
     this.loading_ext = true;
 
+    this.collection_map = {
+
+        allResults: {
+            En: 'All results',
+            He: 'כל התוצאות',
+        },
+        
+        places: {
+            En:'Places',
+            He: 'מקומות'
+        },
+
+        media: {
+            En: 'Images & Videos',
+            He: 'תמונות + וידאו',
+            api: 'photoUnits,movies'
+        },
+
+        personalities: {
+            En: 'Personalities',
+            He: 'אישים'
+        },
+
+        familyNames: {
+            En: 'Family names',
+            He: 'שמות משפחה'
+        }
+    };    
 
     Object.defineProperty(this, 'query', {
         get: function() {
@@ -46,7 +74,7 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
             self.loading = false;
         });
 
-        if(this.collection == 'all-results' || this.collection == 'photoUnits,movies') {
+        if(this.collection == 'allResults' || this.collection == 'media') {
             $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14&start=1", {params: this.api_params_ext()})
             .success(function(r) {
                 self.external_total = r.totalResults;
@@ -74,8 +102,12 @@ GeneralSearchController.prototype = {
     api_params: function () {
         var params = {};
         params.q = this.header.query;
-        if (this.collection != 'all-results')
-            params.collection = this.collection;
+        if (this.collection != 'allResults') {
+            if (this.collection_map[this.collection].hasOwnProperty('api'))
+                params.collection = this.collection_map[this.collection].api
+            else
+                params.collection = this.collection;
+        }
         params.from_ = this.results.hits.length;
         return params;
     }, 
@@ -94,7 +126,7 @@ GeneralSearchController.prototype = {
         var params = {};
         params.query = this.header.query;
 
-        if (this.collection == 'photoUnits,movies')
+        if (this.collection == 'media')
             params.qf = 'TYPE:(IMAGE OR VIDEO)';
         
         params.start = this.external_results.length;
