@@ -1,4 +1,4 @@
-<div class="item-preview" ng-click="itemPreviewController.goto_item(previewData)">
+<a ng-href="{{itemPreviewController.get_item_url(previewData)}}"><div class="item-preview">
 	<div class="thumbnail" ng-if="previewData.thumbnail.data">
 		<img ng-if="!isExtResult" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
 			 alt="Preview Image"/>
@@ -44,3 +44,4 @@
 		</item-type>
 	</div>
 </div>
+</a>
