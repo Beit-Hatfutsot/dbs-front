@@ -541,7 +541,7 @@
                         .picture {
                             position: absolute;
                             height: initial;
-                            width: auto;
+                            width: initial;
                             left: 50%;
                             top: 50%;
                             @include translate(-50%, -50%);
