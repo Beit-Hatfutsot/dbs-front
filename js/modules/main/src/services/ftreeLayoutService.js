@@ -124,7 +124,7 @@ angular.module('main').
 								ratio = maxRatio;
 							}
 							grandchildSize = o.childSize.mult(ratio);
-							child.children.forEach( function (granchild, _grandchild) {
+							child.children.forEach( function (grandchild, _grandchild) {
 								grandchild.pos = new Tuple(child.pos.x+_grandchild*ratio*(o.childSize.x+o.childMargin.horizontal),
 									  child.pos.y+child.size.y+o.childMargin.vertical/4);
 								grandchild.size = grandchildSize;
