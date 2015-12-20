@@ -31,7 +31,8 @@
                                     ng-repeat="pic in itemController.item_data.Pictures"
                                     ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
                                     alt="Item Image"
-                                    prevent-rightclick>
+                                    prevent-rightclick
+                                    fit-thumb>
                             <div class="arrows" ng-if="itemController.item_data.Pictures.length > 1">
                                 <div class="arrow-left" ng-click="itemController.showPrev()"></div>
                                 <div class="arrow-right" ng-click="itemController.showNext()"></div>
