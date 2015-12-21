@@ -9,13 +9,13 @@
              ng-show="isActive($index)" 
              ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
              alt="More Images"
+             fit-thumb
              prevent-rightclick/> 
         <div class="arrows" ng-if="gallery.Pictures.length > 1">
             <div class="arrow-left" ng-click="showPrev()"></div>
             <div class="arrow-right" ng-click="showNext()"></div>
         </div>
     </div>
-
     <div class="gallery-modal__info">
         <div class="gallery-modal__info__picture-info">
             <en><span class="field-name">Description: </span>{{gallery.UnitText1.En}}</en><br/>

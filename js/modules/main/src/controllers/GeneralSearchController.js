@@ -1,5 +1,6 @@
-var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header) {
+var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window) {
     var self = this, params = {};
+    this.$window = $window;
     this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'allResults';
     this.results = {hits: []};    
     this.external_results = [];
@@ -13,6 +14,13 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.external_total = '';
     this.loading = true;
     this.loading_ext = true;
+    this.google_query = "";
+    this.langManager = langManager;
+    this.query_words = [
+        {en:'Jewish', he:'יהודים', selected: false},
+        {en:'Jews', he:'יהודי', selected: false},
+        {en:'Judah', he:'ישראל', selected: false}
+    ];
 
     this.collection_map = {
 
@@ -142,6 +150,33 @@ GeneralSearchController.prototype = {
 
     },
 
+    google_search: function() {
+        this.$window.open('http://google.com/?q=' + this.google_query, '_blank');
+    },
+
+    google_search_on_enter:function ($event) {
+        if ($event.keyCode === 13 && this.query_string.length > 1)
+            this.google_search();
+    },
+
+    toggle_selected: function(word) {
+        if(!word.selected && this.google_query.length > 0) {
+            word.selected = true;
+            this.google_query = this.google_query + '+' + word[this.langManager.lang];
+        }
+        else {
+            word.selected = false;
+            var parsed_string = [];
+            parsed_string = this.google_query.split('+');
+            for(var i = 0; i < parsed_string.length; i++) {
+                if (parsed_string[i] === word[this.langManager.lang]) {
+                    parsed_string.splice(i, 1);
+                }
+            }
+            this.google_query = parsed_string.join("+");
+        }
+    },
+
     open_modal: function (collection_name) {
         var body = document.getElementsByTagName('body')[0];
         var scope = this.$scope.$new();
@@ -159,4 +194,4 @@ GeneralSearchController.prototype = {
     },
 };
 
-angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', GeneralSearchController]);

@@ -163,7 +163,6 @@
 							color: $gray3;
 							text-align: center;
 							padding-top: 5px;
-							@include hover-pointer();
 
 						}
 
@@ -226,6 +225,7 @@
 								height: 20px;
 								padding-bottom: 3px;
 								position: relative;
+								@include hover-pointer();
 
 								&:hover {
 									background-color: $gray5;
@@ -294,6 +294,7 @@
 						color: $gray3;
 						text-align: center;
 						padding-top: 5px;
+						@include hover-pointer();
 
 						&:hover {
 							background-color: $gray5;
@@ -341,6 +342,7 @@
 							    padding: 2px 10px 2px 2px;
 							    -moz-appearance: none;
 							    font-size: 80%;
+							    @include hover-pointer();
 
 							    &:hover {
 							    	background-color: $gray5;
