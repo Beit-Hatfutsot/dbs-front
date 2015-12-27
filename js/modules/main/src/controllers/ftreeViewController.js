@@ -20,12 +20,16 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
         individualSize: new Tuple(160,50),
         // - parentSize: (w,h)
         parentSize: new Tuple(120,30),
+        // - stepparentSize: (w,h)
+        stepparentSize: new Tuple(30,30),
         // - partnerSize: (w,h)
         partnerSize: new Tuple(120,30),
         // - childSize: (w,h)
         childSize: new Tuple(100,25),
         // - siblingSize: (w,h)
         siblingSize: new Tuple(100,25),
+        // - stepsiblingSize: (w,h)
+        stepsiblingSize: new Tuple(25,25),
         // - parentMargin: (horizontal,bottom)
         parentMargin: { horizontal:20, vertical:15, bottom:90},
         // - partnerMargin: (horizontal,vertical,left)
@@ -167,6 +171,15 @@ FtreeViewController.prototype = {
 						}
 					});
 				}
+				if ( parent.partners ) {
+					parent.partners.forEach( function (stepparent, _stepparent) {
+						// make sure it's really a stepparent
+						if (stepparent.id != cn.parents[1-_parent].id) {
+							data.push( self.getElement(stepparent,'stepparent') );
+							vdata.push( self.getVertex(stepparent, parent, 'spouse') );
+						}
+					});
+				}
 			})
 		};
 		if ( 'partners' in cn ) {
@@ -177,7 +190,9 @@ FtreeViewController.prototype = {
 		};
 		if ( 'siblings' in cn ) {
 			cn.siblings.forEach(function  (sibling, _sibling) {
-				data.push( self.getElement(sibling,'sibling') );
+				data.push( self.getElement(sibling,
+										   sibling.step?'stepsibling':'sibling') );
+				vdata.push( self.getVertex(sibling.parent, sibling, 'child') );
 			})
 		}
 
@@ -242,7 +257,6 @@ FtreeViewController.prototype = {
 		var lineFunction = function(p) {
 			var midpoint = (p.start.y + p.end.y) / 2;
 			self.layoutEngine.midpoints.every(function (m, _m)  {
-				var m = self.layoutEngine.midpoints[_m];
 				if ( m > p.start.y && m < p.end.y || m < p.start.y && m > p.end.y) {
 					midpoint = m;
 					return false;

@@ -1,8 +1,7 @@
 /**
  * Family tree layout engine
  */
-angular.module('main').
-	service('ftreeLayout', function() {
+angular.module('main').service('ftreeLayout', function() {
 
 	this.setOptions = function (chartSize, layoutOptions) {
 		this.chartSize = chartSize;
@@ -19,6 +18,7 @@ angular.module('main').
 		node.collapseto = node.pos;
 		node.child_ep = node.pos.plus(node.size.mult(0.5));
 		var parentHash = {};
+		var stepparentHash = {};
 		if ( node.parents ) {
 			var grandparentRatio = o.parentSize.x/(o.parentMargin.horizontal + o.parentSize.x*2),
 				numParents = node.parents.length;
@@ -33,13 +33,15 @@ angular.module('main').
 					parent.pos = new Tuple(left,top);
 					parent.size = o.parentSize;
 					parent.collapseto = node.pos;
+					// parent.child_ep = parent.pos.plus(parent.size.mult(0.5));
+					parent.spouse_ep = parent.pos.plus(parent.size.mult(0.5));
 					if ( _parent == 0 ) {
+						parent.spouse_ofs = o.parentMargin.bottom / 2;
 						if ( numParents == 1 ) {
 							parent.child_ep = parent.pos.plus(parent.size.mult(0.5));
 						} else {
 							parent.child_ep = parent.pos.plus(parent.size.mult(0.5));
 							parent.child_ep.x += parent.size.x/2 + o.parentMargin.horizontal/2;
-							parent.spouse_ep = parent.pos.plus(parent.size.mult(0.5));
 						}
 					}
 					if ('parents' in parent) {
@@ -63,6 +65,34 @@ angular.module('main').
 					left += o.parentSize.x + o.parentMargin.horizontal;
 				});
 				this.midpoints.push(node.pos.y - o.parentMargin.bottom - o.parentMargin.vertical/2 );
+				var dir = -1,
+					left = center.x - box.x/2 - o.stepparentSize.x - o.parentMargin.horizontal,
+					epOffset = (node.parents[0].partners.length-2) * 5;
+
+				node.parents.forEach(function (parent, _parent) {
+					if ('partners' in parent)
+						parent.partners.forEach(function (stepparent, _stepParent) {
+							if (!parentHash.hasOwnProperty(stepparent.id)) {
+								stepparentHash[stepparent.id] = stepparent;
+								stepparent.pos = new Tuple(left,top);
+								stepparent.size = o.stepparentSize;
+								console.log(parent.pos);
+								stepparent.collapseto = parent.pos;
+								stepparent.child_ep = stepparent.pos.plus(stepparent.size.mult(0.5));
+								stepparent.child_ep.x -= dir*(stepparent.size.x/2 + o.parentMargin.horizontal/2);
+								stepparent.child_ep.y += epOffset;
+								stepparent.spouse_ep = stepparent.pos.plus(stepparent.size.mult(0.5));
+								stepparent.spouse_ep.y += epOffset;
+								stepparent.spouse_ofs = epOffset;
+								left += dir*(o.stepparentSize.x + o.parentMargin.horizontal);
+								epOffset += dir*5;
+							}
+						});
+					// switch direction for the other parent
+					dir = 1;
+				    left = center.x + box.x/2 + o.parentMargin.horizontal;
+					epOffset = node.parents[0].partners.length * 5;
+				});
 			}
 		}
 		var partnerHash = {};
@@ -119,13 +149,13 @@ angular.module('main').
 						child.collapseto = node.pos;
 						if ( child.children && child.children.length > 0 ) {
 							var numGrandchildren = child.children.length;
-							var ratio = o.childSize.x / ( numGrandchildren*o.childSize.x + (numGrandchildren-1)*o.childMargin.horizontal );
+							var ratio = (o.childSize.x + o.childMargin.horizontal) / ( numGrandchildren*o.childSize.x + (numGrandchildren-1)*o.childMargin.horizontal );
 							if ( ratio > maxRatio ) {
 								ratio = maxRatio;
 							}
 							grandchildSize = o.childSize.mult(ratio);
 							child.children.forEach( function (grandchild, _grandchild) {
-								grandchild.pos = new Tuple(child.pos.x+_grandchild*ratio*(o.childSize.x+o.childMargin.horizontal),
+								grandchild.pos = new Tuple(child.pos.x-o.childMargin.horizontal/2+_grandchild*ratio*(o.childSize.x+o.childMargin.horizontal),
 									  child.pos.y+child.size.y+o.childMargin.vertical/4);
 								grandchild.size = grandchildSize;
 								grandchild.collapseto = child.pos;
@@ -145,30 +175,42 @@ angular.module('main').
 			}
 		}
 		if ( node.siblings ) {
-			var numSiblings = node.siblings.length;
+			var numSiblings = node.siblings.length,
+				numStepsiblings = 0;
 			if ( numSiblings>0 ) {
-				var siblingsPerColumns = Math.floor((o.individualSize.y+o.parentMargin.bottom+o.childMargin.top+o.siblingMargin.vertical) /
-													(o.siblingSize.y + o.siblingMargin.vertical));
-				if ( siblingsPerColumns < 1 ) { siblingsPerColumns = 1; };
-				var idx = 0;
-				var left = node.pos.x - o.siblingMargin.right - o.siblingSize.x;
-				while ( numSiblings > 0 ) {
-					var colSize = numSiblings > siblingsPerColumns ? siblingsPerColumns : numSiblings;
-					var box = new Tuple(o.siblingSize.x,
-										o.siblingSize.y*colSize + o.siblingMargin.vertical*(colSize-1));
-					var top = center.y - box.y/2;
-					while ( colSize > 0 ) {
-						var sibling = node.siblings[idx];
-						numSiblings --;
-						colSize --;
-						idx ++;
-						sibling.pos = new Tuple(left,top);
-						sibling.size = o.siblingSize;
-						sibling.collapseto = node.pos;
-						top += o.siblingMargin.vertical + o.siblingSize.y;
-					}
-					left -= o.siblingSize.x + o.siblingMargin.horizontal;
-				}
+				node.siblings.forEach(function (sibling, _sibling) {
+					sibling.parent = node.parents[0];
+					sibling.step = false;
+					sibling.i = _sibling;
+					sibling.parents.every(function (parent, _parent) {
+						if ( stepparentHash[parent.id] ) {
+							sibling.parent = stepparentHash[parent.id];
+							sibling.step = true;
+							numStepsiblings++;
+							return false;
+						}
+						return true;
+					});
+				});
+				var left = node.pos.x - node.size.x / 2; // - o.siblingMargin.right - node.size.x / 2;
+				node.siblings.sort(function (n1, n2) {
+					if (!n1.step && !n2.step)
+						return n2.i - n1.i;
+					if (!n1.step)
+						return -1;
+					if (!n2.step)
+						return 1;
+					if (n1.parent == n2.parent)
+						return n2.i - n1.i;
+					return n2.parent.pos.x - n1.parent.pos.x
+				}).forEach (function (sibling, _sibling) {
+					var top = node.pos.y + _sibling%2*(o.siblingSize.y+o.siblingMargin.vertical);
+					sibling.size = sibling.step?o.stepsiblingSize:o.siblingSize;
+					left -= sibling.size.x / 2 + o.siblingMargin.horizontal;
+					sibling.pos = new Tuple(left,top);
+					sibling.collapseto = sibling.parent.pos;
+
+				});
 			}
 		}
 	}
