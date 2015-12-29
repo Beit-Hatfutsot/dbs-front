@@ -26,6 +26,10 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
         partnerSize: new Tuple(120,30),
         // - childSize: (w,h)
         childSize: new Tuple(100,25),
+        // - childSize: (w,h)
+        grandchildSize: new Tuple(25,25),
+        // - inlawsSize: (w,h)
+        inlawSize: new Tuple(25,25),
         // - siblingSize: (w,h)
         siblingSize: new Tuple(100,25),
         // - stepsiblingSize: (w,h)
@@ -35,7 +39,9 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
         // - partnerMargin: (horizontal,vertical,left)
         partnerMargin: { horizontal:30, vertical:15, left:50 },
         // - childMargins: (horizontal,vertical,top)
-        childMargin: { horizontal:40, vertical:40, top:90 },
+        childMargin: { horizontal:40, vertical:80, top:90 },
+        // - inlawsMargins: (horizontal,vertical,top)
+        inlawMargin: { horizontal:20, vertical:40, top:90 },
         // - siblingMargin: (horizontal,vertical,right)
         siblingMargin: { horizontal:15, vertical:10, right:30 },
     });
@@ -148,7 +154,14 @@ FtreeViewController.prototype = {
 				if ( child.children ) {
 					child.children.forEach(function (grandchild, _grandchild) {
 						data.push( self.getElement(grandchild,'grandchild') );
-						vdata.push( self.getVertex(child,grandchild,'child') );
+						vdata.push( self.getVertex(grandchild.parent,grandchild,'child') );
+					});
+				}
+
+				if ( child.partners ) {
+					child.partners.forEach(function (inlaw, _inlaw) {
+						data.push( self.getElement(inlaw,'inlaw') );
+						vdata.push( self.getVertex(child, inlaw,'spouse') );
 					});
 				}
 			})
