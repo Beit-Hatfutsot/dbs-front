@@ -234,6 +234,8 @@ FtreeViewController.prototype = {
 			.on("click", function (d) { self.load({i: d.id}); })
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
 			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
+			.style('width',function(d) { return px(d.size.x); })
+			.style('height',function(d) { return px(d.size.y); })
 
 		
 		new_divs.append('div')
