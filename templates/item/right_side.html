@@ -1,52 +1,50 @@
 <div ng-if="itemController.search_result" class="search-results">
-  <div class="search-results__header">
-    <en>Your Search Results</en>
-    <he>תוצאות חיפוש</he>
-  </div>
-  <div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
-    <p class="vertical-middle">
-      <en>{{itemController.search_result.name.Header.En}}</en>
-      <he>{{itemController.search_result.name.Header.He}}</he>
-    </p>
-    <item-type type="'familyNames'"></item-type>
-  </div>
-  <div class="search-results__field" ng-if="itemController.search_result.place.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.place)">
-    <p class="vertical-middle">
-      <en>{{itemController.search_result.place.Header.En}}</en>
-      <he>{{itemController.search_result.place.Header.He}}</he>
-    </p>
-    <item-type type="'places'"></item-type>
-  </div>
-  <div class="search-results__field"
-    ng-if="itemController.search_result.ftree_args" ng-click="itemController.goto_tree()">
-    <p class="vertical-middle">
-      <span ng-if="itemController.search_result.ftree_args.last_name &&
-                   itemController.search_result.name.Header">
-        <en>{{itemController.search_result.name.Header.En}}</en>
-        <he>{{itemController.search_result.name.Header.He}}</he>
-      </span>
-      <span ng-if="itemController.search_result.ftree_args.last_name &&
-                   !itemController.search_result.name.Header">
-        {{itemController.search_result.ftree_args.last_name[0]}}
-      </span>
-      <span ng-if="itemController.search_result.ftree_args.last_name &&
-        itemController.search_result.ftree_args.place">
-        <br />
-        <en>at</en>
-        <he>מ</he>
-      </span>
-      <span ng-if="itemController.search_result.ftree_args.place &&
-                   !itemController.search_result.place.Header">
-        {{itemController.search_result.ftree_args.place[0]}}
-      </span>
-      <span ng-if="itemController.search_result.ftree_args.place &&
-                   itemController.search_result.place.Header">
-        <en>{{itemController.search_result.place.Header.En}}</en>
-        <he>{{itemController.search_result.place.Header.He}}</he>
-      </span>
-    </p>
-    <item-type type="'genTreeIndividuals'"></item-type>
-  </div>
+    <div class="search-results__header">
+        <en>Your Search Results</en>
+        <he>תוצאות חיפוש</he>
+    </div>
+    <div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
+        <p class="vertical-middle">
+            <en>{{itemController.search_result.name.Header.En}}</en>
+            <he>{{itemController.search_result.name.Header.He}}</he>
+        </p>
+        <item-type type="'familyNames'"></item-type>
+    </div>
+    <div class="search-results__field" ng-if="itemController.search_result.place.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.place)">
+        <p class="vertical-middle">
+            <en>{{itemController.search_result.place.Header.En}}</en>
+            <he>{{itemController.search_result.place.Header.He}}</he>
+        </p>
+        <item-type type="'places'"></item-type>
+    </div>
+    <div class="search-results__field"
+         ng-if="itemController.search_result.ftree_args" ng-click="itemController.goto_tree()">
+        <p class="vertical-middle">
+            <span ng-if="itemController.search_result.ftree_args.last_name &&
+                       itemController.search_result.name.Header">
+                <en>{{itemController.search_result.name.Header.En}}</en>
+                <he>{{itemController.search_result.name.Header.He}}</he>
+            </span>
+            <span ng-if="itemController.search_result.ftree_args.last_name &&
+                       !itemController.search_result.name.Header">
+                       {{itemController.search_result.ftree_args.last_name[0]}}
+            </span>
+            <span ng-if="itemController.search_result.ftree_args.last_name && itemController.search_result.ftree_args.place">
+            <br />
+                <en>at</en>
+                <he>מ</he>
+            </span>
+            <span ng-if="itemController.search_result.ftree_args.place && !itemController.search_result.place.Header"> 
+                        {{itemController.search_result.ftree_args.place[0]}}
+            </span>
+            <span ng-if="itemController.search_result.ftree_args.place &&
+                       itemController.search_result.place.Header">
+                <en>{{itemController.search_result.place.Header.En}}</en>
+                <he>{{itemController.search_result.place.Header.He}}</he>
+            </span>
+        </p>
+        <item-type type="'genTreeIndividuals'"></item-type>
+    </div>
 </div>
 <div class="related">
     <div class="related__header">

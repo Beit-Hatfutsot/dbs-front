@@ -1,46 +1,48 @@
-<div class="item-preview" ng-click="itemPreviewController.goto_item(previewData)">
-	<div class="thumbnail" ng-if="previewData.thumbnail.data">
-		<img ng-if="!isExtResult" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
-			 alt="Preview Image"/>
-		 <img ng-if="isExtResult" ng-src="{{previewData.thumbnail.data}}"
-			 alt="Preview Image"/>
-	</div>
-	<div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data), 'white-part1--thumbnail': previewData.thumbnail.data}">
-		<div class="diagonal-block" ng-if="previewData.thumbnail.data" ng-class="{'diagonal-block--ext-result': isExtResult}">
-			<div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
-			<div  class="diagonal-separator" style="right:-10px; opacity:0.7"
-				  ng-show="$index == 0 || previewData.Pictures.length > 1">
-			</div>
-			<div  class="diagonal-separator" style="right:2px; opacity:0.4"
-				  ng-show="$index == 0 || previewData.Pictures.length > 1">
-			</div>
+<a ng-href="{{itemPreviewController.get_item_url(previewData)}}">
+	<div class="item-preview">
+		<div class="thumbnail" ng-if="previewData.thumbnail.data">
+			<img ng-if="!isExtResult" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
+				 alt="Preview Image"/>
+			 <img ng-if="isExtResult" ng-src="{{previewData.thumbnail.data}}"
+				 alt="Preview Image"/>
 		</div>
-		<ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
-			<div ng-switch-when="true" class="text text--nothumb">
-				{{previewData.FN}}<br>{{previewData.LN}}
-			</div>
-			<div ng-switch-default>
-				<div class="header" 
-					ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
-					<en>{{previewData.Header.En}}</en>
-					<he>{{previewData.Header.He}}</he>
+		<div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data), 'white-part1--thumbnail': previewData.thumbnail.data}">
+			<div class="diagonal-block" ng-if="previewData.thumbnail.data" ng-class="{'diagonal-block--ext-result': isExtResult}">
+				<div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
+				<div  class="diagonal-separator" style="right:-10px; opacity:0.7"
+					  ng-show="$index == 0 || previewData.Pictures.length > 1">
 				</div>
-				<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}"> 	
-		            <en><span marked="previewData.UnitText1.En"></span></en>
-		            <he><span marked="previewData.UnitText1.He"></span></he>
+				<div  class="diagonal-separator" style="right:2px; opacity:0.4"
+					  ng-show="$index == 0 || previewData.Pictures.length > 1">
 				</div>
 			</div>
-			<div class="remove" ng-if="removable && !(previewData.ugc)"
-				 ng-click="itemPreviewController.remove_from_mjs($event)">
-				<icon position="[-229, -104]"></icon>
+			<ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
+				<div ng-switch-when="true" class="text text--nothumb">
+					{{previewData.FN}}<br>{{previewData.LN}}
+				</div>
+				<div ng-switch-default>
+					<div class="header" 
+						ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
+						<en>{{previewData.Header.En}}</en>
+						<he>{{previewData.Header.He}}</he>
+					</div>
+					<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}"> 	
+			            <en><span marked="previewData.UnitText1.En"></span></en>
+			            <he><span marked="previewData.UnitText1.He"></span></he>
+					</div>
+				</div>
+				<div class="remove" ng-if="removable && !(previewData.ugc)"
+					 ng-click="itemPreviewController.remove_from_mjs($event)">
+					<icon position="[-229, -104]"></icon>
+				</div>
+			</ng-switch>
+			<div ng-if="isExtResult" class="europeana-label">
+				<en>From: Europeana</en>
+				<he>Europeana</he>
 			</div>
-		</ng-switch>
-		<div ng-if="isExtResult" class="europeana-label">
-			<en>From: Europeana</en>
-			<he>Europeana</he>
+			<item-type type="itemPreviewController.item_type"
+	   			   image="previewData.thumbnail.data"> 
+			</item-type>
 		</div>
-		<item-type type="itemPreviewController.item_type"
-   			   image="previewData.thumbnail.data"> 
-		</item-type>
 	</div>
-</div>
+</a>

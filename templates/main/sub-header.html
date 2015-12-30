@@ -9,11 +9,11 @@
 			<ng-switch on="subHeaderCtrl.header.sub_header_state">
 				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.header.sub_header_state == 'general-search'"> 
 					<label for="search-input" class="search-button-label">
-			        	<en>General Search: </en>
+			        	<en>Search: </en>
 			        	<he>חיפוש כללי: </he>
 			    	</label>
 			    	<div class="gsearch-box-wrapper">
-				    	<input 	id="search-input" 
+				    	<input  id="search-input"
 				    			ng-model="subHeaderCtrl.header.query"
 				    			autofocus
 				    			ng-keydown="subHeaderCtrl.search_on_enter($event)" 

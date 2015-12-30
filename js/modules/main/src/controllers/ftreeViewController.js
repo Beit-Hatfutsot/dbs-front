@@ -1,4 +1,4 @@
-var FtreeViewController = function($http, $window, $document, $scope, $state,
+var FtreeViewController = function ($http, $window, $document, $scope, $state,
 								   $stateParams, apiClient, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
 
@@ -15,31 +15,32 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
 	this.elements = {};
 	this.vertices = {};
 
-	this.layoutEngine.setOptions(new Tuple(800, 600),  {
+	// TODO: get the size from the dom
+	this.layoutEngine.setOptions(new Tuple(800, 500),  {
         // - individualSize: (w,h)
-        individualSize: new Tuple(160,50),
+        individualSize: new Tuple(214,66),
         // - parentSize: (w,h)
-        parentSize: new Tuple(120,30),
+        parentSize: new Tuple(152,52),
+        // - partnerSize: (w,h)
+        partnerSize: new Tuple(152,52),
         // - stepparentSize: (w,h)
         stepparentSize: new Tuple(30,30),
-        // - partnerSize: (w,h)
-        partnerSize: new Tuple(120,30),
         // - childSize: (w,h)
-        childSize: new Tuple(100,25),
-        // - childSize: (w,h)
+        childSize: new Tuple(94,25),
         grandchildSize: new Tuple(25,25),
         // - inlawsSize: (w,h)
         inlawSize: new Tuple(25,25),
         // - siblingSize: (w,h)
-        siblingSize: new Tuple(100,25),
+        siblingSize: new Tuple(94,25),
         // - stepsiblingSize: (w,h)
         stepsiblingSize: new Tuple(25,25),
+        // - siblingSize: (w,h)
         // - parentMargin: (horizontal,bottom)
         parentMargin: { horizontal:20, vertical:15, bottom:90},
         // - partnerMargin: (horizontal,vertical,left)
         partnerMargin: { horizontal:30, vertical:15, left:50 },
         // - childMargins: (horizontal,vertical,top)
-        childMargin: { horizontal:40, vertical:80, top:90 },
+        childMargin: { horizontal:40, vertical:15, top:60 },
         // - inlawsMargins: (horizontal,vertical,top)
         inlawMargin: { horizontal:20, vertical:40, top:90 },
         // - siblingMargin: (horizontal,vertical,right)
@@ -47,7 +48,7 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
     });
 	/* TODO: dynamiclly load d3
     var scriptTag = document[0].createElement('script');
-    scriptTag.type = 'text/javascript'; 
+    scriptTag.type = 'text/javascript';
     scriptTag.async = true;
     scriptTag.src = 'js/lib/d3.min.js';
     scriptTag.onload = function () {
@@ -69,32 +70,43 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
 
 FtreeViewController.prototype = {
 
+	get_fname: function(full_name) {
+		if (!full_name)
+			return "?";
+		var parts = full_name.split(' ');
+		return parts[0];
+	},
+
 	load: function (params) {
 		var self = this;
 
 		this.$http.get(this.apiClient.base_url+"/fwalk", {
-					params: params,
-					cache: true 
-				  }).
-			 success(function (response) {
-				 if (self.d3 != null)
+			params: params,
+			cache: true 
+	  		})
+			.success(function (response) {
+				if (d3 != null)
 					self.render(response)
 				else
 					console.log("where's d3?")
-			 }).
-			 error(function (response) {
-				 console.log('error walking the tree');
-				 console.log(response); 
-			 });
+			})
+			.error(function (response) {
+				console.log('error walking the tree');
+				console.log(response); 
+			});
+
 	},
-	getElement: function(node,cls) {
+
+	getElement: function (node,cls) {
 		var ret;
 		var id = node.id;
 		if ( !this.elements[id] ) {
 			this.elements[id] = {
 				id: id,
 				sex: node.sex,
-				name: node.name
+				name: node.name,
+				birth_year: node.birth_year,
+				death_year: node.death_year
 			}
 		}
 		ret = this.elements[id];
@@ -107,7 +119,7 @@ FtreeViewController.prototype = {
 
 	getVertex:  function(node1,node2,cls) {
 		var ret;
-		var id = node1.id + node1.name + "->" + node2.id + node2.name;
+    var id = node1.id + node1.name + "->" + node2.id + node2.name;
 		if ( !this.vertices[id] ) {
 			this.vertices[id] = {
 				id: id
@@ -212,21 +224,31 @@ FtreeViewController.prototype = {
 		// NODES
 		this.data = data;
 		var els = this.d3.select('#' + this.rootId+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
-		els.attr('class','node old');
+		els.classed('old',true).classed('new', false);
 		var new_els = els.enter();
 		var old_els = els.exit();
+		//var scope = this.$scope.$new(true);
 		var new_divs = new_els.append('div');
-		new_divs.attr('class','node new')
-					   .style('opacity',0)
-					   .on("click", function (d) {
-							self.load({i: d.id});
-					   })
-					   .style('top',function(d) { return px(d.collapseto.y); })
-		   			   .style('left',function(d) { return px(d.collapseto.x); })
-					   .attr('data-sex', function(d) { return d.sex; })
-					   ;
-		new_divs.append('span')
-			.text(function(d) { return d.name; } )
+		new_divs.classed('node', true)
+			.classed('new', true)
+			.on("click", function (d) { self.load({i: d.id}); })
+			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
+			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
+
+		
+		new_divs.append('div')
+				.classed('avatar', true)
+		new_divs.append('div')
+				.classed('dates', true).text(function(d) { 
+				 	var birth = d.birth_year ? d.birth_year : '?';
+				 	var death =  d.death_year ? d.death_year : '?';
+				 	return birth + ' ' + death});
+		new_divs.append('div')
+			    .classed('name', true)
+          .append('p', true).text(function(d) {
+            return ['individual', 'partner', 'parent'].indexOf(d.class) >= 0 ? d.name: self.get_fname(d.name)
+            });
+
 
 		var position_nodes = function(sel) {
 			sel
@@ -235,15 +257,21 @@ FtreeViewController.prototype = {
 				.style('top',function(d) { return px(d.pos.y); })
 				.style('width',function(d) { return px(d.size.x); })
 				.style('height',function(d) { return px(d.size.y); })
-				.style('font-size',function(d) { return px(d.size.y/2.5); })
-				.attr('data-role',function(d) { return d.class; })
-				;
+				.style('font-size',function(d) { 
+					return d.class == 'individual'? "20px": px(d.size.y/2.5); })
+
+
 		}
 
+		var got_old = old_els.size() > 0;
+
 		position_nodes( els.filter('.node.old')
-			.transition('reposition').duration(0).delay(old_els.size() > 0 ? 500 : 0) );
+				.attr('role',function(d) { return d.class; })
+			    .attr('birth-year', function (d) { return d.hasOwnProperty('birth_year') ? d.birth_year : '?';})
+			    .attr('death-year', function (d) { return d.hasOwnProperty('death_year') ? d.death_year : '?';})
+				  .transition('reposition').duration(500).delay(got_old ? 500 : 0) );
 		position_nodes( els.filter('.node.new')
-			.transition('new_els').duration(0).delay(old_els.size() > 0 ? 1000 : 500) );
+			.transition('new_els').duration(500).delay(got_old ? 1000 : 0) );
 
 		old_els
 			.style('top',function(d) { return px(d.collapseto.y); })

@@ -12,17 +12,16 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification, $
 
 ItemPreviewCtrl.prototype = {
 
-    goto_item: function() {
+    get_item_url: function() {
         if (this.url !== undefined) {
-            this.$window.open(this.url);
-            return;
+            return this.url;
         }
         if (this.collection_name === 'genTreeIndividuals') {
-            this.$state.go('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
+            return this.$state.href('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
         }
         else {
 			var parts = this.item_string.split('.')
-			this.$state.go('item-view', {collection: parts[0], id: parts[1]});
+			return this.$state.href('item-view', {collection: parts[0], id: parts[1]});
         }
     },
 
