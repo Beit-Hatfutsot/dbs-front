@@ -1,4 +1,4 @@
-var FtreeViewController = function($http, $window, $document, $scope, $state,
+var FtreeViewController = function ($http, $window, $document, $scope, $state,
 								   $stateParams, apiClient, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
 
@@ -15,23 +15,24 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
 	this.elements = {};
 	this.vertices = {};
 
-	this.layoutEngine.setOptions(new Tuple(800, 600),  {
+	// TODO: get the size from the dom
+	this.layoutEngine.setOptions(new Tuple(800, 500),  {
         // - individualSize: (w,h)
-        individualSize: new Tuple(160,50),
+        individualSize: new Tuple(214,66),
         // - parentSize: (w,h)
-        parentSize: new Tuple(120,30),
+        parentSize: new Tuple(152,52),
         // - partnerSize: (w,h)
-        partnerSize: new Tuple(120,30),
+        partnerSize: new Tuple(152,52),
         // - childSize: (w,h)
-        childSize: new Tuple(100,25),
+        childSize: new Tuple(94,25),
         // - siblingSize: (w,h)
-        siblingSize: new Tuple(100,25),
+        siblingSize: new Tuple(94,25),
         // - parentMargin: (horizontal,bottom)
         parentMargin: { horizontal:20, vertical:15, bottom:90},
         // - partnerMargin: (horizontal,vertical,left)
         partnerMargin: { horizontal:30, vertical:15, left:50 },
         // - childMargins: (horizontal,vertical,top)
-        childMargin: { horizontal:40, vertical:40, top:90 },
+        childMargin: { horizontal:40, vertical:15, top:60 },
         // - siblingMargin: (horizontal,vertical,right)
         siblingMargin: { horizontal:15, vertical:10, right:30 },
     });
@@ -51,7 +52,6 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
     s.appendChild(scriptTag);
     */
 
-	 console.log(apiClient);
 	 // TODO: get the fwalk from the apiClient
 	var params = {i: $stateParams.i};
 	if ('t' in $stateParams)
@@ -61,32 +61,637 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
 
 FtreeViewController.prototype = {
 
+	get_fname: function(full_name) {
+		if (!full_name)
+			return "?";
+		var parts = full_name.split(' ');
+		return parts[0];
+		/*var fname = parts[0];
+		var lname = parts[1];*/
+	},
+
 	load: function (params) {
 		var self = this;
 
-		this.$http.get(this.apiClient.base_url+"/fwalk", {
-					params: params,
-					cache: true 
-				  }).
-			 success(function (response) {
-				 if (self.d3 != null)
+		/* this.$http.get(this.apiClient.base_url+"/fwalk", {
+			params: params,
+			cache: true 
+	  		})
+			.success(function (response) {
+			 	console.log(response);
+				if (self.d3 != null)
 					self.render(response)
 				else 
 					console.log("where's d3?")
-			 }).
-			 error(function (response) {
-				 console.log('error walking the tree');
-				 console.log(response); 
-			 });
+			})
+			.error(function (response) {
+				console.log('error walking the tree');
+				console.log(response); 
+			}); */
+
+	self.render(
+{
+  "fams": "@F3277@", 
+  "sex": "M", 
+  "rin": "MH:I7869", 
+  "name_surn": "Einstein", 
+  "_uid": "DE33792F-03CB-4680-9023-94A5B5C1346D", 
+  "famc": "@F2549@", 
+  "children": [
+    {
+      "partners": [], 
+      "name": "Karoline Einstein", 
+      "children": [], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2315874", 
+          "name": "Juettle Lindauer"
+        }
+      ], 
+      "sex": "F", 
+      "id": "2326048"
+    }, 
+    {
+      "partners": [], 
+      "name": "Dozle Einstein", 
+      "children": [], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2315874", 
+          "name": "Juettle Lindauer"
+        }
+      ], 
+      "sex": "F", 
+      "id": "2317847"
+    }, 
+    {
+      "partners": [], 
+      "name": "Rosalie Einstein", 
+      "children": [], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2328698", 
+          "name": "Juettle Lindauer"
+        }
+      ], 
+      "sex": "F", 
+      "id": "2329079"
+    }, 
+    {
+      "partners": [], 
+      "name": "Hannele Einstein", 
+      "children": [], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2328698", 
+          "name": "Juettle Lindauer"
+        }
+      ], 
+      "sex": "F", 
+      "id": "2337184"
+    }, 
+    {
+      "partners": [], 
+      "name": "Pauline Einstein", 
+      "children": [], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2328698", 
+          "name": "Juettle Lindauer"
+        }
+      ], 
+      "sex": "F", 
+      "id": "2334757"
+    }, 
+    {
+      "partners": [], 
+      "name": "Mandus Einstein", 
+      "children": [], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2328698", 
+          "name": "Juettle Lindauer"
+        }
+      ], 
+      "sex": "M", 
+      "id": "2320920"
+    }, 
+    {
+      "partners": [], 
+      "name": "Babette Einstein", 
+      "children": [], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2328698", 
+          "name": "Juettle Lindauer"
+        }
+      ], 
+      "sex": "F", 
+      "id": "2330331"
+    }
+  ], 
+  "partners": [
+    {
+      "id": "2328698", 
+      "name": "Juettle Lindauer", 
+      "sex": "F"
+    }, 
+    {
+      "id": "2315874", 
+      "name": "Juettle Lindauer", 
+      "sex": "F"
+    }
+  ], 
+  "birt__uid": "426722A4-C749-4405-8EAD-3C8159E6E1A7", 
+  "id": "2316813", 
+  "birt_plac": "Jebenhausen, Germany", 
+  "parents": [
+    {
+      "id": "2332769", 
+      "children": [
+        {
+          "sex": "F", 
+          "id": "2315501", 
+          "name": "Theresa Dolzele Einstein"
+        }, 
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "M", 
+          "id": "2324918", 
+          "name": "Baruch Immanuel Einstein"
+        }, 
+        {
+          "sex": "M", 
+          "id": "2319850", 
+          "name": "Lamle Lewis Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2332425", 
+          "name": "Rebekka Einstein"
+        }
+      ], 
+      "parents": [
+        {
+          "sex": "M", 
+          "id": "2324356", 
+          "name": "Joseph Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2321846", 
+          "name": "Rebekka"
+        }
+      ], 
+      "name": "Immanuel Einstein", 
+      "sex": "M"
+    }, 
+    {
+      "id": "2334703", 
+      "children": [
+        {
+          "sex": "F", 
+          "id": "2315501", 
+          "name": "Theresa Dolzele Einstein"
+        }, 
+        {
+          "sex": "M", 
+          "id": "2316813", 
+          "name": "Hajim Henri Einstein"
+        }, 
+        {
+          "sex": "M", 
+          "id": "2324918", 
+          "name": "Baruch Immanuel Einstein"
+        }, 
+        {
+          "sex": "M", 
+          "id": "2319850", 
+          "name": "Lamle Lewis Einstein"
+        }, 
+        {
+          "sex": "F", 
+          "id": "2332425", 
+          "name": "Rebekka Einstein"
+        }
+      ], 
+      "parents": [], 
+      "name": "Fanni Fredle Hajim", 
+      "sex": "F"
+    }
+  ], 
+  "tree_id": "641C1040-12D3-48DA-ABFA-5E723EE6C011", 
+  "siblings": [
+    {
+      "id": "2315501", 
+      "parents": [
+        {
+          "sex": "M", 
+          "parents": [
+            {
+              "sex": "M", 
+              "id": "2324356", 
+              "name": "Joseph Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2321846", 
+              "name": "Rebekka"
+            }
+          ], 
+          "id": "2332769", 
+          "name": "Immanuel Einstein", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }, 
+        {
+          "sex": "F", 
+          "parents": [], 
+          "id": "2334703", 
+          "name": "Fanni Fredle Hajim", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }
+      ], 
+      "name": "Theresa Dolzele Einstein", 
+      "sex": "F"
+    }, 
+    {
+      "id": "2324918", 
+      "parents": [
+        {
+          "sex": "M", 
+          "parents": [
+            {
+              "sex": "M", 
+              "id": "2324356", 
+              "name": "Joseph Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2321846", 
+              "name": "Rebekka"
+            }
+          ], 
+          "id": "2332769", 
+          "name": "Immanuel Einstein", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }, 
+        {
+          "sex": "F", 
+          "parents": [], 
+          "id": "2334703", 
+          "name": "Fanni Fredle Hajim", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }
+      ], 
+      "name": "Baruch Immanuel Einstein", 
+      "sex": "M"
+    }, 
+    {
+      "id": "2319850", 
+      "parents": [
+        {
+          "sex": "M", 
+          "parents": [
+            {
+              "sex": "M", 
+              "id": "2324356", 
+              "name": "Joseph Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2321846", 
+              "name": "Rebekka"
+            }
+          ], 
+          "id": "2332769", 
+          "name": "Immanuel Einstein", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }, 
+        {
+          "sex": "F", 
+          "parents": [], 
+          "id": "2334703", 
+          "name": "Fanni Fredle Hajim", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }
+      ], 
+      "name": "Lamle Lewis Einstein", 
+      "sex": "M"
+    }, 
+    {
+      "id": "2332425", 
+      "parents": [
+        {
+          "sex": "M", 
+          "parents": [
+            {
+              "sex": "M", 
+              "id": "2324356", 
+              "name": "Joseph Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2321846", 
+              "name": "Rebekka"
+            }
+          ], 
+          "id": "2332769", 
+          "name": "Immanuel Einstein", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }, 
+        {
+          "sex": "F", 
+          "parents": [], 
+          "id": "2334703", 
+          "name": "Fanni Fredle Hajim", 
+          "children": [
+            {
+              "sex": "F", 
+              "id": "2315501", 
+              "name": "Theresa Dolzele Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2316813", 
+              "name": "Hajim Henri Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2324918", 
+              "name": "Baruch Immanuel Einstein"
+            }, 
+            {
+              "sex": "M", 
+              "id": "2319850", 
+              "name": "Lamle Lewis Einstein"
+            }, 
+            {
+              "sex": "F", 
+              "id": "2332425", 
+              "name": "Rebekka Einstein"
+            }
+          ]
+        }
+      ], 
+      "name": "Rebekka Einstein", 
+      "sex": "F"
+    }
+  ], 
+  "birth_year": 1806, 
+  "name__aka": "Henri", 
+  "name": "Hajim Henri /Einstein/", 
+  "birt_date": "1806", 
+  "name_givn": "Hajim Henri", 
+  "order": {
+    "marriage_year": 1806, 
+    "birth_year": 1806
+  }, 
+  "birt_rin": "MH:IF13109"
+}
+
+);
+
 	},
-	getElement: function(node,cls) {
+
+	getElement: function (node,cls) {
 		var ret;
+		//console.log(node);
 		var id = node.id;
 		if ( !this.elements[id] ) {
 			this.elements[id] = {
 				id: id,
 				sex: node.sex,
-				name: node.name
+				name: node.name,
+				birth_year: node.birth_year,
+				death_year: node.death_year
 			}
 		}
 		ret = this.elements[id];
@@ -99,7 +704,7 @@ FtreeViewController.prototype = {
 
 	getVertex:  function(node1,node2,cls) {
 		var ret;
-		var id = node1.id + node1.name + "->" + node2.id + node2.name;
+    var id = node1.id + node1.name + "->" + node2.id + node2.name;
 		if ( !this.vertices[id] ) {
 			this.vertices[id] = {
 				id: id
@@ -108,8 +713,8 @@ FtreeViewController.prototype = {
 		ret = this.vertices[id];
 		if ( cls == 'spouse' ) {
 			ret.start = new Tuple(node2.pos.x+node2.size.x/2,node1.spouse_ep.y);
-		} else {
 			ret.start = node2.pos.plus(node2.size.mult(0.5));
+    } else {
 		}
 		ret.end = node1[cls+'_ep'];
 		if ( !ret.end ) {
@@ -183,23 +788,33 @@ FtreeViewController.prototype = {
 
 		function px(value) { return value + 'px'; };
 
-		// NODES
+		// Adding nodes
 		var els = this.d3.select(this.selector+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
-		els.attr('class','node old');
+		els.classed('old',true).classed('new', false);
 		var new_els = els.enter();
 		var old_els = els.exit();
+		//var scope = this.$scope.$new(true);
 		var new_divs = new_els.append('div');
-		new_divs.attr('class','node new')
-					   .style('opacity',0)
-					   .on("click", function (d) {
-							self.load({i: d.id});
-					   })
-					   .style('top',function(d) { return px(d.collapseto.y); })
-		   			   .style('left',function(d) { return px(d.collapseto.x); })
-					   .attr('data-sex', function(d) { return d.sex; })
-					   ;
-		new_divs.append('span')
-			.text(function(d) { return d.name; } )
+		new_divs.classed('node', true)
+			.classed('new', true)
+			.on("click", function (d) { self.load({i: d.id}); })
+			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
+			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
+
+		
+		new_divs.append('div')
+				.classed('avatar', true)
+		new_divs.append('div')
+				.classed('dates', true).text(function(d) { 
+				 	var birth = d.birth_year ? d.birth_year : '?';
+				 	var death =  d.death_year ? d.death_year : '?';
+				 	return birth + ' ' + death});
+		new_divs.append('div')
+			    .classed('name', true)
+          .append('p', true).text(function(d) {
+            return ['individual', 'partner', 'parent'].indexOf(d.class) >= 0 ? d.name: self.get_fname(d.name)
+            });
+
 
 		var position_nodes = function(sel) {
 			sel
@@ -208,15 +823,21 @@ FtreeViewController.prototype = {
 				.style('top',function(d) { return px(d.pos.y); })
 				.style('width',function(d) { return px(d.size.x); })
 				.style('height',function(d) { return px(d.size.y); })
-				.style('font-size',function(d) { return px(d.size.y/2.5); })
-				.attr('data-role',function(d) { return d.class; })
-				;
+				.style('font-size',function(d) { 
+					return d.class == 'individual'? "20px": px(d.size.y/2.5); })
+
+
 		}
 
+		var got_old = old_els.size() > 0;
+
 		position_nodes( els.filter('.node.old')
-			.transition('reposition').duration(0).delay(old_els.size() > 0 ? 500 : 0) );
+				.attr('role',function(d) { return d.class; })
+			    .attr('birth-year', function (d) { return d.hasOwnProperty('birth_year') ? d.birth_year : '?';})
+			    .attr('death-year', function (d) { return d.hasOwnProperty('death_year') ? d.death_year : '?';})
+				  .transition('reposition').duration(500).delay(got_old ? 500 : 0) );
 		position_nodes( els.filter('.node.new')
-			.transition('new_els').duration(0).delay(old_els.size() > 0 ? 1000 : 500) );
+			.transition('new_els').duration(500).delay(got_old ? 1000 : 0) );
 
 		old_els
 			.style('top',function(d) { return px(d.collapseto.y); })

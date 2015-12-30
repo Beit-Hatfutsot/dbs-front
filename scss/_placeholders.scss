@@ -284,7 +284,7 @@
 	}
 }
 
-%node-container {
+/*%node-container {
 	display: inline-block;
 	min-width: 52px;
 	margin: 15px 22px;
@@ -294,14 +294,12 @@
 		width: 100%;
 		// padding: 0 8px;
 		
-		.individual {
+		.individual, .parent, .partner, .sibling, .child, .grandparent, .grandchild {
 			position: relative;
 			background: #ddf0f4;
 			display: inline-block;
 			vertical-align: top;
 			@include border-radius(50px);
-			width: 210px;
-			height: 58px;
 			z-index: 1;
 
 			// .en & {
@@ -490,7 +488,7 @@
 
 		}
 	}
-}
+}*/
 
 
 %bhs-fieldset {
