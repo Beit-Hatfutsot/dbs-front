@@ -10,7 +10,7 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
 	this.apiClient = apiClient;
 
 	// renderer
-	this.selector = "#ftree-layout";
+	this.rootId = "ftree-layout";
 	this.layoutEngine = ftreeLayout;
 	this.elements = {};
 	this.vertices = {};
@@ -60,8 +60,6 @@ var FtreeViewController = function($http, $window, $document, $scope, $state,
     var s = document[0].getElementsByTagName('body')[0];
     s.appendChild(scriptTag);
     */
-
-	 console.log(apiClient);
 	 // TODO: get the fwalk from the apiClient
 	var params = {i: $stateParams.i};
 	if ('t' in $stateParams)
@@ -81,7 +79,7 @@ FtreeViewController.prototype = {
 			 success(function (response) {
 				 if (self.d3 != null)
 					self.render(response)
-				else 
+				else
 					console.log("where's d3?")
 			 }).
 			 error(function (response) {
@@ -212,7 +210,8 @@ FtreeViewController.prototype = {
 		function px(value) { return value + 'px'; };
 
 		// NODES
-		var els = this.d3.select(this.selector+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
+		this.data = data;
+		var els = this.d3.select('#' + this.rootId+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
 		els.attr('class','node old');
 		var new_els = els.enter();
 		var old_els = els.exit();
@@ -260,12 +259,12 @@ FtreeViewController.prototype = {
 			.style('height',function(d) { return px(d.size.y); })
 
 		// VERTICES
-		var vertices = this.d3.select(this.selector+" .vertices").selectAll(".vertex").data(vdata, function(d) { return d.id; });
+		this.vdata = vdata;
+		var vertices = d3.select('.vertices').selectAll(".vertex").data(vdata, function(d) { return d.id; }),
+		    new_vxs = vertices.enter(),
+		    old_vxs = vertices.exit(),
+		    new_lines = new_vxs.append('path');
 		vertices.attr('class','vertex old');
-		var new_vxs = vertices.enter();
-		var old_vxs = vertices.exit();
-		var new_lines = new_vxs.append('path');
-		var self = this;
 
 		var lineFunction = function(p) {
 			var midpoint = (p.start.y + p.end.y) / 2;
@@ -295,15 +294,9 @@ FtreeViewController.prototype = {
 					   .style('stroke','black')
 					   .style('stroke-width',1)
 					   .style('fill','none')
-					//    .attr('d', function(d) { return lineFunction({start:d.collapseto,end:d.collapseto}); })
 					   .attr('d', function(d) { return lineFunction(d); })
 					   .attr("stroke-dasharray",  function(d) { return tl(d) + " " + tl(d); })
-					   .attr("stroke-dashoffset",  function(d) { return tl(d); })
-
-					//    .attr('x1',function(d) { return d.start.x; })
-					   //    .attr('y1',function(d) { return d.start.y; })
-					   //    .attr('x2',function(d) { return d.end.x; })
-					   //    .attr('y2',function(d) { return d.end.y; });
+					   .attr("stroke-dashoffset",  function(d) { return tl(d); });
 
 		old_vxs
 			.transition('remove-vertices').duration(500).ease('linear')
@@ -311,6 +304,9 @@ FtreeViewController.prototype = {
 			.attr("stroke-dashoffset",  function(d) { return tl(d); })
 			.remove();
 
+		
+		this.pannedX = this.pannedY = 0;
+		vertices.attr("transform", "translate(0,0)");
 		var position_vertex = function(sel) {
 			return sel.style('opacity',1)
 			          .attr('d', function(d) { return lineFunction(d); })
@@ -334,6 +330,58 @@ FtreeViewController.prototype = {
 
 	get_contributor_path: function() {
 		return false;
+	},
+	mouseDown: function (e) {
+		if (e.which == 1) {
+			this.lastMouseX = e.clientX;
+			this.lastMouseY = e.clientY;
+			this.mousePressed = true;
+			angular.element(document.getElementById(this.rootId))
+				.css("cursor", "-webkit-grabbing")
+		}
+	},
+	mouseUp: function (e) {
+		console.log(e);
+		if (e.which == 1) {
+			this.mousePressed = false;
+			angular.element(document.getElementById(this.rootId))
+				.css("cursor", "all-scroll")
+		}
+	},
+	pan: function (e) {
+		if (!this.mousePressed)
+			return;
+
+		var self = this,
+			x = e.clientX - this.lastMouseX,
+			y = e.clientY - this.lastMouseY,
+		    transform;
+			
+		this.pannedX += x;
+		this.pannedY += y;
+		transform = "translate("+this.pannedX+','+this.pannedY+")";
+
+		this.lastMouseX = e.clientX;
+		this.lastMouseY = e.clientY;
+
+		function px(value) { return value + 'px'; };
+
+		this.d3.select('#' + this.rootId + " .nodes")
+			.selectAll(".node")
+			.data(this.data, function(d) { return d.id; })
+			.transition('pan').duration(0)
+			.style('left', function (d) {
+			  d.pos.x += x;
+			  return px(d.pos.x);})
+			.style('top', function (d) {
+			  d.pos.y += y;
+			  return px(d.pos.y);
+			});
+		d3.select('.vertices')
+			.selectAll(".vertex")
+			.data(this.vdata, function(d) { return d.id; })
+			.transition('pan').duration(0)
+			.attr('transform',  transform);
 	}
 };
 

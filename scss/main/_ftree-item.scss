@@ -340,6 +340,8 @@
 
 			@at-root #ftree-layout  {
 				white-space: nowrap;
+                overflow: hidden;
+                cursor: all-scroll;
 
 				@at-root #subtree {
 					position: relative;
@@ -380,6 +382,11 @@
                     transition-property: opacity, height, width, left, top, font-size;
                     transition-duration: 0.5s;
                     transition-timing-function: linear;
+                    cursor: cell;
+                }
+
+                .node[data-role="individual"] {
+                    cursor: help;
                 }
 
                 .node[data-sex="F"] {

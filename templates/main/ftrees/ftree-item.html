@@ -26,7 +26,10 @@
 			This tree contains {{ftreeItemCtrl.individual_count}} individuals, click on any of them to navigate the tree.
 		</div>
 		<div id="ftree-layout-container">
-			<div id="ftree-layout">
+			<div id="ftree-layout" ng-init="ftreeViewCtrl.mousePressed=false"
+        ng-mousedown="ftreeViewCtrl.mouseDown($event)"
+        ng-mouseup="ftreeViewCtrl.mouseUp($event)"
+        ng-mousemove="ftreeViewCtrl.pan($event)">
         <svg class="vertices"></svg>
         <div class="nodes"></div>
 				<!-- subtree individual="ftreeItemCtrl.individual"></subtree -->
