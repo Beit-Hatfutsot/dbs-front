@@ -356,6 +356,13 @@ FtreeViewController.prototype = {
 					.delay(old_els.size() ? 1000 : 500)
 					.duration(500).ease('linear')
 		);
+		this.d3Nodes = this.d3.select('#' + this.rootId + " .nodes")
+			.selectAll(".node")
+			.data(this.data, function(d) { return d.id; })
+		this.d3Vertices = d3.select('.vertices')
+			.selectAll(".vertex")
+			.data(this.vdata, function(d) { return d.id; })
+		this.lastPan = 0;
 	},
 
 	get_contributor_path: function() {
@@ -371,7 +378,6 @@ FtreeViewController.prototype = {
 		}
 	},
 	mouseUp: function (e) {
-		console.log(e);
 		if (e.which == 1) {
 			this.mousePressed = false;
 			angular.element(document.getElementById(this.rootId))
@@ -385,8 +391,10 @@ FtreeViewController.prototype = {
 		var self = this,
 			x = e.clientX - this.lastMouseX,
 			y = e.clientY - this.lastMouseY,
+			elapsed = Date.now() - this.lastPan,
 		    transform;
 			
+		if ( elapsed < 60 ) return; 
 		this.pannedX += x;
 		this.pannedY += y;
 		transform = "translate("+this.pannedX+','+this.pannedY+")";
@@ -396,22 +404,20 @@ FtreeViewController.prototype = {
 
 		function px(value) { return value + 'px'; };
 
-		this.d3.select('#' + this.rootId + " .nodes")
-			.selectAll(".node")
-			.data(this.data, function(d) { return d.id; })
+		this.data.forEach(function (d) {
+			d.pos.x += x;
+			d.pos.y += y;
+		});
+
+		this.d3Nodes
 			.transition('pan').duration(0)
-			.style('left', function (d) {
-			  d.pos.x += x;
-			  return px(d.pos.x);})
-			.style('top', function (d) {
-			  d.pos.y += y;
-			  return px(d.pos.y);
-			});
-		d3.select('.vertices')
-			.selectAll(".vertex")
-			.data(this.vdata, function(d) { return d.id; })
+			.style('left', function (d) { return px(d.pos.x);})
+			.style('top', function (d) { return px(d.pos.y); });
+		this.d3Vertices
 			.transition('pan').duration(0)
 			.attr('transform',  transform);
+		d3.timer.flush();
+		this.lastPan = Date.now()
 	}
 };
 
