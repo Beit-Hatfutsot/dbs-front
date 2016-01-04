@@ -1,12 +1,11 @@
-var FtreeViewController = function ($http, $window, $document, $scope, $state,
-								   $stateParams, apiClient, ftreeLayout) {
+var FtreeViewController = function ($http, $window, $document, $rootScope,
+							       $scope, $state, $stateParams, apiClient, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
 
 	this.$scope = $scope;
 	this.$state = $state;
-	this.$stateParams = $stateParams;
-	this.d3 = $window.d3;
 	this.$http = $http;
+	this.$window = $window;
 	this.apiClient = apiClient;
 
 	// renderer
@@ -14,6 +13,7 @@ var FtreeViewController = function ($http, $window, $document, $scope, $state,
 	this.layoutEngine = ftreeLayout;
 	this.elements = {};
 	this.vertices = {};
+	this.treeNumber = $stateParams.tree_number;
 
 	// TODO: get the size from the dom
 	this.layoutEngine.setOptions(new Tuple(800, 500),  {
@@ -61,11 +61,12 @@ var FtreeViewController = function ($http, $window, $document, $scope, $state,
     var s = document[0].getElementsByTagName('body')[0];
     s.appendChild(scriptTag);
     */
-	 // TODO: get the fwalk from the apiClient
-	var params = {i: $stateParams.i};
-	if ('t' in $stateParams)
-		params.t = $stateParams.t;
-	this.load(params);
+   $rootScope.$on('$stateChangeStart',
+			  function(event, toState, toParams, fromState, fromParams){ 
+				  self.load(toParams);
+				  event.preventDefault(); 
+	})
+	this.load($stateParams);
 };
 
 FtreeViewController.prototype = {
@@ -78,10 +79,11 @@ FtreeViewController.prototype = {
 	},
 
 	load: function (params) {
-		var self = this;
+		var self = this,
+			apiUrl = this.apiClient.base_url+
+				['', 'fwalk',  params.tree_number, params.node_id].join('/');
 
-		this.$http.get(this.apiClient.base_url+"/fwalk", {
-			params: params,
+		this.$http.get(apiUrl, {
 			cache: true 
 	  		})
 			.success(function (response) {
@@ -223,7 +225,7 @@ FtreeViewController.prototype = {
 
 		// NODES
 		this.data = data;
-		var els = this.d3.select('#' + this.rootId+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
+		var els = d3.select('#' + this.rootId+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
 		els.classed('old',true).classed('new', false);
 		var new_els = els.enter();
 		var old_els = els.exit();
@@ -231,7 +233,11 @@ FtreeViewController.prototype = {
 		var new_divs = new_els.append('div');
 		new_divs.classed('node', true)
 			.classed('new', true)
-			.on("click", function (d) { self.load({i: d.id}); })
+			.on("click", function (d) { 
+				//self.load({node_id: d.id, tree_number: self.treeNumber}); 
+				self.$state.go('ftree-view', {node_id:  d.id, tree_number: self.treeNumber});
+				// self.$window.location.hash = "#" + d.id; 
+			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
 			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
 			.style('width',function(d) { return px(d.size.x); })
@@ -306,7 +312,7 @@ FtreeViewController.prototype = {
 				return true;
 			});
 			midpoint += p.ofs;
-			return self.d3.svg.line()
+			return d3.svg.line()
                  		.x(function(d) { return d[0]; })
                  		.y(function(d) { return d[1]; })
                  		.interpolate("linear")
@@ -356,7 +362,7 @@ FtreeViewController.prototype = {
 					.delay(old_els.size() ? 1000 : 500)
 					.duration(500).ease('linear')
 		);
-		this.d3Nodes = this.d3.select('#' + this.rootId + " .nodes")
+		this.d3Nodes = d3.select('#' + this.rootId + " .nodes")
 			.selectAll(".node")
 			.data(this.data, function(d) { return d.id; })
 		this.d3Vertices = d3.select('.vertices')
@@ -421,4 +427,4 @@ FtreeViewController.prototype = {
 	}
 };
 
-angular.module('main').controller('FtreeViewController', ['$http', '$window', '$document', '$scope', '$state', '$stateParams', 'apiClient', 'ftreeLayout', FtreeViewController]);
+angular.module('main').controller('FtreeViewController', ['$http', '$window', '$document', '$rootScope', '$scope', '$state', '$stateParams', 'apiClient', 'ftreeLayout', FtreeViewController]);

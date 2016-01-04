@@ -101,7 +101,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'ftree-view',
-            url: '/ftree_view?i&t',
+            url: '/ftree_view/:tree_number/:node_id',
             controller: 'FtreeViewController as ftreeViewCtrl',
             templateUrl: 'templates/main/ftrees/ftree-item.html'
         },

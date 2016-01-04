@@ -359,9 +359,8 @@ FtreesController.prototype = {
 		if (!already_selected && individual) {
 			self.selected_index = self.individuals.indexOf(individual);
 			self.$state.go('ftree-view', {
-				ind_index: self.selected_index, 
-				i: individual.II,
-				t: individual.GTF.$uuid
+				node_id: individual.II,
+				tree_number: individual.GTN
 			});
 		}
 	},
