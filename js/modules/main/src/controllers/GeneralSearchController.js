@@ -1,5 +1,6 @@
-var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window) {
+var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, item) {
     var self = this, params = {};
+    this.$state = $state;
     this.$window = $window;
     this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'allResults';
     this.results = {hits: []};    
@@ -16,38 +17,47 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.loading_ext = true;
     this.google_query = "";
     this.langManager = langManager;
+    this.item = item;
+    this.recommended = [];
     this.query_words = [
-        {en:'Jewish', he:'יהודים', selected: false},
-        {en:'Jews', he:'יהודי', selected: false},
-        {en:'Judah', he:'ישראל', selected: false}
+        {en:'Jewish', he:'יהודי', selected: false},
+        {en:'Jews', he:'יהודים', selected: false},
+        {en:'Synagogue', he:'בית הכנסת', selected: false},
+        {en:'Ghetto', he:'גטו', selected: false},
+        {en:'Community', he:'קהילה', selected: false}
     ];
 
     this.collection_map = {
 
         allResults: {
             En: 'All results',
-            He: 'כל התוצאות',
+            He: 'כל התוצאות', 
+            Recommended: ['familyNames.91606', 'photoUnits.38195', 'places.72164', 'photoUnits.16675']
         },
         
         places: {
             En:'Places',
-            He: 'מקומות'
+            He: 'מקומות',
+            Recommended: ['places.70983', 'places.72164', 'places.72200', 'places.74109']
         },
 
         media: {
             En: 'Images & Videos',
             He: 'תמונות + וידאו',
-            api: 'photoUnits,movies'
+            api: 'photoUnits,movies',
+            Recommended: ['photoUnits.150079', 'photoUnits.24319', 'photoUnits.16675', 'photoUnits.38195']
         },
 
         personalities: {
             En: 'Personalities',
-            He: 'אישים'
+            He: 'אישים',
+            Recommended: ['personalities.112294', 'personalities.112998', 'personalities.122293', 'personalities.112264']
         },
 
         familyNames: {
             En: 'Family names',
-            He: 'שמות משפחה'
+            He: 'שמות משפחה',
+            Recommended: ['familyNames.91606', 'familyNames.88874', 'familyNames.88875', 'familyNames.93457']
         }
     };    
 
@@ -69,12 +79,11 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
 
         set: function(new_collection) {
             this._collection = new_collection;
-            $state.go('general-search', {q: this.query, collection: new_collection});
+            $state.go('general-search', {q: this.header.query, collection: new_collection});
         }
     });
-
     if ($stateParams.q !== undefined) {
-        header.query = this.query = $stateParams.q;
+       header.query = this.query = $stateParams.q;
  
         $http.get(apiClient.urls.search, {params: this.api_params()})
         .success(function (r) {  
@@ -177,21 +186,23 @@ GeneralSearchController.prototype = {
         }
     },
 
-    open_modal: function (collection_name) {
-        var body = document.getElementsByTagName('body')[0];
-        var scope = this.$scope.$new();
-        scope.collection_name = this.collection;
-        body.addClassName('backdrop');
-        var authModalInstance = this.$modal.open({
-            templateUrl: 'templates/main/allresults.html',
-            size: 'm',
-            scope : scope
-        });
-        authModalInstance.result.
-        finally(function() {
-            body.removeClassName('backdrop');
-        });
+    read_about_center: function (collection_name) {
+        this.$state.go('about_center', {collection: this.collection});
     },
+
+    get_recommmended: function () {
+        var self = this;
+        self.item.get_items(self.collection_map[self.collection].Recommended)
+            .then(function(recommended) {
+                console.log(recommended);
+                console.log("success");
+            },
+            function() {
+                //self.fail();
+                consol.log("failed");
+
+            })
+    }
 };
 
-angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'item', GeneralSearchController]);

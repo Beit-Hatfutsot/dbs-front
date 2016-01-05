@@ -193,22 +193,6 @@
 			.general-search {
 				color: #666;
 				padding: 35px 0;
-
-				.link-to-wizard {
-
-					.en & {
-						margin-left: 20px;
-					}
-
-					.he & {
-						margin-right: 20px;
-					}
-
-					a {
-						text-decoration: underline;
-						@include hover-pointer();
-					}
-				}
 			}
 
 			.recently-viewed {
