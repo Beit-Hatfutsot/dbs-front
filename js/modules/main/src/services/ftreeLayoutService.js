@@ -95,7 +95,6 @@ angular.module('main').service('ftreeLayout', function() {
 				});
 			}
 		}
-		var partnerHash = {};
 		if ( node.partners ) {
 			var numPartners = node.partners.length;
 			if ( numPartners>0 ) {
@@ -103,8 +102,34 @@ angular.module('main').service('ftreeLayout', function() {
 									o.partnerSize.y);
 				var left = center.x + node.size.x/2 + o.partnerMargin.left;
 				var top = center.y - box.y/2;
+				var numChildren = 0;
+				var numInlaws = 0;
+
+				// children are under the partners
 				node.partners.forEach(function (partner, _partner) {
-					partnerHash[partner.id] = partner;
+					numChildren += partner.children.length;
+					partner.children.forEach(function (child, _child) {
+						numInlaws += child.partners.length;
+					})
+				})
+				var childLeft, childTop, dir,
+					childMarginX = o.childMargin.horizontal,
+					childrenBoxWidth = o.childSize.x*numChildren + (o.inlawMargin.horizontal + o.inlawSize.x)*numInlaws + childMarginX*(numChildren-1);
+
+				if (childrenBoxWidth > self.chartSize.x) {
+					// TODO handle many children
+					childrenBoxWidth -= childMarginX*(numChildren-1);
+					childMarginX = 0;
+					dir = 1;
+					childTop = node.pos.y + node.size.y + o.childMargin.top +o.childSize.y * 1.2
+				}
+				else {
+					dir = 0;
+					childTop = node.pos.y + node.size.y + o.childMargin.top;
+				}
+				childLeft = center.x - childrenBoxWidth/2;
+
+				node.partners.forEach(function (partner, _partner) {
 					partner.pos = new Tuple(left,top);
 					partner.size = o.partnerSize;
 					partner.collapseto = node.pos;
@@ -115,6 +140,52 @@ angular.module('main').service('ftreeLayout', function() {
 												 partner.pos.y+spouse_ratio*partner.size.y);
 					partner.spouse_ofs = (spouse_ratio-0.5)*o.childMargin.vertical;
 					left += o.partnerSize.x + o.partnerMargin.horizontal;
+					partner.children.forEach( function (child, _child) {
+						child.pos = new Tuple(childLeft, childTop);
+						child.size = o.childSize;
+						child.collapseto = partner.pos;
+						if (! child.hasOwnProperty("partners"))
+							return
+						childLeft += child.size.x;
+						var numInlaws = child.partners.length;
+						child.partners.forEach( function (inlaw, _inlaw) {
+							var spouse_ratio = (numInlaws-parseInt(_inlaw))/(numInlaws+1);
+							childLeft += o.inlawMargin.horizontal;
+							inlaw.pos = new Tuple(childLeft, childTop);
+							inlaw.size = o.inlawSize;
+							inlaw.child_ep = new Tuple(inlaw.pos.x-o.inlawMargin.horizontal/3,
+													   inlaw.pos.y+spouse_ratio*inlaw.size.y);
+							inlaw.spouse_ep = new Tuple(inlaw.pos.x,
+														inlaw.pos.y+spouse_ratio*inlaw.size.y);
+							inlaw.spouse_ofs = (spouse_ratio-0.5)*o.inlawMargin.vertical;
+							inlaw.collapseto = child.pos;
+							childLeft += inlaw.size.x;
+							if (! inlaw.hasOwnProperty("children"))
+								return
+							var lastGrandchild = inlaw.children.length - 1,
+							    grandTop = inlaw.pos.y + inlaw.size.y + o.grandchildMargin.top,
+								dir = -1,
+								grandchildLeft = inlaw.child_ep.x-o.grandchildSize.x/2,
+								grandchildTop = inlaw.child_ep.y+inlaw.size.y+o.grandchildMargin.top;
+							inlaw.children.forEach( function (grandchild, _grandchild) {
+								var row = Math.floor(_grandchild / 2),
+								    marginX ;
+								if ((_grandchild == lastGrandchild) && (_grandchild % 2 == 0))
+									marginX = 0
+								else
+								    marginX = o.grandchildSize.x*(1 + row%2)/2+o.grandchildMargin.horizontal;
+
+								grandchild.pos = new Tuple(grandchildLeft+dir*marginX,
+											  grandchildTop+o.grandchildMargin.vertical*row);
+								grandchild.size = o.grandchildSize;
+								grandchild.collapseto = inlaw.pos;
+								dir=dir*-1;
+							})
+						});
+						childLeft += childMarginX;
+						childTop  += dir*o.childSize.y*1.2;
+						dir = dir*-1;
+					})
 				});
 			}
 		}
@@ -228,6 +299,7 @@ angular.module('main').service('ftreeLayout', function() {
 					sibling.parent = node.parents[0];
 					sibling.step = false;
 					sibling.i = _sibling;
+					/*
 					sibling.parents.every(function (parent, _parent) {
 						if ( stepparentHash[parent.id] ) {
 							sibling.parent = stepparentHash[parent.id];
@@ -237,6 +309,7 @@ angular.module('main').service('ftreeLayout', function() {
 						}
 						return true;
 					});
+					*/
 				});
 				var left = node.pos.x - node.size.x / 2; // - o.siblingMargin.right - node.size.x / 2;
 				node.siblings.sort(function (n1, n2) {

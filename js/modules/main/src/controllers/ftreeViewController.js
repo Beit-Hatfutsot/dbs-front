@@ -41,6 +41,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
         partnerMargin: { horizontal:30, vertical:15, left:50 },
         // - childMargins: (horizontal,vertical,top)
         childMargin: { horizontal:40, vertical:15, top:60 },
+        grandchildMargin: { horizontal:2, vertical:20, top:40 },
         // - inlawsMargins: (horizontal,vertical,top)
         inlawMargin: { horizontal:20, vertical:40, top:90 },
         // - siblingMargin: (horizontal,vertical,right)
@@ -72,10 +73,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 FtreeViewController.prototype = {
 
 	get_fname: function(full_name) {
-		if (!full_name)
-			return "?";
-		var parts = full_name.split(' ');
-		return parts[0];
+		return full_name[0];
 	},
 
 	load: function (params) {
@@ -84,7 +82,7 @@ FtreeViewController.prototype = {
 				['', 'fwalk',  params.tree_number, params.node_id].join('/');
 
 		this.$http.get(apiUrl, {
-			cache: true 
+			cache: true
 	  		})
 			.success(function (response) {
 				if (d3 != null)
@@ -208,9 +206,21 @@ FtreeViewController.prototype = {
 			})
 		};
 		if ( 'partners' in cn ) {
-			cn.partners.forEach(function (partner, _partner) {
+			cn.partners.forEach(function (partner) {
 				data.push( self.getElement(partner,'partner') );
 				vdata.push( self.getVertex(partner,cn,'spouse') );
+				partner.children.forEach(function (child) {
+					data.push( self.getElement(child,'child') );
+					vdata.push( self.getVertex(partner, child,'child') );
+					child.partners.forEach(function (inlaw) {
+						data.push( self.getElement(inlaw,'inlaw') );
+						vdata.push( self.getVertex(inlaw, child, 'spouse') );
+						inlaw.children.forEach(function (grandchild) {
+							data.push( self.getElement(grandchild,'grandchild') );
+							vdata.push( self.getVertex(inlaw, grandchild, 'child') );
+						})
+					})
+				});
 			})
 		};
 		if ( 'siblings' in cn ) {
@@ -254,7 +264,9 @@ FtreeViewController.prototype = {
 		new_divs.append('div')
 			    .classed('name', true)
           .append('p', true).text(function(d) {
-            return ['individual', 'partner', 'parent'].indexOf(d.class) >= 0 ? d.name: self.get_fname(d.name)
+            return ['individual', 'partner', 'parent']
+				   .indexOf(d.class) >= 0 ? d.name.join(" "):
+					   				        self.get_fname(d.name)
             });
 
 

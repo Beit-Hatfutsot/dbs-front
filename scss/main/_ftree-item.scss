@@ -60,18 +60,27 @@
 		}
     }
 
-    .node[role="child"], [role="grandparent"],[role="sibling"]{	
+    .node[role="child"], .node[role="grandparent"], .node[role="sibling"],
+    .node[role="grandchild"], .node[role="inlaw"] {	
 
 		.avatar {
 			zoom: 0.4;
 		}
+    }
+    .node[role="child"], .node[role="grandparent"], .node[role="sibling"] {
 
 	    .name {
 	    	width: 70%;
 			font-size: 10px;
 			font-weight: 600;
-		}	
+		}
 	}
+
+    .node[role="grandchild"], .node[role="inlaw"] {
+        .name {
+            display: none;
+        }
+    }
 
 	.node[role="parent"], [role="partner"]  {	
 
@@ -501,7 +510,6 @@
 			overflow: auto;
 
 			@at-root #ftree-layout  {
-				white-space: nowrap;
                 overflow: hidden;
                 cursor: all-scroll;
             }
