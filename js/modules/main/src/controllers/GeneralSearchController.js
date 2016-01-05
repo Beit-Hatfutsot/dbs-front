@@ -1,4 +1,4 @@
-var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, item) {
+var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window) {
     var self = this, params = {};
     this.$state = $state;
     this.$window = $window;
@@ -17,8 +17,6 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.loading_ext = true;
     this.google_query = "";
     this.langManager = langManager;
-    this.item = item;
-    this.recommended = [];
     this.query_words = [
         {en:'Jewish', he:'יהודי', selected: false},
         {en:'Jews', he:'יהודים', selected: false},
@@ -31,33 +29,28 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
 
         allResults: {
             En: 'All results',
-            He: 'כל התוצאות', 
-            Recommended: ['familyNames.91606', 'photoUnits.38195', 'places.72164', 'photoUnits.16675']
+            He: 'כל התוצאות' 
         },
         
         places: {
             En:'Places',
-            He: 'מקומות',
-            Recommended: ['places.70983', 'places.72164', 'places.72200', 'places.74109']
+            He: 'מקומות'
         },
 
         media: {
             En: 'Images & Videos',
             He: 'תמונות + וידאו',
-            api: 'photoUnits,movies',
-            Recommended: ['photoUnits.150079', 'photoUnits.24319', 'photoUnits.16675', 'photoUnits.38195']
+            api: 'photoUnits,movies'
         },
 
         personalities: {
             En: 'Personalities',
-            He: 'אישים',
-            Recommended: ['personalities.112294', 'personalities.112998', 'personalities.122293', 'personalities.112264']
+            He: 'אישים'
         },
 
         familyNames: {
             En: 'Family names',
-            He: 'שמות משפחה',
-            Recommended: ['familyNames.91606', 'familyNames.88874', 'familyNames.88875', 'familyNames.93457']
+            He: 'שמות משפחה'
         }
     };    
 
@@ -188,21 +181,7 @@ GeneralSearchController.prototype = {
 
     read_about_center: function (collection_name) {
         this.$state.go('about_center', {collection: this.collection});
-    },
-
-    get_recommmended: function () {
-        var self = this;
-        self.item.get_items(self.collection_map[self.collection].Recommended)
-            .then(function(recommended) {
-                console.log(recommended);
-                console.log("success");
-            },
-            function() {
-                //self.fail();
-                consol.log("failed");
-
-            })
     }
 };
 
-angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'item', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', GeneralSearchController]);
