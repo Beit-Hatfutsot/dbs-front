@@ -24,7 +24,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
         // - partnerSize: (w,h)
         partnerSize: new Tuple(152,52),
         // - stepparentSize: (w,h)
-        stepparentSize: new Tuple(30,30),
+        stepparentSize: new Tuple(52,52),
         // - childSize: (w,h)
         childSize: new Tuple(94,25),
         grandchildSize: new Tuple(25,25),
@@ -45,7 +45,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
         // - inlawsMargins: (horizontal,vertical,top)
         inlawMargin: { horizontal:20, vertical:40, top:90 },
         // - siblingMargin: (horizontal,vertical,right)
-        siblingMargin: { horizontal:15, vertical:10, right:30 },
+        siblingMargin: { horizontal:10, vertical:25, right:30, top: -50 },
     });
 	/* TODO: dynamiclly load d3
     var scriptTag = document[0].createElement('script');
@@ -119,7 +119,7 @@ FtreeViewController.prototype = {
 
 	getVertex:  function(node1,node2,cls) {
 		var ret;
-    var id = node1.id + node1.name + "->" + node2.id + node2.name;
+		var id = node1.id + node1.name + "->" + node2.id + node2.name;
 		if ( !this.vertices[id] ) {
 			this.vertices[id] = {
 				id: id
@@ -201,6 +201,10 @@ FtreeViewController.prototype = {
 							data.push( self.getElement(stepparent,'stepparent') );
 							vdata.push( self.getVertex(stepparent, parent, 'spouse') );
 						}
+						stepparent.children.forEach( function (stepsibling) {
+							data.push( self.getElement(stepsibling,'stepsibling') );
+							vdata.push( self.getVertex(stepparent, stepsibling, 'child') );
+						});
 					});
 				}
 			})
@@ -224,10 +228,11 @@ FtreeViewController.prototype = {
 			})
 		};
 		if ( 'siblings' in cn ) {
+			var parent = cn.parents[0];
 			cn.siblings.forEach(function  (sibling, _sibling) {
 				data.push( self.getElement(sibling,
 										   sibling.step?'stepsibling':'sibling') );
-				vdata.push( self.getVertex(sibling.parent, sibling, 'child') );
+				vdata.push( self.getVertex(parent, sibling, 'child') );
 			})
 		}
 

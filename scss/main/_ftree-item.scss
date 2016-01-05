@@ -61,7 +61,7 @@
     }
 
     .node[role="child"], .node[role="grandparent"], .node[role="sibling"],
-    .node[role="grandchild"], .node[role="inlaw"] {	
+    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepsibling"] {
 
 		.avatar {
 			zoom: 0.4;
@@ -76,13 +76,17 @@
 		}
 	}
 
-    .node[role="grandchild"], .node[role="inlaw"] {
+    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"] {
         .name {
             display: none;
         }
     }
-
-	.node[role="parent"], [role="partner"]  {	
+    .node[role="stepparent"]  {	
+		.avatar {
+			zoom: 0.9;
+		}
+    }
+	.node[role="parent"], [role="partner"] {
 
 		.avatar {
 			zoom: 0.9;
@@ -91,7 +95,7 @@
 		.name {
 	    	width: 60%;
 			font-size: 12px;
-		}	
+		}
 	}
 
     .node[role="individual"] {

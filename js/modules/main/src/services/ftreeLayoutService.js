@@ -14,12 +14,64 @@ angular.module('main').service('ftreeLayout', function() {
 		this.midpoints = [];
 		var self = this;
 
+		function layoutCluster(cluster, args) {
+			if (cluster === undefined)
+				return
+
+			var lastChild = cluster.length - 1,
+				dir = -1,
+				childLeft,
+				childTop;
+			// figure the starting top center point
+			if (args.hasOwnProperty("topCenter")) {
+				childTop = args.topCenter.y; //+args.childMargin.top;
+				childLeft = args.topCenter.x-args.childSize.x/2
+			} else {
+				var clusterWidth;
+				childTop = args.topRight.y; //+args.childMargin.top;
+				if (cluster.length == 1)
+					clusterWidth = args.childSize.x
+				else if (cluster.length < 4)
+					clusterWidth = args.childSize.x*2+args.childMargin.horizontal*2
+				else
+					clusterWidth = args.childSize.x*4+args.childMargin.horizontal*2;
+
+				childLeft = args.topRight.x-clusterWidth/2-args.childSize.x/2;
+			}
+			var minLeft = 99999;
+			cluster.forEach( function (child, _child) {
+				var row = Math.floor(_child / 2),
+					marginX ;
+				if ((_child == lastChild) && (_child % 2 == 0))
+					marginX = 0
+				else
+					marginX = args.childSize.x*(1 + row%2)/2+args.childMargin.horizontal;
+
+				child.pos = new Tuple(childLeft+dir*marginX,
+							  childTop+args.childMargin.top+args.childMargin.vertical*row);
+				if (child.pos.x < minLeft)
+					minLeft = child.pos.x
+				child.size = args.childSize;
+				child.collapseto = args.collapseTo.pos;
+				dir=dir*-1;
+			})
+			return new Tuple(minLeft - args.childMargin.horizontal, childTop);
+		}
+
 		node.pos = center.minus(o.individualSize.mult(0.5));
 		node.size = o.individualSize;
 		node.collapseto = node.pos;
 		node.child_ep = node.pos.plus(node.size.mult(0.5));
 		var parentHash = {};
 		var stepparentHash = {};
+		// layout the siblings - step siblings not included
+		var topRight = layoutCluster (node.siblings, {
+			childMargin: o.siblingMargin,
+			childSize: o.siblingSize,
+			topRight: new Tuple(node.pos.x - o.siblingMargin.horizontal,
+								node.pos.y),
+			collapseTo: node
+		});
 		if ( node.parents ) {
 			var grandparentRatio = o.parentSize.x/(o.parentMargin.horizontal + o.parentSize.x*2),
 				numParents = node.parents.length;
@@ -37,7 +89,7 @@ angular.module('main').service('ftreeLayout', function() {
 					// parent.child_ep = parent.pos.plus(parent.size.mult(0.5));
 					parent.spouse_ep = parent.pos.plus(parent.size.mult(0.5));
 					if ( _parent == 0 ) {
-						parent.spouse_ofs = o.parentMargin.bottom / 2;
+						parent.spouse_ofs = o.parentMargin.bottom / 3;
 						if ( numParents == 1 ) {
 							parent.child_ep = parent.pos.plus(parent.size.mult(0.5));
 						} else {
@@ -84,6 +136,13 @@ angular.module('main').service('ftreeLayout', function() {
 								stepparent.spouse_ep = stepparent.pos.plus(stepparent.size.mult(0.5));
 								stepparent.spouse_ep.y += epOffset;
 								stepparent.spouse_ofs = epOffset;
+								// layout the step siblings
+								topRight = layoutCluster (stepparent.children, {
+									childMargin: o.siblingMargin,
+									childSize: o.stepsiblingSize,
+									topRight: topRight,
+									collapseTo: stepparent
+								});
 								left += dir*(o.stepparentSize.x + o.parentMargin.horizontal);
 								epOffset += dir*5;
 							}
@@ -160,175 +219,19 @@ angular.module('main').service('ftreeLayout', function() {
 							inlaw.spouse_ofs = (spouse_ratio-0.5)*o.inlawMargin.vertical;
 							inlaw.collapseto = child.pos;
 							childLeft += inlaw.size.x;
-							if (! inlaw.hasOwnProperty("children"))
-								return
-							var lastGrandchild = inlaw.children.length - 1,
-							    grandTop = inlaw.pos.y + inlaw.size.y + o.grandchildMargin.top,
-								dir = -1,
-								grandchildLeft = inlaw.child_ep.x-o.grandchildSize.x/2,
-								grandchildTop = inlaw.child_ep.y+inlaw.size.y+o.grandchildMargin.top;
-							inlaw.children.forEach( function (grandchild, _grandchild) {
-								var row = Math.floor(_grandchild / 2),
-								    marginX ;
-								if ((_grandchild == lastGrandchild) && (_grandchild % 2 == 0))
-									marginX = 0
-								else
-								    marginX = o.grandchildSize.x*(1 + row%2)/2+o.grandchildMargin.horizontal;
 
-								grandchild.pos = new Tuple(grandchildLeft+dir*marginX,
-											  grandchildTop+o.grandchildMargin.vertical*row);
-								grandchild.size = o.grandchildSize;
-								grandchild.collapseto = inlaw.pos;
-								dir=dir*-1;
-							})
+							// layout some gradnchildren
+							layoutCluster (inlaw.children, {
+								childMargin: o.grandchildMargin,
+								childSize: o.grandchildSize,
+								topCenter: inlaw.child_ep,
+								collapseTo: inlaw
+							});
 						});
 						childLeft += childMarginX;
 						childTop  += dir*o.childSize.y*1.2;
 						dir = dir*-1;
 					})
-				});
-			}
-		}
-		if ( node.children ) {
-			var numChildren = node.children.length,
-			    maxRatio =  o.childSize.x / ( 2*o.childSize.x + o.childMargin.horizontal ),
-			    minVertical = 2*o.grandchildSize.y;
-			if ( minVertical > o.childMargin.vertical ) {
-				o.childMargin.vertical = minVertical;
-			}
-			if ( numChildren>0 ) {
-				var	rows = [],
-					rowWidth = 0,
-					rowLength=0,
-					inlawsHash = {};
-				node.children.forEach(function(child, _child) {
-					var width = o.childSize.x + o.childMargin.horizontal;
-					if (child.hasOwnProperty('partners'))
-						width += (o.inlawSize.x + o.inlawMargin.horizontal) * child.partners.length;
-					if (width+rowWidth < self.chartSize.x) {
-						rowWidth += width;
-						rowLength ++;
-					}
-					else {
-						rows.push({width: rowWidth, length: rowLength});
-						rowLength = 1;
-						rowWidth = width;
-					};
-				});
-				rows.push({width: rowWidth, length: rowLength});
-				var idx = 0;
-				var top = node.pos.y + node.size.y + o.childMargin.top;
-				this.midpoints.push(top - o.childMargin.vertical/2 );
-				rows.forEach(function (row, _row) {
-					var rowSize = row.length;
-					var box = new Tuple(row.width,
-										o.childSize.y + o.childMargin.vertical);
-					var left = center.x - box.x/2;
-					while ( rowSize > 0 ) {
-						var child = node.children[idx];
-						numChildren --;
-						rowSize --;
-						idx ++;
-						child.pos = new Tuple(left, top);
-						child.size = o.childSize;
-						child.child_ep = child.pos.plus(child.size.mult(0.5));
-						child.collapseto = node.pos;
-						left += o.childSize.x;
-						// position the partners
-						if (child.hasOwnProperty('partners'))
-							child.spouse_ep = child.pos.plus(child.size.mult(0.5));
-							child.partners.forEach(function (inlaw, _inlaw) {
-								inlawsHash[inlaw.id] = inlaw;
-								left += o.inlawMargin.horizontal;
-								inlaw.pos = new Tuple(left,top);
-								inlaw.size = o.inlawSize;
-								inlaw.child_ep = inlaw.pos.plus(inlaw.size.mult(0.5));
-								inlaw.child_ep.x -= inlaw.size.x/2 + o.childMargin.horizontal/4;
-								inlaw.collapseto = child.pos;
-								left += inlaw.size.x;
-							});
-
-						if ( child.children && child.children.length > 0 ) {
-							var t = child.pos.y+child.size.y+o.childMargin.vertical/4,
-								g = o.grandchildSize.x, // width of grandchild
-								m = g * 0.5, 			// margin
-								c = left - child.pos.x, // containing box width
-								len = child.children.length, // num of grandsons
-								w =  (g + m) * len - m, // width of garndsons
-								r = w/c,     			// ratio grandson occupy
-								l;
-							if (r < 0.6) {
-								w = c * 0.6;
-								m = (w - g * len)/ (len - 1);
-
-							}
-							l = left  - (c - w)/2 - g;
-							
-							child.children.forEach( function (grandchild, _grandchild) {
-								grandchild.pos = new Tuple(l, t);
-								grandchild.size = o.grandchildSize;
-								grandchild.collapseto = child.pos;
-								grandchild.parents.every(function (parent, _parent) {
-									if ( parent.id in inlawsHash ) {
-										grandchild.parent =inlawsHash[parent.id];
-										return false;
-									}
-									return true;
-								});
-								l -= grandchild.size.x + m;
-							})
-						}
-						child.parents.every(function (parent, _parent) {
-							if ( partnerHash[parent.id] ) {
-								child.parent = partnerHash[parent.id];
-								return false;
-							}
-							return true;
-						});
-						left += o.childMargin.horizontal;
-					}
-					top += o.childMargin.vertical + o.childSize.y;
-				});
-			}
-		}
-		if ( node.siblings ) {
-			var numSiblings = node.siblings.length,
-				numStepsiblings = 0;
-			if ( numSiblings>0 ) {
-				node.siblings.forEach(function (sibling, _sibling) {
-					sibling.parent = node.parents[0];
-					sibling.step = false;
-					sibling.i = _sibling;
-					/*
-					sibling.parents.every(function (parent, _parent) {
-						if ( stepparentHash[parent.id] ) {
-							sibling.parent = stepparentHash[parent.id];
-							sibling.step = true;
-							numStepsiblings++;
-							return false;
-						}
-						return true;
-					});
-					*/
-				});
-				var left = node.pos.x - node.size.x / 2; // - o.siblingMargin.right - node.size.x / 2;
-				node.siblings.sort(function (n1, n2) {
-					if (!n1.step && !n2.step)
-						return n2.i - n1.i;
-					if (!n1.step)
-						return -1;
-					if (!n2.step)
-						return 1;
-					if (n1.parent == n2.parent)
-						return n2.i - n1.i;
-					return n2.parent.pos.x - n1.parent.pos.x
-				}).forEach (function (sibling, _sibling) {
-					var top = node.pos.y + _sibling%2*(o.siblingSize.y+o.siblingMargin.vertical);
-					sibling.size = sibling.step?o.stepsiblingSize:o.siblingSize;
-					left -= sibling.size.x / 2 + o.siblingMargin.horizontal;
-					sibling.pos = new Tuple(left,top);
-					sibling.collapseto = sibling.parent.pos;
-
 				});
 			}
 		}
