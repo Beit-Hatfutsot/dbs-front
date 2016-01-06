@@ -1,16 +1,14 @@
 var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache, recentlyViewed, user) {
 
     this.$state = $state;
+    //console.log($state.includes('general-search'));
     this.auth = auth;
     this.cache = cache;
     this.recentlyViewed = recentlyViewed;
-
-	this.langauage_menu_open = false;
-
-	this.search_placeholders = {
-		'en': 'Search for communities, last names and personalities',
-		'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
-	};
+    this.search_placeholders = {
+        'en': 'Search for communities, last names and personalities',
+        'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
+    };
     
     Object.defineProperty(this, 'is_signedin', {
         get: function() {
@@ -18,13 +16,13 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
         }
     });
     
-	Object.defineProperty(this, 'notification_message', {
+    Object.defineProperty(this, 'notification_message', {
         get: function() {
-        	return notification.get();
+            return notification.get();
         }
     });
 
-	Object.defineProperty(this, 'show_notifications', {
+    Object.defineProperty(this, 'show_notifications', {
         get: function() {
             if ( ($state.includes('start') && wizard.search_status == '' && !(wizard.in_progress) && !(wizard.failed)) || header.sub_header_state != 'closed' ) {
                 return false;
@@ -33,7 +31,8 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
             return true;
         }
     });
-
+    this.header = header;
+    /*
     Object.defineProperty(this, 'sub_header_state', {
         get: function() {
             return header.sub_header_state;
@@ -42,7 +41,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
         set: function(new_state) {
             header.sub_header_state = new_state;
         }
-    });
+    });*/
 
     Object.defineProperty(this, 'mjs_count', {
         get: function() {
@@ -69,6 +68,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
 };
 
 HeaderCtrl.prototype = {
+
     signin: function() {
         this.authenticate();
     },
@@ -84,7 +84,7 @@ HeaderCtrl.prototype = {
         });
     },
 
-	signout: function() {
+    signout: function() {
         this.auth.signout();
         this.cache.clear();
         this.recentlyViewed.clear();

@@ -2,9 +2,6 @@
 function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal, $rootScope) {
 	var self = this;
 
-	if (header.sub_header_state !== 'recently-viewed') {
-		header.sub_header_state = 'recently-viewed';
-	}
 	this.$modal = $modal;
 	this.$state = $state;
 	this.$stateParams = $stateParams;
@@ -22,7 +19,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.wizard_place = {};
 	this.itemTypeMap = itemTypeMap;
 	this.pull_wizard_related();
-	this.parsed_wsearch_results = [];
+	this._Index = 0;
 
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
@@ -65,7 +62,6 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 ItemCtrl.prototype = {
 	get_item: function() {
 		var self = this;
-
 		this.item.get(this.$stateParams.collection, this.$stateParams.id).
 			then(function(item_data) {
 
@@ -102,19 +98,6 @@ ItemCtrl.prototype = {
 
 		if ( this.$state.lastState.name === 'start' ) {
 		
-			if ( this.wizard.result.individuals && this.wizard.result.individuals.isNotEmpty() ) {
-				this.related_individuals = this.wizard.result.individuals; 
-
-				this.related_individuals_query_params = {};
-				if ( this.wizard.result.name && this.wizard.result.name.isNotEmpty() ) {
-					this.related_individuals_query_params.last_name = this.wizard.result.name.Header.En;
-				}
-
-				if ( this.wizard.result.place && this.wizard.result.place.isNotEmpty() ) {
-					this.related_individuals_query_params.birth_place = this.wizard.result.place.Header.En;	
-				}
-			}
-
 			if ( this.wizard.result.name && this.wizard.result.name.isNotEmpty() && this.wizard.result.name._id !== _id) {
 				this.wizard_name = angular.copy(this.wizard.result.name);
 			}
@@ -145,36 +128,79 @@ ItemCtrl.prototype = {
     },
 
     goto_tree: function() {
-       	this.wsearch_individuals_query_params = {};
-       	if(this.search_result.name && this.search_result.name.isNotEmpty()){
-       		this.wsearch_individuals_query_params.last_name = this.search_result.name.Header.En;
-       	}
-       	if(this.search_result.place && this.search_result.place.isNotEmpty()) {
-       		this.wsearch_individuals_query_params.birth_place = this.search_result.place.Header.En;
-       	}
-    	this.$state.go('ftrees', this.wsearch_individuals_query_params);
+    	this.$state.go('ftrees', this.search_result.ftree_args);
 	},
 
-	open_gallery: function() {
+	showPrev: function () {
+		this._Index = (this._Index > 0) ? --this._Index : this.item_data.Pictures.length - 1;
+	},
+
+	showNext: function () {
+		this._Index = (this._Index < this.item_data.Pictures.length - 1) ? ++this._Index : 0;
+	},
+
+	isActive: function (index) {
+		return this._Index === index;
+	},
+	
+	showPhoto: function (index) {
+		this._Index = index;
+	},
+
+	open_gallery: function (index) {
+		if (index == undefined) {
+			index = this._Index;
+		}
 		var body = document.getElementsByTagName('body')[0],
 			gallery = this.item_data;
+
 		body.addClassName('backdrop');
-	    angular.element()
 	    var authModalInstance = this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
 	     	size: 'lg',
+
 	     	resolve : {
 	     		gallery: function () {
 	     			return gallery
-	     	}}
+	     	},
+	     		index: function () {
+	     			return index
+	     		}
+	     	}
 	    });
 
 	    authModalInstance.result.
 	    finally(function() {
 	    	body.removeClassName('backdrop');
 	    });
+	},
+
+	print: function () {
+		window.print();
+	},
+
+	get_main_pic_index: function() {
+		for (var i = 0; i < this.item_data.Pictures.length; i++) {
+			var pic = this.item_data.Pictures[i];
+			if (pic.IsPreview == "1") {
+				return i;
+			}
 		}
+	},
+
+	get_additional_pic_index: function() {
+		for (var i = 0; i < this.item_data.Pictures.length; i++) {
+			var pic = this.item_data.Pictures[i];
+			if (pic.IsPreview == "0") {
+				return i;
+			}
+		}
+	},
+
+	get_additional_pic_url: function () {
+		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
+	}
 
 };
 

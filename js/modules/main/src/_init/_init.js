@@ -66,7 +66,17 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'item-view',
             url: '/item/:collection/:id',
             controller: 'ItemCtrl as itemController',
-            templateUrl: 'templates/main/item.html'
+			templateUrl: function(params) {
+				return 'templates/item/'+params.collection+'.html'
+			}
+
+        },
+
+        {
+            name: 'general-search',
+            url: '/search?q&size&from_&collection',
+            controller: 'GeneralSearchController as generalSearchCtrl',
+            templateUrl: 'templates/main/search-results.html'
         },
 
         {
@@ -84,7 +94,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'ftrees',
-            url: '/ftrees?first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
+            url: '/ftrees?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
             controller: 'FtreesController as ftreesCtrl',
             templateUrl: 'templates/main/ftrees/ftrees.html'
         },
@@ -173,7 +183,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: '404',
-            url: '/404',
+            abstract: true,
             templateUrl: 'templates/main/404.html'
         }
 
@@ -196,7 +206,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         return $delegate;
     });
 
-    $urlRouterProvider.otherwise('/404');
+    $urlRouterProvider.otherwise('/405');
 
     $locationProvider.html5Mode(true);
 

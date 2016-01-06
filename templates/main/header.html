@@ -1,126 +1,166 @@
-<div ng-controller="HeaderCtrl as headerController" ng-if="header_visible">
-	<div class="dropdown-icons">
-		<div class="dropdown-icons__upload" dropdown is-open="headerController.upload_menu_open">
-			<div class="upload-icon" dropdown-toggle>
-				<icon alt-text="{en: 'Upload a File', he: 'העלאת קובץ'}" position="[-185, -28]" hover-offset="[0, -27]" offset-on="headerController.upload_menu_open == true"></icon>
+<div class="main-header" ng-controller="HeaderCtrl as headerController">
+	<div class="upper-container">
+		<div class="sub-upper-container">	
+			<div class="sites">
+				<ul class="sites">
+					<li class="site-item museum">
+						<a href="http://www.bh.org.il/" target="_self">
+							<div class="title">
+								<en>Museum</en>
+								<he>מוזיאון</he>
+							</div>
+							<div class="icon"></div>
+						</a>
+					</li>
+					<li class="site-item shop" highlighter='bottom'>
+						<a href="http://www.bh.org.il/shop/" target="_self">
+							<div class="title">
+								<en>Shop</en>
+								<he>חנות</he>
+							</div>
+							<div class="icon"></div>
+						</a>
+					</li>
+					<li class="site-item mjs active">
+						<a href="#">
+							<div class="title">My Story</div>
+							<div class="icon active"></div>
+						</a>
+					</li>
+				</ul>
 			</div>
-			<div class="upload-menu">
-				<div class="upload-menu__title">
-					<en>Upload your item</en>
-					<he>העלו את הפריט שלכם</he>
-				</div>
-				<div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
-					<div class="upload-icon__image">
-						<icon alt-text="{en: 'Image', he: 'תמונה'}" position="[-29, -218]"></icon>
-					</div>
-					<div class="upload-menu__row__desc">
-						<en>Image</en>
-						<he>תמונה</he>
-					</div>
-				</div>
-				<div class="upload-menu__row" ng-click="headerController.goto_state('upload.family_tree')">
-					<div class="upload-icon__ftree">
-						<icon alt-text="{en: 'Family tree', he: 'עץ משפחה'}" position="[-26, -68]"></icon>
-					</div>
-					<div class="upload-menu__row__desc">
-						<en>Family tree</en>
-						<he>עץ משפחה</he>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="dropdown-icons__signin" ng-if="!(headerController.is_signedin)" ng-click="headerController.signin()">
-			<en>Sign In</en>
-			<he>כניסה</he>
-		</div>
-		<div class="dropdown-icons__signup" ng-if="!(headerController.is_signedin)" ng-click="headerController.signup()">
-			<en>Sign Up</en>
-			<he>הרשמה</he>
-		</div>
-		<span ng-if="headerController.is_signedin">
-			<div class="dropdown-icons__user">
-				<icon class="dropdown-icons__user__pic" position="[-269, -85]"></icon>
-				<div class="dropdown-icons__user__name">{{headerController.username}}</div>
-			</div>
-			<div class="dropdown-icons__signout" ng-click="headerController.signout()">
-				<en>Sign Out</en>
-				<he>יציאה</he>
-			</div>
-		</span>
-		<div class="dropdown-icons__language-selector" dropdown is-open="headerController.language_menu_open">
-			<div dropdown-toggle>	
-				<div class="language-icon">
-					<en>
-						<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -24]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
-					</en>
-					<he>
-						<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-312, -86]" hover-offset="[0, -30]" offset-on="headerController.language_menu_open == true"></icon>
-					</he>
-				</div>
-			</div>
-			<div class="language-menu">
-				<div class="language-menu__title">
-					<en>Choose a language</en>
-					<he>בחרו שפה</he>
-				</div>
-				<div class="language-menu__row" ng-click="lang='he'">
-					<div class="language-icon">
-						<icon alt-text="{en: 'Hebrew', he: 'עברית'}" position="[-312, -86]"></icon>
-					</div>
-					<div class="language-menu__row__desc">
-						<en>Hebrew</en>
-						<he>עברית</he>
-					</div>
-				</div>
-				<div class="language-menu__row" ng-click="lang='en'">
-					<div class="language-icon">
-						<icon alt-text="{en: 'English', he: 'אנגלית'}" position="[-312, -24]"></icon>
-					</div>
-					<div class="language-menu__row__desc">
-						<en>English</en>
-						<he>אנגלית</he>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="header-container">
-		<div id="top-header-container">
-			<div id="top-header">
-				<div class="logo" ui-sref="start">
-					<icon alt-text="{en: 'Home', he: 'בית'}" position="[-26, -14]"></icon>
-				</div>
-				<div class="mystory" ui-sref="mjs" ng-class="{'mystory--active': headerController.is_mjs_state}">
-					<span ng-show="headerController.mjs_count" class="mystory__count">{{headerController.mjs_count}}</span>
-					<div class="mystory__icon">
-						<icon alt-text="{en: 'My Story', he: 'הסיפור שלי'}" position="[-83, -24]"></icon>
-					</div>
-					<div class="mystory__text">
-						<en>My Story</en>
-						<he>הסיפור שלי</he>
-					</div>
-				</div>
-				<!-- <div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'wizard'"> -->
-				<div class="header-wizard-trigger" ng-if="!(isCurrentState('start'))" ui-sref="start">
-					<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-83, -88]" hover-offset="[0, -30]" offset-on="headerController.sub_header_state == 'wizard'"></icon>
-				</div>
-				<div class="recently-viewed-trigger" ng-if="!(isCurrentState('start'))" ng-click="headerController.sub_header_state = 'recently-viewed'">
-					<icon alt-text="{en: 'Search Wizard', he: 'אשף חיפוש'}" position="[-125, -89]" hover-offset="[0, -30]" offset-on="headerController.sub_header_state == 'recently-viewed'"></icon>
-				</div>
-				<!-- <div class="search-area">
-					<form action="" class="search-area__form">
-						<input type="text" placeholder={{headerController.search_placeholders[lang]}} class="search-area__form__input" />
-						<div class="search-area__form__search-button">
-							<icon alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-350, -24]"></icon>
+			<div class="dropdown-icons">
+				<div class="header-element dropdown-icons__my-account signed" dropdown>
+					<button class="my-account-label" dropdown-toggle>
+						<div class="dropdown-icons__user" ng-if="headerController.is_signedin">
+							<icon class="dropdown-icons__user__pic" position="[-264, -588]"></icon>
 						</div>
-					</form>
-				</div> -->
-			</div>
-		</div>
-		<div id="notification-bar-container" ng-show="headerController.show_notifications">
-			<div id="notification-bar">
-				{{headerController.notification_message}}
+						<en>My Account</en>
+						<he>החשבון שלי</he>
+						<span class="caret"></span>
+					</button>
+					<div class="my-account-menu signed" ng-if="headerController.is_signedin" >
+						<div class="my-account-menu__row signed">
+							<icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
+							<div class="dropdown-icons__user__name">{{headerController.username}}</div>
+						</div>
+						<div class="my-account-menu__row signed" ng-click="headerController.signout()">
+							<en>Sign out</en>
+							<he>יציאה</he>
+						</div>
+					</div>
+					<div class="my-account-menu" ng-if="!(headerController.is_signedin)">
+						<div class="my-account-menu__row" ng-click="headerController.signin()">
+							<en>Sign in</en>
+							<he>הכנס</he>
+						</div>
+						<div class="my-account-menu__row" ng-click="headerController.signup()">
+							<en>Create account</en>
+							<he>צור חשבון</he>
+						</div>
+					</div>
+				</div>
+
+				<div class="header-element newsletter-popup">
+					<div class="newsletter-popup__button">
+						<button class="label" ng-controller="NewsLetterPopoverCtrl as enewsCtrl" popover-template="'templates/enews-popover.html'" popover-is-open="enewsCtrl.popover.is_open"
+						 		ng-class="{'label--active': enewsCtrl.popover.is_open}">
+							<en>ENews</en>
+							<he>ניוזלטר</he>
+						</button>
+					</div>
+				</div>
+				
+				<div class="header-element dropdown-icons__language-selector">
+					<div class="language-icon">
+						<en>
+							<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-122, -618]" hover-offset="[0, -34]" offset-on="headerController.language_menu_open == true" ng-click="lang='he'"></icon>
+						</en>
+						<he>
+							<icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-122, -687]" hover-offset="[0, -34]" offset-on="headerController.language_menu_open == true" ng-click="lang='en'"></icon>
+						</he>
+					</div>
+				</div>
+				<div class="header-element logo">
+					<en>
+						<icon alt-text="{en: 'Home', he: 'בית'}" position="[-314, -636]"></icon>
+					</en>
+					<he><icon alt-text="{en: 'Home', he: 'בית'}" position="[-306, -575]"></icon></he>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="bottom-container" ng-show="!(isCurrentState('start'))">
+		<div id="header-container">
+			<nav class="menu">
+				<ul class="nav">
+					<li class="logo header-menu-item" ui-sref="start">
+						<span class="item_before" selector></span>
+						<div>
+							<en>Home</en>
+							<he>ראשי</he>
+						</div>
+					</li>
+					<li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
+						<div class="mystory__text">
+							<en>My Story</en>	
+							<he>הסיפור שלי</he>
+						</div>
+					</li>
+					<li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'general-search'}"
+						ng-click="headerController.header.sub_header_state = 'general-search'">
+						<div>
+							<en>Search</en>
+							<he>חיפוש</he>
+						</div>
+					</li>
+					<li class="recently-viewed-trigger header-menu-item" ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'recently-viewed'}"
+						ng-click="headerController.header.sub_header_state = 'recently-viewed'"> 
+						<div>
+							<en>Recently Viewed</en>
+							<he>נצפו לאחרונה</he>
+						</div>
+					</li>
+		            <li class="header-menu-item ftree-tab" ng-class="{'header-menu-item--active': isCurrentState('ftrees')}" 
+		            	ng-click="headerController.goto_state('ftrees')"> 
+		                <div>
+		                    <en>Family tree</en>
+		                    <he>עצ משפחה</he>
+		                </div>
+		            </li>
+				</ul>
+			</nav>
+			<div class="dropdown-icons__upload" dropdown is-open>
+				<div class="upload-label" dropdown-toggle>
+					<en>Upload</en>
+					<he>העלו קובץ</he>
+				</div>
+				<div class="upload-menu">
+					<div class="upload-menu__title">
+						<en>Upload your item</en>
+						<he>העלו את הפריט שלכם</he>
+					</div>
+					<div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
+						<div class="upload-icon__image">
+							<icon alt-text="{en: 'Image', he: 'תמונה'}" position="[-29, -218]"></icon>
+						</div>
+						<div class="upload-menu__row__desc">
+							<en>Image</en>
+							<he>תמונה</he>
+						</div>
+					</div>
+					<div class="upload-menu__row" ng-click="headerController.goto_state('upload.family_tree')">
+						<div class="upload-icon__ftree">
+							<icon alt-text="{en: 'Family tree', he: 'עץ משפחה'}" position="[-26, -68]"></icon>
+						</div>
+						<div class="upload-menu__row__desc">
+							<en>Family tree</en>
+							<he>עץ משפחה</he>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </div>

@@ -1,18 +1,18 @@
-var SubHeaderController = function(header) {
+var SubHeaderController = function($state, header) {
 
-	Object.defineProperty(this, 'sub_header_state', {
-        get: function() {
-            return header.sub_header_state;
-        },
-
-        set: function(new_state) {
-            header.sub_header_state = new_state;
-        }
-    });
+    this.$state = $state;
+    this.header = header;
 };
 
 SubHeaderController.prototype = {
-
+    search: function() {
+        this.$state.go('general-search', {q: this.header.query});
+    },
+    
+    search_on_enter:function ($event) {
+        if ($event.keyCode === 13 && this.header.query.length > 1)
+            this.search();
+    }
 };
 
-angular.module('main').controller('SubHeaderController', ['header', SubHeaderController]);
+angular.module('main').controller('SubHeaderController', ['$state', 'header', SubHeaderController]);

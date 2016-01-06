@@ -1,8 +1,12 @@
 .mjs-widget-wrapper {
 	position: relative;
 	display: inline-block;
+	line-height: 26px;
 
 	&.open {
+		.mjs-widget-icon {
+			background-color: #676767;
+		}
 
 		.mjs-widget-dialog {
 			display: block;
@@ -10,62 +14,151 @@
 	}
 
 	.mjs-widget-icon{
-		display: inline-block;
-		width: 66px;
-		height: 64px;
-	    
+	    position: relative;
+		background-color: #cb5947;
+		font-weight: 600;
+		color: #fff;
+		width: 112px;
+		border-radius: 20px;
+		height: 34px;
+		font-size: 12px;
 		@include hover-pointer();
+
+		&:hover {
+			background-color: #676767;
+		}
+
+		&.in-my-story {
+
+			&:hover {
+
+				.v_sign {
+					display: none;
+				}
+
+				.icon_upper_line {
+					display: none;
+				}
+
+				&:before {
+					content: "Remove from";
+					font-size: 10px;
+
+					.en & {
+						margin-left: 36px;
+					}
+					.he & {
+						margin-right: 36px;
+					}
+				}
+				&:after {
+					content: '+';
+                	position: absolute;
+                	color: #666;
+			  		font-size: 46px;
+			  		font-weight: 600;
+					top: 3px; 
+					@include rotate($degrees:-45deg);
+
+					.en & {
+						left: 3px;
+					}
+					.he & {
+						right: 3px;
+					}
+				}
+			}
+
+		}
 	}
+
+	.icon_bottom_line {
+		margin-top: -16px;
+      	font-size: 15px;
+    }
+		  
+   .icon_upper_line, .icon_bottom_line {
+	    
+	    .en & {
+	    	margin-left: 36px;
+	    }
+	    .he & {
+	    	margin-right: 36px;
+	    }
+    }
+	.sign-background {
+		position: absolute;
+	    background-color: #fff;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50px;
+	    top: 50%;
+	    @include translate (0, -50%);
+	    
+	    .en & {
+	    	left: 2px;
+	    }
+	    .he & {
+	    	right: 2px;
+	    }
+    }
+
+    .add-remove_sign {
+    	position: absolute;
+    	color: #666;
+  		font-size: 46px;
+  		font-weight: 600;
+		top: 1px; 
+
+		.en & {
+			left: 2px;
+		}
+		.he & {
+			right: 2px;
+		}
+    }
+    .v_sign {
+    	content: '';
+        position: absolute;
+        top: 8px;
+        width: 20px;
+        height: 12px;
+        border: 4px solid #666;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        @include rotate($degrees:-45deg);
+
+        .en & {
+        	left: 4px;
+        }
+        .he & {
+        	right: 4px;
+        }
+    }
 
 	.mjs-widget-dialog {
 		display: none;
 		position: absolute;
 		z-index: 1;
-		top: 85px;
+		top: 40px;
 		text-align: center;
 		font-size: 14px;
+		@include box-shadow(0 0 6px 0 #999);
 
 		.en & {
-			right: -33px;
+			right: -18px;
 		}
 
 		.he & {
-			left: -33px;
-		}
-
-		&__title {
-			position: relative;
-			text-align: center;
-			background-color: #999999;
-			color: white;
-			width: 140px;
-			font-size: 16px;
-			padding: 3px auto;
-			margin-bottom: 2px;
-
-			&:before {
-				content: "";
-				position: absolute;
-				height: 0;
-				width: 0;
-				border-width: 0 70px 16px;
-				border-style: solid;
-				border-color: transparent transparent #999999;
-				top: -16px;
-				 .en & {
-				 	left: 0px;
-				 }
-				 .he & {
-				 	right: 0px;
-				 }
-			}
+			left: -18px;
 		}
 
 		&__view, &__remove {
 			padding: 10px 15px;
 			background-color: #d6d6d6;
 			width: 140px;
-			color: #959595;
+			color: #666666;
 			text-decoration: none;
 
 			@include hover-pointer();
@@ -77,9 +170,8 @@
 				text-align: right;
 			}
 
-
 			&:hover {
-				color: #474747;
+				background-color: #c8c8c8;
 			}
 		}
 

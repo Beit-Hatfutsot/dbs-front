@@ -2,7 +2,7 @@
 	zoom: 1;
 	-moz-transform: scale(1);
 	width: 100%;
-	background: #eeeeee;
+	background: $gray7;
 	padding: 14px 0;
 
 	@at-root #tree-sort {
@@ -19,7 +19,7 @@
 		}
 
 		.title {
-			background-color: #999999;
+			background-color: $gray4;
 			width: 100%;
 			height: 45px;
 			position: relative;
@@ -54,7 +54,7 @@
 				width: 0;
 				height: 0;
 				line-height: 0;
-				border-top: 6px solid #666666;
+				border-top: 6px solid $gray3;
 				top: 101%;
 				position: absolute;
 				
@@ -93,7 +93,7 @@
 				bottom:0;
 				width:0px;
 				height:0px;
-				border-top: 46px solid #999;
+				border-top: 46px solid $gray4;
 
 				.en & {
 					right: -30px;    
@@ -115,7 +115,7 @@
 
 				&__update {
 					border: none;
-					background: #47c3d3;
+					background: $blue3;
 					color: #ffffff;
 					text-align: center;
 					padding: 5px 0;
@@ -125,7 +125,7 @@
 					@include hover-pointer();
 
 					&:hover {
-						background-color: #666666;
+						background-color: $gray3;
 					}
 				}
 
@@ -136,7 +136,7 @@
 
 				&__clear {
 					font-size: 10px;
-					color: #999999;
+					color: $gray4;
 					@include hover-pointer();
 
 
@@ -160,7 +160,7 @@
 						label {
 							display: block;
 							font-size: 10px;
-							color: #666666;
+							color: $gray3;
 							text-align: center;
 							padding-top: 5px;
 							@include hover-pointer();
@@ -168,7 +168,7 @@
 						}
 
 						input[type="text"] {
-							border: 2px solid #edcfc5;
+							border: 2px solid $red5;
 							overflow: hidden;
 							font-size: 80%;
 							text-transform: capitalize;
@@ -202,7 +202,7 @@
 
 					.info {
 						font-size: 10px;
-						color: #bababa;
+						color: $gray5;
 						margin: 0 8px;
 					}
 
@@ -210,7 +210,7 @@
 						display: inline-block;
 						width: 248px;
 						height: 23px;
-						border-color: #efcdc7;
+						border-color: $red5;
 					}
 
 					.modifiers-container {		
@@ -221,14 +221,14 @@
 						&__modifier {
 
 							&__modif-label {
-								background-color: #eeecec;
+								background-color: $gray6;
 								width: 80px;
 								height: 20px;
 								padding-bottom: 3px;
 								position: relative;
 
 								&:hover {
-									background-color: #d6d6d6;
+									background-color: $gray5;
 								}
 							}
 							
@@ -237,8 +237,8 @@
 								}
 
 							input[type="radio"]:checked + .modifiers-container__modifier__modif-label {
-								background-color: #efcdc7;
-								color: #333333;
+								background-color: $red5;
+								color: $gray1;
 
 								.modifiers-container__modifier__modif-label__arrow {
 									position: absolute;
@@ -264,7 +264,7 @@
 				&__title {
 					margin-bottom: 8px;
 					text-align: center;
-					color: #666666;
+					color: $gray3;
 				}
 
 				&__choices {
@@ -283,20 +283,20 @@
 						display: none;
 					}
 					input[type="radio"]:checked + .label-sex {
-						color: #333333;
-						background-color: #efcdc7;
+						color: $gray1;
+						background-color: $red5;
 					}
 					.label-sex {
-						background-color: #eeecec;
+						background-color: $gray6;
 						display: inline-block;
 						width: 80px;
 						height: 20px;
-						color: #666666;
+						color: $gray3;
 						text-align: center;
 						padding-top: 5px;
 
 						&:hover {
-							background-color: #d6d6d6;
+							background-color: $gray5;
 						}
 					}
 				}
@@ -335,19 +335,19 @@
 							    height: 20px;
 							    width: 80px;
 							    outline: none;
-							    color: #adadad;
+							    color: $gray4;
 							    border: none;
-							    background: #eeecec; 
+							    background: $gray6; 
 							    padding: 2px 10px 2px 2px;
 							    -moz-appearance: none;
 							    font-size: 80%;
 
 							    &:hover {
-							    	background-color: #d6d6d6;
+							    	background-color: $gray5;
 							    }
 
 							    &:hover + .fancyArrow {
-							    	background-color: #d6d6d6;
+							    	background-color: $gray5;
 							    }
 							}
 
@@ -357,7 +357,7 @@
 							    position: absolute;
 							    display: inline-block;
 							    top: 18px;
-							    background: right / 90%  no-repeat #eeecec;
+							    background: right / 90%  no-repeat $gray6;
 							    pointer-events: none;
 
 							    .en & {
@@ -407,7 +407,7 @@
 			}
 			.BackToSearch {
 				border: none;
-				background: #47c3d3;
+				background: $blue3;
 				color: #ffffff;
 				text-align: center;
 				padding: 5px 0;
@@ -424,7 +424,7 @@
 					right: 4px;
 				}
 				&:hover {
-					background-color: #666666;
+					background-color: $gray3;
 				}
 			}
 
@@ -432,7 +432,7 @@
 				position: relative;
 				top: 24px;
 				height: 940px;
-				background: #f5f5f5;
+				background: $gray7;
 				width: 752px;
 
 					.results__individuals {
@@ -480,7 +480,7 @@
 				border: 4px solid #ffffff;
 				table-layout: fixed;
 				text-transform: capitalize;
-				background: #f5f5f5;
+				background: $gray7;
 				width: 760px;
 
 				.tree-view & {
@@ -490,7 +490,7 @@
 				.thArrowDown {
 					width: 0px;
 					height: 0px;
-					border-top: 16px solid #fde2b5;
+					border-top: 16px solid $yellow6;
 					border-left: 59px solid transparent;
 					border-right: 59px solid transparent;
 					top: 101%;
@@ -498,7 +498,7 @@
 					left: 1%;
 
 				    .tree-view & {
-				    	border-top: 16px solid #999999;
+				    	border-top: 16px solid $gray4;
 				    }
 				}
 
@@ -524,10 +524,10 @@
 
 				thead {
 					display: table-header-group;
-					background-color: #fde2b5;
+					background-color: $yellow6;
 
 					.tree-view & {
-						background-color: #999999;
+						background-color: $gray4;
 					}
 
 					tr {
@@ -539,10 +539,10 @@
 							@include hover-pointer();
 
 							&:hover  {                        
-								background-color: #d6d6d6;
+								background-color: $gray5;
 
 								.thArrowDown {
-									border-top-color: #d6d6d6;
+									border-top-color: $gray5;
 								}
 							}
 
@@ -570,13 +570,13 @@
 						@include hover-pointer();
 
 						&:hover {
-							background-color: #d6d6d6;
+							background-color: $gray5;
 						}
 
 						&.dark {
-							background: #eeeeee;
+							background: $gray6;
 								&:hover {
-									background-color: #d6d6d6;
+									background-color: $gray5;
 								}
 						}
 						td {
@@ -584,11 +584,11 @@
 						}
 
 						&.selected {
-							color: #333333;
+							color: $gray1;
 							font-weight: bold;
 							
 							.tree-view & {
-								background-color: #fde2b5;
+								background-color: $yellow6;
 
 								.last-name-arrow {
 									position: absolute;
@@ -599,11 +599,11 @@
 									top: 0px;
 
 									.en & {
-										border-left: 22px solid #fde2b5;
+										border-left: 22px solid $yellow6;
 										left: 100%;
 									}
 									.he & {
-										border-right: 22px solid #fde2b5;
+										border-right: 22px solid $yellow6;
 										right: 100%;
 									}
 								}
@@ -633,7 +633,7 @@
 				}
 
 				&__trigger {
-					background: #fde2b5;
+					background: $yellow6;
 					font-size: 15px;
 					position: absolute;
 					top: -40px;
@@ -642,7 +642,7 @@
 					@include hover-pointer();
 
 					&:hover {
-						background-color: #d6d6d6;
+						background-color: $gray5;
 						}
 
 					.en & {
@@ -673,7 +673,7 @@
 					z-index: 1;
 					display: none;
 					width: 158px;
-					color: #666666;
+					color: $gray3;
 					border: 3px solid transparent;
 					top: 4px;
 					@include border-radius(7px);
@@ -725,7 +725,7 @@
 						
 					}*/
 					&__title {
-						background-color: #999999;
+						background-color: $gray4;
 						color: #ffffff;
 						height: 46px;
 						font-size: 12px;
@@ -743,13 +743,13 @@
 						height: 43px;
 						font-size: 14px;
 						padding: 10px 12px 0;
-						background: #d6d6d6;
+						background: $gray5;
 
 						&__fancyArrow {
 							content: "";
 							width: 22px;
 							height: 22px;
-							background: none repeat #999999;
+							background: none repeat $gray4;
 							@include border-radius(50px);
 							position: absolute;
 
@@ -763,7 +763,7 @@
 							@include hover-pointer();
 
 							&.selected {
-								background: none repeat #bf311a;
+								background: none repeat $red2;
 
 								&:after {
 									content: '';
@@ -788,9 +788,9 @@
 						}
 
 						&:hover {
-							color: #333333;
+							color: $gray1;
 							#fancyArrow-label {
-								background-color: #bf311a;
+								background-color: $red2;
 							}	
 						}
 
@@ -825,18 +825,18 @@
 					display: inline-block;
 				    height: 17px;
 				    width: 55px;
-				    color: #adadad;
+				    color: $gray5;
 				    border: none;
-				    background: #efcdc7; 
+				    background: $red5; 
 				    -moz-appearance: none;
 				    @include hover-pointer();
 
 				    &:hover {
-				    	background-color: #d6d6d6;
+				    	background-color: $gray5;
 				    }
 
 				    &:hover + .results__per-page__selector__fancyArrow {
-						background-color: #d6d6d6;
+						background-color: $gray5;
 					}
 				}
 				
@@ -848,7 +848,7 @@
 					    height: 15px;
 					    position: absolute;
 					    display: inline-block;
-					    background: right / 90%  no-repeat #efcdc7;
+					    background: right / 90%  no-repeat $red5;
 					    top: -3px;
 					    pointer-events: none;
 
@@ -922,11 +922,11 @@
 						width: 18px;
 						height: 18px;
 						border: none;
-						background: #efcdc7;
+						background: $red5;
 						@include hover-pointer();
 
 						&:hover {
-							background-color: #d6d6d6;
+							background-color: $gray5;
 							}
 
 						&__icon {
@@ -959,11 +959,11 @@
 					}
 
 					&__number {
-						border: 2px solid #edcfc5;
+						border: 2px solid $red5;
 						width: 36px;
 						height: 20px;
 						background-color: #ffffff; 
-						color: #333333;
+						color: $gray1
 					}
 
 					&__go-button {
@@ -971,12 +971,12 @@
 						  width: 36px;
 						  height: 20px;
 						  padding-top: 9px;
-						  background-color: #bf311a;
+						  background-color: $red2;
 						  top: -20px;
 						  @include hover-pointer();
 
 						  &:hover {
-						    	background-color: #d6d6d6;
+						    	background-color: $gray5;
 						    }
 
 						  .en & {
@@ -1039,12 +1039,12 @@
 
 			.en & {
 				right: 0;
-				border-left: 12px solid #eeeeee;
+				border-left: 12px solid $gray6;
 			}
 
 			.he & {
 				left: 0;
-				border-right: 12px solid #eeeeee;
+				border-right: 12px solid $gray6;
 			}
 			
 
@@ -1085,7 +1085,7 @@
 				display: inline-block;
 				top: 178px;
 				background: #ffffff;
-				border: 2px solid #999999;
+				border: 2px solid $gray4;
 				height: 132px;
 				width: 152px;
 
@@ -1101,7 +1101,7 @@
 				  	content: " ";
 				  	height: 0;
 				  	width: 0;
-				  	border-bottom: 133px #999999 solid;
+				  	border-bottom: 133px $gray4 solid;
 				  	top: -3px;
 
 				  	.en & {
@@ -1142,7 +1142,7 @@
 				&__desc {
 					display: none;
 					position: absolute;
-					background-color: #e98909;
+					background-color: $yellow1;
 					color: #ffffff;
 					width: 204px;
 					bottom: 0px;
@@ -1164,7 +1164,7 @@
 					width: 0;
 					height: 0;
 					line-height: 0;
-					border-top: 7px solid #8C8A8A;
+					border-top: 7px solid $gray3;
 					top: 101%;
 
 					.en & {

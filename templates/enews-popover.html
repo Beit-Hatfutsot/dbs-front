@@ -1,0 +1,52 @@
+<div class="newsletter-popup__content"> 
+    <h2 class="widgettitle">
+        <en>Are you part of the story?</en>
+        <he>רוצים להיות חלק מהסיפור?</he>
+    </h2>
+    <div class="widgetcontent">
+        <div class="pre-text">
+            <en>Add your email and you will never miss out on family events, exhibition openings and deals on our shops!</en>
+            <he>הוסיפו את המייל שלכם כדי לא להחמיץ עדכונים, חידושים, המון סיפורים מרחקים ועוד...</he>
+        </div>
+        <form name="myForm" ng-submit="enewsCtrl.submit()" novalidate>
+            <label for="widget-active_trail_newsletter-4-mm_newemail">
+                <small>
+                    <en>Your Email:</en>
+                    <he>האימייל שלך:</he>
+                </small>
+            </label>
+            <input ng-model="enewsCtrl.email" class="mm_newemail" name="email" type="email" placeholder="{{(lang=='en')?'Email Address':'כתובת המייל'}}" required />
+            <div ng-show="myForm.$dirty && myForm.email.$invalid" class="errph"> 
+                <en>Email address is missing or incorrect</en>
+                <he>כתובת מייל שגויה או חסרה</he>
+            </div>
+            <div class="newsletter-groups">
+                <small>
+                    <en>Choose Language:</en>
+                    <he>בחר שפה:</he>
+                </small>
+                <div ng-repeat="checkbox in enewsCtrl.checkboxes">
+                    <input id="enewsletter-lang-{{checkbox.name}}" type="checkbox" ng-model="checkbox.is_checked" name="{{checkbox.name}}"/>
+                    <label for="enewsletter-lang-{{checkbox.name}}">
+                        <span ng-bind="checkbox.label"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="errph" ng-show="enewsCtrl.tried && enewsCtrl.no_languages()">
+                <div>
+                    <en>Please check at least one newsletter language</en>
+                    <he>יש לבחור לפחות שפה אחת</he>
+                </div>
+            </div>
+            <input  class="newsletter-submit" type="submit" ng-value="(lang=='en')?'Register':'הרשמה'" 
+                    ng-disabled="myForm.$invalid"/>
+            <div class="errph succes" ng-show="enewsCtrl.registered"> 
+                <en>Registration was successful, thank you!</en>
+                <he>הרישום בוצע בהצלחה, תודה רבה!</he>
+            </div>
+        </form>
+    </div>
+    <div>  
+        <icon position="[-224, -306]" class="close-button" ng-click="enewsCtrl.popover.close()"></icon>
+    </div>
+</div>

@@ -34,6 +34,8 @@ var StartController = function($scope, $state, wizard, itemTypeMap) {
 			var parts = item_string.split('.')
 			$state.go('item-view', {collection: parts[0], id: parts[1]});
 		}
+		else if ('ftree_args' in self.wizard.result)
+			$state.go('ftrees', self.wizard.result.ftree_args)
 	});
 };
 
@@ -44,7 +46,7 @@ StartController.prototype = {
 	 * @name StartController#choose_result
 	 *
 	 * @description
-	 * Chooses result from wizard results (name/place),
+	 * Chooses result from wizard results (name/place/ftrees),
 	 * according to specified logic (e.g choose name over place if result contains both).
 	 * This method taps into the wizard search result, bypassing the wizard search status,
 	 * which is something worth considering changing.
