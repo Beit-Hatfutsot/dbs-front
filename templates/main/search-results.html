@@ -38,72 +38,48 @@
             <div ng-switch-when='allResults' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About Beit Hatfutsot databases:</br>The vision of Nahum Goldmann<br></en>
-                        <he>אודות מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן<br></he>
-                    </span>
-                    <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal(generalSearchCtrl.collection)">
-                        <en>Read about the databases</en>
-                        <he>קרא עוד על מאגר המידע</he>
+                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot databases:</br>The vision of Nahum Goldmann</a><br></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן</a><br></he>
                     </span>
                 </div>
             </div> 
             <div ng-switch-when='places' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the Beit Hatfutsot Jewish<br>Communities Database</en>
-                        <he>אודות מאגר הקהילות<br>היהודיות של בית התפוצות</he>
-                    </span>
-                    <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
-                        <en>Read about the databases</en>
-                        <he>קרא עוד על מאגר המידע</he>
+                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot Jewish<br>Communities Database</a></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגר הקהילות<br>היהודיות של בית התפוצות</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when='media' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About Bernard H. and Miriam Oster<br>Visual Documentation Center</en>
-                        <he>אודות המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</he>
-                    </span>
-                    <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
-                        <en>Read about the databases</en>
-                        <he>קרא עוד על מאגר המידע</he>
+                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when='personalities' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the Beit Hatfutsot Jewish<br>Personalities Database</en>
-                        <he>אודות מאגר האישים<br>של בית התפוצות</he>
-                    </span>
-                    <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
-                        <en>Read about the databases</en>
-                        <he>קרא עוד על מאגר המידע</he>
+                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot Jewish<br>Personalities Database</a></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגר האישים<br>של בית התפוצות</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when="familyNames" class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the Memi De-Shalit Database<br>of Jewish Family Names</en>
-                        <he>אודות מאגר השמות<br>ע"ש ממי דה-שליט</he>
-                    </span>
-                    <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
-                        <en>Read about the databases</en>
-                        <he>קרא עוד על מאגר המידע</he>
+                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Memi De-Shalit Database<br>of Jewish Family Names</a></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגר השמות<br>ע"ש ממי דה-שליט</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when="family-tree" class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About Douglas E. Goldman Jewish<br>Genealogy Center databases</en>
-                        <he>אודות המרכז לגנאלוגיה יהודית<br>ע"ש דגלס א. גולדמן</he>
-                    </span>
-                    <span class="open-modal-link" ng-click="generalSearchCtrl.open_modal()">
-                        <en>Read about the databases</en>
-                        <he>קרא עוד על מאגר המידע</he>
+                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Douglas E. Goldman Jewish<br>Genealogy Center databases</a></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">המרכז לגנאלוגיה יהודית<br>ע"ש דגלס א. גולדמן</a></he>
                     </span>
                 </div>
             </div>
@@ -114,7 +90,7 @@
                 <he>תוצאות החיפוש עבור <span class="cap-query">{{generalSearchCtrl.query}}</span> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}}  - {{generalSearchCtrl.results.total}})</he>
             </div>
             <div class="item-preview-wrapper">
-                <div class="spinner" ng-if="generalSearchCtrl.loading">
+                <div class="spinner" ng-if="generalSearchCtrl.loading && generalSearchCtrl.query">
                     <img src="images/BH-Loading.gif">
                 </div>
                 <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 

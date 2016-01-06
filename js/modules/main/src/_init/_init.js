@@ -80,6 +80,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
+            name: 'about_center',
+            url: '/about/:collection',
+            controller: 'GeneralSearchController as generalSearchCtrl',
+            templateUrl: 'templates/main/allresults.html'
+        },
+
+        {
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',

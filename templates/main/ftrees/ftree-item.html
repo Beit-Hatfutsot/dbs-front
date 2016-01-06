@@ -2,8 +2,8 @@
 	<div id="ftree-item">
 		<div class="ftree-title">
 			<icon class="ftree-title__tree-icon" position="[-84, -439]"></icon>
-			<en>{{ftreeItemCtrl.individual.last_name + " "}}Family Tree - {{ftreeItemCtrl.tree_number}}</en>
-			<he>{{ftreeItemCtrl.individual.last_name + " "}}עץ המשפחה - {{ftreeItemCtrl.tree_number}}</he>
+			<!-- <en>{{ftreeItemCtrl.individual.last_name + " "}}Family Tree - {{ftreeItemCtrl.tree_number}}</en>
+			<he>{{ftreeItemCtrl.individual.last_name + " "}}עץ המשפחה - {{ftreeItemCtrl.tree_number}}</he> -->
 			<icon class="ftree-title__print-icon" position="[-22, -722]" ng-click="ftreeItemCtrl.print()" ng-class="{'relocate': !ftreeItemCtrl.previous_state}" hover-offset="[-1, 37]"></icon>
 			<span ng-if="ftreeItemCtrl.from_ftree_view">
 				<div class="ftree-title__back" ng-click="ftreeItemCtrl.back()">
@@ -27,7 +27,8 @@
 		</div>
 		<div id="ftree-layout-container">
 			<div id="ftree-layout">
-				<subtree individual="ftreeItemCtrl.individual"></subtree>
+        		<svg class="vertices"></svg>
+        		<div class="nodes"></div>
 			</div>
 		</div>
 	</div>

@@ -11,12 +11,29 @@
     margin: 0 auto;
     background-color: #F6F6F6;
 
+    .article {
+        margin-top: 40px;
+        width: 900px;
+        color: $gray3;
+
+        .article_title {
+            font-weight: 700;
+        }
+
+        .content {
+            padding: 0 50px;
+        }
+    }
+
     .title {
         position: relative;
         font-size: 16px;
-        color: #666;
+        color: $gray3;
         line-height: 18px;
-        top: -50px;
+        top: -20px;
+        background-color: $yellow6;
+        padding: 10px 15px;
+        border-radius: 16px;
         @include hover-pointer();
 
         .en & {
@@ -27,26 +44,20 @@
             float: left;
         }
 
-        .open-modal-link {
-            font-size: 12px;
-            font-weight: 600;
+        .linked {
             text-decoration: underline;
-            display: block;
         }
 
-        &:before {
-            position: absolute;
-            right: 104%;
-            top: -8px;
-            width: 49px;
-            height: 57px;
-            content: "";
-            @include icon(-314px -636px);
+        &:hover {
+            .linked {
+                color: $gray2;
+                font-weight: 600;
+            }
         }
     }
 
     .search-results-page {
-        margin-top: 70px;
+        margin-top: 40px;
 
         .no-res-notif {
             color: $gray3;
@@ -57,21 +68,13 @@
         .db-results-title {
             background-color: #c2c2c2;
             line-height: 40px;
-            padding: 0 25px;
-            font-size: 21px;
+            padding: 0 20px;
+            font-size: 20px;
             color: #666;
             font-weight: 700;
             display: table;
             position: relative;
-            margin-bottom: 20px;   
-
-            .en & {
-                margin-left: -15px; 
-            }
-            .he & {
-                margin-right: -15px;   
-            }
-
+            margin-bottom: 20px;  
 
             &:after {
                 position: absolute;

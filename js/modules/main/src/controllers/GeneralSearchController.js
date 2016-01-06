@@ -1,5 +1,6 @@
 var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window) {
     var self = this, params = {};
+    this.$state = $state;
     this.$window = $window;
     this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'allResults';
     this.results = {hits: []};    
@@ -17,16 +18,18 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.google_query = "";
     this.langManager = langManager;
     this.query_words = [
-        {en:'Jewish', he:'יהודים', selected: false},
-        {en:'Jews', he:'יהודי', selected: false},
-        {en:'Judah', he:'ישראל', selected: false}
+        {en:'Jewish', he:'יהודי', selected: false},
+        {en:'Jews', he:'יהודים', selected: false},
+        {en:'Synagogue', he:'בית הכנסת', selected: false},
+        {en:'Ghetto', he:'גטו', selected: false},
+        {en:'Community', he:'קהילה', selected: false}
     ];
 
     this.collection_map = {
 
         allResults: {
             En: 'All results',
-            He: 'כל התוצאות',
+            He: 'כל התוצאות' 
         },
         
         places: {
@@ -69,12 +72,11 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
 
         set: function(new_collection) {
             this._collection = new_collection;
-            $state.go('general-search', {q: this.query, collection: new_collection});
+            $state.go('general-search', {q: this.header.query, collection: new_collection});
         }
     });
-
     if ($stateParams.q !== undefined) {
-        header.query = this.query = $stateParams.q;
+       header.query = this.query = $stateParams.q;
  
         $http.get(apiClient.urls.search, {params: this.api_params()})
         .success(function (r) {  
@@ -177,21 +179,9 @@ GeneralSearchController.prototype = {
         }
     },
 
-    open_modal: function (collection_name) {
-        var body = document.getElementsByTagName('body')[0];
-        var scope = this.$scope.$new();
-        scope.collection_name = this.collection;
-        body.addClassName('backdrop');
-        var authModalInstance = this.$modal.open({
-            templateUrl: 'templates/main/allresults.html',
-            size: 'm',
-            scope : scope
-        });
-        authModalInstance.result.
-        finally(function() {
-            body.removeClassName('backdrop');
-        });
-    },
+    read_about_center: function (collection_name) {
+        this.$state.go('about_center', {collection: this.collection});
+    }
 };
 
 angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', GeneralSearchController]);
