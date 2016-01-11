@@ -62,11 +62,6 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
     var s = document[0].getElementsByTagName('body')[0];
     s.appendChild(scriptTag);
     */
-   $rootScope.$on('$stateChangeStart',
-			  function(event, toState, toParams, fromState, fromParams){ 
-				  self.load(toParams);
-				  event.preventDefault(); 
-	})
 	this.load($stateParams);
 };
 
@@ -249,9 +244,9 @@ FtreeViewController.prototype = {
 		new_divs.classed('node', true)
 			.classed('new', true)
 			.on("click", function (d) { 
-				//self.load({node_id: d.id, tree_number: self.treeNumber}); 
-				self.$state.go('ftree-view', {node_id:  d.id, tree_number: self.treeNumber});
-				// self.$window.location.hash = "#" + d.id; 
+				var params = {node_id: d.id, tree_number: self.treeNumber}; 
+				self.$state.transitionTo('ftree-view', params, {notify: false});
+			    self.load(params);
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
 			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
