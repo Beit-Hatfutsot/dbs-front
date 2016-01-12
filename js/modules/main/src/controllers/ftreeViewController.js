@@ -1,5 +1,6 @@
 var FtreeViewController = function ($http, $window, $document, $rootScope,
-							       $scope, $state, $stateParams, apiClient, ftreeLayout) {
+							       $scope, $state, $stateParams, apiClient, 
+							       recentlyViewed, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
 
 	this.$scope = $scope;
@@ -7,6 +8,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 	this.$http = $http;
 	this.$window = $window;
 	this.apiClient = apiClient;
+	this.recentlyViewed = recentlyViewed;
 
 	// renderer
 	this.rootId = "ftree-layout";
@@ -62,6 +64,15 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
     var s = document[0].getElementsByTagName('body')[0];
     s.appendChild(scriptTag);
     */
+   $rootScope.$on('$stateChangeStart',
+			  function(event, toState, toParams, fromState, fromParams){ 
+				  if (toState.name == 'ftree-view' && fromState.name == 'ftree-view') {
+					  event.preventDefault(); 
+					  self.$state.transitionTo('ftree-view', toParams, {notify: false});
+					  self.load(toParams);
+				  }
+	})
+   
 	this.load($stateParams);
 };
 
@@ -80,6 +91,13 @@ FtreeViewController.prototype = {
 			cache: true
 	  		})
 			.success(function (response) {
+			
+				var name = response.name.join(" ");
+				self.recentlyViewed.put({
+					params: params,
+					state: 'ftree-view',
+					header: {En: name, He: name}
+				});
 				if (d3 != null)
 					self.render(response)
 				else
@@ -244,9 +262,8 @@ FtreeViewController.prototype = {
 		new_divs.classed('node', true)
 			.classed('new', true)
 			.on("click", function (d) { 
-				var params = {node_id: d.id, tree_number: self.treeNumber}; 
-				self.$state.transitionTo('ftree-view', params, {notify: false});
-			    self.load(params);
+				self.$state.go('ftree-view',
+							   {tree_number: self.treeNumber, node_id: d.id});
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
 			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
@@ -439,4 +456,4 @@ FtreeViewController.prototype = {
 	}
 };
 
-angular.module('main').controller('FtreeViewController', ['$http', '$window', '$document', '$rootScope', '$scope', '$state', '$stateParams', 'apiClient', 'ftreeLayout', FtreeViewController]);
+angular.module('main').controller('FtreeViewController', ['$http', '$window', '$document', '$rootScope', '$scope', '$state', '$stateParams', 'apiClient', 'recentlyViewed', 'ftreeLayout', FtreeViewController]);

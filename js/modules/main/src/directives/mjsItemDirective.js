@@ -5,7 +5,6 @@ angular.module('main').directive('mjsItem', function() {
 			item: '=',
 			nonDraggable: '='
 		},
-		controller: 'MjsItemController as mjsItemCtrl',
 		templateUrl: 'templates/main/mjs/mjs-item.html'
 	};
 });

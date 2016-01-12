@@ -24,6 +24,10 @@ angular.module('main').
 				_sub_header_state = 'general-search';
 			},
 
+			show_recent: function () {
+				_sub_header_state = 'recently-viewed';
+			},
+
 			query: ""
 		}
 

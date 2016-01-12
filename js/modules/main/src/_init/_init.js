@@ -103,7 +103,14 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'ftree-view',
             url: '/ftree_view/:tree_number/:node_id',
             controller: 'FtreeViewController as ftreeViewCtrl',
-            templateUrl: 'templates/main/ftrees/ftree-item.html'
+            templateUrl: 'templates/main/ftrees/ftree-item.html',
+            onEnter: ['header', function(header) {
+                header.show_recent();
+				header.hide_main = true;
+            }],
+            onExit: ['header', function(header) {
+				header.hide_main = false;
+            }]
         },
 
 

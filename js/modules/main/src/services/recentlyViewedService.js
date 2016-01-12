@@ -26,22 +26,21 @@ angular.module('main').
 
 		var recently_viewed = {
 			items: JSON.parse(recent.getItem('recentlyViewed')) || [],
-			
+
 			put: function(item) {
+				item._id = JSON.stringify(item.params);
 				var recent_item = this.items.filter(function(recent_item) {
 					return item._id == recent_item._id;
 				})[0];
-				if (recent_item) {
-					var index = this.items.indexOf(recent_item);
-					this.items.splice(index, 1);
-				}
-				else if (this.items.length > max_items) {
-					this.items.splice(0, 1);
+				if (!recent_item) {
+					this.items.push(item);
+
+					if (this.items.length > max_items) {
+						this.items.splice(0, 1);
+					}
+					recent.setItem('recentlyViewed', JSON.stringify(this.items));
 				}
 
-				this.items.push(item);
-				
-				recent.setItem('recentlyViewed', JSON.stringify(this.items));
 			},
 
 			clear: function() {
