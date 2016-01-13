@@ -6,7 +6,7 @@
         width: 100%;
         height: 100%;
         position: relative;
-        border: solid 1px black;
+        // border: solid 1px black;
     }
 
     svg {
@@ -105,7 +105,6 @@
 
 		.dates {
 			display: block;
-			background-color: $blue4;
 			word-spacing: 100px;
 			text-align: right;
 			width: 94px;
@@ -131,19 +130,17 @@
 			font-weight: 700;
 		}
 
-		.node[sex="F"] {
-			.dates {
-				background-color: $red4;
-			}
-		}
     }
-
     .node[sex="F"] {
         background-color: $red6;
 
         .avatar {
 			background-position: -197px -473px;
 		}
+
+        .dates {
+            background-color: $red4;
+        }
     }
 
     .node[sex="M"] {
@@ -152,7 +149,9 @@
         .avatar {
 			background-position: -197px -404px;
 		}
-
+        .dates {
+            background-color: $blue4;
+        }
     }
 
     .node > span {
@@ -275,7 +274,7 @@
 
 #ftree-item-container {
 	width: 100%;
-	padding: 10px 0 0;
+	padding: 0;
 	background-color: #ffffff;
 
 	@at-root #ftree-item {
@@ -285,162 +284,93 @@
 		background: #ffffff;
 		@include border-radius(4px);
 
-		/*.ftree-title {
+		.ftree-title {
 			position: relative;
-			display: inline-block;
-			width: 726px;
-			height: 48px; 
-			font-size: 22px;
-			padding: 9px 46px  20px;
+			display: block;
+			width: 100%;
+			height: 50px; 
 			border-bottom: 2px solid #f5f5f5;
-			background-color: #999999;
-			color: #ffffff;
-			top: -12px;
+			background-color: $gray6;
+			color: black;
+            padding: 0 0 0 20px;
 
-			.en & {
-				padding: 9px 46px  20px;
-			}
-			.he & {
-				padding: 9px auto 20px 46px;
-			}
+            .pull-right {margin-top: 0; position: relative; height: inherit; }
+            .en & .pull-right { float: right; }
+            .he & .pull-right { float: left; }
 
-			&:after {
-				content:'';
-				position: absolute;
-				top:0;
-				bottom:0;
-				width:0px;
-				height:0px;
-				border-top: 46px solid #999999;
+
+            h2 {
+                background-color: white;
+                color: black;
+                font-weight: bold;
+                width: 4em;
+                font-size: 12px;
+                text-align: center;
+            }
+            h3 {
+                margin:0;
+                font-weight: normal;
+                font-size: 10px;
+            }
+
+			h2, h3, .icon-container, .mjs-widget-wrapper  {
+				display: inline-block;
+                @include vertical-align();
 
 				.en & {
-					right: -30px;    
-					border-right: 30px solid transparent; 
+					float: left; 
+                    margin-right: 14px;
 				}
 
 				.he & {
-					left: -30px;    
-					border-left: 30px solid transparent; 	
+					float:right;
+                    margin-left: 14px;
 				}
 			}
 
 			&__tree-icon {
-				position: absolute;
-				width: 29px;
-				height: 40px;
-				top: 4px;
-
-				.en & {
-					left: 9px;
-				}
-
-				.he & {
-					right: 9px;
-				}
+				width: 15px;
+                height: 18px;
 			}
 
-			&__print-icon {
-				position: absolute;
-				width: 31px;
-				height: 31px;
-  				top: 8px;	
-
-  				.en & {
-  					right: 138px;
-  				}
-  				.he & {
-  					left: 138px;
-  				}
-
-				.tree-view & {
-					display: none;
-				}
-				.relocate & {
-					.en & {
-						right: 23px;
-					}
-					.he & {
-						left: 23px;
-					}
-				}
-
+			&__people-icon {
+				width: 18px;
+                height: 18px;
 			}
-
 			&__back {
-				position: absolute;
+                float: left;
 			  	background-color: #bf311a;
-				width: 125px;
+				width: 164px;
 				height: 100%;
-				top: 0px;
-
-				.en & {
-					right: 0px;
-				}
-				.he & {
-					left: 0px;
-				}
+                color: #ffffff;
+                height: 48px;
+                padding-left: 7px;
 
 				&:hover {
 					background-color: #666666;
+                    /*
 					&:after {
 						border-top: 46px solid #666666;
 					}
-				}
-
-				&:after {
-					content:'';
-					position: absolute;
-					top:0;
-					bottom:0;
-					width:0px;
-					height:0px;
-					border-top: 46px solid #bf311a;
-					z-index: 1;
-
-					.en & {
-						right: -30px;    
-						border-right: 30px solid transparent; 
-					}
-
-					.he & {
-						left: -30px;    
-						border-left: 30px solid transparent; 	
-					}
+                    */
 				}
 
 				.tree-view & {
 					display: none;
 				}
 
-				&__back-icon {
-					position: relative;
+				&-icon {
+                    @include vertical-align();
 					width: 31px;
 					height: 30px;
-  					top: 7px;
-
-  					.en & {
-  						right: -7px;
-  					}
-  					.he & {
-  						left: -7px;
-  					}
 				}
-				&__back-text {
-					position: relative;
-					font-size: 33px;
-					color: #ffffff;
-					top: -28px;
-
-					.en & {
-						right: -47px;
-					}
-					.he & {
-						left: -47px;
-					}
-				}
+                h3 {
+                    @include vertical-align();
+                    font-size: 24px;
+                }
 
 			}
-		}*/
+		}
 
 		@at-root #mjs-widget-container {
 			display: inline-block;
@@ -510,7 +440,6 @@
 		}
 
 		@at-root #ftree-layout-container {
-			padding: 70px 130px 25px;
 			overflow: auto;
 
 			@at-root #ftree-layout  {

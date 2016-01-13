@@ -15,10 +15,11 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 	this.layoutEngine = ftreeLayout;
 	this.elements = {};
 	this.vertices = {};
-	this.treeNumber = $stateParams.tree_number;
+	this.tree_number = $stateParams.tree_number;
+	this.tree = null;
 
 	// TODO: get the size from the dom
-	this.layoutEngine.setOptions(new Tuple(800, 500),  {
+	this.layoutEngine.setOptions(new Tuple(1150, 600),  {
         // - individualSize: (w,h)
         individualSize: new Tuple(214,66),
         // - parentSize: (w,h)
@@ -87,7 +88,7 @@ FtreeViewController.prototype = {
 			apiUrl = this.apiClient.base_url+
 				['', 'fwalk',  params.tree_number, params.node_id].join('/');
 
-		this.$http.get(apiUrl, {
+		self.$http.get(apiUrl, {
 			cache: true
 	  		})
 			.success(function (response) {
@@ -98,12 +99,19 @@ FtreeViewController.prototype = {
 					state: 'ftree-view',
 					header: {En: name, He: name}
 				});
+				self.tree_number = params.tree_number;
+				if ((self.tree === null) || (self.tree.tree_num != self.tree_number)){
+					self.$http.get(self.apiClient.base_url+ ['', 'fwalk',  self.tree_number, "root"].join('/'), {
+						cache: true }).success(function (r) { self.tree = r })
+				};
+
 				if (d3 != null)
 					self.render(response)
 				else
 					console.log("where's d3?")
 			})
 			.error(function (response) {
+				debugger;
 				console.log('error walking the tree');
 				console.log(response); 
 			});
@@ -263,7 +271,7 @@ FtreeViewController.prototype = {
 			.classed('new', true)
 			.on("click", function (d) { 
 				self.$state.go('ftree-view',
-							   {tree_number: self.treeNumber, node_id: d.id});
+							   {tree_number: self.tree_number, node_id: d.id});
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
 			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
