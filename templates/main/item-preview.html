@@ -22,7 +22,7 @@
 				</div>
 				<div ng-switch-default>
 					<div class="header" 
-						ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
+						ng-class="{'header--nothumb': !(previewData.thumbnail.data), 'isExtResult': isExtResult}">
 						<en>{{previewData.Header.En}}</en>
 						<he>{{previewData.Header.He}}</he>
 					</div>
@@ -37,8 +37,14 @@
 				</div>
 			</ng-switch>
 			<div ng-if="isExtResult" class="europeana-label">
-				<en>From: Europeana</en>
-				<he>Europeana</he>
+				<span ng-if="europeana">
+					<en>Europeana</en>
+					<he>Europeana</he>
+				</span>
+				<span ng-if="cjh">
+					<en>Center for Jewish History</en>
+					<he>Center for Jewish History</he>
+				</span>
 			</div>
 			<item-type type="itemPreviewController.item_type"
 	   			   image="previewData.thumbnail.data"> 
