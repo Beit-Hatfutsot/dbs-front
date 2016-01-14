@@ -1,34 +1,49 @@
 <div id="ftree-item-container">
 	<div id="ftree-item">
 		<div class="ftree-title">
-			<icon class="ftree-title__tree-icon" position="[-84, -439]"></icon>
-			<!-- <en>{{ftreeItemCtrl.individual.last_name + " "}}Family Tree - {{ftreeItemCtrl.tree_number}}</en>
-			<he>{{ftreeItemCtrl.individual.last_name + " "}}עץ המשפחה - {{ftreeItemCtrl.tree_number}}</he> -->
-			<icon class="ftree-title__print-icon" position="[-22, -722]" ng-click="ftreeItemCtrl.print()" ng-class="{'relocate': !ftreeItemCtrl.previous_state}" hover-offset="[-1, 37]"></icon>
-			<span ng-if="ftreeItemCtrl.from_ftree_view">
-				<div class="ftree-title__back" ng-click="ftreeItemCtrl.back()">
-					<icon class="ftree-title__back__back-icon" position="[-313, -735]" hover-offset="[0, 35]"></icon>
-					<span class="ftree-title__back__back-text"><en>Back</en><he>חזור</he></span>	
-				</div>
-			</span>
+			<icon class="ftree-title__people-icon" position="[-166, -451]"></icon>
+      <h3>People in this tree:</h3>
+      <h2>{{ctrl.tree.num_nodes || "..." }}</h2>
+			<icon class="ftree-title__tree-icon" position="[-145, -451]"></icon>
+      <h3>Tree ID number:</h3>
+      <h2>{{ctrl.tree_number}}</h2>
+      <h3>This tree uploaded in:</h3>
+      <h2>{{ctrl.tree.date|date:'yyyy' || "..."}}</h2>
+
+      <div class="pull-right">
+        <h3>Share this item:</h3>
+        <icon class="facebook-icon" position="[-271, -443]"></icon>
+        <icon class="twitter-icon" position="[-305, -443]"></icon>
+        <icon class="mail-icon" position="[-340, -443]"></icon>
+			  <mjs-widget item="ctrl.individual"></mjs-widget>
+        <div class="ftree-title__back" ng-click="ctrl.$state.go('ftrees', ctrl.lastSearchParams )">
+          <icon class="ftree-title__back-icon" position="[-313, -700]"></icon>
+          <h3>
+            <en>Exit Tree</en>
+            <he>ליציאה מהעץ</he>
+          </h3>
+        </div>
+      </div>
+
 		</div>
-		<div id="mjs-widget-container">
-			<mjs-widget item="ftreeItemCtrl.individual"></mjs-widget>
-		</div>
-		<div class="babylonLogo" ng-if="ftreeItemCtrl.get_contributor_path()">
+		<div class="babylonLogo" ng-if="ctrl.get_contributor_path()">
 			<span class="babylonLogo__desc">
 				<en>Family tree contributed by</en>
 				<he>עץ משפחה נתרם על ידי</he>
 			</span>
-			<img ng-src="{{ftreeItemCtrl.get_contributor_path()}}">
+			<img ng-src="{{ctrl.get_contributor_path()}}">
 		</div>
-		<div ng-if="ftreeItemCtrl.individual_count">
-			This tree contains {{ftreeItemCtrl.individual_count}} individuals, click on any of them to navigate the tree.
+		<div ng-if="ctrl.individual_count">
+			This tree contains {{ctrl.individual_count}} individuals, click on any of them to navigate the tree.
 		</div>
 		<div id="ftree-layout-container">
-			<div id="ftree-layout">
-        		<svg class="vertices"></svg>
-        		<div class="nodes"></div>
+      <div id="ftree-layout" ng-init="ctrl.mousePressed=false"
+        ng-mousedown="ctrl.mouseDown($event)"
+        ng-mouseup="ctrl.mouseUp($event)"
+        ng-mousemove="ctrl.pan($event)">
+        <svg class="vertices"></svg>
+        <div class="nodes"></div>
+				<!-- subtree individual="ctrl.individual"></subtree -->
 			</div>
 		</div>
 	</div>

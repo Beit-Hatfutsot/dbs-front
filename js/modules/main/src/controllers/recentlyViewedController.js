@@ -61,9 +61,7 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
 
 RecentlyViewedController.prototype = {
 	goto_item: function(item_data) {
-    	var collection_name = this.itemTypeMap.get_collection_name(item_data);;
-        this.$state.go('item-view', {collection: collection_name,
-					   			     id: item_data._id});
+        this.$state.go(item_data.state, item_data.params);
     },
 
     scroll_left: function() {

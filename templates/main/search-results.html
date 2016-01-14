@@ -93,7 +93,11 @@
                 <div class="spinner" ng-if="generalSearchCtrl.loading && generalSearchCtrl.query">
                     <img src="images/BH-Loading.gif">
                 </div>
-                <item-preview ng-repeat="r_data in generalSearchCtrl.results.hits" preview-data="r_data._source"></item-preview> 
+                <item-preview
+                    item-source="bh"
+                    ng-repeat="r_data in generalSearchCtrl.results.hits"
+                    preview-data="r_data._source">
+                </item-preview>
                 <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
                 <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                     <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
@@ -119,7 +123,11 @@
                 <div class="spinner" ng-if="generalSearchCtrl.loading_cjh && generalSearchCtrl.query">
                     <img src="images/BH-Loading.gif">
                 </div>
-                <item-preview ng-repeat="r_data in generalSearchCtrl.cjh_results" preview-data="r_data" is-ext-result = "true" cjh = "true"></item-preview> 
+                <item-preview
+                    item-source="cjh"
+                    ng-repeat="r_data in generalSearchCtrl.cjh_results"
+                    preview-data="r_data">
+                </item-preview>
                 <div class="loader" ng-click="generalSearchCtrl.fetch_more_cjh()" ng-if="generalSearchCtrl.cjh_total>generalSearchCtrl.cjh_results.length">
                     <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                     <div class="loader-desc ext">
@@ -140,7 +148,11 @@
                 <div class="spinner" ng-if="generalSearchCtrl.loading_eurp">
                     <img src="images/BH-Loading.gif">
                 </div>
-                <item-preview ng-repeat="r_data in generalSearchCtrl.eurp_results" preview-data="r_data" is-ext-result = "true" europeana = "true"></item-preview> 
+                <item-preview
+                    item-source="europeana"
+                    ng-repeat="r_data in generalSearchCtrl.eurp_results"
+                    preview-data="r_data">
+                </item-preview>
                 <div class="loader" ng-click="generalSearchCtrl.fetch_more_eurp()" ng-if="generalSearchCtrl.eurp_total>generalSearchCtrl.eurp_results.length">
                 <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                 <div class="loader-desc ext">

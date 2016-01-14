@@ -70,8 +70,10 @@ html {
 				}
 			}		
 
+            @at-root #main-header-container {
+                height: $header-height + $notification-bar-height;
+            }
 			@at-root #below-header {
-				padding-top: $header-height + $notification-bar-height;
 				padding-bottom: $footer-height;
 				min-height: 100%;
 

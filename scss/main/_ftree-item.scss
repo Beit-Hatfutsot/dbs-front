@@ -1,6 +1,294 @@
+#ftree-layout-container {
+
+    height: 600px;
+
+    >div {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        // border: solid 1px black;
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .clickable {
+        cursor: crosshair;
+    }
+    .node {
+        position: absolute;
+        @include border-radius(50px);
+        transition-property: opacity, height, width, left, top, font-size;
+        transition-duration: 0.5s;
+        transition-timing-function: linear;
+        overflow: hidden;
+        color: $gray3;
+        font-weight: 600;
+
+        .dates {
+        	display: none;
+        }
+
+        .avatar {
+			width: 59px;
+			height: 59px;
+			background: url('/images/icons.png');
+
+			.en & {
+				float: left;
+			}
+			.he & {
+				float: right;
+			}
+    	}
+
+      	.name {
+
+			.en & {
+				float: right;
+			}
+			.he & {
+				float: left;
+			}
+
+			p {
+				position: absolute;
+				top: 50%;
+    			transform: translate(0, -50%);
+   				margin: 0;
+			}
+		}
+    }
+
+    .node[role="child"], .node[role="grandparent"], .node[role="sibling"],
+    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepsibling"] {
+
+		.avatar {
+			zoom: 0.4;
+            -moz-transform: scale(0.4);
+            -moz-transform-origin: 1px 1px;
+		}
+    }
+    .node[role="child"], .node[role="grandparent"], .node[role="sibling"] {
+
+	    .name {
+	    	width: 70%;
+			font-size: 10px;
+			font-weight: 600;
+		}
+	}
+
+    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"] {
+        .name {
+            display: none;
+        }
+    }
+    .node[role="stepparent"], .node[role="parent"], .node[role="partner"]  {
+		.avatar {
+			zoom: 0.9;
+            -moz-transform: scale(0.9);
+            -moz-transform-origin: 1px 1px;
+		}
+    }
+	.node[role="parent"], .node[role="partner"] {
+		.name {
+	    	width: 60%;
+			font-size: 12px;
+		}
+	}
+
+    .node[role="individual"] {
+    	border: 5px solid $yellow4;
+		z-index: 2;
+        cursor: help;
+
+		.dates {
+			display: block;
+			word-spacing: 100px;
+			text-align: right;
+			width: 94px;
+			font-size: 11px;
+			position: absolute;
+			height: 100%;
+			line-height: 2.5;
+			top: 0;
+			padding: 2px 10px;
+			z-index: -1;
+
+			.en & {
+				left: 0;
+			}
+			.he & {
+				right: 0;
+			}
+		}
+
+		.name {
+			font-size: 14px;
+			width: 104px;
+			font-weight: 700;
+		}
+
+    }
+    .node, .node[sex="U"] {
+        background-color: $gray6;
+
+        .avatar {
+			background-position: -197px -541px;
+		}
+
+        .dates {
+            background-color: $gray4;
+        }
+    }
+
+    .node[sex="F"] {
+        background-color: $red6;
+
+        .avatar {
+			background-position: -197px -473px;
+		}
+
+        .dates {
+            background-color: $red4;
+        }
+    }
+
+    .node[sex="M"] {
+        background-color: $blue6;
+
+        .avatar {
+			background-position: -197px -404px;
+		}
+        .dates {
+            background-color: $blue4;
+        }
+    }
+
+    .node > span {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+.individual, .parent, .partner, .sibling, .child, .grandparent, .grandchild {
+			@include border-radius(50px);
+			z-index: 1;
+		
+			/*&--female {
+				background-color: #f6e1de;
+			}*/
+
+			.notAlive {
+				position: absolute;
+				width: 20px;
+				height: 100%;
+				background-color: #000000;
+
+				.en & {
+					left: 32px;
+				}
+				.he & {
+					right: 32px;
+				}
+			}
+
+			&__more-info {
+			    position: relative;					
+
+				.en & {
+					left: 86px;
+				}
+				.he & {
+					right: 86px;
+				}
+
+				&.open {
+					.individual__more-info__person-info {
+						display: block;
+					}
+				}
+
+				&__icon {
+					position: absolute;
+					width: 11px;
+					height: 11px;	
+					top: 22px;	
+					@include hover-pointer();
+
+					.en & {
+						left: 0px;
+					}
+					.he & {
+						right: 0px;
+					}
+				}
+
+				&__person-info {
+					position: relative;
+					z-index: -1;
+					font-weight: 10px;
+					display: none;
+					width: 100%;
+					color: #666666;
+					background-color: #fee1b5;
+					border-bottom: 5px solid #fbb034;
+					top: 8px;
+					padding-top: 30px;
+					padding-bottom: 10px;
+					overflow: hidden;
+
+					.en & {
+						right: 85px;
+						padding-left: 10px;
+					}
+					.he & {
+						left: 85px;
+						padding-right: 10px;
+					}
+					&__close-button {
+						position: absolute;
+						width: 20px;
+						height: 20px;
+						background-color: #fbb034;
+						@include border-radius(10px);
+
+						.en & {
+							left: 46%;
+						}
+						.he & {
+							right: 46%;
+						}
+					}
+					&__arrow-up {
+						position: absolute;
+						width: 0; 
+						height: 0; 
+						border-left: 7px solid transparent;
+						border-right: 7px solid transparent;
+						border-bottom: 7px solid #ffffff;
+						bottom: 0px;
+
+						.en & {
+							left: 48%;
+						}
+						.he & {
+							right: 47%;
+						}
+					}
+				}
+			}
+
+		}
+
+}
+
 #ftree-item-container {
 	width: 100%;
-	padding: 10px 0 0;
+	padding: 0;
+	background-color: #ffffff;
 
 	@at-root #ftree-item {
 		position: relative;
@@ -9,260 +297,90 @@
 		background: #ffffff;
 		@include border-radius(4px);
 
-		.rings {
-			position: relative;
-			display: inline-block;
-			vertical-align: middle;
-			width: 12px;
-			height: 12px;
-			z-index: 100;
-			top: 20px;
-
-			&.open {
-				.rings__marriageInfo {
-					display: block;
-					position: absolute;
-					top: 67px;
-
-					.en & {
-						right: -96px;
-					}
-					.he & {
-						left: -96px;
-					}
-				}
-			}
-
-			&__no-details {
-				position: relative;
-				width: 12px;
-				height: 12px;
-				background-color: #999999;
-				@include border-radius(7px);
-			}
-
-			&__icon {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				@include translate(-50%, -50%);
-				width: 20px;
-				height: 20px;
-				@include hover-pointer();
-			}
-			&__marriageInfo {
-				position: relative;
-				display: none;
-				width: 210px;
-				color: #666666;
-				background-color: #fee1b5;
-				top: 55px;
-				border-bottom: 5px solid #fbb034;
-				padding: 10px;
-
-				&:before {
-					content: "";
-				    position: absolute;
-				    height: 0;
-				    width: 0;
-				    top: -47px;
-				    border-style: solid;
-			    	border-color: transparent transparent #fee1b5;
-			    	border-width: 0px 105px 47px;
-			    	.en & {
-			    		left: 0px;
-			    	}
-			    	.he & {
-			    		right: 0px;
-			    	}
-				}
-
-				&__close-button {
-					position: absolute;
-					width: 21px;
-					height: 15px;
-					background-color: #fbb034;
-					@include border-radius(8px);
-
-					.en & {
-						left: 46%;
-					}
-					.he & {
-						right: 46%;
-					}
-				}
-				&__arrow-up {
-					position: absolute;
-					width: 0; 
-					height: 0; 
-					border-left: 7px solid transparent;
-					border-right: 7px solid transparent;
-					border-bottom: 7px solid #ffffff;
-					bottom: 0px;
-
-					.en & {
-						left: 48%;
-					}
-					.he & {
-						right: 47%;
-					}
-				}
-			}
-		}
-
 		.ftree-title {
 			position: relative;
-			display: inline-block;
-			width: 726px;
-			height: 48px; 
-			font-size: 22px;
-			padding: 9px 46px  20px;
+			display: block;
+			width: 100%;
+			height: 50px; 
 			border-bottom: 2px solid #f5f5f5;
-			background-color: #999999;
-			color: #ffffff;
-			top: -12px;
+			background-color: $gray6;
+			color: black;
+            padding: 0 0 0 20px;
 
-			.en & {
-				padding: 9px 46px  20px;
-			}
-			.he & {
-				padding: 9px auto 20px 46px;
-			}
+            .pull-right {margin-top: 0; position: relative; height: inherit; }
+            .en & .pull-right { float: right; }
+            .he & .pull-right { float: left; }
 
-			&:after {
-				content:'';
-				position: absolute;
-				top:0;
-				bottom:0;
-				width:0px;
-				height:0px;
-				border-top: 46px solid #999999;
+
+            h2 {
+                background-color: white;
+                color: black;
+                font-weight: bold;
+                width: 4em;
+                font-size: 12px;
+                text-align: center;
+            }
+            h3 {
+                margin:0;
+                font-weight: normal;
+                font-size: 10px;
+            }
+
+			h2, h3, .icon-container, .mjs-widget-wrapper  {
+				display: inline-block;
+                @include vertical-align();
 
 				.en & {
-					right: -30px;    
-					border-right: 30px solid transparent; 
+					float: left; 
+                    margin-right: 14px;
 				}
 
 				.he & {
-					left: -30px;    
-					border-left: 30px solid transparent; 	
+					float:right;
+                    margin-left: 14px;
 				}
 			}
 
 			&__tree-icon {
-				position: absolute;
-				width: 29px;
-				height: 40px;
-				top: 4px;
-
-				.en & {
-					left: 9px;
-				}
-
-				.he & {
-					right: 9px;
-				}
+				width: 15px;
+                height: 18px;
 			}
 
-			&__print-icon {
-				position: absolute;
-				width: 31px;
-				height: 31px;
-  				top: 8px;	
-
-  				.en & {
-  					right: 138px;
-  				}
-  				.he & {
-  					left: 138px;
-  				}
-
-				.tree-view & {
-					display: none;
-				}
-				.relocate & {
-					.en & {
-						right: 23px;
-					}
-					.he & {
-						left: 23px;
-					}
-				}
-
+			&__people-icon {
+				width: 18px;
+                height: 18px;
 			}
-
 			&__back {
-				position: absolute;
+                float: left;
 			  	background-color: #bf311a;
-				width: 125px;
+				width: 164px;
 				height: 100%;
-				top: 0px;
-
-				.en & {
-					right: 0px;
-				}
-				.he & {
-					left: 0px;
-				}
+                color: #ffffff;
+                height: 48px;
+                padding-left: 7px;
 
 				&:hover {
 					background-color: #666666;
+                    /*
 					&:after {
 						border-top: 46px solid #666666;
 					}
-				}
-
-				&:after {
-					content:'';
-					position: absolute;
-					top:0;
-					bottom:0;
-					width:0px;
-					height:0px;
-					border-top: 46px solid #bf311a;
-					z-index: 1;
-
-					.en & {
-						right: -30px;    
-						border-right: 30px solid transparent; 
-					}
-
-					.he & {
-						left: -30px;    
-						border-left: 30px solid transparent; 	
-					}
+                    */
 				}
 
 				.tree-view & {
 					display: none;
 				}
 
-				&__back-icon {
-					position: relative;
+				&-icon {
+                    @include vertical-align();
 					width: 31px;
 					height: 30px;
-  					top: 7px;
-
-  					.en & {
-  						right: -7px;
-  					}
-  					.he & {
-  						left: -7px;
-  					}
 				}
-				&__back-text {
-					position: relative;
-					font-size: 33px;
-					color: #ffffff;
-					top: -28px;
-
-					.en & {
-						right: -47px;
-					}
-					.he & {
-						left: -47px;
-					}
-				}
+                h3 {
+                    @include vertical-align();
+                    font-size: 24px;
+                }
 
 			}
 		}
@@ -319,7 +437,7 @@
 				 	right: 21px;
 				 }
 			}
-			img {
+			.avatar {
 				position: absolute;
 				width: 107px;
 				height: auto;
@@ -335,13 +453,13 @@
 		}
 
 		@at-root #ftree-layout-container {
-			padding: 70px 130px 25px;
 			overflow: auto;
 
-			@at-root #ftree-layout {
-				white-space: nowrap;
-
-			}
+			@at-root #ftree-layout  {
+                overflow: hidden;
+                cursor: all-scroll;
+            }
 		}
 	}
 }
+

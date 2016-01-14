@@ -8,6 +8,7 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification, $
     this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
+	console.log($scope);
 };
 
 ItemPreviewCtrl.prototype = {

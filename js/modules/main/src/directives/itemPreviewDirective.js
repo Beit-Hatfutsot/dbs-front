@@ -6,9 +6,7 @@ angular.module('main').directive('itemPreview', function() {
 			previewData: '=',
 			hideText: '=',
 			removable: '=',
-			isExtResult: '=',
-			europeana: '=',
-			cjh: '='
+			itemSource: '@'
 		},
 		controller: 'ItemPreviewCtrl as itemPreviewController'
 	};

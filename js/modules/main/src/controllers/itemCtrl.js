@@ -65,7 +65,13 @@ ItemCtrl.prototype = {
 		this.item.get(this.$stateParams.collection, this.$stateParams.id).
 			then(function(item_data) {
 
-				self.recentlyViewed.put(item_data);
+				self.recentlyViewed.put(
+					{state: 'item-view',
+					 params: {id: item_data._id,
+							  collection: self.itemTypeMap.get_collection_name(item_data)},
+					 header: item_data.Header,
+					 thumbnail: item_data.thumbnail.data
+					});
 				self.item_data = item_data;
 				self.content_loaded = true;
 				self.item.get_items(item_data.related).
