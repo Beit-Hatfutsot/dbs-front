@@ -4,7 +4,8 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.$window = $window;
     this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'allResults';
     this.results = {hits: []};    
-    this.external_results = [];
+    this.eurp_results = [];
+    this.cjh_results = [];
     this.$modal = $modal;
     this.$location = $location;
     this.$http = $http;
@@ -12,9 +13,11 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     header.show_search_box();
     this.header = header;
     this.$scope = $scope;
-    this.external_total = '';
+    this.eurp_total = '';
+    this.cjh_total = '';
     this.loading = true;
-    this.loading_ext = true;
+    this.loading_eurp = true;
+    this.loading_cjh = true;
     this.google_query = "";
     this.langManager = langManager;
     this.query_words = [
@@ -85,26 +88,45 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
         });
 
         if(this.collection == 'allResults' || this.collection == 'media') {
-            $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14&start=1", {params: this.api_params_ext()})
+            $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=5&start=1", {params: this.api_params_eurp()})
             .success(function(r) {
-                self.external_total = r.totalResults;
-                self.push_ext_items(r);
-                self.loading_ext = false;
+                self.eurp_total = r.totalResults;
+                self.push_eurp_items(r);
+                self.loading_eurp = false;
             })
-        }
+
+            $http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
+            .success(function(r) {
+                self.cjh_total = r.response.numFound;
+                self.push_cjh_items(r);
+                self.loading_cjh = false;
+            })
+        };
     };
 }; 
         
 GeneralSearchController.prototype = {
 
-    push_ext_items: function(r) {
+    push_eurp_items: function(r) {
         if (r.items) {
             for (var i=0; i < r.items.length; i++) {
                 var item = r.items[i];
                 if (item.edmPreview)
-                    this.external_results.push({thumbnail: {data: item.edmPreview[0]}, UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+                    this.eurp_results.push({thumbnail: {data: item.edmPreview[0]}, UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
                 else 
-                    this.external_results.push({UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+                    this.eurp_results.push({UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+            }
+        }
+    },
+
+    push_cjh_items: function(r) {
+        if (r.response.docs) {
+            for (var i=0; i < r.response.docs.length; i++) {
+                var item = r.response.docs[i];
+                if (item.thumbnail)
+                    this.cjh_results.push({thumbnail: {data: item.thumbnail}, UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
+                else 
+                     this.cjh_results.push({UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
             }
         }
     },
@@ -132,23 +154,42 @@ GeneralSearchController.prototype = {
         });
     }, 
 
-    api_params_ext: function () {
+    api_params_eurp: function () {
         var params = {};
         params.query = this.header.query;
 
         if (this.collection == 'media')
             params.qf = 'TYPE:(IMAGE OR VIDEO)';
         
-        params.start = this.external_results.length;
+        params.start = this.eurp_results.length;
         return params;
     }, 
 
-    fetch_more_ext: function() {
+    api_params_cjh: function () {
+       var params = {};
+        params.q = this.header.query;
+
+        if (this.collection == 'media')
+            params.dtype = 'dtype: Photographs';
+        
+        params.start = this.cjh_results.length;
+        return params; 
+    },
+
+    fetch_more_eurp: function() {
         var query_string = this.query_string,
             self = this;
 
-        this.$http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=14", {params: this.api_params_ext()})
-        .success(function (r) { self.push_ext_items(r)});
+        this.$http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=9", {params: this.api_params_eurp()})
+        .success(function (r) { self.push_eurp_items(r)});
+
+    },
+
+    fetch_more_cjh: function() {
+        var query_string = this.query_string,
+            self = this;
+        this.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
+        .success(function (r) { self.push_cjh_items(r)});
 
     },
 

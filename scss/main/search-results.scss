@@ -6,6 +6,10 @@
     }
 }
 
+.link {
+    color: inherit;
+}
+
 #general-search-page {
     width: $view-width;
     margin: 0 auto;
@@ -32,8 +36,9 @@
         line-height: 18px;
         top: -20px;
         background-color: $yellow6;
-        padding: 10px 15px;
+        padding: 10px 12px;
         border-radius: 16px;
+        width: 300px;
         @include hover-pointer();
 
         .en & {
@@ -59,6 +64,10 @@
     .search-results-page {
         margin-top: 40px;
 
+        .bold {
+            font-weight: 700;
+        }
+
         .no-res-notif {
             color: $gray3;
             font-size: 22px;
@@ -71,10 +80,9 @@
             padding: 0 20px;
             font-size: 20px;
             color: #666;
-            font-weight: 700;
             display: table;
             position: relative;
-            margin-bottom: 20px;  
+            margin-bottom: 18px;  
 
             &:after {
                 position: absolute;
@@ -97,8 +105,14 @@
             }
         }
 
+        .db-results-exttitle {
+            color: $gray3;
+            font-size: 18px;
+            margin: 40px 36px 0;
+        }
+
         .item-preview-wrapper {
-            margin: 20px auto;
+            margin: 0 auto 20px;
 
             a {
                 text-decoration: none;
@@ -107,6 +121,12 @@
             .item-preview {
                 @extend %item-preview;
                 margin: 20px 37px;
+
+                    .header {
+                        &.isExtResult {
+                            color: $gray3;
+                        }
+                    }
 
                 &:hover {
                     .white-part1--thumbnail {
@@ -225,6 +245,7 @@
             }
 
             .loader {
+                position: relative;
                 display: inline-block;
                 width: 150px;
                 height: 150px;
@@ -237,20 +258,40 @@
                 @include box-shadow(0 0 6px 0 #999);
                 @include hover-pointer(); 
 
-                .add-sign {
-                    font-size: 85px;
+                .eye-icon {
+                    width: 66px;
+                    height: 39px;
+                    position: absolute;
+                    top: 30%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+
+                    &:hover {
+                        width: 72px;
+                        height: 56px;   
+                    }
                 }
 
                 .loader-desc {
-                    margin-top: -28px;
-                    color: $red3;
-                    font-size: 24px;
-                    line-height: 18px;
+                    color: $gray3;
+                    font-size: 16px;
+                    line-height: 16px;
+                    display: block;
+                    margin-top: 80px;
+
+                    .bold-part {
+                        font-size: 18px;
+                    }
+
+                    &.ext {
+                        color: $red3;
+                    }
 
                     .results-number {
-                        font-size: 16px;
+                        font-size: 14px;
                         font-weight: normal;
-                        color: #666;
+                        color: $gray3;
+                        display: block;
                     }
                 }
             }
