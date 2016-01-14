@@ -1,44 +1,27 @@
-<div class="db-results-title">
-    <en>Use your Google power:</en>
-    <he>השתמשו בכוחו של גוגל:</he>
+<div id="google-it">
+    <div class="no-res-notif">
+        <en>We couldn't find any match to <span class="cap-query">"{{generalSearchCtrl.query}}"</span>,<br/>check your spelling, try a different query or:</en>
+        <he>לא הצלחנו למצוא תוצאות עבור "{{generalSearchCtrl.query}}",<br/>בדקו שאין שגיאות כתיבה, חפשו שנית או:</he>
+    </div>
+    <div class="db-results-title">
+        <en>Use your Google power:</en>
+        <he>השתמשו בכוחו של גוגל:</he>
+    </div>
+    <label for="search-input" class="search-button-label">
+        <en>Use your query phrase, combined with one or more of the following key words on Google:</en>
+        <he>השתמשו במילים שחיפשתם, יחד עם מילה אחת או יותר מהמיליםשמוצגות בגוגל:</he>
+    </label>
+    <div class="google-search-box-wrapper">
+        <input id="search-input" ng-model="generalSearchCtrl.google_query" ng-keydown="generalSearchCtrl.google_search_on_enter($event)" autofocus type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
+        <ul class="google-key-words">
+            <li class="key-word" ng-repeat="query_word in generalSearchCtrl.query_words" ng-class="{'key-word--active' : query_word.selected}" ng-click="generalSearchCtrl.toggle_selected(query_word)">
+                <en>{{query_word.en}}</en>
+                <he>{{query_word.he}}</he>
+            </li>
+        </ul>
+        <button class="google-search-btn" ng-click="generalSearchCtrl.google_search()" ng-disabled="generalSearchCtrl.google_query.length < 2">
+            <en><a>Search this</a></en>
+            <he><a>חיפוש</a></he>
+        </button>
+    </div>
 </div>
-<label for="search-input" class="search-button-label">
-    <en>Use your query phrase, combined with one or more of the following key words on Google:</en>
-    <he>השתמשו במילים שחיפשתם, יחד עם מילה אחת או יותר מהמיליםשמוצגות בגוגל:</he>
-</label>
-<div class="gsearch-box-wrapper">
-    <input id="search-input" ng-model="generalSearchCtrl.header.query" ng-keydown="subHeaderCtrl.search_on_enter($event)" autofocus type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
-    <button class="search-button-back" ng-click="subHeaderCtrl.search()" ng-disabled="subHeaderCtrl.header.query.length < 2">
-        <icon  class="button" alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
-    </button>
-</div>
-<ul class="google-key-words">
-    <li>
-        <en>Jewish</en>
-        <he>יהודים</he>
-    </li>
-    <li>
-        <en>Jews</en>
-        <he>יהודי</he>
-    </li>
-    <li>
-        <en>Judah</en>
-        <he>ישראל</he>
-    </li>
-     <li>
-        <en>Jewish</en>
-        <he>דגתכךדכ</he>
-    </li>
-    <li>
-        <en>Jews</en>
-        <he>גדגכדג</he>
-    </li>
-    <li>
-        <en>Judah</en>
-        <he>גדכדגכ</he>
-    </li>
-</ul>
-<button class="google-search">
-    <en><a>Search this</a></en>
-    <he><a>חיפוש</a></he>
-</button>

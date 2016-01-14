@@ -151,10 +151,10 @@ ItemCtrl.prototype = {
 		if (index == undefined) {
 			index = this._Index;
 		}
-		var body = document.getElementsByTagName('body')[0],
+		var body = angular.element(document.getElementsByTagName('body')[0]),
 			gallery = this.item_data;
 
-		body.addClassName('backdrop');
+		body.addClass('backdrop');
 	    var authModalInstance = this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
