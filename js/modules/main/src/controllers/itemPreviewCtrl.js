@@ -5,10 +5,24 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification, $
     this.$scope = $scope;
     this.notification = notification;
     this.item_string = itemTypeMap.get_item_string($scope.previewData);
-    this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
-	console.log($scope);
+	var unitType = $scope.previewData.UnitType;
+	this.item_type = 'unknown';
+	try {
+		unitType.every(function (t) {
+			var m = itemTypeMap.get_type(t);
+			if ((m !== undefined) && (m != 'unknown')) {
+				this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+				return false
+			}
+			return true
+		});
+
+	}
+	catch (e) {
+		this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+	}
 };
 
 ItemPreviewCtrl.prototype = {
