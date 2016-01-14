@@ -14,6 +14,9 @@
         height: 100%;
     }
 
+    .clickable {
+        cursor: crosshair;
+    }
     .node {
         position: absolute;
         @include border-radius(50px);
@@ -23,7 +26,6 @@
         overflow: hidden;
         color: $gray3;
         font-weight: 600;
-        cursor: crosshair;
 
         .dates {
         	display: none;
@@ -131,6 +133,18 @@
 		}
 
     }
+    .node, .node[sex="U"] {
+        background-color: $gray6;
+
+        .avatar {
+			background-position: -197px -541px;
+		}
+
+        .dates {
+            background-color: $gray4;
+        }
+    }
+
     .node[sex="F"] {
         background-color: $red6;
 
