@@ -48,7 +48,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
         // - inlawsMargins: (horizontal,vertical,top)
         inlawMargin: { horizontal:20, vertical:40, top:90 },
         // - siblingMargin: (horizontal,vertical,right)
-        siblingMargin: { horizontal:10, vertical:25, right:30, top: -50 },
+        siblingMargin: { horizontal:10, vertical:28, right:30, top: -50 },
     });
 	/* TODO: dynamiclly load d3
     var scriptTag = document[0].createElement('script');
@@ -367,7 +367,7 @@ FtreeViewController.prototype = {
 			midpoint += p.ofs;
 			// if ((p.class=="grandchild") || (p.class=="sibling"))
 			if ((p.class=="grandchild"))
-				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y], [p.end.x,midpoint], [p.end.x, p.end.y]]
+				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-13], [p.end.x,midpoint], [p.end.x, p.end.y]]
 			else
 				points =[ [p.start.x, p.start.y], [p.start.x, midpoint], [p.end.x,midpoint], [p.end.x, p.end.y]];
 			
@@ -386,7 +386,7 @@ FtreeViewController.prototype = {
 
 		new_lines.attr('class','vertex new')
 					   .style('opacity',0)
-					   .style('stroke','#666666')
+					   .style('stroke','#aaaaaa')
 					   .style('stroke-width',2)
 					   .style('fill','none')
 					   .attr('d', function(d) { return lineFunction(d); })

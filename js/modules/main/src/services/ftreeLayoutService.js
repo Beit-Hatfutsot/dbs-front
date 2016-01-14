@@ -117,7 +117,7 @@ angular.module('main').service('ftreeLayout', function() {
 					}
 					left += o.parentSize.x + o.parentMargin.horizontal;
 				});
-				this.midpoints.push(node.pos.y - o.parentMargin.bottom - o.parentMargin.vertical/2 );
+				this.midpoints.push(node.pos.y + node.size.y/2 - o.parentMargin.bottom - o.parentMargin.vertical/2 );
 				var dir = -1,
 					left = center.x - box.x/2 - o.stepparentSize.x - o.parentMargin.horizontal,
 					epOffset = (node.parents[0].partners.length-2) * 5;
@@ -171,6 +171,7 @@ angular.module('main').service('ftreeLayout', function() {
 						numInlaws += child.partners.length;
 					})
 				})
+
 				var childLeft, childTop, dir,
 					childMarginX = o.childMargin.horizontal,
 					childrenBoxWidth = o.childSize.x*numChildren + (o.inlawMargin.horizontal + o.inlawSize.x)*numInlaws + childMarginX*(numChildren-1);
@@ -186,6 +187,11 @@ angular.module('main').service('ftreeLayout', function() {
 					dir = 0;
 					childTop = node.pos.y + node.size.y + o.childMargin.top;
 				}
+				if (numChildren > 0)
+				{
+					this.midpoints.push((node.pos.y+node.size.y + childTop) / 2);
+				}
+
 				childLeft = center.x - childrenBoxWidth/2;
 
 				node.partners.forEach(function (partner, _partner) {
