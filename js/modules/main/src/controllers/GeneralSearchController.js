@@ -170,7 +170,7 @@ GeneralSearchController.prototype = {
         params.q = this.header.query;
 
         if (this.collection == 'media')
-            params.dtype = 'dtype: Photographs';
+			params.q = params.q.concat(' dtype: Photographs');
         
         params.start = this.cjh_results.length;
         return params; 
