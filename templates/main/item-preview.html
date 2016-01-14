@@ -1,4 +1,4 @@
-<a ng-href="{{itemPreviewController.get_item_url(previewData)}}">
+<a ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='bh'? '_self' : '_blank'}}">
 	<div class="item-preview">
 		<div class="thumbnail" ng-if="previewData.thumbnail.data">
 			<img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
