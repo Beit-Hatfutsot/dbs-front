@@ -16,7 +16,7 @@ angular.module('main').service('ftreeLayout', function() {
 
 		function layoutCluster(cluster, args) {
 			if (cluster === undefined)
-				return
+				return;
 
 			var lastChild = cluster.length - 1,
 				dir = -1,
@@ -65,13 +65,15 @@ angular.module('main').service('ftreeLayout', function() {
 		var parentHash = {};
 		var stepparentHash = {};
 		// layout the siblings - step siblings not included
-		var topRight = layoutCluster (node.siblings, {
-			childMargin: o.siblingMargin,
-			childSize: o.siblingSize,
-			topRight: new Tuple(node.pos.x - o.siblingMargin.horizontal,
-								node.pos.y),
-			collapseTo: node
-		});
+		var siblingsTopRight = new Tuple(node.pos.x - o.siblingMargin.horizontal,
+										 node.pos.y);
+		if (node.siblings.length > 0)
+		    siblingsTopRight  = layoutCluster (node.siblings, {
+				childMargin: o.siblingMargin,
+				childSize: o.siblingSize,
+				topRight: siblingsTopRight,
+				collapseTo: node
+			});
 		if ( node.parents ) {
 			var grandparentRatio = o.parentSize.x/(o.parentMargin.horizontal + o.parentSize.x*2),
 				numParents = node.parents.length;
@@ -137,12 +139,13 @@ angular.module('main').service('ftreeLayout', function() {
 								stepparent.spouse_ep.y += epOffset;
 								stepparent.spouse_ofs = epOffset;
 								// layout the step siblings
-								topRight = layoutCluster (stepparent.children, {
-									childMargin: o.siblingMargin,
-									childSize: o.stepsiblingSize,
-									topRight: topRight,
-									collapseTo: stepparent
-								});
+								if (stepparent.children)
+									siblingsTopRight = layoutCluster (stepparent.children, {
+										childMargin: o.siblingMargin,
+										childSize: o.stepsiblingSize,
+										topRight: siblingsTopRight,
+										collapseTo: stepparent
+									});
 								left += dir*(o.stepparentSize.x + o.parentMargin.horizontal);
 								epOffset += dir*5;
 							}
