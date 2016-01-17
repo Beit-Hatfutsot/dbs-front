@@ -179,24 +179,6 @@
 .individual, .parent, .partner, .sibling, .child, .grandparent, .grandchild {
 			@include border-radius(50px);
 			z-index: 1;
-		
-			/*&--female {
-				background-color: #f6e1de;
-			}*/
-
-			.notAlive {
-				position: absolute;
-				width: 20px;
-				height: 100%;
-				background-color: #000000;
-
-				.en & {
-					left: 32px;
-				}
-				.he & {
-					right: 32px;
-				}
-			}
 
 			&__more-info {
 			    position: relative;					

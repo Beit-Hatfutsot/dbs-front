@@ -126,6 +126,7 @@ FtreeViewController.prototype = {
 				id: id,
 				sex: node.sex,
 				name: node.name,
+				deceased: node.deceased,
 				birth_year: node.birth_year,
 				death_year: node.death_year
 			}
@@ -274,6 +275,7 @@ FtreeViewController.prototype = {
 		new_divs.classed('node', true)
 			.classed('new', true)
 			.classed('clickable', function (d) { return d.id !== undefined; })
+			.classed('deceased', function (d) { return d.deceased; })
 			.on("click", function (d) {
 				if (d.id)
 					self.$state.go('ftree-view',
