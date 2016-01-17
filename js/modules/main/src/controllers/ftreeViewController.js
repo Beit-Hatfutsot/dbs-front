@@ -79,8 +79,24 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 
 FtreeViewController.prototype = {
 
-	get_fname: function(full_name) {
-		return full_name[0];
+	get_full_name: function (d) {
+		try {
+			return d.name.join(" ");
+		}
+		catch (e) {
+			// something's wrong so we return a smile
+			return "\u263a";
+		}
+	},
+
+	get_fname: function(d) {
+		try {
+			return d.name[0];
+		}
+		catch (e) {
+			// something's wrong so we return a smile
+			return "\u263a";
+		}
 	},
 
 	load: function (params) {
@@ -93,7 +109,7 @@ FtreeViewController.prototype = {
 	  		})
 			.success(function (response) {
 			
-				var name = response.name.join(" ");
+				var name = self.get_full_name(response);
 				self.recentlyViewed.put({
 					params: params,
 					state: 'ftree-view',
@@ -283,15 +299,7 @@ FtreeViewController.prototype = {
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
 			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
-			.attr('title', function (d) { 
-				try {
-					return d.name.join(" ");
-				}
-				catch (e) {
-					// something's wrong so we return a smile
-					return "\u263a";
-				}
-			})
+			.attr('title', function (d) { return self.get_full_name(d); })
 			.style('width',function(d) { return px(d.size.x); })
 			.style('height',function(d) { return px(d.size.y); })
 
@@ -307,8 +315,8 @@ FtreeViewController.prototype = {
 			    .classed('name', true)
           .append('p', true).text(function(d) {
             return ['individual', 'partner', 'parent']
-				   .indexOf(d.class) >= 0 ? d.name.join(" "):
-					   				        self.get_fname(d.name)
+				   .indexOf(d.class) >= 0 ? self.get_full_name(d):
+					   				        self.get_fname(d)
             });
 
 
