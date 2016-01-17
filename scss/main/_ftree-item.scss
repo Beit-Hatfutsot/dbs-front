@@ -448,3 +448,34 @@
 	}
 }
 
+#ftree-node-details {
+    position: absolute;
+    right: 0;
+    top: 56px;
+    background-color: $yellow7;
+    width: 200px;
+    overflow: hidden; 
+    z-index: 10;
+    line-height: 18px;
+    padding: 0;
+    @include box-shadow(0 0 10px 0px $gray4);
+    .header {
+        padding: 0.2em;
+        background-color: $yellow5;
+        width: 100%;
+        line-height: 28px;
+        font-size: 120%;
+        font-weight: bold;
+    }
+    .body { 
+        padding: 0.2em;
+        height: 570px;
+        overflow: auto; 
+    }
+    h3 {
+        line-height: 10px;
+        font-size: inherit;
+        font-weight: bold;
+    }
+}
+

@@ -37,6 +37,7 @@
 			This tree contains {{ctrl.individual_count}} individuals, click on any of them to navigate the tree.
 		</div>
 		<div id="ftree-layout-container">
+      <ng-include src="'templates/main/ftrees/node-details.html'"></ng-include>
       <div id="ftree-layout" ng-init="ctrl.mousePressed=false"
         ng-mousedown="ctrl.mouseDown($event)"
         ng-mouseup="ctrl.mouseUp($event)"

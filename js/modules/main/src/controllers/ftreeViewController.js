@@ -69,6 +69,8 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 			  function(event, toState, toParams, fromState, fromParams){ 
 				  if (toState.name == 'ftree-view' && fromState.name == 'ftree-view') {
 					  event.preventDefault(); 
+					  d3.select('#ftree-node-details').style('display', 'block')
+					  self.detailsShown = true;
 					  self.$state.transitionTo('ftree-view', toParams, {notify: false});
 					  self.load(toParams);
 				  }
@@ -116,6 +118,7 @@ FtreeViewController.prototype = {
 					header: {En: name, He: name}
 				});
 				self.tree_number = params.tree_number;
+				self.node = response;
 				if ((self.tree === null) || (self.tree.tree_num != self.tree_number)){
 					self.$http.get(self.apiClient.base_url+ ['', 'fwalk',  self.tree_number, "root"].join('/'), {
 						cache: true }).success(function (r) { self.tree = r })
@@ -293,7 +296,13 @@ FtreeViewController.prototype = {
 			.classed('clickable', function (d) { return d.id !== undefined; })
 			.classed('deceased', function (d) { return d.deceased; })
 			.on("click", function (d) {
-				if (d.id)
+				if (d.class == 'individual') {
+					d3.select('#ftree-node-details').style('display',
+								self.detailsShown?'none':'block')
+					self.detailsShown = !self.detailsShown;
+				}
+
+				else if (d.id)
 					self.$state.go('ftree-view',
 							   {tree_number: self.tree_number, node_id: d.id});
 			})

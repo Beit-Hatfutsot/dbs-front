@@ -1,0 +1,57 @@
+<div id="ftree-node-details">
+  <div class="header">
+    Details:
+  </div>
+  <div class="body">
+    <h3 ng-show="ctrl.node.NAME_GIVN">
+      <en>First Name</en>
+    </h3>
+    {{ctrl.node.NAME_GIVN}}
+    <h3 ng-show="ctrl.node.NAME_SURN">
+      <en>Family Name</en>
+    </h3>
+    {{ctrl.node.NAME_SURN}}
+    <h3>
+      <en>Sex</en>
+    </h3>
+    <span ng-if="ctrl.node.SEX=='M'">
+      <en>Male</en>
+    </span>
+    <span ng-if="ctrl.node.SEX=='F'">
+      <en>Female</en>
+    </span>
+    <h3 ng-show="ctrl.node.BIRT_DATE">
+      <en>Date of Birth</en>
+    </h3>
+    {{ctrl.node.BIRT_DATE}}
+    <h3 ng-show="ctrl.node.BIRT_PLAC">
+      <en>Place of Birth</en>
+    </h3>
+    {{ctrl.node.BIRT_PLAC}}
+    <h3 ng-show="ctrl.node.MARR_DATE">
+      <en>Date of Marriage</en>
+    </h3>
+    {{ctrl.node.MARR_DATE}}
+    <h3 ng-show="ctrl.node.MARR_PLAC">
+      <en>Place of Marriage</en>
+    </h3>
+    {{ctrl.node.MARR_PLAC}}
+    <h3 ng-show="ctrl.node.DEAT_DATE">
+      <en>Date of Death</en>
+    </h3>
+    {{ctrl.node.DEAT_DATE}}
+    <h3 ng-show="ctrl.node.DEAT_PLAC">
+      <en>Place of Death</en>
+    </h3>
+    {{ctrl.node.DEAT_PLAC}}
+    <h3 ng-show="ctrl.node.OCCU">
+      <en>Occupation</en>
+    </h3>
+      {{ctrl.node.OCCU}}
+    <h3 ng-show="ctrl.node.NOTE">
+      <en>Notes</en>
+    </h3>
+      {{ctrl.node.NOTE}}
+    </div>
+</div>
+
