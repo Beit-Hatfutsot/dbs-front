@@ -1,6 +1,9 @@
-<div id="ftree-node-details">
+<div id="ftree-node-details" ng-show="ctrl.detailsShown">
   <div class="header">
     Details:
+    <div style="float:right;">
+      <a ng-click="ctrl.detailsShown=false">X</a>
+    </div>
   </div>
   <div class="body">
     <h3 ng-show="ctrl.node.NAME_GIVN">

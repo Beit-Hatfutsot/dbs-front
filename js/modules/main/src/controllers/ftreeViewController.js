@@ -69,7 +69,6 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 			  function(event, toState, toParams, fromState, fromParams){ 
 				  if (toState.name == 'ftree-view' && fromState.name == 'ftree-view') {
 					  event.preventDefault(); 
-					  d3.select('#ftree-node-details').style('display', 'block')
 					  self.detailsShown = true;
 					  self.$state.transitionTo('ftree-view', toParams, {notify: false});
 					  self.load(toParams);
@@ -118,6 +117,7 @@ FtreeViewController.prototype = {
 					header: {En: name, He: name}
 				});
 				self.tree_number = params.tree_number;
+				self.detailsShown = true;
 				self.node = response;
 				if ((self.tree === null) || (self.tree.tree_num != self.tree_number)){
 					self.$http.get(self.apiClient.base_url+ ['', 'fwalk',  self.tree_number, "root"].join('/'), {
@@ -297,9 +297,8 @@ FtreeViewController.prototype = {
 			.classed('deceased', function (d) { return d.deceased; })
 			.on("click", function (d) {
 				if (d.class == 'individual') {
-					d3.select('#ftree-node-details').style('display',
-								self.detailsShown?'none':'block')
 					self.detailsShown = !self.detailsShown;
+					self.$scope.$apply();
 				}
 
 				else if (d.id)
@@ -316,17 +315,21 @@ FtreeViewController.prototype = {
 		new_divs.append('div')
 				.classed('avatar', true)
 		new_divs.append('div')
-				.classed('dates', true).text(function(d) { 
+				.classed('dates', true)
+				.classed('noselect', true)
+				.text(function(d) { 
 				 	var birth = d.birth_year ? d.birth_year : '?';
 				 	var death =  d.death_year ? d.death_year : '?';
 				 	return birth + ' ' + death});
 		new_divs.append('div')
 			    .classed('name', true)
-          .append('p', true).text(function(d) {
-            return ['individual', 'partner', 'parent']
-				   .indexOf(d.class) >= 0 ? self.get_full_name(d):
-					   				        self.get_fname(d)
-            });
+				.append('p', true)
+				  .classed('noselect', true)
+				  .text(function(d) {
+					return ['individual', 'partner', 'parent']
+						   .indexOf(d.class) >= 0 ? self.get_full_name(d):
+													self.get_fname(d)
+					});
 
 
 		var position_nodes = function(sel) {
