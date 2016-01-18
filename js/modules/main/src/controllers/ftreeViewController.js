@@ -158,6 +158,13 @@ FtreeViewController.prototype = {
 		return ret;
 	},
 
+	getChildEP:  function(node) {
+		if (!node.child_ep)
+			return null;
+		return {center: node.child_ep,
+				id: node.id};
+	},
+
 	getVertex:  function(node1,node2,cls) {
 		var ret;
 		var id = node1.id + node1.name + "->" + node2.id + node2.name;
@@ -196,35 +203,14 @@ FtreeViewController.prototype = {
 			this.layoutEngine.layoutNode(cn);
 		}
 		var data = [],
-		    vdata = [];
+		    vdata = [],
+			cdata = [];
 		data.push( this.getElement(cn, 'individual') );
-		if ( 'children' in cn ) {
-			cn.children.forEach(function (child, _child) {
-				data.push( self.getElement(child,'child') );
-				if ( child.parent ) {
-					vdata.push( self.getVertex(child.parent,child,'child') );
-				} else {
-					vdata.push( self.getVertex(cn,child,'child') );
-				}
-				if ( child.children ) {
-					child.children.forEach(function (grandchild, _grandchild) {
-						data.push( self.getElement(grandchild,'grandchild') );
-						vdata.push( self.getVertex(grandchild.parent,grandchild,'grandchild') );
-					});
-				}
-
-				if ( child.partners ) {
-					child.partners.forEach(function (inlaw, _inlaw) {
-						data.push( self.getElement(inlaw,'inlaw') );
-						vdata.push( self.getVertex(child, inlaw,'spouse') );
-					});
-				}
-			})
-		};
 		if ( 'parents' in cn ) {
 			cn.parents.forEach(function (parent, _parent) {
 				data.push( self.getElement(parent,'parent') );
 				if ( _parent == 0 ) {
+					cdata.push( self.getChildEP(parent) );
 					vdata.push( self.getVertex(parent,cn,'child') );
 				} else {
 					vdata.push( self.getVertex(cn.parents[0],parent,'spouse') );
@@ -233,6 +219,7 @@ FtreeViewController.prototype = {
 					parent.parents.forEach( function (grandparent, _grandparent) {
 						data.push( self.getElement(grandparent,'grandparent') );
 						if ( _grandparent == 0 ) {
+							cdata.push( self.getChildEP(grandparent) );
 							vdata.push( self.getVertex(grandparent,parent,'child') );
 						} else {
 							vdata.push( self.getVertex(parent.parents[0],grandparent,'spouse') );
@@ -246,6 +233,8 @@ FtreeViewController.prototype = {
 							data.push( self.getElement(stepparent,'stepparent') );
 							vdata.push( self.getVertex(stepparent, parent, 'spouse') );
 						}
+						if (stepparent.children.length > 0)
+							cdata.push( self.getChildEP(stepparent) );
 						stepparent.children.forEach( function (stepsibling) {
 							data.push( self.getElement(stepsibling,'stepsibling') );
 							vdata.push( self.getVertex(stepparent, stepsibling, 'child') );
@@ -258,12 +247,15 @@ FtreeViewController.prototype = {
 			cn.partners.forEach(function (partner) {
 				data.push( self.getElement(partner,'partner') );
 				vdata.push( self.getVertex(partner,cn,'spouse') );
+				cdata.push( self.getChildEP(partner) );
 				partner.children.forEach(function (child) {
 					data.push( self.getElement(child,'child') );
 					vdata.push( self.getVertex(partner, child,'child') );
 					child.partners.forEach(function (inlaw) {
 						data.push( self.getElement(inlaw,'inlaw') );
 						vdata.push( self.getVertex(inlaw, child, 'spouse') );
+						if (inlaw.children.length > 0)
+							cdata.push( self.getChildEP(inlaw) );
 						inlaw.children.forEach(function (grandchild) {
 							data.push( self.getElement(grandchild,'grandchild') );
 							vdata.push( self.getVertex(inlaw, grandchild, 'grandchild') );
@@ -284,7 +276,6 @@ FtreeViewController.prototype = {
 		function px(value) { return value + 'px'; };
 
 		// NODES
-		this.data = data;
 		var els = d3.select('#' + this.rootId+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
 		els.classed('old',true).classed('new', false);
 		var new_els = els.enter();
@@ -368,13 +359,27 @@ FtreeViewController.prototype = {
 			.style('width',function(d) { return px(d.size.x); })
 			.style('height',function(d) { return px(d.size.y); })
 
+		// CIRCLES
+		var circles = d3.select('.vertices').selectAll(".child-ep").data(cdata, function(d) { return d.id; }),
+		    new_cs = circles.enter(),
+		    old_cs = circles.exit(),
+		    new_circles = new_cs.append('circle');
+		circles.attr('cx', function(d) { return d.center.x })
+		       .attr('cy', function(d) { return d.center.y  }) ;
+		old_cs.remove();
+		new_circles.classed('new', true)
+				   .classed('child-ep', true)
+				   .attr('r', function(d) { return  "4"})
+				   .attr('fill','none')
+		           .transition('new_circles').duration(0).delay(1500)
+				    .attr('fill','#aaaaaa');
 		// VERTICES
-		this.vdata = vdata;
 		var vertices = d3.select('.vertices').selectAll(".vertex").data(vdata, function(d) { return d.id; }),
 		    new_vxs = vertices.enter(),
 		    old_vxs = vertices.exit(),
 		    new_lines = new_vxs.append('path');
 		vertices.attr('class','vertex old');
+
 
 		var lineFunction = function(p) {
 			var midpoint = (p.start.y + p.end.y) / 2;
@@ -446,10 +451,14 @@ FtreeViewController.prototype = {
 		// caching the nodes & vertices for panning
 		this.d3Nodes = d3.select('#' + this.rootId + " .nodes")
 			.selectAll(".node")
-			.data(this.data, function(d) { return d.id; })
+			.data(data, function(d) { return d.id; })
 		this.d3Vertices = d3.select('.vertices')
 			.selectAll(".vertex")
-			.data(this.vdata, function(d) { return d.id; })
+			.data(vdata, function(d) { return d.id; })
+		this.d3Circles = d3.select('.vertices')
+			.selectAll(".child-ep")
+			.data(cdata, function(d) { return d.id; })
+
 		this.lastPan = 0;
 	},
 
@@ -481,7 +490,7 @@ FtreeViewController.prototype = {
 			y = e.clientY - this.lastMouseY,
 			elapsed = Date.now() - this.lastPan,
 		    transform;
-			
+
 		if ( elapsed < 60 ) return; 
 		this.pannedX += x;
 		this.pannedY += y;
@@ -492,18 +501,29 @@ FtreeViewController.prototype = {
 
 		function px(value) { return value + 'px'; };
 
-		this.data.forEach(function (d) {
-			d.pos.x += x;
-			d.pos.y += y;
-		});
-
 		this.d3Nodes
 			.transition('pan').duration(0)
-			.style('left', function (d) { return px(d.pos.x);})
-			.style('top', function (d) { return px(d.pos.y); });
+			.style('left', function (d) { 
+				d.pos.x += x;
+				return px(d.pos.x);
+			})
+			.style('top', function (d) {
+				d.pos.y += y;
+				return px(d.pos.y);
+			});
 		this.d3Vertices
 			.transition('pan').duration(0)
 			.attr('transform',  transform);
+		this.d3Circles
+			.transition('pan').duration(0)
+			.attr('cx',  function (d) {
+				 d.center.x += x;
+				 return d.center.x;
+			})
+			.attr('cy',  function (d) {
+				 d.center.y += y;
+				 return d.center.y;
+			});
 		d3.timer.flush();
 		this.lastPan = Date.now()
 	}

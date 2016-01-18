@@ -88,7 +88,6 @@ angular.module('main').service('ftreeLayout', function() {
 					parent.pos = new Tuple(left,top);
 					parent.size = o.parentSize;
 					parent.collapseto = node.pos;
-					// parent.child_ep = parent.pos.plus(parent.size.mult(0.5));
 					parent.spouse_ep = parent.pos.plus(parent.size.mult(0.5));
 					if ( _parent == 0 ) {
 						parent.spouse_ofs = o.parentMargin.bottom / 3;
@@ -202,12 +201,12 @@ angular.module('main').service('ftreeLayout', function() {
 					partner.size = o.partnerSize;
 					partner.collapseto = node.pos;
 					var spouse_ratio = (numPartners-parseInt(_partner))/(numPartners+1);
-					partner.child_ep = new Tuple(partner.pos.x-o.partnerMargin.horizontal/3,
-												 partner.pos.y+spouse_ratio*partner.size.y);
 					partner.spouse_ep = new Tuple(partner.pos.x,
 												 partner.pos.y+spouse_ratio*partner.size.y);
 					partner.spouse_ofs = (spouse_ratio-0.5)*o.childMargin.vertical;
 					left += o.partnerSize.x + o.partnerMargin.horizontal;
+					partner.child_ep = new Tuple(partner.pos.x-o.partnerMargin.horizontal/3,
+												 partner.pos.y+spouse_ratio*partner.size.y);
 					partner.children.forEach( function (child, _child) {
 						child.pos = new Tuple(childLeft, childTop);
 						child.size = o.childSize;
@@ -221,13 +220,13 @@ angular.module('main').service('ftreeLayout', function() {
 							childLeft += o.inlawMargin.horizontal;
 							inlaw.pos = new Tuple(childLeft, childTop);
 							inlaw.size = o.inlawSize;
-							inlaw.child_ep = new Tuple(inlaw.pos.x-o.inlawMargin.horizontal/3,
-													   inlaw.pos.y+spouse_ratio*inlaw.size.y);
 							inlaw.spouse_ep = new Tuple(inlaw.pos.x,
 														inlaw.pos.y+spouse_ratio*inlaw.size.y);
 							inlaw.spouse_ofs = (spouse_ratio-0.5)*o.inlawMargin.vertical;
 							inlaw.collapseto = child.pos;
 							childLeft += inlaw.size.x;
+							inlaw.child_ep = new Tuple(inlaw.pos.x-o.inlawMargin.horizontal/3,
+													   inlaw.pos.y+spouse_ratio*inlaw.size.y);
 
 							// layout some gradnchildren
 							layoutCluster (inlaw.children, {
