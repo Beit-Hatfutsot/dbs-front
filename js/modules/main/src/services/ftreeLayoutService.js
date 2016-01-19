@@ -77,7 +77,6 @@ angular.module('main').service('ftreeLayout', function() {
 		if ( node.parents ) {
 			var grandparentRatio = o.parentSize.x/(o.parentMargin.horizontal + o.parentSize.x*2),
 				numParents = node.parents.length;
-			o.grandparentSize = o.parentSize.mult(grandparentRatio);
 			if ( numParents>0 ) {
 				var box = new Tuple(o.parentSize.x*numParents + o.parentMargin.horizontal*(numParents-1),
 									o.parentSize.y + o.parentMargin.bottom + o.parentMargin.vertical);

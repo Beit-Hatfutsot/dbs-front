@@ -1,6 +1,6 @@
 var FtreeViewController = function ($http, $window, $document, $rootScope,
 							       $scope, $state, $stateParams, apiClient, 
-							       recentlyViewed, ftreeLayout) {
+							       recentlyViewed, langManager, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
 
 	this.$scope = $scope;
@@ -9,6 +9,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 	this.$window = $window;
 	this.apiClient = apiClient;
 	this.recentlyViewed = recentlyViewed;
+	this.langManager = langManager;
 
 	// renderer
 	this.rootId = "ftree-layout";
@@ -24,31 +25,33 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
         individualSize: new Tuple(214,66),
         // - parentSize: (w,h)
         parentSize: new Tuple(152,52),
+        // - grandparentSize: (w,h)
+        grandparentSize: new Tuple(80,30),
         // - partnerSize: (w,h)
         partnerSize: new Tuple(152,52),
         // - stepparentSize: (w,h)
         stepparentSize: new Tuple(52,52),
         // - childSize: (w,h)
-        childSize: new Tuple(94,25),
-        grandchildSize: new Tuple(25,25),
+        childSize: new Tuple(94,30),
+        grandchildSize: new Tuple(30,30),
         // - inlawsSize: (w,h)
-        inlawSize: new Tuple(25,25),
+        inlawSize: new Tuple(30,30),
         // - siblingSize: (w,h)
-        siblingSize: new Tuple(94,25),
+        siblingSize: new Tuple(94,30),
         // - stepsiblingSize: (w,h)
-        stepsiblingSize: new Tuple(25,25),
+        stepsiblingSize: new Tuple(30,30),
         // - siblingSize: (w,h)
         // - parentMargin: (horizontal,bottom)
-        parentMargin: { horizontal:20, vertical:15, bottom:90},
+        parentMargin: { horizontal:40, vertical:15, bottom:90},
         // - partnerMargin: (horizontal,vertical,left)
         partnerMargin: { horizontal:30, vertical:15, left:50 },
         // - childMargins: (horizontal,vertical,top)
         childMargin: { horizontal:40, vertical:15, top:60 },
-        grandchildMargin: { horizontal:2, vertical:20, top:40 },
+        grandchildMargin: { horizontal:2, vertical:28, top:40 },
         // - inlawsMargins: (horizontal,vertical,top)
         inlawMargin: { horizontal:20, vertical:40, top:90 },
         // - siblingMargin: (horizontal,vertical,right)
-        siblingMargin: { horizontal:10, vertical:28, right:30, top: -50 },
+        siblingMargin: { horizontal:10, vertical:34, right:30, top: -50 },
     });
 	/* TODO: dynamiclly load d3
     var scriptTag = document[0].createElement('script');
@@ -274,6 +277,15 @@ FtreeViewController.prototype = {
 		}
 
 		function px(value) { return value + 'px'; };
+		function get_sex(d) {
+			return d.hasOwnProperty('sex') ? d.sex : 'U';
+		};
+		var avatars = {'M': 'images/man.png',
+					   'F': '/images/woman.png',
+					   'U': '/images/unknown.png'};
+		this.vertical_pos = (self.langManager.lang == 'he')?'right':'left';
+		this.vertical_transform = (self.langManager.lang == 'he')?
+			'translate(1150,0) scale(-1,1)':'translate(0,0)';
 
 		// NODES
 		var els = d3.select('#' + this.rootId+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
@@ -285,26 +297,32 @@ FtreeViewController.prototype = {
 		new_divs.classed('node', true)
 			.classed('new', true)
 			.classed('clickable', function (d) { return d.id !== undefined; })
-			.classed('deceased', function (d) { return d.deceased; })
 			.on("click", function (d) {
 				if (d.class == 'individual') {
 					self.detailsShown = !self.detailsShown;
 					self.$scope.$apply();
 				}
-
 				else if (d.id)
 					self.$state.go('ftree-view',
 							   {tree_number: self.tree_number, node_id: d.id});
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
-			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
+			.attr('sex', get_sex)
 			.attr('title', function (d) { return self.get_full_name(d); })
+			.style('top', px(cn.pos.y))
+			.style(self.vertical_pos, px(cn.pos.x))
 			.style('width',function(d) { return px(d.size.x); })
-			.style('height',function(d) { return px(d.size.y); })
+			.style('height',function(d) { return px(d.size.y); });
 
-		
 		new_divs.append('div')
 				.classed('avatar', true)
+				.classed('deceased', function (d) { return d.deceased; })
+				.append('img')
+				.attr('src', function (d) {
+					var sex = get_sex(d);
+					return avatars[sex];
+				});
+
 		new_divs.append('div')
 				.classed('dates', true)
 				.classed('noselect', true)
@@ -314,7 +332,6 @@ FtreeViewController.prototype = {
 				 	return birth + ' ' + death});
 		new_divs.append('div')
 			    .classed('name', true)
-				.append('p', true)
 				  .classed('noselect', true)
 				  .text(function(d) {
 					return ['individual', 'partner', 'parent']
@@ -324,16 +341,13 @@ FtreeViewController.prototype = {
 
 
 		var position_nodes = function(sel) {
-			sel
-				.style('opacity',1)
-				.style('left',function(d) { return px(d.pos.x); })
+			sel.style('opacity',1)
 				.style('top',function(d) { return px(d.pos.y); })
+				.style(self.vertical_pos,function(d) { return px(d.pos.x); })
 				.style('width',function(d) { return px(d.size.x); })
 				.style('height',function(d) { return px(d.size.y); })
 				.style('font-size',function(d) { 
-					return d.class == 'individual'? "20px": px(d.size.y/2.5); })
-
-
+					return d.class == 'individual'? "20px": px(d.size.y/2.5); });
 		}
 
 		var got_old = old_els.size() > 0;
@@ -348,7 +362,7 @@ FtreeViewController.prototype = {
 
 		old_els
 			.style('top',function(d) { return px(d.collapseto.y); })
-			.style('left',function(d) { return px(d.collapseto.x); })
+			.style(self.vertical_pos,function(d) { return px(d.collapseto.x); })
 			.style('opacity',0)
 			.transition('exit').duration(500)
 			.remove()
@@ -371,6 +385,7 @@ FtreeViewController.prototype = {
 				   .classed('child-ep', true)
 				   .attr('r', function(d) { return  "4"})
 				   .attr('fill','none')
+				   .attr("transform", self.vertical_transform)
 		           .transition('new_circles').duration(0).delay(1500)
 				    .attr('fill','#aaaaaa');
 		// VERTICES
@@ -428,7 +443,7 @@ FtreeViewController.prototype = {
 
 
 		this.pannedX = this.pannedY = 0;
-		vertices.attr("transform", "translate(0,0)");
+		vertices.attr("transform", self.vertical_transform);
 		var position_vertex = function(sel) {
 			return sel.style('opacity',1)
 			          .attr('d', function(d) { return lineFunction(d); })
@@ -494,7 +509,7 @@ FtreeViewController.prototype = {
 		if ( elapsed < 60 ) return; 
 		this.pannedX += x;
 		this.pannedY += y;
-		transform = "translate("+this.pannedX+','+this.pannedY+")";
+		transform = "translate("+this.pannedX+','+this.pannedY+")"+this.vertical_transform;
 
 		this.lastMouseX = e.clientX;
 		this.lastMouseY = e.clientY;
@@ -503,8 +518,11 @@ FtreeViewController.prototype = {
 
 		this.d3Nodes
 			.transition('pan').duration(0)
-			.style('left', function (d) { 
-				d.pos.x += x;
+			.style(self.vertical_pos, function (d) { 
+				if (self.vertical_pos == 'left')
+					d.pos.x += x;
+				else
+					d.pos.x -= x;
 				return px(d.pos.x);
 			})
 			.style('top', function (d) {
@@ -517,8 +535,11 @@ FtreeViewController.prototype = {
 		this.d3Circles
 			.transition('pan').duration(0)
 			.attr('cx',  function (d) {
-				 d.center.x += x;
-				 return d.center.x;
+				if (self.vertical_pos == 'left')
+                    d.center.x += x;
+                else
+                    d.center.x -= x;
+				return d.center.x;
 			})
 			.attr('cy',  function (d) {
 				 d.center.y += y;
@@ -529,4 +550,7 @@ FtreeViewController.prototype = {
 	}
 };
 
-angular.module('main').controller('FtreeViewController', ['$http', '$window', '$document', '$rootScope', '$scope', '$state', '$stateParams', 'apiClient', 'recentlyViewed', 'ftreeLayout', FtreeViewController]);
+angular.module('main').controller('FtreeViewController', 
+			  ['$http', '$window', '$document', '$rootScope', '$scope',
+			   '$state', '$stateParams', 'apiClient', 'recentlyViewed', 
+			   'langManager', 'ftreeLayout', FtreeViewController]);

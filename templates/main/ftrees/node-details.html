@@ -1,58 +1,72 @@
 <div id="ftree-node-details" ng-show="ctrl.detailsShown">
   <div class="header">
-    Details:
-    <div style="float:right;">
+    <en>Details:</en>
+    <he>פרטים נוספים:</he>
+    <div class="pull-right">
       <a ng-click="ctrl.detailsShown=false">X</a>
     </div>
   </div>
   <div class="body">
     <h3 ng-show="ctrl.node.NAME_GIVN">
       <en>First Name</en>
+      <he>שם פרטי</he>
     </h3>
     {{ctrl.node.NAME_GIVN}}
     <h3 ng-show="ctrl.node.NAME_SURN">
       <en>Family Name</en>
+      <he>שם משפחה</he>
     </h3>
     {{ctrl.node.NAME_SURN}}
     <h3>
       <en>Sex</en>
+      <he>מין</he>
     </h3>
     <span ng-if="ctrl.node.SEX=='M'">
       <en>Male</en>
+      <he>זכר</he>
     </span>
     <span ng-if="ctrl.node.SEX=='F'">
       <en>Female</en>
+      <he>נקבה</he>
     </span>
     <h3 ng-show="ctrl.node.BIRT_DATE">
       <en>Date of Birth</en>
+      <he>תאריך לידה</he>
     </h3>
     {{ctrl.node.BIRT_DATE}}
     <h3 ng-show="ctrl.node.BIRT_PLAC">
       <en>Place of Birth</en>
+      <he>מקום לידה</he>
     </h3>
     {{ctrl.node.BIRT_PLAC}}
     <h3 ng-show="ctrl.node.MARR_DATE">
       <en>Date of Marriage</en>
+      <he>תאריך חתונה</he>
     </h3>
     {{ctrl.node.MARR_DATE}}
     <h3 ng-show="ctrl.node.MARR_PLAC">
       <en>Place of Marriage</en>
+      <he>מקום חתונה</he>
     </h3>
     {{ctrl.node.MARR_PLAC}}
     <h3 ng-show="ctrl.node.DEAT_DATE">
       <en>Date of Death</en>
+      <he>תאריך פטירה</he>
     </h3>
     {{ctrl.node.DEAT_DATE}}
     <h3 ng-show="ctrl.node.DEAT_PLAC">
       <en>Place of Death</en>
+      <he>מקום פטירה</he>
     </h3>
     {{ctrl.node.DEAT_PLAC}}
     <h3 ng-show="ctrl.node.OCCU">
       <en>Occupation</en>
+      <he>מקצוע</he>
     </h3>
       {{ctrl.node.OCCU}}
     <h3 ng-show="ctrl.node.NOTE">
       <en>Notes</en>
+      <he>הערות</he>
     </h3>
       {{ctrl.node.NOTE}}
     </div>
