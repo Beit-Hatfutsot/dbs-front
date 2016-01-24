@@ -52,7 +52,6 @@
                 margin-right: 4px;
 			}
 			.he & {
-                @include flip();
 				float: right;
                 margin-left: 4px;
 			}
@@ -164,6 +163,7 @@
 
         .avatar {
             background-color: $red2;
+            .he & { @include flip(); }
 		}
 
         .dates {
@@ -176,6 +176,7 @@
 
         .avatar {
             background-color: $blue2;
+            .he & { @include flip(); }
 		}
         .dates {
             background-color: $blue4;

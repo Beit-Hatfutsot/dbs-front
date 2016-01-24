@@ -278,7 +278,7 @@ FtreeViewController.prototype = {
 
 		function px(value) { return value + 'px'; };
 		function get_sex(d) {
-			return d.hasOwnProperty('sex') ? d.sex : 'U';
+			return (d.sex !== undefined) ? d.sex : 'U';
 		};
 		var avatars = {'M': 'images/man.png',
 					   'F': '/images/woman.png',
