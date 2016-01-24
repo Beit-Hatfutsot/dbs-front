@@ -90,7 +90,8 @@
         }
 	}
 
-    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"] {
+    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"],
+    .node[role="stepsibling"] {
         .name {
             display: none;
         }

@@ -48,7 +48,7 @@ angular.module('main').service('ftreeLayout', function() {
 					marginX = args.childSize.x*(1 + row%2)/2+args.childMargin.horizontal;
 
 				child.pos = new Tuple(childLeft+dir*marginX,
-							  childTop+args.childMargin.top+args.childMargin.vertical*row);
+							  childTop+args.childMargin.vertical*row);
 				if (child.pos.x < minLeft)
 					minLeft = child.pos.x
 				child.size = args.childSize;
@@ -64,16 +64,7 @@ angular.module('main').service('ftreeLayout', function() {
 		node.child_ep = node.pos.plus(node.size.mult(0.5));
 		var parentHash = {};
 		var stepparentHash = {};
-		// layout the siblings - step siblings not included
-		var siblingsTopRight = new Tuple(node.pos.x - o.siblingMargin.horizontal,
-										 node.pos.y);
-		if (node.siblings.length > 0)
-		    siblingsTopRight  = layoutCluster (node.siblings, {
-				childMargin: o.siblingMargin,
-				childSize: o.siblingSize,
-				topRight: siblingsTopRight,
-				collapseTo: node
-			});
+		var siblingsTopRight;
 		if ( node.parents ) {
 			var grandparentRatio = o.parentSize.x/(o.parentMargin.horizontal + o.parentSize.x*2),
 				numParents = node.parents.length;
@@ -95,6 +86,21 @@ angular.module('main').service('ftreeLayout', function() {
 						} else {
 							parent.child_ep = parent.pos.plus(parent.size.mult(0.5));
 							parent.child_ep.x += parent.size.x/2 + o.parentMargin.horizontal/2;
+						}
+						// layout the siblings - step siblings not included
+						var numSiblings = node.siblings.length;
+						if (numSiblings > 0) {
+							var clusterWidth = (numSiblings < 2)?
+								o.siblingSize.x:
+								(o.siblingSize.x+o.siblingMargin.horizontal)*2;
+							parent.cluster_ep = new Tuple(node.pos.x - o.siblingMargin.horizontal-clusterWidth/2,
+														 node.pos.y + o.siblingMargin.top);
+							siblingsTopRight  = layoutCluster (node.siblings, {
+								childMargin: o.siblingMargin,
+								childSize: o.siblingSize,
+								topCenter: parent.cluster_ep,
+								collapseTo: node
+							});
 						}
 					}
 					if ('parents' in parent) {
@@ -137,13 +143,21 @@ angular.module('main').service('ftreeLayout', function() {
 								stepparent.spouse_ep.y += epOffset;
 								stepparent.spouse_ofs = epOffset;
 								// layout the step siblings
-								if (stepparent.children)
+								if (stepparent.children) {
+									var clusterLen = stepparent.children.length,
+										clusterWidth = (clusterLen < 2)?
+											o.stepsiblingSize.x:
+ 											(o.stepsiblingSize.x+o.siblingMargin.horizontal)*2;
+									stepparent.cluster_ep = new Tuple(siblingsTopRight.x-clusterWidth/2,
+															 siblingsTopRight.y);
+
 									siblingsTopRight = layoutCluster (stepparent.children, {
 										childMargin: o.siblingMargin,
 										childSize: o.stepsiblingSize,
-										topRight: siblingsTopRight,
+										topCenter: stepparent.cluster_ep,
 										collapseTo: stepparent
 									});
+								}
 								left += dir*(o.stepparentSize.x + o.parentMargin.horizontal);
 								epOffset += dir*5;
 							}
@@ -227,11 +241,13 @@ angular.module('main').service('ftreeLayout', function() {
 							inlaw.child_ep = new Tuple(inlaw.pos.x-o.inlawMargin.horizontal/3,
 													   inlaw.pos.y+spouse_ratio*inlaw.size.y);
 
+							inlaw.cluster_ep = new Tuple(inlaw.child_ep.x,
+														 inlaw.child_ep.y+o.grandchildMargin.top);
 							// layout some gradnchildren
 							layoutCluster (inlaw.children, {
 								childMargin: o.grandchildMargin,
 								childSize: o.grandchildSize,
-								topCenter: inlaw.child_ep,
+								topCenter: inlaw.cluster_ep,
 								collapseTo: inlaw
 							});
 						});

@@ -182,8 +182,11 @@ FtreeViewController.prototype = {
 		} else {
 			ret.start = node2.pos.plus(node2.size.mult(0.5));
 		}
-		if ((cls=='sibling') || (cls=='grandchild'))
-			ret.end = node1['child_ep'];
+		if (((cls == 'sibling') || (cls == 'stepsibling')) && node1.hasOwnProperty('cluster_ep')) {
+			ret.end = node1['cluster_ep'];
+		}
+		else if ((cls=='sibling') || (cls=='grandchild'))
+			ret.end = node1['child_ep']
 		else
 			ret.end = node1[cls+'_ep'];
 		if ( !ret.end ) {
@@ -207,7 +210,8 @@ FtreeViewController.prototype = {
 		}
 		var data = [],
 		    vdata = [],
-			cdata = [];
+			cdata = [],
+			siblingsClusters = -1;
 		data.push( this.getElement(cn, 'individual') );
 		if ( 'parents' in cn ) {
 			cn.parents.forEach(function (parent, _parent) {
@@ -215,6 +219,16 @@ FtreeViewController.prototype = {
 				if ( _parent == 0 ) {
 					cdata.push( self.getChildEP(parent) );
 					vdata.push( self.getVertex(parent,cn,'child') );
+					if (parent.hasOwnProperty("cluster_ep")) {
+						var line = new Object({
+							class: "line",
+							start: parent.child_ep,
+							end: parent.cluster_ep,
+							ofs: 0,
+							id: parent.id+parent.name+':cluster_up'
+						});
+						vdata.push(line);
+					}
 				} else {
 					vdata.push( self.getVertex(cn.parents[0],parent,'spouse') );
 				}
@@ -236,11 +250,23 @@ FtreeViewController.prototype = {
 							data.push( self.getElement(stepparent,'stepparent') );
 							vdata.push( self.getVertex(stepparent, parent, 'spouse') );
 						}
-						if (stepparent.children.length > 0)
+						if (stepparent.children.length > 0) {
 							cdata.push( self.getChildEP(stepparent) );
+							if (stepparent.hasOwnProperty('cluster_ep')) {
+								var line = new Object({
+									class: "line",
+									start: stepparent.child_ep,
+									end: stepparent.cluster_ep,
+									ofs: siblingsClusters*5,
+									id: stepparent.id+stepparent.name+':cluster_up'
+								});
+								vdata.push(line);
+								siblingsClusters--;
+							};
+						}
 						stepparent.children.forEach( function (stepsibling) {
 							data.push( self.getElement(stepsibling,'stepsibling') );
-							vdata.push( self.getVertex(stepparent, stepsibling, 'child') );
+							vdata.push( self.getVertex(stepparent, stepsibling, 'stepsibling') );
 						});
 					});
 				}
@@ -270,8 +296,7 @@ FtreeViewController.prototype = {
 		if ( 'siblings' in cn ) {
 			var parent = cn.parents[0];
 			cn.siblings.forEach(function  (sibling, _sibling) {
-				data.push( self.getElement(sibling,
-										   sibling.step?'stepsibling':'sibling') );
+				data.push( self.getElement(sibling, 'sibling') );
 				vdata.push( self.getVertex(parent, sibling, 'sibling') );
 			})
 		}
@@ -407,8 +432,9 @@ FtreeViewController.prototype = {
 				return true;
 			});
 			midpoint += p.ofs;
-			// if ((p.class=="grandchild") || (p.class=="sibling"))
-			if ((p.class=="grandchild"))
+			if ((p.class=="stepsibling") || (p.class=="sibling"))
+				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-13], [p.end.x, p.end.y]]
+			else if (p.class=="grandchild")
 				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-13], [p.end.x,midpoint], [p.end.x, p.end.y]]
 			else
 				points =[ [p.start.x, p.start.y], [p.start.x, midpoint], [p.end.x,midpoint], [p.end.x, p.end.y]];
