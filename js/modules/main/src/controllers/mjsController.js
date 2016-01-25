@@ -1,4 +1,4 @@
-var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, plumbConnectionManager, header, langManager, auth, user) {
+var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, header, langManager, auth, user) {
 	var self = this;
 
 	this.$q = $q;
@@ -6,46 +6,40 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, p
 	this.mjs = mjs;
 	this.itemTypeMap = itemTypeMap;
 	this.item = item;
-	this.plumbConnectionManager = plumbConnectionManager;
 	this.langManager = langManager;
 	this.header = header;
-	this.dragging = false;
+	this.selected_branch = 0;
+	this.branch_list_popover = {
+        is_open: false,
+
+        open: function open() {
+            this.branch_list_popover.is_open = true;
+        }, 
+
+        close: function close() {
+            this.branch_list_popover.is_open = false;
+        }
+    };
 
 	Object.defineProperty(this, 'mjs_data', {
 		get: function() {
+			return [
+			{UnitType: 'photoUnits', Header: {En: 'photo1'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, true, true] },
+			{UnitType: 'photoUnits', Header: {En: 'photo2'}, UnitText1: {En: 'bla bla bla'}, branch: [true, true, true, true] },
+			{UnitType: 'photoUnits', Header: {En: 'photo3'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, false, false] },
+			{UnitType: 'photoUnits', Header: {En: 'photo4'}, UnitText1: {En: 'bla bla bla'}, branch: [false, true, true, false] },
+			{UnitType: 'photoUnits', Header: {En: 'photo5'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, false, true] },
+			{UnitType: 'photoUnits', Header: {En: 'photo6'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, false, false] },
+			{UnitType: 'photoUnits', Header: {En: 'photo7'}, UnitText1: {En: 'bla bla bla'}, branch: [true, false, true, true] },
+			{UnitType: 'photoUnits', Header: {En: 'photo8'}, UnitText1: {En: 'bla bla bla'}, branch: [false, true, true, true] },
+			]
 			return mjs.data;
-		}
-	});
-
-	Object.defineProperty(this, 'selected_collection_type', {
-		get: function() {
-			return this.get_collection_type(this.selected_collection);
 		}
 	});
 
 	Object.defineProperty(this, 'signedin', {
 		get: function() {
 			return auth.is_signedin();
-		}
-	});
-
-	Object.defineProperty(this, 'molecules_top', {
-		get: function() {
-			if (this.selected_branch === 0 || this.selected_branch === 1) {
-				return true;
-			}
-
-			return false;
-		}
-	});
-
-	Object.defineProperty(this, 'molecules_bottom', {
-		get: function() {
-			if (this.selected_branch === 2 || this.selected_branch === 3) {
-				return true;
-			}
-
-			return false;
 		}
 	});
 
@@ -100,12 +94,6 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, p
 			self.dragging = true;
 		});
 	});
-
-	$scope.$on('dragend', function() {
-		$scope.$apply(function() {
-			self.dragging = false;
-		});
-	});
 };
 
 MjsController.prototype = {
@@ -126,10 +114,8 @@ MjsController.prototype = {
 		this.new_branch = {
 			name: 'new family branch'
 		}
-		this.selected_branch = null;
-		this.selected_collection = [];
+		this.selected_branch = -1;
 		this.parse_in_progress = false;
-		this.dragging = false;
 		this.branch_edit_status = {
 			0: false,
 			1: false,
@@ -148,7 +134,7 @@ MjsController.prototype = {
 		var self = this,
 			item_string = this.itemTypeMap.get_item_string(item);
 
-		this.dragging = false;
+		//this.dragging = false;
 		this.mjs.assign(branch_name, item_string).then(function() {
 			var index = self.get_branch_index(branch_name);
 			if (self.selected_branch !== index) {
@@ -220,7 +206,7 @@ MjsController.prototype = {
 						items: {}
 					};
 					self.mjs_items.assigned.push(b);
-					item.get_items( branch.items ).
+					item.get_items(branch.items ).
 						then(function(item_data) {
 							b.items = self.sort_items(item_data);
 							assigned_deferred[index].resolve(item_data);
@@ -365,14 +351,14 @@ MjsController.prototype = {
 		else{
 			this.selected_branch = branch_index;
 		}
-		this.select_collection([]);
+		/*this.select_collection([]);
 		
 		var repaint = setInterval(function() {
 			self.plumbConnectionManager.connections['molecules-main'].plumb.repaintEverything();
 		}, 100);
 		setTimeout(function() {
 			clearInterval(repaint);
-		}, 2500);
+		}, 2500);*/
 	},
 
 	get_branch_index: function(branch_name) {
@@ -390,8 +376,6 @@ MjsController.prototype = {
 
 	create_n_assign: function(branch_name, item) {
 		var self = this;
-
-		this.dragging = false;
 		this.insert_new_branch(branch_name).
 			then(function(new_name) {
 				self.assign_item(new_name, item);
@@ -503,4 +487,4 @@ MjsController.prototype = {
 	}
 };
 
-angular.module('main').controller('MjsController', ['$scope', '$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'plumbConnectionManager', 'header', 'langManager', 'auth', 'user', MjsController]);
+angular.module('main').controller('MjsController', ['$scope', '$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'header', 'langManager', 'auth', 'user', MjsController]);

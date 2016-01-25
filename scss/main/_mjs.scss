@@ -8,6 +8,157 @@
 		z-index: 2;
 	}
 
+	#mjs-header-wrapper {
+		height: 250px;
+		background-color: $gray5;
+
+		.mjs-header {
+			margin: 0 auto;
+			width: 1070px;
+			height: 100%;
+			background-color: #fff;
+			transform: skew(16deg);
+
+			.ftree-pic-wrapper {
+				width: 190px;
+				background-color: $blue5;
+				float: right;
+				height: 100%;
+			}
+
+			.item-preview-pic1, .item-preview-pic2 {
+				height: 100%;
+				width: 190px;
+				float: right;
+			}
+
+			.item-preview-pic1 {
+
+				background-color: $yellow5;
+
+			}
+
+			.item-preview-pic2 {
+				background-color: $red5;				
+			}
+
+			.diagonal-block {
+				position: relative;
+				float: right;
+    			height: 100%;
+
+    			.diagonal-separator {
+    				position: absolute;
+    				background-color: $yellow3;
+    				width: 10px;
+    				height: 100%;
+    			}
+			}
+		}
+	}
+
+	.mjs-menu {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        background: inherit;
+        box-shadow: 0px -10px 10px 0px #b0b0b0;
+
+        ul.nav {
+            margin: 0 auto;
+            display: block;
+            max-width: 1170px;
+            padding-left: 0;
+            display: flex;
+            justify-content: flex-start;
+
+            li.menu-item {
+            	display: inline-block;
+            	width: 174px;
+            	height: 70px;
+            	margin-right: 26px;
+            	line-height: 20px;
+            	font-size: 18px;
+            	text-align: left;
+                position: relative;
+                text-decoration: none;
+                color: #fff;
+                font-weight: 600;
+                @include hover-pointer();
+                padding: 4px 25px;
+                text-align: center;
+                vertical-align: middle;
+                margin-top: -10px;
+
+                &:after {
+                	content: "";
+                	width: 0; 
+					height: 0; 
+					border-top: 10px solid transparent;
+					border-left: 6px solid black;
+					top: 0;
+					left: 100%;
+					position: absolute;
+                }
+
+                &:hover {
+                    background-color: green;
+                }
+
+                &--active {
+                    background-color: $yellow3;
+                }
+
+                &--selected {
+                	color: red;
+                }
+            }
+
+            #branch--0 {
+            	background-color: $red3;
+
+            	/*&:hover {
+            		background-color: green;
+            	}*/
+            }
+
+            #branch--1 {
+            	background-color: $red4;
+            }
+
+            #branch--2 {
+            	background-color: $yellow3;
+            }
+
+            #branch--3 {
+            	background-color: $blue3;
+            }
+
+            #branch--4 {
+            	background-color: $blue2;
+            }
+
+            #branch--5 {
+            	background-color: $blue8;
+            }
+        }
+    }
+
+
+    .item-preview-wrapper {
+	    margin: 20px auto;
+	    max-width: 1170px;
+
+	    a {
+	        text-decoration: none;
+	    }
+	    .item-preview {
+	        @extend %item-preview;
+            margin: 20px 37px;
+            text-align: left;
+	    }
+    }
+
 	@at-root #mjs {
 		width: $view-width;
 		margin: 0 auto;
@@ -121,78 +272,13 @@
 
 				&.selected {
 
-					.branch__head {
-						background: #ffffff;
-					}
+					background-color: red;
 				}
 
 				&.under-edit {
 
 					.branch__edit, .branch__remove {
 						opacity: 1;
-					}
-				}
-
-				&--0 {
-					right: 0;
-					bottom: 0;
-
-					&.selected {
-						//@include translate(100px, 75px);
-						right: -100px;
-						bottom: -75px;
-					}
-				}
-
-				&--1 {
-					left: 0;
-					bottom: 0;
-
-					&.selected {
-						//@include translate(-100px, 75px);
-						left: -100px;
-						bottom: -75px;
-					}
-				}
-
-				&--2 {
-					left: 0;
-					top: 0;
-
-					&.selected {
-						//@include translate(-100px, -75px);
-						left: -100px;
-						top: -75px;
-					}
-				}
-
-				&--3 {
-					right: 0;
-					top: 0;
-				
-					&.selected {
-						//@include translate(100px, -75px);
-						right: -100px;
-						top: -75px;
-					}
-				}
-
-				&--new {
-
-					.create-branch {
-						/*
-						width: inherit;
-						height: inherit;
-						font-size: 40px;
-						text-align: center;
-						line-height: 62px;
-						margin-top: 5px;
-						*/
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						@include translate(-50%, -50%);
-						font-size: 40px;
 					}
 				}
 

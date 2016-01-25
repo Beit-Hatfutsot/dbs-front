@@ -7,17 +7,11 @@
 	<span ng-switch-default>
 		<ng-switch on="item.thumbnail.data == ''">
 			<div class="item-thumbnail item-thumbnail--text" ng-switch-when="true" draggable="{{nonDraggable ? false : true}}" data="item">
-				<div class="title">
-					<en>{{item.Header.En}}</en>
-					<he>{{item.Header.He}}</he>
-				</div>
+				<en>{{item.Header.En}}</en>
+				<he>{{item.Header.He}}</he>
 			</div>
 			<div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" draggable="{{nonDraggable ? false : true}}" data="item">
-				<img ng-src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb>
-				<div class="title">
-					<en>{{item.Header.En}}</en>
-					<he>{{item.Header.He}}</he>
-				</div>
+				<img src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb>
 			</div>
 		</ng-switch>
 	</span>

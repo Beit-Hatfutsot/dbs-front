@@ -1,60 +1,50 @@
 <auth-private>
-<div id="mjs-container" ng-controller="MjsController as mjsCtrl">
-	<div ng-show="mjsCtrl.content_loaded">
-		<div id="mjs">
-			<div id="unassigned">
-				<div class="title">
-					<en>Unsorted Items</en>
-					<he>פריטים לא ממויינים</he>
-				</div>
-				<div ng-repeat="item in mjsCtrl.mjs_items.unassigned">
-					<mjs-item ng-click="mjsCtrl.select_collection([item])" item="item" ng-class="{'selected-collection': mjsCtrl.is_selected_collection([item])}"></mjs-item>
-				</div>
-			</div>
-			<div id="molecules" ng-class="{'molecules-top': mjsCtrl.molecules_top, 'molecules-bottom': mjsCtrl.molecules_bottom}">
-				<div id="silhouette" class="silhouette" plumb-root="molecules-main" root-container="molecules" connecton="mjsCtrl.mjs_items.assigned.length">
-					<div class="silhouette__icon">
-						<icon position="[-125, -148]"></icon>
+	<div id="mjs-container" ng-controller="MjsController as mjsCtrl">
+		<div ng-show="mjsCtrl.content_loaded">
+			<div id="mjs-header-wrapper">
+				<div class="mjs-header">
+					<div class="ftree-pic-wrapper"></div>
+					<div class="item-preview-pic1"></div>
+					<div class="item-preview-pic2"></div>
+					<div class="diagonal-block">
+						<div  class="diagonal-separator" style="left:-10px; opacity:1;"></div>
+						<div  class="diagonal-separator" style="left:-30px; opacity:0.7;"></div>
+						<div  class="diagonal-separator" style="left:-50px; opacity:0.4;"></div>
+					</div>
+					<div id="silhouette" class="silhouette">
+						<div class="silhouette__icon">
+							<icon position="[-125, -148]"></icon>
+						</div>
 					</div>
 				</div>
-				<!-- placeholders for jsPlumb -->
-				<div id="branch-placeholder--0" class="branch-placeholder branch-placeholder--0" ng-class="{selected: mjsCtrl.selected_branch === 0 && mjsCtrl.mjs_items.assigned.length > 0}" plumb-node="molecules-main" node-container="molecules"></div>
-				<div id="branch-placeholder--1" class="branch-placeholder branch-placeholder--1" ng-class="{selected: mjsCtrl.selected_branch === 1 && mjsCtrl.mjs_items.assigned.length > 1}" plumb-node="molecules-main" node-container="molecules"></div>
-				<div id="branch-placeholder--2" class="branch-placeholder branch-placeholder--2" ng-class="{selected: mjsCtrl.selected_branch === 2 && mjsCtrl.mjs_items.assigned.length > 2}" plumb-node="molecules-main" node-container="molecules"></div>
-				<div id="branch-placeholder--3" class="branch-placeholder branch-placeholder--3" ng-class="{selected: mjsCtrl.selected_branch === 3 && mjsCtrl.mjs_items.assigned.length > 3}" plumb-node="molecules-main" node-container="molecules"></div>
-				<!-- new branch -->
-				<div class="branch branch--{{mjsCtrl.mjs_items.assigned.length}} branch--new" ng-if="mjsCtrl.mjs_items.assigned.length < 4">
-					<ng-switch on="mjsCtrl.dragging">
-						<div ng-switch-when="true" class="branch__drop-area" droppable ondrop="mjsCtrl.create_n_assign" context="mjsCtrl" branch-name="mjsCtrl.new_branch.name">
-							<div class="branch__drop-area__border"></div>
-							<div class="branch__drop-area__center">
-								<div class="branch__drop-area__center__text">Drop here to create a new branch</div>
-							</div>
-						</div>
-						<div ng-switch-when="false" style="width: 100%; height: 100%;">
-							<div class="branch__head-border"></div>
-							<div class="branch__head" ng-click="mjsCtrl.insert_new_branch()">
-								<div class="create-branch">+</div>
-							</div>
-						</div>
-					</ng-switch>
-				</div>
-				<!-- branches -->
-				<mjs-branch ng-repeat="branch in mjsCtrl.mjs_items.assigned"></mjs-branch>
 			</div>
-		</div>
-		<div id="item-bar-container">
-			<div id="item-bar">
-				<div id="item-bar-title-container" ng-hide="mjsCtrl.is_selected_collection([])">
-					<div id="item-bar-title">
-						<he>מאגר</he>
-						{{mjsCtrl.selected_collection_type}} 
-						<en>collection</en>
-					</div>
-				</div>
-				<item-preview ng-repeat="item_data in mjsCtrl.selected_collection" preview-data="item_data" arrow="right" hide-text="true" removable="true"></item-preview>
-			</div>
+			<nav id="general-search-page" class="mjs-menu">
+		        <ul class="nav">
+		        	<li id="branch--{{$index}}" class=" branch menu-item" ng-class="{'menu-item--selected': mjsCtrl.selected_branch === $index-1}" ng-click="mjsCtrl.selected_branch = $index-1" ng-repeat="branch in [1,2,3,4,5,6]">
+						<div class="branch__head__name">
+							{{branch.name}}
+						</div>
+						<!-- <div class="branch__edit" ng-show="mjsCtrl.selected_branch === $index-1">
+							<icon position="[-231, -127]"></icon>
+						</div>
+						<div class="branch__edit-popover" dropdown is-open="mjsCtrl.branch_edit_status[$index]">
+							<label for="edit-popover-name-{{$index}}">
+								<en>Rename this Family Branch</en>
+								<he>שנה את שם הענף</he>
+							</label>
+							<input id="edit-popover-name-{{$index}}" class="branch__edit-popover__name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
+							<div class="branch__edit-popover__error" ng-show="branch_name_error">
+								<en>You alredy have a branch with this name</en>
+								<he>כבר קיים ענף עם שם זה</he>
+							</div>
+						</div> -->
+	        		</li>
+	    		</ul>
+		    </nav>
+	    	<div class="item-preview-wrapper">
+		    	<item-preview ng-repeat="item in mjsCtrl.mjs_data" ng-if="(mjsCtrl.selected_branch < 0) || item.branch[mjsCtrl.selected_branch]" preview-data="item"></item-preview>
+	    	</div>
+		  
 		</div>
 	</div>
-</div>
 </auth-private>
