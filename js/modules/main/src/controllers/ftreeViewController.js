@@ -195,7 +195,7 @@ FtreeViewController.prototype = {
 		ret.collapseto = node1.collapseto;
 		// if ( node1.spouse_ofs && ((cls=='sibling') || (cls=='grandchild') || (cls =='child'))) {
 		if ( node1.spouse_ofs && ((cls=='grandchild') || (cls =='child'))) {
-			ret.ofs = node1.spouse_ofs;
+			ret.ofs = node1.spouse_ofs * -2;
 		} else {
 			ret.ofs = 0;
 		}

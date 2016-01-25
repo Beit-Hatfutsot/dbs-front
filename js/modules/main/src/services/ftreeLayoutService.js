@@ -64,7 +64,8 @@ angular.module('main').service('ftreeLayout', function() {
 		node.child_ep = node.pos.plus(node.size.mult(0.5));
 		var parentHash = {};
 		var stepparentHash = {};
-		var siblingsTopRight;
+		var siblingsTopRight = new Tuple(node.pos.x - o.siblingMargin.horizontal,
+									     node.pos.y) ;
 		if ( node.parents ) {
 			var grandparentRatio = o.parentSize.x/(o.parentMargin.horizontal + o.parentSize.x*2),
 				numParents = node.parents.length;
