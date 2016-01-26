@@ -23,6 +23,8 @@ var MjsWidgetController = function($scope, $state, mjs, itemTypeMap, auth) {
 
 	Object.defineProperty(this, 'in_mjs', {
 		get: function() {
+			if (this.item_added)
+				return true
 			if (this.signedin && this.content_loaded) {
 				return mjs.in_mjs(this.item_string);
 			}
@@ -62,6 +64,7 @@ MjsWidgetController.prototype = {
 			if ( this.content_loaded && !(this.in_mjs) ) {
 				this.mjs.add(this.item_string).then(function() {
 					// open pop-over
+					debugger;
 					self.item_added = true;
 				});
 			}

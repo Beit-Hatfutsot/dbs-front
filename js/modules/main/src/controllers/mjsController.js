@@ -8,6 +8,7 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, h
 	this.item = item;
 	this.langManager = langManager;
 	this.header = header;
+	this.user = user;
 	this.selected_branch = 0;
 	this.branch_list_popover = {
         is_open: false,
@@ -23,16 +24,6 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, h
 
 	Object.defineProperty(this, 'mjs_data', {
 		get: function() {
-			return [
-			{UnitType: 'photoUnits', Header: {En: 'photo1'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, true, true] },
-			{UnitType: 'photoUnits', Header: {En: 'photo2'}, UnitText1: {En: 'bla bla bla'}, branch: [true, true, true, true] },
-			{UnitType: 'photoUnits', Header: {En: 'photo3'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, false, false] },
-			{UnitType: 'photoUnits', Header: {En: 'photo4'}, UnitText1: {En: 'bla bla bla'}, branch: [false, true, true, false] },
-			{UnitType: 'photoUnits', Header: {En: 'photo5'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, false, true] },
-			{UnitType: 'photoUnits', Header: {En: 'photo6'}, UnitText1: {En: 'bla bla bla'}, branch: [false, false, false, false] },
-			{UnitType: 'photoUnits', Header: {En: 'photo7'}, UnitText1: {En: 'bla bla bla'}, branch: [true, false, true, true] },
-			{UnitType: 'photoUnits', Header: {En: 'photo8'}, UnitText1: {En: 'bla bla bla'}, branch: [false, true, true, true] },
-			]
 			return mjs.data;
 		}
 	});

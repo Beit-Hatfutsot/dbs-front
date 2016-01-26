@@ -4,8 +4,17 @@
 	width: 100%;
 	background: #eeeeee;
 
-	._jsPlumb_connector {
-		z-index: 2;
+	.image-separator {
+	    height: 100%;
+	    width: 10px;
+	    background: $yellow3;
+	    
+	    .en & {
+	    	float: right;
+	    }
+	    .he & {
+	    	float: left;
+	    }
 	}
 
 	#mjs-header-wrapper {
@@ -17,35 +26,55 @@
 			width: 1070px;
 			height: 100%;
 			background-color: #fff;
-			transform: skew(16deg);
+			
+			.en & {
+				transform: skew(16deg);
+			}
+			.he & {
+				transform: skew(-16deg);
+			}
 
-			.ftree-pic-wrapper {
-				width: 190px;
-				background-color: $blue5;
-				float: right;
+			.item-preview-pic1, .item-preview-pic2, .ftree-pic-wrapper {
 				height: 100%;
-			}
-
-			.item-preview-pic1, .item-preview-pic2 {
-				height: 100%;
 				width: 190px;
-				float: right;
+				position: relative;
+				overflow: hidden;
+
+				.en & {
+					float: right;
+				}
+
+				.he & {
+					float: left;
+				}
 			}
 
-			.item-preview-pic1 {
+			.top-pic {
+				position: absolute;
+			    top: 50%;
 
-				background-color: $yellow5;
+			    .en & {
+			    	left: 50%;
+			    	transform: translate(-50%, -50%) skew(-16deg);
+			    }
 
-			}
-
-			.item-preview-pic2 {
-				background-color: $red5;				
+			    .he & {
+			    	right: 50%;
+			    	transform: translate(50%, -50%) skew(16deg);
+			    }
 			}
 
 			.diagonal-block {
 				position: relative;
-				float: right;
     			height: 100%;
+
+    			.en & {
+    				float: right;
+    			}
+    			.he & {
+    				float: left;
+    				 @include flip ();
+    			}
 
     			.diagonal-separator {
     				position: absolute;
@@ -53,6 +82,68 @@
     				width: 10px;
     				height: 100%;
     			}
+			}
+
+			.silhouette {
+				position: absolute;
+			    top: 50%;
+				color: $gray3;
+				display: block;
+
+				.en & {
+					left: -56px;
+					transform: translate(0%, -50%) skew(-16deg);
+				}
+
+				.he & {
+					right: -56px;
+					transform: translate(0%, -50%) skew(16deg);
+				}
+
+				img {
+					display: inline-block;
+					margin-top: 18px;
+					position: absolute;
+				}
+				
+				&__description {
+				 	display: inline-block;
+				 	
+				 	.en & {
+				 		margin-left: 116px;
+				 	}
+				 	.he & {
+				 		margin-right: 116px;
+				 	}
+				 }
+			}
+
+			.share-item {
+				display: flex;
+			    bottom: 26px;
+			    position: absolute;
+			    justify-content: space-between;
+    			width: 180px;
+			    
+			    .en & {
+			    	left: 18px;
+			    	transform: skew(-16deg);
+			    }
+
+			    .he & {
+			    	right: 18px;
+			    	transform: skew(16deg);
+			    }
+
+			    &__header {
+			    	margin-top: 6px;
+			    	font-size: 10px;
+			    }
+
+			    &__icon {
+			    	width: 30px;
+			    	height: 30px;
+			    }
 			}
 		}
 	}
@@ -67,16 +158,15 @@
         ul.nav {
             margin: 0 auto;
             display: block;
-            max-width: 1170px;
+            max-width: 1150px;
             padding-left: 0;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
 
             li.menu-item {
             	display: inline-block;
             	width: 174px;
             	height: 70px;
-            	margin-right: 26px;
             	line-height: 20px;
             	font-size: 18px;
             	text-align: left;
@@ -95,10 +185,17 @@
                 	width: 0; 
 					height: 0; 
 					border-top: 10px solid transparent;
-					border-left: 6px solid black;
 					top: 0;
-					left: 100%;
 					position: absolute;
+
+					.en & {
+						left: 100%;
+						border-left: 6px solid black;
+					}
+					.he & {
+						right: 100%;
+						border-right: 6px solid black;
+					}
                 }
 
                 &:hover {

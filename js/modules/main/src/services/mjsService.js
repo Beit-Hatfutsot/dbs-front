@@ -1,7 +1,7 @@
 angular.module('main').
 	factory('mjs', ['$resource', 'apiClient', function($resource, apiClient) {
 		var mjsResource = $resource(apiClient.urls.mjs, null, {
-			put: {method: 'PUT'}
+			post: {method: 'POST'}
 		});
 
 		var mjs = {
@@ -12,16 +12,7 @@ angular.module('main').
 			},
 
 			add: function(item_string) {
-				if (this.data.$resolved && !this.in_mjs(item_string)) {
-					if (this.data.unassigned) {
-						this.data.unassigned.push(item_string);
-					}
-					else {
-						this.data.unassigned = [item_string];
-						this.data.assigned = [];
-					}
-					return this.data.$put();
-				}
+				return mjsResource.post(item_string).$promise;
 			},
 
 			remove: function(item_string) {
@@ -122,9 +113,10 @@ angular.module('main').
 				return this.data.$put();
 			}
 		};
-		
+		/*
 		mjs.data.$promise.
 			then(function(mjs_data) {
+
 				if ( !(mjs_data.hasOwnProperty('unassigned')) || !(mjs_data.hasOwnProperty('assigned')) ) {
 					if ( !(mjs_data.hasOwnProperty('unassigned')) ) {
 						mjs_data.unassigned = [];
@@ -139,6 +131,6 @@ angular.module('main').
 					mjs_data.$put();
 				}
 			});
-
+*/
 		return mjs;
 	}]);
