@@ -50,7 +50,7 @@ angular.module('main').service('ftreeLayout', function() {
 				child.pos = new Tuple(childLeft+dir*marginX,
 							  childTop+args.childMargin.vertical*row);
 				if (child.pos.x < minLeft)
-					minLeft = child.pos.x
+					minLeft = child.pos.x;
 				child.size = args.childSize;
 				child.collapseto = args.collapseTo.pos;
 				dir=dir*-1;
@@ -144,7 +144,7 @@ angular.module('main').service('ftreeLayout', function() {
 								stepparent.spouse_ep.y += epOffset;
 								stepparent.spouse_ofs = epOffset;
 								// layout the step siblings
-								if (stepparent.children) {
+								if (stepparent.hasOwnProperty('children') && (stepparent.children.length > 0)) {
 									var clusterLen = stepparent.children.length,
 										clusterWidth = (clusterLen < 2)?
 											o.stepsiblingSize.x:

@@ -519,7 +519,6 @@ FtreeViewController.prototype = {
 		}
 	},
 	mouseUp: function (e) {
-		console.log(e);
 		if (e.which == 1) {
 			this.mousePressed = false;
 			angular.element(document.getElementById(this.rootId))
