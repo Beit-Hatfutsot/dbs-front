@@ -52,7 +52,6 @@
       <ng-include src="'templates/main/ftrees/node-details.html'"></ng-include>
       <div id="ftree-layout" ng-init="ctrl.mousePressed=false"
         ng-mousedown="ctrl.mouseDown($event)"
-        ng-mouseup="ctrl.mouseUp($event)"
         ng-mousemove="ctrl.pan($event)">
         <svg class="vertices"></svg>
         <div class="nodes"></div>

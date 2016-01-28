@@ -77,7 +77,10 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 					  self.load(toParams);
 				  }
 	})
-   
+	document.documentElement.addEventListener('mouseup', function (e) {
+		self.mouseUp(e)
+	});
+
 	this.load($stateParams);
 };
 
@@ -516,6 +519,7 @@ FtreeViewController.prototype = {
 		}
 	},
 	mouseUp: function (e) {
+		console.log(e);
 		if (e.which == 1) {
 			this.mousePressed = false;
 			angular.element(document.getElementById(this.rootId))
