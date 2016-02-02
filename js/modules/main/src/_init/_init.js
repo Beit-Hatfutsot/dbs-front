@@ -47,10 +47,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'item-view',
-            url: '/item/:collection/:id',
+			url: '/item/:collection/:id/:slug',
             controller: 'ItemCtrl as itemController',
 			templateUrl: function(params) {
 				return 'templates/item/'+params.collection+'.html'
+			},
+			params: {
+				slug: null
 			}
 
         },
