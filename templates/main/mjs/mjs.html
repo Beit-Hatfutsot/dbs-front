@@ -1,77 +1,90 @@
-<auth-private>
-	<div id="mjs-container" ng-controller="MjsController as mjsCtrl">
-		<div ng-show="mjsCtrl.content_loaded">
-			<div id="mjs-header-wrapper">
-				<div class="mjs-header">
-					<div class="image-separator"></div>
-					<div class="ftree-pic-wrapper">
-						<en>
-							<img class="top-pic" ng-src="images/Top-Ftree-Eng.jpg">
-						</en>
-						<he>
-							<img class="top-pic" ng-src="images/Top-Ftree-Heb.jpg">
-						</he>
-					</div>
-					<div class="image-separator"></div>
-					<div class="item-preview-pic1">
-						<img class="top-pic" ng-src="images/Top-Picture-1.jpg">
-					</div>
-					<div class="image-separator"></div>
-					<div class="item-preview-pic2">
-						<img class="top-pic" ng-src="images/Top-Picture-2.jpg">
-					</div>
-					<div class="diagonal-block">
-						<div  class="diagonal-separator" style="left:-10px; opacity:1;"></div>
-						<div  class="diagonal-separator" style="left:-30px; opacity:0.7;"></div>
-						<div  class="diagonal-separator" style="left:-50px; opacity:0.4;"></div>
-					</div>
-					<div id="silhouette" class="silhouette">
-						<img src="images/BH-Loading.gif">
-						<h1 class="silhouette__description">
-							<en>The story of<br>{{mjsCtrl.user.name}}</en>
-							<he>הסיפור של<br>{{mjsCtrl.user.name}}<he>
-						</h1>
-					</div>
-					<div class="share-item">
-                        <div class="share-item__header">
-                            <en>Share my story:</en>
-                            <he>לשתף את הסיפור:</he>
-                        </div>
-                       <!--  <tweet text="{{title}} via @BeitHatfutsot"></tweet> -->
-                        <!-- <fb-share></fb-share> -->
-                        <icon class="share-item__icon" position="[-271, -408]" ng-click="" hover-offset="[-0, -35]"></icon>
-                        <icon class="share-item__icon" position="[-305, -408]" ng-click="" hover-offset="[-0, -35]"></icon>
-                        <icon class="share-item__icon" position="[-340, -408]" ng-click="" hover-offset="[-0, -35]"></icon>
-                    </div>
+<!-- <auth-private> -->
+	<div id="mjs-page-container" ng-controller="MjsController as mjsCtrl">
+		<div id="mjs-header-wrapper">
+			<div class="mjs-header">
+				<div class="image-separator"></div>
+				<div class="ftree-pic-wrapper">
+					<en>
+						<img class="top-pic" ng-src="images/Top-Ftree-Eng.jpg">
+					</en>
+					<he>
+						<img class="top-pic" ng-src="images/Top-Ftree-Heb.jpg">
+					</he>
 				</div>
+				<div class="image-separator"></div>
+				<div class="item-preview-pic1">
+					<img class="top-pic" ng-src="images/Top-Picture-1.jpg">
+				</div>
+				<div class="image-separator"></div>
+				<div class="item-preview-pic2">
+					<img class="top-pic" ng-src="images/Top-Picture-2.jpg">
+				</div>
+				<div class="diagonal-block">
+					<div  class="diagonal-separator" style="left:-10px; opacity:1;"></div>
+					<div  class="diagonal-separator" style="left:-30px; opacity:0.7;"></div>
+					<div  class="diagonal-separator" style="left:-50px; opacity:0.4;"></div>
+				</div>
+				<div id="silhouette" class="silhouette">
+					<img src="images/BH-Loading.gif">
+					<h1 class="silhouette__description">
+						<en>The story of<br>{{mjsCtrl.user.name}}</en>
+						<he>הסיפור של<br>{{mjsCtrl.user.name}}<he>
+					</h1>
+				</div>
+				<div class="share-item">
+	                <div class="share-item__header">
+	                    <en>Share my story:</en>
+	                    <he>לשתף את הסיפור:</he>
+	                </div>
+	               <!--  <tweet text="{{title}} via @BeitHatfutsot"></tweet> -->
+	                <!-- <fb-share></fb-share> -->
+	                <icon class="share-item__icon" position="[-271, -408]" ng-click="" hover-offset="[-0, -35]"></icon>
+	                <icon class="share-item__icon" position="[-305, -408]" ng-click="" hover-offset="[-0, -35]"></icon>
+	                <icon class="share-item__icon" position="[-340, -408]" ng-click="" hover-offset="[-0, -35]"></icon>
+	            </div>
 			</div>
-			<nav id="general-search-page" class="mjs-menu">
-		        <ul class="nav">
-		        	<li id="branch--{{$index}}" class=" branch menu-item" ng-class="{'menu-item--selected': mjsCtrl.selected_branch === $index-1}" ng-click="mjsCtrl.selected_branch = $index-1" ng-repeat="branch in [1,2,3,4,5,6]">
-						<div class="branch__head__name">
-							{{branch.name}}	
-						</div>
-						<!-- <div class="branch__edit" ng-show="mjsCtrl.selected_branch === $index-1">
-							<icon position="[-231, -127]"></icon>
-						</div>
-						<div class="branch__edit-popover" dropdown is-open="mjsCtrl.branch_edit_status[$index]">
-							<label for="edit-popover-name-{{$index}}">
-								<en>Rename this Family Branch</en>
-								<he>שנה את שם הענף</he>
-							</label>
-							<input id="edit-popover-name-{{$index}}" class="branch__edit-popover__name" ng-model="branch.name" ng-click="mjsCtrl.stopPropagation($event)" alter-mjs-branch>
-							<div class="branch__edit-popover__error" ng-show="branch_name_error">
-								<en>You alredy have a branch with this name</en>
-								<he>כבר קיים ענף עם שם זה</he>
+		</div>
+		<nav class="mjs-menu">
+	        <ul class="nav">
+	        	<li class="menu-item branch--{{$index}}" ng-class="{'menu-item--selected': mjsCtrl.selected_branch === $index}" ng-repeat="branch in [0,1,2,3,4,5]">
+					<div ng-if="branch == 0" class="branch_name" ng-click="mjsCtrl.selected_branch = branch">
+						<en>The whole story</en>
+						<he>הסיפור שלי</he>
+						<br>
+						<span class="branch_name__num">{{mjsCtrl.mjs_data.length}}</span>	
+					</div>
+					<div class="clickable-area" ng-if="(branch > 0) && (branch < 5)" ng-click="mjsCtrl.selected_branch = branch">
+						<ng-switch on="mjsCtrl.branch_edit_status[branch]">
+							<div ng-switch-when="false" class="branch_name">
+								{{mjsCtrl.mjs.data.branches[branch-1]}} <!-- {{myname}} -->
+								<br>
+								<span class="branch_name__num">{{mjsCtrl.items_counter[branch-1]}}</span>
 							</div>
-						</div> -->
-	        		</li>
-	    		</ul>
-		    </nav>
-	    	<div class="item-preview-wrapper">
-		    	<item-preview ng-repeat="item in mjsCtrl.mjs_data" ng-if="(mjsCtrl.selected_branch < 0) || item.branch[mjsCtrl.selected_branch]" preview-data="item"></item-preview>
-	    	</div>
-		  
+							<div ng-switch-when="true">
+								<input  class="rename"
+									 	placeholder="{{mjsCtrl.mjs.data.branches[branch-1]}}"
+										ng-model="myname"
+										alter-mjs-branch />
+							</div>
+						</ng-switch>
+					</div> 
+					<div ng-if="branch == 5" ng-click="mjsCtrl.selected_branch = $index">
+						<div class="branch_name" ng-click="mjsCtrl.selected_branch = branch">
+							<en>My upload</en>
+							<he>ההעלאות שלי </he>
+							<br>
+							<span class="branch_name__num">{{}}</span>
+						</div>
+					</div>
+					<icon  ng-if="(branch > 0) && (branch < 5)" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit($event, branch)"></icon>
+	    		</li>
+			</ul>
+	    </nav>
+		<div class="item-preview-wrapper">
+	    	<item-preview ng-repeat="item in mjsCtrl.mjs_data" 
+	    		ng-if="(mjsCtrl.selected_branch == 0) || item.branches[mjsCtrl.selected_branch-1]"
+	    		preview-data="item">
+	    	</item-preview>
 		</div>
 	</div>
-</auth-private>
+<!-- </auth-private> -->

@@ -5,9 +5,9 @@ var MjsWidgetController = function($scope, $state, mjs, itemTypeMap, auth) {
 	this.$scope = $scope
 	this.mjs = mjs;
 	this.auth = auth;
-	
+	this.item_tobe_added = false;
 	this.in_mjs = false;
-	this.item_added = false;
+	this.item_added = false;	
 
 	Object.defineProperty(this, 'item', {
 		get: function() {
@@ -21,26 +21,17 @@ var MjsWidgetController = function($scope, $state, mjs, itemTypeMap, auth) {
 		}
 	});
 
-	Object.defineProperty(this, 'in_mjs', {
-		get: function() {
-			if (this.item_added)
-				return true
-			if (this.signedin && this.content_loaded) {
-				return mjs.in_mjs(this.item_string);
-			}
-			else {
-				return false;
-			}
-		}
-	});
-
 	$scope.$watch('item', function(newVal, oldVal) {
 		if ( newVal && newVal.isNotEmpty() && !(self.content_loaded) ) {
 			self.item_string = itemTypeMap.get_item_string(self.item);
 			self.content_loaded = true; 
+			mjs.data.$promise.then(function() {
+				self.in_mjs = self.mjs.in_mjs(self.item_string);
+			});
 		}
 	});
 	
+
 	$scope.$on('signin', function() {
 		mjs.refresh().
 			then(function() {
@@ -59,13 +50,11 @@ var MjsWidgetController = function($scope, $state, mjs, itemTypeMap, auth) {
 MjsWidgetController.prototype = {
 	push_to_mjs: function() {
 		var self = this;
-
 		if (this.signedin) {
 			if ( this.content_loaded && !(this.in_mjs) ) {
 				this.mjs.add(this.item_string).then(function() {
 					// open pop-over
-					debugger;
-					self.item_added = true;
+					self.in_mjs = true;
 				});
 			}
 		}
@@ -78,9 +67,16 @@ MjsWidgetController.prototype = {
 	},
 
 	remove_from_mjs: function() {
-		if (this.in_mjs && !(this.item.ugc)) {
-			this.mjs.remove(this.item_string);
-		}
+		var self = this;
+		this.mjs.remove_from_story(this.item_string);
+		this.mjs.refresh();
+		self.in_mjs = false;
+		
+	/*	if (this.in_mjs && !(this.item.ugc)) {
+			this.mjs.remove(this.item_string).then(function () {
+				self.in_mjs = false;
+			});
+		}*/
 	}
 };
 

@@ -1,4 +1,4 @@
-var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, header, langManager, auth, user) {
+var MjsController = function($q, mjs, notification, item, itemTypeMap, header, langManager, auth, user) {
 	var self = this;
 
 	this.$q = $q;
@@ -10,23 +10,15 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, h
 	this.header = header;
 	this.user = user;
 	this.selected_branch = 0;
-	this.branch_list_popover = {
-        is_open: false,
-
-        open: function open() {
-            this.branch_list_popover.is_open = true;
-        }, 
-
-        close: function close() {
-            this.branch_list_popover.is_open = false;
-        }
-    };
-
-	Object.defineProperty(this, 'mjs_data', {
-		get: function() {
-			return mjs.data;
-		}
-	});
+	this.mjs_data = [];
+	this.items_counter = [0,0,0,0];
+	this.branch_edit_status = {
+		1: false,
+		2: false,
+		3: false,
+		4: false,
+	};
+	this.rmdialog_status = false;
 
 	Object.defineProperty(this, 'signedin', {
 		get: function() {
@@ -35,447 +27,61 @@ var MjsController = function($scope, $q, mjs, notification, item, itemTypeMap, h
 	});
 
 	this.init();
-	
-	$scope.$watch(function() {
-		return self.signedin;
-	},
-	function(signedin) {
-		if (signedin) {
-			mjs.refresh().
-				then(function() {
-					self.parse_mjs_data();
-				});
-		}
-	});
-
-	$scope.$watch(function() {
-		if (self.mjs_data.$resolved) {
-			var unassigned_count = self.mjs_data.unassigned.length,
-				branches_count = self.mjs_data.assigned.length,
-				assigned_count = 0;
-
-			self.mjs_data.assigned.forEach(function(branch) {
-				assigned_count += branch.items.length;
-			});
-
-			return unassigned_count - assigned_count;
-		}
-	}, 
-	function(newVal, oldVal) {
-		if (newVal != oldVal) {
-			self.parse_mjs_data();
-		}
-	});
-	
-	$scope.$watch(function() {
-		if (self.mjs_data.$resolved) {
-			var	branches_count = self.mjs_data.assigned.length;
-			return branches_count;
-		}
-	}, 
-	function(newVal, oldVal) {
-		if (newVal != oldVal) {
-			self.parse_mjs_data();
-		}
-	});
-	
-	$scope.$on('dragstart', function() {
-		$scope.$apply(function() {
-			self.selected_branch = null;
-			self.dragging = true;
-		});
-	});
 };
 
 MjsController.prototype = {
 	init: function() {
-		var self = this;
+
 
 		this.notification.put({
 			en: 'Loding Story...',
 			he: 'טוען את הסיפור...'
 		});
-
-		this.header.sub_header_state = 'closed';
-		this.content_loaded = false;
-		this.mjs_items = {
-			assigned: [],
-			unassigned: []
-		};
-		this.new_branch = {
-			name: 'new family branch'
-		}
-		this.selected_branch = -1;
-		this.parse_in_progress = false;
-		this.branch_edit_status = {
-			0: false,
-			1: false,
-			2: false,
-			3: false,
-		};
-		this.branch_rmdialog_status = {
-			0: false,
-			1: false,
-			2: false,
-			3: false,
-		};
+		this.refresh();
 	},
 
-	assign_item: function(branch_name, item) {
-		var self = this,
-			item_string = this.itemTypeMap.get_item_string(item);
-
-		//this.dragging = false;
-		this.mjs.assign(branch_name, item_string).then(function() {
-			var index = self.get_branch_index(branch_name);
-			if (self.selected_branch !== index) {
-				self.select_branch(index);
-			}
-			self.notification.put({
-				en: 'Item successfully added to branch ' + branch_name,
-				he: 'הפריט הוסף לענף ' + branch_name +  ' בהצלחה'
-			});
-		}, function() {
-			self.notification.put({
-				en: 'Failed to add item',
-				he: 'הוספת הפריט נכשלה'
-			});
-		});
-	},
-
-	unassign_item: function(branch_name, item) {
-		var self = this,
-			item_string = this.itemTypeMap.get_item_string(item);
-
-		this.mjs.unassign(branch_name, item_string).then(function() {
-			self.notification.put({
-				en: 'Item successfully removed from branch ' + branch_name,
-				he: 'הפריט הורד מענף ' + branch_name +  ' בהצלחה'
-			});
-		}, function() {
-			self.notification.put({
-				en: 'Failed to remove item from branch',
-				he: 'הורדת הפריט מהענף נכשלה'
-			});
-		});
-	},
-
-	parse_mjs_data: function() {
-		var self = this,
-			item = this.item,
-			mjs_data = this.mjs_data,
-			unassigned_deferred,
-			assigned_deferred = [],
-			all_promises = [],
-			parse_promise;
-
-		this.notification.put({
-			en: 'Parsing Story...',
-			he: 'טוען סיפור...'
-		});
-
-		this.select_collection([]);
-		this.mjs_items.unassigned = [];
-		this.mjs_items.assigned = [];
-		
-		if ( mjs_data.hasOwnProperty('unassigned') && mjs_data.unassigned.length > 0 ) {
-			unassigned_deferred = this.$q.defer();
-			all_promises.push(unassigned_deferred.promise);
-			item.get_items( mjs_data.unassigned ).
-				then(function(item_data) {
-					self.mjs_items.unassigned = item_data;
-					unassigned_deferred.resolve(item_data);
-				});	
-		}
-
-		if ( mjs_data.hasOwnProperty('assigned') && mjs_data.assigned.length > 0 ) {
-			mjs_data.assigned.forEach(function(branch, index) {
-				assigned_deferred[index] = self.$q.defer();
-				if (branch.items.length > 0) {
-					var b = {
-						name: branch.name,
-						items: {}
-					};
-					self.mjs_items.assigned.push(b);
-					item.get_items(branch.items ).
-						then(function(item_data) {
-							b.items = self.sort_items(item_data);
-							assigned_deferred[index].resolve(item_data);
-						});
-				}
-				else {
-					var b = {
-						name: branch.name,
-						items: []
-					};
-					self.mjs_items.assigned.push(b); 
-					assigned_deferred[index].resolve(null);
-				}
-			});	
-
-			assigned_deferred.forEach(function(ad) {
-				all_promises.push(ad.promise);
-			});
-		}
-		
-		parse_promise = this.$q.all(all_promises);
-		parse_promise.
-			then(function() {
-				self.notification.put({
-					en: 'Story loaded successfully.',
-					he: 'הסיפור נטען בהצלחה'
-				});
-				self.content_loaded = true;
-			});
-
-		return parse_promise;
-	},
-
-	sort_items: function(item_arr) {
-		var self = this,
-			item_map = {};
-		
-		item_arr.forEach(function(item) {
-			var type = self.itemTypeMap.get_type(item.UnitType);
-			if (item_map[type]) {
-				item_map[type].push(item);	
-			}
-			else {
-				item_map[type] = [item];
-			}
-		});
-
-		return item_map;
-	},
-
-	insert_new_branch: function() {
-		var insert_deferred = this.$q.defer();
-
-		if (this.mjs_items.assigned.length < 4) {			
-			var self = this;
-			var name = this.generate_unique_branch_name();
-
-			this.mjs.add_branch(name).
-				then(function() {
-					var index = self.mjs_items.assigned.length-1;
-					self.select_branch(index);
-					self.branch_edit_status[index] = true;
-
-					insert_deferred.resolve(name);
-				}, 
-				function() {
-					insert_deferred.reject();
-				});
-		}
-		else {
-			insert_deferred.reject();
-		}
-
-		return insert_deferred.promise;
-	},
-
-	remove_branch: function($event, branch_name) {
+	refresh: function() {
 		var self = this;
-		$event.stopPropagation();
-		this.select_branch(this.selected_branch);
-		this.mjs.remove_branch(branch_name).
-			then(function() {
-				//notify of success
-			});
-	},
+		var items_ids = [];
 
-	save_story: function() {
-		var self = this,
-			new_unassigned = [], 
-			new_assigned = []; 
-
-		this.mjs_items.unassigned.forEach(function(item) {
-			new_unassigned.push(self.itemTypeMap.get_type(item.UnitType) + '.' + item._id);
-		});
-
-		this.mjs_items.assigned.forEach(function(branch) {
-			var items = [];
-			for (var collection in branch.items) {
-				if (branch.items[collection] instanceof Array) {
-					branch.items[collection].forEach(function(item) {
-						items.push(self.itemTypeMap.get_type(item.UnitType) + '.' + item._id);
+		this.mjs.refresh().then(function () {
+			var items_ids = [];
+			//console.log(self.mjs.data);
+			self.mjs.data.items.forEach(function (i) {
+				items_ids.push(i.id);
+			})
+			self.item.get_items(items_ids).then (function (ret) {
+				self.mjs_data = [];
+				self.mjs.data.items.forEach(function(i, _i) {
+					ret[_i].branches = i.branches;
+					ret[_i].item_string = i.id;
+					self.mjs_data.push(ret[_i]);
+					i.branches.forEach(function (flag, _j) {
+						if (flag)
+							self.items_counter[_j]++;
 					});
-				}
-			}
-			new_assigned.push({
-				name: branch.name,
-				items: items
+				})
 			});
 		});
-
-		this.mjs_data.unassigned = new_unassigned;
-		this.mjs_data.assigned = new_assigned;
-		this.mjs_data.$put();
-	},
-
-	select_collection: function(collection) {
-		this.selected_collection = collection;
-	},
-
-	is_selected_collection: function(item_arr) {
-		var result = true;
-
-		if (this.selected_collection.length != item_arr.length) {
-			return false;
-		}
-
-		this.selected_collection.forEach(function(item, index) {
-			if (item._id !== item_arr[index]._id) {
-				result = false;
-			}
-		});
-
-		return result;
-	},
-
-	select_branch: function(branch_index) {
-		var self = this;
-
-		if (this.selected_branch == branch_index) {
-			this.selected_branch = null;
-		}
-		else{
-			this.selected_branch = branch_index;
-		}
-		/*this.select_collection([]);
-		
-		var repaint = setInterval(function() {
-			self.plumbConnectionManager.connections['molecules-main'].plumb.repaintEverything();
-		}, 100);
-		setTimeout(function() {
-			clearInterval(repaint);
-		}, 2500);*/
-	},
-
-	get_branch_index: function(branch_name) {
-		var branch = this.mjs_items.assigned.filter(function(branch, index) {
-			return branch.name == branch_name;
-		})[0];
-		var index = this.mjs_items.assigned.indexOf(branch);
-
-		return index;
 	},
 
 	stopPropagation: function($event) {
 		$event.stopPropagation();
 	},
 
-	create_n_assign: function(branch_name, item) {
-		var self = this;
-		this.insert_new_branch(branch_name).
-			then(function(new_name) {
-				self.assign_item(new_name, item);
-			});	
+	update_branch_name: function(branch_num, new_name) {
+		this.mjs.update_branch_name(branch_num, new_name);
 	},
 
-	remove: function($event, branch_name) {
-		this.remove_branch($event, branch_name);
-		this.selected_branch = null;
-		for (var index in this.branch_edit_status) {
-			this.branch_edit_status[index] = false;
-		}
-		for (var index in this.branch_rmdialog_status) {
-			this.branch_rmdialog_status[index] = false;
-		}
-	},
-
-	toggle_branch_edit: function($event, index)  {
-		$event.preventDefault();
-	    $event.stopPropagation();
+	toggle_branch_edit: function($event,index)  {
 		this.branch_edit_status[index] = !(this.branch_edit_status[index]); 
 	},
 
-	toggle_branch_rmdialog: function($event, index)  {
-		$event.preventDefault();
-	    $event.stopPropagation();
-		this.branch_rmdialog_status[index] = !(this.branch_rmdialog_status[index]); 
-	},
+	toggle_branch_rmdialog: function()  {
+		this.rmdialog_status = !(this.rmdialog_status);
+		console.log(this.rmdialog_status);
 
-	get_collection_type: function(collection) {
-		if (collection.length > 0) {
-			var display_type_map = {
-				'familyNames': {
-					en: 'Family Names',
-					he: 'שמות משפחה'
-				},
-				'places': {
-					en: 'Places',
-					he: 'מקומות'
-				},
-				'photoUnits': {
-					en: 'Images',
-					he: 'תמונות'
-				},
-				'genTreeIndividuals': {
-					en: 'Family Trees',
-					he: 'עצי משפחה'
-				},
-				'ugc': {
-					en: 'Uploaded Items',
-					he: 'פריטים שהועלו'
-				},
-				'default': {
-					en: 'Unknown',
-					hw: 'לא ידוע'
-				}
-			};
-
-			var type = this.itemTypeMap.get_type(collection[0].UnitType);
-			if (!type) {
-				type = 'default';
-			}
-			try {
-				var display_type = display_type_map[type][this.langManager.lang];
-			}
-			catch(e) {
-				console.error('Could not find type: ' + type)
-			}
-			
-			return display_type ;
-		}
-		else {
-			return '';
-		}
-	},
-
-	count_branches_named: function(name) {
-		var count = 0;
-
-		this.mjs_items.assigned.forEach(function(branch) {
-			if (branch.name === name) {
-				count++;
-			}
-		});
-
-		return count;
-	},
-
-	is_duplicate_branch_name: function(name) {
-		return this.count_branches_named(name) > 1;
-	},
-
-	is_branch_name: function(name) {
-		return this.count_branches_named(name) > 0;
-	},
-
-	generate_unique_branch_name: function() {
-		var new_name = this.new_branch.name;
-		var i = 1;
-	
-		var is_duplicate = this.is_branch_name(new_name);
-		while (is_duplicate) {
-			new_name = this.new_branch.name + ' ' + i;
-			is_duplicate = this.is_branch_name(new_name);
-			i++;
-		}
-
-		return new_name;
 	}
 };
 
-angular.module('main').controller('MjsController', ['$scope', '$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'header', 'langManager', 'auth', 'user', MjsController]);
+angular.module('main').controller('MjsController', ['$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'header', 'langManager', 'auth', 'user', MjsController]);
