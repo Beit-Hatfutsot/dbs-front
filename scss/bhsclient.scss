@@ -7,7 +7,6 @@
 @import "main/footer";
 @import "main/wizard-form";
 @import "main/start";
-@import "main/wizard-result";
 @import "main/item";
 @import "main/mjs";
 @import "main/mjs-widget";
@@ -70,8 +69,10 @@ html {
 				}
 			}		
 
+            @at-root #main-header-container {
+                height: $header-height + $notification-bar-height;
+            }
 			@at-root #below-header {
-				padding-top: $header-height + $notification-bar-height;
 				padding-bottom: $footer-height;
 				min-height: 100%;
 

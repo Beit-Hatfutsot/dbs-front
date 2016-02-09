@@ -1,5 +1,5 @@
 angular.module('main').
-	factory('ftrees', ['$http', '$q', 'apiClient', 'gedcomParser', function($http, $q, apiClient, gedcomParser) {
+	factory('ftrees', ['$http', '$q', 'apiClient', function($http, $q, apiClient) {
 		var in_progress = false;
 		var contributor_images = {
 			'babylonjewry.org.il': 'images\/babylon.jpg'
@@ -79,20 +79,6 @@ angular.module('main').
 				$http.get(apiClient.urls.ftrees_get + '/' + tree_number).
 					success(function(tree_data) {
 						deferred.resolve(tree_data);
-					}).
-					error(function() {
-						deferred.reject();
-					});
-
-				return deferred.promise;
-			},
-
-			load: function(gedcom_url) {
-				var deferred = $q.defer();
-
-				$http.get(gedcom_url).
-					success(function(gedcom_text) {
-						deferred.resolve(gedcomParser.parse(gedcom_text));
 					}).
 					error(function() {
 						deferred.reject();
@@ -338,27 +324,13 @@ angular.module('main').
 				return parsed_family;
 			},
 
-			get_individual_data: function(individual_id) {
-				var raw_data = gedcomParser.getData(individual_id);
-
-				if (raw_data) {
-					var parent_data = raw_data.getValue('familleParent'),
-						family_data = raw_data.getValue('familles')[0];
-				}
-				
-				return {
-					parent_data: parent_data,
-					family_data: family_data
-				};
-			},
-
 			filter_individuals: function(individuals) {
 				var filtered = [];
 
 				individuals.forEach(function(individual) {
 					if ( is_alive(individual) ) {
 
-						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', 'EditorRemarks', '_id'];
+						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', 'GTF', 'EditorRemarks', '_id'];
 						var filtered_individual = {};
 
 						for (var prop in individual) {

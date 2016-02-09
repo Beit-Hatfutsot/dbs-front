@@ -1,13 +1,14 @@
 <div class="item-preview" ng-hide='itemPreviewController.deleted'>
 	<a ng-href="{{itemPreviewController.get_item_url(previewData)}}">
 		<div class="thumbnail" ng-if="previewData.thumbnail.data">
-			<img ng-if="!isExtResult" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
+			<img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
 				 alt="Preview Image"/>
-			 <img ng-if="isExtResult" ng-src="{{previewData.thumbnail.data}}"
+			 <img ng-if="itemSource!='bh'" ng-src="{{previewData.thumbnail.data}}"
 				 alt="Preview Image"/>
 		</div>
 		<div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data), 'white-part1--thumbnail': previewData.thumbnail.data}">
-			<div class="diagonal-block" ng-if="previewData.thumbnail.data" ng-class="{'diagonal-block--ext-result': isExtResult}">
+			<div class="diagonal-block" ng-if="previewData.thumbnail.data"
+           ng-class="{'diagonal-block--ext-result': itemSource!='bh'}">
 				<div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
 				<div  class="diagonal-separator" style="right:-10px; opacity:0.7"
 					  ng-show="$index == 0 || previewData.Pictures.length > 1">
@@ -22,7 +23,8 @@
 				</div>
 				<div ng-switch-default>
 					<div class="header" 
-						ng-class="{'header--nothumb': !(previewData.thumbnail.data)}">
+						ng-class="{'header--nothumb': !(previewData.thumbnail.data),
+                       'isExtResult': itemSource != 'bh'}">
 						<en>{{previewData.Header.En}}</en>
 						<he>{{previewData.Header.He}}</he>
 					</div>
@@ -36,12 +38,20 @@
 					<icon position="[-229, -104]"></icon>
 				</div>
 			</ng-switch>
-			<div ng-if="isExtResult" class="europeana-label">
-				<en>From: Europeana</en>
-				<he>Europeana</he>
+			<div ng-if="itemSource!='bh'" class="europeana-label">
+        <ng-switch on="itemSource">
+          <span ng-switch-when="europeana">
+            <en>Europeana</en>
+            <he>Europeana</he>
+          </span>
+          <span ng-switch-when="cjh">
+            <en>Center for Jewish History</en>
+            <he>Center for Jewish History</he>
+          </span>
+        </ng-switch>
 			</div>
 			<item-type type="itemPreviewController.item_type"
-	   			   image="previewData.thumbnail.data"> 
+	   			   image="previewData.thumbnail.data">
 			</item-type>
 		</div>
 	</a>

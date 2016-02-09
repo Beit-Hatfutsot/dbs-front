@@ -16,11 +16,6 @@ var ItemPreviewCtrl = function($element, $state, $scope, itemTypeMap, mjs, notif
     this._rmdialog_is_open = false;
     this.deleted = false;
 
-    jQuery('.mjs').on('hide.bs.dropdown', function(event) {
-        console.log(event);
-        self._rmdialog_is_open = false;
-    });
-
     Object.defineProperty(this, 'rmdialog_is_open', {
         get: function() {
             return self._rmdialog_is_open;

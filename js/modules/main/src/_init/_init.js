@@ -46,23 +46,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
-            name: 'start-result',
-            parent: 'start',
-            url: 'start-result?place&name',
-            controller: 'WizardResultCtrl as wizardResultController',
-            templateUrl: 'templates/main/wizard-result.html'
-        },
-
-        {
-            name: 'wizard-result',
-            url: '/wizard-result?place&name',
-            template: '<wizard-result></wizard-result>',
-            onEnter: ['$stateParams', 'wizard', function($stateParams, wizard) {
-                wizard.search($stateParams.name, $stateParams.place);
-            }]
-        },
-        
-        {
             name: 'item-view',
             url: '/item/:collection/:id',
             controller: 'ItemCtrl as itemController',
@@ -108,43 +91,18 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'ftree-view',
-            parent: 'ftrees',
-            url: '/ftree_view?ind_index',
-            controller: 'FtreeViewController as ftreeViewCtrl',
-            templateUrl: 'templates/main/ftrees/ftree-view.html'
+            url: '/ftree_view/:tree_number/:node_id',
+            controller: 'FtreeViewController as ctrl',
+            templateUrl: 'templates/main/ftrees/ftree-item.html',
+            onEnter: ['header', function(header) {
+                header.show_recent();
+				header.hide_main = true;
+            }],
+            onExit: ['header', function(header) {
+				header.hide_main = false;
+            }]
         },
 
-        {
-            name: 'ftree-view.ftree-item',
-            url: '/ftree_item?individual_id&tree_number',
-            controller: 'FtreeItemController as ftreeItemCtrl',
-            templateUrl: 'templates/main/ftrees/ftree-item.html',
-            resolve: {
-                fromFtreeView: ['$state', function($state) {
-                    return $state.lastState.name === 'ftree-view.ftree-item';
-                }]
-            },
-        },
-        
-        {
-            name: 'ftree-item',
-            url: '/ftree_item?individual_id&tree_number',
-            controller: 'FtreeItemController as ftreeItemCtrl',
-            templateUrl: 'templates/main/ftrees/ftree-item.html',
-            resolve: {
-                fromFtreeView: ['$state', function($state) {
-                    return $state.lastState.name === 'ftree-view.ftree-item';
-                }]
-            },
-            onEnter: ['header', 'fromFtreeView', function(header, fromFtreeView) {
-                if (fromFtreeView) {
-                    header.is_visible = false;
-                }
-            }],
-            onExit: ['header', function(header) {    
-                header.is_visible = true;
-            }]
-        },            
 
         {
             name: 'upload',

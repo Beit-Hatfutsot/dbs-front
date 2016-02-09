@@ -358,9 +358,8 @@ FtreesController.prototype = {
 		 
 		if (!already_selected && individual) {
 			self.selected_index = self.individuals.indexOf(individual);
-			self.$state.go('ftree-view.ftree-item', {
-				ind_index: self.selected_index, 
-				individual_id: individual.II,
+			self.$state.go('ftree-view', {
+				node_id: individual.II,
 				tree_number: individual.GTN
 			});
 		}

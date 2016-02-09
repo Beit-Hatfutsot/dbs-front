@@ -4,6 +4,8 @@
 sudo apt-get install ruby
 sudo apt-get install nginx
 sudo gem install sass
+sudo npm install -g grunt-cli
+sudo npm install -g bower
 npm install
 bower install
 # Gedcom Viewer dependency - run once:
