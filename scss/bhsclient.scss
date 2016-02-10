@@ -7,7 +7,6 @@
 @import "main/footer";
 @import "main/wizard-form";
 @import "main/start";
-@import "main/wizard-result";
 @import "main/item";
 @import "main/mjs";
 @import "main/mjs-widget";
@@ -57,7 +56,7 @@ html {
 		@at-root #app-container {
 			position: relative;
 			height: 100%;
-			background: #eeeeee;
+			background: $gray7;
 
 			.lang-float {
 

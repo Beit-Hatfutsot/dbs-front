@@ -1,6 +1,6 @@
 var FtreeViewController = function ($http, $window, $document, $rootScope,
 							       $scope, $state, $stateParams, apiClient, 
-							       recentlyViewed, ftreeLayout) {
+							       recentlyViewed, langManager, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
 
 	this.$scope = $scope;
@@ -9,6 +9,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 	this.$window = $window;
 	this.apiClient = apiClient;
 	this.recentlyViewed = recentlyViewed;
+	this.langManager = langManager;
 
 	// renderer
 	this.rootId = "ftree-layout";
@@ -24,31 +25,33 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
         individualSize: new Tuple(214,66),
         // - parentSize: (w,h)
         parentSize: new Tuple(152,52),
+        // - grandparentSize: (w,h)
+        grandparentSize: new Tuple(80,30),
         // - partnerSize: (w,h)
         partnerSize: new Tuple(152,52),
         // - stepparentSize: (w,h)
         stepparentSize: new Tuple(52,52),
         // - childSize: (w,h)
-        childSize: new Tuple(94,25),
-        grandchildSize: new Tuple(25,25),
+        childSize: new Tuple(94,30),
+        grandchildSize: new Tuple(30,30),
         // - inlawsSize: (w,h)
-        inlawSize: new Tuple(25,25),
+        inlawSize: new Tuple(30,30),
         // - siblingSize: (w,h)
-        siblingSize: new Tuple(94,25),
+        siblingSize: new Tuple(94,30),
         // - stepsiblingSize: (w,h)
-        stepsiblingSize: new Tuple(25,25),
+        stepsiblingSize: new Tuple(30,30),
         // - siblingSize: (w,h)
         // - parentMargin: (horizontal,bottom)
-        parentMargin: { horizontal:20, vertical:15, bottom:90},
+        parentMargin: { horizontal:40, vertical:15, bottom:90},
         // - partnerMargin: (horizontal,vertical,left)
         partnerMargin: { horizontal:30, vertical:15, left:50 },
         // - childMargins: (horizontal,vertical,top)
         childMargin: { horizontal:40, vertical:15, top:60 },
-        grandchildMargin: { horizontal:2, vertical:20, top:40 },
+        grandchildMargin: { horizontal:2, vertical:28, top:40 },
         // - inlawsMargins: (horizontal,vertical,top)
         inlawMargin: { horizontal:20, vertical:40, top:90 },
         // - siblingMargin: (horizontal,vertical,right)
-        siblingMargin: { horizontal:10, vertical:25, right:30, top: -50 },
+        siblingMargin: { horizontal:10, vertical:34, right:30, top: -50 },
     });
 	/* TODO: dynamiclly load d3
     var scriptTag = document[0].createElement('script');
@@ -69,18 +72,38 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 			  function(event, toState, toParams, fromState, fromParams){ 
 				  if (toState.name == 'ftree-view' && fromState.name == 'ftree-view') {
 					  event.preventDefault(); 
+					  self.detailsShown = true;
 					  self.$state.transitionTo('ftree-view', toParams, {notify: false});
 					  self.load(toParams);
 				  }
 	})
-   
+	document.documentElement.addEventListener('mouseup', function (e) {
+		self.mouseUp(e)
+	});
+
 	this.load($stateParams);
 };
 
 FtreeViewController.prototype = {
 
-	get_fname: function(full_name) {
-		return full_name[0];
+	get_full_name: function (d) {
+		try {
+			return d.name.join(" ");
+		}
+		catch (e) {
+			// something's wrong so we return a smile
+			return "\u263a";
+		}
+	},
+
+	get_fname: function(d) {
+		try {
+			return d.name[0];
+		}
+		catch (e) {
+			// something's wrong so we return a smile
+			return "\u263a";
+		}
 	},
 
 	load: function (params) {
@@ -93,13 +116,15 @@ FtreeViewController.prototype = {
 	  		})
 			.success(function (response) {
 			
-				var name = response.name.join(" ");
+				var name = self.get_full_name(response);
 				self.recentlyViewed.put({
 					params: params,
 					state: 'ftree-view',
 					header: {En: name, He: name}
 				});
 				self.tree_number = params.tree_number;
+				self.detailsShown = true;
+				self.node = response;
 				if ((self.tree === null) || (self.tree.tree_num != self.tree_number)){
 					self.$http.get(self.apiClient.base_url+ ['', 'fwalk',  self.tree_number, "root"].join('/'), {
 						cache: true }).success(function (r) { self.tree = r })
@@ -126,6 +151,7 @@ FtreeViewController.prototype = {
 				id: id,
 				sex: node.sex,
 				name: node.name,
+				deceased: node.deceased,
 				birth_year: node.birth_year,
 				death_year: node.death_year
 			}
@@ -136,6 +162,13 @@ FtreeViewController.prototype = {
 		ret.collapseto = node.collapseto;
 		ret.class = cls;
 		return ret;
+	},
+
+	getChildEP:  function(node) {
+		if (!node.child_ep)
+			return null;
+		return {center: node.child_ep,
+				id: node.id};
 	},
 
 	getVertex:  function(node1,node2,cls) {
@@ -152,8 +185,11 @@ FtreeViewController.prototype = {
 		} else {
 			ret.start = node2.pos.plus(node2.size.mult(0.5));
 		}
-		if ((cls=='sibling') || (cls=='grandchild'))
-			ret.end = node1['child_ep'];
+		if (((cls == 'sibling') || (cls == 'stepsibling')) && node1.hasOwnProperty('cluster_ep')) {
+			ret.end = node1['cluster_ep'];
+		}
+		else if ((cls=='sibling') || (cls=='grandchild'))
+			ret.end = node1['child_ep']
 		else
 			ret.end = node1[cls+'_ep'];
 		if ( !ret.end ) {
@@ -162,7 +198,7 @@ FtreeViewController.prototype = {
 		ret.collapseto = node1.collapseto;
 		// if ( node1.spouse_ofs && ((cls=='sibling') || (cls=='grandchild') || (cls =='child'))) {
 		if ( node1.spouse_ofs && ((cls=='grandchild') || (cls =='child'))) {
-			ret.ofs = node1.spouse_ofs;
+			ret.ofs = node1.spouse_ofs * -2;
 		} else {
 			ret.ofs = 0;
 		}
@@ -176,36 +212,26 @@ FtreeViewController.prototype = {
 			this.layoutEngine.layoutNode(cn);
 		}
 		var data = [],
-		    vdata = [];
+		    vdata = [],
+			cdata = [],
+			siblingsClusters = -1;
 		data.push( this.getElement(cn, 'individual') );
-		if ( 'children' in cn ) {
-			cn.children.forEach(function (child, _child) {
-				data.push( self.getElement(child,'child') );
-				if ( child.parent ) {
-					vdata.push( self.getVertex(child.parent,child,'child') );
-				} else {
-					vdata.push( self.getVertex(cn,child,'child') );
-				}
-				if ( child.children ) {
-					child.children.forEach(function (grandchild, _grandchild) {
-						data.push( self.getElement(grandchild,'grandchild') );
-						vdata.push( self.getVertex(grandchild.parent,grandchild,'grandchild') );
-					});
-				}
-
-				if ( child.partners ) {
-					child.partners.forEach(function (inlaw, _inlaw) {
-						data.push( self.getElement(inlaw,'inlaw') );
-						vdata.push( self.getVertex(child, inlaw,'spouse') );
-					});
-				}
-			})
-		};
 		if ( 'parents' in cn ) {
 			cn.parents.forEach(function (parent, _parent) {
 				data.push( self.getElement(parent,'parent') );
 				if ( _parent == 0 ) {
+					cdata.push( self.getChildEP(parent) );
 					vdata.push( self.getVertex(parent,cn,'child') );
+					if (parent.hasOwnProperty("cluster_ep")) {
+						var line = new Object({
+							class: "line",
+							start: parent.child_ep,
+							end: parent.cluster_ep,
+							ofs: 0,
+							id: parent.id+parent.name+':cluster_up'
+						});
+						vdata.push(line);
+					}
 				} else {
 					vdata.push( self.getVertex(cn.parents[0],parent,'spouse') );
 				}
@@ -213,6 +239,7 @@ FtreeViewController.prototype = {
 					parent.parents.forEach( function (grandparent, _grandparent) {
 						data.push( self.getElement(grandparent,'grandparent') );
 						if ( _grandparent == 0 ) {
+							cdata.push( self.getChildEP(grandparent) );
 							vdata.push( self.getVertex(grandparent,parent,'child') );
 						} else {
 							vdata.push( self.getVertex(parent.parents[0],grandparent,'spouse') );
@@ -226,9 +253,23 @@ FtreeViewController.prototype = {
 							data.push( self.getElement(stepparent,'stepparent') );
 							vdata.push( self.getVertex(stepparent, parent, 'spouse') );
 						}
+						if (stepparent.children.length > 0) {
+							cdata.push( self.getChildEP(stepparent) );
+							if (stepparent.hasOwnProperty('cluster_ep')) {
+								var line = new Object({
+									class: "line",
+									start: stepparent.child_ep,
+									end: stepparent.cluster_ep,
+									ofs: siblingsClusters*5,
+									id: stepparent.id+stepparent.name+':cluster_up'
+								});
+								vdata.push(line);
+								siblingsClusters--;
+							};
+						}
 						stepparent.children.forEach( function (stepsibling) {
 							data.push( self.getElement(stepsibling,'stepsibling') );
-							vdata.push( self.getVertex(stepparent, stepsibling, 'child') );
+							vdata.push( self.getVertex(stepparent, stepsibling, 'stepsibling') );
 						});
 					});
 				}
@@ -238,12 +279,15 @@ FtreeViewController.prototype = {
 			cn.partners.forEach(function (partner) {
 				data.push( self.getElement(partner,'partner') );
 				vdata.push( self.getVertex(partner,cn,'spouse') );
+				cdata.push( self.getChildEP(partner) );
 				partner.children.forEach(function (child) {
 					data.push( self.getElement(child,'child') );
 					vdata.push( self.getVertex(partner, child,'child') );
 					child.partners.forEach(function (inlaw) {
 						data.push( self.getElement(inlaw,'inlaw') );
 						vdata.push( self.getVertex(inlaw, child, 'spouse') );
+						if (inlaw.children.length > 0)
+							cdata.push( self.getChildEP(inlaw) );
 						inlaw.children.forEach(function (grandchild) {
 							data.push( self.getElement(grandchild,'grandchild') );
 							vdata.push( self.getVertex(inlaw, grandchild, 'grandchild') );
@@ -255,16 +299,23 @@ FtreeViewController.prototype = {
 		if ( 'siblings' in cn ) {
 			var parent = cn.parents[0];
 			cn.siblings.forEach(function  (sibling, _sibling) {
-				data.push( self.getElement(sibling,
-										   sibling.step?'stepsibling':'sibling') );
+				data.push( self.getElement(sibling, 'sibling') );
 				vdata.push( self.getVertex(parent, sibling, 'sibling') );
 			})
 		}
 
 		function px(value) { return value + 'px'; };
+		function get_sex(d) {
+			return (d.sex !== undefined) ? d.sex : 'U';
+		};
+		var avatars = {'M': 'images/man.png',
+					   'F': '/images/woman.png',
+					   'U': '/images/unknown.png'};
+		this.vertical_pos = (self.langManager.lang == 'he')?'right':'left';
+		this.vertical_transform = (self.langManager.lang == 'he')?
+			'translate(1150,0) scale(-1,1)':'translate(0,0)';
 
 		// NODES
-		this.data = data;
 		var els = d3.select('#' + this.rootId+" .nodes").selectAll(".node").data(data, function(d) { return d.id; });
 		els.classed('old',true).classed('new', false);
 		var new_els = els.enter();
@@ -275,52 +326,56 @@ FtreeViewController.prototype = {
 			.classed('new', true)
 			.classed('clickable', function (d) { return d.id !== undefined; })
 			.on("click", function (d) {
-				if (d.id)
+				if (d.class == 'individual') {
+					self.detailsShown = !self.detailsShown;
+					self.$scope.$apply();
+				}
+				else if (d.id)
 					self.$state.go('ftree-view',
 							   {tree_number: self.tree_number, node_id: d.id});
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
-			.attr('sex', function (d) { return d.hasOwnProperty('sex') ? d.sex : 'U';})
-			.attr('title', function (d) { 
-				try {
-					return d.name.join(" ");
-				}
-				catch (e) {
-					// something's wrong so we return a smile
-					return "\u263a";
-				}
-			})
+			.attr('sex', get_sex)
+			.attr('title', function (d) { return self.get_full_name(d); })
+			.style('top', px(cn.pos.y))
+			.style(self.vertical_pos, px(cn.pos.x))
 			.style('width',function(d) { return px(d.size.x); })
-			.style('height',function(d) { return px(d.size.y); })
+			.style('height',function(d) { return px(d.size.y); });
 
-		
 		new_divs.append('div')
 				.classed('avatar', true)
+				.classed('deceased', function (d) { return d.deceased; })
+				.append('img')
+				.attr('src', function (d) {
+					var sex = get_sex(d);
+					return avatars[sex];
+				});
+
 		new_divs.append('div')
-				.classed('dates', true).text(function(d) { 
+				.classed('dates', true)
+				.classed('noselect', true)
+				.text(function(d) { 
 				 	var birth = d.birth_year ? d.birth_year : '?';
 				 	var death =  d.death_year ? d.death_year : '?';
 				 	return birth + ' ' + death});
 		new_divs.append('div')
 			    .classed('name', true)
-          .append('p', true).text(function(d) {
-            return ['individual', 'partner', 'parent']
-				   .indexOf(d.class) >= 0 ? d.name.join(" "):
-					   				        self.get_fname(d.name)
-            });
+				  .classed('noselect', true)
+				  .text(function(d) {
+					return ['individual', 'partner', 'parent']
+						   .indexOf(d.class) >= 0 ? self.get_full_name(d):
+													self.get_fname(d)
+					});
 
 
 		var position_nodes = function(sel) {
-			sel
-				.style('opacity',1)
-				.style('left',function(d) { return px(d.pos.x); })
+			sel.style('opacity',1)
 				.style('top',function(d) { return px(d.pos.y); })
+				.style(self.vertical_pos,function(d) { return px(d.pos.x); })
 				.style('width',function(d) { return px(d.size.x); })
 				.style('height',function(d) { return px(d.size.y); })
 				.style('font-size',function(d) { 
-					return d.class == 'individual'? "20px": px(d.size.y/2.5); })
-
-
+					return d.class == 'individual'? "20px": px(d.size.y/2.5); });
 		}
 
 		var got_old = old_els.size() > 0;
@@ -335,7 +390,7 @@ FtreeViewController.prototype = {
 
 		old_els
 			.style('top',function(d) { return px(d.collapseto.y); })
-			.style('left',function(d) { return px(d.collapseto.x); })
+			.style(self.vertical_pos,function(d) { return px(d.collapseto.x); })
 			.style('opacity',0)
 			.transition('exit').duration(500)
 			.remove()
@@ -346,13 +401,28 @@ FtreeViewController.prototype = {
 			.style('width',function(d) { return px(d.size.x); })
 			.style('height',function(d) { return px(d.size.y); })
 
+		// CIRCLES
+		var circles = d3.select('.vertices').selectAll(".child-ep").data(cdata, function(d) { return d.id; }),
+		    new_cs = circles.enter(),
+		    old_cs = circles.exit(),
+		    new_circles = new_cs.append('circle');
+		circles.attr('cx', function(d) { return d.center.x })
+		       .attr('cy', function(d) { return d.center.y  }) ;
+		old_cs.remove();
+		new_circles.classed('new', true)
+				   .classed('child-ep', true)
+				   .attr('r', function(d) { return  "4"})
+				   .attr('fill','none')
+				   .attr("transform", self.vertical_transform)
+		           .transition('new_circles').duration(0).delay(1500)
+				    .attr('fill','#aaaaaa');
 		// VERTICES
-		this.vdata = vdata;
 		var vertices = d3.select('.vertices').selectAll(".vertex").data(vdata, function(d) { return d.id; }),
 		    new_vxs = vertices.enter(),
 		    old_vxs = vertices.exit(),
 		    new_lines = new_vxs.append('path');
 		vertices.attr('class','vertex old');
+
 
 		var lineFunction = function(p) {
 			var midpoint = (p.start.y + p.end.y) / 2;
@@ -365,9 +435,10 @@ FtreeViewController.prototype = {
 				return true;
 			});
 			midpoint += p.ofs;
-			// if ((p.class=="grandchild") || (p.class=="sibling"))
-			if ((p.class=="grandchild"))
-				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y], [p.end.x,midpoint], [p.end.x, p.end.y]]
+			if ((p.class=="stepsibling") || (p.class=="sibling"))
+				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-13], [p.end.x, p.end.y]]
+			else if (p.class=="grandchild")
+				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-13], [p.end.x,midpoint], [p.end.x, p.end.y]]
 			else
 				points =[ [p.start.x, p.start.y], [p.start.x, midpoint], [p.end.x,midpoint], [p.end.x, p.end.y]];
 			
@@ -386,7 +457,7 @@ FtreeViewController.prototype = {
 
 		new_lines.attr('class','vertex new')
 					   .style('opacity',0)
-					   .style('stroke','#666666')
+					   .style('stroke','#aaaaaa')
 					   .style('stroke-width',2)
 					   .style('fill','none')
 					   .attr('d', function(d) { return lineFunction(d); })
@@ -401,7 +472,7 @@ FtreeViewController.prototype = {
 
 
 		this.pannedX = this.pannedY = 0;
-		vertices.attr("transform", "translate(0,0)");
+		vertices.attr("transform", self.vertical_transform);
 		var position_vertex = function(sel) {
 			return sel.style('opacity',1)
 			          .attr('d', function(d) { return lineFunction(d); })
@@ -424,10 +495,14 @@ FtreeViewController.prototype = {
 		// caching the nodes & vertices for panning
 		this.d3Nodes = d3.select('#' + this.rootId + " .nodes")
 			.selectAll(".node")
-			.data(this.data, function(d) { return d.id; })
+			.data(data, function(d) { return d.id; })
 		this.d3Vertices = d3.select('.vertices')
 			.selectAll(".vertex")
-			.data(this.vdata, function(d) { return d.id; })
+			.data(vdata, function(d) { return d.id; })
+		this.d3Circles = d3.select('.vertices')
+			.selectAll(".child-ep")
+			.data(cdata, function(d) { return d.id; })
+
 		this.lastPan = 0;
 	},
 
@@ -459,32 +534,52 @@ FtreeViewController.prototype = {
 			y = e.clientY - this.lastMouseY,
 			elapsed = Date.now() - this.lastPan,
 		    transform;
-			
+
 		if ( elapsed < 60 ) return; 
 		this.pannedX += x;
 		this.pannedY += y;
-		transform = "translate("+this.pannedX+','+this.pannedY+")";
+		transform = "translate("+this.pannedX+','+this.pannedY+")"+this.vertical_transform;
 
 		this.lastMouseX = e.clientX;
 		this.lastMouseY = e.clientY;
 
 		function px(value) { return value + 'px'; };
 
-		this.data.forEach(function (d) {
-			d.pos.x += x;
-			d.pos.y += y;
-		});
-
 		this.d3Nodes
 			.transition('pan').duration(0)
-			.style('left', function (d) { return px(d.pos.x);})
-			.style('top', function (d) { return px(d.pos.y); });
+			.style(self.vertical_pos, function (d) { 
+				if (self.vertical_pos == 'left')
+					d.pos.x += x;
+				else
+					d.pos.x -= x;
+				return px(d.pos.x);
+			})
+			.style('top', function (d) {
+				d.pos.y += y;
+				return px(d.pos.y);
+			});
 		this.d3Vertices
 			.transition('pan').duration(0)
 			.attr('transform',  transform);
+		this.d3Circles
+			.transition('pan').duration(0)
+			.attr('cx',  function (d) {
+				if (self.vertical_pos == 'left')
+                    d.center.x += x;
+                else
+                    d.center.x -= x;
+				return d.center.x;
+			})
+			.attr('cy',  function (d) {
+				 d.center.y += y;
+				 return d.center.y;
+			});
 		d3.timer.flush();
 		this.lastPan = Date.now()
 	}
 };
 
-angular.module('main').controller('FtreeViewController', ['$http', '$window', '$document', '$rootScope', '$scope', '$state', '$stateParams', 'apiClient', 'recentlyViewed', 'ftreeLayout', FtreeViewController]);
+angular.module('main').controller('FtreeViewController', 
+			  ['$http', '$window', '$document', '$rootScope', '$scope',
+			   '$state', '$stateParams', 'apiClient', 'recentlyViewed', 
+			   'langManager', 'ftreeLayout', FtreeViewController]);

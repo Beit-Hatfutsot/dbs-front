@@ -52,6 +52,7 @@ angular.module('main').
 						not_cached_items	= [];
 
 					items_arr.forEach(function(item_string) {
+						if(!item_string) return;
 						var item_string_split	= item_string.split('.'),
 							collection_name 	= item_string_split[0],
 							item_id				= item_string_split[1],

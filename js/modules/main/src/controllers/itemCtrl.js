@@ -74,17 +74,18 @@ ItemCtrl.prototype = {
 					});
 				self.item_data = item_data;
 				self.content_loaded = true;
-				self.item.get_items(item_data.related).
-					then(function(related_data) {
-						self.parse_related_data(related_data);	
-						self.notification.put({
-							en: 'Item loaded successfuly.',
-							he: 'הפריט נטען בהצלחה.' 
+				if (item_data.related)
+					self.item.get_items(item_data.related).
+						then(function(related_data) {
+							self.parse_related_data(related_data);	
+							self.notification.put({
+								en: 'Item loaded successfuly.',
+								he: 'הפריט נטען בהצלחה.' 
+							});
+						}, 
+						function() {
+							self.fail();
 						});
-					}, 
-					function() {
-						self.fail();
-					});
 			}, 
 			function() {
 				self.fail();

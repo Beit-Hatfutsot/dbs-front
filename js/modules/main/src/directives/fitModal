@@ -1,0 +1,23 @@
+angular.module('main').directive('fitModal', ['$timeout', function($timeout) {
+    return {
+        restrict: 'A',
+        scope: {},
+        link: function(scope, element) {
+            
+            $timeout(function() {
+                var elementwidth = element[0].naturalWidth,
+                    elementheight = element[0].naturalHeight,
+                    /*modalwidth = document.getElementsByClassName("gallery-modal__stage"),
+                    wrappedmodalwidth = angular.element(modalwidth);*/
+                    elementmodal = document.getElementsByClassName('gallery-modal__stage');
+                    elementmodalheight = angular.element(elementmodal).height;
+                
+                if (elementheight !== undefined && elementheight > elementmodalheight) {
+                    elementheight == elementmodalheight;  
+                    element.css('height', '100%');
+                    element.css('height', 'auto');
+                }
+            });
+        }
+    }
+}]);

@@ -1,5 +1,5 @@
-<a ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='bh'? '_self' : '_blank'}}">
-	<div class="item-preview">
+<div class="item-preview" ng-hide='itemPreviewController.deleted'>
+	<a ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='bh'? '_self' : '_blank'}}">
 		<div class="thumbnail" ng-if="previewData.thumbnail.data">
 			<img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
 				 alt="Preview Image"/>
@@ -54,5 +54,62 @@
 	   			   image="previewData.thumbnail.data">
 			</item-type>
 		</div>
+	</a>
+	<div ng-if="previewData.branches" class="mjs" dropdown dropdown-toggle
+		 on-toggle="itemPreviewController.rmdialog_is_open=false">
+		<span class="mjs__desc">
+			<en>This item appears in: </en>
+			<he>נושה זה מופיע ב:</he>
+		</span>
+		<ul class="branch_preview vertical-middle">
+			<li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]" ng-show="previewData.branches[idx]"></li>
+		</ul> 
+		<span class="arrow-down vertical-middle"></span>
+		<div class="mjs_branches_popover" ng-click="itemPreviewController.stopPropagation($event)">
+		    <div class="mjs_branches_popover__line" ng-repeat="i in [0,1,2,3]" ng-if="previewData.branches">
+		        <icon  class="edit-branch-icon" position="[-231, -127]"></icon>
+		        <input  id="{{previewData.item_string}}--branch--{{i+1}}" 
+		                type="checkbox" 
+		                ng-model="previewData.branches[i]" 
+		                ng-click="itemPreviewController.update_branch($event, i)"/>
+		        <label  class="branch--{{i+1}}" 
+		                for="{{previewData.item_string}}--branch--{{i+1}}"
+		                ng-class="{'checked': previewData.branches[i]}">
+		        </label>
+		        <div class="mjs_branches_popover__line__desc">
+		            <en>{{itemPreviewController.mjs.data.branches[i] || "Name this family branch"}}</en>
+		            <he>{{itemPreviewController.mjs.data.branches[i] || "בחרו שם עבור ענף משפחתי זה"}}</he>
+		        </div>
+		    </div>
+		    <div class="mjs_branches_popover__line rm-popover"
+		    	 ng-click="itemPreviewController.rmdialog_is_open = !itemPreviewController.rmdialog_is_open">
+		        <icon class="remove-icon" position="[-230, -105]"></icon>
+		        <div class="mjs_branches_popover__line__desc">
+		            <en>Remove this item from my story</en>
+		            <he>הסר נושא זה מהסיפור שלי</he>
+		        </div>
+		        <div class="rmdialog" ng-show="itemPreviewController.rmdialog_is_open">
+		            <span class="rmdialog__title">
+		                <en>Are you sure you want to remove this?</en>
+		                <he>Are you sure you want to remove this?</he>
+		            </span>
+		           	<div class="rmdialog__actions ">
+		                <button class="rmdialog__actions__action" ng-click="itemPreviewController.remove_from_story()">
+		                    <icon class="rmdialog__actions__action__remove-icon" position="[-230, -105]"></icon>
+		                    <en>Yes</en>
+		                    <he>כן</he>
+		                </button>
+		           	</div>
+	        	</div>
+		    </div>
+		    <div class="close-button-back" ng-hide="itemPreviewController.rmdialog_is_open" dropdown-toggle>
+		        <span class="close-button">x</span>
+		    </div>
+		</div>
 	</div>
-</a>
+</div>
+
+
+
+
+

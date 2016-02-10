@@ -1,28 +1,21 @@
-var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, notification, $window) {
+var ItemPreviewCtrl = function($element, $state, $scope, itemTypeMap, mjs, notification, $window, $document) {
+    
+    var self = this;
+    this.$document = $document;
     this.$state = $state;
     this.$window = $window;
     this.mjs = mjs;
     this.$scope = $scope;
     this.notification = notification;
     this.item_string = itemTypeMap.get_item_string($scope.previewData);
+    this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+    this.branches = $scope.previewData.branches;
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
-	var unitType = $scope.previewData.UnitType;
-	this.item_type = 'unknown';
-	try {
-		unitType.every(function (t) {
-			var m = itemTypeMap.get_type(t);
-			if ((m !== undefined) && (m != 'unknown')) {
-				this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
-				return false
-			}
-			return true
-		});
+    this.element = $element.find('div')[0];
+    this.rmdialog_is_open = false;
+    this.deleted = false;
 
-	}
-	catch (e) {
-		this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
-	}
 };
 
 ItemPreviewCtrl.prototype = {
@@ -40,24 +33,27 @@ ItemPreviewCtrl.prototype = {
         }
     },
 
-    remove_from_mjs: function($event) {
-    	$event.stopPropagation();
-    	
-    	var self = this;
+    remove_from_story: function() {
+        var self = this;
+        this.mjs.remove_from_story(this.item_string).success(function() {
+            self.deleted = true;
+        });
+    },
 
-    	this.mjs.remove(self.item_string).
-			then(function() {
-				self.notification.put({
-					en: 'Item removed',
-					he: 'הפריט הוסר'
-				});
-			}, function() {
-				self.notification.put({
-					en: 'Failed to remove item',
-					he: 'הסרת הפריט נכשלה'
-				});
-			});
-    }
+    update_branch: function($event, branch) {
+        if (this.branches[branch]) {
+            
+            this.mjs.add_to_branch(this.item_string, branch); 
+        }
+        else {
+            $event.stopPropagation();
+       }
+    },
+
+    stopPropagation: function($event) {
+        $event.stopPropagation();
+    },
+
 };
 
-angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', 'mjs', 'notification', '$window', ItemPreviewCtrl]);
+angular.module('main').controller('ItemPreviewCtrl', ['$element', '$state', '$scope', 'itemTypeMap', 'mjs', 'notification', '$window', '$document', ItemPreviewCtrl]);

@@ -1,3 +1,6 @@
+#below-header {
+    background-color: white;
+}
 #ftree-layout-container {
 
     height: 600px;
@@ -32,33 +35,34 @@
         }
 
         .avatar {
-			width: 59px;
-			height: 59px;
-			background: url('/images/icons.png');
+			width: 56px;
+			height: 56px;
+            @include border-radius(50%);
+            border-width: 0;
+            text-align: center;
+            img {
+                @include vertical-align();
+                display: inline-block;
+                width: auto;
+                height: 34px;
+            }
 
 			.en & {
 				float: left;
+                margin-right: 4px;
 			}
 			.he & {
 				float: right;
+                margin-left: 4px;
 			}
     	}
-
+        .deceased {
+            border: 4px solid $gray2;
+        }
       	.name {
-
-			.en & {
-				float: right;
-			}
-			.he & {
-				float: left;
-			}
-
-			p {
-				position: absolute;
-				top: 50%;
-    			transform: translate(0, -50%);
-   				margin: 0;
-			}
+            font-size: 12px;
+            overflow: hidden;
+            @include vertical-align()
 		}
     }
 
@@ -66,77 +70,89 @@
     .node[role="grandchild"], .node[role="inlaw"], .node[role="stepsibling"] {
 
 		.avatar {
-			zoom: 0.4;
-            -moz-transform: scale(0.4);
-            -moz-transform-origin: 1px 1px;
+			width: 30px;
+            height: 30px;
+            img {
+                height:16px;
+            }
 		}
+        
+        .deceased {
+            border: 2px solid $gray2;
+        }
     }
-    .node[role="child"], .node[role="grandparent"], .node[role="sibling"] {
+    .node[role="grandparent"], .node[role="sibling"] {
 
-	    .name {
-	    	width: 70%;
-			font-size: 10px;
-			font-weight: 600;
-		}
+        img {
+            height: 28px;
+        }
+        .deceased {
+            border: 2px solid $gray2;
+        }
 	}
 
-    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"] {
+    .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"],
+    .node[role="stepsibling"] {
         .name {
             display: none;
         }
     }
     .node[role="stepparent"], .node[role="parent"], .node[role="partner"]  {
 		.avatar {
-			zoom: 0.9;
-            -moz-transform: scale(0.9);
-            -moz-transform-origin: 1px 1px;
+			width:52px;
+            height:52px;
 		}
+        img {
+            height:30px;
+        }
+        .deceased {
+            border: 3px solid $gray2;
+        }
     }
-	.node[role="parent"], .node[role="partner"] {
-		.name {
-	    	width: 60%;
-			font-size: 12px;
-		}
-	}
 
     .node[role="individual"] {
     	border: 5px solid $yellow4;
 		z-index: 2;
         cursor: help;
+        .avatar { margin-right: 0; }
 
 		.dates {
 			display: block;
+            position: relative;
 			word-spacing: 100px;
 			text-align: right;
-			width: 94px;
+			width: 74px;
 			font-size: 11px;
-			position: absolute;
 			height: 100%;
 			line-height: 2.5;
-			top: 0;
 			padding: 2px 10px;
 			z-index: -1;
 
 			.en & {
-				left: 0;
+				float: left;
+                left: -40px;
+                margin-right: -36px;
+                padding-left: 42px;
 			}
 			.he & {
-				right: 0;
+				float: right;
+                right: -40px;
+                padding-right: 42px;
+                margin-left: -36px;
 			}
 		}
 
 		.name {
 			font-size: 14px;
-			width: 104px;
 			font-weight: 700;
 		}
 
     }
-    .node, .node[sex="U"] {
+    .node[sex="U"] {
         background-color: $gray6;
 
         .avatar {
-			background-position: -197px -541px;
+            background-color: $gray2;
 		}
 
         .dates {
@@ -148,7 +164,8 @@
         background-color: $red6;
 
         .avatar {
-			background-position: -197px -473px;
+            background-color: $red2;
+            .he & { @include flip(); }
 		}
 
         .dates {
@@ -160,7 +177,8 @@
         background-color: $blue6;
 
         .avatar {
-			background-position: -197px -404px;
+            background-color: $blue2;
+            .he & { @include flip(); }
 		}
         .dates {
             background-color: $blue4;
@@ -173,115 +191,6 @@
         text-align: center;
     }
 
-.individual, .parent, .partner, .sibling, .child, .grandparent, .grandchild {
-			@include border-radius(50px);
-			z-index: 1;
-		
-			/*&--female {
-				background-color: #f6e1de;
-			}*/
-
-			.notAlive {
-				position: absolute;
-				width: 20px;
-				height: 100%;
-				background-color: #000000;
-
-				.en & {
-					left: 32px;
-				}
-				.he & {
-					right: 32px;
-				}
-			}
-
-			&__more-info {
-			    position: relative;					
-
-				.en & {
-					left: 86px;
-				}
-				.he & {
-					right: 86px;
-				}
-
-				&.open {
-					.individual__more-info__person-info {
-						display: block;
-					}
-				}
-
-				&__icon {
-					position: absolute;
-					width: 11px;
-					height: 11px;	
-					top: 22px;	
-					@include hover-pointer();
-
-					.en & {
-						left: 0px;
-					}
-					.he & {
-						right: 0px;
-					}
-				}
-
-				&__person-info {
-					position: relative;
-					z-index: -1;
-					font-weight: 10px;
-					display: none;
-					width: 100%;
-					color: #666666;
-					background-color: #fee1b5;
-					border-bottom: 5px solid #fbb034;
-					top: 8px;
-					padding-top: 30px;
-					padding-bottom: 10px;
-					overflow: hidden;
-
-					.en & {
-						right: 85px;
-						padding-left: 10px;
-					}
-					.he & {
-						left: 85px;
-						padding-right: 10px;
-					}
-					&__close-button {
-						position: absolute;
-						width: 20px;
-						height: 20px;
-						background-color: #fbb034;
-						@include border-radius(10px);
-
-						.en & {
-							left: 46%;
-						}
-						.he & {
-							right: 46%;
-						}
-					}
-					&__arrow-up {
-						position: absolute;
-						width: 0; 
-						height: 0; 
-						border-left: 7px solid transparent;
-						border-right: 7px solid transparent;
-						border-bottom: 7px solid #ffffff;
-						bottom: 0px;
-
-						.en & {
-							left: 48%;
-						}
-						.he & {
-							right: 47%;
-						}
-					}
-				}
-			}
-
-		}
 
 }
 
@@ -296,20 +205,25 @@
 		margin: 0 auto;
 		background: #ffffff;
 		@include border-radius(4px);
+        border: 1px solid #aaaaaa;
 
 		.ftree-title {
 			position: relative;
 			display: block;
 			width: 100%;
 			height: 50px; 
-			border-bottom: 2px solid #f5f5f5;
 			background-color: $gray6;
 			color: black;
-            padding: 0 0 0 20px;
 
             .pull-right {margin-top: 0; position: relative; height: inherit; }
-            .en & .pull-right { float: right; }
-            .he & .pull-right { float: left; }
+            .en & {
+                padding: 0 0 0 20px;
+                .pull-right { float: right; }
+            }
+            .he & {
+                padding: 0 20px 0 0px;
+                .pull-right { float: left; }
+            }
 
 
             h2 {
@@ -331,7 +245,7 @@
                 @include vertical-align();
 
 				.en & {
-					float: left; 
+					float: left;
                     margin-right: 14px;
 				}
 
@@ -351,13 +265,20 @@
                 height: 18px;
 			}
 			&__back {
-                float: left;
 			  	background-color: #bf311a;
-				width: 164px;
 				height: 100%;
                 color: #ffffff;
                 height: 48px;
-                padding-left: 7px;
+                .en & {
+                    float: left;
+                    padding-left: 7px;
+                    width: 164px;
+                }
+                .he & {
+                    float: right;
+                    padding-right: 7px;
+                    width: 194px;
+                }
 
 				&:hover {
 					background-color: #666666;
@@ -461,5 +382,44 @@
             }
 		}
 	}
+}
+
+#ftree-node-details {
+    position: absolute;
+    top: 56px;
+    background-color: $yellow7;
+    width: 200px;
+    overflow: hidden; 
+    z-index: 10;
+    line-height: 18px;
+    padding: 0;
+    @include box-shadow(0 0 10px 0px $gray4);
+    .en & {
+        right: 0;
+        .pull-right { float: right; }
+    }
+    .he & {
+        left: 0;
+        .pull-right { float: left; }
+    }
+
+    .header {
+        padding: 0.2em;
+        background-color: $yellow5;
+        width: 100%;
+        line-height: 28px;
+        font-size: 120%;
+        font-weight: bold;
+    }
+    .body {
+        padding: 0.2em;
+        height: 554px;
+        overflow: auto;
+    }
+    h3 {
+        line-height: 10px;
+        font-size: inherit;
+        font-weight: bold;
+    }
 }
 

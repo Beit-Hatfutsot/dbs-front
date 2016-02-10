@@ -46,23 +46,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
-            name: 'start-result',
-            parent: 'start',
-            url: 'start-result?place&name',
-            controller: 'WizardResultCtrl as wizardResultController',
-            templateUrl: 'templates/main/wizard-result.html'
-        },
-
-        {
-            name: 'wizard-result',
-            url: '/wizard-result?place&name',
-            template: '<wizard-result></wizard-result>',
-            onEnter: ['$stateParams', 'wizard', function($stateParams, wizard) {
-                wizard.search($stateParams.name, $stateParams.place);
-            }]
-        },
-        
-        {
             name: 'item-view',
             url: '/item/:collection/:id',
             controller: 'ItemCtrl as itemController',
