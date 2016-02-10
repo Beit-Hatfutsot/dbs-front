@@ -13,17 +13,9 @@ var ItemPreviewCtrl = function($element, $state, $scope, itemTypeMap, mjs, notif
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
     this.element = $element.find('div')[0];
-    this._rmdialog_is_open = false;
+    this.rmdialog_is_open = false;
     this.deleted = false;
 
-    Object.defineProperty(this, 'rmdialog_is_open', {
-        get: function() {
-            return self._rmdialog_is_open;
-        },
-        set: function(val) {
-            self._rmdialog_is_open = val;
-        }
-    });
 };
 
 ItemPreviewCtrl.prototype = {
