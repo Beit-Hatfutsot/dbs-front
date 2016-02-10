@@ -52,6 +52,7 @@ MjsController.prototype = {
 			})
 			self.item.get_items(items_ids).then (function (ret) {
 				self.mjs_data = [];
+				self.items_counter = [0, 0, 0, 0];
 				self.mjs.data.items.forEach(function(i, _i) {
 					ret[_i].branches = i.branches;
 					ret[_i].item_string = i.id;
