@@ -1,4 +1,5 @@
 angular.module('main').service('itemTypeMap', function() {
+
 	var map = {
 		0: 'genTreeIndividuals',
 		1: 'photoUnits',
@@ -10,7 +11,11 @@ angular.module('main').service('itemTypeMap', function() {
     	'VIDEO': 'movies',
     	'TEXT': 'text',
     	'SOUND': 'audio',
-    	'3D': '3D'
+    	'3D': '3D',
+        'Photographs' : 'photoUnits',
+        'Photograph albums' : 'photoUnits',
+        'Photographic portraits' : 'photoUnits',
+        'Manuscripts': 'text',
 	};
 
 	this.get_type = function(description_code) {
@@ -19,7 +24,7 @@ angular.module('main').service('itemTypeMap', function() {
 			type = map[description_code];
 		}
 		else {
-			type = 'genTreeIndividuals';
+			type = 'unkown';
 		} 
 
 		return type;

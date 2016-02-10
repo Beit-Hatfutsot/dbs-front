@@ -1,24 +1,17 @@
-<ng-switch on="mjsItemCtrl.collection_name == 'genTreeIndividuals'">
-	<!-- family trees / individuals -->
-	<div ng-switch-when="true" class="item-thumbnail item-thumbnail--text" draggable="{{nonDraggable ? false : true}}" data="item">
-		{{item.FN + ' ' + item.LN}}
-	</div>
-	<!-- regular items -->
-	<span ng-switch-default>
-		<ng-switch on="item.thumbnail.data == ''">
-			<div class="item-thumbnail item-thumbnail--text" ng-switch-when="true" draggable="{{nonDraggable ? false : true}}" data="item">
-				<div class="title">
-					<en>{{item.Header.En}}</en>
-					<he>{{item.Header.He}}</he>
-				</div>
-			</div>
-			<div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" draggable="{{nonDraggable ? false : true}}" data="item">
-				<img ng-src="data:image/jpeg;base64,{{item.thumbnail.data}}" alt="Item Thumbnail Image" fit-thumb>
-				<div class="title">
-					<en>{{item.Header.En}}</en>
-					<he>{{item.Header.He}}</he>
-				</div>
-			</div>
-		</ng-switch>
-	</span>
-</ng-switch>
+<span>
+  <ng-switch on="item.thumbnail === undefined || item.thumbnail == ''">
+    <div class="item-thumbnail item-thumbnail--text" ng-switch-when="true" draggable="{{nonDraggable ? false : true}}" data="item">
+      <div class="title">
+        <en>{{item.header.En}}</en>
+        <he>{{item.header.He}}</he>
+      </div>
+    </div>
+    <div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" draggable="{{nonDraggable ? false : true}}" data="item">
+      <img ng-src="data:image/jpeg;base64,{{item.thumbnail}}" alt="Item Thumbnail Image" fit-thumb>
+      <div class="title">
+        <en>{{item.header.En}}</en>
+        <he>{{item.header.He}}</he>
+      </div>
+    </div>
+  </ng-switch>
+</span>

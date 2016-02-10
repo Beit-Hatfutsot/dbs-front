@@ -39,10 +39,10 @@ angular.module('auth').
 			 * A call to this method opens a Sign-in/Register dialog (modal). 
 		     */
 	  		authenticate: function(config) {
-	  			var body = document.getElementsByTagName('body')[0];
+				var body = angular.element(document.getElementsByTagName('body')[0]);
 
 	  			if ( !(this.is_signedin()) ) {
-	  				body.addClassName('backdrop');
+	  				body.addClass('backdrop');
 				    angular.element()
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
