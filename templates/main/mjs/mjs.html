@@ -83,7 +83,8 @@
 		<div class="item-preview-wrapper">
 	    	<item-preview ng-repeat="item in mjsCtrl.mjs_data" 
 	    		ng-if="(mjsCtrl.selected_branch == 0) || item.branches[mjsCtrl.selected_branch-1]"
-	    		preview-data="item">
+	    		preview-data="item"
+	    		item-source="bh">
 	    	</item-preview>
 		</div>
 	</div>
