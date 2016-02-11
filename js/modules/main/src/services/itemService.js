@@ -8,11 +8,18 @@ angular.module('main').
 
 		var item_service = {
 
+			get_string: function(collection_name, item_id) {
+				return [collection_name, item_id].join('.');
+			},
+			get_data_string: function(item_data) {
+				return this.get_string(itemTypeMap.get_collection_name(item_data),item_data._id)
+			},
+
 			get: function(collection_name, item_id) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
-						item_string 		= [collection_name, item_id].join('.'),
+						item_string 		= self.get_string(collection_name, item_id),
 						cached				= cache.get(item_id, collection_name); 
 
 					if (cached.isNotEmpty()) {

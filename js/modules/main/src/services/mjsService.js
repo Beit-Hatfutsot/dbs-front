@@ -1,8 +1,10 @@
 angular.module('main').
-	factory('mjs', ['$http', '$resource', 'apiClient', function($http, $resource, apiClient) {
-		var mjsResource = $resource(apiClient.urls.mjs, null, {
-			post: {method: 'POST'},
-		});
+	factory('mjs', ['$http', '$resource', 'apiClient', '$rootScope', 'item',
+		function($http, $resource, apiClient, $rootScope, item) {
+		var self = this;
+		self.item = item;
+
+		var mjsResource = $resource(apiClient.urls.mjs);
 
 		var mjs = {
 			data: mjsResource.get(),
@@ -16,7 +18,7 @@ angular.module('main').
 			},
 
 			add: function(item_string) {
-				return mjsResource.post(item_string).$promise;
+				return mjsResource.save(item_string).$promise;
 			},
 
 			remove_from_story: function(item_string) {
@@ -29,25 +31,30 @@ angular.module('main').
 
 			remove_from_branch: function(item_string, branch_num) {
 				$http.delete(apiClient.urls.mjs + '/' + (parseInt(branch_num) + 1) + '/' + item_string);
-			},
-
-			in_mjs: function(item_string) {
-				var in_mjs = false;
-
-				if (this.data.hasOwnProperty('items')) {
-					this.data['items'].every(function(item) {
-						if (item_string == item.id) {
-							in_mjs = true;
-							return false;
-						}
-						return true;
-					});
-				}
-			
-				return in_mjs;
-			},
+			}
 
 		};
+
+		/*
+		** When a new Item is loaded, check if it's in the story and update `in_mjs` on the `item_data`
+		*/
+		$rootScope.$on('item-load', function (event, item_data) {
+			var item_string = self.item.get_data_string(item_data);
+
+			mjs.data.$promise.then(function () {
+				var in_mjs = false;
+
+				mjs.data['items'].every(function(mjs_item) {
+					if (item_string == mjs_item.id) {
+						in_mjs = true;
+					}
+					return !in_mjs;
+				});
+				item_data.in_mjs = in_mjs;
+			});
+		
+
+		});
 
 		return mjs;
 	}]);

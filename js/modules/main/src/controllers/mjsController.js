@@ -85,4 +85,5 @@ MjsController.prototype = {
 	}
 };
 
-angular.module('main').controller('MjsController', ['$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'header', 'langManager', 'auth', 'user', MjsController]);
+angular.module('main').controller('MjsController', ['$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'header',
+	'langManager', 'auth', 'user', MjsController]);
