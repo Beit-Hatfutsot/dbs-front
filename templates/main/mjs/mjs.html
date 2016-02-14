@@ -51,7 +51,7 @@
 						<en>The whole story</en>
 						<he>הסיפור שלי</he>
 						<br>
-						<span class="branch_name__num">{{mjsCtrl.mjs_data.length}}</span>	
+						<span class="branch_name__num">{{mjsCtrl.mjs_items.length}}</span>	
 					</div>
 					<div class="clickable-area" ng-if="(branch > 0) && (branch < 5)" ng-click="mjsCtrl.selected_branch = branch">
 						<ng-switch on="mjsCtrl.branch_edit_status[branch]">
@@ -81,7 +81,7 @@
 			</ul>
 	    </nav>
 		<div class="item-preview-wrapper">
-	    	<item-preview ng-repeat="item in mjsCtrl.mjs_data" 
+	    	<item-preview ng-repeat="item in mjsCtrl.mjs_items" 
 	    		ng-if="(mjsCtrl.selected_branch == 0) || item.branches[mjsCtrl.selected_branch-1]"
 	    		preview-data="item"
 	    		item-source="bh">

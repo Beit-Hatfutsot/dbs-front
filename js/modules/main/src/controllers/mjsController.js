@@ -5,7 +5,7 @@ var MjsController = function(mjs, notification, item, auth) {
 	this.mjs = mjs;
 	this.item = item;
 	this.selected_branch = 0;
-	this.mjs_data = [];
+	this.mjs_items = [];
 	this.items_counter = [0,0,0,0];
 	this.branch_edit_status = {
 		1: false,
@@ -36,27 +36,34 @@ MjsController.prototype = {
 	},
 
 	refresh: function() {
+		// TODO: `load` is probably a better name for this function and the one
+		// in the service too
+		this.mjs_items = [];
+
 		var self = this;
 		var items_ids = [];
 
+
 		this.mjs.refresh().then(function () {
-			var items_ids = [];
-			//console.log(self.mjs.data);
-			self.mjs.data.items.forEach(function (i) {
-				items_ids.push(i.id);
-			})
-			self.item.get_items(items_ids).then (function (ret) {
-				self.mjs_data = [];
+			var item_ids = self.mjs.items_ids();
+
+			self.item.get_items(item_ids).then (function (ret) {
 				self.items_counter = [0, 0, 0, 0];
-				self.mjs.data.items.forEach(function(i, _i) {
-					ret[_i].branches = i.branches;
-					ret[_i].item_string = i.id;
-					self.mjs_data.push(ret[_i]);
-					i.branches.forEach(function (flag, _j) {
-						if (flag)
-							self.items_counter[_j]++;
-					});
-				})
+				ret.forEach(function(i, _i) {
+					// TODO: refactor `id` to `url` 
+					var mjs = self.mjs.dict[i.id];
+					if (mjs) {
+						i.branches = mjs.branches;
+						i.item_string = mjs.id;
+						// update the counters
+						i.branches.forEach(function (flag, _flag) {
+							if (flag)
+								self.items_counter[_flag]++;
+						});
+					};
+					self.mjs_items.push(i);
+
+				});
 			});
 		});
 	},

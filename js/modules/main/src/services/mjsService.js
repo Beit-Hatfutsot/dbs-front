@@ -9,12 +9,16 @@ angular.module('main').
 		var mjs = {
 			data: mjsResource.get(),
 
+			dict: {},
+
 			update_branch_name: function(branch_num, new_name) {
 				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name);
 			},
 
 			refresh: function() {
-				return this.data.$get();
+				return this.data.$get().then(function() {
+					
+				});
 			},
 
 			add: function(item_string) {
@@ -31,8 +35,14 @@ angular.module('main').
 
 			remove_from_branch: function(item_string, branch_num) {
 				$http.delete(apiClient.urls.mjs + '/' + (parseInt(branch_num) + 1) + '/' + item_string);
+			},
+			items_ids: function () {
+				var ret = [];
+				this.data.items.forEach(function (i) {
+					ret.push(i.id);
+				});
+				return ret;
 			}
-
 		};
 
 		/*
@@ -42,17 +52,21 @@ angular.module('main').
 			var item_string = self.item.get_data_string(item_data);
 
 			mjs.data.$promise.then(function () {
-				var in_mjs = false;
+				var in_mjs = false,
+					mjs_item = null;
 
-				mjs.data['items'].every(function(mjs_item) {
-					if (item_string == mjs_item.id) {
+				mjs.data['items'].every(function(item) {
+					if (item_string == item.id) {
 						in_mjs = true;
+						mjs_item = item;
 					}
 					return !in_mjs;
 				});
 				item_data.in_mjs = in_mjs;
+				if (in_mjs)  {
+					mjs.dict[item_string] = mjs_item;
+				}
 			});
-		
 
 		});
 
