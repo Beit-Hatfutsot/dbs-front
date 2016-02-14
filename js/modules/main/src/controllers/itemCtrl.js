@@ -162,7 +162,7 @@ ItemCtrl.prototype = {
 			gallery = this.item_data;
 
 		body.addClass('backdrop');
-	    var authModalInstance = this.$modal.open({
+	    this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
 	     	size: 'lg',
@@ -175,11 +175,8 @@ ItemCtrl.prototype = {
 	     			return index
 	     		}
 	     	}
-	    });
-
-	    authModalInstance.result.
-	    finally(function() {
-	    	body.removeClassName('backdrop');
+	    }).result.finally(function() {
+	    	body.removeClass('backdrop');
 	    });
 	},
 

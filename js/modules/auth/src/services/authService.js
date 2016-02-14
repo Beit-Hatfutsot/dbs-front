@@ -65,7 +65,7 @@ angular.module('auth').
 				    	}
 				    }).
 				    finally(function() {
-				    	body.removeClassName('backdrop');
+				    	body.removeClass('backdrop');
 				    });
 				}
 		  	},
