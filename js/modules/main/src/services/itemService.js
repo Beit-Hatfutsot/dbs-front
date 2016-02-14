@@ -36,8 +36,8 @@ angular.module('main').
 						cached				= cache.get(item_id, collection_name); 
 
 					if (cached.isNotEmpty()) {
+						$rootScope.$broadcast('item-loaded', cached);
 						deferred.resolve(cached);
-						$rootScope.$broadcast('item-load', cached);
 					} 
 					else {
 						try {
@@ -45,8 +45,8 @@ angular.module('main').
 								then(function(item_data) {
 									var collection_name = itemTypeMap.get_collection_name(item_data[0]);
 									cache.put(item_data[0], collection_name);
+									$rootScope.$broadcast('item-loaded', item_data[0]);
 									deferred.resolve(item_data[0]);
-									$rootScope.$broadcast('item-load', item_data[0]);
 								},
 								function() {
 									deferred.reject();
@@ -87,8 +87,8 @@ angular.module('main').
 					});
 
 					if (not_cached_items.isEmpty()) {
+						$rootScope.$broadcast('item-loaded', cached_items);
 						deferred.resolve(cached_items);
-						$rootScope.$broadcast('items-load');
 					} 
 					else {
 						try {
@@ -99,8 +99,9 @@ angular.module('main').
 										var collection_name = itemTypeMap.get_collection_name(item_data);
 										cache.put(item_data, collection_name);
 									});
-									deferred.resolve( item_data_arr.concat(cached_items) );
-									$rootScope.$broadcast('items-load');
+									var ret = item_data_arr.concat(cached_items);
+									$rootScope.$broadcast('item-loaded', ret);
+									deferred.resolve(ret);
 								},
 								function() {
 									deferred.resolve( cached_items );

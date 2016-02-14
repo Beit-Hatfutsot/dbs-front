@@ -52,7 +52,9 @@ MjsController.prototype = {
 				ret.forEach(function(i, _i) {
 					// TODO: refactor `id` to `url` 
 					var mjs = self.mjs.dict[i.id];
+					console.log(i);
 					if (mjs) {
+						console.log("found")
 						i.branches = mjs.branches;
 						i.item_string = mjs.id;
 						// update the counters

@@ -48,26 +48,31 @@ angular.module('main').
 		/*
 		** When a new Item is loaded, check if it's in the story and update `in_mjs` on the `item_data`
 		*/
-		$rootScope.$on('item-load', function (event, item_data) {
-			var item_string = self.item.get_data_string(item_data);
+		$rootScope.$on('item-loaded', function (event, data) {
+			if (data.constructor !== Array)
+				data = [data]
 
-			mjs.data.$promise.then(function () {
-				var in_mjs = false,
-					mjs_item = null;
+			data.forEach(function (item_data) {
+				var item_string = self.item.get_data_string(item_data);
 
-				mjs.data['items'].every(function(item) {
-					if (item_string == item.id) {
-						in_mjs = true;
-						mjs_item = item;
+				mjs.data.$promise.then(function () {
+					var in_mjs = false,
+						mjs_item = null;
+
+					mjs.data['items'].every(function(item) {
+						if (item_string == item.id) {
+							in_mjs = true;
+							mjs_item = item;
+						}
+						return !in_mjs;
+					});
+					item_data.in_mjs = in_mjs;
+					if (in_mjs)  {
+						item_data.branches = mjs_item.branches;
+						mjs.dict[item_string] = mjs_item;
 					}
-					return !in_mjs;
 				});
-				item_data.in_mjs = in_mjs;
-				if (in_mjs)  {
-					mjs.dict[item_string] = mjs_item;
-				}
 			});
-
 		});
 
 		return mjs;

@@ -25,7 +25,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
 
-	var unwatch_item_load = $rootScope.$on('item-load', function(event, item) {
+	var unwatch_item_load = $rootScope.$on('item-loaded', function(event, item) {
 		$rootScope.title = item.Header[{'en': 'En', 'he': 'He'}[$rootScope.lang]];
 		unwatch_item_load();
 	});
