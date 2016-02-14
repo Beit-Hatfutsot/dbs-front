@@ -33,7 +33,7 @@ html {
 		margin: 0;
 		/*font-family: Helvetica, Arial, sans-serif;*/
 		font-family: "Open Sans","Open Sans Hebrew",sans-serif;
-		color: #333333;
+		color: $gray1;
 		overflow-x: hidden;
 		overflow-y: auto;
 
@@ -48,6 +48,11 @@ html {
 		&.backdrop {
 			overflow: hidden;
 		}
+
+        a { 
+            text-decoration: none;
+            color: $gray2;
+        }
 
 		.modal {
 			overflow: auto;

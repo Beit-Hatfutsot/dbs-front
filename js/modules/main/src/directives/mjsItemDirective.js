@@ -3,7 +3,6 @@ angular.module('main').directive('mjsItem', function() {
 		restrict: 'EA',
 		scope: {
 			item: '=',
-			nonDraggable: '='
 		},
 		templateUrl: 'templates/main/mjs/mjs-item.html'
 	};

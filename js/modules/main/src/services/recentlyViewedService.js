@@ -1,5 +1,5 @@
 angular.module('main').
-	factory('recentlyViewed', ['$window', function($window) {
+	factory('recentlyViewed', ['$window', 'item', function($window, item) {
 		var recent;
 		var max_items = 50;
 
@@ -27,13 +27,14 @@ angular.module('main').
 		var recently_viewed = {
 			items: JSON.parse(recent.getItem('recentlyViewed')) || [],
 
-			put: function(item) {
-				item._id = JSON.stringify(item.params);
+			put: function(item_data) {
+				item_data._id = JSON.stringify(item_data.params);
 				var recent_item = this.items.filter(function(recent_item) {
-					return item._id == recent_item._id;
+					return item_data._id == recent_item._id;
 				})[0];
 				if (!recent_item) {
-					this.items.push(item);
+					item_data.url = item.get_url(item_data);
+					this.items.push(item_data);
 
 					if (this.items.length > max_items) {
 						this.items.splice(0, 1);

@@ -1,6 +1,6 @@
 angular.module('main').
-	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache', 'itemTypeMap',
-	function($resource, $q, $rootScope, apiClient, cache, itemTypeMap) {
+	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache', 'itemTypeMap', '$state',
+	function($resource, $q, $rootScope, apiClient, cache, itemTypeMap, $state) {
 		
 		var in_progress = false;
 
@@ -8,6 +8,19 @@ angular.module('main').
 
 		var item_service = {
 
+			get_url: function (item_data) {
+				if (item_data.url !== undefined) {
+					return item_data.url;
+				}
+				if (item_data.params.hasOwnProperty('tree_number')) {
+					return $state.href('ftree-view',
+									   	{individual_id: item_data.params.node_id,
+										 tree_number: item_data.params.tree_number});
+				}
+				else {
+					return $state.href('item-view', item_data.params);
+				}
+			},
 			get_string: function(collection_name, item_id) {
 				return [collection_name, item_id].join('.');
 			},

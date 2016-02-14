@@ -21,6 +21,7 @@ var ItemPreviewCtrl = function($element, $state, $scope, itemTypeMap, mjs, notif
 ItemPreviewCtrl.prototype = {
 
     get_item_url: function() {
+		// TODO: refactor to user item.get_url
         if (this.url !== undefined) {
             return this.url;
         }
