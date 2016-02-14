@@ -46,7 +46,7 @@ ItemPreviewCtrl.prototype = {
             this.mjs.add_to_branch(this.item_string, branch); 
         }
         else {
-            $event.stopPropagation();
+            this.mjs.remove_from_branch(this.item_string, branch);
        }
     },
 
