@@ -1,14 +1,9 @@
-var MjsController = function($q, mjs, notification, item, itemTypeMap, header, langManager, auth, user) {
+var MjsController = function(mjs, notification, item, auth) {
 	var self = this;
 
-	this.$q = $q;
 	this.notification = notification;
 	this.mjs = mjs;
-	this.itemTypeMap = itemTypeMap;
 	this.item = item;
-	this.langManager = langManager;
-	this.header = header;
-	this.user = user;
 	this.selected_branch = 0;
 	this.mjs_data = [];
 	this.items_counter = [0,0,0,0];
@@ -85,5 +80,5 @@ MjsController.prototype = {
 	}
 };
 
-angular.module('main').controller('MjsController', ['$q', 'mjs', 'notification', 'item', 'itemTypeMap', 'header',
-	'langManager', 'auth', 'user', MjsController]);
+angular.module('main').controller('MjsController', ['mjs', 'notification',
+								  'item', 'auth', MjsController]);
