@@ -45,16 +45,13 @@ MjsController.prototype = {
 
 
 		this.mjs.refresh().then(function () {
-			var item_ids = self.mjs.items_ids();
-
-			self.item.get_items(item_ids).then (function (ret) {
+			var items_ids = self.mjs.items_ids();
+			self.item.get_items(items_ids).then (function (ret) {
 				self.items_counter = [0, 0, 0, 0];
 				ret.forEach(function(i, _i) {
-					// TODO: refactor `id` to `url` 
-					var mjs = self.mjs.dict[i.id];
-					console.log(i);
+					var mjs = self.mjs.dict[items_ids[_i]];	
+					
 					if (mjs) {
-						console.log("found")
 						i.branches = mjs.branches;
 						i.item_string = mjs.id;
 						// update the counters
@@ -84,7 +81,7 @@ MjsController.prototype = {
 
 	toggle_branch_rmdialog: function()  {
 		this.rmdialog_status = !(this.rmdialog_status);
-		console.log(this.rmdialog_status);
+		//console.log(this.rmdialog_status);
 
 	}
 };

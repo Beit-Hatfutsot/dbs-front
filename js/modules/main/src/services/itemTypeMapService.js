@@ -24,7 +24,7 @@ angular.module('main').service('itemTypeMap', function() {
 			type = map[description_code];
 		}
 		else {
-			type = 'unkown';
+			type = 'unknown';
 		} 
 
 		return type;
