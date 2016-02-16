@@ -11,6 +11,8 @@ angular.module('main').
 
 			dict: {},
 
+			items_counter : [0,0,0,0],
+
 			update_branch_name: function(branch_num, new_name) {
 				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name);
 			},
@@ -30,12 +32,15 @@ angular.module('main').
 			},
 
 			add_to_branch: function(item_string, branch_num) {
+				this.items_counter[branch_num]++;
 				$http.post(apiClient.urls.mjs +'/'+ (parseInt(branch_num) + 1), item_string);
 			},
 
 			remove_from_branch: function(item_string, branch_num) {
+				this.items_counter[branch_num]--;
 				$http.delete(apiClient.urls.mjs + '/' + (parseInt(branch_num) + 1) + '/' + item_string);
 			},
+
 			items_ids: function () {
 				var ret = [];
 				this.data.items.forEach(function (i) {
@@ -51,7 +56,6 @@ angular.module('main').
 		$rootScope.$on('item-loaded', function (event, data) {
 			if (data.constructor !== Array)
 				data = [data]
-
 			data.forEach(function (item_data) {
 				var item_string = self.item.get_data_string(item_data);
 

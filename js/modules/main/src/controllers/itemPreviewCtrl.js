@@ -43,7 +43,6 @@ ItemPreviewCtrl.prototype = {
 
     update_branch: function($event, branch) {
         if (this.branches[branch]) {
-            
             this.mjs.add_to_branch(this.item_string, branch); 
         }
         else {

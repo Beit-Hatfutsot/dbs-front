@@ -6,7 +6,6 @@ var MjsController = function(mjs, notification, item, auth) {
 	this.item = item;
 	this.selected_branch = 0;
 	this.mjs_items = [];
-	this.items_counter = [0,0,0,0];
 	this.branch_edit_status = {
 		1: false,
 		2: false,
@@ -47,7 +46,6 @@ MjsController.prototype = {
 		this.mjs.refresh().then(function () {
 			var items_ids = self.mjs.items_ids();
 			self.item.get_items(items_ids).then (function (ret) {
-				self.items_counter = [0, 0, 0, 0];
 				ret.forEach(function(i, _i) {
 					var mjs = self.mjs.dict[items_ids[_i]];	
 					
@@ -57,7 +55,7 @@ MjsController.prototype = {
 						// update the counters
 						i.branches.forEach(function (flag, _flag) {
 							if (flag)
-								self.items_counter[_flag]++;
+								self.mjs.items_counter[_flag]++;
 						});
 					};
 					self.mjs_items.push(i);
