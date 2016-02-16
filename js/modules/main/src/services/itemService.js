@@ -41,15 +41,15 @@ angular.module('main').
 					} 
 					else {
 						try {
-							itemResource.query({items: item_string}).$promise.
-								then(function(item_data) {
+							itemResource.query({items: item_string}).$promise
+								.then(function(item_data) {
 									var collection_name = itemTypeMap.get_collection_name(item_data[0]);
 									cache.put(item_data[0], collection_name);
 									$rootScope.$broadcast('item-loaded', item_data[0]);
 									deferred.resolve(item_data[0]);
 								},
-								function() {
-									deferred.reject();
+								function(error) {
+									deferred.reject(error);
 								}).
 								finally(function() {
 									in_progress = false;

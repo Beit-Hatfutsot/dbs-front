@@ -11,7 +11,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.mjs = mjs;
 	this.recentlyViewed = recentlyViewed;
 	this.$window = $window;
-	this.failed = false;
+	this.error = null;
 	this.content_loaded = false;
 	this.item_data = {};
 	this.related_data = [];
@@ -82,22 +82,15 @@ ItemCtrl.prototype = {
 								en: 'Item loaded successfuly.',
 								he: 'הפריט נטען בהצלחה.' 
 							});
-						}, 
-						function() {
-							self.fail();
 						});
 			}, 
-			function() {
-				self.fail();
+			function(error) {
+				self.error = error;
+				self.notification.put({
+					en: 'Failed to fetch item.',
+					he: 'טעינת פריט נכשלה.'
+				});
 			});
-	},
-
-	fail: function() {
-		this.failed = true;
-		this.notification.put({
-			en: 'Failed to fetch item.',
-			he: 'טעינת פריט נכשלה.'
-		});
 	},
 
 	pull_wizard_related: function() {

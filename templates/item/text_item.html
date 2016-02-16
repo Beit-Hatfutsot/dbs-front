@@ -1,7 +1,11 @@
 <div id="item-page-container">
+    <pre ng-if="itemController.error" style="color:red;">
+        {{itemController.error.data.error}}
+    </pre>
 	<div id="item-page" ng-show="itemController.content_loaded">
 		<div class="item-container">
 			<div class="item">
+
 				<div class="item__header">
                     <div class="text">
                         <en>
