@@ -1,4 +1,4 @@
-var MjsController = function(mjs, notification, item, auth) {
+var MjsController = function(mjs, notification, item, auth, user) {
 	var self = this;
 
 	this.notification = notification;
@@ -6,6 +6,7 @@ var MjsController = function(mjs, notification, item, auth) {
 	this.item = item;
 	this.selected_branch = 0;
 	this.mjs_items = [];
+	this.user = user;
 	this.branch_edit_status = {
 		1: false,
 		2: false,
@@ -85,4 +86,4 @@ MjsController.prototype = {
 };
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',
-								  'item', 'auth', MjsController]);
+								  'item', 'auth', 'user', MjsController]);
