@@ -544,6 +544,11 @@
                             left: 50%;
                             top: 50%;
                             @include translate(-50%, -50%);
+                            @include hover-pointer();
+
+                            &:hover {
+                                opacity: 0.5;
+                            }
                         }
 
                         .notification {

@@ -34,16 +34,17 @@
                                     ng-repeat="pic in itemController.item_data.Pictures"
                                     ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
                                     alt="Item Image"
+                                    ng-click="itemController.open_gallery()"
                                     prevent-rightclick
                                     fit-thumb>
                             <div class="arrows" ng-if="itemController.item_data.Pictures.length > 1">
                                 <div class="arrow-left" ng-click="itemController.showPrev()"></div>
                                 <div class="arrow-right" ng-click="itemController.showNext()"></div>
                             </div>
-                            <div class="notification vertical-middle" ng-click="itemController.open_gallery()">
+                            <!-- <div class="notification vertical-middle" ng-click="itemController.open_gallery()">
                                 <en>Click to view</en>
                                 <he>ליחצו לצפייה</he>
-                            </div>
+                            </div> -->
                         </div> 
                         <div class="header-wrapper">
                             <h2 class="item__article-header">
