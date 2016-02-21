@@ -14,7 +14,6 @@ angular.module('main').
 				element.bind('blur', function($event) {
 					if(scope.myname != " ") {
 						scope.mjsCtrl.update_branch_name(scope.$index, scope.myname);
-						scope.mjsCtrl.refresh();
 					}
 				});
 			}

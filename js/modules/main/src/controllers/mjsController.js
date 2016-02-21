@@ -1,4 +1,4 @@
-var MjsController = function(mjs, notification, item, auth, user) {
+var MjsController = function(mjs, notification, item, auth, user, $rootScope) {
 	var self = this;
 
 	this.notification = notification;
@@ -21,48 +21,38 @@ var MjsController = function(mjs, notification, item, auth, user) {
 		}
 	});
 
+	$rootScope.$on('mjs_updated', function(items_n_branches) {
+		debugger;
+		var items_ids = [];
+		items_n_branches.story_items.forEach(function (i) {
+			items_ids.push(i.id)
+		})
+		self.load(items_ids);
+	});
+
 	this.init();
 };
 
 MjsController.prototype = {
 	init: function() {
-
+		var self = this;
 
 		this.notification.put({
 			en: 'Loding Story...',
 			he: 'טוען את הסיפור...'
 		});
-		this.refresh();
+		this.mjs.get_items_ids().then(function (items_ids) {
+			self.load(items_ids);
+		});
 	},
 
-	refresh: function() {
-		// TODO: `load` is probably a better name for this function and the one
-		// in the service too
+	load: function(items_ids) {
+		var self = this;
+
 		this.mjs_items = [];
 
-		var self = this;
-		var items_ids = [];
-
-
-		this.mjs.refresh().then(function () {
-			var items_ids = self.mjs.items_ids();
-			self.item.get_items(items_ids).then (function (ret) {
-				ret.forEach(function(i, _i) {
-					var mjs = self.mjs.dict[items_ids[_i]];	
-					
-					if (mjs) {
-						i.branches = mjs.branches;
-						i.item_string = mjs.id;
-						// update the counters
-						i.branches.forEach(function (flag, _flag) {
-							if (flag)
-								self.mjs.items_counter[_flag]++;
-						});
-					};
-					self.mjs_items.push(i);
-
-				});
-			});
+		this.item.get_items(items_ids).then(function (ret) {
+				self.mjs_items = ret;
 		});
 	},
 
@@ -86,4 +76,4 @@ MjsController.prototype = {
 };
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',
-								  'item', 'auth', 'user', MjsController]);
+								  'item', 'auth', 'user', '$rootScope', MjsController]);

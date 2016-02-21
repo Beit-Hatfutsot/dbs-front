@@ -26,16 +26,7 @@ module.exports = function(config) {
 		'bower_components/angular-sanitize/angular-sanitize.js',
 		'bower_components/marked/marked.min.js',
 		'bower_components/angular-marked/angular-marked.min.js',
-
-        // gedcomParser dependencies & scripts
-        'js/lib/gedcom-js-viewer/js/lib/prototype.js',
-        'js/lib/gedcom-js-viewer/js/gedcom/const.js',
-        'js/lib/gedcom-js-viewer/js/gedcom/lang.js',
-        'js/lib/gedcom-js-viewer/js/gedcom/toolbox.js',
-        'js/lib/gedcom-js-viewer/js/gedcom/parser.js',
-        'js/lib/gedcom-js-viewer/js/gedcom/plugins.js',
-        'js/lib/gedcom-js-viewer/js/gedcom/viewer.js',
-        'js/lib/gedcom-js-viewer/js/gedcom/entities.js',
+		'bower_components/ngstorage/ngStorage.min.js',
 
         // app modules & tests
         {pattern: 'js/modules/**/**/*.js/', included: true},
@@ -101,11 +92,11 @@ module.exports = function(config) {
 
 
     // If browser does not capture in given timeout [ms], kill it
-    captureTimeout: 60000,
+    captureTimeout: 10000,
 
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true
+    singleRun: false
   });
 };

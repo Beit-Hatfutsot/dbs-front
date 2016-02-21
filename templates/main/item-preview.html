@@ -1,4 +1,4 @@
-<div class="item-preview" ng-hide='itemPreviewController.deleted'>
+<div class="item-preview">
 	<a ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='bh'? '_self' : '_blank'}}">
 		<div class="thumbnail" ng-if="previewData.thumbnail.data">
 			<img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
@@ -62,23 +62,23 @@
 			<he>נושה זה מופיע ב:</he>
 		</span>
 		<ul class="branch_preview vertical-middle">
-			<li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]" ng-show="previewData.branches[idx]"></li>
+			<li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]"
+      ng-show="previewData.in_branch[idx]"></li>
 		</ul> 
 		<span class="arrow-down vertical-middle"></span>
 		<div class="mjs_branches_popover" ng-click="itemPreviewController.stopPropagation($event)">
-		    <div class="mjs_branches_popover__line" ng-repeat="i in [0,1,2,3]" ng-if="previewData.branches">
+		    <div class="mjs_branches_popover__line" ng-repeat="i in [0,1,2,3]" >
 		        <icon  class="edit-branch-icon" position="[-231, -127]"></icon>
 		        <input  id="{{previewData.item_string}}--branch--{{i+1}}" 
 		                type="checkbox" 
-		                ng-model="previewData.branches[i]" 
-		                ng-click="itemPreviewController.update_branch($event, i)"/>
+                    ng-model="previewData.in_branch[i]" >
 		        <label  class="branch--{{i+1}}" 
 		                for="{{previewData.item_string}}--branch--{{i+1}}"
-		                ng-class="{'checked': previewData.branches[i]}">
+		                ng-class="{'checked': previewData.in_branch[i]}">
 		        </label>
 		        <div class="mjs_branches_popover__line__desc">
-		            <en>{{itemPreviewController.mjs.data.branches[i] || "Name this family branch"}}</en>
-		            <he>{{itemPreviewController.mjs.data.branches[i] || "בחרו שם עבור ענף משפחתי זה"}}</he>
+		            <en>{{itemPreviewController.mjs.data.in_branch[i] || "Name this family branch"}}</en>
+		            <he>{{itemPreviewController.mjs.data.in_branch[i] || "בחרו שם עבור ענף משפחתי זה"}}</he>
 		        </div>
 		    </div>
 		    <div class="mjs_branches_popover__line rm-popover"

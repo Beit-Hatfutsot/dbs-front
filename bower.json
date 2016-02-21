@@ -11,8 +11,8 @@
     "angular-sanitize": "1.4.5",
     "angular-ui-router": "~0.2.15",
     "jquery": "~2.1.3",
-    "jsplumb": "1.7.5",
     "marked": "~0.3.5",
-    "ng-flow": "~2"
+    "ng-flow": "~2",
+	"ng-storage": "~0.4.2"
   }
 }

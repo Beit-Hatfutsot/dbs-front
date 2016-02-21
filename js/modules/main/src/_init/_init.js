@@ -14,6 +14,7 @@ angular.module('main', [
     'ngResource',
     'ngAnimate',
     'ngSanitize',
+    'ngStorage',
     'ui.bootstrap',
     'ui.router',
     'config',
