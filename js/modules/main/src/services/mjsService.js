@@ -6,15 +6,14 @@ angular.module('main').
 		var self = this;
 		self.item = item;
 
-		var mjsResource = $resource(apiClient.urls.mjs);
-
 		var mjs = {
 			// items_counters: [0,0,0,0];
 			get: function () {
-				var self = this;
-				console.log('getting ', self._latest);
-				if (self._latest)
-					return $q.resolve(self._latest);
+				var self = this,
+					latest = self._latest;
+
+				if (latest)
+					return $q.resolve(latest);
 				else {
 					return user.$promise.then(function(user) {
 						self._latest = user; 
@@ -26,11 +25,11 @@ angular.module('main').
 
 			dict: {},
 
-			_update_latest: function (data) {
-				mjs._latest = data;
+			_update_latest: function (response) {
+				mjs._latest = response.data;
 			},
 
-			update_branch_name: function(branch_num, new_name) {
+			rename_branch: function(branch_num, new_name) {
 				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name)
 					 .then(mjs._update_latest);
 			},
@@ -48,11 +47,11 @@ angular.module('main').
 			},
 
 			add: function(item_string) {
-				return mjsResource.save(item_string).$promise
+				return $http.post(apiClient.urls.mjs, item_string)
 								  .then(mjs._update_latest);
 			},
 
-			remove_from_story: function(item_string) {
+			remove: function(item_string) {
 				return $http.delete(apiClient.urls.mjs +'/'+ item_string)
 							.then(mjs._update_latest);
 			},
@@ -62,16 +61,15 @@ angular.module('main').
 				var self = this;
 				$http.post(apiClient.urls.mjs +'/'+ (parseInt(branch_num) + 1),
 						   item_string)
-					 .then(function (data) {
-						 console.log('added to branch', data);
-						 self._latest = data;
-					 });
+					 .then(mjs._update_latest);
 			},
 
 			remove_from_branch: function(item_string, branch_num) {
 				// this.items_counter[branch_num]--;
 				$http.delete(apiClient.urls.mjs + '/' + (parseInt(branch_num) + 1) + '/' + item_string)
-					 .then(mjs._update_latest);
+					 .then(function(data) {
+					 mjs._update_latest(data);
+					 });
 			},
 
 			get_items_ids: function () {
@@ -92,7 +90,6 @@ angular.module('main').
 			},
 			set: function(story) {
 				$sessionStorage.latest_mjs = story;
-				console.log('setted ', $sessionStorage.latest_mjs);
 			}
 		});
 		Object.defineProperty(mjs, 'items_counters', {
@@ -100,7 +97,6 @@ angular.module('main').
 				var story = mjs._latest;
 					ret = [0,0,0,0];
 
-				story = $sessionStorage.latest_mjs;
 				story.story_items.forEach(function(i, _i) {
 					i.in_branch.forEach(function (flag, _flag) {
 						if (flag)
