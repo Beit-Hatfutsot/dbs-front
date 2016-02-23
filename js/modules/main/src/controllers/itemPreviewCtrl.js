@@ -1,17 +1,15 @@
-var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs) {
+var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item) {
     
     var self = this;
     this.$state = $state;
     this.mjs = mjs;
     this.$scope = $scope;
-    this.item_string = itemTypeMap.get_item_string($scope.previewData);
-	console.log(this.item_string);
+    this.item_string = item.get_data_string($scope.previewData);
     this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
     this.in_branch = $scope.previewData.in_branch;
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
     this.rmdialog_is_open = false;
-
 };
 
 ItemPreviewCtrl.prototype = {
@@ -30,13 +28,11 @@ ItemPreviewCtrl.prototype = {
         }
     },
 
-    remove_from_story: function() {
-        var self = this;
-        this.mjs.remove_from_story(this.item_string);
+    remove_from_mjs: function() {
+        this.mjs.remove(this.item_string);
     },
 
     update_branch: function(branch) {
-		debugger;
         if (this.in_branch[branch]) {
             this.mjs.add_to_branch(this.item_string, branch); 
         }
@@ -51,4 +47,4 @@ ItemPreviewCtrl.prototype = {
 
 };
 
-angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', 'mjs', ItemPreviewCtrl]);
+angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', 'mjs', 'item', ItemPreviewCtrl]);

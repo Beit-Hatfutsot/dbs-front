@@ -21,11 +21,13 @@ angular.module('main').
 					return $state.href('item-view', item_data.params);
 				}
 			},
+			
 			get_string: function(collection_name, item_id) {
 				return [collection_name, item_id].join('.');
 			},
+
 			get_data_string: function(item_data) {
-				return this.get_string(itemTypeMap.get_collection_name(item_data),item_data._id)
+				return itemTypeMap.get_item_string(item_data);
 			},
 
 			get: function(collection_name, item_id) {

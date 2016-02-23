@@ -21,8 +21,7 @@ var MjsController = function(mjs, notification, item, auth, user, $rootScope) {
 		}
 	});
 
-	$rootScope.$on('mjs_updated', function(items_n_branches) {
-		debugger;
+	$rootScope.$on('mjs-updated', function(event, items_n_branches) {
 		var items_ids = [];
 		items_n_branches.story_items.forEach(function (i) {
 			items_ids.push(i.id)
@@ -60,8 +59,8 @@ MjsController.prototype = {
 		$event.stopPropagation();
 	},
 
-	update_branch_name: function(branch_num, new_name) {
-		this.mjs.update_branch_name(branch_num, new_name);
+	rename_branch: function(branch_num, new_name) {
+		this.mjs.rename_branch(branch_num, new_name);
 	},
 
 	toggle_branch_edit: function($event,index)  {

@@ -6,6 +6,7 @@ angular.module('main').
 		var self = this;
 		self.item = item;
 
+
 		var mjs = {
 			// items_counters: [0,0,0,0];
 			get: function () {
@@ -32,18 +33,6 @@ angular.module('main').
 			rename_branch: function(branch_num, new_name) {
 				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name)
 					 .then(mjs._update_latest);
-			},
-
-			refresh: function(data) {
-				// TODO: remove this function
-				mjs.items_counter = [0,0,0,0],
-				mjs.data = {items: data.story_items, branches: data.story_branches};
-				mjs.data.items.forEach(function(i, _i) {
-					i.in_branch.forEach(function (flag, _flag) {
-						if (flag)
-							mjs.items_counter[_flag]++;
-					});
-				});
 			},
 
 			add: function(item_string) {
@@ -90,6 +79,7 @@ angular.module('main').
 			},
 			set: function(story) {
 				$sessionStorage.latest_mjs = story;
+				$rootScope.$broadcast('mjs-updated', story);
 			}
 		});
 		Object.defineProperty(mjs, 'items_counters', {

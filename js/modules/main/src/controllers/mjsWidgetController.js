@@ -36,7 +36,7 @@ MjsWidgetController.prototype = {
 		var self = this;
 		if (this.signedin) {
 			if (!this.item_data.in_mjs) {
-				this.mjs.add(this.item_string).then(function() {
+				this.mjs.add(self.item_string).then(function() {
 					// open pop-over
 					self.item_data.in_mjs = true;
 					self.item_added = true;
@@ -54,9 +54,10 @@ MjsWidgetController.prototype = {
 	remove_from_mjs: function() {
 		var self = this;
 		if(this.item_data.in_mjs && !(this.item_data.ugc)) {
-			this.mjs.remove_from_story(this.item_string);	
+			this.mjs.remove(self.item_string).then(function() {
+				self.item_data.in_mjs = false;
+			})	
 		}
-		self.item_data.in_mjs = false;
 	}
 };
 
