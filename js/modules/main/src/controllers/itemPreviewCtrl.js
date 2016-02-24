@@ -34,15 +34,11 @@ ItemPreviewCtrl.prototype = {
 
     update_branch: function(branch) {
         if (this.in_branch[branch]) {
-            this.mjs.add_to_branch(this.item_string, branch); 
+            this.mjs.add_to_branch(this.item_string, branch);
         }
         else {
             this.mjs.remove_from_branch(this.item_string, branch);
-       }
-    },
-
-    stopPropagation: function($event) {
-        $event.stopPropagation();
+        }
     },
 
 };

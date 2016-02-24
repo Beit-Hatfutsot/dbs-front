@@ -56,24 +56,25 @@
 		</div>
 	</a>
 	<div ng-if="previewData.in_mjs" class="mjs" dropdown dropdown-toggle
-		 on-toggle="itemPreviewController.rmdialog_is_open=false">
-		<span class="mjs__desc">
-			<en>This item appears in: </en>
-			<he>נושה זה מופיע ב:</he>
-		</span>
-		<ul class="branch_preview vertical-middle">
-			<li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]"
-      ng-show="previewData.in_branch[idx]"></li>
-		</ul> 
-		<span class="arrow-down vertical-middle"></span>
-		<div class="mjs_branches_popover" ng-click="itemPreviewController.stopPropagation($event)">
-		    <div class="mjs_branches_popover__line" ng-repeat="i in [0,1,2,3]" >
+		 on-toggle="itemPreviewController.rmdialog_is_open = false">
+			<span class="mjs__desc">
+				<en>This item appears in: </en>
+				<he>נושה זה מופיע ב:</he>
+			</span>
+			<ul class="branch_preview vertical-middle">
+				<li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]"
+	      			ng-show="previewData.in_branch[idx]"></li>
+			</ul> 
+			<span class="arrow-down vertical-middle"></span>
+		<div class="mjs_branches_popover" ng-click="$event.stopPropagation()">
+		    <div class="mjs_branches_popover__line" ng-repeat="i in [0,1,2,3]">
 		        <icon  class="edit-branch-icon" position="[-231, -127]"></icon>
-		        <input  id="{{previewData.item_string}}--branch--{{i+1}}" 
+		        <input  id="branch--{{previewData._id}}--{{i+1}}" 
 		                type="checkbox" 
-                    ng-model="previewData.in_branch[i]" >
+                   	 	ng-model="previewData.in_branch[i]"
+                   	 	ng-click="itemPreviewController.update_branch(i)">
 		        <label  class="branch--{{i+1}}" 
-		                for="{{previewData.item_string}}--branch--{{i+1}}"
+		                for="branch--{{previewData._id}}--{{i+1}}"
 		                ng-class="{'checked': previewData.in_branch[i]}">
 		        </label>
 		        <div class="mjs_branches_popover__line__desc">
