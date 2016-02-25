@@ -187,6 +187,12 @@
 		display: inline-block;
 		margin: 0 5px;
 
+		.tree-icon {
+			width: 12px;
+			height: 16px;
+			@include icon(-29px -69px);
+		}
+
 		.surname-icon {
 			width: 19px;
 			height: 16px;
@@ -203,12 +209,6 @@
 			width: 17px;
 			height: 17px;
 			@include icon(-29px -218px);
-		}
-
-		.tree-icon {
-			width: 14px;
-			height: 17px;
-			@include icon(-28px -68px);
 		}
 
 		.movie-icon {
