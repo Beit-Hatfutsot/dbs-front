@@ -41,6 +41,10 @@ ItemPreviewCtrl.prototype = {
         }
     },
 
+    in_mjs_state: function() {
+        return this.$state.current.name == 'mjs';
+    }
+
 };
 
 angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', 'mjs', 'item', ItemPreviewCtrl]);

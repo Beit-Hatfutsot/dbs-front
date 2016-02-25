@@ -1,5 +1,5 @@
 <div class="item-preview">
-	<a ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='bh'? '_self' : '_blank'}}">
+	<a ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='cjh'||itemSource=='europeana'?'_blank': null}}">
 		<div class="thumbnail" ng-if="previewData.thumbnail.data">
 			<img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
 				 alt="Preview Image"/>
@@ -55,7 +55,7 @@
 			</item-type>
 		</div>
 	</a>
-	<div ng-if="previewData.in_mjs" class="mjs" dropdown dropdown-toggle
+	<div ng-if="previewData.in_mjs && itemPreviewController.in_mjs_state()" class="mjs" dropdown dropdown-toggle
 		 on-toggle="itemPreviewController.rmdialog_is_open = false">
 			<span class="mjs__desc">
 				<en>This item appears in: </en>
