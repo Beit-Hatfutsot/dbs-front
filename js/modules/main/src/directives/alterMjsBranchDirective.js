@@ -12,8 +12,8 @@ angular.module('main').
 					}
 				});
 				element.bind('blur', function($event) {
-					if(scope.myname != " ") {
-						scope.mjsCtrl.update_branch_name(scope.$index, scope.myname);
+					if(scope.myname !== "") {
+						scope.mjsCtrl.rename_branch(scope.$index, scope.myname);
 					}
 				});
 			}
