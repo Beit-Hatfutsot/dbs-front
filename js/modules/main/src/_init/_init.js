@@ -75,6 +75,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/allresults.html'
         },
 
+		/*
         {
             name: 'mjs',
             url: '/mjs',
@@ -151,6 +152,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'VerifyEmailController as verifyEmailCtrl',
             templateUrl: 'templates/main/verify_email.html'
         },
+		*/
 
         {
             name: '404',
