@@ -40,7 +40,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-        
+        'js/modules/**/test/end2end/*.js',
     ],
 
 
