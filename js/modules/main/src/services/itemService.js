@@ -89,6 +89,8 @@ angular.module('main').
 					} 
 					else {
 						try {
+							// fetch the non-cached items
+							// TODO: store items on the cache
 							var not_cached_slugs = not_cached_items.join(',');
 							itemResource.query({slugs: not_cached_slugs}).$promise.
 								then(function(item_data_arr) {
