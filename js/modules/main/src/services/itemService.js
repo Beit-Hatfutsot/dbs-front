@@ -1,7 +1,9 @@
 angular.module('main').
 	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache', 'itemTypeMap', '$state',
 	function($resource, $q, $rootScope, apiClient, cache, itemTypeMap, $state) {
-		
+
+		var collection_type_map = {'place': 'places'};
+
 		var in_progress = false;
 
 		var itemResource = $resource(apiClient.urls.item +'/:slugs');
@@ -9,17 +11,19 @@ angular.module('main').
 		var item_service = {
 
 			parse_slug: function(text) {
-				var sep_index = text.indexOf('_');
-				return {full: text,
-						collection: text.slice(0, sep_index),
-						local_slug: text.slice(sep_index+1)};
+				var sep_index = text.indexOf('_'),
+				    ret =  {full: text,
+							collection: text.slice(0, sep_index),
+							local_slug: text.slice(sep_index+1)}
+				ret.item_type = collection_type_map[ret.collection];
+				return ret;
 
 			},
 			get_url: function (item_data) {
 				if (item_data.url !== undefined) {
 					return item_data.url;
 				}
-				if (item_data.params.hasOwnProperty('tree_number')) {
+				if (item_data.params && item_data.params.hasOwnProperty('tree_number')) {
 					return $state.href('ftree-view',
 									   	{individual_id: item_data.params.node_id,
 										 tree_number: item_data.params.tree_number});

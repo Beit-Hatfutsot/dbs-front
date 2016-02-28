@@ -52,9 +52,11 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             url: '/{slug_text: .+_.+}',
             controller: 'ItemCtrl as itemController',
 			templateUrl: function(params) {
-				// TODO: add the slug parser in item service
-				var slug = item.parse_slug(slug_text);
-				return 'templates/item/'+slug.collection+'.html'
+				// TODO: rinse - this code was copied from itemService.js
+				var collection_type_map = {'place': 'places'};
+				var collection = params.slug_text.split('_')[0];
+				return 'templates/item/places.html';
+				return 'templates/item/'+collection_type_map[collectiona]+'.html';
 			}
 
         },
