@@ -162,10 +162,6 @@ angular.module('main').
 		                    }
 		                    else {
 		                        self.search_status = 'bingo';
-		                        notification.put({
-	                                en: 'Search finished successfully.',
-	                                he: 'החיפוש הסתיים בהצלחה.'
-	                            });
 		                    }
 		                }
 		                else {
