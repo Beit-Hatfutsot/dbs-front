@@ -30,10 +30,11 @@ angular.module('main', [
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider',
+
 function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider) {
 
     /*** State definitions go here ***/
-    var states = [ 
+    var states = [
         {
             name: 'start',
 			title: 'Home Page',
@@ -48,10 +49,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'item-view',
-            url: '/item/:collection/:id',
+            url: '/{slug_text: .+_.+}',
             controller: 'ItemCtrl as itemController',
 			templateUrl: function(params) {
-				return 'templates/item/'+params.collection+'.html'
+				// TODO: add the slug parser in item service
+				var slug = item.parse_slug(slug_text);
+				return 'templates/item/'+slug.collection+'.html'
 			}
 
         },

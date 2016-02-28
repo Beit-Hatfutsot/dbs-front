@@ -29,6 +29,7 @@ describe('item', function() {
 			}]);
 	}));
 
+	/* TODO: enable the cache
 	it('should fetch items from cache', function() {
 		var retrieved;
 
@@ -66,4 +67,5 @@ describe('item', function() {
 		expect(retrieved._id).toEqual('non-cached-id');
 		$httpBackend.verifyNoOutstandingRequest();
 	});
+	*/
 });

@@ -4,7 +4,7 @@ angular.module('main').
 		
 		var in_progress = false;
 
-		var itemResource = $resource(apiClient.urls.item +'/:items');
+		var itemResource = $resource(apiClient.urls.item +'/:slugs');
 
 		var item_service = {
 
@@ -30,12 +30,11 @@ angular.module('main').
 				return itemTypeMap.get_item_string(item_data);
 			},
 
-			get: function(collection_name, item_id) {
+			get: function(slug) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
-						item_string 		= self.get_string(collection_name, item_id),
-						cached				= cache.get(item_id, collection_name); 
+						cached				= {}; // cache.get(slug); 
 
 					if (cached.isNotEmpty()) {
 						$rootScope.$broadcast('item-loaded', cached);
@@ -43,10 +42,9 @@ angular.module('main').
 					} 
 					else {
 						try {
-							itemResource.query({items: item_string}).$promise
+							itemResource.query({slugs: slug.full}).$promise
 								.then(function(item_data) {
-									var collection_name = itemTypeMap.get_collection_name(item_data[0]);
-									cache.put(item_data[0], collection_name);
+									// cache.put(item_data[0], slug);
 									$rootScope.$broadcast('item-loaded', item_data[0]);
 									deferred.resolve(item_data[0]);
 								},
@@ -66,25 +64,22 @@ angular.module('main').
 				}
 			},
 
-			get_items: function(items_arr) {
+			get_items: function(slugs) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
 						cached_items		= [],
 						not_cached_items	= [];
 
-					items_arr.forEach(function(item_string) {
-						if(!item_string) return;
-						var item_string_split	= item_string.split('.'),
-							collection_name 	= item_string_split[0],
-							item_id				= item_string_split[1],
-							cached 				= cache.get(item_id, collection_name);
+					slugs.forEach(function(slug) {
+						if(!slug) return;
+						var cached 				= {}; // cache.get(item_id, collection_name);
 
 						if (cached.isNotEmpty()) {
 							cached_items.push(cached);
 						}
 						else {
-							not_cached_items.push(item_string);
+							not_cached_items.push(slug);
 						}
 					});
 
@@ -94,13 +89,15 @@ angular.module('main').
 					} 
 					else {
 						try {
-							var not_cached_item_strings = parse_items_arr(not_cached_items);
-							itemResource.query({items: not_cached_item_strings}).$promise.
+							var not_cached_slugs = not_cached_items.join(',');
+							itemResource.query({slugs: not_cached_slugs}).$promise.
 								then(function(item_data_arr) {
+									/*
 									item_data_arr.forEach(function(item_data) {
 										var collection_name = itemTypeMap.get_collection_name(item_data);
 										cache.put(item_data, collection_name);
 									});
+									*/
 									var ret = item_data_arr.concat(cached_items);
 									$rootScope.$broadcast('item-loaded', ret);
 									deferred.resolve(ret);
@@ -122,16 +119,6 @@ angular.module('main').
 				}
 			}
 		};
-
-		function parse_items_arr(items_arr) {
-			var items_string = '';
-
-			items_arr.forEach(function(item_string) {
-				items_string += ',' + item_string;
-			});
-
-			return items_string.slice(1);
-		}
 
 		return item_service;
 	}]);
