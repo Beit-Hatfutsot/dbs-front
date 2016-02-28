@@ -8,6 +8,13 @@ angular.module('main').
 
 		var item_service = {
 
+			parse_slug: function(text) {
+				var sep_index = text.indexOf('_');
+				return {full: text,
+						collection: text.slice(0, sep_index),
+						local_slug: text.slice(sep_index+1)};
+
+			},
 			get_url: function (item_data) {
 				if (item_data.url !== undefined) {
 					return item_data.url;
@@ -30,16 +37,19 @@ angular.module('main').
 				return itemTypeMap.get_item_string(item_data);
 			},
 
-			get: function(slug) {
+			get: function(some_slug) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
-						cached				= {}; // cache.get(slug); 
+						slug,
+						cached				= {}; // cache.get(slug);
+
+					slug = angular.isString(some_slug)?  this.parse_slug(some_slug) : some_slug;
 
 					if (cached.isNotEmpty()) {
 						$rootScope.$broadcast('item-loaded', cached);
 						deferred.resolve(cached);
-					} 
+					}
 					else {
 						try {
 							itemResource.query({slugs: slug.full}).$promise
