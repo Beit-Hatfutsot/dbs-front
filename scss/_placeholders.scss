@@ -155,14 +155,15 @@
 	transition: width 1s;
 	white-space: nowrap;
 	line-height: 16px;
+	top: 16px;
 	@include box-shadow(0 0 6px 0 #999);
 
 	.en & {
-		right: -9px;
+		right: -10px;
 	}
 
 	.he & {
-		left: -9px;
+		left: -10px;
 	}
 
 	&:after {
@@ -174,11 +175,11 @@
 		top: 100%;
 
 		.en & {
-			border-right: 8px solid transparent;
+			border-right: 10px solid transparent;
 			right: 0;
 		}
 		.he & {
-			border-left: 8px solid transparent;
+			border-left: 10px solid transparent;
 			left: 0;
 		}
 	}

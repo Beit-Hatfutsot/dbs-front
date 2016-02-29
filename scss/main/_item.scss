@@ -649,9 +649,8 @@
                 }
 
                 &__article-header {
-                    position: absolute;
                     margin: 0px 26px;
-                    color: #BE3217;
+                    color: $red2;
                     max-width: 640px;
                     line-height: 26px;
                     .en & {
