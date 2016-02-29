@@ -1,3 +1,67 @@
+.beta-icon {
+    width: 42px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+
+    .en & {
+        right: 0;
+    }
+    .he & {
+        left: 0;
+    }
+}
+
+.beta-greeting {
+    position: relative;
+    width: 530px;
+    height: 174px;
+    top: 22px;
+    z-index: 1;
+
+    .en & {
+        left: 318px;
+    }
+    .he & {
+        right: 318px;
+    }
+
+    &__shape {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    &__close {
+        position: absolute;
+        top: 64px;
+        color: #fff;
+        font-weight: 700;
+        @include hover-pointer();
+
+        .en & {
+            right: 8px;
+        }
+        .he & {
+            left: 8px;
+        }
+    }
+
+    &__text {
+        position: absolute;
+        font-weight: 600;
+        font-size: 13px;
+        width: 100%;
+        top: 70px;
+        color: $blue4;
+        .en & {
+            padding-left: 40px;
+        }
+        .he & {
+            padding-right: 40px;
+        }
+    }
+}
+
 .main-header {
     position: fixed;
     top: 0;
@@ -31,6 +95,7 @@
                     list-style: none;
 
                     .site-item {
+                        position: relative;
                         
                         .en & {
                             float: left;
@@ -168,6 +233,7 @@
             .dropdown-icons {
                 position: fixed;
                 height: 70px;
+                top: 0;
                 display: flex;
                 align-items: center;
                 z-index: 2;

@@ -5,6 +5,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
     this.auth = auth;
     this.cache = cache;
     this.recentlyViewed = recentlyViewed;
+    this.greeting_open = true;
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',
         'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
