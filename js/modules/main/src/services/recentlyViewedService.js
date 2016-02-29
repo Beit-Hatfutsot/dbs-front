@@ -28,9 +28,8 @@ angular.module('main').
 			items: JSON.parse(recent.getItem('recentlyViewed')) || [],
 
 			put: function(item_data) {
-				item_data._id = JSON.stringify(item_data.params);
 				var recent_item = this.items.filter(function(recent_item) {
-					return item_data._id == recent_item._id;
+					return item_data.slug.full == recent_item.slug.full;
 				})[0];
 				if (!recent_item) {
 					item_data.url = item.get_url(item_data);

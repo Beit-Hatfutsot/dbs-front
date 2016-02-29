@@ -5,11 +5,11 @@
  * @description
  * The Home page controller.
  */
-var StartController = function($scope, $state, wizard, itemTypeMap) {
+var StartController = function($scope, $state, wizard) {
 	var self = this;
 
 	this.wizard = wizard;
-	this.itemTypeMap = itemTypeMap;
+	this.lang = $scope.lang.charAt(0).toUpperCase()+$scope.lang.charAt(1);
 
 	/**
 	 * @ngdoc property
@@ -28,11 +28,11 @@ var StartController = function($scope, $state, wizard, itemTypeMap) {
 
 	// see doc for wizard-search-end event
 	$scope.$on('wizard-search-end', function() {
-		var item_string = self.choose_result(); 
+		var slug_text = self.choose_result();
 
-		if (item_string) {
-			var parts = item_string.split('.')
-			$state.go('item-view', {collection: parts[0], id: parts[1]});
+		if (slug_text) {
+			console.log(slug_text);
+			$state.go('item-view', {slug_text: slug_text});
 		}
 		else if ('ftree_args' in self.wizard.result)
 			$state.go('ftrees', self.wizard.result.ftree_args)
@@ -58,10 +58,10 @@ StartController.prototype = {
 			place = this.wizard.result.place;
 
 		if ( name.isNotEmpty() ) {
-			return this.itemTypeMap.get_item_string(name);
+			return name.Slug[this.lang];
 		}
 		else if ( place.isNotEmpty() ) {
-			return this.itemTypeMap.get_item_string(place);
+			return place.Slug[this.lang];
 		}
 		else {
 			return null
@@ -69,4 +69,4 @@ StartController.prototype = {
 	}
 }
 
-angular.module('main').controller('StartController', ['$scope', '$state', 'wizard', 'itemTypeMap', StartController]);
+angular.module('main').controller('StartController', ['$scope', '$state', 'wizard', StartController]);

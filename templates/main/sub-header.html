@@ -44,7 +44,8 @@
 					</div>
 					<div class="recently-viewed__items">
 						<div class="recently-viewed__items__scroll" ng-style="recentlyViewedCtrl.scroll_style">
-							<mjs-item 	ng-repeat="i in recentlyViewedCtrl.items track by i._id" 
+							<mjs-item 	ng-repeat="i in recentlyViewedCtrl.items track by
+              i.slug.full" 
 										item="i">
 							</mjs-item>
 						</div>

@@ -29,7 +29,7 @@ angular.module('main').
 										 tree_number: item_data.params.tree_number});
 				}
 				else {
-					return $state.href('item-view', item_data.params);
+					return $state.href('item-view', item_data.slug.full);
 				}
 			},
 			

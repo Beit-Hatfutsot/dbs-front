@@ -57,45 +57,41 @@ describe('StartController', function() {
 	it('should choose a name result over place result from wizard results', function() {
 		wizard.query = {
 			name: {
-				_id: 'name-id',
-				UnitType: 6
+				Slug: {'En': 'family_Einstein'},
 			},
 			place: {
-				_id: 'place-id',
-				UnitType: 5
+				Slug: {'En': 'place_someplace'},
 			}
 		}
 		wizard.search();
 		$timeout.flush();
 		var chosen_result = scope.startCtrl.choose_result()
-		expect(chosen_result).toBe('familyNames.name-id');
+		expect(chosen_result).toBe('family_Einstein');
 	});
 
 	it('should choose a place result when name is empty', function() {
 		wizard.query = {
 			name: '',
 			place: {
-				_id: 'place-id',
-				UnitType: 5
+				Slug: {'En': 'place_someplace'},
 			}
 		}
 		wizard.search();
 		$timeout.flush();
 		var chosen_result = scope.startCtrl.choose_result()
-		expect(chosen_result).toBe('places.place-id');
+		expect(chosen_result).toBe('place_someplace');
 	});
 
 	it('should choose a name result when place is empty', function() {
 		wizard.query = {
 			name: {
-				_id: 'name-id',
-				UnitType: 6
+				Slug: {'En': 'family_Einstein'},
 			},
 			place: ''
 		}
 		wizard.search();
 		$timeout.flush();
 		var chosen_result = scope.startCtrl.choose_result()
-		expect(chosen_result).toBe('familyNames.name-id');
+		expect(chosen_result).toBe('family_Einstein');
 	});
 });
