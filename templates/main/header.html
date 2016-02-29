@@ -28,25 +28,25 @@
                 <div class="title">My Story</div>
                 <div class="icon active"></div>
               </a>
-              <en><icon class="beta-icon" alt-text="Beta" position="[-590, -530]"></icon></en>
-              <he><icon class="beta-icon" alt-text="'בטא'" position="[-541, -530]"></icon></he>
+              <en><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="Beta" position="[-590, -530]"></icon></en>
+              <he><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="'בטא'" position="[-541, -530]"></icon></he>
             </li>
           </ul>
         </div>
-        <div class="beta-greeting" ng-show="headerController.greeting_open">
+        <div class="beta-notification" ng-show="headerController.beta_notification_open">
           <en>
-            <svg class="beta-greeting__shape" height="174" width="530">
+            <svg class="beta-notification__shape" height="174" width="530">
               <path fill="#019DB2" d="M81.8,65.2C77.9,31.1,50.4,1,1,1c42.6,0,46.8,45.2,46.7,64.2h-7.2C28.7,65.2,19,74.9,19,86.7v65.8  c0,11.8,9.7,21.5,21.5,21.5h466.9c11.8,0,21.5-9.7,21.5-21.5V65.2H81.8z"/>
             </svg>
           </en>
           <he>
-            <svg class="beta-greeting__shape" height="174" width="530">
+            <svg class="beta-notification__shape" height="174" width="530">
               <path fill="#019DB2" d="M489.5,65.2h-7.2C482.2,46.2,486.4,1,529,1c-49.4,0-76.9,30.2-80.8,64.2H1v87.3c0,11.8,9.7,21.5,21.5,21.5  h466.9c11.8,0,21.5-9.7,21.5-21.5V86.7C511,74.9,501.3,65.2,489.5,65.2z"/>
             </svg>
           </en>
           </he>
-          <span class="beta-greeting__close" ng-click="headerController.greeting_open=false">x</span>
-          <p class="beta-greeting__text">
+          <span class="beta-notification__close" ng-click="headerController.toggle_beta_notification()">x</span>
+          <p class="beta-notification__text">
             <en>Welcome! We're so happy you've joined us. Please note that we've just launched our new website and are improving it daily.<br>We hope you'll check out all that we've got here so far, and thank you for bearing with us while we keep working to make it even better.
             </en>
             <he>

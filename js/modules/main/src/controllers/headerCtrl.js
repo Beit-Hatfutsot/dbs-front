@@ -5,7 +5,7 @@ var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache
     this.auth = auth;
     this.cache = cache;
     this.recentlyViewed = recentlyViewed;
-    this.greeting_open = true;
+    this.beta_notification_open = true;
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',
         'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
@@ -93,7 +93,17 @@ HeaderCtrl.prototype = {
 
     goto_state: function(state_name) {
         this.$state.go(state_name);
+    },
+
+    toggle_beta_notification: function() {
+        if (this.beta_notification_open) {
+            this.beta_notification_open = false;
+        }
+        else {
+            this.beta_notification_open = true;
+        }
     }
+
 };
 
 angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', 'mjs', 'cache', 'recentlyViewed', 'user', HeaderCtrl]);
