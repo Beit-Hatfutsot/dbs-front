@@ -23,21 +23,31 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this._Index = 0;
 	this.lang = langManager.lang;
 
+	function refresh_root_scope(item) {
+		// TODO: make language option 'En' & 'He' universal
+		var language_map = {'en': 'En', 'he': 'He'},
+			lang = language_map[$rootScope.lang];
+		$rootScope.title = item.Header[lang];
+		$rootScope.slug = item.Slug;
+	};
+
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
 
 	var unwatch_item_load = $rootScope.$on('item-loaded', function(event, item) {
-		$rootScope.title = item.Header[{'en': 'En', 'he': 'He'}[$rootScope.lang]];
+		refresh_root_scope(item);
 		unwatch_item_load();
 	});
 	this.get_item();
 
+	/*
 	$rootScope.$on('language-changed', function (event, lang) {
 		self.lang = lang;
 		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
 		
 	})
+	*/
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
 			return this.slug.collection === 'ugc';
@@ -116,6 +126,7 @@ ItemCtrl.prototype = {
 	},
 
 	goto_item: function(item_data) {
+		//TODO: rinse the language names
 		var lang = this.lang[0].toUpperCase() + this.lang.slice(1),
 			slug = item_data.Slug[lang];
 

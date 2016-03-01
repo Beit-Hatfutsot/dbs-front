@@ -1,11 +1,13 @@
-var HeaderCtrl = function($state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, user) {
+var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, user, item) {
 
     this.$state = $state;
     //console.log($state.includes('general-search'));
     this.auth = auth;
     this.cache = cache;
     this.recentlyViewed = recentlyViewed;
+	this.$rootScope = $rootScope;
 	this.$location = $location;
+	this.item = item;
 	this.langManager = langManager;
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',
@@ -34,16 +36,6 @@ var HeaderCtrl = function($state, $location, langManager, wizard, header, notifi
         }
     });
     this.header = header;
-    /*
-    Object.defineProperty(this, 'sub_header_state', {
-        get: function() {
-            return header.sub_header_state;
-        },
-
-        set: function(new_state) {
-            header.sub_header_state = new_state;
-        }
-    });*/
 
     Object.defineProperty(this, 'mjs_count', {
         get: function() {
@@ -97,7 +89,15 @@ HeaderCtrl.prototype = {
     },
 
 	goto_lang: function(lang) {
-		var url = this.$location.url()
+		//TODO: rinse the language names
+		var proper_lang = lang[0].toUpperCase() + lang.slice(1),
+		    url = this.$location.url(),
+			text_slug = this.$rootScope.slug;
+
+		// handle item pages
+		if (text_slug)
+			this.item.goto_slug(text_slug[proper_lang]);
+
 		if (lang == 'en')
 			url = url.slice(3);
 		else
@@ -107,6 +107,6 @@ HeaderCtrl.prototype = {
 	}
 };
 
-angular.module('main').controller('HeaderCtrl', ['$state', '$location', 
+angular.module('main').controller('HeaderCtrl', ['$rootScope', '$state', '$location', 
 		  'langManager', 'wizard', 'header', 'notification', 'auth', 'mjs',
-		  'cache', 'recentlyViewed', 'user', HeaderCtrl]);
+		  'cache', 'recentlyViewed', 'user', 'item', HeaderCtrl]);
