@@ -51,10 +51,17 @@ angular.module('main').
 
 			},
 
-			slug_to_params: function(api_slug) {
-				var sep = api_slug.indexOf('_');
-				return {collection: api_slug.slice(0, sep),
-						local_slug: api_slug.slice(sep+1)};
+			goto_slug: function(api_slug) {
+				var sep = api_slug.indexOf('_'),
+					params = {collection: api_slug.slice(0, sep),
+							  local_slug: api_slug.slice(sep+1)},
+					first = params.collection[0],
+					state;
+				if ((first >= 'a') && (first <= 'z'))
+					state = 'item-view';
+				else
+					state = 'he.he_item-view';
+				$state.go(state, params);
 			},
 
 			get_url: function (item_data) {

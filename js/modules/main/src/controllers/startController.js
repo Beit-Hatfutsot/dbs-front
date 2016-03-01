@@ -28,10 +28,11 @@ var StartController = function($scope, $state, wizard, item) {
 
 	// see doc for wizard-search-end event
 	$scope.$on('wizard-search-end', function() {
+		debugger;
 		var slug_text = self.choose_result();
 
 		if (slug_text) {
-			$state.go('item-view', item.slug_to_params(slug_text));
+			item.goto_slug(slug_text);
 		}
 		else if ('ftree_args' in self.wizard.result)
 			$state.go('ftrees', self.wizard.result.ftree_args)

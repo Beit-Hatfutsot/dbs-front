@@ -34,7 +34,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.get_item();
 
 	$rootScope.$on('language-changed', function (event, lang) {
-		this.lang = lang;
+		self.lang = lang;
 		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
 		
 	})
@@ -119,7 +119,7 @@ ItemCtrl.prototype = {
 		var lang = this.lang[0].toUpperCase() + this.lang.slice(1),
 			slug = item_data.Slug[lang];
 
-		this.$state.go('item-view', this.item.slug_to_params(slug));
+		this.item.goto_slug(slug);
     },
 
     goto_tree: function() {

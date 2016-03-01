@@ -49,27 +49,16 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'item-view',
-            url: '/{collection: (?:place|image|personality|familyname)}/{local_slug}',
+            url: '/{collection: (?:place|image|personality|familyname|video)}/{local_slug}',
             controller: 'ItemCtrl as itemController',
 			templateUrl: function(params) {
 				// TODO: rinse - this code was copied from itemService.js
 				var slug_collection_map = {
 					  "image": "photoUnits",
-					  "תמונה": "photoUnits",
-					  "synonym": "synonyms",
-					  "שם נרדף": "synonyms",
-					  "lexicon": "lexicon",
-					  "מלון": "lexicon",
 					  "personality": "personalities",
-					  "אישיות": "personalities",
 					  "place": "places",
-					  "מקום": "places",
-					  "person": "genTreeIndividuals",
-					  "אדם": "genTreeIndividuals",
 					  "familyname": "familyNames",
-					  "שםמשפחה": "familyNames",
-					  "video": "movies",
-					  "וידאו": "movies"};
+					  "video": "movies"};
 
 				return 'templates/item/'+slug_collection_map[params.collection]+'.html';
 			}
@@ -109,9 +98,26 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             onEnter: ['cache', 'wizard', 'header', function(cache, wizard, header) {
                 wizard.clear();
                 header.sub_header_state = 'closed';
-				console.log('eeee');
             }]
         },
+        {
+            name: 'he.he_item-view',
+            url: '/{local_slug}/{collection: (?:מקום|תמונה|אישייות|שםמשפחה|וידאו)}',
+            controller: 'ItemCtrl as itemController',
+			templateUrl: function(params) {
+				// TODO: rinse - this code was copied from itemService.js
+				var slug_collection_map = {
+					  "תמונה": "photoUnits",
+					  "אישיות": "personalities",
+					  "מקום": "places",
+					  "שםמשפחה": "familyNames",
+					  "וידאו": "movies"};
+
+				return 'templates/item/'+slug_collection_map[params.collection]+'.html';
+			}
+
+        },
+
 
 		/*
         {
