@@ -5,7 +5,7 @@
  * @description
  * The Home page controller.
  */
-var StartController = function($scope, $state, wizard) {
+var StartController = function($scope, $state, wizard, item) {
 	var self = this;
 
 	this.wizard = wizard;
@@ -31,8 +31,7 @@ var StartController = function($scope, $state, wizard) {
 		var slug_text = self.choose_result();
 
 		if (slug_text) {
-			console.log(slug_text);
-			$state.go('item-view', {slug_text: slug_text});
+			$state.go('item-view', item.slug_to_params(slug_text));
 		}
 		else if ('ftree_args' in self.wizard.result)
 			$state.go('ftrees', self.wizard.result.ftree_args)
@@ -69,4 +68,4 @@ StartController.prototype = {
 	}
 }
 
-angular.module('main').controller('StartController', ['$scope', '$state', 'wizard', StartController]);
+angular.module('main').controller('StartController', ['$scope', '$state', 'wizard', 'item',StartController]);

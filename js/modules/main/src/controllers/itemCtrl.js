@@ -1,10 +1,10 @@
 
-function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal, $rootScope) {
+function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal, $rootScope, langManager) {
 	var self = this;
 
 	this.$modal = $modal;
 	this.$state = $state;
-	this.slug = item.parse_slug($stateParams.slug_text);
+	this.slug = item.parse_state($stateParams);
 	this.item_type =   this.slug.item_type;
 	this.wizard = wizard;
 	this.item = item;
@@ -21,6 +21,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.itemTypeMap = itemTypeMap;
 	this.pull_wizard_related();
 	this._Index = 0;
+	this.lang = langManager.lang;
 
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
@@ -33,6 +34,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.get_item();
 
 	$rootScope.$on('language-changed', function (event, lang) {
+		this.lang = lang;
 		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
 		
 	})
@@ -107,14 +109,17 @@ ItemCtrl.prototype = {
 		related_data.forEach(function(related_item) {
 			// push related items after checking they were not pulled from wizard result
 			// if ( self.wizard_name._id !== related_item._id && self.wizard_place._id !== related_item._id ) {
-			if (related_data.Slug[self.$rootScope.lang] != self.slug.full) {
+			if (related_data.Slug[self.lang] != self.slug.api) {
 				self.related_data.push(related_item);
 			}
 		});
 	},
 
 	goto_item: function(item_data) {
-        this.$state.go('item-view', {slug: item_data.Slug[this.$rootScope.lang]});
+		var lang = this.lang[0].toUpperCase() + this.lang.slice(1),
+			slug = item_data.Slug[lang];
+
+		this.$state.go('item-view', this.item.slug_to_params(slug));
     },
 
     goto_tree: function() {
@@ -192,5 +197,6 @@ ItemCtrl.prototype = {
 };
 
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
-											   'notification', 'itemTypeMap','wizard', 'header', 
-											   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope', ItemCtrl]);
+	   'notification', 'itemTypeMap','wizard', 'header', 
+	   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope', 
+	   'langManager', ItemCtrl]);

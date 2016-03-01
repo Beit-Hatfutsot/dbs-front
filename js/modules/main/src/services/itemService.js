@@ -31,8 +31,8 @@ angular.module('main').
 			  "מקום": "places",
 			  "person": "genTreeIndividuals",
 			  "אדם": "genTreeIndividuals",
-			  "family-name": "familyNames",
-			  "שם-משפחה": "familyNames",
+			  "familyname": "familyNames",
+			  "שםמשפחה": "familyNames",
 			  "video": "movies",
 			  "וידאו": "movies"};
 		var in_progress = false;
@@ -41,15 +41,22 @@ angular.module('main').
 
 		var item_service = {
 
-			parse_slug: function(text) {
-				var sep_index = text.indexOf('_'),
-				    ret =  {full: text,
-							collection: text.slice(0, sep_index),
-							local_slug: text.slice(sep_index+1)}
+			parse_state: function(state) {
+				var ret =  {collection: state.collection,
+							local_slug: state.local_slug}
 				ret.item_type = slug_collection_map[ret.collection];
+				ret.api = [ret.collection, ret.local_slug].join('_');
+				ret.full = [ret.collection, ret.local_slug].join('/');
 				return ret;
 
 			},
+
+			slug_to_params: function(api_slug) {
+				var sep = api_slug.indexOf('_');
+				return {collection: api_slug.slice(0, sep),
+						local_slug: api_slug.slice(sep+1)};
+			},
+
 			get_url: function (item_data) {
 				if (item_data.url !== undefined) {
 					return item_data.url;
@@ -82,7 +89,7 @@ angular.module('main').
 						slug,
 						cached				= {}; // cache.get(slug);
 
-					slug = angular.isString(some_slug)?  this.parse_slug(some_slug) : some_slug;
+					slug = angular.isString(some_slug)? some_slug : some_slug.api;
 
 					if (cached.isNotEmpty()) {
 						$rootScope.$broadcast('item-loaded', cached);
@@ -90,7 +97,7 @@ angular.module('main').
 					}
 					else {
 						try {
-							itemResource.query({slugs: slug.full}).$promise
+							itemResource.query({slugs: slug}).$promise
 								.then(function(item_data) {
 									// cache.put(item_data[0], slug);
 									$rootScope.$broadcast('item-loaded', item_data[0]);

@@ -49,7 +49,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'item-view',
-            url: '/{slug_text: .+_.+}',
+            url: '/{collection: (?:place|image|personality|familyname)}/{local_slug}',
             controller: 'ItemCtrl as itemController',
 			templateUrl: function(params) {
 				// TODO: rinse - this code was copied from itemService.js
@@ -66,13 +66,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 					  "מקום": "places",
 					  "person": "genTreeIndividuals",
 					  "אדם": "genTreeIndividuals",
-					  "family-name": "familyNames",
-					  "שם-משפחה": "familyNames",
+					  "familyname": "familyNames",
+					  "שםמשפחה": "familyNames",
 					  "video": "movies",
-					  "וידאו": "movies"},
-				    collection = params.slug_text.split('_')[0];
+					  "וידאו": "movies"};
 
-				return 'templates/item/'+slug_collection_map[collection]+'.html';
+				return 'templates/item/'+slug_collection_map[params.collection]+'.html';
 			}
 
         },
@@ -179,7 +178,16 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     ];
 
     angular.forEach(states, function(state) {
+		var he_state = angular.copy(state);
+		// state.resolve = {currentLang: function () { return 'En'; }};
+		// state.name = 'En_'+state.name;
         $stateProvider.state(state);
+		/*
+		he_state.url = '/he'+state.url;
+		he_state.name = 'He_'+state.name;
+		he_state.resolve = {currentLang: function () { return 'He'; }};
+        $stateProvider.state(he_state);
+		*/
     });
 
     /*** End of state definitions ***/

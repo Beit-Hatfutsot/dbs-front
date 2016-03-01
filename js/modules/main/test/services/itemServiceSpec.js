@@ -14,8 +14,8 @@ describe('item', function() {
 
 	describe('local operations', function () {
 		it('should parse the slug properly', function() {
-			var slug = item.parse_slug('place_anyplace');
-			expect(slug.full).toEqual('place_anyplace');
+			var slug = item.parse_state({collection: 'place', local_slug:'anyplace'});
+			expect(slug.api).toEqual('place_anyplace');
 			expect(slug.collection).toEqual('place');
 			expect(slug.local_slug).toEqual('anyplace');
 		});
