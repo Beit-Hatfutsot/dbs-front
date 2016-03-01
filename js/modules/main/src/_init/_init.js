@@ -53,10 +53,26 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'ItemCtrl as itemController',
 			templateUrl: function(params) {
 				// TODO: rinse - this code was copied from itemService.js
-				var collection_type_map = {'place': 'places'};
-				var collection = params.slug_text.split('_')[0];
-				return 'templates/item/places.html';
-				return 'templates/item/'+collection_type_map[collectiona]+'.html';
+				var slug_collection_map = {
+					  "image": "photoUnits",
+					  "תמונה": "photoUnits",
+					  "synonym": "synonyms",
+					  "שם נרדף": "synonyms",
+					  "lexicon": "lexicon",
+					  "מלון": "lexicon",
+					  "personality": "personalities",
+					  "אישיות": "personalities",
+					  "place": "places",
+					  "מקום": "places",
+					  "person": "genTreeIndividuals",
+					  "אדם": "genTreeIndividuals",
+					  "family-name": "familyNames",
+					  "שם-משפחה": "familyNames",
+					  "video": "movies",
+					  "וידאו": "movies"},
+				    collection = params.slug_text.split('_')[0];
+
+				return 'templates/item/'+slug_collection_map[collection]+'.html';
 			}
 
         },

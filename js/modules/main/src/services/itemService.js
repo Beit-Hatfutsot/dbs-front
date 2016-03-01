@@ -2,8 +2,39 @@ angular.module('main').
 	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache', 'itemTypeMap', '$state',
 	function($resource, $q, $rootScope, apiClient, cache, itemTypeMap, $state) {
 
-		var collection_type_map = {'place': 'places'};
-
+		var collection_type_map = {
+			0: 'genTreeIndividuals',
+			1: 'photoUnits',
+			5: 'places',
+			6: 'familyNames',
+			8: 'personalities',
+			9: 'movies',
+			'IMAGE': 'photoUnits',
+			'VIDEO': 'movies',
+			'TEXT': 'text',
+			'SOUND': 'audio',
+			'3D': '3D',
+			'Photographs' : 'photoUnits',
+			'Photograph albums' : 'photoUnits',
+			'Photographic portraits' : 'photoUnits',
+			'Manuscripts': 'text'},
+			 slug_collection_map = {
+			  "image": "photoUnits",
+			  "תמונה": "photoUnits",
+			  "synonym": "synonyms",
+			  "שם נרדף": "synonyms",
+			  "lexicon": "lexicon",
+			  "מלון": "lexicon",
+			  "personality": "personalities",
+			  "אישיות": "personalities",
+			  "place": "places",
+			  "מקום": "places",
+			  "person": "genTreeIndividuals",
+			  "אדם": "genTreeIndividuals",
+			  "family-name": "familyNames",
+			  "שם-משפחה": "familyNames",
+			  "video": "movies",
+			  "וידאו": "movies"};
 		var in_progress = false;
 
 		var itemResource = $resource(apiClient.urls.item +'/:slugs');
@@ -15,7 +46,7 @@ angular.module('main').
 				    ret =  {full: text,
 							collection: text.slice(0, sep_index),
 							local_slug: text.slice(sep_index+1)}
-				ret.item_type = collection_type_map[ret.collection];
+				ret.item_type = slug_collection_map[ret.collection];
 				return ret;
 
 			},
@@ -39,6 +70,9 @@ angular.module('main').
 
 			get_data_string: function(item_data) {
 				return itemTypeMap.get_item_string(item_data);
+			},
+			get_type: function (item_data) {
+				return collection_type_map[item_data.UnitType];
 			},
 
 			get: function(some_slug) {
