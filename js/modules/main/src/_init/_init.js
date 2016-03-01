@@ -90,6 +90,29 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/allresults.html'
         },
 
+        {
+            name: 'he',
+			abstract: true,
+			template: "<div ui-view></div>",
+            url: '/he',
+            onEnter: ['langManager', function(langManager) {
+                langManager.lang = 'he';
+            }]
+        },
+
+        {
+            name: 'he.he_start',
+			title: 'עמוד הבית',
+            url: '/',
+            templateUrl: 'templates/main/start.html',
+            controller: 'StartController as startCtrl',
+            onEnter: ['cache', 'wizard', 'header', function(cache, wizard, header) {
+                wizard.clear();
+                header.sub_header_state = 'closed';
+				console.log('eeee');
+            }]
+        },
+
 		/*
         {
             name: 'mjs',

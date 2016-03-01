@@ -1,6 +1,6 @@
 angular.module('lang').
 	factory('langManager', ['$window', '$rootScope', function($window, $rootScope) {
-		var _lang = $window.localStorage.getItem('bhsclient_language') || 'en';
+		var _lang = 'en';
 
 		/**
 		 * @ngdoc service
@@ -28,7 +28,6 @@ angular.module('lang').
 
 	  		set lang(new_lang) {
 				if (new_lang != _lang) {
-					$window.localStorage.setItem('bhsclient_language', new_lang);
 					_lang = new_lang;
 					$rootScope.$broadcast('language-changed', _lang)
 				}

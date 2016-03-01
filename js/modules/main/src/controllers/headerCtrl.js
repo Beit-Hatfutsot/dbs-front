@@ -1,10 +1,12 @@
-var HeaderCtrl = function($state, wizard, header, notification, auth, mjs, cache, recentlyViewed, user) {
+var HeaderCtrl = function($state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, user) {
 
     this.$state = $state;
     //console.log($state.includes('general-search'));
     this.auth = auth;
     this.cache = cache;
     this.recentlyViewed = recentlyViewed;
+	this.$location = $location;
+	this.langManager = langManager;
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',
         'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
@@ -92,7 +94,19 @@ HeaderCtrl.prototype = {
 
     goto_state: function(state_name) {
         this.$state.go(state_name);
-    }
+    },
+
+	goto_lang: function(lang) {
+		var url = this.$location.url()
+		if (lang == 'en')
+			url = url.slice(3);
+		else
+			url = '/he' + url;
+		this.langManager.lang = lang;
+		this.$location.url(url);
+	}
 };
 
-angular.module('main').controller('HeaderCtrl', ['$state', 'wizard', 'header', 'notification', 'auth', 'mjs', 'cache', 'recentlyViewed', 'user', HeaderCtrl]);
+angular.module('main').controller('HeaderCtrl', ['$state', '$location', 
+		  'langManager', 'wizard', 'header', 'notification', 'auth', 'mjs',
+		  'cache', 'recentlyViewed', 'user', HeaderCtrl]);

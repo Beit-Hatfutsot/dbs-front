@@ -76,10 +76,16 @@
           <div class="header-element dropdown-icons__language-selector">
             <div class="language-icon">
               <en>
-                <icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-122, -618]" hover-offset="[0, -34]" offset-on="headerController.language_menu_open == true" ng-click="lang='he'"></icon>
+                <icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}"
+                position="[-122, -618]" hover-offset="[0, -34]"
+                offset-on="headerController.language_menu_open == true"
+                ng-click="headerController.goto_lang('he')"></icon>
               </en>
               <he>
-                <icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}" position="[-122, -687]" hover-offset="[0, -34]" offset-on="headerController.language_menu_open == true" ng-click="lang='en'"></icon>
+                <icon alt-text="{en: 'Select Language', he: 'בחירת שפה'}"
+                position="[-122, -687]" hover-offset="[0, -34]"
+                offset-on="headerController.language_menu_open == true"
+                ng-click="headerController.goto_lang('en')"></icon>
               </he>
             </div>
           </div>
