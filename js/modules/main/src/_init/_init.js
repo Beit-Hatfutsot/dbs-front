@@ -33,8 +33,13 @@ config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 
 function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider) {
 
-    /*** State definitions go here ***/
-    var states = [
+		// to be used we exiting the item pages
+	var slug_cleaner = ['$rootScope', function($rootScope) {
+											$rootScope.slug = null;
+									  }],
+		// all of the states
+		//TODO: rinse, we should have one item-view state for all languages
+        states = [
         {
             name: 'start',
 			title: 'Home Page',
@@ -51,6 +56,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'item-view',
             url: '/{collection: (?:place|image|personality|familyname|video)}/{local_slug}',
             controller: 'ItemCtrl as itemController',
+            onExit: slug_cleaner,
 			templateUrl: function(params) {
 				// TODO: rinse - this code was copied from itemService.js
 				var slug_collection_map = {
@@ -62,7 +68,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 				return 'templates/item/'+slug_collection_map[params.collection]+'.html';
 			}
-
         },
 
         {
@@ -104,6 +109,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'he.he_item-view',
             url: '/{local_slug}/{collection: (?:מקום|תמונה|אישייות|שםמשפחה|וידאו)}',
             controller: 'ItemCtrl as itemController',
+            onExit: slug_cleaner,
 			templateUrl: function(params) {
 				// TODO: rinse - this code was copied from itemService.js
 				var slug_collection_map = {
@@ -118,6 +124,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         },
 
+        {
+            name: 'he.he_general-search',
+            url: '/חפשו?q&size&from_&collection',
+            controller: 'GeneralSearchController as generalSearchCtrl',
+            templateUrl: 'templates/main/search-results.html'
+        },
 
 		/*
         {

@@ -94,16 +94,20 @@ HeaderCtrl.prototype = {
 		    url = this.$location.url(),
 			text_slug = this.$rootScope.slug;
 
+		this.langManager.lang = lang;
 		// handle item pages
 		if (text_slug)
 			this.item.goto_slug(text_slug[proper_lang]);
 
+		// handle simple pages - with no moving parts in the url
+		var current = this.$state.current,
+			state; // the state we need to go to
+
 		if (lang == 'en')
-			url = url.slice(3);
+			name = current.name.slice(6);
 		else
-			url = '/he' + url;
-		this.langManager.lang = lang;
-		this.$location.url(url);
+			name = 'he.he_' + current.name;
+		this.$state.go(name, this.$state.params);
 	}
 };
 
