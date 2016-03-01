@@ -28,7 +28,6 @@ var StartController = function($scope, $state, wizard, item) {
 
 	// see doc for wizard-search-end event
 	$scope.$on('wizard-search-end', function() {
-		debugger;
 		var slug_text = self.choose_result();
 
 		if (slug_text) {
