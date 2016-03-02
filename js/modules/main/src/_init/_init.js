@@ -91,7 +91,9 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'about_center',
             url: '/about/:collection',
             controller: 'GeneralSearchController as generalSearchCtrl',
-            templateUrl: 'templates/main/allresults.html'
+            templateUrl: function(params) {
+                return 'templates/main/about'+params.collection+'.html';
+            }
         },
 
 		/*
