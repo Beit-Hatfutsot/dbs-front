@@ -65,7 +65,8 @@ angular.module('main').
 			},
 
 			get_url: function (item_data) {
-				if (item_data.url !== undefined) {
+				/*
+				if ((item_data.url !== undefined) && (item_data.url !== null)) {
 					return item_data.url;
 				}
 				/* TODO: restore the family trees
@@ -80,10 +81,18 @@ angular.module('main').
 				*/
 			    var lang = $rootScope.lang,
 					proper_lang = lang[0].toUpperCase() + lang.slice(1),
-					slug = item_data.Slug[proper_lang].split('_'),
-					state = (lang == 'he')?'he.he_item-view':'item_view';
+					params,
+					state = (lang == 'he')?'he.he_item-view':'item-view';
 
-				return $state.href(state, {collection: slug[0], local_slug: slug[1]});
+				if (item_data.slug)
+					params = {collection: item_data.slug.collection,
+							  local_slug : item_data.slug.local_slug};
+				else {
+					var parts = item_data.Slug[proper_lang].split('_'),
+					params = {collection: parts[0],
+							  local_slug : parts[1]};
+				}
+				return $state.href(state, params);
 			},
 			
 			get_string: function(collection_name, item_id) {
