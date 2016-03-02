@@ -275,7 +275,7 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
     });
 
     $rootScope.isCurrentState = function(state_name) {
-        return $state.includes(state_name);
+        return ($state.includes(state_name) || $state.includes('he.he_'+state_name));
     };
     
     // $rootScope.facebookAppId = 666465286777871;
