@@ -75,14 +75,14 @@
         }
 
         .db-results-title {
-            background-color: #c2c2c2;
+            background-color: #d6d6d6;
             line-height: 40px;
             padding: 0 20px;
             font-size: 20px;
             color: #666;
             display: table;
             position: relative;
-            margin-bottom: 18px;  
+            margin: 20px 0;  
 
             &:after {
                 position: absolute;
@@ -92,11 +92,11 @@
 
                 .en & {
                     left: 100%;
-                    border-left: 20px solid #c2c2c2;
+                    border-left: 20px solid #d6d6d6;
                 }
                 .he & {
                     right: 100%;
-                    border-right: 20px solid #c2c2c2;
+                    border-right: 20px solid #d6d6d6;
                 }
             }
 
@@ -108,11 +108,12 @@
         .db-results-exttitle {
             color: $gray3;
             font-size: 18px;
-            margin: 40px 36px 0;
+            margin: 14px 36px 0;
+            display: inline-block;
         }
 
         .item-preview-wrapper {
-            margin: 0 auto 20px;
+            margin: 0 auto;
 
             a {
                 text-decoration: none;
@@ -254,41 +255,70 @@
                 text-align: center;
                 color: #666;
                 font-weight: 700;
-
+                background-color: #fff;
                 @include box-shadow(0 0 6px 0 #999);
                 @include hover-pointer(); 
+
+                &:hover {
+
+                    .eye-icon {
+                        display: none;
+                    }
+
+                    .eye-open-icon {
+                        display: block;
+                    }
+
+                    .loader-desc {
+                        color: $gray3;
+                    }
+                }
+
+                .eye-icon, .eye-open-icon {
+                    width: 66px;
+                    height: 39px;
+                    position: absolute;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                    bottom: 84px;
+                }
 
                 .eye-icon {
                     width: 66px;
                     height: 39px;
-                    position: absolute;
-                    top: 30%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+                }
 
-                    &:hover {
-                        width: 72px;
-                        height: 56px;   
-                    }
+                .eye-open-icon {
+                    display: none;
+                    width: 72px;
+                    height: 56px;
                 }
 
                 .loader-desc {
-                    color: $gray3;
-                    font-size: 16px;
-                    line-height: 16px;
+                    color: $red2;
+                    line-height: 14px;
                     display: block;
-                    margin-top: 80px;
+                    top: 70px;
+                    position: absolute;
+                    width: 100%;
+                    transform: translate(-50%, 0);
+                    left: 50%;
 
                     .bold-part {
-                        font-size: 18px;
+                        font-size: 20px;
                     }
 
-                    &.ext {
-                        color: $red3;
+                    .med-font {
+                       font-size: 14px; 
+                    }
+
+                    .ext-src-name {
+                        font-size: 16px;
                     }
 
                     .results-number {
-                        font-size: 14px;
+                        margin-top: 16px;
+                        font-size: 13px;
                         font-weight: normal;
                         color: $gray3;
                         display: block;

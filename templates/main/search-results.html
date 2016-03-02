@@ -3,7 +3,7 @@
         <ul class="nav">
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'allResults'}" ng-click="generalSearchCtrl.collection ='allResults'">
                 <div>
-                    <en>All results</en>
+                    <en>All Results</en>
                     <he>כל התוצאות</he>
                 </div>
             </li>
@@ -27,7 +27,7 @@
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'familyNames'}" ng-click="generalSearchCtrl.collection = 'familyNames'">
                 <div>
-                    <en>Family names</en>   
+                    <en>Family Names</en>   
                     <he>שמות משפחה</he>
                 </div>
             </li>
@@ -38,7 +38,7 @@
             <div ng-switch-when='allResults' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot databases:</br>The vision of Nahum Goldmann</a><br></en>
+                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot Databases:</br>The Vision of Douglas E. Goldman</a><br></en>
                         <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן</a><br></he>
                     </span>
                 </div>
@@ -101,6 +101,7 @@
                 <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
                 <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                     <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
+                    <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                     <div class="loader-desc">
                         <en><span class="bold-part">More</span><br></en>
                         <he>לראות עוד<br></he>
@@ -112,7 +113,7 @@
                 </div>
             </div>
             <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0">
-                <en><span class="bold">{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</span> External sources results found for <span class="cap-query bold">{{generalSearchCtrl.query}}</span></en>
+                <en><span class="bold">{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</span> results elsewhere on the internet for <span class="cap-query bold">{{generalSearchCtrl.query}}</span></en>
                 <he>נמצאו {{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}} תוצאות עבור <span class="cap-query bold">{{generalSearchCtrl.query}}</span></he>
             </div>
             <div class="db-results-exttitle" ng-if="generalSearchCtrl.cjh_total > 0">
@@ -129,9 +130,10 @@
                     preview-data="r_data">
                 </item-preview>
                 <div class="loader" ng-click="generalSearchCtrl.fetch_more_cjh()" ng-if="generalSearchCtrl.cjh_total>generalSearchCtrl.cjh_results.length">
-                    <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
+                    <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]"></icon>
+                    <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                     <div class="loader-desc ext">
-                        <en><span class="bold-part">More</span> from<br> Center for Jewish History</en>
+                        <en><span class="bold-part">More</span><span class="med-font"> from</span><br><span class="ext-src-name">Center for<br>Jewish History</span></en>
                         <he>לראות עוד<br></he>
                         <span class="results-number">
                             <en>(+{{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} results)</en>
@@ -141,8 +143,8 @@
                 </div>
             </div>
             <div class="db-results-exttitle" ng-if="generalSearchCtrl.eurp_total > 0">
-                <en><span class="bold">{{generalSearchCtrl.eurp_total}}</span> Results from <a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></span></en>
-                <he>נמצאו <span class="bold">{{generalSearchCtrl.eurp_total}}</span> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">מירופיאנה</a></span>
+                <en><span class="bold">{{generalSearchCtrl.eurp_total}}</span> Results<a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></en>
+                <he>נמצאו <span class="bold">{{generalSearchCtrl.eurp_total}}</span> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">מירופיאנה</a></span></he>
             </div>
             <div class="item-preview-wrapper" ng-if="generalSearchCtrl.eurp_total > 0">
                 <div class="spinner" ng-if="generalSearchCtrl.loading_eurp">
@@ -155,8 +157,9 @@
                 </item-preview>
                 <div class="loader" ng-click="generalSearchCtrl.fetch_more_eurp()" ng-if="generalSearchCtrl.eurp_total>generalSearchCtrl.eurp_results.length">
                 <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
+                <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                 <div class="loader-desc ext">
-                    <en><span class="bold-part">More</span> from<br>Europeana</en>
+                    <en><span class="bold-part">More</span><span class="med-font"> from</span><br><span class="ext-src-name">Europeana</span></en>
                     <he>לראות עוד<br></he>
                     <span class="results-number">
                         <en>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} results)</en>
