@@ -108,6 +108,12 @@
                 }
             }
 
+            .print-ntf {
+                font-weight: normal;
+                margin-right: 10px;
+                line-height: 16px;
+            }
+
             .print-icon {
                 width: 30px;
                 height: 30px;
@@ -649,9 +655,8 @@
                 }
 
                 &__article-header {
-                    position: absolute;
                     margin: 0px 26px;
-                    color: #BE3217;
+                    color: $red2;
                     max-width: 640px;
                     line-height: 26px;
                     .en & {

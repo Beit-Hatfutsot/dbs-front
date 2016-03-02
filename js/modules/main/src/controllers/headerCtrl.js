@@ -9,6 +9,7 @@ var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, he
 	this.$location = $location;
 	this.item = item;
 	this.langManager = langManager;
+    this.beta_notification_open = true;
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',
         'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
@@ -108,7 +109,16 @@ HeaderCtrl.prototype = {
 		else
 			name = 'he.he_' + current.name;
 		this.$state.go(name, this.$state.params);
-	}
+	},
+    toggle_beta_notification: function() {
+        if (this.beta_notification_open) {
+            this.beta_notification_open = false;
+        }
+        else {
+            this.beta_notification_open = true;
+        }
+    }
+
 };
 
 angular.module('main').controller('HeaderCtrl', ['$rootScope', '$state', '$location', 

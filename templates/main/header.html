@@ -28,11 +28,34 @@
                 <div class="title">My Story</div>
                 <div class="icon active"></div>
               </a>
+              <en><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="Beta" position="[-590, -530]"></icon></en>
+              <he><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="'בטא'" position="[-541, -530]"></icon></he>
             </li>
           </ul>
         </div>
+        <div class="beta-notification" ng-show="headerController.beta_notification_open">
+          <en>
+            <svg class="beta-notification__shape" height="174" width="530">
+              <path fill="#019DB2" d="M81.8,65.2C77.9,31.1,50.4,1,1,1c42.6,0,46.8,45.2,46.7,64.2h-7.2C28.7,65.2,19,74.9,19,86.7v65.8  c0,11.8,9.7,21.5,21.5,21.5h466.9c11.8,0,21.5-9.7,21.5-21.5V65.2H81.8z"/>
+            </svg>
+          </en>
+          <he>
+            <svg class="beta-notification__shape" height="174" width="530">
+              <path fill="#019DB2" d="M489.5,65.2h-7.2C482.2,46.2,486.4,1,529,1c-49.4,0-76.9,30.2-80.8,64.2H1v87.3c0,11.8,9.7,21.5,21.5,21.5  h466.9c11.8,0,21.5-9.7,21.5-21.5V86.7C511,74.9,501.3,65.2,489.5,65.2z"/>
+            </svg>
+          </en>
+          </he>
+          <span class="beta-notification__close" ng-click="headerController.toggle_beta_notification()">x</span>
+          <p class="beta-notification__text">
+            <en>Welcome! We're so happy you've joined us. Please note that we've just launched our new website and are improving it daily.<br>We hope you'll check out all that we've got here so far, and thank you for bearing with us while we keep working to make it even better.
+            </en>
+            <he>
+                ברוכים הבאים, אנחנו שמחים שהצטרפתם אלינו! אנא שימו לב שרק עתה השקנו את האתר ואנו עובדים עליו ומשפרים אותו כל הזמן. אנו מקווים שתהנו מכל מה שיש כאן, ושתחזרו לבקר מדי פעם כדי לגלות מה חדש. תודה על הסבלנות.
+            </he>
+          </p>
+        </div>
         <div class="dropdown-icons">
-          <div class="header-element dropdown-icons__my-account signed" dropdown>
+          <!-- <div class="header-element dropdown-icons__my-account signed" dropdown>
             <button class="my-account-label" dropdown-toggle>
               <div class="dropdown-icons__user" ng-if="headerController.is_signedin">
                 <icon class="dropdown-icons__user__pic" position="[-264, -588]"></icon>
@@ -61,7 +84,7 @@
                 <he>צור חשבון</he>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="header-element newsletter-popup">
             <div class="newsletter-popup__button">
@@ -109,12 +132,12 @@
                 <he>ראשי</he>
               </div>
             </li>
-            <li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
+           <!--  <li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
               <div class="mystory__text">
                 <en>My Story</en>	
                 <he>הסיפור שלי</he>
               </div>
-            </li>
+            </li> -->
             <li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'general-search'}"
               ng-click="headerController.header.sub_header_state = 'general-search'">
               <div>
@@ -132,8 +155,8 @@
                   <li class="header-menu-item ftree-tab" ng-class="{'header-menu-item--active': isCurrentState('ftrees')}" 
                     ng-click="headerController.goto_state('ftrees')"> 
                       <div>
-                          <en>Family tree</en>
-                          <he>עץ משפחה</he>
+                          <en>Family Trees</en>
+                          <he>עצי משפחה</he>
                       </div>
                   </li>
           </ul>

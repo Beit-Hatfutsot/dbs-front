@@ -17,7 +17,7 @@
         </p>
         <item-type type="'places'"></item-type>
     </div>
-    <div class="search-results__field"
+    <!-- <div class="search-results__field"
          ng-if="itemController.search_result.ftree_args" ng-click="itemController.goto_tree()">
         <p class="vertical-middle">
             <span ng-if="itemController.search_result.ftree_args.last_name &&
@@ -46,12 +46,12 @@
             </span>
         </p>
         <item-type type="'genTreeIndividuals'"></item-type>
-    </div>
+    </div> -->
 </div>
 <div class="related">
     <div class="related__header">
         <en>Related Items</en>
-        <he>פרטים קשורים</he>
+        <he>ערכים קשורים</he>
     </div>
     <item-preview ng-repeat="r_data in itemController.related_data | limitTo: 6" preview-data="r_data" item-source="bh"></item-preview> 
 </div>

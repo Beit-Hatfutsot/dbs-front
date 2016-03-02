@@ -1,3 +1,70 @@
+.beta-icon {
+    width: 42px;
+    height: 35px;
+    position: absolute;
+    top: 0;
+    @include hover-pointer();
+
+    .en & {
+        right: 0;
+    }
+    .he & {
+        left: 0;
+    }
+}
+
+.beta-notification {
+    position: relative;
+    width: 530px;
+    height: 174px;
+    top: 22px;
+    z-index: 1;
+
+    .en & {
+        left: 282px;
+    }
+    .he & {
+        right: 282px;
+    }
+
+    &__shape {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    &__close {
+        position: absolute;
+        top: 64px;
+        color: #fff;
+        font-weight: 700;
+        @include hover-pointer();
+
+        .en & {
+            right: 8px;
+        }
+        .he & {
+            left: 8px;
+        }
+    }
+
+    &__text {
+        position: absolute;
+        font-weight: 600;
+        font-size: 14px;
+        width: 100%;
+        top: 70px;
+        color: $blue6;
+        .en & {
+            padding-left: 40px;
+            padding-right: 18px;
+        }
+        .he & {
+            padding-right: 40px;
+            padding-left: 18px;
+        }
+    }
+}
+
 .main-header {
     position: fixed;
     top: 0;
@@ -16,7 +83,7 @@
         .sub-upper-container {
             position: relative;
             margin: 0 auto;
-            padding: 0 6px 17px;
+            padding: 0 0px 17px;
             max-width: 1140px;
             height: 70px;
 
@@ -30,7 +97,15 @@
                     margin: 0;
                     list-style: none;
 
+                    .en & {
+                        padding-left: 0;
+                    }
+                    .he & {
+                        padding-right: 0;
+                    }
+
                     .site-item {
+                        position: relative;
                         
                         .en & {
                             float: left;
@@ -168,6 +243,7 @@
             .dropdown-icons {
                 position: fixed;
                 height: 70px;
+                top: 0;
                 display: flex;
                 align-items: center;
                 z-index: 2;
@@ -633,12 +709,13 @@
             @at-root .menu {
                 position: relative;
                 margin: 0 auto;
-                padding: 0 6px;
+                padding: 0;
                 height: 100%;
                 width: 100%;
                 background: inherit;
 
                 ul.nav {
+                    padding: 0;
                     margin: 0 auto;
                     max-width: 1170px;
 

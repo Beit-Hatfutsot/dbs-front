@@ -5,6 +5,36 @@
 	background: $gray7;
 	padding: 14px 0;
 
+	#temp-ftree {
+		position: relative;
+		width: 1140px;
+		min-height: 560px;
+		margin: 0 auto;
+		background-color: inherit;
+
+		.tree-examp {
+		    position: absolute;
+		    display: block;
+		    left: 230px;
+    		top: 70px;
+		}
+
+		.explanation-he {
+			position: absolute;
+			width: 450px;
+    		right: 0;
+    		direction: rtl;
+		}
+
+		.explanation-en {
+		    width: 460px;
+		    top: 324px;
+		    position: absolute;
+		    direction: ltr;
+		    left: 0;
+		}
+	}
+
 	@at-root #tree-sort {
 		position: relative;
 		width: 1170px;
