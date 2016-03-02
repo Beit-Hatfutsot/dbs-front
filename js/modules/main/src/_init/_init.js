@@ -260,9 +260,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     $provide.decorator('$state', function($delegate, $stateParams) {
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
+			var target = state_name;
+			
+			if ($delegate.lastState && $delegate.lastState.name.startsWith('he') && !target.startsWith('he'))
+				target = 'he.he_' + target;
             $delegate.lastState = $delegate.current;
             $delegate.lastStateParams = $delegate.params;
-            return old_go.apply($delegate, [state_name, state_params, config]);
+            return old_go.apply($delegate, [target, state_params, config]);
         };
         return $delegate;
     });
