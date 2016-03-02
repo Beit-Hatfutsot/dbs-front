@@ -41,6 +41,16 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 		//TODO: rinse, we should have one item-view state for all languages
         states = [
         {
+            name: 'he',
+			abstract: true,
+			template: "<div ui-view></div>",
+            url: '/he',
+            onEnter: ['langManager', function(langManager) {
+                langManager.lang = 'he';
+            }]
+        },
+
+        {
             name: 'start',
 			title: 'Home Page',
             url: '/',
@@ -84,15 +94,18 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/allresults.html'
         },
 
+		/*
         {
-            name: 'he',
-			abstract: true,
-			template: "<div ui-view></div>",
-            url: '/he',
-            onEnter: ['langManager', function(langManager) {
-                langManager.lang = 'he';
-            }]
+            name: 'he.he_about_center',
+            url: '/אודות/:collection',
+            controller: 'GeneralSearchController as generalSearchCtrl',
+            templateUrl: function (params) {
+				collection_map = {'אישיות': 'personalities',
+					
+				return 'templates/main/allresults.html'
+			}
         },
+		*/
 
         {
             name: 'he.he_start',
@@ -144,7 +157,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 });
             }]
         }, 
-
+		*/
         {
             name: 'ftrees',
             url: '/ftrees?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
@@ -152,7 +165,14 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             //templateUrl: 'templates/main/ftrees/ftrees.html'
             templateUrl: 'templates/main/ftrees/coming-soon.html'
         },
-
+        {
+            name: 'he.he_ftrees',
+            url: '/עצימשפחה?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
+            controller: 'FtreesController as ftreesCtrl',
+            //templateUrl: 'templates/main/ftrees/ftrees.html'
+            templateUrl: 'templates/main/ftrees/coming-soon.html'
+        },
+		/*
         {
             name: 'ftree-view',
             url: '/ftree_view/:tree_number/:node_id',

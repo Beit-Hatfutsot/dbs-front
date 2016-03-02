@@ -4,7 +4,7 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item) {
     this.$state = $state;
     this.mjs = mjs;
     this.$scope = $scope;
-    this.item_string = item.get_data_string($scope.previewData);
+    this.item = item;
     this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
     this.in_branch = $scope.previewData.in_branch;
     this.url = $scope.previewData.url;
@@ -14,7 +14,7 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item) {
 
 ItemPreviewCtrl.prototype = {
 
-    get_item_url: function() {
+    get_item_url: function(item_data) {
 		// TODO: refactor to user item.get_url
         if (this.url !== undefined) {
             return this.url;
@@ -23,11 +23,11 @@ ItemPreviewCtrl.prototype = {
             return this.$state.href('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
         }
         else {
-			var parts = this.item_string.split('.')
-			return this.$state.href('item-view', {collection: parts[0], id: parts[1]});
+			return this.item.get_url(item_data);
         }
     },
 
+	/*
     remove_from_mjs: function() {
         this.mjs.remove(this.item_string);
     },
@@ -44,6 +44,7 @@ ItemPreviewCtrl.prototype = {
     in_mjs_state: function() {
         return this.$state.current.name == 'mjs';
     }
+	*/
 
 };
 

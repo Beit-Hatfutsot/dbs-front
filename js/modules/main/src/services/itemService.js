@@ -68,6 +68,7 @@ angular.module('main').
 				if (item_data.url !== undefined) {
 					return item_data.url;
 				}
+				/* TODO: restore the family trees
 				if (item_data.params && item_data.params.hasOwnProperty('tree_number')) {
 					return $state.href('ftree-view',
 									   	{individual_id: item_data.params.node_id,
@@ -76,6 +77,13 @@ angular.module('main').
 				else {
 					return $state.href('item-view', item_data.slug.full);
 				}
+				*/
+			    var lang = $rootScope.lang,
+					proper_lang = lang[0].toUpperCase() + lang.slice(1),
+					slug = item_data.Slug[proper_lang].split('_'),
+					state = (lang == 'he')?'he.he_item-view':'item_view';
+
+				return $state.href(state, {collection: slug[0], local_slug: slug[1]});
 			},
 			
 			get_string: function(collection_name, item_id) {
