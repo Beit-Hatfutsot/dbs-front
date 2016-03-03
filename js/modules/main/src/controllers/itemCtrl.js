@@ -80,11 +80,13 @@ ItemCtrl.prototype = {
 					});
 				self.item_data = item_data;
 				self.content_loaded = true;
+				/* TODO: restore related items
 				if (item_data.related)
 					self.item.get_items(item_data.related).
 						then(function(related_data) {
 							self.parse_related_data(related_data);
 						});
+				*/
 			},
 			function(error) {
 				self.error = error;
@@ -119,7 +121,8 @@ ItemCtrl.prototype = {
 		related_data.forEach(function(related_item) {
 			// push related items after checking they were not pulled from wizard result
 			// if ( self.wizard_name._id !== related_item._id && self.wizard_place._id !== related_item._id ) {
-			if (related_data.Slug[self.lang] != self.slug.api) {
+			var proper_lang = self.lang[0].toUpperCase() + self.lang[1];
+			if (related_data.Slug[proper_lang] != self.slug.api) {
 				self.related_data.push(related_item);
 			}
 		});
