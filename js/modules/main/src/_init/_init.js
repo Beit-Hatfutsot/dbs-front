@@ -94,18 +94,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/allresults.html'
         },
 
-		/*
         {
             name: 'he.he_about_center',
             url: '/אודות/:collection',
             controller: 'GeneralSearchController as generalSearchCtrl',
-            templateUrl: function (params) {
-				collection_map = {'אישיות': 'personalities',
-					
-				return 'templates/main/allresults.html'
-			}
+            templateUrl: 'templates/main/allresults.html'
         },
-		*/
 
         {
             name: 'he.he_start',
