@@ -95,20 +95,26 @@ HeaderCtrl.prototype = {
 		    url = this.$location.url(),
 			text_slug = this.$rootScope.slug;
 
+		delete this.$state.lastState;
 		this.langManager.lang = lang;
 		// handle item pages
+		debugger;
 		if (text_slug)
 			this.item.goto_slug(text_slug[proper_lang]);
+		else {
+			// handle simple pages - with no moving parts in the url
+			var current = this.$state.current,
+				current_is_he = current.name.startsWith('he'),
+				name = current.name,
+				state; // the state we need to go to
 
-		// handle simple pages - with no moving parts in the url
-		var current = this.$state.current,
-			state; // the state we need to go to
-
-		if (lang == 'en')
-			name = current.name.slice(6);
-		else
-			name = 'he.he_' + current.name;
-		this.$state.go(name, this.$state.params);
+			if ((lang == 'en') && current_is_he)
+				name = current.name.slice(6);
+			else if ((lang == 'he') && !current_is_he)
+				name = 'he.he_' + current.name;
+			console.log(name);
+			this.$state.go(name, this.$state.params);
+		}
 	},
     toggle_beta_notification: function() {
         if (this.beta_notification_open) {

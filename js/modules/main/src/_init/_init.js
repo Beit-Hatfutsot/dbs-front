@@ -41,6 +41,16 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 		//TODO: rinse, we should have one item-view state for all languages
         states = [
         {
+            name: 'he',
+			abstract: true,
+			template: "<div ui-view></div>",
+            url: '/he',
+            onEnter: ['langManager', function(langManager) {
+                langManager.lang = 'he';
+            }]
+        },
+
+        {
             name: 'start',
 			title: 'Home Page',
             url: '/',
@@ -81,19 +91,14 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'about_center',
             url: '/about/:collection',
             controller: 'GeneralSearchController as generalSearchCtrl',
-            templateUrl: function(params) {
-                return 'templates/main/about'+params.collection+'.html';
-            }
+            templateUrl: 'templates/main/allresults.html'
         },
 
         {
-            name: 'he',
-			abstract: true,
-			template: "<div ui-view></div>",
-            url: '/he',
-            onEnter: ['langManager', function(langManager) {
-                langManager.lang = 'he';
-            }]
+            name: 'he.he_about_center',
+            url: '/אודות/:collection',
+            controller: 'GeneralSearchController as generalSearchCtrl',
+            templateUrl: 'templates/main/allresults.html'
         },
 
         {
@@ -146,7 +151,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 });
             }]
         }, 
-
+		*/
         {
             name: 'ftrees',
             url: '/ftrees?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
@@ -154,7 +159,14 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             //templateUrl: 'templates/main/ftrees/ftrees.html'
             templateUrl: 'templates/main/ftrees/coming-soon.html'
         },
-
+        {
+            name: 'he.he_ftrees',
+            url: '/עצימשפחה?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
+            controller: 'FtreesController as ftreesCtrl',
+            //templateUrl: 'templates/main/ftrees/ftrees.html'
+            templateUrl: 'templates/main/ftrees/coming-soon.html'
+        },
+		/*
         {
             name: 'ftree-view',
             url: '/ftree_view/:tree_number/:node_id',
@@ -240,9 +252,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     $provide.decorator('$state', function($delegate, $stateParams) {
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
+			var target = state_name;
+			
+			if ($delegate.lastState && $delegate.lastState.name.startsWith('he') && !target.startsWith('he'))
+				target = 'he.he_' + target;
             $delegate.lastState = $delegate.current;
             $delegate.lastStateParams = $delegate.params;
-            return old_go.apply($delegate, [state_name, state_params, config]);
+            return old_go.apply($delegate, [target, state_params, config]);
         };
         return $delegate;
     });
@@ -277,7 +293,7 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
     });
 
     $rootScope.isCurrentState = function(state_name) {
-        return $state.includes(state_name);
+        return ($state.includes(state_name) || $state.includes('he.he_'+state_name));
     };
     
     // $rootScope.facebookAppId = 666465286777871;
