@@ -1,4 +1,4 @@
-var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, user, item) {
+var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, user, item, $window) {
 
     this.$state = $state;
     //console.log($state.includes('general-search'));
@@ -9,7 +9,9 @@ var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, he
 	this.$location = $location;
 	this.item = item;
 	this.langManager = langManager;
-    this.beta_notification_open = true;
+    this.beta_notification_open = $window.localStorage.getItem('beta-welcome-msg') != 'dismissed';
+    this.$window = $window;
+
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',
         'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
@@ -98,7 +100,6 @@ HeaderCtrl.prototype = {
 		delete this.$state.lastState;
 		this.langManager.lang = lang;
 		// handle item pages
-		debugger;
 		if (text_slug)
 			this.item.goto_slug(text_slug[proper_lang]);
 		else {
@@ -116,12 +117,15 @@ HeaderCtrl.prototype = {
 			this.$state.go(name, this.$state.params);
 		}
 	},
+
     toggle_beta_notification: function() {
         if (this.beta_notification_open) {
             this.beta_notification_open = false;
+            this.$window.localStorage.setItem('beta-welcome-msg', 'dismissed');
         }
         else {
             this.beta_notification_open = true;
+            this.$window.localStorage.removeItem('beta-welcome-msg');
         }
     }
 
@@ -129,4 +133,4 @@ HeaderCtrl.prototype = {
 
 angular.module('main').controller('HeaderCtrl', ['$rootScope', '$state', '$location', 
 		  'langManager', 'wizard', 'header', 'notification', 'auth', 'mjs',
-		  'cache', 'recentlyViewed', 'user', 'item', HeaderCtrl]);
+		  'cache', 'recentlyViewed', 'user', 'item', '$window', HeaderCtrl]);
