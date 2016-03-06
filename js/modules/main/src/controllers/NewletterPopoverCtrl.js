@@ -37,6 +37,7 @@ var NewsLetterPopoverCtrl = function($http, apiClient) {
                 headers:{'Content-Type': 'application/json'},
                 data: {email: this.email, langs: this.get_languages_array()}
             }).finally(function (data, status) {
+					self.popover.close();
                     if (status !== 200) {
 						console.log("newsletter registration failed with", status);
 					}
