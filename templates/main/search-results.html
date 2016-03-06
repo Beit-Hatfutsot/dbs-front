@@ -38,8 +38,8 @@
             <div ng-switch-when='allResults' class="about-bh">
                 <div class="title">
                     <span>
-                        <en><a class="linked" ng-click="generalSearchCtrl.read_about_center()">About the Beit Hatfutsot Databases</a><br></en>
-                        <he><a class="linked" ng-click="generalSearchCtrl.read_about_center()">אודות מאגרי המידע של בית התפוצות</a><br></he>
+                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot Databases:</br>The Vision of Douglas E. Goldman</a><br></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן</a><br></he>
                     </span>
                 </div>
             </div> 
@@ -54,7 +54,7 @@
             <div ng-switch-when='media' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center(media)">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
+                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
                         <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
                     </span>
                 </div>
@@ -85,17 +85,9 @@
             </div>
         </ng-switch>
         <div class="search-results-page">
-            <!-- <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include> -->
-            <div id="google-it" ng-if="generalSearchCtrl.results.total == 0">
-                <div class="no-res-notif">
-                    <en>We couldn't find any match to <span class="cap-query">"{{generalSearchCtrl.query}}"</span>,<br/>check your spelling, try a different query or:</en>
-                    <he>לא הצלחנו למצוא תוצאות עבור "{{generalSearchCtrl.query}}" במאגרים שלנו.<br>אנא בדקו שאין בטקסט שהזנתם שגיאות כתיב ונסו שוב, או הזינו טקסט חדש לחיפוש.<br>
-                        באפשרותכם גם לבחור באחת מהאפשרויות הבאות:<br/></he>
-                </div>
-            </div>
             <div class="db-results-title"  ng-if="generalSearchCtrl.results.total > 0">
                 <en><span class="bold">{{generalSearchCtrl.results.total}}</span> results found for <span class="cap-query bold">{{generalSearchCtrl.query}}</span> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].En}})</en>
-                <he>{{generalSearchCtrl.results.total}} תוצאות עבור <span class="cap-query bold">{{generalSearchCtrl.query}}</span>: ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}})</he>
+                <he>נמצאו {{generalSearchCtrl.results.total}} תוצאות עבור <span class="cap-query bold">{{generalSearchCtrl.query}}</span>: ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}})</he>
             </div>
             <div class="item-preview-wrapper">
                 <div class="spinner" ng-if="generalSearchCtrl.loading && generalSearchCtrl.query">
@@ -106,36 +98,27 @@
                     ng-repeat="r_data in generalSearchCtrl.results.hits"
                     preview-data="r_data._source">
                 </item-preview>
+                <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
                 <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                     <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                     <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                     <div class="loader-desc">
                         <en><span class="bold-part">More</span><br></en>
-                        <he><span class="bold-part">עוד תוצאות</span><br></he>
+                        <he>לראות עוד<br></he>
                         <span class="results-number">
                             <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
-                            <he>({{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
+                            <he>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
                         </span>
                     </div>
                 </div>
             </div>
-            <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0 && generalSearchCtrl.results.total == 0">
-                <en><span class="bold">{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</span> results elsewhere on the internet for <span class="cap-query bold">{{generalSearchCtrl.query}}:</span></en>
-                <he>בדקו את התוצאות שמצאנו עבורכם במאגרי מידה נוספים:</he>
-            </div>
-            <div class="search-button-label" ng-if="generalSearchCtrl.eurp_total > 0 && generalSearchCtrl.results.total == 0">
-                <en></en>
-                <he>בית התפוצות חבר לארכיונים ומאגרי מידע בעולם, על מנת לתת לכם כמה שיותר תוצאות רלוונטיות.<br>
-                    לחיצה על כל אחת מהתוצאות הבאות תפתח חלון חדש עם הפריט הנבחר באתר המקור שלו:
-                </he>
-            </div>
-            <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0 && generalSearchCtrl.results.total > 0">
+            <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0">
                 <en><span class="bold">{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</span> results elsewhere on the internet for <span class="cap-query bold">{{generalSearchCtrl.query}}</span></en>
-                <he><span class="bold">{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</span> תוצאות ממאגרי מידה אחרים עבור <span class="cap-query bold">{{generalSearchCtrl.query}}</span></he>
+                <he>נמצאו {{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}} תוצאות עבור <span class="cap-query bold">{{generalSearchCtrl.query}}</span></he>
             </div>
             <div class="db-results-exttitle" ng-if="generalSearchCtrl.cjh_total > 0">
                 <en><span class="bold">{{generalSearchCtrl.cjh_total}}</span> Results from <a class="link" href="http://www.cjh.org/" target="_blank">the Center for Jewish History</a></en>
-                <he>{{generalSearchCtrl.cjh_total}} תוצאות ממאגרי <a class="link" href="http://www.cjh.org/" target="_blank">מהמרכז להיסטוריה יהודית</a></he>
+                <he>נמצאו <span class="bold">{{generalSearchCtrl.cjh_total}}</span> תוצאות <a class="link" href="http://www.cjh.org/" target="_blank">מהמרכז להיסטוריה יהודית</a></he>
             </div>
             <div class="item-preview-wrapper" ng-if="generalSearchCtrl.cjh_total > 0">
                 <div class="spinner" ng-if="generalSearchCtrl.loading_cjh && generalSearchCtrl.query">
@@ -151,17 +134,17 @@
                     <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                     <div class="loader-desc ext">
                         <en><span class="bold-part">More</span><span class="med-font"> from</span><br><span class="ext-src-name">Center for<br>Jewish History</span></en>
-                        <he><span class="bold-part">עוד תוצאות</span><br><span class="med-font">מהמרכז<br>להיסטוריה יהודית</span></he>
+                        <he>לראות עוד<br></he>
                         <span class="results-number">
                             <en>(+{{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} results)</en>
-                            <he>({{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} תוצאות)</he>
+                            <he>(+{{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} תוצאות)</he>
                         </span>
                     </div>
                 </div>
             </div>
             <div class="db-results-exttitle" ng-if="generalSearchCtrl.eurp_total > 0">
                 <en><span class="bold">{{generalSearchCtrl.eurp_total}}</span> Results<a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></en>
-                <he>{{generalSearchCtrl.eurp_total}} תוצאות ממאגרי <a class="link" href="http://www.europeana.eu/portal/" target="_blank">מירופיאנה</a></span></he>
+                <he>נמצאו <span class="bold">{{generalSearchCtrl.eurp_total}}</span> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">מירופיאנה</a></span></he>
             </div>
             <div class="item-preview-wrapper" ng-if="generalSearchCtrl.eurp_total > 0">
                 <div class="spinner" ng-if="generalSearchCtrl.loading_eurp">
@@ -177,37 +160,12 @@
                 <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                 <div class="loader-desc ext">
                     <en><span class="bold-part">More</span><span class="med-font"> from</span><br><span class="ext-src-name">Europeana</span></en>
-                    <he><span class="bold-part">עוד תוצאות</span><br><span class="med-font">מיורופיאנה</span></he>
+                    <he>לראות עוד<br></he>
                     <span class="results-number">
                         <en>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} results)</en>
-                        <he>({{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} תוצאות)</he>
+                        <he>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} תוצאות)</he>
                     </span>
                 </div>
-                </div>
-            </div>
-            <div ng-if="generalSearchCtrl.results.total == 0">
-                <div class="db-results-title">
-                    <en>Use your Google power:</en>
-                    <he>השתמשו בכוחו של גוגל:</he>
-                </div>
-                <label for="search-input" class="search-button-label">
-                    <en>Use your query phrase, combined with one or more of the following key words on Google:</en>
-                    <he>מנוע החיפוש של גוגל הוא חזק ונרחב, אבל חסר לו ההקשר של העולם היהודי.<br>
-                        באפשרותכם להוסיף למלים שאתם מחפשים כמה מלות מפתח שימקדו את החיפוש בגוגל.<br>
-                        בחרו מלים מהרשימה למטה או הקלידו מלים נוספות בעצמכם.</he>
-                </label>
-                <div class="google-search-box-wrapper">
-                    <input id="search-input" ng-model="generalSearchCtrl.google_query" ng-keydown="generalSearchCtrl.google_search_on_enter($event)" autofocus type="text" placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
-                    <ul class="google-key-words">
-                        <li class="key-word" ng-repeat="query_word in generalSearchCtrl.query_words" ng-class="{'key-word--active' : query_word.selected}" ng-click="generalSearchCtrl.toggle_selected(query_word)">
-                            <en>{{query_word.en}}</en>
-                            <he>{{query_word.he}}</he>
-                        </li>
-                    </ul>
-                    <button class="google-search-btn" ng-click="generalSearchCtrl.google_search()" ng-disabled="generalSearchCtrl.google_query.length < 2">
-                        <en><a>Search this</a></en>
-                        <he><a>חיפוש</a></he>
-                    </button>
                 </div>
             </div>
         </div>
