@@ -11,6 +11,7 @@
 }
 
 #general-search-page {
+    position: relative;
     width: $view-width;
     margin: 0 auto;
     background-color: #F6F6F6;
@@ -30,6 +31,7 @@
     }
 
     .title {
+        position: absolute;
         font-size: 16px;
         color: $gray3;
         line-height: 18px;
@@ -41,11 +43,11 @@
         @include hover-pointer();
 
         .en & {
-            float: right;
+            right: 0;
         }
 
         .he & {
-            float: left;
+            left: 0;
         }
 
         .linked {
