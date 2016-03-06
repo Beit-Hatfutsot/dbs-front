@@ -1,5 +1,38 @@
 <div id="item-page-container">
-    <ng-include src="'templates/main/about/search-tabs.html'"></ng-include>
+    <nav class="menu gsearch">
+        <ul class="nav">
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'allResults'}" ng-click="generalSearchCtrl.collection ='allResults'">
+                <div>
+                    <en>All Results</en>
+                    <he>כל התוצאות</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'places'}" ng-click="generalSearchCtrl.collection = 'places'">
+                <div>
+                    <en>Places</en>   
+                    <he>מקומות</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'media'}" ng-click="generalSearchCtrl.collection = 'media'">
+                <div>
+                    <en>Images<br>& Videos</en>
+                    <he>תמונות + וידאו</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'personalities'}" ng-click="generalSearchCtrl.collection = 'personalities'">
+                <div>
+                    <en>Personalities</en>   
+                    <he>אישים</he>
+                </div>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'familyNames'}" ng-click="generalSearchCtrl.collection = 'familyNames'">
+                <div>
+                    <en>Family Names</en>   
+                    <he>שמות משפחה</he>
+                </div>
+            </li>
+        </ul>
+    </nav>
     <div  id="general-search-page">
         <ng-switch on="generalSearchCtrl.collection">
             <div ng-switch-when='allResults' class="about-bh">
