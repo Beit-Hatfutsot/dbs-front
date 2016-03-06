@@ -1,4 +1,4 @@
-var NewsLetterPopoverCtrl = function($http) {
+var NewsLetterPopoverCtrl = function($http, apiClient) {
     var self = this;
     self.email = '';
     self.tried = false;
@@ -33,16 +33,18 @@ var NewsLetterPopoverCtrl = function($http) {
         if(!this.no_languages())  {
             $http ({
                 method: "post",
-                url: "http://www.bh.org.il/wp-content/themes/bh/functions/widgets/active-trail-newsletter/newsletter-api.php",
-                headers:{'Content-Type': 'application/x-www-form-urlencoded'},
-                data: {mm_userid: 59325, mm_newemail: this.email, mm_key: this.get_languages_array()}
+                url: apiClient.base_url+"/newsletter",
+                headers:{'Content-Type': 'application/json'},
+                data: {email: this.email, langs: this.get_languages_array()}
             }).finally(function (data, status) {
-                    if (data==0) {
+                    if (status !== 200) {
+						console.log("newsletter registration failed with", status);
+					}
+					else
                         self.registered = true;
-                    }
                 })
         }
-        else 
+        else
             self.tried = true;
 
     };
@@ -60,4 +62,4 @@ var NewsLetterPopoverCtrl = function($http) {
     };
 }
 
-angular.module('main').controller('NewsLetterPopoverCtrl', ['$http', NewsLetterPopoverCtrl]);
+angular.module('main').controller('NewsLetterPopoverCtrl', ['$http', 'apiClient', NewsLetterPopoverCtrl]);
