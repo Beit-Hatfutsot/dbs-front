@@ -1,4 +1,4 @@
-<div id="footer-container">
+<div id="footer-container" ng-controller="HeaderCtrl as headerController">
 	<div id="footer">
 		<div class="title">
 			<en>Beit Hatfutsot Databases</en>
@@ -7,18 +7,18 @@
 		<div class="links-contact-rights">
 			<div class="links">
 				<en>
-					<a>Jewish Genealogy</a>
-					<a>Family Names</a>
-					<a>Jewish Communities</a>
-					<a>Jewish Music</a>
-					<a>Visual Documentation</a>
+					<a ng-click="headerController.goto_state('ftrees')">Jewish Genealogy</a>
+					<a ng-click="headerController.goto_state_collection('about_center', 'familyNames')">Family Names</a>
+					<a ng-click="headerController.goto_state_collection('about_center', 'places')">Jewish Communities</a>
+					<!-- <a>Jewish Music</a> -->
+					<a ng-click="headerController.goto_state_collection('about_center', 'media')">Visual Documentation</a>
 				</en>
 				<he>
-					<a>גניאולוגיה יהודית</a>
-					<a>שמות משפחה</a>
-					<a>קהילות יהודיות</a>
-					<a>מוזיקה יהודית</a>
-					<a>תיעוד חזותי</a>	
+					<a ng-click="headerController.goto_state('he.he_ftrees')">גניאולוגיה יהודית</a>
+					<a ng-click="headerController.goto_state_collection('he.he_about_center', 'familyNames')">שמות משפחה</a>
+					<a ng-click="headerController.goto_state_collection('he.he_about_center', 'places')">קהילות יהודיות</a>
+					<!-- <a>מוזיקה יהודית</a> -->
+					<a ng-click="headerController.goto_state_collection('he.he_about_center', 'media')">תיעוד חזותי</a>	
 				</he>
 			</div>
 			<div class="contact-rights">

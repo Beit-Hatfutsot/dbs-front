@@ -37,6 +37,11 @@
 				font-size: 12px;
 			}
 
+			.links {
+				text-decoration: underline;
+				@include hover-pointer();
+			}
+
 			.contact-rights {
 				position: absolute;
 				top: 0;
