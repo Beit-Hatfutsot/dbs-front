@@ -114,7 +114,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
         {
             name: 'he.he_item-view',
-            url: '/{local_slug}/{collection: (?:מקום|תמונה|אישייות|שםמשפחה|וידאו)}',
+            url: '/{local_slug}/{collection: (?:מקום|תמונה|אישיות|שםמשפחה|וידאו)}',
             controller: 'ItemCtrl as itemController',
             onExit: slug_cleaner,
 			templateUrl: function(params) {
