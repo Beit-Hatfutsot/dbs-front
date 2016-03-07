@@ -105,7 +105,7 @@ HeaderCtrl.prototype = {
 		else {
 			// handle simple pages - with no moving parts in the url
 			var current = this.$state.current,
-				current_is_he = current.name.startsWith('he'),
+				current_is_he = current.name.indexOf('he') === 0,
 				name = current.name,
 				state; // the state we need to go to
 
