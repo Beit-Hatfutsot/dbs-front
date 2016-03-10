@@ -28,11 +28,12 @@ angular.module('main').
 			items: JSON.parse(recent.getItem('recentlyViewed')) || [],
 
 			put: function(item_data) {
-				var recent_item = this.items.filter(function(recent_item) {
-					return item_data.slug.full == recent_item.slug.full;
+				var slug = item.get_default_slug(item_data),
+				    recent_item = this.items.filter(function(recent_item) {
+					return slug == item.get_default_slug(recent_item);
 				})[0];
 				if (!recent_item) {
-					item_data.url = item.get_url(item_data);
+					// item_data.url = item.get_url(item_data);
 					this.items.push(item_data);
 
 					if (this.items.length > max_items) {

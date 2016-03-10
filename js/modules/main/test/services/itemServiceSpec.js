@@ -19,6 +19,16 @@ describe('item', function() {
 			expect(slug.collection).toEqual('place');
 			expect(slug.local_slug).toEqual('anyplace');
 		});
+		it('should use the english slug as default when both exists',
+		   function () {
+			var item_data = {'Slug': {'He': 'שלום', 'En': 'hello'}}
+			expect(item.get_default_slug(item_data)).toEqual('hello');
+		});
+		it('should use the hebrew slug when it is the only one',
+		   function () {
+			var item_data = {'Slug': {'He': 'שלום'}}
+			expect(item.get_default_slug(item_data)).toEqual('שלום');
+		});
 	})
 	describe('networked operations', function () {
 		var item_data, item_url, cache, $httpBackend, $timeout;

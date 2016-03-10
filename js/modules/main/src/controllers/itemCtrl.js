@@ -73,8 +73,7 @@ ItemCtrl.prototype = {
 			then(function(item_data) {
 
 				self.recentlyViewed.put(
-					{state: 'item-view',
-					 slug: self.slug,
+					{Slug: item_data.Slug,
 					 header: item_data.Header,
 					 thumbnail: item_data.thumbnail.data
 					});

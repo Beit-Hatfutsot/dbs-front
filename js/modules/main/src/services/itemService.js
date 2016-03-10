@@ -1,3 +1,4 @@
+
 angular.module('main').
 	factory('item', ['$resource', '$q', '$rootScope', 'apiClient', 'cache', 'itemTypeMap', '$state',
 	function($resource, $q, $rootScope, apiClient, cache, itemTypeMap, $state) {
@@ -64,6 +65,10 @@ angular.module('main').
 				$state.go(state, params);
 			},
 
+			get_default_slug: function(item_data) {
+				return item_data.Slug.En || item_data.Slug.He;
+			},
+
 			get_url: function (item_data) {
 				/*
 				if ((item_data.url !== undefined) && (item_data.url !== null)) {
@@ -84,6 +89,8 @@ angular.module('main').
 					params,
 					state = (lang == 'he')?'he.he_item-view':'item-view';
 
+				//TODO: try and remove the next 3 lines as url should be based
+				// on current language
 				if (item_data.slug)
 					params = {collection: item_data.slug.collection,
 							  local_slug : item_data.slug.local_slug};
@@ -95,10 +102,6 @@ angular.module('main').
 				return $state.href(state, params);
 			},
 			
-			get_string: function(collection_name, item_id) {
-				return [collection_name, item_id].join('.');
-			},
-
 			get_data_string: function(item_data) {
 				return itemTypeMap.get_item_string(item_data);
 			},
