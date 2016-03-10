@@ -301,6 +301,13 @@
 					vertical-align: middle;
 					overflow: hidden;
 
+                    a {
+                        text-decoration: none;
+                    }
+                    a:visited {
+                        color: #666
+                    }
+
 					&__scroll {
 						position: relative;
 						display: inline-block;
