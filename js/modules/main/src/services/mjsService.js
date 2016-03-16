@@ -108,14 +108,15 @@ angular.module('main').
 
 					var in_mjs = false;
 
-					items_n_branches.story_items.every(function(item) {
-						if (item_string == item.id) {
-							in_mjs = true;
-							item_data.in_branch = item.in_branch.slice();
-							mjs.dict[item_string] = item;
-						}
-						return !in_mjs;
-					});
+					if (items_n_branches.story_items)
+						items_n_branches.story_items.every(function(item) {
+							if (item_string == item.id) {
+								in_mjs = true;
+								item_data.in_branch = item.in_branch.slice();
+								mjs.dict[item_string] = item;
+							}
+							return !in_mjs;
+						});
 					item_data.in_mjs = in_mjs;
 				});
 			});

@@ -11,22 +11,6 @@ module.exports = function(grunt) {
             bower: ['bower_components/']
         },
 
-        replace: {
-            config: {
-                options: {
-                    patterns: [{
-                        json: grunt.file.readJSON('/etc/bhs/client/config.json')
-                    }]
-                },
-                files: [{
-                    expand: true,
-                    flatten: true,
-                    src: ['/etc/bhs/client/config.js'],
-                    dest: 'js/modules/config'
-                }]
-            }
-        },
-
         concat: {
             options: {
                 // define a string to put between each file in the concatenated output
@@ -124,7 +108,6 @@ module.exports = function(grunt) {
     });
 
     // Load plugins
-    grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
@@ -134,5 +117,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['replace:config', 'clean:public', 'sass', 'concat', 'uglify', 'copy']);
+    grunt.registerTask('build', ['clean:public', 'sass', 'concat', 'uglify', 'copy']);
 };
