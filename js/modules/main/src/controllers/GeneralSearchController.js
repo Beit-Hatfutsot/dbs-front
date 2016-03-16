@@ -25,7 +25,8 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
         {en:'Jews', he:'יהודים', selected: false},
         {en:'Synagogue', he:'בית הכנסת', selected: false},
         {en:'Ghetto', he:'גטו', selected: false},
-        {en:'Community', he:'קהילה', selected: false}
+        {en:'Community', he:'קהילה', selected: false},
+        {en:'Israel', he:'ישראל', selected: false}
     ];
 
     this.collection_map = {

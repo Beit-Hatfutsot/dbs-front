@@ -65,10 +65,6 @@
     .search-results-page {
         margin-top: 40px;
 
-        .bold {
-            font-weight: 700;
-        }
-
         .no-res-notif {
             color: $gray3;
             font-size: 22px;
@@ -107,6 +103,7 @@
         }
 
         .google-search-box-wrapper {
+                margin-top: 14px;
 
                 .en & {
                     margin-left: 50px;
@@ -121,7 +118,7 @@
                 }
 
                 .google-key-words {
-                    margin: 0 0 20px;
+                    margin: 0 10px 20px;
                     padding: 0;
 
                     .key-word {
@@ -141,6 +138,7 @@
 
                         &--active {
                             @include box-shadow(0 0 6px 1px $gray3);
+                            background-color: $yellow6;
                         }
                     }
                 }
@@ -152,7 +150,7 @@
                     font-weight: 700;
                     font-size: 20px;
                     text-align: center;
-                    height: 38px;
+                    height: 34px;
                     border-radius: 4px;
                     border: none;
                     outline: none;
@@ -167,6 +165,12 @@
             font-size: 18px;
             margin: 14px 36px 0;
             display: block;
+        }
+
+        .title-desc {
+            @extend .db-results-exttitle;
+            margin: 0 0;
+            font-size: 16px;
         }
 
         .item-preview-wrapper {
