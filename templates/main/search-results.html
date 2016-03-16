@@ -33,7 +33,7 @@
             </li>
         </ul>
     </nav>
-    <div  id="general-search-page">
+    <div id="general-search-page">
         <ng-switch on="generalSearchCtrl.collection">
             <div ng-switch-when='allResults' class="about-bh">
                 <div class="title">
@@ -85,89 +85,111 @@
             </div>
         </ng-switch>
         <div class="search-results-page">
-            <div class="db-results-title"  ng-if="generalSearchCtrl.results.total > 0">
-                <en><span class="bold">{{generalSearchCtrl.results.total}}</span> results found for <span class="cap-query bold">{{generalSearchCtrl.query}}</span> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].En}})</en>
-                <he>נמצאו {{generalSearchCtrl.results.total}} תוצאות עבור <span class="cap-query bold">{{generalSearchCtrl.query}}</span>: ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}})</he>
-            </div>
-            <div class="item-preview-wrapper">
-                <div class="spinner" ng-if="generalSearchCtrl.loading && generalSearchCtrl.query">
-                    <img src="images/BH-Loading.gif">
+            <div ng-if="generalSearchCtrl.results.total > 0">
+                <div class="db-results-title">
+                    <en><strong>{{generalSearchCtrl.results.total}}</strong> results found for <strong>{{generalSearchCtrl.query}}</strong> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].En}})</en>
+                    <he>נמצאו <strong>{{generalSearchCtrl.results.total}}</strong> תוצאות עבור <strong>{{generalSearchCtrl.query}}</strong> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}})</he>
                 </div>
-                <item-preview
-                    item-source="bh"
-                    ng-repeat="r_data in generalSearchCtrl.results.hits"
-                    preview-data="r_data._source">
-                </item-preview>
-                <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
-                <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
+                <div class="item-preview-wrapper">
+                    <div class="spinner" ng-if="generalSearchCtrl.loading && generalSearchCtrl.query">
+                        <img src="images/BH-Loading.gif">
+                    </div>
+                    <item-preview item-source="bh"
+                                  ng-repeat="r_data in generalSearchCtrl.results.hits"
+                                  preview-data="r_data._source">
+                    </item-preview>
+                    <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
+                        <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
+                        <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
+                        <div class="loader-desc">
+                            <en><strong>More</strong><br></en>
+                            <he>לראות עוד<br></he>
+                            <span class="results-number">
+                                <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
+                                <he>({{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0 || generalSearchCtrl.cjh_total > 0">
+                    <en><strong>{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</strong> results elsewhere on the internet for <strong>{{generalSearchCtrl.query}}</strong></en>
+                    <he>נמצאו <strong>{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</strong> תוצאות עבור <strong>{{generalSearchCtrl.query}}</strong></he>
+                </div>
+            </div>
+
+            <div ng-if="generalSearchCtrl.results.total == 0">
+                <div class="no-res-notif">
+                    <en>We couldn't find any items matching "{{generalSearchCtrl.query}}".<br/>Please try again with a different spelling, try a different query, or:</en>
+                    <he>לא הצלחנו למצוא תוצאות עבור "{{generalSearchCtrl.query}}" במאגרים שלנו.<br>אנא בדקו שאין בטקסט שהזנתם שגיאות כתיב ונסו שוב, או הזינו טקסט חדש לחיפוש.<br>
+                        באפשרותכם גם לבחור באחת מהאפשרויות הבאות:<br/></he>
+                </div>
+                <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0 || generalSearchCtrl.cjh_total > 0">
+                    <en><strong>See results from elsewhere on the Internet</strong></en>
+                    <he><strong>בדקו את התוצאות שמצאנו עבורכם במאגרי מידע נוספים</strong></he>
+                </div>
+                <div class="title-desc" ng-if="generalSearchCtrl.eurp_total > 0 || generalSearchCtrl.cjh_total > 0">
+                    <en>Beit Hatfutsot has partnered with other archives to offer you even more results:</en>
+                    <he>בית התפוצות חבר לארכיונים ומאגרי מידע בעולם, על מנת לתת לכם כמה שיותר תוצאות רלוונטיות.</he>
+                </div>
+            </div>
+
+            <div id="cjh" ng-if="generalSearchCtrl.cjh_total > 0">
+                <div class="db-results-exttitle">
+                    <en><strong>{{generalSearchCtrl.cjh_total}}</strong> Results from <a class="link" href="http://www.cjh.org/" target="_blank">the Center for Jewish History</a></en>
+                    <he><strong>{{generalSearchCtrl.cjh_total}}</strong> תוצאות <a class="link" href="http://www.cjh.org/" target="_blank">ממאגרי המרכז להיסטוריה יהודית</a></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <div class="spinner" ng-if="generalSearchCtrl.loading_cjh && generalSearchCtrl.query">
+                        <img src="images/BH-Loading.gif">
+                    </div>
+                    <item-preview
+                        item-source="cjh"
+                        ng-repeat="r_data in generalSearchCtrl.cjh_results"
+                        preview-data="r_data">
+                    </item-preview>
+                    <div class="loader" ng-click="generalSearchCtrl.fetch_more_cjh()" ng-if="generalSearchCtrl.cjh_total>generalSearchCtrl.cjh_results.length">
+                        <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]"></icon>
+                        <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
+                        <div class="loader-desc ext">
+                            <en><strong>More</strong><span class="med-font"> from</strong><br><span class="ext-src-name">Center for<br>Jewish History</span></en>
+                            <he><strong>עוד תוצאות</strong><br><span class="med-font">מהמרכז<br> להיסטוריה יהודית</span></he>
+                            <span class="results-number">
+                                <en>(+{{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} results)</en>
+                                <he>({{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} תוצאות)</he>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="europeana" ng-if="generalSearchCtrl.eurp_total > 0">
+                <div class="db-results-exttitle">
+                    <en><strong>{{generalSearchCtrl.eurp_total}}</strong> Results from <a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></en>
+                    <he><strong>{{generalSearchCtrl.eurp_total}}</strong> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">ממאגרי יורפיאנה</a></span></he>
+                </div>
+                <div class="item-preview-wrapper">
+                    <div class="spinner" ng-if="generalSearchCtrl.loading_eurp">
+                        <img src="images/BH-Loading.gif">
+                    </div>
+                    <item-preview
+                        item-source="europeana"
+                        ng-repeat="r_data in generalSearchCtrl.eurp_results"
+                        preview-data="r_data">
+                    </item-preview>
+                    <div class="loader" ng-click="generalSearchCtrl.fetch_more_eurp()" ng-if="generalSearchCtrl.eurp_total>generalSearchCtrl.eurp_results.length">
                     <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                     <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
-                    <div class="loader-desc">
-                        <en><span class="bold-part">More</span><br></en>
-                        <he>לראות עוד<br></he>
-                        <span class="results-number">
-                            <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
-                            <he>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0">
-                <en><span class="bold">{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</span> results elsewhere on the internet for <span class="cap-query bold">{{generalSearchCtrl.query}}</span></en>
-                <he>נמצאו {{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}} תוצאות עבור <span class="cap-query bold">{{generalSearchCtrl.query}}</span></he>
-            </div>
-            <div class="db-results-exttitle" ng-if="generalSearchCtrl.cjh_total > 0">
-                <en><span class="bold">{{generalSearchCtrl.cjh_total}}</span> Results from <a class="link" href="http://www.cjh.org/" target="_blank">the Center for Jewish History</a></en>
-                <he>נמצאו <span class="bold">{{generalSearchCtrl.cjh_total}}</span> תוצאות <a class="link" href="http://www.cjh.org/" target="_blank">מהמרכז להיסטוריה יהודית</a></he>
-            </div>
-            <div class="item-preview-wrapper" ng-if="generalSearchCtrl.cjh_total > 0">
-                <div class="spinner" ng-if="generalSearchCtrl.loading_cjh && generalSearchCtrl.query">
-                    <img src="images/BH-Loading.gif">
-                </div>
-                <item-preview
-                    item-source="cjh"
-                    ng-repeat="r_data in generalSearchCtrl.cjh_results"
-                    preview-data="r_data">
-                </item-preview>
-                <div class="loader" ng-click="generalSearchCtrl.fetch_more_cjh()" ng-if="generalSearchCtrl.cjh_total>generalSearchCtrl.cjh_results.length">
-                    <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]"></icon>
-                    <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                     <div class="loader-desc ext">
-                        <en><span class="bold-part">More</span><span class="med-font"> from</span><br><span class="ext-src-name">Center for<br>Jewish History</span></en>
-                        <he>לראות עוד<br></he>
+                        <en><strong>More</strong><span class="med-font"> from</span><br><span class="ext-src-name">Europeana</span></en>
+                        <he><strong>עוד תוצאות</strong><br><span class="med-font">מיורפיאנה</span></he>
                         <span class="results-number">
-                            <en>(+{{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} results)</en>
-                            <he>(+{{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} תוצאות)</he>
+                            <en>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} results)</en>
+                            <he>({{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} תוצאות)</he>
                         </span>
+                    </div>
                     </div>
                 </div>
             </div>
-            <div class="db-results-exttitle" ng-if="generalSearchCtrl.eurp_total > 0">
-                <en><span class="bold">{{generalSearchCtrl.eurp_total}}</span> Results<a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></en>
-                <he>נמצאו <span class="bold">{{generalSearchCtrl.eurp_total}}</span> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">מירופיאנה</a></span></he>
-            </div>
-            <div class="item-preview-wrapper" ng-if="generalSearchCtrl.eurp_total > 0">
-                <div class="spinner" ng-if="generalSearchCtrl.loading_eurp">
-                    <img src="images/BH-Loading.gif">
-                </div>
-                <item-preview
-                    item-source="europeana"
-                    ng-repeat="r_data in generalSearchCtrl.eurp_results"
-                    preview-data="r_data">
-                </item-preview>
-                <div class="loader" ng-click="generalSearchCtrl.fetch_more_eurp()" ng-if="generalSearchCtrl.eurp_total>generalSearchCtrl.eurp_results.length">
-                <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
-                <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
-                <div class="loader-desc ext">
-                    <en><span class="bold-part">More</span><span class="med-font"> from</span><br><span class="ext-src-name">Europeana</span></en>
-                    <he>לראות עוד<br></he>
-                    <span class="results-number">
-                        <en>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} results)</en>
-                        <he>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} תוצאות)</he>
-                    </span>
-                </div>
-                </div>
-            </div>
+            <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
         </div>
     </div>
 </div>
