@@ -6,7 +6,7 @@
         <div class="sites">
           <ul class="sites">
             <li class="site-item museum">
-              <a href="http://www.bh.org.il/" target="_self">
+              <a ng-href="{{lang == 'en' ? 'http://www.bh.org.il/' : 'http://www.bh.org.il/he/'}}" target="_self">
                 <div class="title">
                   <en>Museum</en>
                   <he>מוזיאון</he>
@@ -15,7 +15,7 @@
               </a>
             </li>
             <li class="site-item shop" highlighter='bottom'>
-              <a href="http://www.bh.org.il/shop/" target="_self">
+              <a ng-href="{{lang == 'en' ? 'http://www.bh.org.il/shop/' : 'http://www.bh.org.il/he/חנות/'}}" target="_self">
                 <div class="title">
                   <en>Shop</en>
                   <he>חנות</he>
