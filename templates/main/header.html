@@ -125,12 +125,14 @@
       <div id="header-container">
         <nav class="menu">
           <ul class="nav">
-            <li class="logo header-menu-item" ui-sref="start">
+            <li class="logo header-menu-item">
+             <a ng-href="{{lang == 'en' ? '/' : '/he/'}}"> 
               <span class="item_before" selector></span>
               <div>
                 <en>Home</en>
                 <he>ראשי</he>
               </div>
+            </a>
             </li>
            <!--  <li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
               <div class="mystory__text">

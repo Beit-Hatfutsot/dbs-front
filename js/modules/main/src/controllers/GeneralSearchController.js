@@ -221,8 +221,17 @@ GeneralSearchController.prototype = {
         }
     },
 
-    read_about_center: function (collection_name) {
+    read_about_center: function () {
         this.$state.go('about_center', {collection: this.collection});
+    },
+
+    goto_results: function (collection_name) {
+        if (this.header.query !==  '') {
+            this.collection = collection_name;
+        }
+        else {
+            this.$state.go('about_center', {collection: collection_name});
+        }
     }
 };
 
