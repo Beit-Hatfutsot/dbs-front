@@ -156,15 +156,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'ftrees',
             url: '/ftrees?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
             controller: 'FtreesController as ftreesCtrl',
-            //templateUrl: 'templates/main/ftrees/ftrees.html'
-            templateUrl: 'templates/main/ftrees/coming-soon.html'
+            templateUrl: 'templates/main/ftrees/ftrees.html'
         },
         {
             name: 'he.he_ftrees',
             url: '/עצימשפחה?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
             controller: 'FtreesController as ftreesCtrl',
-            //templateUrl: 'templates/main/ftrees/ftrees.html'
-            templateUrl: 'templates/main/ftrees/coming-soon.html'
+            templateUrl: 'templates/main/ftrees/ftrees.html'
         },
 		/*
         {

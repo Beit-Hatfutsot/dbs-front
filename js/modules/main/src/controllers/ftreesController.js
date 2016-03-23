@@ -6,6 +6,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.selected_individual = null;
 	this.selected_individual_data = {};
 	this.search_params = {};
+	this.advanced_search = false;
 	
 	this.key_map = {
 		FN: {
@@ -432,7 +433,11 @@ FtreesController.prototype = {
 		if (this.display_from_result + this.results_per_page < this.individuals.length) {
 			this.display_from_result = this.display_from_result + this.results_per_page;
 		}
-	}
+	},
+
+	read_about_center: function (collection_name) {
+        this.$state.go('about_center', {collection: collection_name});
+    },
 };
 
 angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', 'notification', 'musicalChairsFactory', FtreesController]);
