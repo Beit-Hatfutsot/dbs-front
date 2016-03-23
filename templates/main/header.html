@@ -1,5 +1,4 @@
-<div id="main-header-container" ng-controller="HeaderCtrl as headerController"
-  ng-hide="headerController.header.hide_main"> 
+<div id="main-header-container" ng-controller="HeaderCtrl as headerController">
   <div class="main-header">
     <div class="upper-container">
       <div class="sub-upper-container">	
@@ -154,7 +153,8 @@
                 <he>נצפו לאחרונה</he>
               </div>
             </li>
-                  <li class="header-menu-item ftree-tab" ng-class="{'header-menu-item--active': isCurrentState('ftrees')}" 
+                  <li class="header-menu-item ftree-tab"
+                    ng-class="{'header-menu-item--active': isCurrentState('ftrees') || isCurrentState('person-view')}" 
                     ng-click="headerController.goto_state('ftrees')"> 
                       <div>
                           <en>Family Trees</en>

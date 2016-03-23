@@ -173,10 +173,6 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/ftrees/person.html',
             onEnter: ['header', function(header) {
                 header.show_recent();
-				header.hide_main = true;
-            }],
-            onExit: ['header', function(header) {
-				header.hide_main = false;
             }]
         },
 
