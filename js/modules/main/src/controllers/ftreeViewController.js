@@ -341,7 +341,6 @@ FtreeViewController.prototype = {
 
 		new_divs.append('div')
 				.classed('avatar', true)
-				.classed('deceased', function (d) { return d.deceased; })
 				.append('img')
 				.attr('src', function (d) {
 					var sex = get_sex(d);

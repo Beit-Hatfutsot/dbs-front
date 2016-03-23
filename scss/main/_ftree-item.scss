@@ -56,9 +56,6 @@
                 margin-left: 4px;
 			}
     	}
-        .deceased {
-            border: 4px solid $gray2;
-        }
       	.name {
             font-size: 12px;
             overflow: hidden;
@@ -77,17 +74,11 @@
             }
 		}
         
-        .deceased {
-            border: 2px solid $gray2;
-        }
     }
     .node[role="grandparent"], .node[role="sibling"] {
 
         img {
             height: 28px;
-        }
-        .deceased {
-            border: 2px solid $gray2;
         }
 	}
 
@@ -104,9 +95,6 @@
 		}
         img {
             height:30px;
-        }
-        .deceased {
-            border: 3px solid $gray2;
         }
     }
 
