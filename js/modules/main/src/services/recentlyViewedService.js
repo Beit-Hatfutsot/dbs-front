@@ -28,17 +28,19 @@ angular.module('main').
 			items: JSON.parse(recent.getItem('recentlyViewed')) || [],
 
 			put: function(item_data) {
-				var recent_item = null;
+				var item_exists = null;
 				try {
 					var key = item.get_key(item_data);
+					console.log(key)
+					item_data._key = key;
 
-					recent_item = this.items.filter(function(recent_item) {
-						return key == item.get_key(recent_item);
-					})[0];
+					item_exists = this.items.some(function(item) {
+						return (key == item._key);
+					});
 				} catch (e){
 					this.items = [];
 				}
-				if (!recent_item) {
+				if (!item_exists) {
 					// item_data.url = item.get_url(item_data);
 					this.items.push(item_data);
 
