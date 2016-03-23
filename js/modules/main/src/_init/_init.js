@@ -156,22 +156,21 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'ftrees',
             url: '/ftrees?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
             controller: 'FtreesController as ftreesCtrl',
-            //templateUrl: 'templates/main/ftrees/ftrees.html'
-            templateUrl: 'templates/main/ftrees/coming-soon.html'
+            templateUrl: 'templates/main/ftrees/ftrees.html'
+            // templateUrl: 'templates/main/ftrees/coming-soon.html'
         },
         {
             name: 'he.he_ftrees',
             url: '/עצימשפחה?place&first_name&last_name&maiden_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&filters_tree_number',
             controller: 'FtreesController as ftreesCtrl',
-            //templateUrl: 'templates/main/ftrees/ftrees.html'
-            templateUrl: 'templates/main/ftrees/coming-soon.html'
+            templateUrl: 'templates/main/ftrees/ftrees.html'
+            // templateUrl: 'templates/main/ftrees/coming-soon.html'
         },
-		/*
         {
-            name: 'ftree-view',
-            url: '/ftree_view/:tree_number/:node_id',
+            name: 'person-view',
+            url: '/person/:tree_number/:node_id',
             controller: 'FtreeViewController as ctrl',
-            templateUrl: 'templates/main/ftrees/ftree-item.html',
+            templateUrl: 'templates/main/ftrees/person.html',
             onEnter: ['header', function(header) {
                 header.show_recent();
 				header.hide_main = true;
@@ -181,6 +180,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             }]
         },
 
+		/*
 
         {
             name: 'upload',

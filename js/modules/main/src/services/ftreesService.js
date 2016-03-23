@@ -330,7 +330,8 @@ angular.module('main').
 				individuals.forEach(function(individual) {
 					if ( is_alive(individual) ) {
 
-						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN', 'GTF', 'EditorRemarks', '_id'];
+						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN',
+							'GTF', 'EditorRemarks', '_id', 'tree'];
 						var filtered_individual = {};
 
 						for (var prop in individual) {

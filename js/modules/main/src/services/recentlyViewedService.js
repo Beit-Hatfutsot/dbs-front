@@ -30,10 +30,10 @@ angular.module('main').
 			put: function(item_data) {
 				var recent_item = null;
 				try {
-					var slug = item.get_default_slug(item_data);
+					var key = item.get_key(item_data);
 
 					recent_item = this.items.filter(function(recent_item) {
-						return slug == item.get_default_slug(recent_item);
+						return key == item.get_key(recent_item);
 					})[0];
 				} catch (e){
 					this.items = [];
