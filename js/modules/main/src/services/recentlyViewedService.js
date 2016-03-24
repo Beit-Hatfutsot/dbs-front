@@ -31,7 +31,6 @@ angular.module('main').
 				var item_exists = null;
 				try {
 					var key = item.get_key(item_data);
-					console.log(key)
 					item_data._key = key;
 
 					item_exists = this.items.some(function(item) {
