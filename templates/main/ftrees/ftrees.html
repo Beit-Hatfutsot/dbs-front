@@ -107,7 +107,25 @@
 			</form>
 		</div>
 
-		<div class="results">
+		<div class="item-preview-wrapper">
+			<person-preview   ng-repeat="individual in ftreesCtrl.individuals |limitTo: 14" 
+							 sex="individual.G"
+							 individual="individual">
+			</person-preview>
+			<!-- <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
+                <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
+                <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
+                <div class="loader-desc">
+                    <en><strong>More</strong><br></en>
+                    <he>לראות עוד<br></he>
+                    <span class="results-number">
+                        <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
+                        <he>({{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
+                    </span>
+                </div>
+            </div> -->
+		</div>
+		<!-- <div class="results">
 			<table class="results__individuals">
 				<thead>
 					<tr>
@@ -228,7 +246,7 @@
 						<he>עוד</he>
 					</div>
 				</div>			
-				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)"f>
+				<div class="results__more-columns__menu" ng-click="ftreesCtrl.prevent_dropdown_close($event)">
 					<div class="results__more-columns__menu__title">
 						<en>Choose what columns to display (up to 6)</en>
 						<he>בחר אלו עמודות להציג (עד 6)</he>
@@ -313,7 +331,7 @@
 				<en>Back to Search Filters</en>
 				<he>Back to Search Filters</he>
 			</button>
-		</div>
+		</div> -->
 		<ui-view></ui-view>
 	</div>
 </div>

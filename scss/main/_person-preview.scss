@@ -1,0 +1,140 @@
+.ftree-preview {
+
+    @extend %item-preview;
+    margin: 20px 37px;
+    background-color: #fff;
+    padding: 6px 6px;
+
+    .top, .bottom {
+        position: absolute;
+        width: 294px;
+        display: flex;
+        height: 34px;
+
+        .family {
+            height: 100%;
+            color: $gray3;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            &__names {
+                font-size: 13px;
+                font-weight: 600;
+                line-height: 14px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                text-align: center;
+            }
+
+            &__title {
+                font-size: 10px;
+                font-weight: 600;
+                border: 1px solid $gray4;
+                border-radius: 50px;
+                margin: 0 auto;
+                width: 82px;    
+            }
+        }
+    }
+
+    .top {
+
+        justify-content: space-between;
+
+        .tree-num, .add-to-story {
+            height: 100%;
+            width: 66px;
+        }
+
+        .tree-num {
+            padding: 2px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            background-color: $gray6;
+
+            &__title {
+                font-size: 9px;
+                width: 100%;
+                font-weight: 600;
+            }
+
+            &__num {
+                font-size: 12px;
+                width: 100%;
+                background: #fff;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .bottom {
+        bottom: 6px;
+        justify-content: center;
+    }
+
+    .node {
+        @include border-radius(50px);
+        overflow: hidden;
+        color: $gray3;
+        font-weight: 600;
+        width: 294px;
+        height: 63px;
+        background-color: $gray6;
+        @include vertical-align(absolute);
+        margin: 0 auto;
+
+        .preview-data {
+            @include vertical-align(absolute);
+            left: 76px;
+            width: 210px;
+            display: block;
+
+            .data-preview {
+                display: block;
+                color: $gray3;
+                width: 100%;
+                white-space: nowrap; 
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 600;
+                font-size: 11px;
+
+            }
+
+            .name  {
+                display: table-cell;
+                font-size: 14px;
+                color: $gray2;
+                font-weight: 700;
+            }
+        }
+
+        .avatar {
+            width: 60px;
+            height: 57px;
+            margin: 0 4px;
+            @include vertical-align(absolute);
+        }
+
+        &--m {
+            background-color: $blue6;
+
+            .preview-data .name {
+                color: $blue2;
+            }
+        }
+
+        &--f {
+            background-color: $red6;
+
+            .preview-data .name {
+                color: $red2;
+            }
+        }
+    }
+}

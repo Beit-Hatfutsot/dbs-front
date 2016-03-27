@@ -131,6 +131,10 @@
 
 				}
 
+				.loader {
+					@extend %loader;
+				}
+
 				.pic-wpapper {
 					width: 100%;
 					height: 100%;

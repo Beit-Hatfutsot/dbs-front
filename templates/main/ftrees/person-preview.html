@@ -1,0 +1,43 @@
+<div class="ftree-preview">
+    <div class="top">
+        <div class="tree-num">
+            <div class="tree-num__title">Tree number</div>
+            <div class="tree-num__num">{{individual.GTN}}</div>
+        </div>
+        <div class="family" ng-if="individual.tree.parents[0].name[0]&&individual.tree.parents[1].name[0]">
+            <div class="family__names">{{individual.tree.parents[0].name[0]}} & {{individual.tree.parents[1].name[0] }}</div>
+            <div class="family__title">Parents</div>
+        </div>
+        <div class="add-to-story"></div>
+    </div>
+    <div class="node" ng-class="{'node--f': sex === 'F', 'node--m' : sex == 'M'}">
+        <ng-switch on="sex">
+            <div class="avatar" ng-switch-when="M">
+                <icon position="[-197, -404]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
+            </div>
+            <div class="avatar" ng-switch-when="F">
+                <icon position="[-197, -473]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+            </div>
+            <div class="avatar" ng-switch-when="U">
+                <icon position="[-197, -541]" alt-text="{en: 'Unknown', he: ''}"></icon>
+            </div>
+        </ng-switch>
+        <div class="preview-data" title="{{person_info}}">
+            <div class="name">
+               <put-value value="individual.FN + ' ' + individual.LN"></put-value><br>
+            </div>
+            <div class="data-preview">
+                {{person_info}}
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="family" ng-if="children && individual.tree">
+            <ng-switch on="children_num">
+                <div ng-switch-when="1" class="family__title">1 Child</div>
+                <div ng-switch-default class="family__title">{{children_num + " "}}Children</div>
+            </ng-switch>
+            <div class="parents__names">{{children}}</div>
+        </div>
+    </div>
+</div>
