@@ -5,7 +5,6 @@
 	width: 306px;
 	height: 150px;
 	@include box-shadow(0 0 6px 0 #999);
-	@include hover-pointer(); 
 
 	&:hover {
 		.white-part1 {
