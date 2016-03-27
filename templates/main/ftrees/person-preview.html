@@ -1,5 +1,4 @@
 <a ui-sref="person-view({tree_number: individual.GTN, node_id: individual.II})" class="person-preview">
-  
     <div class="top">
         <div class="tree-num">
             <div class="tree-num__title">Tree number</div>
@@ -33,7 +32,7 @@
         </div>
     </div>
     <div class="bottom">
-        <div class="family" title="{{children}}" ng-if="children && individual.tree">
+        <div class="family children" title="{{children}}" ng-if="children && individual.tree">
             <ng-switch on="children_num">
                 <div ng-switch-when="1" class="family__title">1 Child</div>
                 <div ng-switch-default class="family__title">{{children_num + " "}}Children</div>
@@ -41,4 +40,4 @@
             <div class="family__names">{{children}}</div>
         </div>
     </div>
-</div>
+</a>
