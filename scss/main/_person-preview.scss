@@ -4,6 +4,7 @@
     margin: 20px 37px;
     background-color: #fff;
     padding: 6px 6px;
+    color: $gray3;
 
     .top, .bottom {
         position: absolute;
@@ -13,11 +14,14 @@
 
         .family {
             height: 100%;
-            color: $gray3;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+
+            &.parents {
+                max-width: 150px;
+            }
 
             &__names {
                 font-size: 13px;
