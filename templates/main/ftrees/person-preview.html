@@ -6,7 +6,7 @@
             <div class="tree-num__num">{{individual.GTN}}</div>
         </div>
         <div class="family parents" title="{{individual.tree.parents[0].name[0] + ' & ' + individual.tree.parents[1].name[0]}}" ng-if="individual.tree.parents[0].name[0]&&individual.tree.parents[1].name[0]">
-            <div class="family__names">{{individual.tree.parents[0].name[0]}} & {{individual.tree.parents[1].name[0] }}</div>
+            <div class="family__members">{{individual.tree.parents[0].name[0]}} & {{individual.tree.parents[1].name[0] }}</div>
             <div class="family__title">Parents</div>
         </div>
         <div class="add-to-story"></div>
@@ -38,7 +38,7 @@
                 <div ng-switch-when="1" class="family__title">1 Child</div>
                 <div ng-switch-default class="family__title">{{children_num + " "}}Children</div>
             </ng-switch>
-            <div class="family__names">{{children}}</div>
+            <div class="family__members">{{children}}</div>
         </div>
     </div>
 </div>
