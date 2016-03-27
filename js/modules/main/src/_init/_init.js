@@ -167,7 +167,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         {
             name: 'person-view',
             url: '/person/:tree_number/:node_id',
-            controller: 'FtreeViewController as ctrl',
+            controller: 'PersonViewController as ctrl',
             templateUrl: 'templates/main/ftrees/person.html',
             onEnter: ['header', function(header) {
                 header.show_recent();
