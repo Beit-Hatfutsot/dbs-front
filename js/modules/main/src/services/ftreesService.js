@@ -33,8 +33,7 @@ angular.module('main').
 					
 					$http.get(apiClient.urls.ftrees_search, {params: params}).
 						success(function(individuals) {
-							var filtered_individuals = self.filter_individuals(individuals);
-							deferred.resolve(filtered_individuals);
+							deferred.resolve(individuals);
 						}).
 						error(function() {
 							deferred.reject();
@@ -323,35 +322,6 @@ angular.module('main').
 
 				return parsed_family;
 			},
-
-			filter_individuals: function(individuals) {
-				var filtered = [];
-
-				individuals.forEach(function(individual) {
-					if ( is_alive(individual) ) {
-
-						var allowed_props = ['FN', 'LN', 'G', 'II', 'GTN',
-							'GTF', 'EditorRemarks', '_id', 'tree'];
-						var filtered_individual = {};
-
-						for (var prop in individual) {
-							if ( allowed_props.indexOf(prop) !== -1 ) {
-								filtered_individual[prop] = individual[prop];
-							}
-							else {
-								filtered_individual[prop] = null;
-							}
-						}
-						
-						filtered.push(filtered_individual);
-					}
-					else {
-						filtered.push(individual);
-					}
-				});
-
-				return filtered;
-			}
 		}
 
 		function parse_name(name) {

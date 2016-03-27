@@ -17,6 +17,7 @@
 @import "main/print";
 @import "main/item_preview";
 @import "main/search-results";
+@import "main/person-preview";
 
 * {
 	box-sizing: border-box;
@@ -76,8 +77,10 @@ html {
 				padding-bottom: $footer-height;
 
 				@at-root #view {
-					position: relative;
+					position: absolute;
+					padding-bottom: 80px;
 					width: 100%;
+					background-color: $gray7;
 					/*
 					@include transition(all, 1s, linear);
 

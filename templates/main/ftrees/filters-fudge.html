@@ -1,25 +1,23 @@
 <div class="container">
+	<label>
+		<en>
+			{{label_text_en}}
+		</en>
+		<he>
+			{{label_text_he}}
+		</he>
+	</label>
 	<div class="text">
-		<label>
-			<en>
-				{{label_text_en}}
-			</en>
-			<he>
-				{{label_text_he}}
-			</he>
-		</label>
 		<input type="text" ng-model="model" placeholder="{{placeholder}}">
 	</div>
 	<div class="notIE"> 
 		<div class="fudge">
-			<label>
-				<en>Margin of error</en>
-				<he>תווך שגיאה</he>
-			</label>
-			<select ng-model="fudge_model">
-				<option>0</option>
-				<option>1 year</option>
-				<option>2 years</option>
+			<select> <!-- ng-model="fudge_model" -->
+				
+				<option>+/-2 years</option>
+				<!-- <option>טווח שנים: +/-2</option> -->
+				<option>+/- year</option>
+				<option>exact</option>
 			</select>
 			<span class="fancyArrow">
 				<icon  class="fancyArrow__selectbox-icon" position="[-178, -663]"></icon>

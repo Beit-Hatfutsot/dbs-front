@@ -9,10 +9,11 @@
 	@at-root #wizard-container {
 		position: relative;
 		height: 810px;
+		z-index: 3;
 
 		@at-root #wizard {
 			position: absolute;
-			top: 0;
+			top: 15px;
 			left: 50%;
 			width: 1920px;
 			height: 694px;
