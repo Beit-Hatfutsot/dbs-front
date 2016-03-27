@@ -6,9 +6,9 @@ angular.module('main')
 			item: '=',
 		},
 		link: function(scope, element, attr) {
-			scope.item.url = item.get_url(scope.item);
+			scope.url = item.get_url(scope.item);
 			$rootScope.$on('language-changed', function() {
-				scope.item.url = item.get_url(scope.item);
+				scope.url = item.get_url(scope.item);
 			});
 		},
 		templateUrl: 'templates/main/mjs/mjs-item.html'
