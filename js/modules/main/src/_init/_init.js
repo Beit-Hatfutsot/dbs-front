@@ -164,21 +164,17 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'FtreesController as ftreesCtrl',
             templateUrl: 'templates/main/ftrees/ftrees.html'
         },
-		/*
         {
-            name: 'ftree-view',
-            url: '/ftree_view/:tree_number/:node_id',
+            name: 'person-view',
+            url: '/person/:tree_number/:node_id',
             controller: 'FtreeViewController as ctrl',
-            templateUrl: 'templates/main/ftrees/ftree-item.html',
+            templateUrl: 'templates/main/ftrees/person.html',
             onEnter: ['header', function(header) {
                 header.show_recent();
-				header.hide_main = true;
-            }],
-            onExit: ['header', function(header) {
-				header.hide_main = false;
             }]
         },
 
+		/*
 
         {
             name: 'upload',

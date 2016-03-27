@@ -65,8 +65,11 @@ angular.module('main').
 				$state.go(state, params);
 			},
 
-			get_default_slug: function(item_data) {
-				return item_data.Slug.En || item_data.Slug.He;
+			get_key: function(item_data) {
+				if (item_data.Slug)
+					return item_data.Slug.En || item_data.Slug.He;
+				if (item_data.params)
+					return JSON.stringify(item_data.params)
 			},
 
 			get_url: function (item_data) {
@@ -87,18 +90,28 @@ angular.module('main').
 			    var lang = $rootScope.lang,
 					proper_lang = lang[0].toUpperCase() + lang.slice(1),
 					params,
-					state = (lang == 'he')?'he.he_item-view':'item-view';
+					state;
 
+				
 				//TODO: try and remove the next 3 lines as url should be based
 				// on current language
-				if (item_data.slug)
+				if (item_data.slug) {
+					state = 'item-view';
 					params = {collection: item_data.slug.collection,
 							  local_slug : item_data.slug.local_slug};
-				else {
+				}
+				else if (item_data.Slug) {
+					state = 'item-view';
 					var parts = item_data.Slug[proper_lang].split('_'),
 					params = {collection: parts[0],
 							  local_slug : parts[1]};
 				}
+				else {
+					state = item_data.state;
+					params = item_data.prams;
+				}
+				if (lang == 'he')
+					state = 'he.he_'+state;
 				return $state.href(state, params);
 			},
 			

@@ -211,7 +211,8 @@
 				</thead>
 
 				<tbody ng-hide="ftreesCtrl.individuals.isEmpty()">
-					<tr ng-repeat="indi in ftreesCtrl.individuals.slice(ftreesCtrl.display_from_result) | limitTo: ftreesCtrl.results_per_page" ng-class="{dark: $index % 2 !== 0, selected: ftreesCtrl.is_selected(indi)}" ng-click="ftreesCtrl.select_individual(indi)">
+					<tr ng-repeat="indi in ftreesCtrl.individuals.slice(ftreesCtrl.display_from_result) | limitTo: ftreesCtrl.results_per_page"
+            ng-class="{dark: $index % 2 !== 0, selected: ftreesCtrl.is_selected(indi)}">
 						<td class="first-name" ng-show="ftreesCtrl.column_status['FN']">
 							{{indi.FN}}
 						</td>
@@ -240,7 +241,10 @@
 						<td class="sex" ng-show="ftreesCtrl.column_status['G']">
 							{{indi.G}}
 						</td>
-						<td class="tree-number" ng-show="ftreesCtrl.column_status['GTN']">{{indi.GTN}}</td>
+						<td class="tree-number" ng-show="ftreesCtrl.column_status['GTN']">
+             <a ng-href="{{ftreesCtrl.get_href(indi)}}">
+              {{indi.GTN}}
+          </a></td>
 					</tr>
 				</tbody>
 			</table>

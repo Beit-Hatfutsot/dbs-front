@@ -22,12 +22,12 @@ describe('item', function() {
 		it('should use the english slug as default when both exists',
 		   function () {
 			var item_data = {'Slug': {'He': 'שלום', 'En': 'hello'}}
-			expect(item.get_default_slug(item_data)).toEqual('hello');
+			expect(item.get_key(item_data)).toEqual('hello');
 		});
 		it('should use the hebrew slug when it is the only one',
 		   function () {
 			var item_data = {'Slug': {'He': 'שלום'}}
-			expect(item.get_default_slug(item_data)).toEqual('שלום');
+			expect(item.get_key(item_data)).toEqual('שלום');
 		});
 	})
 	describe('networked operations', function () {

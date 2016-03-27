@@ -70,10 +70,10 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
     */
    $rootScope.$on('$stateChangeStart',
 			  function(event, toState, toParams, fromState, fromParams){ 
-				  if (toState.name == 'ftree-view' && fromState.name == 'ftree-view') {
+				  if (toState.name == 'person-view' && fromState.name == 'person-view') {
 					  event.preventDefault(); 
 					  self.detailsShown = true;
-					  self.$state.transitionTo('ftree-view', toParams, {notify: false});
+					  self.$state.transitionTo('person-view', toParams, {notify: false});
 					  self.load(toParams);
 				  }
 	})
@@ -109,35 +109,31 @@ FtreeViewController.prototype = {
 	load: function (params) {
 		var self = this,
 			apiUrl = this.apiClient.base_url+
-				['', 'fwalk',  params.tree_number, params.node_id].join('/');
+				['/person',  params.tree_number, params.node_id].join('/');
 
-		self.$http.get(apiUrl, {
-			cache: true
-	  		})
-			.success(function (response) {
-			
-				var name = self.get_full_name(response);
+		self.$http.get(apiUrl, { cache: true })
+			.success(function (item_data) {
+				var name = self.get_full_name(item_data.tree),
+					thumbnail = null;
+				if (item_data.thumbnail)
+					thumbnail = item_data.thumbnail.data;
 				self.recentlyViewed.put({
 					params: params,
-					state: 'ftree-view',
+					state: 'person-view',
+					thumbnail: thumbnail,
 					header: {En: name, He: name}
 				});
 				self.tree_number = params.tree_number;
 				self.detailsShown = true;
-				self.node = response;
-				if ((self.tree === null) || (self.tree.tree_num != self.tree_number)){
-					self.$http.get(self.apiClient.base_url+ ['', 'fwalk',  self.tree_number, "root"].join('/'), {
-						cache: true }).success(function (r) { self.tree = r })
-				};
+				self.node = item_data;
 
 				if (d3 != null)
-					self.render(response)
+					self.render(self.node)
 				else
 					console.log("where's d3?")
-			})
-			.error(function (response) {
+			}, function (response) {
 				debugger;
-				console.log('error walking the tree');
+				console.log('error walking the tree', response)
 				console.log(response); 
 			});
 
@@ -206,7 +202,8 @@ FtreeViewController.prototype = {
 		return ret;
 	},
 
-	render: function(cn) {
+	render: function(node) {
+		var cn = node.tree;
 		var self = this;
 		if ( !cn.pos ) {
 			this.layoutEngine.layoutNode(cn);
@@ -331,7 +328,7 @@ FtreeViewController.prototype = {
 					self.$scope.$apply();
 				}
 				else if (d.id)
-					self.$state.go('ftree-view',
+					self.$state.go('person-view',
 							   {tree_number: self.tree_number, node_id: d.id});
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
@@ -344,7 +341,6 @@ FtreeViewController.prototype = {
 
 		new_divs.append('div')
 				.classed('avatar', true)
-				.classed('deceased', function (d) { return d.deceased; })
 				.append('img')
 				.attr('src', function (d) {
 					var sex = get_sex(d);

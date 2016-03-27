@@ -352,18 +352,10 @@ FtreesController.prototype = {
 		}
 	},
 
-
-	select_individual: function(individual) {
-		var self = this;
-		var already_selected = self.is_selected(individual);
-		 
-		if (!already_selected && individual) {
-			self.selected_index = self.individuals.indexOf(individual);
-			self.$state.go('ftree-view', {
-				node_id: individual.II,
-				tree_number: individual.GTN
-			});
-		}
+	get_href: function (individual) {
+		// TODO: support languages
+		return this.$state.href('person-view', {tree_number: individual.GTN,
+							   			   node_id: individual.II});
 	},
 
 	maximize_results_table: function() {
