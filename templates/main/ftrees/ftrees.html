@@ -52,8 +52,16 @@
 					</ng-switch>
 
 		            <a href="" class="filters__expand" ng-click="ftreesCtrl.advanced_search = !ftreesCtrl.advanced_search">
-		            	<en>More Fields</en>
-		            	<he>פחות שדות</he>
+		            	<ng-switch on="ftreesCtrl.advanced_search">
+			            	<span ng-switch-when="false">
+			            		<en>More Fields</en>
+			            		<he>עוד שדות</he>
+		            		</span>
+		            		<span ng-switch-when="true">
+			            		<en>Less Fields</en>
+			            		<he>פחות שדות</he>
+		            		</span>
+	            		</ng-switch>
 		            </a>
 		            <button class="filters__update" ng-click="ftreesCtrl.update()">
 						<en>Search</en>
