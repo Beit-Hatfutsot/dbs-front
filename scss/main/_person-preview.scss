@@ -98,9 +98,15 @@
 
         .preview-data {
             @include vertical-align(absolute);
-            left: 76px;
             width: 210px;
             display: block;
+
+            .en & {
+                left: 76px;
+            }
+            .he & {
+                right: 76px;
+            }
 
             .data-preview {
                 display: block;
@@ -125,8 +131,11 @@
         .avatar {
             width: 60px;
             height: 57px;
-            margin: 0 4px;
-            @include vertical-align(absolute);
+            margin: 3px 4px;
+
+            .he & {
+                @include flip ();
+            }
         }
 
         &--m {
