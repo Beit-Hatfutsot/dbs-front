@@ -1,4 +1,4 @@
-var FtreeViewController = function ($http, $window, $document, $rootScope,
+var PersonViewController = function ($http, $window, $document, $rootScope,
 							       $scope, $state, $stateParams, apiClient, 
 							       recentlyViewed, langManager, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
@@ -84,7 +84,7 @@ var FtreeViewController = function ($http, $window, $document, $rootScope,
 	this.load($stateParams);
 };
 
-FtreeViewController.prototype = {
+PersonViewController.prototype = {
 
 	get_full_name: function (d) {
 		try {
@@ -575,7 +575,7 @@ FtreeViewController.prototype = {
 	}
 };
 
-angular.module('main').controller('FtreeViewController', 
+angular.module('main').controller('PersonViewController', 
 			  ['$http', '$window', '$document', '$rootScope', '$scope',
 			   '$state', '$stateParams', 'apiClient', 'recentlyViewed', 
-			   'langManager', 'ftreeLayout', FtreeViewController]);
+			   'langManager', 'ftreeLayout', PersonViewController]);

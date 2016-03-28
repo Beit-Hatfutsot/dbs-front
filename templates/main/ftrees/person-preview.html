@@ -8,7 +8,7 @@
             <div class="tree-num__num">{{individual.GTN}}</div>
         </div>
         <div class="family parents" title="{{individual.tree.parents[0].name[0] + ' & ' + individual.tree.parents[1].name[0]}}" ng-if="individual.tree.parents[0].name[0]&&individual.tree.parents[1].name[0]">
-            <div class="family__names">{{individual.tree.parents[0].name[0]}} & {{individual.tree.parents[1].name[0] }}</div>
+            <div class="family__members">{{individual.tree.parents[0].name[0]}} & {{individual.tree.parents[1].name[0] }}</div>
             <div class="family__title">
                 <en>Parents</en>
                 <he>הורים</he>
@@ -48,7 +48,7 @@
                     <en>{{children_num + " "}}Children</en>
                     <he>{{children_num + " "}}ילדים</he></div>
             </ng-switch>
-            <div class="family__names">{{children}}</div>
+            <div class="family__members">{{children}}</div>
         </div>
     </div>
 </a>

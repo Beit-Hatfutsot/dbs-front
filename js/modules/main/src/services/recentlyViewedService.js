@@ -33,8 +33,8 @@ angular.module('main').
 					var key = item.get_key(item_data);
 					item_data._key = key;
 
-					item_exists = this.items.some(function(item) {
-						return (key == item._key);
+					item_exists = this.items.some(function(i) {
+						return (key == item.get_key(i));
 					});
 				} catch (e){
 					this.items = [];
