@@ -158,8 +158,8 @@ FtreesController.prototype = {
 	},
 
  	clear_filters: function() {
- 		for (var modifier in this.search_modifiers) {
- 			this.search_params[modifier] = '';
+ 		for (var parameter in this.search_params) {
+ 			this.search_params[parameter] = '';
  		}
  	},
 
