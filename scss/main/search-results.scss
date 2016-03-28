@@ -1,3 +1,91 @@
+ %db-results-exttitle {
+    color: $gray3;
+    font-size: 18px;
+    margin: 14px 36px 0;
+    display: block;
+ }
+
+ %loader {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    vertical-align: middle;
+    margin: 20px 37px;
+    text-align: center;
+    color: #666;
+    font-weight: 700;
+    background-color: #fff;
+    @include box-shadow(0 0 6px 0 #999);
+    @include hover-pointer(); 
+
+    &:hover {
+
+        .eye-icon {
+            display: none;
+        }
+
+        .eye-open-icon {
+            display: block;
+        }
+
+        .loader-desc {
+            color: $gray3;
+        }
+    }
+
+    .eye-icon, .eye-open-icon {
+        width: 66px;
+        height: 39px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        bottom: 84px;
+    }
+
+    .eye-icon {
+        width: 66px;
+        height: 39px;
+    }
+
+    .eye-open-icon {
+        display: none;
+        width: 72px;
+        height: 56px;
+    }
+
+    .loader-desc {
+        color: $red2;
+        line-height: 14px;
+        display: block;
+        top: 70px;
+        position: absolute;
+        width: 100%;
+        transform: translate(-50%, 0);
+        left: 50%;
+
+        .bold-part {
+            font-size: 20px;
+        }
+
+        .med-font {
+           font-size: 14px; 
+        }
+
+        .ext-src-name {
+            font-size: 16px;
+        }
+
+        .results-number {
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: normal;
+            color: $gray3;
+            display: block;
+        }
+    }
+}
+
  %title {
     position: absolute;
     font-size: 16px;
@@ -165,10 +253,7 @@
             }
 
         .db-results-exttitle {
-            color: $gray3;
-            font-size: 18px;
-            margin: 14px 36px 0;
-            display: block;
+            @extend %db-results-exttitle;
         }
 
         .title-desc {
@@ -261,85 +346,8 @@
                 }
             }
 
-            %loader {
-                position: relative;
-                display: inline-block;
-                width: 150px;
-                height: 150px;
-                vertical-align: middle;
-                margin: 20px 37px;
-                text-align: center;
-                color: #666;
-                font-weight: 700;
-                background-color: #fff;
-                @include box-shadow(0 0 6px 0 #999);
-                @include hover-pointer(); 
-
-                &:hover {
-
-                    .eye-icon {
-                        display: none;
-                    }
-
-                    .eye-open-icon {
-                        display: block;
-                    }
-
-                    .loader-desc {
-                        color: $gray3;
-                    }
-                }
-
-                .eye-icon, .eye-open-icon {
-                    width: 66px;
-                    height: 39px;
-                    position: absolute;
-                    left: 50%;
-                    transform: translate(-50%, 0);
-                    bottom: 84px;
-                }
-
-                .eye-icon {
-                    width: 66px;
-                    height: 39px;
-                }
-
-                .eye-open-icon {
-                    display: none;
-                    width: 72px;
-                    height: 56px;
-                }
-
-                .loader-desc {
-                    color: $red2;
-                    line-height: 14px;
-                    display: block;
-                    top: 70px;
-                    position: absolute;
-                    width: 100%;
-                    transform: translate(-50%, 0);
-                    left: 50%;
-
-                    .bold-part {
-                        font-size: 20px;
-                    }
-
-                    .med-font {
-                       font-size: 14px; 
-                    }
-
-                    .ext-src-name {
-                        font-size: 16px;
-                    }
-
-                    .results-number {
-                        margin-top: 16px;
-                        font-size: 14px;
-                        font-weight: normal;
-                        color: $gray3;
-                        display: block;
-                    }
-                }
+            .loader {
+                @extend %loader;
             }
         } 
     }

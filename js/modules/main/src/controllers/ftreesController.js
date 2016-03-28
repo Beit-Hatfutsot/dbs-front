@@ -1,12 +1,15 @@
-var FtreesController = function($scope, $state, $stateParams, $location, ftrees, notification, musicalChairsFactory) {
+var FtreesController = function($scope, $state, $stateParams, $location, ftrees, notification, musicalChairsFactory, $http, apiClient) {
 	var self = this;
 
 	this.individuals = [];
+	this.$http = $http;
 	this._sorted_by = null;
 	this.selected_individual = null;
 	this.selected_individual_data = {};
 	this.search_params = {};
+	this.query = '';
 	this.advanced_search = false;
+	this.apiClient = apiClient;
 	
 	this.key_map = {
 		FN: {
@@ -224,6 +227,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 
 	//search
 	var BreakException= {};
+	var parameters = [];
 	try {
 		Object.keys($stateParams).forEach(function(key) {
 			if ($stateParams[key]) {
@@ -231,6 +235,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 				// read state params & update bound objects to update view accordingly
 				for (var param in $stateParams) {
 					if ( $stateParams[param] !== undefined ) {
+						parameters.push($stateParams[param]);
 
 						// handle search modifiers & fudge factors in query string
 						if ( $stateParams[param].indexOf('~') !== -1 ) {
@@ -247,6 +252,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 							self.search_params[param] = $stateParams[param];
 						}
 					}
+					self.query = parameters.join(' + ');
 				};
 
 				self.search($stateParams);
@@ -299,7 +305,19 @@ FtreesController.prototype = {
 			});
 	},
 
+	fetch_more: function() {
+		var self = this;
+		var search_params = angular.copy(this.search_params);
+		search_params.start = self.individuals.items.length;
+		var individuals = self.individuals;
+        self.$http.get(self.apiClient.urls.ftrees_search, {params: search_params})
+        .success(function (r){
+            self.individuals.items = individuals.items.concat(r.items);
+        });
+    }, 
+
 	update: function() {
+		var self = this;
 		var search_params = angular.copy(this.search_params);
 
 		for (var param in search_params) {
@@ -429,7 +447,7 @@ FtreesController.prototype = {
 
 	read_about_center: function (collection_name) {
         this.$state.go('about_center', {collection: collection_name});
-    },
+    }
 };
 
-angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', 'notification', 'musicalChairsFactory', FtreesController]);
+angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', 'notification', 'musicalChairsFactory', '$http', 'apiClient', FtreesController]);

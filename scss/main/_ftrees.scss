@@ -86,6 +86,17 @@
 
 		}
 
+		.cards-title {
+			color: $gray3;
+    		display: block;
+			margin: 14px 10px 0;
+            font-size: 16px;
+        }
+
+		.loader {
+			@extend %loader;
+		}
+
 			.filters {
 				display: block;
 				position: relative;
@@ -253,13 +264,12 @@
 							}
 						}
 
-						}
+					}
 					.container {
 						margin-bottom: 17px;
 
-						
-
 						input[type="text"] {
+							color: $gray2;
 							border: 2px solid $red5;
 							overflow: hidden;
 							font-size: 80%;

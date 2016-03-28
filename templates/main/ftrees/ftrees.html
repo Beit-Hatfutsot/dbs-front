@@ -2,7 +2,6 @@
 	<div id="tree-sort">
 		<div id="search-params">
 			<form class="filters" name="filters" ng-class="{'filters--expanded': ftreesCtrl.advanced_search}">
-
 				<div class="filters__general">
 						<div class="title"> 
 							<span class="title__arrow"></span>
@@ -21,10 +20,20 @@
 							<input type="text" ng-model="ftreesCtrl.search_params.first_name" placeholder="{{(lang=='en')?'Moshe, Liat...':'משה, ליאת...'}}">
 						</div>
 					</div>
-					<filters-field class="filters__field" label-text-en="Last Name"
-			                           label-text-he="שם משפחה" model="last_name" placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}"></filters-field>
+					<filters-field  class="filters__field" 
+									label-text-en="Last Name"
+			                        label-text-he="שם משפחה"
+			                        model="last_name"
+			                        placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
+                    </filters-field>
 		            <ng-switch on="ftreesCtrl.advanced_search">
-		            	<filters-field ng-switch-when="false" class="filters__field" label-text-en="Place of Birth / Marriage / Death" label-text-he="מקום לידה \ נישואין \ פטירה" model="marriage_place" placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}"></filters-field>
+		            	<filters-field  ng-switch-when="false"
+		            					class="filters__field"
+		            					label-text-en="Place of Birth / Marriage / Death"
+		            					label-text-he="מקום לידה \ נישואין \ פטירה"
+		            					model="marriage_place"
+		            					placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+        				</filters-field>
 
 		            	<div ng-switch-when="true" class="filters__sex" >
 							<label>
@@ -90,15 +99,45 @@
 					</div>
 					<div class="advanced-filters" ng-if="ftreesCtrl.advanced_search">
 						<div class="col2">
-							<filters-field class="filters__field" label-text-en="Place of Birth" label-text-he="מקום לידה" model="birth_place" placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}"></filters-field> <!-- placeholder="{{(lang=='en')?'Tel-Aviv, Israel...':'תל-אביב, ישראל...'}}" -->
-							<filters-field class="filters__field" label-text-en="Place of Marriage" label-text-he="מקום נישואין" model="marriage_place" placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}"></filters-field>
-							<filters-field class="filters__field" label-text-en="Place of Death" label-text-he="מקום פטירה" model="death_place" placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}"></filters-field>
+							<filters-field class="filters__field"
+											label-text-en="Place of Birth"
+											label-text-he="מקום לידה"
+											model="birth_place"
+											placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+							</filters-field>
+							<filters-field class="filters__field"
+											label-text-en="Place of Marriage"
+											label-text-he="מקום נישואין"
+											model="marriage_place"
+											placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+							</filters-field>
+							<filters-field class="filters__field" 
+											label-text-en="Place of Death"
+											label-text-he="מקום פטירה"
+											model="death_place"
+											placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+							</filters-field>
 						</div>
 
 						<div class="col3">
-							<filters-fudge class="filters__fudge-field" label-text-en="Year of Birth" label-text-he="שנת לידה" model="birth_year" placeholder="1948.."></filters-fudge>
-							<filters-fudge class="filters__fudge-field" label-text-en="Year of Marriage" label-text-he="שנת נישואין" model="marriage_year" placeholder="1948.."></filters-fudge>
-							<filters-fudge class="filters__fudge-field" label-text-en="Year of Death" label-text-he="שנת פטירה" model="death_year" placeholder="1948.."></filters-fudge>
+							<filters-fudge class="filters__fudge-field"
+											label-text-en="Year of Birth"
+											label-text-he="שנת לידה"
+											model="birth_year"
+											placeholder="1948..">
+							</filters-fudge>
+							<filters-fudge class="filters__fudge-field"
+											label-text-en="Year of Marriage"
+											label-text-he="שנת נישואין"
+											model="marriage_year"
+											placeholder="1948..">
+							</filters-fudge>
+							<filters-fudge class="filters__fudge-field"
+											label-text-en="Year of Death"
+											label-text-he="שנת פטירה"
+											model="death_year"
+											placeholder="1948..">
+							</filters-fudge>
 							<div class="filters__field">
 								<div class="container">
 									<label>
@@ -114,24 +153,27 @@
 				</div>
 			</form>
 		</div>
+		<div class="cards-title">
+            <en><strong>{{ftreesCtrl.individuals.total}}</strong> Results found for <strong>{{ftreesCtrl.query}}</strong></en>
+        </div>
 
 		<div class="item-preview-wrapper">
-			<person-preview   ng-repeat="individual in ftreesCtrl.individuals |limitTo: 14" 
+			<person-preview  ng-repeat="individual in ftreesCtrl.individuals.items" 
 							 sex="individual.G"
 							 individual="individual">
 			</person-preview>
-			<!-- <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
+			<div class="loader" ng-click="ftreesCtrl.fetch_more()" ng-if="ftreesCtrl.individuals.total>ftreesCtrl.individuals.items.length">
                 <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                 <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                 <div class="loader-desc">
                     <en><strong>More</strong><br></en>
                     <he>לראות עוד<br></he>
                     <span class="results-number">
-                        <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
-                        <he>({{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
+                        <en>(+{{ftreesCtrl.individuals.total-ftreesCtrl.individuals.items.length}} results)</en>
+                        <he>(+{{ftreesCtrl.individuals.total-ftreesCtrl.individuals.items.length}} תוצאות)</he>
                     </span>
                 </div>
-            </div> -->
+            </div>
 		</div>
 		<!-- <div class="results">
 			<table class="results__individuals">
