@@ -1,7 +1,6 @@
 var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, user, item, $window) {
 
     this.$state = $state;
-    //console.log($state.includes('general-search'));
     this.auth = auth;
     this.cache = cache;
     this.recentlyViewed = recentlyViewed;
@@ -117,7 +116,6 @@ HeaderCtrl.prototype = {
 				name = current.name.slice(6);
 			else if ((lang == 'he') && !current_is_he)
 				name = 'he.he_' + current.name;
-			console.log(name);
 			this.$state.go(name, this.$state.params);
 		}
 	},

@@ -34,7 +34,6 @@ angular.module('main').directive('personPreview', function() {
                 person_info = ''
             else
                 person_info += ') ';
-            console.log(person_info);
             if (scope.birth_place) {
                 var bp = scope.birth_place.toLowerCase();
                 if ((bp[0]>='a') && (bp[0] <= 'z'))
