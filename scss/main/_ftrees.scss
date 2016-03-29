@@ -224,6 +224,10 @@
 				    left: 50%;
 				    bottom: 60px;
 				    transform: translate(-50%, 0);
+
+				    &:hover {
+				    	color: $gray3;
+				    }
 				}
 
 				&__clear {
@@ -272,7 +276,7 @@
 							color: $gray2;
 							border: 2px solid $red5;
 							overflow: hidden;
-							font-size: 80%;
+							font-size: 11px;
 							text-transform: capitalize;
 							.en & {
 								padding-left: 6px;
@@ -305,7 +309,8 @@
 					input[type="text"] {
 						display: inline-block;
 						width: 248px;
-						height: 20px;
+						height: 24px;
+						font-size: 12px;
 						border-color: $red5;
 					}
 
@@ -411,13 +416,12 @@
 
 					.text {
 						display: inline-block;
-						//margin: 5px;
 
 						input[type="text"] {
 							display: inline-block;
 							width: 76px;
-							height: 20px;
-							font-size: 80%;
+							height: 24px;
+							font-size: 12px;
 							padding: auto;
 						}
 					}
@@ -431,15 +435,14 @@
 								outline-style:none;
 								position: relative;
 							    display: inline-block;
-							    height: 20px;
+							    height: 24px;
 							    width: 164px;
 							    outline: none;
 							    color: $gray3;
 							    border: none;
 							    background: $gray6; 
 							    -moz-appearance: none;
-							    font-size: 10px;
-    							font-weight: 600;	
+							    font-size: 12px;	
 							    @include hover-pointer();
 
 							    &:hover {
