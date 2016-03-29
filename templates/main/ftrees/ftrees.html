@@ -26,16 +26,8 @@
 			                        model="last_name"
 			                        placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
                     </filters-field>
-		            <ng-switch on="ftreesCtrl.advanced_search">
-		            	<filters-field  ng-switch-when="false"
-		            					class="filters__field"
-		            					label-text-en="Place of Birth / Marriage / Death"
-		            					label-text-he="מקום לידה \ נישואין \ פטירה"
-		            					model="marriage_place"
-		            					placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
-        				</filters-field>
-
-		            	<div ng-switch-when="true" class="filters__sex" >
+		            <ng-switch on="ftreesCtrl.url_search_params.more">
+		            	<div ng-switch-when="1" class="filters__sex" >
 							<label>
 								<en>Sex</en>
 								<he>מין</he>
@@ -58,17 +50,24 @@
 								</label>
 							</div>
 						</div>
+						<filters-field  ng-switch-default
+		            					class="filters__field"
+		            					label-text-en="Place of Birth / Marriage / Death"
+		            					label-text-he="מקום לידה \ נישואין \ פטירה"
+		            					model="marriage_place"
+		            					placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+        				</filters-field>
 					</ng-switch>
 
-		            <a href="" class="filters__expand" ng-click="ftreesCtrl.advanced_search = !ftreesCtrl.advanced_search">
-		            	<ng-switch on="ftreesCtrl.advanced_search">
-			            	<span ng-switch-when="false">
-			            		<en>More Fields</en>
-			            		<he>עוד שדות</he>
-		            		</span>
-		            		<span ng-switch-when="true">
+		            <a href="" class="filters__expand" ng-click="ftreesCtrl.toggle_form()">
+		            	<ng-switch on="ftreesCtrl.url_search_params.more">
+			            	<span ng-switch-when="1">
 			            		<en>Less Fields</en>
 			            		<he>פחות שדות</he>
+		            		</span>
+			            	<span ng-switch-default>
+			            		<en>More Fields</en>
+			            		<he>עוד שדות</he>
 		            		</span>
 	            		</ng-switch>
 		            </a>
@@ -76,14 +75,13 @@
 						<en>Search</en>
 						<he>חיפוש</he>
 					</button>
-					<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()" ng-if="ftreesCtrl.advanced_search">
+					<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()" ng-if="ftreesCtrl.url_search_params.more == '1'">
 						<en>Clear</en>
 						<he>ניקוי</he>
 					</a>
 				</div>
 
 				<div class="filters__advanced">
-
 					<div class="filters__advanced__head">
 						<div class="about-bh">
 			                <div class="about-collection-title">
@@ -94,10 +92,10 @@
 			                </div>
 			            </div>
 					</div>
-					<div class="pic-wpapper" ng-if="!ftreesCtrl.advanced_search">
+					<div class="pic-wpapper" ng-if="!ftreesCtrl.url_search_params.more||ftreesCtrl.url_search_params.more =='0'">
 						<img ng-src="/images/Ftrees-Photos_Eng+Heb3.jpg">
 					</div>
-					<div class="advanced-filters" ng-if="ftreesCtrl.advanced_search">
+					<div class="advanced-filters" ng-if="ftreesCtrl.url_search_params.more=='1'">
 						<div class="col2">
 							<filters-field class="filters__field"
 											label-text-en="Place of Birth"
@@ -145,7 +143,7 @@
 										<en>Tree s/n Number</en>
 										<he>מספר סידורי של העץ</he>
 									</label>
-									<input type="text" ng-model="ftreesCtrl.search_params.filters_tree_number" placeholder="12345">
+									<input type="text" ng-model="ftreesCtrl.search_params.tree_number" placeholder="12345">
 								</div>
 							</div>
 						</div>

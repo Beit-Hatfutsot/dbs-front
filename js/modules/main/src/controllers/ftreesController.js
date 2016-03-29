@@ -4,9 +4,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.individuals = [];
 	this.search_params = {};
 	this.query = '';
-	this.advanced_search = false;
 	
-
 	this.search_modifiers = {
 		first_name: 	'',
 		last_name: 		'',
@@ -26,6 +24,7 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.$location = $location;
 	this.ftrees = ftrees;
 	this.notification = notification;
+	this.url_search_params = $location.search();
 
 	Object.defineProperty($scope, '$stateParams', {
 		get: function() {
@@ -43,8 +42,8 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 
 				// read state params & update bound objects to update view accordingly
 				for (var param in $stateParams) {
-					if ( $stateParams[param] !== undefined ) {
-						parameters.push($stateParams[param]);
+					if ($stateParams[param] !== undefined ) {
+							parameters.push($stateParams[param]);
 
 						// handle search modifiers & fudge factors in query string
 						if ( $stateParams[param].indexOf('~') !== -1 ) {
@@ -61,8 +60,8 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 							self.search_params[param] = $stateParams[param];
 						}
 					}
-					self.query = parameters.join(' + ');
 				};
+				self.query = parameters.join(' + ');
 
 				self.search($stateParams);
 				throw BreakException;
@@ -113,12 +112,21 @@ FtreesController.prototype = {
 		var self = this;
 		var search_params = angular.copy(this.search_params);
 		search_params.start = self.individuals.items.length;
-		var individuals = self.individuals;
 		this.ftrees.search(search_params).
 			then(function (r){
-				self.individuals.items = individuals.items.concat(r.items);
+				self.individuals.items = self.individuals.items.concat(r.items);
 			});
-    }, 
+    },
+
+    toggle_form: function() {
+    	var self = this;
+    	if (self.url_search_params.more == '0' || self.url_search_params.more == undefined) {
+    		self.$location.search('more', '1');
+    	}
+    	else {
+    		self.$location.search('more', '0');
+    	}
+    },
 
 	update: function() {
 		var self = this;
@@ -147,10 +155,6 @@ FtreesController.prototype = {
 				search_params[factor] += '~' + fudge_val;
 			}
 		}
-
-		// avoid conflict with parameter from state ftree-view.ftree-item
-		search_params.tree_number = search_params.filters_tree_number;
-		delete search_params.filters_tree_number;
 
 		for (var param in this.search_params) {
 			this.$location.search(param, search_params[param]);
