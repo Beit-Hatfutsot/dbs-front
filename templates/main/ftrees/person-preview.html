@@ -18,10 +18,10 @@
     </div>
     <div class="node" ng-class="{'node--f': sex === 'F', 'node--m' : sex == 'M'}">
         <ng-switch on="sex">
-            <div class="avatar" ng-switch-when="M">
+            <div class="avatar flip" ng-switch-when="M">
                 <icon position="[-197, -404]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
             </div>
-            <div class="avatar" ng-switch-when="F">
+            <div class="avatar flip" ng-switch-when="F">
                 <icon position="[-197, -473]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
             </div>
             <div class="avatar" ng-switch-when="U">
