@@ -70,10 +70,10 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
     */
    $rootScope.$on('$stateChangeStart',
 			  function(event, toState, toParams, fromState, fromParams){ 
-				  if (toState.name == 'person-view' && fromState.name == 'person-view') {
+				  if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
 					  event.preventDefault(); 
 					  self.detailsShown = true;
-					  self.$state.transitionTo('person-view', toParams, {notify: false});
+					  self.$state.transitionTo(toState.name, toParams, {notify: false});
 					  self.load(toParams);
 				  }
 	})
@@ -328,7 +328,8 @@ PersonViewController.prototype = {
 					self.$scope.$apply();
 				}
 				else if (d.id)
-					self.$state.go('person-view',
+					self.$state.go((self.langManager.lang == 'he')?
+								     'he.he_person-view':'person-view',
 							   {tree_number: self.tree_number, node_id: d.id});
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })

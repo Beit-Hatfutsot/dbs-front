@@ -173,6 +173,16 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 header.show_recent();
             }]
         },
+        {
+            name: 'he.he_person-view',
+            url: '/person/:tree_number/:node_id',
+            controller: 'PersonViewController as ctrl',
+            templateUrl: 'templates/main/ftrees/person.html',
+            onEnter: ['header', function(header) {
+                header.show_recent();
+            }]
+        },
+
 
 		/*
 

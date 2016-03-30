@@ -108,7 +108,7 @@ angular.module('main').
 				}
 				else {
 					state = item_data.state;
-					params = item_data.prams;
+					params = item_data.params;
 				}
 				if (lang == 'he')
 					state = 'he.he_'+state;
