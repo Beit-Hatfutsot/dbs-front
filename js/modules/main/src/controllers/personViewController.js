@@ -399,11 +399,14 @@ PersonViewController.prototype = {
 			.style('height',function(d) { return px(d.size.y); })
 
 		// CIRCLES
-		var circles = d3.select('.vertices').selectAll(".child-ep").data(cdata, function(d) { return d.id; }),
+		var circles = d3.select('.vertices').selectAll(".child-ep")
+					    .data(cdata, function(d) { return d.id; }),
 		    new_cs = circles.enter(),
 		    old_cs = circles.exit(),
 		    new_circles = new_cs.append('circle');
-		circles.attr('cx', function(d) { return d.center.x })
+		circles.attr('cx', function(d) {
+		   return (self.vertical_pos == 'right')?d.center.x:
+			   self.layoutEngine.chartSize.x - d.center.x;})
 		       .attr('cy', function(d) { return d.center.y  }) ;
 		old_cs.remove();
 		new_circles.classed('new', true)
