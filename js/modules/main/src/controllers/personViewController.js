@@ -309,7 +309,6 @@ PersonViewController.prototype = {
 					   'F': '/images/woman.png',
 					   'U': '/images/unknown.png'};
 		this.vertical_pos = (self.langManager.lang == 'he')?'right':'left';
-		console.log(this.vertical_pos);
 		this.vertical_transform = (self.langManager.lang == 'he')?
 			'translate(1150,0) scale(-1,1)':'translate(0,0)';
 
