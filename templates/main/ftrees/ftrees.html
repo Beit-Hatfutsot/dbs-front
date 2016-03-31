@@ -26,7 +26,7 @@
 			                        model="last_name"
 			                        placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
                     </filters-field>
-		            <ng-switch on="ftreesCtrl.url_search_params.more">
+		            <ng-switch on="ftreesCtrl.$stateParams.more">
 		            	<div ng-switch-when="1" class="filters__sex" >
 							<label>
 								<en>Sex</en>
@@ -59,8 +59,8 @@
         				</filters-field>
 					</ng-switch>
 
-		            <a href="" class="filters__expand" ng-click="ftreesCtrl.toggle_form()">
-		            	<ng-switch on="ftreesCtrl.url_search_params.more">
+		            <a href="" class="filters__expand" ng-click="ftreesCtrl.toggle_more()">
+		            	<ng-switch on="ftreesCtrl.$stateParams.more">
 			            	<span ng-switch-when="1">
 			            		<en>Less Fields</en>
 			            		<he>פחות שדות</he>
@@ -75,7 +75,7 @@
 						<en>Search</en>
 						<he>חיפוש</he>
 					</button>
-					<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()" ng-if="ftreesCtrl.url_search_params.more == '1'">
+					<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()" ng-if="ftreesCtrl.$stateParams.more == '1'">
 						<en>Clear</en>
 						<he>ניקוי</he>
 					</a>
@@ -92,10 +92,10 @@
 			                </div>
 			            </div>
 					</div>
-					<div class="pic-wpapper" ng-if="!ftreesCtrl.url_search_params.more||ftreesCtrl.url_search_params.more =='0'">
+					<div class="pic-wpapper" ng-if="!ftreesCtrl.$stateParams.more||ftreesCtrl.$stateParams.more =='0'">
 						<img ng-src="/images/Ftrees-Photos_Eng+Heb3.jpg">
 					</div>
-					<div class="advanced-filters" ng-if="ftreesCtrl.url_search_params.more=='1'">
+					<div class="advanced-filters" ng-if="ftreesCtrl.$stateParams.more=='1'">
 						<div class="col2">
 							<filters-field class="filters__field"
 											label-text-en="Place of Birth"
@@ -150,6 +150,46 @@
 					</div>
 				</div>
 			</form>
+		</div>
+		<div class="start" ng-show="ftreesCtrl.individuals.isEmpty()"><!-- filters.$pristine -->
+			<div class="start__top">
+				<div class="start__top__text">
+					<en>
+						<h2>Searching for long lost relatives?</h2>
+						<p><span class="subtitle">Simply type names in one of fields above and go on a fascinating family journey!</span>
+						For centuries Jews have travelled and wandered. In many cases they left behind assets, texts and documents. Unfortunately, only a few families recorded their history, and many precious memories were bound to be lost and forgotten. Now you can record all information about your family at the Douglas E. Goldman Jewish Genealogy Center in Beit Hatfutsot and make sure that the family heritage is safe for future generations.<br>
+						The Douglas E. Goldman Jewish Genealogy Center is the only center of its kind in the world. At the Center, visitors can search a computerized database containing thousands of genealogies of Jewish families from all over the world and can also register their own family trees.<br>
+						It is important to state that the information in the database meets the restrictions of the privacy protection law of 1981. Therefore, searching for living individuals can only yield partial results such as gender, given namese, and family name.<br>
+						Over 5 million individuals have already been recorded in the continuously expanding database. Visitors from all backgrounds can explore their ancestry, record and preserve their own family trees for future generations, thus adding their own “branch” to the family tree of the Jewish People.</p>
+					</en>
+					<he>
+						<h2>מחפשים קרוב משפחה רחוק?</h2>
+						<p><span class="subtitle">פשוט הקלידו באחד השדות למעלה וצאו למסע משפחתי מרתק!</span>
+						במרוצת הדורות עברו משפחות יהודיות ממקום למקום. במקרים רבים הותירו מאחור נכסים, דברי-ערך, מזכרות ורשומות. למרבה הצער, רק לעתים רחוקות תיעדו וכתבו את תולדות המשפחה, ורשמי העבר נותרו רק בזיכרון. כיום אתם יכולים לתעד את המידע על משפחתכם במרכז לגנאלוגיה יהודית של בית התפוצות, ולהבטיח את שימורו של הסיפור המשפחתי לדורות הבאים.<br>
+						המרכז לגנאלוגיה יהודית ע"ש דאגלס א. גולדמן הוא יחיד במינו בעולם. במאגר מליוני אנשים ועשרות אלפי עצי משפחה של משפחות יהודיות מקצווי תבל אשר נתרמו לבית התפוצות באופן ישיר ואישי, ללא התערבות חיצונית כלשהי. מבקרים יכולים לערוך חיפוש וגם להוסיף את עץ המשפחה שלהם. המידע במאגר עומד בתקן "חוק הגנת הפרטיות –התשמ"א". אשר על כן, חיפוש אנשים שנמצאים בין החיים הינו חלקי וכולל רק משתנים כמו מין, שם פרטי ושם משפחה.<br>
+						מעל ל-5 מיליוני בני אדם כבר רשומים במרכז לגנאלוגיה יהודית בבית התפוצות, והמאגר גדל מדי יום ומדי שעה. מבקרים ממגוון מקומות ואורחות חיים באים להתחקות אחר שורשיהם, לתעד ולהנציח את עץ המשפחה שלהם עבור הדורות הבאים, ובכך הם מוסיפים עוד ענף לעץ הגדול של העם היהודי.</p>
+					</he>
+				</div>
+				<img ng-src="/images/Ftrees-Photos_Start.jpg">
+			</div>
+			<div class="start__bottom">
+				<img ng-src="/images/Ftrees-Photos_Support.jpg">
+				<div class="start__bottom__text">
+					<en><p><span class="subtitle">If you wish to help us pass on the Jewish story – now it is easier than ever.</span><br>
+						Record any information you have about your family at the Jewish Genealogy Center in Beit Hatfutsot, thus insuring that future generations will have access to the information.<br>
+						We invite you to add your family tree to our database. Your contribution will help us preserve the Jewish story and will enable future users to search for their roots and to complete the puzzle. It can also assist you and other users tracing long lost relatives and enhancing family ties at present.<br>
+						<span class="emph">If you have already built a family tree</span>, <a href='http://www.bh.org.il/databases/jewish-genealogy/tool-kit-research/'>click here and learn how to upload it unto this website</a>.<br> 
+						<span class="emph">If you have not yet formed your family tree</span>, you can easily do so using one of the following sites or soft wares. <a href='http://www.bh.org.il/databases/jewish-genealogy/tool-kit-research/'>Click here for information on forming your family tree</a>.</p>
+					</en>
+					<he>
+						<p><span class="subtitle">מעוניינים לסייע לנו להמשיך לספר את הסיפור היהודי?</span><br>
+						היום יותר מתמיד קל לתעד את המידע על משפחתכם במרכז לגנאלוגיה יהודית של בית התפוצות, ולהבטיח את שימורו של הסיפור המשפחתי לדורות הבאים.<br>
+						אתם מוזמנים לתרום לבית התפוצות את העץ המשפחתי שלכם. תרומה זו תעזור לנו תבטיח את שימורו של הסיפור המשפחתי שלכם לדורות הבאים, ותסייע בהרכבת הפסיפס היהודי לדורותיו. תרומת העץ שלכם למאגר תסייע גם לכם ולאנשים נוספים באיתור קרובי משפחה אבודים וחיזוק הקשרים המשפחתיים הקיימים.<br>
+						<span class="emph">יש לכם כבר עץ משפחתי?</span> <a href='http://www.bh.org.il/he/%D7%9E%D7%90%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%90%D7%95%D7%A1%D7%A4%D7%99%D7%9D/%D7%92%D7%A0%D7%90%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA/%D7%90%D7%A8%D7%92%D7%96-%D7%94%D7%9B%D7%9C%D7%99%D7%9D-%D7%A9%D7%9C%D7%9B%D7%9D/'>לחצו כאן כדי ללמוד איך להעלות אותו לאתר זה</a>.<br> 
+						<span class="emph">אם טרם בניתם עץ משפחתי,</span> תוכלו לעשות זאת בקלות באחד מכמה אתרים או תוכנות: <a href='http://www.bh.org.il/he/%D7%9E%D7%90%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%90%D7%95%D7%A1%D7%A4%D7%99%D7%9D/%D7%92%D7%A0%D7%90%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA/%D7%90%D7%A8%D7%92%D7%96-%D7%94%D7%9B%D7%9C%D7%99%D7%9D-%D7%A9%D7%9C%D7%9B%D7%9D/'>למידע על בניית עץ משפחתי לחצו כאן</a>.</p>
+					</he>
+				</div>
+			</div>
 		</div>
 		<div class="cards-title" ng-if="ftreesCtrl.individuals.items">
             <en><strong>{{ftreesCtrl.individuals.total}}</strong> Results found for <strong>{{ftreesCtrl.query}}</strong></en>

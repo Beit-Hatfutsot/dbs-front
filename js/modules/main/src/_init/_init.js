@@ -154,13 +154,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 		*/
         {
             name: 'ftrees',
-            url: '/ftrees?first_name&last_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number',
+            url: '/ftrees?first_name&last_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
             controller: 'FtreesController as ftreesCtrl',
             templateUrl: 'templates/main/ftrees/ftrees.html'
         },
         {
             name: 'he.he_ftrees',
-            url: '/עצימשפחה?first_name&last_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number',
+            url: '/עצימשפחה?first_name&last_name&sex&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
             controller: 'FtreesController as ftreesCtrl',
             templateUrl: 'templates/main/ftrees/ftrees.html'
         },

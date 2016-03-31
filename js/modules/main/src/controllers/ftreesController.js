@@ -1,4 +1,5 @@
-var FtreesController = function($scope, $state, $stateParams, $location, ftrees, notification) {
+var FtreesController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window) {
+
 	var self = this;
 
 	this.individuals = [];
@@ -21,56 +22,60 @@ var FtreesController = function($scope, $state, $stateParams, $location, ftrees,
 	this.$state = $state;
 	this.$stateParams = $stateParams;
 	this.$scope = $scope;
-	this.$location = $location;
+	this.$window = $window;
 	this.ftrees = ftrees;
 	this.notification = notification;
-	this.url_search_params = $location.search();
 
 	Object.defineProperty($scope, '$stateParams', {
 		get: function() {
 			return $stateParams;
 		}
-	});
-
+	}); 
 
 	//search
-	var BreakException= {};
 	var parameters = [];
-	try {
-		Object.keys($stateParams).forEach(function(key) {
+		for (var key in $stateParams) {
 			if ($stateParams[key]) {
 
 				// read state params & update bound objects to update view accordingly
-				for (var param in $stateParams) {
-					if ($stateParams[param] !== undefined ) {
-							parameters.push($stateParams[param]);
+					if (key !== 'more') {
+							parameters.push($stateParams[key]);
 
 						// handle search modifiers & fudge factors in query string
-						if ( $stateParams[param].indexOf('~') !== -1 ) {
-							var parts = $stateParams[param].split('~');
-							self.search_params[param] = parts[0];
-							self.fudge_factors[param] = parts[1];
+						if ( $stateParams[key].indexOf('~') !== -1 ) {
+							var parts = $stateParams[key].split('~');
+							self.search_params[key] = parts[0];
+							self.fudge_factors[key] = parts[1];
 						}
-						else if ( $stateParams[param].indexOf(';') !== -1 ) {
-							var parts = $stateParams[param].split(';');
-							self.search_params[param] = parts[0];	
-							self.search_modifiers[param] = parts[1];
+						else if ( $stateParams[key].indexOf(';') !== -1 ) {
+							var parts = $stateParams[key].split(';');
+							self.search_params[key] = parts[0];	
+							self.search_modifiers[key] = parts[1];
 						}
 						else {
-							self.search_params[param] = $stateParams[param];
+							self.search_params[key] = $stateParams[key];
 						}
 					}
-				};
-				self.query = parameters.join(' + ');
-
-				self.search($stateParams);
-				throw BreakException;
 			}
-		});
-	}
-	catch(e) {
-		 if (e !== BreakException) throw e;
-	}
+		};
+		this.query = parameters.join(' + ');
+		var temp = angular.copy($stateParams);
+		delete temp.more;
+		self.search(temp);
+
+
+	if ($state.lastState.name !== 'ftrees') {
+		$timeout(function(){
+		    var body = angular.element(document.getElementsByTagName('body')[0]);
+			body.addClass('backdrop');
+		    $modal.open({
+		     	templateUrl: 'templates/main/ftrees/ftrees-welcome-message.html',
+		     	size: 'ftree'
+		    }).result.finally(function(){
+		    	body.removeClass('backdrop');
+		    })
+		}, 1000)
+	};
 };
 
 FtreesController.prototype = {
@@ -85,15 +90,6 @@ FtreesController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
-
-				if (self.results_per_page > individuals.length) {
-					if (individuals.length === 0) {
-						self.results_per_page = 15;
-					}
-					else {
-						self.results_per_page = (individuals.length - individuals.length % 5) || 5;
-					}
-				}
 
 				self.notification.put({
 					en: 'Family Trees Search has finished successfully.',
@@ -118,28 +114,26 @@ FtreesController.prototype = {
 			});
     },
 
-    toggle_form: function() {
-    	var self = this;
-    	if (self.url_search_params.more == '0' || self.url_search_params.more == undefined) {
-    		self.$location.search('more', '1');
+    toggle_more: function() {
+    	var params = this.$stateParams;
+
+    	if (params.more == '0' || params.more == undefined) {
+    		params.more = '1';
+    		this.$state.go('ftrees', params);
     	}
     	else {
-    		self.$location.search('more', '0');
+     		params.more = '0';
+    		this.$state.go('ftrees', params);
     	}
     },
 
 	update: function() {
-		var self = this;
 		var search_params = angular.copy(this.search_params);
 
 		for (var param in search_params) {
 			if (search_params[param] === '') {
 				delete search_params[param];
 			}
-		}
-
-		if (search_params.ind_index) {
-			delete(search_params.ind_index);
 		}
 
 		// insert search modifiers & fudge_factors into query string
@@ -155,10 +149,9 @@ FtreesController.prototype = {
 				search_params[factor] += '~' + fudge_val;
 			}
 		}
-
-		for (var param in this.search_params) {
-			this.$location.search(param, search_params[param]);
-		}
+		search_params.more = this.$stateParams.more;
+		this.$state.go('ftrees', search_params, {inherit: false});
+		this.$window.sessionStorage.setItem('ftrees_search_params', JSON.stringify(search_params));
 	},
 
  	clear_filters: function() {
@@ -178,4 +171,4 @@ FtreesController.prototype = {
     }
 };
 
-angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', '$location', 'ftrees', 'notification', FtreesController]);
+angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', FtreesController]);
