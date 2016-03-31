@@ -309,6 +309,7 @@ PersonViewController.prototype = {
 					   'F': '/images/woman.png',
 					   'U': '/images/unknown.png'};
 		this.vertical_pos = (self.langManager.lang == 'he')?'right':'left';
+		console.log(this.vertical_pos);
 		this.vertical_transform = (self.langManager.lang == 'he')?
 			'translate(1150,0) scale(-1,1)':'translate(0,0)';
 
@@ -404,16 +405,14 @@ PersonViewController.prototype = {
 		    new_cs = circles.enter(),
 		    old_cs = circles.exit(),
 		    new_circles = new_cs.append('circle');
-		circles.attr('cx', function(d) {
-		   return (self.vertical_pos == 'right')?d.center.x:
-			   self.layoutEngine.chartSize.x - d.center.x;})
-		       .attr('cy', function(d) { return d.center.y  }) ;
+		circles.attr("transform", self.vertical_transform);
 		old_cs.remove();
 		new_circles.classed('new', true)
 				   .classed('child-ep', true)
-				   .attr('r', function(d) { return  "4"})
+				   .attr('cy', function(d) { return d.center.y  })
+				   .attr('cx', function(d) { return d.center.x  })
+				   .attr('r', "4")
 				   .attr('fill','none')
-				   .attr("transform", self.vertical_transform)
 		           .transition('new_circles').duration(0).delay(1500)
 				    .attr('fill','#aaaaaa');
 		// VERTICES
@@ -563,6 +562,8 @@ PersonViewController.prototype = {
 			.attr('transform',  transform);
 		this.d3Circles
 			.transition('pan').duration(0)
+			.attr('transform',  transform);
+			/*
 			.attr('cx',  function (d) {
 				if (self.vertical_pos == 'left')
                     d.center.x += x;
@@ -574,6 +575,7 @@ PersonViewController.prototype = {
 				 d.center.y += y;
 				 return d.center.y;
 			});
+			*/
 		d3.timer.flush();
 		this.lastPan = Date.now()
 	}
