@@ -64,7 +64,8 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 		self.search(temp);
 
 
-	if ($state.lastState.name !== 'ftrees') {
+	// if ($state.lastState.name !== 'ftrees') {
+	if (false) {
 		$timeout(function(){
 		    var body = angular.element(document.getElementsByTagName('body')[0]);
 			body.addClass('backdrop');
