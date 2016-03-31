@@ -10,6 +10,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	this.apiClient = apiClient;
 	this.recentlyViewed = recentlyViewed;
 	this.langManager = langManager;
+	this.ftrees_search_params = JSON.parse(this.$window.sessionStorage.getItem('ftrees_search_params'));
 
 	// renderer
 	this.rootId = "ftree-layout";

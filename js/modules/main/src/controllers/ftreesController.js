@@ -1,4 +1,4 @@
-var FtreesController = function($scope, $state, $stateParams, $ftrees, notification, $timeout, $modal) {
+var FtreesController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window) {
 
 	var self = this;
 
@@ -22,6 +22,7 @@ var FtreesController = function($scope, $state, $stateParams, $ftrees, notificat
 	this.$state = $state;
 	this.$stateParams = $stateParams;
 	this.$scope = $scope;
+	this.$window = $window;
 	this.ftrees = ftrees;
 	this.notification = notification;
 
@@ -150,6 +151,7 @@ FtreesController.prototype = {
 		}
 		search_params.more = this.$stateParams.more;
 		this.$state.go('ftrees', search_params, {inherit: false});
+		this.$window.sessionStorage.setItem('ftrees_search_params', JSON.stringify(search_params));
 	},
 
  	clear_filters: function() {
@@ -169,4 +171,4 @@ FtreesController.prototype = {
     }
 };
 
-angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', FtreesController]);
+angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', FtreesController]);
