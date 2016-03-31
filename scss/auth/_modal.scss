@@ -36,12 +36,24 @@
 	.modal-sm { width: 630px; }
 	.modal-m { width: 800px; }
 	.modal-lg { width: 90%; }
+	.modal-ftree {
+		width: 1003px;
+		height: 994px;
+	}
 
 	.modal-dialog {
 		position: relative;
-		margin: 5% auto;
+		margin: 1% auto;
+		overflow: hidden;
 		background: #fefefe;
 		cursor: default;
+
+		.ftrees-modal {
+			background-image: url(/images/Ftrees-Photos_Modal_Dialog.jpg);
+			background-repeat: no-repeat;
+			width: 1003px;
+			height: 994px;
+		}
 
 		.auth-modal {
 			padding: 40px 0 55px;
