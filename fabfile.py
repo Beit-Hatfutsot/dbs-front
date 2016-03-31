@@ -5,8 +5,12 @@ import logging
 
 from fabric.api import *
 
-API_SERVERS = {'bhs-dev': 'test-api.myjewishidentity.org',
-               'bhs-prod': 'api.dbs.bh.org.il'}
+API_SERVERS = {
+               'bhs-dev': 'test-api.myjewishidentity.org',
+               '104.155.5.184': 'test-api.myjewishidentity.org',
+               'bhs-prod': 'api.dbs.bh.org.il',
+               '104.155.4.121': 'api.dbs.bh.org.il',
+               }
 env.user = 'bhs'
 
 env.now = datetime.now().strftime('%Y%m%d-%H%M')
