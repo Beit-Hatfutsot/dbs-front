@@ -26,7 +26,7 @@
 			                        model="last_name"
 			                        placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
                     </filters-field>
-		            <ng-switch on="ftreesCtrl.url_search_params.more">
+		            <ng-switch on="ftreesCtrl.$stateParams.more">
 		            	<div ng-switch-when="1" class="filters__sex" >
 							<label>
 								<en>Sex</en>
@@ -59,8 +59,8 @@
         				</filters-field>
 					</ng-switch>
 
-		            <a href="" class="filters__expand" ng-click="ftreesCtrl.toggle_form()">
-		            	<ng-switch on="ftreesCtrl.url_search_params.more">
+		            <a href="" class="filters__expand" ng-click="ftreesCtrl.toggle_more()">
+		            	<ng-switch on="ftreesCtrl.$stateParams.more">
 			            	<span ng-switch-when="1">
 			            		<en>Less Fields</en>
 			            		<he>פחות שדות</he>
@@ -75,7 +75,7 @@
 						<en>Search</en>
 						<he>חיפוש</he>
 					</button>
-					<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()" ng-if="ftreesCtrl.url_search_params.more == '1'">
+					<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()" ng-if="ftreesCtrl.$stateParams.more == '1'">
 						<en>Clear</en>
 						<he>ניקוי</he>
 					</a>
@@ -92,10 +92,10 @@
 			                </div>
 			            </div>
 					</div>
-					<div class="pic-wpapper" ng-if="!ftreesCtrl.url_search_params.more||ftreesCtrl.url_search_params.more =='0'">
+					<div class="pic-wpapper" ng-if="!ftreesCtrl.$stateParams.more||ftreesCtrl.$stateParams.more =='0'">
 						<img ng-src="/images/Ftrees-Photos_Eng+Heb3.jpg">
 					</div>
-					<div class="advanced-filters" ng-if="ftreesCtrl.url_search_params.more=='1'">
+					<div class="advanced-filters" ng-if="ftreesCtrl.$stateParams.more=='1'">
 						<div class="col2">
 							<filters-field class="filters__field"
 											label-text-en="Place of Birth"
