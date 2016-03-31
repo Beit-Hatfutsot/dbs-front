@@ -86,6 +86,73 @@
 
 		}
 
+		.start {
+			margin-top: 20px;
+			width: 100%;
+			color: $gray4;
+			line-height: 1.5;
+			font-size: 16px;
+			padding-bottom: 40px;
+
+			.en & {
+				padding-left: 10px;
+			}
+			.he & {
+				padding-right: 10px;
+			}
+
+			&__top, &__bottom {
+
+				font-weight: 600;
+				display: flex;
+				justify-content: space-between;
+
+				.subtitle {
+					font-size: 18px;
+					line-height: 2;
+				}
+
+				a {
+					color: inherit;
+				}
+			}
+
+			&__top {
+
+				&__text {
+					width: 750px;
+
+					h2 {
+						line-height: 0;
+					}
+				}
+
+				img {
+					width: 393px;
+					height: 349px;
+					margin-top: 20px;
+				}
+			}
+
+			&__bottom {
+
+				&__text {
+				    width: 780px;
+
+				    .emph {
+				    	font-size: 18px;
+				    	color: $gray3;
+				    }
+				}
+
+				img {
+					width: 356px;
+					height: 288px;
+					margin-top: 26px;
+				}
+			}
+		}
+
 		.cards-title {
 			color: $gray3;
     		display: block;
