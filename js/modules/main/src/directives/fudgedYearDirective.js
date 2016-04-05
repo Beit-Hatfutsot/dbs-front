@@ -21,9 +21,17 @@ angular.module('main').
 					parts = scope.searchParam.split(':');
 				}
 				else {
-					parts = [null, '2']
+					parts = [undefined, '2']
 				}
-				parts[0] = parseInt(parts[0])
+				parts[0] = parseInt(parts[0]) || undefined;
+
+				function joinParts(scope, parts) {
+					if (scope.fudge.id > 0 && !isNaN(scope.year))
+						return parts.join(':')
+					else
+						return parts[0];
+
+				}
 
 				Object.defineProperty(scope, 'year', { 
 					get: function() {
@@ -31,7 +39,7 @@ angular.module('main').
 					},
 					set: function(newVal) {
 						parts[0] = newVal;
-						scope.searchParam = (scope.fudge.id > 0)?parts.join(':'):parts[0];
+						scope.searchParam = joinParts(scope, parts);
 					}
 				});
 
@@ -41,7 +49,7 @@ angular.module('main').
 					},
 					set: function(newVal) {
 						parts[1] = newVal.id;
-						scope.searchParam = (scope.fudge.id > 0)?parts.join(':'):parts[0];
+						scope.searchParam = joinParts(scope, parts);
 					}
 				});
 			}
