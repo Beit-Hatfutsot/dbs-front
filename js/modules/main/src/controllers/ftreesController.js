@@ -13,6 +13,7 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 		marriage_place: '',
 		death_place: 	''
 	};
+	this.tree_number = parseInt($stateParams['tree_number']);
 
 	this.$state = $state;
 	this.$stateParams = $stateParams;
@@ -32,7 +33,6 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 	var parameters = [];
 		for (var key in $stateParams) {
 			if ($stateParams[key]) {
-
 				// read state params & update bound objects to update view accordingly
 					if (key !== 'more') {
 							parameters.push($stateParams[key]);
@@ -44,13 +44,17 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 							self.search_modifiers[key] = parts[1];
 						}
 						else {
-							self.search_params[key] = $stateParams[key];
+							if(key !== 'tree_number') {
+								self.search_params[key] = $stateParams[key];
+							}
+							else
+								self.search_params[key] = parseInt($stateParams[key]);
 						}
 					}
 			}
 		};
 		this.query = parameters.join(' + ');
-		var temp = angular.copy($stateParams);
+		var temp = angular.copy(self.search_params);
 		delete temp.more;
 		self.search(temp);
 

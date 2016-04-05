@@ -354,18 +354,12 @@
 							}
 							
 						}
-						::-webkit-input-placeholder {
-							   font-style: italic;
-							}
-							:-moz-placeholder {
-							   font-style: italic;  
-							}
-							::-moz-placeholder {
-							   font-style: italic;  
-							}
-							:-ms-input-placeholder {  
-							   font-style: italic; 
-							}
+
+						input[type=number]::-webkit-inner-spin-button, 
+						input[type=number]::-webkit-outer-spin-button { 
+						  -webkit-appearance: none; 
+						  margin: 0; 
+						}
 					}
 				}
 
@@ -491,12 +485,6 @@
 							height: 24px;
 							font-size: 12px;
 							padding: auto;
-						}
-
-						input[type=number]::-webkit-inner-spin-button, 
-						input[type=number]::-webkit-outer-spin-button { 
-						  -webkit-appearance: none; 
-						  margin: 0; 
 						}
 					}
 
