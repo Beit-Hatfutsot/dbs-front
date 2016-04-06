@@ -1,0 +1,30 @@
+<div class="container">
+	<label>
+		<en>
+			{{labelTextEn}}
+		</en>
+		<he>
+			{{labelTextHe}}
+		</he>
+	</label>
+	<div class="text">
+		<input type="number" ng-model="year" placeholder="1948...">
+	</div>
+	<div class="notIE"> 
+		<div class="fudge">
+			<en>
+				<select ng-options="option.label.en for option in fudge_options"
+			      		ng-model="fudge">
+		      	</select>
+		      </en>
+		      <he>
+				<select ng-options="option.label.he for option in fudge_options"
+			      		ng-model="fudge">
+		      	</select>
+		      </he>
+			<div class="fancyArrow">
+				<icon  class="fancyArrow__selectbox-icon" position="[-178, -663]"></icon>
+			</div>
+		</div>
+	</div> 
+</div>

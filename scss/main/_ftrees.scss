@@ -124,6 +124,7 @@
 
 					h2 {
 						line-height: 0;
+						color: $gray3;
 					}
 				}
 
@@ -339,7 +340,7 @@
 					.container {
 						margin-bottom: 17px;
 
-						input[type="text"] {
+						input[type="text"], input[type="number"] {
 							color: $gray2;
 							border: 2px solid $red5;
 							overflow: hidden;
@@ -353,18 +354,12 @@
 							}
 							
 						}
-						::-webkit-input-placeholder {
-							   font-style: italic;
-							}
-							:-moz-placeholder {
-							   font-style: italic;  
-							}
-							::-moz-placeholder {
-							   font-style: italic;  
-							}
-							:-ms-input-placeholder {  
-							   font-style: italic; 
-							}
+
+						input[type=number]::-webkit-inner-spin-button, 
+						input[type=number]::-webkit-outer-spin-button { 
+						  -webkit-appearance: none; 
+						  margin: 0; 
+						}
 					}
 				}
 
@@ -373,7 +368,7 @@
 				
 				.container {
 
-					input[type="text"] {
+					input[type="text"], input[type="number"] {
 						display: inline-block;
 						width: 248px;
 						height: 24px;
@@ -484,7 +479,7 @@
 					.text {
 						display: inline-block;
 
-						input[type="text"] {
+						input[type="number"], input[type="text"] {
 							display: inline-block;
 							width: 76px;
 							height: 24px;
@@ -496,13 +491,23 @@
 						.notIE {
 							    position: relative;
 							    display: inline-block;
+
+						    .fudge {
+						    	position: relative;
+						    	height: 24px;
+
+							    &:hover {
+									select, .fancyArrow {
+										background-color: $gray5;
+									}
+								}	
+						    }
 							
 							.fudge select {
 								padding: 0 4px;
 								outline-style:none;
-								position: relative;
-							    display: inline-block;
-							    height: 24px;
+								//position: relative;
+							    height: 100%;
 							    width: 164px;
 							    outline: none;
 							    color: $gray3;
@@ -511,24 +516,14 @@
 							    -moz-appearance: none;
 							    font-size: 12px;	
 							    @include hover-pointer();
-
-							    &:hover {
-							    	background-color: $gray5;
-							    }
-
-							    &:hover + .fancyArrow {
-							    	background-color: $gray5;
-							    }
 							}
 
 							.fancyArrow {
+							    background: $gray6;
 							    width: 33px;
-							    height: 18px;
+							    height: 100%;
 							    position: absolute;
-							    display: inline-block;
-							    bottom: 0;
-							    background: right / 90%  no-repeat $gray6;
-							    pointer-events: none;
+							    bottom: -1px;
 
 							    .en & {
 							    	right: 0px;
@@ -543,17 +538,17 @@
 									right: 13px;
 									width: 13px;
 									height: 11px;
-									top: 4px;
+									top: 8px;
 
 								}
 							}
 					
 							/*target Internet Explorer 9 and Internet Explorer 10:*/
 							@media screen and (min-width:0\0) { 
-							    .notIE .fancyArrow
+							    /*.notIE .fancyArrow
 							    {
 							        display:none;
-							    }
+							    }*/
 							}
 						}
 				}
