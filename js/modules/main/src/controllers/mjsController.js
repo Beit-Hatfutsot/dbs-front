@@ -36,10 +36,7 @@ MjsController.prototype = {
 	init: function() {
 		var self = this;
 
-		this.notification.put({
-			en: 'Loding Story...',
-			he: 'טוען את הסיפור...'
-		});
+		this.notification.put(6);
 		this.mjs.get_items_ids().then(function (items_ids) {
 			self.load(items_ids);
 		});

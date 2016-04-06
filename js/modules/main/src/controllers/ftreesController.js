@@ -83,25 +83,16 @@ FtreesController.prototype = {
 	search: function(search_params) {
 		var self = this;
 
-		this.notification.put({
-			en:'Searching family trees...',
-			he: 'מחפש בעצי משפחה...'			
-		});
+		this.notification.put(1);
 
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
 
-				self.notification.put({
-					en: 'Family Trees Search has finished successfully.',
-					he: 'חיפוש בעצי משפחה הסתיים בהצלחה.'
-				});
+				self.notification.put(2);
 
 			}, function() {
-				self.notification.put({
-					en: 'Family Trees Search has failed.',
-					he: 'חיפוש בעצי משפחה נכשל.'
-				});
+				self.notification.put(3);
 			});
 	},
 

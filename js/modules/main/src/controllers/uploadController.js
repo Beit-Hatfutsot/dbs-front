@@ -260,10 +260,7 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
     }, 
     function(newVal) { 
         if (newVal) {
-            notification.put({
-                en: 'Upload in progress...',
-                he: 'העלאה מתבצעת...'
-            });
+            notification.put(9);
         }
     });
 

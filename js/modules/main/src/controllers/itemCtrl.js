@@ -60,10 +60,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		}
 	});
 
-	notification.put({
-		en: 'Loading item...',
-		he: 'טוען פריט...'
-	});
+	notification.put(4);
 };
 
 ItemCtrl.prototype = {
@@ -79,6 +76,7 @@ ItemCtrl.prototype = {
 					});
 				self.item_data = item_data;
 				self.content_loaded = true;
+				self.notification.clear();
 				if (item_data.related)
 					self.item.get_items(item_data.related).
 						then(function(related_data) {
@@ -87,10 +85,8 @@ ItemCtrl.prototype = {
 			},
 			function(error) {
 				self.error = error;
-				self.notification.put({
-					en: 'Sorry, failed to fetch item.',
-					he: 'מצטערת, טעינת פריט נכשלה.'
-				});
+				console.log(error);
+				self.notification.put(5);
 			});
 	},
 

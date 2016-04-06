@@ -19,15 +19,9 @@ TreesPreviewController.prototype = {
 
     	this.mjs.remove(item_string).
 			then(function() {
-				self.notification.put({
-					en: 'Item removed',
-					he: 'הפריט הוסר'
-				});
+				self.notification.put(7);
 			}, function() {
-				self.notification.put({
-					en: 'Failed to remove item',
-					he: 'הסרת הפריט נכשלה'
-				});
+				self.notification.put(8);
 			});
     }
 };

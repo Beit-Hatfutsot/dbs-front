@@ -110,10 +110,7 @@ angular.module('main').
 
 	  				this.in_progress = true;
 
-					notification.put({
-	                    en: 'Searching...',
-	                    he: 'מחפש...'
-	                });
+					notification.put(10);
 
 		  			var self = this, 
 		  				query_params = {},
@@ -135,6 +132,7 @@ angular.module('main').
 					success(function(result) {
 						// set search status
 						var search_status;
+						notification.clear();
 
 		                if ( result.name.isNotEmpty() || result.place.isNotEmpty())  {
 		                    
@@ -148,17 +146,11 @@ angular.module('main').
 
 		                    if ( result.name.isNotEmpty() && result.place.isEmpty() ) {
 		                        self.search_status = 'bingo-name';
-		                        notification.put({
-	                                en: 'We have not found a community to match your search.',
-	                                he: 'לא מצאנו את הקהילה שחיפשתם.'
-	                            });
+		                        notification.put(13);
 		                    }
 		                    else if ( result.name.isEmpty() && result.place.isNotEmpty() ) {
 		                        self.search_status = 'bingo-place';
-		                        notification.put({
-	                                en: 'We have not found a surname to match your search.',
-	                                he: 'לא מצאנו את שם המפשחה שחיפשתם.'
-	                            });		                
+		                        notification.put(14);		                
 		                    }
 		                    else {
 		                        self.search_status = 'bingo';
@@ -166,10 +158,7 @@ angular.module('main').
 		                }
 		                else {
 		                    self.search_status =  'none';
-		                    notification.put({
-                                en: 'We have not found a surname and a community to match your search.',
-                                he: 'לא מצאנו את שם המשפחה והקהילה שחיפשתם.'
-                            });
+		                    notification.put(12);
 		                }
 
 						self.result = result;
@@ -180,10 +169,7 @@ angular.module('main').
 						deferred.resolve(search_status);
 					}).
 					error(function() {
-						notification.put({
-		                    en: 'Search has failed.',
-		                    he: 'החיפוש נכשל.'
-		                });
+						notification.put(11);
 		                self.failed = true;
 						deferred.reject();
 					}).
