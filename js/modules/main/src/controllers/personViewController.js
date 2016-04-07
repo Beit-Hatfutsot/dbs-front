@@ -69,11 +69,12 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
     var s = document[0].getElementsByTagName('body')[0];
     s.appendChild(scriptTag);
     */
+   self.detailsShown = false;
    $rootScope.$on('$stateChangeStart',
 			  function(event, toState, toParams, fromState, fromParams){ 
 				  if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
 					  event.preventDefault(); 
-					  self.detailsShown = true;
+					  // self.detailsShown = true;
 					  self.$state.transitionTo(toState.name, toParams, {notify: false});
 					  self.load(toParams);
 				  }
@@ -125,7 +126,7 @@ PersonViewController.prototype = {
 					header: {En: name, He: name}
 				});
 				self.tree_number = params.tree_number;
-				self.detailsShown = true;
+				// self.detailsShown = true;
 				self.node = item_data;
 
 				if (d3 != null)
