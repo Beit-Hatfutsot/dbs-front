@@ -60,16 +60,17 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 
 
 	if (self.ftrees_welcome_msg && $state.lastState.name !== 'ftrees') {
-		$timeout(function(){
+		 $timeout(function(){
 		    var body = angular.element(document.getElementsByTagName('body')[0]);
 			body.addClass('backdrop');
 		    $modal.open({
 		     	templateUrl: 'templates/main/ftrees/ftrees-welcome-message.html',
+		     	controller: 'FtreesModalController',
 		     	size: 'ftree'
 		    }).result.finally(function(){
 		    	body.removeClass('backdrop');
 		    })
-		}, 1000)
+	    }, 1000)
 	};
 };
 
@@ -159,10 +160,6 @@ FtreesController.prototype = {
 	read_about_center: function (collection_name) {
         this.$state.go('about_center', {collection: collection_name});
     },
-
-    dismiss_dialog: function () {
-    	this.$window.localStorage.setItem('ftrees-welcome-msg', 'dismissed');
-    }
 };
 
 angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', FtreesController]);
