@@ -38,7 +38,7 @@
 	.modal-lg { width: 90%; }
 	.modal-ftree {
 		width: 1003px;
-		height: 994px;
+		height: 846px;
 	}
 
 	.modal-dialog {
@@ -52,7 +52,197 @@
 			background-image: url(/images/Ftrees-Photos_Modal_Dialog.jpg);
 			background-repeat: no-repeat;
 			width: 1003px;
-			height: 994px;
+			height: 820px;
+			padding: 20px 20px;
+
+			.msg_logo_wrapper {
+				width: 100%;
+				margin-bottom: 10px;
+				height: 380px;
+			}		
+
+			&__msg {
+				color: $gray3;
+				float: left;
+
+				.en & {
+					width: 790px;
+				}
+
+				.he & {
+					width: 590px;
+				}
+
+				a {
+					color: inherit;
+				}
+
+				p {
+
+					.en & {
+						margin-top: -16px;
+						margin-bottom: 20px;	
+					}
+				    
+				}
+
+				p > span {
+					color: $red3;
+				}
+
+				h2 {
+				    margin-top: 0;
+
+				    .en & {
+				    	line-height: 0;
+				    	font-weight: 600;
+				    	display: inline-block;
+				    }
+
+				    .he & {
+				    	font-weight: normal;
+				    	margin-bottom: 0;
+				    }
+				}
+			}
+
+			&__logo {
+
+				float: right;
+
+                .en & {
+                    width: 114px;
+                    height: 57px;
+                }
+                .he & {
+                    width: 126px;
+                    height: 57px;
+                }
+			}
+
+			.ftrees-modal-hintbox-wrapper {
+				display: block;
+				width: 590px;
+				margin-bottom: 26px;
+				float: left;
+			}
+
+			&__hintbox {
+				position: relative;
+				width: 214px;
+				font-size: 12px;
+				font-weight: 600;
+				@include border-radius(10px);
+				@include box-shadow(0px 0px 2px 2px #d4d6d5);
+
+				.en & {
+					left: 214px;
+				}
+				.he & {
+					float: left;
+					left: 60px;
+				}
+
+				&__title {
+					text-align: center;
+					background-color: $gray4; 
+					color: #fff;
+    				line-height: 1;
+    				border-top-left-radius: 10px;
+    				border-top-right-radius: 10px;
+    				padding: 3px 6px;
+
+    				.arrow-left, .arrow-right {
+						width: 0;
+						height: 0;
+						border-top: 5px solid transparent;
+						border-bottom: 5px solid transparent;
+					} 
+
+					.arrow-left {
+						border-right: 10px solid #fff;
+						float: left;
+					}
+
+					.arrow-right {
+						border-left: 10px solid #fff;
+						float: right;
+					}
+				}
+
+				&__hint {
+					color: $gray3;
+					background-color: $gray6;
+					padding: 10px 10px;
+    				border-bottom-left-radius: 10px;
+    				border-bottom-right-radius: 10px;
+				}
+			}
+
+			&__btns {
+				display: flex;
+				justify-content: space-between;
+
+				.en & {
+					width: 410px;
+				}
+				.he & {
+					width: 500px;
+					float: left;
+				}
+				
+				&__dismiss, &__cancel {
+					line-height: 2;
+					color: #fff;	
+					padding: 0 10px;
+    				font-size: 15px;
+    				font-weight: 700;
+    				border: none;
+    				@include box-shadow(0px 0px 2px 2px #d4d6d5);
+    				@include hover-pointer();
+				}
+
+				&__dismiss {
+					background-color: $blue3;
+				}
+
+				&__cancel {
+					background-color: $yellow3;
+
+					.he & {
+						margin-left: 30px;
+					}
+				}
+			}
+
+			&__desc {
+				font-size: 12px;
+				font-weight: 600;
+				color: $gray3;
+				position: absolute;
+				bottom: 4px;
+			}
+
+			.xsign {
+				//@extend %xsign;
+				position: absolute;
+				color: $gray3;
+				width: 20px;
+    			height: 20px;
+    			text-align: center;
+    			line-height: 1;
+    			font-size: 18px;
+    			font-weight: 600;
+				background-color: $gray6;
+				top: 0;
+				
+				.en & {
+					right: 0;
+				}
+				.he & {
+					left: 0;
+				}
+			}
 		}
 
 		.auth-modal {

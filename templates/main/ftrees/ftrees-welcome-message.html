@@ -1,9 +1,62 @@
 <div class="ftrees-modal">
-  <en>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</en>
-  <he> לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לורם איפסום דולור סיט אמט, ושבעגט ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש. תרבנך וסתעד לכנו סתשם השמה - לתכי מורגם בורק? לתיג ישבעס.</he>
+    <div class="xsign" ng-click="cancel()">x</div>
+    <div class="msg_logo_wrapper">
+        <div class="ftrees-modal__msg">
+            <en>        
+                <p><h2>Before you dive in…</h2> we wanted to share a few important things about our genealogy database.
+                    <span>The information in this database is displayed in a family tree format.</span> Family trees generally include information such as names, birth dates, relationships between family members (who were the parents of whom, how many children a family member had, etc.) and more.</p>
+                <p>Searching for a family member? You might find a relative in a family tree that was contributed to our database by another user. You might even find a tree that you yourself donated in the past, as our database is over 30 years old and is one of the <span>largest and most comprehensive collaborative Jewish genealogical databases in the world.</span></p>
+                <p>Not looking for anyone in particular? You can simply browse the family trees of interesting people, such as the family tree of <a ng-href="{{go_to_tree('3372', 'I476')}}" target="_self">Albert Einstein</a></p>
+                <p><span>We are committed to privacy and operate under the Israeli Protection of Privacy Law</span> of 1981 as well as under various court rulings on the subject of privacy. Please note that, for this reason, we are only able to display partial information about living individuals, such as their names and sex.</p>
+                <p>There are many more interesting things we think you should know about our genealogy<br> database. You can find them in the Tips section, which is located in the main search<br> form of the family trees section.</p>
+            </en>
+            <he>
+                <h2>שנייה לפני שאתם צוללים פנימה...</h2><p>חשוב לנו לספר לכם כמה דברים על מאגר העצים של בית התפוצות:<br>
+                <span>המאגר מכיל מידע על אנשים בצורה של עצי משפחה</span>. לרוב המידע כולל שמות, תאריכי לידה ופטירה, מקומות לידה ופטירה, ותצוגת יחסים בין בני במשפחה (מי הורה של מי, מי אחים, למי אנשים נשואים וכו').</p>
+                <p>כאן תוכלו למצוא את עצמכם או את בני משפחתכם בעצי משפחה שנתרמו לנו, או סתם לצפות בעצים של אנשים מעניינים, כמו העץ הזה למשל, של <a ng-href="{{go_to_tree('8888', 'I59594')}}" target="_self">משה מנדלסון</a>. אולי אפילו תמצאו כאן את העץ שאתם תרמתם לנו בעבר, מכיוון שהמאגר שלנו קיים כבר יותר מ-30 שנה, <span>והוא המאגר הגדול והאיכותי ביותר של עצי משפחה יהודיים בעולם</span>.</p>
+                <p><span>אנחנו מחויבים לשמירה על פרטיות</span>, ופועלים על פי <a>חוק הגנת הפרטיות, תשמ"א-1981</a>, וכן על פי פסיקות בתי המשפט. לכן אין באפשרותנו להציג מידע מלא על אנשים חיים, למעט שמם ומינם.</p>
+                <p>יש עוד דברים שחשוב לנו לספר לכם, אבל אותם תוכלו למצוא תחת הכותרת "טיפים", והם מופיעים ליד טופס החיפוש המרכזי בעמוד הראשי של עצי משפחה.</p>
+            </he>
+        </div>
+        <div class="ftrees-modal__logo">
+            <en>
+              <icon alt-text="{en: 'Home', he: 'בית'}" position="[-314, -636]"></icon>
+            </en>
+            <he><icon alt-text="{en: 'Home', he: 'בית'}" position="[-306, -575]"></icon></he>
+        </div>
+    </div>
+    <div class="ftrees-modal-hintbox-wrapper">
+        <div class="ftrees-modal__hintbox">
+            <div class="ftrees-modal__hintbox__title">
+                <div class="arrow-left"></div>
+                <div class="arrow-right"></div>
+                <span>
+                    <en>Helpful Hint</en>
+                    <he>טיף קטן</he>
+                </span>
+            </div>
+            <div class="ftrees-modal__hintbox__hint">
+                <span>
+                    <en>For additional results, try searching in different language.</en>
+                    <he>כדי לקבל יותר תוצאות, מומלץ לחפש בעצים גם באנגלית</he>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ftrees-modal__btns">
+        <button class="ftrees-modal__btns__dismiss" ng-click="dismiss()">
+            <en>Got it, thanks. Don't show this again</en>
+            <he>הבנתי, תודה. אל תראו לי את ההודעה הזאת יותר</he>
+        </button>
+        <button class="ftrees-modal__btns__cancel" ng-click="cancel()">
+            <en>Close</en>
+            <he>סריגה</he>
+        </button>
+    </div>
+    <div class="ftrees-modal__desc">
+        <span>
+            <en>A Family of Jewish immigrants arrive in the USA, New York, USA 1950s. Photo: Herbert Sonnenfeld.(Beth Hatefutsoth Photo Archive, Sonnenfeld collection)</en>
+            <he>משפחת מהגרים יהודים מגיעה לארה"ב. ניו יורק שנות 1950</he>
+        </span>
+    </div>
 </div>
