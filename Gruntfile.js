@@ -40,7 +40,10 @@ module.exports = function(grunt) {
             },
             
             js: {
-                src: [public_dir + 'js/<%= pkg.name %>.js'],
+                src: [
+					public_dir + 'js/<%= pkg.name %>.js',
+					public_dir + 'js/lib/notify.js'
+				],
                 dest: '',
                 expand: true, 
                 ext: '.min.js'

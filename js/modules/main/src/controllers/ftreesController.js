@@ -83,10 +83,13 @@ FtreesController.prototype = {
 			then(function(individuals) {
 				self.individuals = individuals;
 
-				self.notification.put(2);
+				self.notification.clear();
+				if (individuals.total == 0)
+					self.notification.put(3);
+
 
 			}, function() {
-				self.notification.put(3);
+				self.notification.put(500);
 			});
 	},
 

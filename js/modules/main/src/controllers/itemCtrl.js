@@ -60,7 +60,8 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		}
 	});
 
-	notification.put(4);
+	// TODO: loading notification
+	// notification.put(4);
 };
 
 ItemCtrl.prototype = {
@@ -76,7 +77,6 @@ ItemCtrl.prototype = {
 					});
 				self.item_data = item_data;
 				self.content_loaded = true;
-				self.notification.clear();
 				if (item_data.related)
 					self.item.get_items(item_data.related).
 						then(function(related_data) {

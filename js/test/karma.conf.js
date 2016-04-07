@@ -27,6 +27,8 @@ module.exports = function(config) {
 		'bower_components/marked/marked.min.js',
 		'bower_components/angular-marked/angular-marked.min.js',
 		'bower_components/ngstorage/ngStorage.min.js',
+		'bower_components/jquery/dist/jquery.min.js',
+		'js/lib/notify.js',
 
         // app modules & tests
         {pattern: 'js/modules/**/**/*.js/', included: true},

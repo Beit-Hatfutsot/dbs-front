@@ -146,11 +146,13 @@ angular.module('main').
 
 		                    if ( result.name.isNotEmpty() && result.place.isEmpty() ) {
 		                        self.search_status = 'bingo-name';
-		                        notification.put(13);
+								if (query_params.place)
+									notification.put(13);
 		                    }
 		                    else if ( result.name.isEmpty() && result.place.isNotEmpty() ) {
 		                        self.search_status = 'bingo-place';
-		                        notification.put(14);		                
+								if (query_params.name)
+									notification.put(14);
 		                    }
 		                    else {
 		                        self.search_status = 'bingo';
