@@ -31,33 +31,34 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 
 	//search
 	var parameters = [];
-		for (var key in $stateParams) {
-			if ($stateParams[key]) {
-				// read state params & update bound objects to update view accordingly
-					if (key !== 'more') {
-							parameters.push($stateParams[key]);
+	for (var key in $stateParams) {
+		if ($stateParams[key]) {
+			// read state params & update bound objects to update view accordingly
+				if (key !== 'more') {
+						parameters.push($stateParams[key]);
 
-						// handle search modifiers & fudge factors in query string
-						if ( $stateParams[key].indexOf(';') !== -1 ) {
-							var parts = $stateParams[key].split(';');
-							self.search_params[key] = parts[0];	
-							self.search_modifiers[key] = parts[1];
-						}
-						else {
-							if(key !== 'tree_number') {
-								self.search_params[key] = $stateParams[key];
-							}
-							else
-								self.search_params[key] = parseInt($stateParams[key]);
-						}
+					// handle search modifiers & fudge factors in query string
+					if ( $stateParams[key].indexOf(';') !== -1 ) {
+						var parts = $stateParams[key].split(';');
+						self.search_params[key] = parts[0];	
+						self.search_modifiers[key] = parts[1];
 					}
-			}
-		};
+					else {
+						if(key !== 'tree_number') {
+							self.search_params[key] = $stateParams[key];
+						}
+						else
+							self.search_params[key] = parseInt($stateParams[key]);
+					}
+				}
+		}
+	};
+	if (parameters.length > 0) {
 		this.query = parameters.join(' + ');
 		var temp = angular.copy(self.search_params);
 		delete temp.more;
 		self.search(temp);
-
+	}
 
 	if (self.ftrees_welcome_msg && $state.lastState.name !== 'ftrees') {
 		 $timeout(function(){
