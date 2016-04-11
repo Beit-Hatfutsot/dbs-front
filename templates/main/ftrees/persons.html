@@ -1,7 +1,7 @@
-<div id="family-trees-container" ng-class="{'tree-view': ftreesCtrl.tree_view}">
+<div id="family-trees-container" ng-class="{'tree-view': ctrl.tree_view}">
 	<div id="tree-sort">
 		<div id="search-params">
-			<form class="filters" name="filters" ng-class="{'filters--expanded': ftreesCtrl.advanced_search}">
+			<form class="filters" name="filters" ng-class="{'filters--expanded': ctrl.advanced_search}">
 				<div class="filters__general">
 						<div class="title"> 
 							<span class="title__arrow"></span>
@@ -17,7 +17,7 @@
 								<en>First Name</en>
 								<he>שם פרטי</he>
 							</label>
-							<input type="text" ng-model="ftreesCtrl.search_params.first_name" placeholder="{{(lang=='en')?'Moshe, Liat...':'משה, ליאת...'}}">
+							<input type="text" ng-model="ctrl.search_params.first_name" placeholder="{{(lang=='en')?'Moshe, Liat...':'משה, ליאת...'}}">
 						</div>
 					</div>
 					<filters-field  class="filters__field" 
@@ -26,24 +26,24 @@
 			                        model="last_name"
 			                        placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
                     </filters-field>
-		            <ng-switch on="ftreesCtrl.$stateParams.more">
+		            <ng-switch on="ctrl.$stateParams.more">
 		            	<div ng-switch-when="1" class="filters__sex" >
 							<label>
 								<en>Sex</en>
 								<he>מין</he>
 							</label>
 							<div class="filters__sex__choices">
-								<input type="radio" name="sex" value="m" ng-model="ftreesCtrl.search_params.sex" id="choice-male" checked="checked">
+								<input type="radio" name="sex" value="m" ng-model="ctrl.search_params.sex" id="choice-male" checked="checked">
 								<label class="label-sex" for="choice-male">
 									<en>Male</en>
 									<he>זכר</he>
 								</label>
-								<input type="radio" name="sex" value="f" ng-model="ftreesCtrl.search_params.sex" id="choice-female">
+								<input type="radio" name="sex" value="f" ng-model="ctrl.search_params.sex" id="choice-female">
 								<label class="label-sex" for="choice-female">
 									<en>Female</en>
 									<he>נקבה</he>
 								</label>
-								<input type="radio" name="sex" value="n" ng-model="ftreesCtrl.search_params.sex" id="choice-nm">
+								<input type="radio" name="sex" value="n" ng-model="ctrl.search_params.sex" id="choice-nm">
 								<label class="label-sex" for="choice-nm">
 									<en>Never mind</en>
 									<he>לא משנה</he>
@@ -59,8 +59,8 @@
         				</filters-field>
 					</ng-switch>
 
-		            <a href="" class="filters__expand" ng-click="ftreesCtrl.toggle_more()">
-		            	<ng-switch on="ftreesCtrl.$stateParams.more">
+		            <a href="" class="filters__expand" ng-click="ctrl.toggle_more()">
+		            	<ng-switch on="ctrl.$stateParams.more">
 			            	<span ng-switch-when="1">
 			            		<en>Less Fields</en>
 			            		<he>פחות שדות</he>
@@ -71,11 +71,11 @@
 		            		</span>
 	            		</ng-switch>
 		            </a>
-		            <button class="filters__update" ng-click="ftreesCtrl.update()">
+		            <button class="filters__update" ng-click="ctrl.update()">
 						<en>Search</en>
 						<he>חיפוש</he>
 					</button>
-					<a href="" class="filters__clear" ng-click="ftreesCtrl.clear_filters()" ng-if="ftreesCtrl.$stateParams.more == '1'">
+					<a href="" class="filters__clear" ng-click="ctrl.clear_filters()" ng-if="ctrl.$stateParams.more == '1'">
 						<en>Clear</en>
 						<he>ניקוי</he>
 					</a>
@@ -85,17 +85,17 @@
 					<div class="filters__advanced__head">
 						<div class="about-bh">
 			                <div class="about-collection-title">
-			                    <span ng-click="ftreesCtrl.read_about_center('familyTree')">
+			                    <span ng-click="ctrl.read_about_center('familyTree')">
 			                        <en>About <a class="linked">Douglas E. Goldman Jewish<br>Genealogy Center databases</a></en>
 			                        <he>אודות <a class="linked">המרכז לגנאלוגיה יהודית<br>ע"ש דגלס א. גולדמן</a></he>
 			                    </span>
 			                </div>
 			            </div>
 					</div>
-					<div class="pic-wpapper" ng-if="!ftreesCtrl.$stateParams.more||ftreesCtrl.$stateParams.more =='0'">
+					<div class="pic-wpapper" ng-if="!ctrl.$stateParams.more||ctrl.$stateParams.more =='0'">
 						<img ng-src="/images/Ftrees-Photos_Eng+Heb3.jpg">
 					</div>
-					<div class="advanced-filters" ng-if="ftreesCtrl.$stateParams.more=='1'">
+					<div class="advanced-filters" ng-if="ctrl.$stateParams.more=='1'">
 						<div class="col2">
 							<filters-field class="filters__field"
 											label-text-en="Place of Birth"
@@ -121,17 +121,17 @@
 							<fudged-year   class="filters__fudge-field"
 										   label-text-en="Year of Birth"
 										   label-text-he="שנת לידה"
-										   search-param="ftreesCtrl.search_params.birth_year">
+										   search-param="ctrl.search_params.birth_year">
 							</fudged-year>
 							<fudged-year    class="filters__fudge-field"
 											label-text-en="Year of Marriage"
 											label-text-he="שנת נישואין"
-											search-param="ftreesCtrl.search_params.marriage_year">
+											search-param="ctrl.search_params.marriage_year">
 							</fudged-year>
 							<fudged-year	class="filters__fudge-field"
 											label-text-en="Year of Death"
 											label-text-he="שנת פטירה"
-											search-param="ftreesCtrl.search_params.death_year">
+											search-param="ctrl.search_params.death_year">
 							</fudged-year>
 							<div class="filters__field">
 								<div class="container">
@@ -140,7 +140,7 @@
 										<en>Tree Serial Number</en>
 										<he>מספר סידורי של העץ</he>
 									</label>
-									<input type="number" ng-model="ftreesCtrl.search_params.tree_number" placeholder="12345">
+									<input type="number" ng-model="ctrl.search_params.tree_number" placeholder="12345">
 								</div>
 							</div>
 						</div>
@@ -148,8 +148,8 @@
 				</div>
 			</form>
 		</div>
-		<div class="start" ng-hide="ftreesCtrl.individuals.total > 0">
-			<div class="start__top" ng-show="ftreesCtrl.individuals.isEmpty()">
+		<div class="start" ng-hide="ctrl.individuals.total > 0">
+			<div class="start__top" ng-show="ctrl.individuals.isEmpty()">
 				<div class="start__top__text">
 					<en>
 						<h2>Searching for long lost relatives?</h2>
@@ -169,7 +169,7 @@
 				</div>
 				<img ng-src="/images/Ftrees-Photos_Start.jpg">
 			</div>
-			<div ng-show="ftreesCtrl.individuals.total == '0'" class="start__top">
+			<div ng-show="ctrl.individuals.total == '0'" class="start__top">
 				<div class="start__top__text">
 					<en>
 						<h2>Found no results? Do not give up!</h2>
@@ -192,27 +192,27 @@
 					</he>
 				</div>
 			</div>
-			<ng-include ng-show="ftreesCtrl.individuals.total == '0' || ftreesCtrl.individuals.isEmpty()" src="'templates/main/ftrees/add-family-tree.html'"></ng-include>
+			<ng-include ng-show="ctrl.individuals.total == '0' || ctrl.individuals.isEmpty()" src="'templates/main/ftrees/add-family-tree.html'"></ng-include>
 		</div>
-		<div class="cards-title" ng-if="ftreesCtrl.individuals.total > 0">
-            <en><strong>{{ftreesCtrl.individuals.total}}</strong> Results found for <strong>{{ftreesCtrl.query}}</strong></en>
-            <he>נמצאו <strong>{{ftreesCtrl.individuals.total}}</strong> תוצאות עבור <strong>{{ftreesCtrl.query}}</strong></he>
+		<div class="cards-title" ng-if="ctrl.individuals.total > 0">
+            <en><strong>{{ctrl.individuals.total}}</strong> Results found for <strong>{{ctrl.query}}</strong></en>
+            <he>נמצאו <strong>{{ctrl.individuals.total}}</strong> תוצאות עבור <strong>{{ctrl.query}}</strong></he>
         </div>
 
 		<div class="item-preview-wrapper">
-			<person-preview  ng-repeat="individual in ftreesCtrl.individuals.items" 
+			<person-preview  ng-repeat="individual in ctrl.individuals.items" 
 							 sex="individual.G"
 							 individual="individual">
 			</person-preview>
-			<div class="loader" ng-click="ftreesCtrl.fetch_more()" ng-if="ftreesCtrl.individuals.total>ftreesCtrl.individuals.items.length">
+			<div class="loader" ng-click="ctrl.fetch_more()" ng-if="ctrl.individuals.total>ctrl.individuals.items.length">
                 <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                 <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                 <div class="loader-desc">
                     <en><strong>More</strong><br></en>
                     <he>לראות עוד<br></he>
                     <span class="results-number">
-                        <en>(+{{ftreesCtrl.individuals.total-ftreesCtrl.individuals.items.length}} results)</en>
-                        <he>(+{{ftreesCtrl.individuals.total-ftreesCtrl.individuals.items.length}} תוצאות)</he>
+                        <en>(+{{ctrl.individuals.total-ctrl.individuals.items.length}} results)</en>
+                        <he>(+{{ctrl.individuals.total-ctrl.individuals.items.length}} תוצאות)</he>
                     </span>
                 </div>
             </div>

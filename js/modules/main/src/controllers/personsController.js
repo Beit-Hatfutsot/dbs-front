@@ -1,4 +1,4 @@
-var FtreesController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window) {
+var PersonsController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window) {
 
 	var self = this;
 
@@ -21,7 +21,7 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 	this.$window = $window;
 	this.ftrees = ftrees;
 	this.notification = notification;
-	this.ftrees_welcome_msg = $window.localStorage.getItem('ftrees-welcome-msg') != 'dismissed';
+	this.persons_welcome_msg = $window.localStorage.getItem('persons-welcome-msg') != 'dismissed';
 
 	Object.defineProperty($scope, '$stateParams', {
 		get: function() {
@@ -61,13 +61,13 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 		self.search(query);
 	}
 
-	if (self.ftrees_welcome_msg && $state.lastState.name !== 'ftrees') {
+	if (self.persons_welcome_msg && $state.lastState.name !== 'ftrees') {
 		 $timeout(function(){
 		    var body = angular.element(document.getElementsByTagName('body')[0]);
 			body.addClass('backdrop');
 		    $modal.open({
-		     	templateUrl: 'templates/main/ftrees/ftrees-welcome-message.html',
-		     	controller: 'FtreesModalController',
+		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
+		     	controller: 'PersonsWelcomeController',
 		     	size: 'ftree'
 		    }).result.finally(function(){
 		    	body.removeClass('backdrop');
@@ -76,7 +76,7 @@ var FtreesController = function($scope, $state, $stateParams, ftrees, notificati
 	};
 };
 
-FtreesController.prototype = {
+PersonsController.prototype = {
 	search: function(search_params) {
 		var self = this;
 
@@ -111,11 +111,11 @@ FtreesController.prototype = {
 
     	if (params.more == '0' || params.more == undefined) {
     		params.more = '1';
-    		this.$state.go('ftrees', params);
+    		this.$state.go('persons', params);
     	}
     	else {
      		params.more = '0';
-    		this.$state.go('ftrees', params);
+    		this.$state.go('persons', params);
     	}
     },
 
@@ -137,7 +137,7 @@ FtreesController.prototype = {
 		}
 		search_params.more = this.$stateParams.more;
 
-		this.$state.go('ftrees', search_params, {inherit: false});
+		this.$state.go('persons', search_params, {inherit: false});
 		this.$window.sessionStorage.setItem('ftrees_search_params', JSON.stringify(search_params));
 	},
 
@@ -158,4 +158,4 @@ FtreesController.prototype = {
     },
 };
 
-angular.module('main').controller('FtreesController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', FtreesController]);
+angular.module('main').controller('PersonsController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', PersonsController]);

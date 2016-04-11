@@ -7,18 +7,18 @@ angular.module('main').
 			link: function(scope, element, attrs) {
 				Object.defineProperty(scope, 'model', { 
 					get: function() {
-						return scope.ftreesCtrl.search_params[attrs['model']];
+						return scope.ctrl.search_params[attrs['model']];
 					},
 					set: function(newVal) {
-						scope.ftreesCtrl.search_params[attrs['model']] = newVal;
+						scope.ctrl.search_params[attrs['model']] = newVal;
 					}
 				});
 				Object.defineProperty(scope, 'modifier_model', {
 					get: function() {
-						return scope.ftreesCtrl.search_modifiers[attrs['model']];
+						return scope.ctrl.search_modifiers[attrs['model']];
 					},
 					set: function(newVal) {
-						scope.ftreesCtrl.search_modifiers[attrs['model']] = newVal;
+						scope.ctrl.search_modifiers[attrs['model']] = newVal;
 					}
 				});
 
