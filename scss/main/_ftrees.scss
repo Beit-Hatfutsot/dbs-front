@@ -89,10 +89,9 @@
 		.start {
 			margin-top: 20px;
 			width: 100%;
-			color: $gray4;
+			color: $gray3;
 			line-height: 1.5;
 			font-size: 16px;
-			padding-bottom: 40px;
 
 			.en & {
 				padding-left: 10px;
@@ -102,14 +101,12 @@
 			}
 
 			&__top, &__bottom {
-
-				font-weight: 600;
 				display: flex;
 				justify-content: space-between;
+				margin-bottom: 30px;
 
 				.subtitle {
-					font-size: 18px;
-					line-height: 2;
+					font-size: 20px;
 				}
 
 				a {
@@ -123,8 +120,12 @@
 					width: 750px;
 
 					h2 {
-						line-height: 0;
 						color: $gray3;
+					}
+
+					ol {
+						margin-top: 0;
+						padding: 0 20px;
 					}
 				}
 
@@ -138,18 +139,20 @@
 			&__bottom {
 
 				&__text {
-				    width: 780px;
+				    width: 756px;
 
 				    .emph {
 				    	font-size: 18px;
-				    	color: $gray3;
+				    	color: $gray2;
+				    }
+				    p {
+				    	margin-top: -7px;
 				    }
 				}
 
 				img {
 					width: 356px;
 					height: 288px;
-					margin-top: 26px;
 				}
 			}
 		}

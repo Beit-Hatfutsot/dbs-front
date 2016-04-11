@@ -149,6 +149,94 @@
         }
     }
 
+    .start {
+        width: 100%;
+        color: $gray3;
+        font-size: 16px;
+        line-height: 1.5;
+
+        &__top, &__bottom {
+            margin-bottom: 30px;
+        }
+        &__top {
+            background-image: url(/images/Ftree-AlbertEinstein.png);;
+            background-repeat: no-repeat;
+            
+            .en & {
+                background-position: right top;
+            }
+            .he & {
+                background-position: left top;
+            }
+
+            &__text {
+
+                h3 {
+                    padding-top: 10px;
+                }
+                .par1 {
+                    .en & {
+                        width: 410px;
+                    }
+
+                    .he & {
+                        width: 670px;
+                    }
+                }
+                .par2 {
+                    .en & {
+                        width: 660px;
+                    }
+
+                    .he & {
+                        width: 350px;
+                    }
+                }
+                .par3 {
+                    .en & {
+                        width: 740px;
+                    }
+
+                    .he & {
+                        width: 526px;
+                    }
+                }
+            }
+        }
+
+        &__bottom {
+           display: flex;
+           justify-content: space-between; 
+
+           .subtitle {
+                font-size: 20px;
+            }
+
+           a {
+                color: inherit;
+            }
+
+            &__text {
+                width: 756px;
+
+                .emph {
+                    font-size: 18px;
+                    color: $gray2;
+                }
+
+                p {
+                    margin-top: -7px;
+                }
+            }
+
+            img {
+                width: 356px;
+                height: 288px;
+            }
+        }
+
+    }
+
     .title {
        @extend %title;
        top: -20px;
