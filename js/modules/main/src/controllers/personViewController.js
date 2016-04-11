@@ -425,8 +425,9 @@ PersonViewController.prototype = {
 
 
 		var lineFunction = function(p) {
-			var midpoint = (p.start.y + p.end.y) / 2;
-			var points;
+			var midpoint = (p.start.y + p.end.y) / 2,
+			    points,
+				interpolate;
 			self.layoutEngine.midpoints.every(function (m, _m)  {
 				if ( m > p.start.y && m < p.end.y || m < p.start.y && m > p.end.y) {
 					midpoint = m;
@@ -435,17 +436,23 @@ PersonViewController.prototype = {
 				return true;
 			});
 			midpoint += p.ofs;
-			if ((p.class=="stepsibling") || (p.class=="sibling"))
-				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-13], [p.end.x, p.end.y]]
-			else if (p.class=="grandchild")
-				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-13], [p.end.x,midpoint], [p.end.x, p.end.y]]
-			else
+			if ((p.class=="stepsibling") || (p.class=="sibling")) {
+				interpolate = "basis";
+				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-8], [p.end.x, p.end.y]]
+			}
+			else if (p.class=="grandchild") {
+				interpolate = "basis";
+				points =[ [p.start.x, p.start.y], [p.end.x, p.start.y-8], [p.end.x,midpoint], [p.end.x, p.end.y]]
+			}
+			else {
+				interpolate = "line";
 				points =[ [p.start.x, p.start.y], [p.start.x, midpoint], [p.end.x,midpoint], [p.end.x, p.end.y]];
-			
+			}
+
 			return d3.svg.line()
                  		.x(function(d) { return d[0]; })
                  		.y(function(d) { return d[1]; })
-                 		.interpolate("linear")
+                 		.interpolate(interpolate)
 						(points);
 		}
 		var tl = function(d) { // total length of a path
