@@ -108,13 +108,21 @@ PersonsController.prototype = {
 
     toggle_more: function() {
     	var params = this.$stateParams;
-
     	if (params.more == '0' || params.more == undefined) {
     		params.more = '1';
+    		if(params.place) {
+    			params.birth_place = params.place;
+    			params.place = '';
+
+    		}
     		this.$state.go('persons', params);
     	}
     	else {
      		params.more = '0';
+     		if(params.birth_place) {
+     			params.place = params.birth_place;
+     			params.birth_place = '';
+     		}
     		this.$state.go('persons', params);
     	}
     },
