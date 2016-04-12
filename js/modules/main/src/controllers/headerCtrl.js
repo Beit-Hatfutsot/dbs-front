@@ -86,7 +86,7 @@ HeaderCtrl.prototype = {
         this.recentlyViewed.clear();
     },
 
-    goto_state_collection: function(state, collection_name) {
+    goto_about_collection: function(state, collection_name) {
         this.$state.go(state, {collection: collection_name});
     },
 

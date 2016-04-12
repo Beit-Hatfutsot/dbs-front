@@ -2,8 +2,8 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 							       $scope, $state, $stateParams, apiClient, 
 							       recentlyViewed, langManager, ftreeLayout) {
 	var self = this, script_loaded = true, node = {};
-
 	this.$scope = $scope;
+	this.$rootScope = $rootScope;
 	this.$state = $state;
 	this.$http = $http;
 	this.$window = $window;
@@ -82,8 +82,8 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	document.documentElement.addEventListener('mouseup', function (e) {
 		self.mouseUp(e)
 	});
-
 	this.load($stateParams);
+	$rootScope.title = '';
 };
 
 PersonViewController.prototype = {
@@ -128,6 +128,7 @@ PersonViewController.prototype = {
 				self.tree_number = params.tree_number;
 				// self.detailsShown = true;
 				self.node = item_data;
+				self.$rootScope.title = self.get_full_name(self.node.tree);
 
 				if (d3 != null)
 					self.render(self.node)
