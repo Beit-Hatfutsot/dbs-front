@@ -76,6 +76,15 @@ html, body {
 					height: 100%;
 					background: $gray7;
 					width: 100%;
+
+					.clearfix:before, .clearfix:after {
+						content: "";
+    					display: table;
+					}
+
+					.clearfix:after {
+						clear: both;
+					}
 					/*
 					@include transition(all, 1s, linear);
 
