@@ -193,6 +193,7 @@
 		background: #ffffff;
 		@include border-radius(4px);
         border: 1px solid #aaaaaa;
+        overflow: hidden;
 
 		.ftree-title {
 			position: relative;
@@ -373,39 +374,117 @@
 
 #ftree-node-details {
     position: absolute;
-    top: 56px;
-    background-color: $yellow7;
-    width: 200px;
+    top: 50px;
+    width: 272px;
     overflow: hidden; 
     z-index: 10;
-    line-height: 18px;
+    line-height: 2;
+    color: $gray3;
     padding: 0;
     @include box-shadow(0 0 10px 0px $gray4);
     .en & {
-        right: 0;
+        left: 0;
         .pull-right { float: right; }
     }
     .he & {
-        left: 0;
+        right: 0;
         .pull-right { float: left; }
     }
 
+    .cc {
+        line-height: 16px;
+        font-size: 11px;
+        background-color: #fff;
+        padding: 6px 14px;
+
+        .en & {
+            height: 74px;
+        }
+
+        .he & {
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__desc {
+            display: inline;
+
+            .he & {
+                float: left;
+                width: 146px;
+            }
+
+            a {
+                color: inherit;
+            }
+        }
+
+        img {
+            display: inline-block;
+            width: 80px;
+            height: 31px;
+
+            .en & {
+                float: left;
+                margin-right: 16px;
+            }
+
+            .he & {
+                margin-top: 6px;
+            }
+        }
+    }
+
     .header {
-        padding: 0.2em;
-        background-color: $yellow5;
+        padding: 0 6px;
+        background-color: $yellow6;
         width: 100%;
-        line-height: 28px;
-        font-size: 120%;
-        font-weight: bold;
+        line-height: 2;
+        font-size: 16px;
+        font-weight: 700;
+        position: relative;
+
+        .arrow-left {
+            @include vertical-align(absolute);
+            width: 0;
+            height: 0;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+
+            .en & {
+                border-left: 12px solid $gray4;
+                right: 6px;
+            }
+            .he & {
+                border-right: 12px solid $gray4;
+                left: 6px;
+            }
+
+            &--down {
+                border-bottom: 0px solid transparent;
+                border-top: 12px solid $gray4;
+                border-right: 9px solid transparent;
+                border-left: 9px solid transparent;
+
+                .en & {
+                    border-left: 9px solid transparent;
+                }
+
+                .he & {
+                    border-right: 9px solid transparent;
+                }
+            }
+        }
     }
     .body {
-        padding: 0.2em;
-        height: 554px;
+        padding: 10px;
+        height: 520px;
         overflow: auto;
+        background-color: #FEF1DE;
     }
-    h3 {
+    h6 {
         line-height: 10px;
-        font-size: inherit;
         font-weight: bold;
     }
 }
