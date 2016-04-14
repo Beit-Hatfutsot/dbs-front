@@ -159,3 +159,12 @@
   margin-top: 0;
   margin-bottom: 0;
 }
+
+  @mixin centering($position: absolute) {
+      position: $position;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translateY(-50%, -50%);
+      transform: translateY(-50%, -50%);
+}

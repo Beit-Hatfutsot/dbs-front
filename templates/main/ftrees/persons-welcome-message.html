@@ -1,14 +1,15 @@
 <div class="ftrees-modal">
+   <!--  <img ng-src="images/Ftrees-Photos_Modal_Dialog.jpg"> -->
     <div class="xsign" ng-click="cancel()">x</div>
     <div class="msg_logo_wrapper">
         <div class="ftrees-modal__msg">
             <en>        
-                <p><h2>Before you dive in…</h2> we wanted to share a few important things about our genealogy database.
-                    <span>The information in this database is displayed in a family tree format.</span> Family trees generally include information such as names, birth dates, relationships between family members (who were the parents of whom, how many children a family member had, etc.) and more.</p>
-                <p>Searching for a family member? You might find a relative in a family tree that was contributed to our database by another user. You might even find a tree that you yourself donated in the past, as our database is over 30 years old and is one of the <span>largest and most comprehensive collaborative Jewish genealogical databases in the world.</span></p>
-                <p>Not looking for anyone in particular? You can simply browse the family trees of interesting people, such as the family tree of <a ng-href="{{go_to_tree('3372', 'I476')}}" target="_self">Albert Einstein</a></p>
-                <p><span>We are committed to privacy and operate under the Israeli Protection of Privacy Law</span> of 1981 as well as under various court rulings on the subject of privacy. Please note that, for this reason, we are only able to display partial information about living individuals, such as their names and sex.</p>
-                <p>There are many more interesting things we think you should know about our genealogy<br> database. You can find them in the Tips section, which is located in the main search<br> form of the family trees section.</p>
+                <p><h2>Before you dive in…</h2> here are important things about genealogy:<br><p>
+                <p><span>The information here is displayed in a family tree format.</span> These generally include names, birth dates, relationships between family members (who were the parents of whom, how many children a family member had, etc.) and more.</p>
+                <p>Searching for a family member? You might find a relative in a tree that was contributed to us by another user. You might even find a tree that you yourself donated in the past, as our database is over 30 years old and is one of <span>the largest and most comprehensive collaborative Jewish genealogical databases in the world.</span></p>
+                <p>Not looking for anyone in particular? Simply browse the family trees of<br> interesting people, such as <a ng-href="{{go_to_tree('3372', 'I476')}}" target="_self">this one.</a></p>
+                <p><span>We are committed to privacy and operate under the Israeli Protection of<br> Privacy Law</span> of 1981. For this reason, we only display partial information about<br> living individuals.</p>
+                <p>You can find out more in the Tips section in the main search form of the<br> family trees section.</p>
             </en>
             <he>
                 <h2>שנייה לפני שאתם צוללים פנימה...</h2><p>חשוב לנו לספר לכם כמה דברים על מאגר העצים של בית התפוצות:<br>
@@ -25,7 +26,7 @@
             <he><icon alt-text="{en: 'Home', he: 'בית'}" position="[-306, -575]"></icon></he>
         </div>
     </div>
-    <div class="ftrees-modal-hintbox-wrapper">
+   <!--  <div class="ftrees-modal-hintbox-wrapper">
         <div class="ftrees-modal__hintbox">
             <div class="ftrees-modal__hintbox__title">
                 <div class="arrow-left"></div>
@@ -42,7 +43,7 @@
                 </span>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="ftrees-modal__btns">
         <button class="ftrees-modal__btns__dismiss" ng-click="dismiss()">
             <en>Got it, thanks. Don't show this again</en>
