@@ -33,8 +33,14 @@ var StartController = function($scope, $state, wizard, item) {
 		if (slug_text) {
 			item.goto_slug(slug_text);
 		}
-		else if ('ftree_args' in self.wizard.result)
-			$state.go('ftrees', self.wizard.result.ftree_args)
+		else {
+			var params = {};
+			if (self.wizard.last_search.name != '')
+				params.last_name = self.wizard.last_search.name;
+			if (self.wizard.last_search.place != '')
+				params.place = self.wizard.last_search.place;
+			$state.go('persons', params)
+		}
 	});
 };
 
