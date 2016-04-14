@@ -17,36 +17,26 @@
         </p>
         <item-type type="'places'"></item-type>
     </div>
-    <!-- <div class="search-results__field"
-         ng-if="itemController.search_result.ftree_args" ng-click="itemController.goto_tree()">
+    <div class="search-results__field"
+         ng-click="itemController.goto_persons()">
         <p class="vertical-middle">
-            <span ng-if="itemController.search_result.ftree_args.last_name &&
-                         itemController.search_result.name.Header">
+            <span ng-if="itemController.search_result.name.Header">
                 <en>{{itemController.search_result.name.Header.En}}</en>
                 <he>{{itemController.search_result.name.Header.He}}</he>
             </span>
-            <span ng-if="itemController.search_result.ftree_args.last_name &&
-                        !itemController.search_result.name.Header">
-                       {{itemController.search_result.ftree_args.last_name[0]}}
-            </span>
-            <span ng-if="itemController.search_result.ftree_args.last_name &&
-                         itemController.search_result.ftree_args.birth_place">
+            <span ng-if="itemController.search_result.name.Header &&
+                         itemController.search_result.place.Header">
                 <br/>
                     <en>at</en>
                     <he>מ</he>
             </span>
-            <span ng-if="itemController.search_result.ftree_args.birth_place &&
-                        !itemController.search_result.place.Header"> 
-                        {{itemController.search_result.ftree_args.birth_place[0]}}
-            </span>
-            <span ng-if="itemController.search_result.ftree_args.birth_place &&
-                        itemController.search_result.place.Header">
+            <span ng-if="itemController.search_result.place.Header">
                 <en>{{itemController.search_result.place.Header.En}}</en>
                 <he>{{itemController.search_result.place.Header.He}}</he>
             </span>
         </p>
         <item-type type="'genTreeIndividuals'"></item-type>
-    </div> -->
+    </div>
 </div>
 <div class="related">
     <div class="related__header">
