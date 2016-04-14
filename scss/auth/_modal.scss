@@ -37,40 +37,58 @@
 	.modal-m { width: 800px; }
 	.modal-lg { width: 90%; }
 	.modal-ftree {
-		width: 1003px;
-		height: 846px;
+		width:	800px;
+		height: 792px;
+		max-height: 96%;
+
+		.modal-content {
+			width: 100%;
+			height: 100%;
+			background-image: url(/images/Ftrees-Photos_Modal_Dialog.jpg);
+			background-repeat: no-repeat;
+			background-size: 800px;
+
+		}
 	}
 
 	.modal-dialog {
-		position: relative;
-		margin: 1% auto;
 		overflow: hidden;
-		background: #fefefe;
+		background: $gray7;
 		cursor: default;
+		@include centering();
 
 		.ftrees-modal {
-			background-image: url(/images/Ftrees-Photos_Modal_Dialog.jpg);
-			background-repeat: no-repeat;
-			width: 1003px;
-			height: 820px;
-			padding: 20px 20px;
+			width: 100%;
+			height: 100%;
+			
+			.en & {
+				padding: 10px 10px;
+			}
+
+			.he & {
+				padding: 10px 20px;
+			}
 
 			.msg_logo_wrapper {
+				margin-top: 10px;
 				width: 100%;
 				margin-bottom: 10px;
-				height: 380px;
+				height: 486px;
 			}		
 
 			&__msg {
+				margin-top: 10px;
 				color: $gray3;
 				float: left;
+				font-size: 14px;
 
 				.en & {
-					width: 790px;
+					width: 666px;
 				}
 
 				.he & {
-					width: 590px;
+					line-height: 1.5;
+					width: 530px;
 				}
 
 				a {
@@ -83,11 +101,9 @@
 						margin-top: -16px;
 						margin-bottom: 20px;	
 					}
-				    
 				}
-
 				p > span {
-					color: $red3;
+					color: $blue3;
 				}
 
 				h2 {
@@ -184,10 +200,10 @@
 				justify-content: space-between;
 
 				.en & {
-					width: 410px;
+					width: 366px;
 				}
 				.he & {
-					width: 500px;
+					width: 374px;
 					float: left;
 				}
 				
@@ -195,7 +211,7 @@
 					line-height: 2;
 					color: #fff;	
 					padding: 0 10px;
-    				font-size: 15px;
+    				font-size: 14px;
     				font-weight: 700;
     				border: none;
     				@include box-shadow(0px 0px 2px 2px #d4d6d5);
@@ -208,23 +224,31 @@
 
 				&__cancel {
 					background-color: $yellow3;
-
-					.he & {
-						margin-left: 30px;
-					}
 				}
 			}
 
 			&__desc {
-				font-size: 12px;
-				font-weight: 600;
+				font-size: 10px;
+				line-height: 2;
+				font-weight: 700;
 				color: $gray3;
 				position: absolute;
-				bottom: 4px;
+				bottom: 0;
+				width: 100%;
+				background-color: $gray7;
+				padding: 0 10px;
+
+				.en & {
+					left: 0;
+				}
+
+				.he & {
+					right: 0;
+				}
+
 			}
 
 			.xsign {
-				//@extend %xsign;
 				position: absolute;
 				color: $gray3;
 				width: 20px;
@@ -235,13 +259,7 @@
     			font-weight: 600;
 				background-color: $gray6;
 				top: 0;
-				
-				.en & {
-					right: 0;
-				}
-				.he & {
-					left: 0;
-				}
+				left: 0;
 			}
 		}
 

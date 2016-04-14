@@ -11,7 +11,8 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 		last_name: 		'',
 		birth_place: 	'',
 		marriage_place: '',
-		death_place: 	''
+		death_place: 	'',
+		place:          ''
 	};
 	this.tree_number = parseInt($stateParams['tree_number']);
 

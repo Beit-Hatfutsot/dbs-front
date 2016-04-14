@@ -39,7 +39,12 @@ angular.module('main').
 					},
 					set: function(newVal) {
 						parts[0] = newVal;
-						scope.searchParam = joinParts(scope, parts);
+						if(!newVal) {
+							scope.searchParam = '';
+						}
+						else {
+							scope.searchParam = joinParts(scope, parts);					
+						}
 					}
 				});
 

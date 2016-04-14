@@ -195,12 +195,10 @@
 
 #item-page-container {
     width: 100%;
-    background: #F6F6F6;
 
     @at-root #item-page {
         width: $view-width;
-        margin: 20px auto;
-        background-color: #F6F6F6;
+        margin: 0 auto;
 
         .right-side {
             display: inline-block;
@@ -225,10 +223,8 @@
             position: relative;
             width: 800px;
             height: auto;
-
             margin: 20px 0;
             
-            background-color: #F6F6F6;
 
             .item {
                 position: relative;
@@ -242,7 +238,6 @@
                     width: 100%;
                     padding: 0 10px;
                     margin-bottom: 15px;
-                    background-color: #F6F6F6;
 
                     .text {
                         color: #999999;
