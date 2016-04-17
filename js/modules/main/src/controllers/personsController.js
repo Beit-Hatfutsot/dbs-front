@@ -99,11 +99,13 @@ PersonsController.prototype = {
 
 	fetch_more: function() {
 		var self = this;
+		self.notification.put(15);
 		var search_params = angular.copy(this.search_params);
 		search_params.start = self.individuals.items.length;
 		this.ftrees.search(search_params).
 			then(function (r){
 				self.individuals.items = self.individuals.items.concat(r.items);
+				self.notification.clear();
 			});
     },
 

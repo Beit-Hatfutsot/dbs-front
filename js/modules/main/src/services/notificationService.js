@@ -82,7 +82,13 @@ angular.module('main').
 	en: 'Sorry, we failed to find a family name to match your search',
 	he: 'לא מצאנו את שם המפשחה שחיפשתם',
 	options: warnOptions
-}
+
+}, 15: {
+	en: 'Fetching more items...',
+	he: 'אוסף עוד פריטים...',
+	options: pendingOptions
+},	
+// next line ends the notifications dict
 	},
 	message = {
 			en: '',
