@@ -129,6 +129,7 @@ PersonViewController.prototype = {
 				// self.detailsShown = true;
 				self.node = item_data;
 				self.$rootScope.title = self.get_full_name(self.node.tree);
+				d3.select('.backdrop').remove();
 
 				if (d3 != null)
 					self.render(self.node)
@@ -330,10 +331,17 @@ PersonViewController.prototype = {
 					self.detailsShown = !self.detailsShown;
 					self.$scope.$apply();
 				}
-				else if (d.id)
+				else if (d.id) {
+					d3.select('#ftree-layout-container')
+					.append('div')
+					.classed('backdrop', true)
+					.append('img')
+					.classed('gif', true)
+					.attr('src', 'images/BH-Loading.gif');
 					self.$state.go((self.langManager.lang == 'he')?
 								     'he.he_person-view':'person-view',
 							   {tree_number: self.tree_number, node_id: d.id});
+				}
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })
 			.attr('sex', get_sex)
