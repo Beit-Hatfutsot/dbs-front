@@ -1,6 +1,7 @@
 var PersonsController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window) {
 
-	var self = this;
+	var self = this,
+		advanced_fields = ['birth_place', 'marriage_place', 'death_place', 'tree_number', 'birth_year', 'marriage_year', 'death_year'];
 
 	this.individuals = [];
 	this.search_params = {};
@@ -32,14 +33,19 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 
 	//search
 	var query = {},
-	    parameters = [];
+	    parameters = [],
+	    advanced = $stateParams['more']=='1';
+
+	debugger;
 	for (var key in $stateParams) {
 		if ($stateParams[key]) {
 			// read state params & update bound objects to update view accordingly
 			var val = $stateParams[key];
 			if (key !== 'more') {
-				parameters.push(val);
-				query[key] = val;
+				if (advanced || (advanced_fields.indexOf(key) == -1)) {
+					parameters.push(val);
+					query[key] = val;
+				}
 
 				// handle search modifiers & fudge factors in query string
 				if ( val.indexOf(';') !== -1 ) {
