@@ -36,7 +36,6 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 	    parameters = [],
 	    advanced = $stateParams['more']=='1';
 
-	debugger;
 	for (var key in $stateParams) {
 		if ($stateParams[key]) {
 			// read state params & update bound objects to update view accordingly
