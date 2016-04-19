@@ -129,6 +129,7 @@ PersonViewController.prototype = {
 				// self.detailsShown = true;
 				self.node = item_data;
 				self.$rootScope.title = self.get_full_name(self.node.tree);
+				d3.select('.gif').remove();
 				d3.select('.backdrop').remove();
 
 				if (d3 != null)
@@ -334,7 +335,8 @@ PersonViewController.prototype = {
 				else if (d.id) {
 					d3.select('#ftree-layout-container')
 					.append('div')
-					.classed('backdrop', true)
+					.classed('backdrop', true);
+					d3.select('#ftree-layout-container')
 					.append('img')
 					.classed('gif', true)
 					.attr('src', 'images/BH-Loading.gif');

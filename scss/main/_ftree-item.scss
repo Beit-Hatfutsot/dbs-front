@@ -19,16 +19,18 @@
         height: 100%;
         width: 100%;
         @include transition(all, 0.8s, ease-in);
-        opacity: 0.9;
+        opacity: 0.5;
         z-index: 100;
     }
 
     .gif {
-        @include vertical-align();
+        @include centering(absolute);
+        top: 20%;
         margin: 0 auto;
         display: block;
         width: 100px;
         height: 100px;
+        z-index: 100;
     }
 
     svg {
@@ -393,7 +395,6 @@
 
 #ftree-node-details {
     position: absolute;
-    top: 50px;
     width: 272px;
     overflow: hidden; 
     z-index: 10;
@@ -498,7 +499,7 @@
     }
     .body {
         padding: 10px;
-        height: 520px;
+        height: 494px;
         overflow: auto;
         background-color: #FEF1DE;
     }
