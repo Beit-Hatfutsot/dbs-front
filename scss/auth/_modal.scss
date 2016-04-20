@@ -32,10 +32,11 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
-	cursor: url(/images/X.png) 0 0, pointer; 	
+	cursor: url(/images/X.png) 0 0, pointer; 
+
 	.modal-sm { width: 630px; }
 	.modal-m { width: 800px; }
-	.modal-lg { width: 90%; }
+	.modal-lg { max-width: 90%;}
 	.modal-ftree {
 		width:	800px;
 		height: 792px;
@@ -56,6 +57,8 @@
 		background: $gray7;
 		cursor: default;
 		@include centering();
+		overflow-y: auto;
+		max-height: 90%;
 
 		.ftrees-modal {
 			width: 100%;
