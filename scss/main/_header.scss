@@ -34,6 +34,7 @@
     }
     &__close {
         position: absolute;
+        z-index: 2;
         top: 64px;
         color: #fff;
         font-weight: 700;
