@@ -138,7 +138,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/search-results.html'
         },
 
-		/*
+		
         {
             name: 'mjs',
             url: '/mjs',
@@ -151,7 +151,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 });
             }]
         }, 
-		*/
+		
         {
             name: 'persons',
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
@@ -220,6 +220,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
         },
+        */
 
         {
             name: 'verify_email',
@@ -227,8 +228,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'VerifyEmailController as verifyEmailCtrl',
             templateUrl: 'templates/main/verify_email.html'
         },
-		*/
-
+		
         {
             name: '404',
             templateUrl: 'templates/main/404.html'
