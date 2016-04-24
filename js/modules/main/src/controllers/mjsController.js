@@ -60,13 +60,18 @@ MjsController.prototype = {
 		this.mjs.rename_branch(branch_num, new_name);
 	},
 
-	toggle_branch_edit: function($event,index)  {
+	toggle_branch_edit: function($event, index)  {
+		for (var branch in this.branch_edit_status) {
+			if (branch != index && this.branch_edit_status[branch] == true) {
+				this.branch_edit_status[branch] = false;
+				break;
+			}
+		}
 		this.branch_edit_status[index] = !(this.branch_edit_status[index]); 
 	},
 
 	toggle_branch_rmdialog: function()  {
 		this.rmdialog_status = !(this.rmdialog_status);
-		//console.log(this.rmdialog_status);
 
 	}
 };
