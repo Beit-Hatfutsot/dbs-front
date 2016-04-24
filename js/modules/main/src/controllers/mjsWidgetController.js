@@ -10,6 +10,7 @@ var MjsWidgetController = function($scope, $state, mjs, auth, item) {
 	this.item_data = $scope.item;
 	this.item_string = item.get_data_string(self.item_data);
 
+
 	Object.defineProperty(this, 'signedin', {
 		get: function() {
 			return auth.is_signedin();
@@ -35,11 +36,11 @@ MjsWidgetController.prototype = {
 	push_to_mjs: function() {
 		var self = this;
 		if (this.signedin) {
-			if (!this.item_data.in_mjs) {
+				if (!self.$scope.item.in_mjs) {
 				this.mjs.add(self.item_string).then(function() {
 					// open pop-over
-					self.item_data.in_mjs = true;
-					self.item_added = true;
+					self.$scope.item.in_mjs = true;
+					self.$scope.item.item_added = true;
 				});
 			}
 		}
