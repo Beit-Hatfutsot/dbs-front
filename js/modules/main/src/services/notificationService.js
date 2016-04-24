@@ -25,19 +25,12 @@ angular.module('main').
 	en: 'all is fine',
 	he: 'הכל אחלה',
 	options: pendingOptions
-}, 1: {
-	en:'Searching family trees ...',
-	he: 'מחפש בעצי משפחה ...',
-	elm: '#search',
-	options: pendingOptions
 }, 2: {
 	en: 'found some people in the family trees',
 	he: 'מצטתי אנשים בעצי המשפחהן',
-	elm: '#search'
 }, 3: {
 	en: "Sorry, didn't find any person",
 	he: 'מצטערת, לא מצאתי אנשים',
-	elm: '#search',
 	options: errorOptions
 }, 4: {
 	en: 'Loading item...',
@@ -83,11 +76,7 @@ angular.module('main').
 	he: 'לא מצאנו את שם המפשחה שחיפשתם',
 	options: warnOptions
 
-}, 15: {
-	en: 'Fetching more items...',
-	he: 'אוסף עוד פריטים...',
-	options: pendingOptions
-},	
+}	
 // next line ends the notifications dict
 	},
 	message = {
@@ -96,15 +85,21 @@ angular.module('main').
 		}
 
 		var notification = {
+			loading_gif: null,
 			put: function(msg_id) {
-				message = messages[msg_id];
-				var options = angular.extend({}, DEFAULT_OPTIONS, message.options),
-					text = message[langManager.lang];
-				if (message.hasOwnProperty('elm'))
+				if (msg_id == 10) {
+					jQuery('#view').addClass('backdrop');
+					this.loading_gif = jQuery('<img>')
+						.addClass('loading')
+						.attr('src', 'images/BH-Loading.gif')
+						.appendTo('#view');
+				}
+				else {
+					message = messages[msg_id];
+					var options = angular.extend({}, DEFAULT_OPTIONS, message.options),
+						text = message[langManager.lang];
 					jQuery.notify(text, options);
-					// jQuery(options.elm).notify(text, options)
-				else
-					jQuery.notify(text, options);
+				}
 			},
 
 			add: function(new_message) {
@@ -113,6 +108,11 @@ angular.module('main').
 			},
 
 			clear: function() {
+				if (this.loading_gif) {
+					jQuery('#view').removeClass('backdrop');
+					this.loading_gif.remove();
+					this.loading_gif == null;
+				}
 				jQuery('.notifyjs-hidable').trigger('notify-hide');
 			},
 

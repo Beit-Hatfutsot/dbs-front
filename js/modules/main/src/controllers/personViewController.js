@@ -129,7 +129,7 @@ PersonViewController.prototype = {
 				// self.detailsShown = true;
 				self.node = item_data;
 				self.$rootScope.title = self.get_full_name(self.node.tree);
-				d3.select('.gif').remove();
+				d3.select('.loading').remove();
 				d3.select('.backdrop').remove();
 
 				if (d3 != null)
@@ -338,7 +338,7 @@ PersonViewController.prototype = {
 					.classed('backdrop', true);
 					d3.select('#ftree-layout-container')
 					.append('img')
-					.classed('gif', true)
+					.classed('loading', true)
 					.attr('src', 'images/BH-Loading.gif');
 					self.$state.go((self.langManager.lang == 'he')?
 								     'he.he_person-view':'person-view',

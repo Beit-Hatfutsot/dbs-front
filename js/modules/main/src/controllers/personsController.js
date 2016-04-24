@@ -36,7 +36,6 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 	    parameters = [],
 	    advanced = $stateParams['more']=='1';
 
-	debugger;
 	for (var key in $stateParams) {
 		if ($stateParams[key]) {
 			// read state params & update bound objects to update view accordingly
@@ -87,7 +86,7 @@ PersonsController.prototype = {
 	search: function(search_params) {
 		var self = this;
 
-		this.notification.put(1);
+		this.notification.put(10);
 
 		this.ftrees.search(search_params).
 			then(function(individuals) {
@@ -105,7 +104,7 @@ PersonsController.prototype = {
 
 	fetch_more: function() {
 		var self = this;
-		self.notification.put(15);
+		self.notification.put(10);
 		var search_params = angular.copy(this.search_params);
 		search_params.start = self.individuals.items.length;
 		this.ftrees.search(search_params).
