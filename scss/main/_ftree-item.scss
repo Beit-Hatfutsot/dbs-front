@@ -1,6 +1,12 @@
+#ftree-layout  {
+    overflow: hidden;
+    cursor: all-scroll;
+}
+
 #ftree-layout-container {
     position: inherit;
     height: 600px;
+    overflow: hidden;
 
     >div {
         width: 100%;
@@ -358,14 +364,6 @@
 			}
 		}
 
-		@at-root #ftree-layout-container {
-			overflow: auto;
-
-			@at-root #ftree-layout  {
-                overflow: hidden;
-                cursor: all-scroll;
-            }
-		}
 	}
 }
 
