@@ -133,6 +133,15 @@
               </div>
             </a>
             </li>
+            <li class="header-menu-item ftree-tab"
+              ng-class="{'header-menu-item--active':
+              isCurrentState('persons') || isCurrentState('person-view')}" 
+              ng-click="headerController.goto_state('persons')"> 
+                <div>
+                    <en>Family Trees</en>
+                    <he>עצי משפחה</he>
+                </div>
+            </li>
             <li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
               <div class="mystory__text">
                 <en>My Story</en>	
@@ -153,15 +162,6 @@
                 <he>נצפו לאחרונה</he>
               </div>
             </li>
-                  <li class="header-menu-item ftree-tab"
-                    ng-class="{'header-menu-item--active':
-                    isCurrentState('persons') || isCurrentState('person-view')}" 
-                    ng-click="headerController.goto_state('persons')"> 
-                      <div>
-                          <en>Family Trees</en>
-                          <he>עצי משפחה</he>
-                      </div>
-                  </li>
           </ul>
         </nav>
         <!-- <div class="dropdown-icons__upload" dropdown is-open>
