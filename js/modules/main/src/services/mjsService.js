@@ -104,7 +104,7 @@ angular.module('main').
 				items = [items]
 			mjs.get().then(function (items_n_branches) {
 				items.forEach(function (item_data) {
-					var item_string = self.item.get_data_string(item_data);
+					var item_string = self.item.get_key(item_data);
 
 					var in_mjs = false;
 
