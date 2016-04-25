@@ -51,10 +51,6 @@ angular.module('main').
 }, 9: {
 	en: 'Upload in progress...',
 	he: 'העלאה מתבצעת...'
-}, 10: {
-	en: 'Searching...',
-	he: 'מחפש...',
-	options: pendingOptions
 }, 11: {
 	en: 'Search has failed.',
 	he: 'החיפוש נכשל.',
@@ -76,7 +72,7 @@ angular.module('main').
 	he: 'לא מצאנו את שם המפשחה שחיפשתם',
 	options: warnOptions
 
-}	
+}
 // next line ends the notifications dict
 	},
 	message = {
@@ -86,20 +82,24 @@ angular.module('main').
 
 		var notification = {
 			loading_gif: null,
-			put: function(msg_id) {
-				if (msg_id == 10) {
+			loading: function(on) {
+				if (on) {
 					jQuery('#view').addClass('backdrop');
 					this.loading_gif = jQuery('<img>')
 						.addClass('loading')
 						.attr('src', 'images/BH-Loading.gif')
-						.appendTo('#view');
+						.appendTo('body');
+				} else if (this.loading_gif) {
+					jQuery('#view').removeClass('backdrop');
+					this.loading_gif.remove();
+					this.loading_gif == null;
 				}
-				else {
-					message = messages[msg_id];
-					var options = angular.extend({}, DEFAULT_OPTIONS, message.options),
-						text = message[langManager.lang];
-					jQuery.notify(text, options);
-				}
+			},
+			put: function(msg_id) {
+				message = messages[msg_id];
+				var options = angular.extend({}, DEFAULT_OPTIONS, message.options),
+					text = message[langManager.lang];
+				jQuery.notify(text, options);
 			},
 
 			add: function(new_message) {
@@ -108,15 +108,8 @@ angular.module('main').
 			},
 
 			clear: function() {
-				if (this.loading_gif) {
-					jQuery('#view').removeClass('backdrop');
-					this.loading_gif.remove();
-					this.loading_gif == null;
-				}
 				jQuery('.notifyjs-hidable').trigger('notify-hide');
 			},
-
-				
 		};
 
 		return notification;

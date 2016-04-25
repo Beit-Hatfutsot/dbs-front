@@ -1,4 +1,4 @@
-var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window) {
+var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, notification) {
     var self = this, params = {};
     this.$state = $state;
     this.$window = $window;
@@ -81,10 +81,12 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     });
     if ($stateParams.q !== undefined) {
        header.query = this.query = $stateParams.q;
- 
+
+	    notification.loading(true);
         $http.get(apiClient.urls.search, {params: this.api_params()})
         .success(function (r) {  
             self.results = r.hits;
+			notification.loading(false);
             self.loading = false;
         });
 
@@ -235,4 +237,4 @@ GeneralSearchController.prototype = {
     }
 };
 
-angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'notification', GeneralSearchController]);

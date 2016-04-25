@@ -86,13 +86,13 @@ PersonsController.prototype = {
 	search: function(search_params) {
 		var self = this;
 
-		this.notification.put(10);
+		this.notification.loading(true);
 
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
 
-				self.notification.clear();
+				self.notification.loading(false);
 				if (individuals.total == 0)
 					self.notification.put(3);
 
@@ -104,13 +104,13 @@ PersonsController.prototype = {
 
 	fetch_more: function() {
 		var self = this;
-		self.notification.put(10);
+		this.notification.loading(true);
 		var search_params = angular.copy(this.search_params);
 		search_params.start = self.individuals.items.length;
 		this.ftrees.search(search_params).
 			then(function (r){
 				self.individuals.items = self.individuals.items.concat(r.items);
-				self.notification.clear();
+				self.notification.loading(false);
 			});
     },
 
