@@ -10,6 +10,7 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item) {
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
     this.rmdialog_is_open = false;
+    this.item_string = item.get_key($scope.previewData);
 };
 
 ItemPreviewCtrl.prototype = {
@@ -31,7 +32,7 @@ ItemPreviewCtrl.prototype = {
     remove_from_mjs: function() {
         this.mjs.remove(this.item_string);
     },
-
+	*/
     update_branch: function(branch) {
         if (this.in_branch[branch]) {
             this.mjs.add_to_branch(this.item_string, branch);
@@ -44,7 +45,6 @@ ItemPreviewCtrl.prototype = {
     in_mjs_state: function() {
         return this.$state.current.name == 'mjs';
     }
-	*/
 
 };
 

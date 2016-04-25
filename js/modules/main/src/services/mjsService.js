@@ -6,9 +6,7 @@ angular.module('main').
 		var self = this;
 		self.item = item;
 
-
 		var mjs = {
-			// items_counters: [0,0,0,0];
 			get: function () {
 				var self = this,
 					latest = self._latest;
@@ -46,7 +44,7 @@ angular.module('main').
 			},
 
 			add_to_branch: function(item_string, branch_num) {
-				// this.items_counter[branch_num]++;
+				this.items_counters[branch_num]++;
 				var self = this;
 				$http.post(apiClient.urls.mjs +'/'+ (parseInt(branch_num) + 1),
 						   item_string)
@@ -54,7 +52,7 @@ angular.module('main').
 			},
 
 			remove_from_branch: function(item_string, branch_num) {
-				// this.items_counter[branch_num]--;
+				this.items_counters[branch_num]--;
 				$http.delete(apiClient.urls.mjs + '/' + (parseInt(branch_num) + 1) + '/' + item_string)
 					 .then(function(data) {
 					 mjs._update_latest(data);
@@ -84,7 +82,7 @@ angular.module('main').
 		});
 		Object.defineProperty(mjs, 'items_counters', {
 			get: function () {
-				var story = mjs._latest;
+				var story = mjs._latest,
 					ret = [0,0,0,0];
 
 				story.story_items.forEach(function(i, _i) {
