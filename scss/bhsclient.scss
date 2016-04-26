@@ -43,10 +43,6 @@ html, body {
 			direction: rtl;
 		}
 
-		&.backdrop {
-			overflow: hidden;
-		}
-
 		.modal {
 			overflow: auto;
 		}
@@ -198,3 +194,15 @@ html, body {
         }
     }
 }
+.backdrop {
+    opacity: 0.4;
+    z-index: 100;
+}
+
+img.loading {
+    @include centering(fixed);
+    width: 100px;
+    height: 100px;
+    z-index: 1000;
+}
+
