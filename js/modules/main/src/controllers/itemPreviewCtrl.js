@@ -28,13 +28,14 @@ ItemPreviewCtrl.prototype = {
         }
     },
 
-	/*
+	
     remove_from_mjs: function() {
         this.mjs.remove(this.item_string);
     },
-	*/
+	
     update_branch: function(branch) {
         if (this.in_branch[branch]) {
+            
             this.mjs.add_to_branch(this.item_string, branch);
         }
         else {
