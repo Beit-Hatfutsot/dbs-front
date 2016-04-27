@@ -1,4 +1,4 @@
-var MjsController = function(mjs, notification, item, auth, user, $rootScope) {
+var MjsController = function(mjs, notification, item, auth, user, $rootScope, $scope) {
 	var self = this;
 
 	this.notification = notification;
@@ -7,6 +7,7 @@ var MjsController = function(mjs, notification, item, auth, user, $rootScope) {
 	this.selected_branch = 0;
 	this.mjs_items = [];
 	this.user = user;
+	this.$scope = $scope;
 	this.branch_edit_status = {
 		1: false,
 		2: false,
@@ -60,7 +61,7 @@ MjsController.prototype = {
 		this.mjs.rename_branch(branch_num, new_name);
 	},
 
-	toggle_branch_edit: function($event, index)  {
+	toggle_branch_edit: function(index)  {
 		for (var branch in this.branch_edit_status) {
 			if (branch != index && this.branch_edit_status[branch] == true) {
 				this.branch_edit_status[branch] = false;
@@ -77,4 +78,4 @@ MjsController.prototype = {
 };
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',
-								  'item', 'auth', 'user', '$rootScope', MjsController]);
+								  'item', 'auth', 'user', '$rootScope', '$scope', MjsController]);

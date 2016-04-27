@@ -56,7 +56,7 @@
 					<div class="clickable-area" ng-if="(branch > 0) && (branch < 5)" ng-click="mjsCtrl.selected_branch = branch">
 						<ng-switch on="mjsCtrl.branch_edit_status[branch]">
 							<div ng-switch-when="false" class="branch_name">
-								{{mjsCtrl.mjs._latest.story_branches[branch-1]}} <!-- {{myname}} -->
+								{{mjsCtrl.mjs._latest.story_branches[branch-1]}} 
 								<br>
 								<span class="branch_name__num">{{mjsCtrl.mjs.items_counters[branch-1]}}</span>
 							</div>
@@ -64,7 +64,7 @@
 								<input  class="rename"
 										focus="true"
 									 	placeholder="{{mjsCtrl.mjs._latest.story_branches[branch-1]}}"
-										ng-model="myname"
+										ng-model="branch_name"
 										alter-mjs-branch />
 							</div>
 						</ng-switch>
@@ -77,7 +77,7 @@
 							<span class="branch_name__num">{{}}</span>
 						</div>
 					</div>
-					<icon  ng-if="(branch > 0) && (branch < 5)" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit($event, branch)"></icon>
+					<icon ng-if="(branch > 0) && (branch < 5)" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit(branch)"></icon>
 	    		</li>
 			</ul>
 	    </nav>
