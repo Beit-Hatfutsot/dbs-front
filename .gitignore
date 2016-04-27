@@ -4,3 +4,4 @@ bower_components
 public
 js/lib/gedcom-js-viewer
 docs/.tmp/**
+.idea
