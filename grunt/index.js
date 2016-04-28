@@ -34,11 +34,10 @@ module.exports = function (grunt) {
         'sass:dist',
         'copy:public',
         'copy:dist',
+        'concat:public',
+        'ngAnnotate',
         'useminPrepare',
-
-        'concat',
-        // 'ngAnnotate',
-        
+        'concat:generated',
         'cssmin',
         'uglify',
         'postcss',
