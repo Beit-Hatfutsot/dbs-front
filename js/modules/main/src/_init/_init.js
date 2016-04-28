@@ -275,7 +275,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     /*** End of state definitions ***/
 
     // Add current state data to $state when calling $state.go
-    $provide.decorator('$state', function($delegate, $stateParams) {
+    $provide.decorator('$state', ['$delegate', '$stateParams', function($delegate, $stateParams) {
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
 			var target = state_name;
@@ -291,7 +291,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             return old_go.apply($delegate, [target, state_params, config]);
         };
         return $delegate;
-    });
+    }]);
 
     $urlRouterProvider.otherwise(function($injector, $location){
        var state = $injector.get('$state');
