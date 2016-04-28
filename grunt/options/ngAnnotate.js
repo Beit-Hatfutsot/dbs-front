@@ -4,10 +4,11 @@ module.exports = {
         add:true,
 
     },
-    dist: {
+    public: {
         files:[{
-
-            concatenatedProjectJsFile:concatenatedProjectJsFile,
+            expand:true,
+            src:[concatenatedProjectJsFile],
+            // dest:'<%= pkg.name %>.js'
             
 
         }]
