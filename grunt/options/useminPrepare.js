@@ -8,7 +8,7 @@ module.exports = {
         dest: '<%= dist_dir %>',
         flow:{
             steps:{
-                'js':['concat', 'uglify'],
+                'js':['concat','uglify'],
                 'css':['concat','cssmin']
             },
             post:{}
