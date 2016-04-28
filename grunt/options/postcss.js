@@ -13,6 +13,7 @@ module.exports = {
             {
                 cwd: '<%= dist_dir %>styles',
                 src:'{,*/}*.css',
+                dest:'<%= dist_dir %>styles',
                 expand: true
             }
         ]
