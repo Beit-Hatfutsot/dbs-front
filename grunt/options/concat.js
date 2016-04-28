@@ -3,7 +3,7 @@ module.exports = {
         // define a string to put between each file in the concatenated output
         separator: ';'
     },
-    dist: {
+    public: {
         // the files to concatenate
         src: [
             'js/modules/main/src/**/*.js',
