@@ -30,9 +30,11 @@ module.exports = function (grunt) {
         'useminPrepare',
 
         'concat',
+        // 'ngAnnotate',
+        
         'cssmin',
         'uglify',
-
+        'postcss',
          'rev',
         'usemin']);
 };
