@@ -53,9 +53,9 @@
 						<br>
 						<span class="branch_name__num">{{mjsCtrl.mjs_items.length}}</span>	
 					</div>
-					<div class="clickable-area" ng-if="(branch > 0) && (branch < 5)" ng-click="mjsCtrl.selected_branch = branch">
+					<div class="clickable-area" ng-if="(branch > 0) && (branch < 5)">
 						<ng-switch on="mjsCtrl.branch_edit_status[branch]">
-							<div ng-switch-when="false" class="branch_name">
+							<div ng-switch-when="false" class="branch_name" ng-click="mjsCtrl.selected_branch = branch">
 								{{mjsCtrl.mjs._latest.story_branches[branch-1]}} 
 								<br>
 								<span class="branch_name__num">{{mjsCtrl.mjs.items_counters[branch-1]}}</span>
