@@ -47,9 +47,10 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
             api: 'photoUnits,movies'
         },
 
-        personalities: {
-            En: 'Personalities',
-            He: 'אישים'
+        luminaries: {
+            En: 'Luminaries',
+            He: 'אישים',
+            api: 'personalities'
         },
 
         familyNames: {
