@@ -12,7 +12,7 @@
  * @property {Object} urls An object that maps API endpoint names to full endpoint URLs.
  */
 angular.module('apiClient').
-	factory('apiClient', function(apiConfig) {
+	factory('apiClient', ['apiConfig', function(apiConfig) {
 
 	  	var api_client = {
 	  		base_url: 'http://' + apiConfig.baseUrl,
@@ -44,4 +44,4 @@ angular.module('apiClient').
 		});
 
 	  	return api_client;
-	});
+	}]);
