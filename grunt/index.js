@@ -31,7 +31,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:public',
         'clean:dist',
-        'sass:dist',
+        'sass:public',
         'copy:public',
         'copy:dist',
         'concat:public',
