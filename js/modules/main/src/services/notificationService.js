@@ -25,19 +25,12 @@ angular.module('main').
 	en: 'all is fine',
 	he: 'הכל אחלה',
 	options: pendingOptions
-}, 1: {
-	en:'Searching family trees ...',
-	he: 'מחפש בעצי משפחה ...',
-	elm: '#search',
-	options: pendingOptions
 }, 2: {
 	en: 'found some people in the family trees',
 	he: 'מצטתי אנשים בעצי המשפחהן',
-	elm: '#search'
 }, 3: {
 	en: "Sorry, didn't find any person",
 	he: 'מצטערת, לא מצאתי אנשים',
-	elm: '#search',
 	options: errorOptions
 }, 4: {
 	en: 'Loading item...',
@@ -58,10 +51,6 @@ angular.module('main').
 }, 9: {
 	en: 'Upload in progress...',
 	he: 'העלאה מתבצעת...'
-}, 10: {
-	en: 'Searching...',
-	he: 'מחפש...',
-	options: pendingOptions
 }, 11: {
 	en: 'Search has failed.',
 	he: 'החיפוש נכשל.',
@@ -83,11 +72,7 @@ angular.module('main').
 	he: 'לא מצאנו את שם המפשחה שחיפשתם',
 	options: warnOptions
 
-}, 15: {
-	en: 'Fetching more items...',
-	he: 'אוסף עוד פריטים...',
-	options: pendingOptions
-},	
+}
 // next line ends the notifications dict
 	},
 	message = {
@@ -96,15 +81,25 @@ angular.module('main').
 		}
 
 		var notification = {
+			loading_gif: null,
+			loading: function(on) {
+				if (on) {
+					jQuery('#view').addClass('backdrop');
+					this.loading_gif = jQuery('<img>')
+						.addClass('loading')
+						.attr('src', 'images/BH-Loading.gif')
+						.appendTo('body');
+				} else if (this.loading_gif) {
+					jQuery('#view').removeClass('backdrop');
+					this.loading_gif.remove();
+					this.loading_gif == null;
+				}
+			},
 			put: function(msg_id) {
 				message = messages[msg_id];
 				var options = angular.extend({}, DEFAULT_OPTIONS, message.options),
 					text = message[langManager.lang];
-				if (message.hasOwnProperty('elm'))
-					jQuery.notify(text, options);
-					// jQuery(options.elm).notify(text, options)
-				else
-					jQuery.notify(text, options);
+				jQuery.notify(text, options);
 			},
 
 			add: function(new_message) {
@@ -115,8 +110,6 @@ angular.module('main').
 			clear: function() {
 				jQuery('.notifyjs-hidable').trigger('notify-hide');
 			},
-
-				
 		};
 
 		return notification;
