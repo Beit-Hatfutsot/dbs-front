@@ -45,14 +45,12 @@ angular.module('main').
 
 			add_to_branch: function(item_string, branch_num) {
 				var self = this;
-				this.items_counters[branch_num]++;
 				$http.post(apiClient.urls.mjs +'/'+ (parseInt(branch_num) + 1),
 						   item_string)
 					 .then(mjs._update_latest);
 			},
 
 			remove_from_branch: function(item_string, branch_num) {
-				this.items_counters[branch_num]--;
 				$http.delete(apiClient.urls.mjs + '/' + (parseInt(branch_num) + 1) + '/' + item_string)
 					 .then(mjs._update_latest);
 			},
