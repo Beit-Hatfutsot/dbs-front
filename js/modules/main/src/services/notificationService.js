@@ -30,7 +30,7 @@ angular.module('main').
 	he: 'מצטתי אנשים בעצי המשפחהן',
 }, 3: {
 	en: "Sorry, didn't find any person",
-	he: 'מצטערת, לא מצאתי אנשים',
+	he: 'מצטערים, לא מצאתי אנשים',
 	options: errorOptions
 }, 4: {
 	en: 'Loading item...',
@@ -38,7 +38,7 @@ angular.module('main').
 	options: pendingOptions
 }, 5: {
 	en: 'Sorry, failed to fetch item',
-	he: 'מצטערת, טעינת פריט נכשלה'
+	he: 'מצטערים, טעינת פריט נכשלה'
 }, 6: {
 	en: 'Loading Story...',
 	he: 'טוען את הסיפור...'
