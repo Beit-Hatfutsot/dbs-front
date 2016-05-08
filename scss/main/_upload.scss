@@ -2,24 +2,53 @@
 	background: #ffffff;
 
 	@at-root #upload-instructions-container {
-		width: 100%;
-		background: #f5f5f5;
+		background-image: url(/images/Upload.jpg);
+        background-repeat: no-repeat;
+        width: 1716px;
+        height: 798px;
+        margin: 0 auto;
+        position: relative;
+        color: $gray3;
 
 		@at-root #upload-instructions {
-			width: 940px;
-			height: 180px;
-			margin: 0 auto;
-			padding: 30px 0 0;
 			text-align: center;
+            background: rgba(249,249,249,0.75);
+            top: 50px;
+		    position: absolute;
+		    width: 100%;
 
 			.title {
-				font-size: 37px;
-				margin-bottom: 22px;
+				font-size: 60px;
 			}
 
 			.content {
-				font-size: 29px;
+				font-size: 26px;
+    			margin-bottom: 10px;
 			}
+		}
+		.description {
+			position: absolute;
+			bottom: 0;
+			background: $gray5;
+    		padding: 2px 10px;
+    		font-size: 12px;
+    		font-weight: 600;
+		}
+		.arrow-down {
+			position: absolute;
+			width: 0; 
+			height: 0; 
+			border-left: 16px solid transparent;
+			border-right: 16px solid transparent;
+			border-top: 30px solid;
+			border-top-color: $yellow3;
+			@include translateX(50%);
+			left: 50%;
+    		bottom: 60px;
+
+    		&:hover {
+    			border-top-color: $gray5;
+    		} 
 		}	
 	}
 
