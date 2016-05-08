@@ -91,13 +91,11 @@ PersonsController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
-
 				self.notification.loading(false);
 				if (individuals.total == 0)
 					self.notification.put(3);
-
-
 			}, function() {
+				self.notification.loading(false);
 				self.notification.put(500);
 			});
 	},
