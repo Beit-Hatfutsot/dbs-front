@@ -323,17 +323,28 @@ UploadController.prototype = {
     onSuccess: function() {
         this.mjs.refresh();
         this.clear_form();
-        this.notification.put({
+        $timeout(function(){
+            var body = angular.element(document.getElementsByTagName('body')[0]);
+            body.addClass('backdrop');
+            $modal.open({
+                templateUrl: 'templates/main/upload/successful-upload.html',
+                controller: 'UploadModalController',
+                size: 'ftree'
+            }).result.finally(function(){
+                body.removeClass('backdrop');
+            })
+        }, 1000)
+        /*this.notification.put({
             en: 'Upload succeeded.',
             he: 'העלאת הקובץ הסתיימה בהצלחה.'
-        });
+        });*/
         this.success = true;
     },
 
     onError: function($file, $message) {
         if ($message && JSON.parse($message).error.substr(-13) === 'not supported') {
             this.notification.put({
-                en: 'This file type is not supported, please try uploading a supported file',
+                en: 'This file type is not supported. Please upload a JPG or PNG file.',
                 he: 'שוג הקובץ הזה אינו נתמך, אנא נסו להעלות קובץ מסוג נתמך'
             });
         }
