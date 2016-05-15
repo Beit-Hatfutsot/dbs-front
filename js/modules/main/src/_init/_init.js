@@ -194,7 +194,21 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
+            name: 'he.he_upload',
+            abstract: true,
+            url: '/upload',
+            templateUrl: 'templates/main/upload/upload.html'
+        },
+
+        {
             name: 'upload.image',
+            url: '/image',
+            controller: 'UploadFormController as uploadFormCtrl',
+            templateUrl: 'templates/main/upload/image.html'
+        },
+
+        {
+            name: 'he.he_upload.image',
             url: '/image',
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/image.html'
