@@ -54,51 +54,58 @@
 
 	@at-root #tabs-container {
 		width: 100%;
-		background: #eeeeee;
+		background: #fff;
+		@include box-shadow(0 1px 5px 1px #b0b0b0);
 
-		.tabs {
-			width: 400px;
+		.nav-tabs {
+			display: flex;
+			justify-content: space-between;
+			width: 300px;
 			margin: 0 auto;
-
-			&__tab {
-				width: 160px;
-				height: 53px;
-				padding: 19px 0 0;
+			padding: 0;
+			
+			li {
+				display: inline-block;
+				width: 134px;
+				line-height: 40px;
+				font-size: 20px;
+				color: $gray3;
 				text-align: center;
+				@include hover-pointer();
 
-				&--selected {
-					background: #ffffff;
-					border-top: 6px solid #1ec3d2;
-					border-left: 1px solid #d5d5d5;
-					border-right: 1px solid #d5d5d5;
-					@include border-radius-top(5px);
+				&.active { 
+					background-color: $red4;
+					color: #fff;
+					font-weight: 700;
 				}
-			} 
 
-			.nav-tabs {
-				margin: 0;
-				
-				li {
-					display: table-cell;
-					width: 160px;
-					height: 53px;
-					padding-top: 19px;
-					text-align: center;
-
-					&.active { 
-						height: 44px;
-						background: #ffffff;
-						border-top: 6px solid #1ec3d2;
-						border-left: 1px solid #d5d5d5;
-						border-right: 1px solid #d5d5d5;
-						@include border-radius-top(5px);
-					}
-
-					a {
-						text-decoration: none;
-						color: #333333;
-					}
+				a {
+					text-decoration: none;
+					color: inherit;
 				}
+				&.inactive {
+					color: $gray5;
+					cursor: default;
+					 a {
+					 	cursor: default;
+					 }
+				}
+			}
+		}
+	}
+
+	.upload-introduction {
+		color: $gray3;
+		h2 {
+			font-weight: normal;
+		}
+
+		p {
+			margin-bottom: 16px;
+
+			&.emph {
+				font-size: 18px;
+				margin-bottom: 10px;
 			}
 		}
 	}
@@ -107,7 +114,7 @@
 		width: 100%;
 
 		@at-root #upload-view {
-			width: 940px;
+			width: 800px;
 			margin: 0 auto;
 			padding: 30px 0 10px;
 
@@ -143,17 +150,18 @@
 			}
 
 			.upload-droparea {
+				position: relative;
+				overflow: hidden;
+				height: 110px;
 				width: 100%;
 				margin-bottom: 20px;
-				padding: 18px 0;
-				border: 2px dashed #666666;
-				text-align: center;
+				border: 2px dotted $gray3;
 
 				&__cloud {
-					width: 92px;
-					height: 67px;
-					margin: 0 auto 16px;
-					@include bg_image("cloud.png");
+					width: 57px;
+					height: 43px;
+					@include vertical-align(absolute);
+					left: 184px;
 				}
 
 				&__rain-cloud {
@@ -163,23 +171,20 @@
 					@include bg_image("rain_cloud.png");
 				}
 
+				.upload-droparea-text {
+					display: table-cell;
+					margin: 0 auto;
+					@include vertical-align(absolute);
+					left: 250px;
+					color: $gray3;
+				}
 				&__instructions {
-					font-size: 19px;
-					color: #666666;
-					text-align: center;
+					font-size: 16px;
 				}
 
 				&__browse {
-					width: 223px;
-					height: 65px;
-					margin: 0 auto;
-					padding: 22px 0;
-					text-align: center;
-					background: #f5f5f5;
-					border: 2px solid #d7d9d8;
-					@include border-radius(4px);
-					font-size: 19px;
-					color: #999999;
+					text-decoration: underline;
+					font-size: 22px;
 					@include hover_pointer();
 				}
 
@@ -212,18 +217,76 @@
 				}
 
 				&__image {
-					max-width: 900px;
-					max-height: 210px;
+					position: absolute;
+					max-height: 80%;
+					width: auto;
 				}
 
 				@at-root #upload-form {
+
+					.checkbox {
+						display: block;
+						width: 100%;
+
+						.en & {
+							direction: rtl;
+						}
+
+						.he & {
+							direction: ltr;
+						}
+						
+						input[type=checkbox] {
+	                        display: none;
+	                    }
+
+	                    .checkbox-label {
+	                    	position: relative;
+	                    	display: inline-block;
+	                    	padding-left: 25px;
+	                    	font-size: 14px;
+	                    	@include hover-pointer();
+	                    }
+
+		                .checkbox-label:before {
+		                	content: "";
+		                	position: absolute;
+		                	left: 0;
+		                	width: 20px;
+						    height: 20px;
+						    background-color: $red4;
+						    @include border-radius(4px);
+		                }
+
+		                input[type=checkbox]:checked + .checkbox-label:after {
+		                	content: "";
+		                	display: inline-block;
+		                	position: absolute;
+		                	top: 4px;
+	                        left: 3px;
+		                	width: 11px;
+	                        height: 6px;
+	                        border: 3px solid $gray3;
+	                        border-top: none;
+	                        border-right: none;
+	                        background: transparent;
+	                        @include rotate($degrees:-45deg);
+		                }
+					}
 
 					.upf {
 						margin: 0;
 						padding: 0;
 						border: none;
+						width: 800px;
+
+						&--bilingual {
+							width: 370px;
+						}
 
 						&--en {
+
+							float: left;
 							direction: ltr;
 
 							label {
@@ -236,6 +299,7 @@
 						}
 
 						&--he {
+							float: right;
 							direction: rtl;
 
 							label {
@@ -251,20 +315,22 @@
 							position: relative;
 
 							label {
-								opacity: 1;
-								position: absolute;
-								color: #999999;
-								@include transition(all, 0.5s, linear);
+								display: block;
+								max-width: 370px;
+								//opacity: 1;
+								//position: absolute;
+								color: $gray3;
+								//@include transition(all, 0.5s, linear);
 
-								&.ng-hide {
+								/*&.ng-hide {
 									opacity: 0;
 									top: 24px;
-								}
+								}*/
 							}
 
 							&__label {
 
-								&--up {
+								/*&--up {
 									top: 10px;
 									font-size: 14px;
 								}
@@ -272,14 +338,12 @@
 								&--down {
 									top: 36px;
 									font-size: 25px;
-								}
+								}*/
 							}
 
 							input, textarea {
 								width: 100%;
-								max-width: 940px;
-								border: 2px solid #d4d6d5;
-								@include border-radius(6px);
+								border: 2px solid $red4;
 								margin-bottom: 6px;
 								padding: 34px 10px 0;
 								font-size: 25px;
@@ -314,8 +378,9 @@
 						}
 
 						&__alt-instructions {
-							margin: 35px 0 42px;
-							font-size: 24px;
+							color: $gray3;
+							//margin: 35px 0 42px;
+							font-size: 20px;
 
 							.en & {
 								direction: rtl;

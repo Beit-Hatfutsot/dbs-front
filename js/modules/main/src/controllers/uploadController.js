@@ -15,6 +15,8 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
     };
 
     this.tab_status = {};
+    this.is_bilingual = false;
+
 
     // configure tab_status properties
     [

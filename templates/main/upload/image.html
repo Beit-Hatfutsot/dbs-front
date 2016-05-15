@@ -17,38 +17,96 @@
 	</div>
 	<button class="upload-success__button" ng-click="uploadCtrl.clear_form()">Upload another file</button>
 </div>
+<div class="upload-introduction">
+	<h2>
+		<en>Want to make this site even better?</en>
+		<he>מה עושים פה ולמה?</he>
+	</h2>
+	<p>
+		<en>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tellus felis, blandit sit amet enim a, volutpat tempor eros. Nullam lectus justo, consequat a rutrum eget, dapibus vel lorem. Aenean eget lectus ut leo posuere cursus eu at massa. Donec fermentum turpis sed orci imperdiet ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque viverra massa justo, eget posuere mi dapibus id. Suspendisse varius neque eget neque iaculis, ac commodo magna iaculis. Aliquam vitae fringilla ex. Suspendisse ac quam dapibus, imperdiet dui ac, vehicula nulla.</en>
+		<he>לכולנו יש תמונות המתעדות את הסיפור המשפחתי, את אורחות החיים ואת התרבות והמורשות של יהודיות בעולם - בעבר ובהווה. התצלומים שלכם מהווים מסמכי יקרי ערך. בבית התפוצות נשמור עליהם למען הדורות הבאים ולמען הזיכרון הקולקטיבי של העם היהודי.</he>
+	</p>
+	<h2>
+		<en>How?</en>
+		<he>איך?</he>
+	</h2>
+	<p>
+		<en>First upload your photo via the field below. Then fill in the fields in the form that opens.</en>
+		<he>קודם בחרו תמונה ואז מלאו את השדות בטופס שיפתח.</he>
+	</p>
+	<p class="emph"><en>Accepted file types: JPG and PNG. Minimum file size: 1 MB.</en>
+	<he>ניתן להעלות קבצי JPG או PNG בגודל של 1 מגה (1MB) מינימום.</he>
+</p>
+</div>
 <div ng-hide="uploadCtrl.success">
 	<upload-area ctrl="uploadCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
 	<!--<upload-form ctrl="uploadCtrl" meta-data="uploadCtrl.meta_data.image" type="image"></upload-form>-->
-	<form name="upload_form" id="upload-form" rc-submit="uploadCtrl.submit('image')" novalidate>
-		<upload-fieldset	ng-if="uploadCtrl.lang === 'he'" 
-							meta-data="uploadCtrl.meta_data.image" 
-							upload-form="upload_form" 
-							rc="rc" 
-							fieldset-lang="he" 
-							is-required="true">
-		</upload-fieldset>
-		<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'he'">
-			<en>במידה ואתם דוברי עברית, אנא מלאו את אותם פרטים גם בעברית</en>
-			<he>If you speak English, please fill the same details below</he>
+	<form ng-show="uploadCtrl.is_image" name="upload_form" id="upload-form" rc-submit="uploadCtrl.submit('image')" novalidate>
+		<!-- ng-class="{uploadCtrl.is_checked}" -->
+		<div ng-if="uploadCtrl.lang === 'en'">
+			<div class="upf__alt-instructions">
+				<en>במידה ואתם דוברי עברית, אנא מלאו את אותם פרטים גם בעברית</en>
+			</div>
+			<div class="checkbox">
+				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
+				<label class="checkbox-label" for="language-checkbox">
+					<span class="checkbox-label-desc">
+						<en>אני דובר\ת עברית</en>
+					</span>
+				</label>
+			</div>
+			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
+								upload-form="upload_form" 
+								rc="rc" 
+								fieldset-lang="en" 
+								is-required="true"
+								is-bilingual="uploadCtrl.is_bilingual ? true:false">
+			</upload-fieldset>
+			<upload-fieldset	ng-show="uploadCtrl.is_bilingual"
+								meta-data="uploadCtrl.meta_data.image" 
+								upload-form="upload_form" 
+								rc="rc" 
+								fieldset-lang="he" 
+								is-required="false"
+								is-bilingual="uploadCtrl.is_bilingual ? true:false">
+			</upload-fieldset>
+
 		</div>
-		<upload-fieldset 	meta-data="uploadCtrl.meta_data.image" 
+
+		<div ng-if="uploadCtrl.lang === 'he'">
+			<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'he'">
+				<he>If you speak English, please fill the same details below</he>
+			</div>
+			<div class="checkbox">
+				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
+				<label class="checkbox-label" for="language-checkbox">
+					<span class="checkbox-label-desc">
+						<he>I speak English</he>
+					</span>
+				</label>
+			</div>
+			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
+								upload-form="upload_form" 
+								rc="rc" 
+								fieldset-lang="he" 
+								is-required="true"
+								is-bilingual="uploadCtrl.is_bilingual ? true:false">
+			</upload-fieldset>
+			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
+								upload-form="upload_form" 
+								rc="rc" 
+								fieldset-lang="en" 
+								is-required="false"
+								is-bilingual="uploadCtrl.is_bilingual ? true:false">
+			</upload-fieldset>
+		</div>
+
+		<!-- <upload-fieldset 	meta-data="uploadCtrl.meta_data.image" 
 							upload-form="upload_form" 
 							rc="rc" 
 							fieldset-lang="en" 
 							is-required="uploadCtrl.lang === 'en' ? true : false">
-		</upload-fieldset>
-		<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'en'">
-			<en>במידה ואתם דוברי עברית, אנא מלאו את אותם פרטים גם בעברית</en>
-			<he>If you speak English, please fill the same details below</he>
-		</div>
-		<upload-fieldset 	ng-if="uploadCtrl.lang === 'en'" 
-							meta-data="uploadCtrl.meta_data.image" 
-							upload-form="upload_form" 
-							rc="rc" 
-							fieldset-lang="he" 
-							is-required="false">
-		</upload-fieldset>
+		</upload-fieldset> -->
 		<input type="submit" value="{{uploadCtrl.submit_value[uploadCtrl.lang]}}" class="upf__submit">
 		<div class="upf__in-progress" ng-show="uploadCtrl.in_progress">
 			<img src="images/progress.gif">

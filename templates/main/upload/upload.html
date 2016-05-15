@@ -1,6 +1,6 @@
 <auth-private>
     <div id="upload" ng-controller="UploadController as uploadCtrl">
-         <div id="upload-instructions-container">
+        <div id="upload-instructions-container">
             <div id="upload-instructions" ng-hide="uploadCtrl.success">
                 <div class="title">
                     <en>Waiting for you to upload your items</en>
@@ -8,7 +8,7 @@
                 </div>
                 <div class="content">
                     <en>
-                        Uploaded items will be added to your story. Some may be <br>included in the database for others to search and view
+                        Uploaded items will be added to your story. Some may also be<br> included in the museum database for others to search and view.
                     </en>
                     <he>
                         פריטים שתעלו יתווספו לסיפור שלכם. חלק מהפריטים שיימצאו מתאימים<br> יתווספו למאגרים כדי שגם אנשים אחרים יוכלו להנות מהם
@@ -16,20 +16,16 @@
                 </div>
             </div>
             <div class="description">
-                <en>David Ben-Gurion surrounded by young zionists on his arrival at the railroad station in Memel, Lithuania, April 25, 1933. (Beth Hatefutsoth Photo Archive, courtesy of Israel Sperling, Tel Aviv)</en>
+                <en>David Ben-Gurion surrounded by young zionists on his arrival at the railroad station in Memel, Lithuania, April 25, 1933. (Beit Hatfutsot Photo Archive, courtesy of Israel Sperling, Tel Aviv)</en>
                 <he>דוד בן-גוריון מוקף במקבלי פנים בתחנת הרכבת בממל, ליטא, 25 לאפריל, 1933, ארכיון בית התפוצות</he>
             </div>
             <div class="arrow-down"></div>
         </div>
         <div id="tabs-container">
-            <div class="tabs">
                 <tabset justified="true">
                     <tab heading="{{uploadCtrl.get_tab_heading('image')}}" active="uploadCtrl.tab_status.image"></tab>
-                    <tab heading="{{uploadCtrl.get_tab_heading('family_tree')}}" active="uploadCtrl.tab_status.family_tree"></tab>
-                    <!-- <tab heading="{{uploadCtrl.get_tab_heading('video')}}" active="uploadCtrl.tab_status.video"></tab>
-                    <tab heading="{{uploadCtrl.get_tab_heading('music')}}" active="uploadCtrl.tab_status.music"></tab> -->
+                    <tab class="inactive" heading="{{uploadCtrl.get_tab_heading('family_tree')}}"></tab> <!-- active="uploadCtrl.tab_status.family_tree" -->
                 </tabset>
-            </div>
         </div>
         <div id="upload-view-container">
             <div id="upload-view" ui-view></div>

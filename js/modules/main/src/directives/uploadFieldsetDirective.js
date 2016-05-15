@@ -8,7 +8,8 @@ angular.module('main').
 				metaData: '=',
 				rc: '=',
 				fieldsetLang: '@',
-				isRequired: '='
+				isRequired: '=',
+				isBilingual: '='
 			},
 			controller: ['$scope', function($scope) {
 				$scope.select_field = function(type) {
