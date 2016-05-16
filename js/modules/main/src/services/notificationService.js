@@ -25,6 +25,9 @@ angular.module('main').
 	en: 'all is fine',
 	he: 'הכל אחלה',
 	options: pendingOptions
+}, 1: {
+	en: "A message with your login link has been emailed to you",
+	he: 'הודעת דואל עם הקישור לכניסה נשלחה אליך'
 }, 2: {
 	en: 'found some people in the family trees',
 	he: 'מצטתי אנשים בעצי המשפחהן',
@@ -51,6 +54,10 @@ angular.module('main').
 }, 9: {
 	en: 'Upload in progress...',
 	he: 'העלאה מתבצעת...'
+}, 10: {
+	en: 'Sending the login email has failed, please try again later.',
+	he: 'שליחת דואל הכניסה נשלחה, אנא נסו שוב בעוד מספר רגעים',
+	options: errorOptions
 }, 11: {
 	en: 'Search has failed.',
 	he: 'החיפוש נכשל.',

@@ -16,7 +16,7 @@ angular.module('config', []).
      */
     constant('apiConfig', {
         baseUrl:        'localhost:5000',
-        auth:           'auth',
+        login:      	'login',
         user:           'user', 
         mjs:            'mjs', 
         wizard_search:  'wsearch',

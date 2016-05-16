@@ -6,11 +6,13 @@
  * Controller for auth modal template.
  * Handles auth modal scope.
  */
-var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
+var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister,
+						notification) {
     var self = this;
 
     this.$modalInstance = $modalInstance;
     this.auth = auth;
+    this.notification = notification;
     this.is_register = isRegister;
 
     /**
@@ -60,8 +62,7 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
      * Object that binds to the signin form inputs.
      */
     this.signin_data = {
-        email:  '',
-        ps:     ''
+        email:  ''
     };
 
 
@@ -153,18 +154,13 @@ AuthCtrl.prototype = {
     signin: function() {
         var self = this;
 
-    	this.auth.signin(this.signin_data.email, this.signin_data.ps).
+    	this.auth.signin(this.signin_data.email).
             then(function() {
-                self.message = {
-                    en: 'Sign in succeeded',
-                    he: 'הכניסה התבצעה בהצלחה'
-                };
                 self.$modalInstance.close();
+                self.notification.put(1);
             }, function() {
-                self.message = {
-                    en: 'Sign in failed',
-                    he: 'הכניסה נכשלה'
-                };
+                self.$modalInstance.close();
+                self.notification.put(10);
             });
     },
 
@@ -243,4 +239,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance', 'langManager', 'auth', 'isRegister', AuthCtrl]);
+angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance',
+			'langManager', 'auth', 'isRegister', 'notification', AuthCtrl]);

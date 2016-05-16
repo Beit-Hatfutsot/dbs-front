@@ -182,7 +182,16 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 header.show_recent();
             }]
         },
-
+        {
+            name: 'login',
+            url: '/login/:token',
+            controller: 'LoginCtrl as ctrl',
+            templateUrl: 'templates/main/start.html',
+            onEnter: ['cache', 'wizard', 'header', function(cache, wizard, header) {
+                wizard.clear();
+                header.sub_header_state = 'closed';
+            }]
+        },
 
 		/*
 

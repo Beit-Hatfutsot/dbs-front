@@ -58,11 +58,13 @@ describe('auth-services', function() {
 
 		
 		it('should signin when credentials correct', function() {
-			$httpBackend.expectPOST(apiClient.urls.auth);
+			$httpBackend.expectGET(apiClient.urls.login)
+				.respond(200, {user: {authentication_token: "test-token"}});
 			$httpBackend.expectGET(apiClient.urls.user);
-			auth.signin('test-username', 'test-password');
+			auth.login('goodtoken');
 			$httpBackend.flush();
-			expect($window.localStorage.getItem('bhsclient_token')).toEqual('test-token')
+			expect($window.localStorage.getItem('bhsclient_token'))
+				.toEqual('test-token')
 			expect(requestHeaders.Authorization).toEqual('Bearer test-token')
 			expect(auth.is_signedin()).toBe(true);
 		});
@@ -70,7 +72,7 @@ describe('auth-services', function() {
 
 		it('should not signin when credentials are incorrect', function() {
 			$httpBackend.expectPOST(apiClient.urls.auth);
-			auth.signin('wrong-username', 'wrong-password');
+			auth.signin('bad token');
 			$httpBackend.flush();
 			expect($window.localStorage.getItem('bhsclient_token')).toBe(null);
 			expect(requestHeaders.Authorization).toBeUndeifned;

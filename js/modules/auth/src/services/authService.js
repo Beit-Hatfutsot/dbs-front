@@ -75,17 +75,15 @@ angular.module('auth').
 		     * @name auth#signin
 		     * 
 		     * @param email {String} user email
-		     * @param password {String} user password
 			 * 
 			 * @description
 			 * Sign a user in:
 			 * Sends a request to the auth API endpoint with user credentials.
-			 * Upon success, saves the authorization token on localStorage, and gets user data from {@link user}.
 			 *
 			 * @returns
 			 * {Promise}
 			 */
-		  	signin: function(email, password) {
+		  	signin: function(email) {
 		  		if ( !this.in_progress ) {
 		  			this.in_progress = true;
 
@@ -95,20 +93,11 @@ angular.module('auth').
 					 	signin_deferred = $q.defer();
 
 					try {
-				  		$http.post(apiClient.urls.auth, {
-				    		username: email,
-				    		password: password
+				  		$http.post(apiClient.urls.user, {
+				    		email: email,
 				    	}).
 				    	success(function(response) {
-				    		if (response.token) {
-				    			$window.localStorage.setItem('bhsclient_token', response.token);
-				    			user.$get().then(function() {
-				    				$rootScope.$broadcast('signin');
-					    			signin_deferred.resolve();
-				    			});
-				    		} else {
-				    			signin_deferred.reject();
-				    		}
+							signin_deferred.resolve();
 				    	}).
 				    	error(function() {
 				    		signin_deferred.reject();
@@ -122,6 +111,48 @@ angular.module('auth').
 				    }
 
 	  				return signin_deferred.promise;
+		  		}
+		  	},
+
+		  	login: function(token) {
+		  		if ( !this.in_progress ) {
+		  			this.in_progress = true;
+
+		  			this.signout();
+
+			  		var self = this,
+					 	login_deferred = $q.defer();
+
+					try {
+						var url = apiClient.urls.login;
+				  		$http.get(url, {
+							headers: {Accept: 'application/json'}
+						}). then(function(response) {
+								// success
+								var auth_token = response.data.user.authentication_token;
+								if (auth_token) {
+									$window.localStorage.setItem('bhsclient_token', auth_token);
+									user.$get().then(function() {
+										$rootScope.$broadcast('signin');
+										login_deferred.resolve();
+									});
+								} else {
+									login_deferred.reject();
+								}
+							}, function(response) {
+								// failure
+								console.log(response);
+								login_deferred.reject(response);
+							}).
+							finally(function() {
+								self.in_progress = false;
+							});
+				    }
+				    catch(e) {
+				    	login_deferred.reject();
+				    }
+
+	  				return login_deferred.promise;
 		  		}
 		  	},
 
@@ -212,13 +243,12 @@ angular.module('auth').
 		     * @name auth#get_token
 			 * 
 			 * @description
-			 * We use JWT for user authentication.
-			 * Once recieved, the JWT token is saved in `localStorage`,
+			 * The authentication token is saved in `localStorage`,
 			 * and is added to every subsequent request to the API.
-			 * This method retrieves the JWT token from `localStorage`.
+			 * This method retrieves the token from `localStorage`.
 			 *
 			 * @returns
-			 * {String} JWT token, or `false` if not signed-in.
+			 * {String} authentication token, or `false` if not signed-in.
 			 */
 		  	get_token: function() {
 		  		return this.is_signedin() ? $window.localStorage.getItem('bhsclient_token') : false;
