@@ -227,13 +227,38 @@
 					.checkbox {
 						display: block;
 						width: 100%;
+						color: $gray3;
 
-						.en & {
+						&.rtl {
 							direction: rtl;
+
+							.checkbox-label {
+								padding-right: 25px;
+
+								&:before {
+									right: 0;
+								}
+							}
+
+							input[type=checkbox]:checked + .checkbox-label:after {
+								right: 3px;
+							}
 						}
 
-						.he & {
+						&.ltr {
 							direction: ltr;
+
+							.checkbox-label {
+								padding-left: 25px;
+
+								&:before {
+									left: 0;
+								}
+							}
+
+							input[type=checkbox]:checked + .checkbox-label:after {
+								left: 3px;
+							}
 						}
 						
 						input[type=checkbox] {
@@ -243,19 +268,31 @@
 	                    .checkbox-label {
 	                    	position: relative;
 	                    	display: inline-block;
-	                    	padding-left: 25px;
-	                    	font-size: 14px;
+	                    	font-size: 16px;
 	                    	@include hover-pointer();
+
+	                    	.en & {
+	                    		padding-left: 25px;
+	                    	}
+	                    	.he & {
+	                    		padding-right: 25px;
+	                    	}
 	                    }
 
 		                .checkbox-label:before {
 		                	content: "";
 		                	position: absolute;
-		                	left: 0;
 		                	width: 20px;
 						    height: 20px;
-						    background-color: $red4;
+						    background-color: $pink;
 						    @include border-radius(4px);
+
+						    .en & {
+						    	left: 0;
+						    }
+						    .he & {
+						    	right: 0;
+						    }
 		                }
 
 		                input[type=checkbox]:checked + .checkbox-label:after {
@@ -263,7 +300,6 @@
 		                	display: inline-block;
 		                	position: absolute;
 		                	top: 4px;
-	                        left: 3px;
 		                	width: 11px;
 	                        height: 6px;
 	                        border: 3px solid $gray3;
@@ -271,7 +307,40 @@
 	                        border-right: none;
 	                        background: transparent;
 	                        @include rotate($degrees:-45deg);
+
+	                        .en & {
+	                        	left: 3px;
+	                        }
+	                        .he & {
+	                        	right: 3px;
+	                        }
 		                }
+					}
+
+					.cc {
+						display: block;
+						width: 100%;
+						img {
+							margin-top: 10px;
+							.en & {
+								float: left;
+								margin-right: 10px;
+							}
+
+							.he & {
+								float: right;
+								margin-left: 10px;
+							}
+						}
+
+						a {
+							color: inherit;
+							font-size: 17px;
+
+							&:hover {
+								color: $gray2;
+							}
+						}
 					}
 
 					.upf {

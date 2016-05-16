@@ -47,12 +47,10 @@
 			<div class="upf__alt-instructions">
 				<en>במידה ואתם דוברי עברית, אנא מלאו את אותם פרטים גם בעברית</en>
 			</div>
-			<div class="checkbox">
+			<div class="checkbox rtl">
 				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
-				<label class="checkbox-label" for="language-checkbox">
-					<span class="checkbox-label-desc">
-						<en>אני דובר\ת עברית</en>
-					</span>
+				<label class="checkbox-label " for="language-checkbox">
+					<span class="checkbox-label-desc">אני דובר/ת עברית</span>
 				</label>
 			</div>
 			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
@@ -77,12 +75,10 @@
 			<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'he'">
 				<he>If you speak English, please fill the same details below</he>
 			</div>
-			<div class="checkbox">
+			<div class="checkbox ltr">
 				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
 				<label class="checkbox-label" for="language-checkbox">
-					<span class="checkbox-label-desc">
-						<he>I speak English</he>
-					</span>
+					<span class="checkbox-label-desc">I speak English</span>
 				</label>
 			</div>
 			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
@@ -92,13 +88,31 @@
 								is-required="true"
 								is-bilingual="uploadCtrl.is_bilingual ? true:false">
 			</upload-fieldset>
-			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
+			<upload-fieldset	ng-show="uploadCtrl.is_bilingual"
+								meta-data="uploadCtrl.meta_data.image" 
 								upload-form="upload_form" 
 								rc="rc" 
 								fieldset-lang="en" 
 								is-required="false"
 								is-bilingual="uploadCtrl.is_bilingual ? true:false">
 			</upload-fieldset>
+		</div>
+
+		<div class="checkbox">
+			<input id="cc-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.copyright">
+			<label class="checkbox-label" for="cc-checkbox">
+				<span class="checkbox-label-desc">
+					<en>I assert that I hold the copyrights to these images / I have unlimited usage rights regarding these images and I agree to contribute these images to the databases of Beit Hatfutsot.</en>
+					<he>אני מאשר/ת שאני בעל/ת זכויות היוצרים או שאני בעל/ת זכויות שימוש בלתי מוגבלות על הקובץ, ומסכים/ה לתרום את התמונה למאגר בית התפוצות.</he>
+				</span>
+			</label>
+			<div class="cc">
+			    <img ng-src="images/creative_commonsS.png">
+			    <div class="cc__desc">
+			      <en>The files you upload will be licensed under a <a ng-href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="blank">Creative Commons Attribution-Non Commercial-ShareAlike 4.0 International License</a>.</en>
+			      <he>שימו לב, כי בהעלאת קובץ, אתם מסכימים שהפריט יופץ תחת רשיון מסוג <a ng-href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="blank">"שימוש לא מסחרי, שיטוף זהה" של Creative Commons</a>.
+			    </div>
+		  	</div>
 		</div>
 
 		<!-- <upload-fieldset 	meta-data="uploadCtrl.meta_data.image" 
