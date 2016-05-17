@@ -6,6 +6,7 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
     this.langManager = langManager;
     this.mjs = mjs;
     this.notification = notification;
+    this.placement = langManager.lang === 'en' ? 'left':'right';
 
     this.flow_init = {
         target:             apiClient.urls.upload, 
@@ -99,61 +100,73 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
                 title:  {
                     en: {
                         true: '*Title',
-                        false: 'Title'
+                        false: 'Title',
+                        placeholder: 'In a few words, describe this image.'
                     },
                     he: {
                         true: '*כותרת',
                         false: 'כותרת',
+                        placeholder: 'כתבו בכמה מילים מה רואים בתמונה.'
                     }
                 },
                 description: {
                     en: {
                         true: '*Description',
-                        false: 'Description'
+                        false: 'Description',
+                        placeholder: 'Describe this image. Who is in this photo and what are they doing / what is the occasion? (Example: "Passover Seder at the Cohen family home.") Is there an interesting story that goes along with this image? This is the place to tell it!'
                     },
                     he: {
                         true: '*תיאור',
-                        false: 'תיאור'
+                        false: 'תיאור',
+                        placeholder: 'הוסיפו תיאור כללי של התמונה - מה היו הנסיבות שבהן צולמה (לדוגמה - "סדר פסח בבית המשפחת כהן בעיירה פשמישל"), האם יש סיפור מעניין על מה שקורה בה וכו\'.'
                     }
                 },
                 location: {
                     en: {
                         true: '*Location',
-                        false: 'Location'
+                        false: 'Location',
+                        placeholder: 'Where was this photo taken? (City, town, village, etc.) If unknown, write the country or region.'
                     },
                     he: {
                         true: '*מיקום',
-                        false: 'מיקום'
+                        false: 'מיקום',
+                        placeholder: 'ציינו את שם המקום שבו צולמה התמונה. אם לא ידוע, ציינו חבל ארץ או מדינה. טיפ: הסתכלו מה רשום על גב התמונה.'
                     }
                 },
                 date: {
                     en: {
                         true: '*Date',
-                        false: 'Date'
+                        false: 'Date',
+                        placeholder: 'On what date was this photo taken? If unknown, write the year, range of years, or decade.'
                     },
                     he: {
                         true: '*תאריך',
-                        false: 'תאריך'
+                        false: 'תאריך',
+                        placeholder: 'ציינו תאריך מדויק שבו צולמה התמונה. אם לא ידוע, ציינו שנה או טווח שנים. טיפ: הסתכלו מה רשום על גב התמונה.'
                     }
                 },
                 creator_name: {
                     en: {
                         true: '*Photographer\'s name',
-                        false: 'Photographer\'s name'
+                        false: 'Photographer\'s name',
+                        placeholder: 'If you are unsure of who took the picture, please write "unknown."'
                     },
                     he: {
                         true: '*שם הצלם',
-                        false: 'שם הצלם'
+                        false: 'שם הצלם',
+                        placeholder: 'אם אינכם יודעים מי צילם את התמונה, או באיזה סטודיו צולמה, כתבו "לא יודע" או ציינו כמה זמן היא ברשותכם.'
                     }
                 },
                 people_present: {
                     en: {
                         true: '*Names of people in this photo',
-                        false: 'Names of people in this photo'
+                        false: 'Names of people in this photo',
+                        placeholder: 'Name the people, objects, structures, etc. Please only indicate those whose identity is known to you.'
                     },
                     he: {
                         true: '*מי בתמונה? שמות ושמות משפחה של המצולמים',
-                        false: 'מי בתמונה? שמות ושמות משפחה של המצולמים'
+                        false: 'מי בתמונה? שמות ושמות משפחה של המצולמים',
+                        placeholder: 'שמות בני משפחה או אנשים אחרים, תיאור המבנים או מחפצים וכו\'. אם אינכם בטוחים בכל הפרטים, התמקדו באלה שכן.'
                     }
                 }
             },

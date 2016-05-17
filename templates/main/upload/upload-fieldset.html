@@ -12,7 +12,13 @@
 				ng-focus="select_field(type + '_' + fieldsetLang)"
 				ng-blur="select_field(null)"
 				ng-model="metaData.values[type][fieldsetLang]" 
-				ng-required="isRequired">
+				ng-required="isRequired"
+				placeholder="{{metaData.placeholders[type][fieldsetLang].placeholder}}"
+				tooltip="{{metaData.placeholders[type][fieldsetLang].placeholder}}"
+				tooltip-trigger="focus"
+				tooltip-animation="false"
+				tooltip-placement="{{fieldsetLang === 'en'? 'left':'right'}}"/>
+
 		<textarea 	ng-if="type === 'description'" 
 					id="upf-{{type}}-{{fieldsetLang}}" 
 					class="upf__field__{{type}}" 
@@ -20,7 +26,12 @@
 					ng-focus="select_field(type + '_' + fieldsetLang)"
 					ng-blur="select_field(null)"
 					ng-model="metaData.values[type][fieldsetLang]" 
-					ng-required="isRequired">
+					ng-required="isRequired"
+					placeholder="{{metaData.placeholders[type][fieldsetLang].placeholder}}"
+					tooltip="{{metaData.placeholders[type][fieldsetLang].placeholder}}"
+					tooltip-trigger="focus"
+					tooltip-animation="false"
+					tooltip-placement="{{fieldsetLang === 'en'? 'left':'right'}}">
 		</textarea>
         <div class="upf__field__error" ng-show="rc.upload_form.needsAttention(upload_form[type + '_' + fieldsetLang])">
         	{{metaData.validation_errors[type][fieldsetLang]}}

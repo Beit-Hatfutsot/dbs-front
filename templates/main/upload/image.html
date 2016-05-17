@@ -41,8 +41,7 @@
 <div ng-hide="uploadCtrl.success">
 	<upload-area ctrl="uploadCtrl" flow-instance-init="uploadCtrl.flow_init"></upload-area>
 	<!--<upload-form ctrl="uploadCtrl" meta-data="uploadCtrl.meta_data.image" type="image"></upload-form>-->
-	<form ng-show="uploadCtrl.is_image" name="upload_form" id="upload-form" rc-submit="uploadCtrl.submit('image')" novalidate>
-		<!-- ng-class="{uploadCtrl.is_checked}" -->
+	<form  name="upload_form" id="upload-form" ng-show="uploadCtrl.is_image" rc-submit="uploadCtrl.submit('image')" novalidate> 
 		<div ng-if="uploadCtrl.lang === 'en'">
 			<div class="upf__alt-instructions">
 				<en>במידה ואתם דוברי עברית, אנא מלאו את אותם פרטים גם בעברית</en>
@@ -100,7 +99,10 @@
 
 		<div class="checkbox">
 			<input id="cc-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.copyright">
-			<label class="checkbox-label" for="cc-checkbox">
+			<label 	class="checkbox-label" 
+					for="cc-checkbox"
+					tooltip-html="'<div>Not sure if you have the copyright? we have some tips that might help you find out.</div>'"
+					tooltip-placement="{{uploadCtrl.placement}}">
 				<span class="checkbox-label-desc">
 					<en>I assert that I hold the copyrights to these images / I have unlimited usage rights regarding these images and I agree to contribute these images to the databases of Beit Hatfutsot.</en>
 					<he>אני מאשר/ת שאני בעל/ת זכויות היוצרים או שאני בעל/ת זכויות שימוש בלתי מוגבלות על הקובץ, ומסכים/ה לתרום את התמונה למאגר בית התפוצות.</he>

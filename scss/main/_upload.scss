@@ -1,3 +1,53 @@
+.tooltip {
+	position: absolute;
+    z-index: 1030;
+    display: block;
+    visibility: visible;
+    font-size: 12px;
+    line-height: 1.4;
+
+    &.left {
+    	margin-left: -3px;
+    	padding: 0 5px;
+
+    	.tooltip-arrow {
+    		right: 0;
+    		border-left: 5px solid #d6d6d6;
+    	}
+    }
+    &.right {
+    	margin-right: -3px;
+    	padding: 0 5px;
+
+    	.tooltip-arrow {
+    		left: 0;
+    		border-right: 5px solid #d6d6d6;
+    	}
+
+    }
+
+    .tooltip-inner {
+    	max-width: 200px;
+	    padding: 4px 8px;
+	    color: #666;
+	    text-decoration: none;
+	    background-color: #d6d6d6;
+	    border-radius: 10px;
+    }
+
+    .tooltip-arrow {
+		position: absolute;
+	    top: 50%;
+	    margin-top: -5px;
+	    border-top: 5px solid transparent;
+		border-bottom: 5px solid transparent;
+	    width: 0;
+	    height: 0;
+    }
+
+}
+
+
 #upload {
 	background: #ffffff;
 
@@ -414,8 +464,9 @@
 								width: 100%;
 								border: 2px solid $red4;
 								margin-bottom: 6px;
-								padding: 34px 10px 0;
-								font-size: 25px;
+								padding: 0px 10px;
+							    font-size: 18px;
+							    font-family: inherit;
 							}
 
 							&__title,
@@ -428,7 +479,7 @@
 
 							&__description {
 								height: 153px;
-								padding-top: 26px !important;
+								//padding-top: 26px !important;
 							}
 
 							&__error {
