@@ -164,10 +164,10 @@ ItemCtrl.prototype = {
 		if (index == undefined) {
 			index = this._Index;
 		}
-		var body = angular.element(document.getElementsByTagName('body')[0]),
+		var view = angular.element(document.getElementById('view')),
 			gallery = this.item_data;
 
-		body.addClass('backdrop');
+		view.addClass('backdrop');
 	    this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
@@ -182,7 +182,7 @@ ItemCtrl.prototype = {
 	     		}
 	     	}
 	    }).result.finally(function() {
-	    	body.removeClass('backdrop');
+	    	view.removeClass('backdrop');
 	    });
 	},
 

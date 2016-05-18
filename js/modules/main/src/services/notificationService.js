@@ -90,14 +90,15 @@ angular.module('main').
 		var notification = {
 			loading_gif: null,
 			loading: function(on) {
+				var view = angular.element(document.getElementById('view'));
 				if (on) {
-					jQuery('#view').addClass('backdrop');
+					view.addClass('backdrop');
 					this.loading_gif = jQuery('<img>')
 						.addClass('loading')
 						.attr('src', 'images/BH-Loading.gif')
 						.appendTo('body');
 				} else if (this.loading_gif) {
-					jQuery('#view').removeClass('backdrop');
+					view.removeClass('backdrop');
 					this.loading_gif.remove();
 					this.loading_gif == null;
 				}
