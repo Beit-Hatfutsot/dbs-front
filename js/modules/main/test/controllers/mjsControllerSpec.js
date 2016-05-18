@@ -17,54 +17,28 @@ describe("My Story Service", function() {
         mjs_url = apiClient.urls.mjs;
         user_url = apiClient.urls.user;
         $sessionStorage = _$sessionStorage_;
+		mjs._latest = {name: 'tester',
+                       email: 'tester@example.com',
+                       story_items:
+							[{id:'someid',
+							  in_branch: [false, false, false, true]}],
+                       story_branches: ['father'] 
+            }
     }));
 
-    beforeEach(function() {
-        // expect the service to get the user with a basic story
-        $httpBackend.expectGET(user_url)
-            .respond(200, {name: 'tester',
-                           email: 'tester@example.com',
-                           story_items:
-                                [{id:'someid',
-                                  in_branch: [false, false, false, true]}],
-                           story_branches: ['father'] 
-            });
-    })
     afterEach(function() {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    describe("get the story", function() {
-
-        var story;
-
-        it ("should return the user's story", function() {
-            mjs.get().then(function (data) {
-                expect(data.story_items.length).toEqual(1);
-                expect(data.story_branches[0]).toMatch('father');
-                expect(mjs._latest).toBe(data);
-            });
-            $httpBackend.flush();
-            // next call should get the data from memory
-            expect(mjs._latest).not.toBeNull();
-            mjs.get().then (function(data) {
-                expect(data.story_items.length).toEqual(1);
-                expect(data.story_branches[0]).toMatch('father');
-            });
-        });
-    });
     describe("update the items in the story", function() {
         it ("should add an item to the story", function() {
             $httpBackend.expectPOST(mjs_url)
                 .respond(200, {story_items: [{id:'another_id'}],
                                story_branches: ['father']});
             mjs.add('another id').then(function () {
-                var data = mjs._latest;
+                var data = mjs.latest;
                 expect(data.story_items[0].id).toMatch('another_id');
-                mjs.get().then(function(data) {
-                    expect(data.story_items[0].id).toMatch('another_id');
-                });
             });
             $httpBackend.flush();
         });
@@ -85,9 +59,7 @@ describe("My Story Service", function() {
                                story_branches: ['father']});
             mjs.remove_from_branch('someid', 3)
             $httpBackend.flush();
-            mjs.get().then(function (story) {
-                expect(story.story_items[0].in_branch[3]).toBeFalsy();
-            });
+			expect(mjs.latest.story_items[0].in_branch[3]).toBeFalsy();
         });
         it ("should delete an item from the story", function() {
             $httpBackend.expectDELETE(mjs_url+'/someid')
@@ -95,9 +67,7 @@ describe("My Story Service", function() {
                                story_branches: ['father']});
             mjs.remove('someid');
             $httpBackend.flush();
-            mjs.get().then(function (story) {
-                expect(story.story_items.length).toEqual(0);
-            });
+			expect(mjs.latest.story_items.length).toEqual(0);
         });
     });
     describe("update the branches names", function() {
@@ -109,9 +79,7 @@ describe("My Story Service", function() {
                                story_branches: ['mother']});
             mjs.rename_branch(0, 'mother');
             $httpBackend.flush();
-            mjs.get().then(function (story) {
-                expect(story.story_branches[0]).toMatch('mother');
-            });
+			expect(mjs.latest.story_branches[0]).toMatch('mother');
         });
     });
 });

@@ -10,9 +10,6 @@ var LoginCtrl = function($stateParams, auth, notification) {
 
     var self = this;
 
-    this.auth = auth;
-    this.notification = notification;
-
 	var token = $stateParams.token;
 	notification.loading(true);
 	auth.login(token).then(function () {

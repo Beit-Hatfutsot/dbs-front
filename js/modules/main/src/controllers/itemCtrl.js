@@ -54,7 +54,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		}
 	});
 
-	$scope.$on('signin', function() {
+	$scope.$on('loggedin', function() {
 		if (self.is_ugc_request) {
 			self.get_item();
 		}

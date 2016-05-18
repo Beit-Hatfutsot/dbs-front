@@ -1,31 +1,19 @@
 angular.module('main').
 	factory('mjs', ['$http', '$resource', 'apiClient', '$rootScope', 'item',
-					'user', '$q', '$sessionStorage', '$window',
+					'auth', '$q', '$sessionStorage', '$window',
 					function($http, $resource, apiClient, $rootScope, item,
-							 user, $q, $sessionStorage, $window) {
+							 auth, $q, $sessionStorage, $window) {
 		var self = this;
 		self.item = item;
 
 		var mjs = {
-			get: function () {
-				var self = this,
-					latest = self._latest;
-
-				if (latest)
-					return $q.resolve(latest);
-				else {
-					return user.$promise.then(function(user) {
-						self._latest = user; 
-						// update_latest(user);
-						return self._latest;
-					})
-				}
-			},
 
 			dict: {},
+			_latest: auth.user,
 
 			_update_latest: function (response) {
-				mjs._latest = response.data;
+				var user = response.data;
+				mjs.latest = user;
 			},
 
 			rename_branch: function(branch_num, new_name) {
@@ -56,37 +44,37 @@ angular.module('main').
 			},
 
 			get_items_ids: function () {
-				return this.get().then(function (data) {
-					var ret = [];
-					data.story_items.forEach(function (i) {
+				var ret = [];
+				if (this.latest)
+					this.latest.story_items.forEach(function (i) {
 						ret.push(i.id);
 					});
-					return ret;
-				})
+				return ret;
 			}
 		};
 		//get latest from session storage
-		Object.defineProperty(mjs, '_latest', {
+		Object.defineProperty(mjs, 'latest', {
 			enumerable: true,
 			get: function () {
-				return $sessionStorage.latest_mjs;
+				return this._latest;
 			},
 			set: function(story) {
-				$sessionStorage.latest_mjs = story;
+				this._latest = story;
 				$rootScope.$broadcast('mjs-updated', story);
 			}
 		});
 		Object.defineProperty(mjs, 'items_counters', {
 			get: function () {
-				var story = mjs._latest,
+				var story = mjs.latest,
 					ret = [0,0,0,0];
 
-				story.story_items.forEach(function(i, _i) {
-					i.in_branch.forEach(function (flag, _flag) {
-						if (flag)
-							ret[_flag]++;
+				if (story && story.story_items)
+					story.story_items.forEach(function(i, _i) {
+						i.in_branch.forEach(function (flag, _flag) {
+							if (flag)
+								ret[_flag]++;
+						});
 					});
-				});
 				return ret;
 			}
 		});
@@ -94,26 +82,29 @@ angular.module('main').
 		** When a new Item is loaded, check if it's in the story and update `in_mjs` on the `item_data`
 		*/
 		$rootScope.$on('item-loaded', function (event, items) {
-			if (items.constructor !== Array)
-				items = [items]
-			mjs.get().then(function (items_n_branches) {
+			if (mjs.latest && mjs.latest.story_items) {
+				if (items.constructor !== Array)
+					items = [items]
 				items.forEach(function (item_data) {
 					var item_string = self.item.get_key(item_data);
 
 					var in_mjs = false;
 
-					if (items_n_branches.story_items)
-						items_n_branches.story_items.every(function(item) {
-							if (item_string == item.id) {
-								in_mjs = true;
-								item_data.in_branch = item.in_branch.slice();
-								mjs.dict[item_string] = item;
-							}
-							return !in_mjs;
-						});
+					mjs.latest.story_items.every(function(item) {
+						if (item_string == item.id) {
+							in_mjs = true;
+							item_data.in_branch = item.in_branch.slice();
+							mjs.dict[item_string] = item;
+						}
+						return !in_mjs;
+					});
 					item_data.in_mjs = in_mjs;
 				});
-			});
+			}
+		});
+		$rootScope.$on('loggedin', function (event, user) {
+			mjs.latest = user;
+			console.log("updated mjs with loggedin user");
 		});
 
 		return mjs;
