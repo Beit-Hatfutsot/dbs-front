@@ -11,9 +11,11 @@ angular.module('main').
 							element[0].blur();
 							scope.mjsCtrl.rename_branch(scope.$index, scope.branch_name);
 							scope.mjsCtrl.branch_edit_status[scope.$index] = false;
+							scope.mjsCtrl.in_edit_mode = false;
 						}
 						else {
 							scope.mjsCtrl.branch_edit_status[scope.$index] = false;
+							scope.mjsCtrl.in_edit_mode = false;
 							scope.mjsCtrl.$scope.$digest();
 						}
 					}

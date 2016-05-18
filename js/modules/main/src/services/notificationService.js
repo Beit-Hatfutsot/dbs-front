@@ -87,7 +87,12 @@ angular.module('main').
 	en: 'Fetching more items...',
 	he: 'אוסף עוד פריטים...',
 	options: pendingOptions
-},	
+}, 16: {
+	en: 'You must complete renaming before navigating',
+	he: 'נא להשלים את שינוי השם',
+	options: errorOptions
+}	
+
 // next line ends the notifications dict
 	},
 	message = {
