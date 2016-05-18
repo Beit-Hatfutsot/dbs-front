@@ -81,7 +81,6 @@ MjsController.prototype = {
 	},
 
 	navigate_to_branch: function(branch_num) {
-		debugger
 		if(!this.in_edit_mode) {
 			this.selected_branch = branch_num;
 		}
