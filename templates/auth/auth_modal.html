@@ -1,103 +1,20 @@
-<div class="auth-modal" ng-switch on="authController.is_register">
+<div class="auth-modal">
 	<icon class="xsign" position="[-224, -333]" ng-click="authController.dismiss()"></icon>
-	<div class="auth-modal__icon"></div>
-	<!-- registration form -->
-	<div ng-switch-when="true">
+	<div>
 		<div class="auth-modal__title">
-			<en>Please register so we can create your story and save it for you</en>
-			<he>אנא הירשמו לאתר כדי שנוכל ליצור את הסיפור שלכם ולשמור אותו עבורכם</he>
+			<en>Sign In</en>
+			<he>כניסה</he>
 		</div>
-		<div class="auth-modal__switch">
-			<en>Already have an account? </en>
-			<he>כבר יש לכם חשבון? </he>
-			<a href="" ng-click="authController.goto_signin()">
-				<en>Sign in</en>
-				<he>היכנסו</he>
-			</a>
-		</div>
-		<form ng-switch on="authController.auth_in_progress" name="register_form" class="auth-form" rc-submit="authController.register()" novalidate>
-			<fieldset class="bhf bhf--{{authController.lang}}">
-				<div class="bhf__field">
-					<input 	type="text"
-							name="name"
-							id="register-name"
-							ng-model="authController.register_data.name"
-							required
-							ng-focus="authController.select_field('name')"
-							ng-blur="authController.select_field(null)">
-					<label for="register-name" ng-class="{'bhf__field__label--up': authController.selected_field === 'name' || authController.register_data.name || rc.register_form.needsAttention(register_form.name), 'bhf__field__label--down': authController.selected_field !== 'name' && !(authController.register_data.name) && !(rc.register_form.needsAttention(register_form.name))}">
-						<en>Name</en>
-						<he>שם</he>
-					</label>
-					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.name)">
-						<en>Please enter a name</en>
-						<he>אנא הכניסו שם</he>
-					</div>
-				</div>
-				<div class="bhf__field">
-					<input 	type="text"
-							name="email"
-							id="register-email"
-							ng-model="authController.register_data.email"
-							ng-focus="authController.select_field('email')"
-							ng-blur="authController.select_field(null)"
-							required>
-					<label for="register-email" ng-class="{'bhf__field__label--up': authController.selected_field === 'email' || authController.register_data.email || rc.register_form.needsAttention(register_form.email), 'bhf__field__label--down': authController.selected_field !== 'email' && !(authController.register_data.email) && !(rc.register_form.needsAttention(register_form.email))}">
-						<en>Email</en>
-						<he>מייל</he>
-					</label>
-					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.email)">
-						<en>Please enter a valid email</en>
-						<he>אנא הכניסו כתובת מייל תקנית</he>
-					</div>
-				</div>
-				<div class="bhf__field">
-					<input 	type="password"
-							name="ps"
-							id="register-ps"
-							ng-model="authController.register_data.ps"
-							ng-focus="authController.select_field('ps')"
-							ng-blur="authController.select_field(null)"
-							required>
-					<label for="register-ps" ng-class="{'bhf__field__label--up': authController.selected_field === 'ps' || authController.register_data.ps || rc.register_form.needsAttention(register_form.ps), 'bhf__field__label--down': authController.selected_field !== 'ps' && !(authController.register_data.ps) && !(rc.register_form.needsAttention(register_form.ps))}">
-						<en>Password</en>
-						<he>סיסמה</he>
-					</label>
-					<div class="bhf__field__error" ng-show="rc.register_form.needsAttention(register_form.ps)">
-						<en>Please enter a password</en>
-						<he>אנא הכניסו סיסמה</he>
-					</div>
-				</div>
-			</fieldset>
-			<div class="auth-form__terms">
-				<input type="checkbox" id="accept-terms" class="auth-form__terms__checkbox">
-				<label for="accept-terms">
-					<en>I accept the </en>
-					<he>אני מקבל/ת את </he>
-					<a href="">
-						<en>terms and conditions</en>
-						<he>תנאי השימוש</he>
-					</a>
-				</label>
-			</div>
-			<input ng-switch-when="true" disabled class="auth-form__submit auth-form__submit--processing" type="submit" value="{{authController.submit_values.processing[authController.lang]}}">
-			<input ng-switch-default class="auth-form__submit" type="submit" value="{{authController.submit_values.register[authController.lang]}}">
-		</form>
-	</div>
-	<!-- sign-in form -->
-	<div ng-switch-default>
-		<div class="auth-modal__title">
-			<en>Please sign in so we can create your story and save it for you</en>
-			<he>אנא היכנסו לאתר כדי שנוכל ליצור את הסיפור שלכם ולשמור אותו עבורכם</he>
-		</div>
-		<div class="auth-modal__switch">
-			<en>Haven't got an account yet? </en>
-			<he>אין לכם חשבון? </he>
-			<a href="" ng-click="authController.goto_register()">
-				<en>Register for free</en>
-				<he>הירשמו חינם</he>
-			</a>
-		</div>
+    <p>
+      <en>
+        To save your family's story you need to be logged in.<br />
+        To log in just enter your email and we will send you a login link.
+     </en>
+     <he>
+       כדי לשמור את סיפור המשפחה שלך עליך להכנס לחשבונך.<br />
+       אנא הכנס את הדואל שלך ואנו נשלח קישור שיכניסך.
+     </he>
+    </p>
 		<form name="signin_form" class="auth-form" rc-submit="authController.signin()" novalidate>
 			<fieldset class="bhf bhf--{{authController.lang}}">
 				<div class="bhf__field">
@@ -115,23 +32,6 @@
 					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.email)">
 						<en>Please enter an email</en>
 						<he>אנא הכניסו דוא"ל</he>
-					</div>
-				</div>
-				<div class="bhf__field">
-					<input 	type="password"
-							name="ps"
-							id="signin-ps"
-							ng-model="authController.signin_data.ps"
-							ng-focus="authController.select_field('ps')"
-							ng-blur="authController.select_field(null)"
-							required>
-					<label for="signin-ps" ng-class="{'bhf__field__label--up': authController.selected_field === 'ps' || authController.signin_data.ps || rc.signin_form.needsAttention(signin_form.ps), 'bhf__field__label--down': authController.selected_field !== 'ps' && !(authController.signin_data.ps) && !(rc.signin_form.needsAttention(signin_form.ps))}">
-						<en>Password</en>
-						<he>סיסמה</he>
-					</label>
-					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.ps)">
-						<en>Please enter a password</en>
-						<he>אנא הכניסו סיסמה</he>
 					</div>
 				</div>
 			</fieldset>
