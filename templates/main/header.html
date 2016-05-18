@@ -64,7 +64,7 @@
               <span class="caret"></span>
             </button>
             <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
-              <div class="my-account-menu__row signed">
+              <div class="my-account-menu__row signed" ui-sref="mjs">
                 <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
                 <div class="dropdown-icons__user__name">{{headerController.username}}</div>
               </div>
@@ -77,10 +77,6 @@
               <div class="my-account-menu__row" ng-click="headerController.signin()">
                 <en>Sign in</en>
                 <he>הכנס</he>
-              </div>
-              <div class="my-account-menu__row" ng-click="headerController.signup()">
-                <en>Create account</en>
-                <he>צור חשבון</he>
               </div>
             </div>
           </div>
@@ -142,7 +138,9 @@
                     <he>עצי משפחה</he>
                 </div>
             </li>
-            <li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
+            <li class="mystory header-menu-item"
+                ng-class="{'header-menu-item--active': headerController.is_mjs_state}"
+                ui-sref="mjs">
               <div class="mystory__text">
                 <en>My Story</en>	
                 <he>הסיפור שלי</he>
