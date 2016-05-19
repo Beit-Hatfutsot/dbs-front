@@ -8,11 +8,13 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 	this.mjs_items = [];
 	this.$scope = $scope;
 	this.branch_edit_status = {
-		1: false,
-		2: false,
-		3: false,
-		4: false,
-	};
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+    };
+    this.in_edit_mode = false;
+	
 	this.rmdialog_status = false;
 
 	Object.defineProperty(this, 'signedin', {
@@ -61,14 +63,29 @@ MjsController.prototype = {
 		this.mjs.rename_branch(branch_num, new_name);
 	},
 
-	toggle_branch_edit: function(index)  {
-		for (var branch in this.branch_edit_status) {
-			if (branch != index && this.branch_edit_status[branch] == true) {
-				this.branch_edit_status[branch] = false;
-				break;
-			}
+	toggle_branch_edit: function(branch_num)  {
+		if (this.branch_edit_status[branch_num]) {
+			this.branch_edit_status[branch_num] = false;
+			this.in_edit_mode = false;
 		}
-		this.branch_edit_status[index] = !(this.branch_edit_status[index]); 
+		else {
+			for(var branch in this.branch_edit_status) {
+				if (this.branch_edit_status[branch] && branch != branch_num) {
+					this.branch_edit_status[branch] = false;
+					break;
+				}
+			}
+			this.branch_edit_status[branch_num] = true; 
+			this.in_edit_mode = true;
+		}
+	},
+
+	navigate_to_branch: function(branch_num) {
+		if(!this.in_edit_mode) {
+			this.selected_branch = branch_num;
+		}
+		else
+			this.notification.put(16);
 	},
 
 	toggle_branch_rmdialog: function()  {

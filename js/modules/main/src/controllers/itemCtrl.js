@@ -54,7 +54,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		}
 	});
 
-	$scope.$on('loggedin', function() {
+	$scope.$on('signin', function() {
 		if (self.is_ugc_request) {
 			self.get_item();
 		}
@@ -164,10 +164,8 @@ ItemCtrl.prototype = {
 		if (index == undefined) {
 			index = this._Index;
 		}
-		var view = angular.element(document.getElementById('view')),
-			gallery = this.item_data;
+		var	gallery = this.item_data;
 
-		view.addClass('backdrop');
 	    this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
@@ -181,8 +179,6 @@ ItemCtrl.prototype = {
 	     			return index
 	     		}
 	     	}
-	    }).result.finally(function() {
-	    	view.removeClass('backdrop');
 	    });
 	},
 

@@ -47,15 +47,17 @@
 		<nav class="mjs-menu">
 	        <ul class="nav">
 	        	<li class="menu-item branch--{{$index}}" ng-class="{'menu-item--selected': mjsCtrl.selected_branch === $index}" ng-repeat="branch in [0,1,2,3,4,5]">
-					<div ng-if="branch == 0" class="branch_name" ng-click="mjsCtrl.selected_branch = branch">
+					
+					<div ng-if="branch == 0" class="branch_name" ng-click="mjsCtrl.navigate_to_branch(branch)">
 						<en>The whole story</en>
 						<he>הסיפור שלי</he>
 						<br>
 						<span class="branch_name__num">{{mjsCtrl.mjs_items.length}}</span>	
 					</div>
+
 					<div class="clickable-area" ng-if="(branch > 0) && (branch < 5)">
 						<ng-switch on="mjsCtrl.branch_edit_status[branch]">
-							<div ng-switch-when="false" class="branch_name" ng-click="mjsCtrl.selected_branch = branch">
+							<div ng-switch-when="false" class="branch_name" ng-click="mjsCtrl.navigate_to_branch(branch)">
 								{{mjsCtrl.mjs._latest.story_branches[branch-1]}} 
 								<br>
 								<span class="branch_name__num">{{mjsCtrl.mjs.items_counters[branch-1]}}</span>
@@ -68,15 +70,15 @@
 										alter-mjs-branch />
 							</div>
 						</ng-switch>
-					</div> 
-					<div ng-if="branch == 5" ng-click="mjsCtrl.selected_branch = $index">
-						<div class="branch_name" ng-click="mjsCtrl.selected_branch = branch">
-							<en>My upload</en>
-							<he>ההעלאות שלי </he>
-							<br>
-							<span class="branch_name__num">{{}}</span>
-						</div>
 					</div>
+
+					<div ng-if="branch == 5" class="branch_name" ng-click="mjsCtrl.navigate_to_branch(branch)">
+						<en>My upload</en>
+						<he>ההעלאות שלי </he>
+						<br>
+						<span class="branch_name__num">{{}}</span>
+					</div>
+
 					<icon ng-if="(branch > 0) && (branch < 5)" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit(branch)"></icon>
 	    		</li>
 			</ul>

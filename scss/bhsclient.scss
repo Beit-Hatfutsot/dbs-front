@@ -47,6 +47,12 @@ html, body {
 			overflow: auto;
 		}
 
+        &.modal-open {
+            overflow: hidden;
+            position:fixed;
+            width: 100%;
+        }
+
 		@at-root #app-container {
 			position: relative;
 			min-height: 100%;

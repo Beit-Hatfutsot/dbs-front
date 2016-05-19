@@ -1,4 +1,4 @@
-var PersonsController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window) {
+var PersonsController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window, $location) {
 
 	var self = this,
 		advanced_fields = ['birth_place', 'marriage_place', 'death_place', 'tree_number', 'birth_year', 'marriage_year', 'death_year'];
@@ -21,6 +21,7 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 	this.$stateParams = $stateParams;
 	this.$scope = $scope;
 	this.$window = $window;
+	this.$location = $location;
 	this.ftrees = ftrees;
 	this.notification = notification;
 	this.persons_welcome_msg = $window.localStorage.getItem('persons-welcome-msg') != 'dismissed';
@@ -69,14 +70,10 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 
 	if (self.persons_welcome_msg && $state.lastState.name !== 'ftrees') {
 		 $timeout(function(){
-		    var view = angular.element(document.getElementById('view'));
-			view.addClass('backdrop');
 		    $modal.open({
 		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
 		     	controller: 'PersonsWelcomeController',
 		     	size: 'ftree'
-		    }).result.finally(function(){
-		    	view.removeClass('backdrop');
 		    })
 	    }, 1000)
 	};
@@ -91,11 +88,13 @@ PersonsController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
+
 				self.notification.loading(false);
 				if (individuals.total == 0)
 					self.notification.put(3);
+
+
 			}, function() {
-				self.notification.loading(false);
 				self.notification.put(500);
 			});
 	},
@@ -158,6 +157,7 @@ PersonsController.prototype = {
  	clear_filters: function() {
  		for (var parameter in this.search_params) {
  			this.search_params[parameter] = '';
+ 			this.$location.search(parameter, null);
  		}
  	},
 
@@ -172,4 +172,4 @@ PersonsController.prototype = {
     },
 };
 
-angular.module('main').controller('PersonsController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', PersonsController]);
+angular.module('main').controller('PersonsController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', '$location', PersonsController]);
