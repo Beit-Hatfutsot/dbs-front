@@ -122,18 +122,22 @@ angular.module('auth').
 				  		$http.get(url+'/'+token, {
 							headers: {Accept: 'application/json'}
 						}).then(function(response) {
-								// success
-								var auth_token = response.data.response.user.authentication_token;
-								if (auth_token) {
-									$window.localStorage.setItem('bhsclient_token', auth_token);
-									user.get().$promise.then(function(user) {
-										self.user = user
-										$rootScope.$broadcast('loggedin', user);
-										login_deferred.resolve();
-									});
-								} else {
-									login_deferred.reject();
-								}
+								if (response.data.meta.code == 200) {		
+								   // success
+									var auth_token = response.data.response.user.authentication_token;
+									if (auth_token) {
+										$window.localStorage.setItem('bhsclient_token', auth_token);
+										user.get().$promise.then(function(user) {
+											self.user = user
+											$rootScope.$broadcast('loggedin', user);
+											login_deferred.resolve();
+										});
+									} else {
+										login_deferred.reject(response);
+									}
+								} else 
+									login_deferred.reject(response);
+
 							}, function(response) {
 								// failure
 								login_deferred.reject(response);

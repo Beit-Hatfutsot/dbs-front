@@ -88,7 +88,11 @@ angular.module('main').
 	en: 'You must complete renaming before navigating',
 	he: 'נא להשלים את שינוי השם',
 	options: errorOptions
-}	
+}, 17: {
+	en: 'Sorry, this login link is not valid anymore',
+	he: 'מצטערים, הקישור אינו תקין',
+	options: errorOptions
+}
 // next line ends the notifications dict
 	},
 	message = {
