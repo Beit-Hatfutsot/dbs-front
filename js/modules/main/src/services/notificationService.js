@@ -25,6 +25,9 @@ angular.module('main').
 	en: 'all is fine',
 	he: 'הכל אחלה',
 	options: pendingOptions
+}, 1: {
+	en: "Our pigeon is on her way, carrying your login link",
+	he: 'נשלחה הודעת דואל עם קישור לכניסה לחשבונך'
 }, 2: {
 	en: 'found some people in the family trees',
 	he: 'מצטתי אנשים בעצי המשפחהן',
@@ -51,6 +54,10 @@ angular.module('main').
 }, 9: {
 	en: 'Upload in progress...',
 	he: 'העלאה מתבצעת...'
+}, 10: {
+	en: 'Sending the login email has failed, please try again later.',
+	he: 'שליחת דואל הכניסה נשלחה, אנא נסו שוב בעוד מספר רגעים',
+	options: errorOptions
 }, 11: {
 	en: 'Search has failed.',
 	he: 'החיפוש נכשל.',
@@ -92,14 +99,15 @@ angular.module('main').
 		var notification = {
 			loading_gif: null,
 			loading: function(on) {
+				var view = angular.element(document.getElementById('view'));
 				if (on) {
-					jQuery('#view').addClass('backdrop');
+					view.addClass('backdrop');
 					this.loading_gif = jQuery('<img>')
 						.addClass('loading')
 						.attr('src', 'images/BH-Loading.gif')
 						.appendTo('body');
 				} else if (this.loading_gif) {
-					jQuery('#view').removeClass('backdrop');
+					view.removeClass('backdrop');
 					this.loading_gif.remove();
 					this.loading_gif == null;
 				}

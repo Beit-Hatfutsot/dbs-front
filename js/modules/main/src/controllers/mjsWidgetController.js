@@ -1,4 +1,4 @@
-var MjsWidgetController = function($scope, $state, mjs, auth, item) {
+var MjsWidgetController = function($rootScope, $scope, $state, mjs, auth, item) {
 	var self = this;
 
 	this.$state = $state;
@@ -17,19 +17,15 @@ var MjsWidgetController = function($scope, $state, mjs, auth, item) {
 		}
 	});
 	
-	$scope.$on('signin', function() {
-		mjs.refresh().
-			then(function() {
-				if (self.item_tobe_added) {
-					self.mjs.add($scope.item.Slug).
-						then(function() {
-							// open pop-over
-							self.item_added = true;
-							self.item_tobe_added = false;
-						});
-				}
-			});
+	/*
+	$rootScope.$on('mjs-updated', function() {
+		if (self.item_tobe_added) {
+					self.item_added = true;
+					self.item_tobe_added = false;
+		};
 	});
+	*/
+
 };
 
 MjsWidgetController.prototype = {
@@ -65,4 +61,4 @@ MjsWidgetController.prototype = {
 	}
 };
 
-angular.module('main').controller('MjsWidgetController', ['$scope', '$state', 'mjs', 'auth', 'item', MjsWidgetController]);
+angular.module('main').controller('MjsWidgetController', ['$rootScope', '$scope', '$state', 'mjs', 'auth', 'item', MjsWidgetController]);

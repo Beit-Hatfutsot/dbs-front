@@ -1,4 +1,4 @@
-var MjsController = function(mjs, notification, item, auth, user, $rootScope, $scope) {
+var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) {
 	var self = this;
 
 	this.notification = notification;
@@ -6,7 +6,6 @@ var MjsController = function(mjs, notification, item, auth, user, $rootScope, $s
 	this.item = item;
 	this.selected_branch = 0;
 	this.mjs_items = [];
-	this.user = user;
 	this.$scope = $scope;
 	this.branch_edit_status = {
             1: false,
@@ -24,34 +23,35 @@ var MjsController = function(mjs, notification, item, auth, user, $rootScope, $s
 		}
 	});
 
-	$rootScope.$on('mjs-updated', function(event, items_n_branches) {
+	$rootScope.$on('mjs-updated', function(event, user) {
 		var items_ids = [];
-		items_n_branches.story_items.forEach(function (i) {
+		user.story_items.forEach(function (i) {
 			items_ids.push(i.id)
 		})
 		self.load(items_ids);
 	});
 
-	this.init();
+	var items_ids = mjs.get_items_ids();
+	console.log(items_ids);
+	if (items_ids)
+		self.load(items_ids);
 };
 
 MjsController.prototype = {
 	init: function() {
 		var self = this;
-
-		this.notification.put(6);
-		this.mjs.get_items_ids().then(function (items_ids) {
-			self.load(items_ids);
-		});
+		self.load(this.mjs.get_items_ids());
 	},
 
 	load: function(items_ids) {
 		var self = this;
 
 		this.mjs_items = [];
+		this.notification.put(6);
 
 		this.item.get_items(items_ids).then(function (ret) {
 				self.mjs_items = ret;
+				self.notification.clear();
 		});
 	},
 
@@ -95,4 +95,4 @@ MjsController.prototype = {
 };
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',
-								  'item', 'auth', 'user', '$rootScope', '$scope', MjsController]);
+								  'item', 'auth', '$rootScope', '$scope', MjsController]);

@@ -1,4 +1,4 @@
-var GeneralSearchController = function($scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, notification) {
+var GeneralSearchController = function(europeanaUrl, $scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, notification) {
     var self = this, params = {};
     this.$state = $state;
     this.$window = $window;
@@ -10,6 +10,7 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
     this.$location = $location;
     this.$http = $http;
     this.apiClient = apiClient;
+    this.europeanaUrl = europeanaUrl;
     header.show_search_box();
     this.header = header;
     this.$scope = $scope;
@@ -92,12 +93,11 @@ var GeneralSearchController = function($scope, $state, langManager, $stateParams
         });
 
         if(this.collection == 'allResults' || this.collection == 'media') {
-            $http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=5&start=1", {params: this.api_params_eurp()})
-            .success(function(r) {
+			this.search_europeana(function(r) {
                 self.eurp_total = r.totalResults;
                 self.push_eurp_items(r);
                 self.loading_eurp = false;
-            })
+            });
 
             $http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
             .success(function(r) {
@@ -158,16 +158,18 @@ GeneralSearchController.prototype = {
         });
     }, 
 
-    api_params_eurp: function () {
-        var params = {};
+    search_europeana: function (callback) {
+        var params = {qf: 'PROVIDER:"Judaica Europeana"',
+				      rows: 5};
         params.query = this.header.query;
 
-        if (this.collection == 'media')
-            params.qf = 'TYPE:(IMAGE OR VIDEO)';
-        
-        params.start = this.eurp_results.length;
-        return params;
-    }, 
+		if (this.collection == 'media')
+            params.qf += ' TYPE:(IMAGE OR VIDEO)';
+
+        params.start = this.eurp_results.length || 1;
+		this.$http.get(this.europeanaUrl, {params: params})
+            .success(callback)
+    },
 
     api_params_cjh: function () {
        var params = {};
@@ -184,9 +186,7 @@ GeneralSearchController.prototype = {
         var query_string = this.query_string,
             self = this;
 
-        this.$http.get("http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn&rows=9", {params: this.api_params_eurp()})
-        .success(function (r) { self.push_eurp_items(r)});
-
+		this.search_europeana(function (r) { self.push_eurp_items(r)});
     },
 
     fetch_more_cjh: function() {
@@ -238,4 +238,4 @@ GeneralSearchController.prototype = {
     }
 };
 
-angular.module('main').controller('GeneralSearchController', ['$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'notification', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['europeanaUrl', '$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'notification', GeneralSearchController]);

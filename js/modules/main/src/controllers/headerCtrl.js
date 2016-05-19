@@ -1,4 +1,4 @@
-var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, user, item, $window) {
+var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, header, notification, auth, mjs, cache, recentlyViewed, item, $window) {
 
     this.$state = $state;
     this.auth = auth;
@@ -58,7 +58,7 @@ var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, he
 
     Object.defineProperty(this, 'username', {
         get: function() {
-            return user.name;
+            return (auth.user)?auth.user.name:"";
         }
     });
 };
@@ -135,4 +135,4 @@ HeaderCtrl.prototype = {
 
 angular.module('main').controller('HeaderCtrl', ['$rootScope', '$state', '$location', 
 		  'langManager', 'wizard', 'header', 'notification', 'auth', 'mjs',
-		  'cache', 'recentlyViewed', 'user', 'item', '$window', HeaderCtrl]);
+		  'cache', 'recentlyViewed', 'item', '$window', HeaderCtrl]);
