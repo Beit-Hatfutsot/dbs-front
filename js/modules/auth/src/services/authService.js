@@ -204,9 +204,7 @@ angular.module('auth').
 		  	}
 	  	};
 		if (auth.is_signedin()) {
-			console.log("loading user...");
 			user.get().$promise.then(function(user) {
-				console.log("got a new user");
 				auth.user = user
 				$rootScope.$broadcast('loggedin', user);
 			});

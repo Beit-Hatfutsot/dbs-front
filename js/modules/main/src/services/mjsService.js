@@ -13,7 +13,7 @@ angular.module('main').
 
 			_update_latest: function (response) {
 				var user = response.data;
-				mjs.latest = user;
+				angular.extend(mjs.latest, user);
 			},
 
 			rename_branch: function(branch_num, new_name) {
@@ -35,7 +35,7 @@ angular.module('main').
 				var self = this;
 				$http.post(apiClient.urls.mjs +'/'+ (parseInt(branch_num) + 1),
 						   item_string)
-					 .then(mjs._update_latest);
+							.then(mjs._update_latest)
 			},
 
 			remove_from_branch: function(item_string, branch_num) {
@@ -104,7 +104,6 @@ angular.module('main').
 		});
 		$rootScope.$on('loggedin', function (event, user) {
 			mjs.latest = user;
-			console.log("updated mjs with loggedin user");
 		});
 
 		return mjs;

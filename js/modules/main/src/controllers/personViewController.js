@@ -139,7 +139,6 @@ PersonViewController.prototype = {
 				else
 					console.log("where's d3?")
 			}, function (response) {
-				debugger;
 				console.log('error walking the tree', response)
 				console.log(response); 
 			});

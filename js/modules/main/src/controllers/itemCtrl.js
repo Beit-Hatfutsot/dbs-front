@@ -87,7 +87,6 @@ ItemCtrl.prototype = {
 			},
 			function(error) {
 				self.error = error;
-				console.log(error);
 				self.notification.put(5);
 			});
 	},
