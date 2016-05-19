@@ -39,10 +39,8 @@ angular.module('auth').
 			 * A call to this method opens a Sign-in/Register dialog (modal). 
 		     */
 	  		authenticate: function(config) {
-				var body = angular.element(document.getElementsByTagName('body')[0]);
 
 	  			if ( !(this.is_signedin()) ) {
-	  				body.addClass('backdrop');
 				    angular.element()
 				    var authModalInstance = $modal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
@@ -63,9 +61,6 @@ angular.module('auth').
 				    	if (config.fallback_state) {
 				    		$state.go(config.fallback_state, config.fallback_state_params);
 				    	}
-				    }).
-				    finally(function() {
-				    	body.removeClass('backdrop');
 				    });
 				}
 		  	},

@@ -70,14 +70,10 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 
 	if (self.persons_welcome_msg && $state.lastState.name !== 'ftrees') {
 		 $timeout(function(){
-		    var body = angular.element(document.getElementsByTagName('body')[0]);
-			body.addClass('backdrop');
 		    $modal.open({
 		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
 		     	controller: 'PersonsWelcomeController',
 		     	size: 'ftree'
-		    }).result.finally(function(){
-		    	body.removeClass('backdrop');
 		    })
 	    }, 1000)
 	};

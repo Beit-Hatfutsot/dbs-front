@@ -338,14 +338,10 @@ UploadController.prototype = {
         this.mjs.refresh();
         this.clear_form();
         $timeout(function(){
-            var body = angular.element(document.getElementsByTagName('body')[0]);
-            body.addClass('backdrop');
             $modal.open({
                 templateUrl: 'templates/main/upload/successful-upload.html',
                 controller: 'UploadModalController',
                 size: 'ftree'
-            }).result.finally(function(){
-                body.removeClass('backdrop');
             })
         }, 1000)
         /*this.notification.put({
