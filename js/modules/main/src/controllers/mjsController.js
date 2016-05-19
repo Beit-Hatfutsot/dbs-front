@@ -23,7 +23,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 		}
 	});
 
-	$rootScope.$on('mjs-updated', function(event, user) {
+	$rootScope.$on('loggedin', function(event, user) {
 		var items_ids = [];
 		user.story_items.forEach(function (i) {
 			items_ids.push(i.id)
@@ -32,7 +32,6 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 	});
 
 	var items_ids = mjs.get_items_ids();
-	console.log(items_ids);
 	if (items_ids)
 		self.load(items_ids);
 };
