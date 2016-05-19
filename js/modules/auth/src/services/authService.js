@@ -1,8 +1,8 @@
 angular.module('auth').
 
 	factory('auth', [
-	'$modal', '$state', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
-	function($modal, $state, $http, apiClient, $q, $window, $rootScope, user) {
+	'$modal', '$state', '$stateParams', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
+	function($modal, $state, $stateParams, $http, apiClient, $q, $window, $rootScope, user) {
 		/**
 		 * @ngdoc service
 		 * @name auth
@@ -88,6 +88,9 @@ angular.module('auth').
 					try {
 				  		$http.post(apiClient.urls.login, {
 				    		email: email,
+							next_state:  $state.current.name,
+							next_params:  $stateParams
+							
 				    	}).
 				    	success(function(response) {
 							signin_deferred.resolve();
