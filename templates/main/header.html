@@ -63,20 +63,22 @@
               <he>החשבון שלי</he>
               <span class="caret"></span>
             </button>
-            <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
-              <div class="my-account-menu__row signed" ui-sref="mjs">
-                <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
-                <div class="dropdown-icons__user__name">{{headerController.username}}</div>
+            <div class="dropdown-menu">
+              <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
+                <div class="my-account-menu__row signed" ui-sref="mjs">
+                  <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
+                  <div class="dropdown-icons__user__name">{{headerController.username}}</div>
+                </div>
+                <div class="my-account-menu__row signed" ng-click="headerController.signout()">
+                  <en>Sign out</en>
+                  <he>יציאה</he>
+                </div>
               </div>
-              <div class="my-account-menu__row signed" ng-click="headerController.signout()">
-                <en>Sign out</en>
-                <he>יציאה</he>
-              </div>
-            </div>
-            <div class="my-account-menu" ng-if="!(headerController.is_signedin)">
-              <div class="my-account-menu__row" ng-click="headerController.signin()">
-                <en>Sign in</en>
-                <he>הכנס</he>
+              <div class="my-account-menu" ng-if="!(headerController.is_signedin)">
+                <div class="my-account-menu__row" ng-click="headerController.signin()">
+                  <en>Sign in</en>
+                  <he>הכנס</he>
+                </div>
               </div>
             </div>
           </div>
