@@ -1,4 +1,4 @@
-var PersonsWelcomeController = function($scope, $modalInstance, $window, $state) {
+var PersonsWelcomeCtrl = function($scope, $modalInstance, $window, $state) {
 
     $scope.cancel = function () {
         $modalInstance.dismiss();
@@ -13,4 +13,4 @@ var PersonsWelcomeController = function($scope, $modalInstance, $window, $state)
     }
 };
 
-angular.module('main').controller('PersonsWelcomeController', ['$scope', '$modalInstance', '$window', '$state', PersonsWelcomeController]);
+angular.module('main').controller('PersonsWelcomeCtrl', ['$scope', '$modalInstance', '$window', '$state', PersonsWelcomeCtrl]);

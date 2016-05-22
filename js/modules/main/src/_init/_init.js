@@ -279,12 +279,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
 			var target = state_name;
-			
-			if ($delegate.lastState)
-				var lastStateHe = $delegate.lastState.name.indexOf('he') === 0,
-				    targetHe = target.indexOf('he') === 0;
-				if (lastStateHe && !targetHe)
-					target = 'he.he_' + target;
+            if ($delegate.lastState) {
+                var lastStateHe = $delegate.current.name.indexOf('he') === 0,
+                    targetHe = target.indexOf('he') === 0;
+                if (lastStateHe && !targetHe) {
+                    target = 'he.he_' + target;
+                }
+            }
             $delegate.lastState = $delegate.current;
             $delegate.lastStateParams = $delegate.params;
             return old_go.apply($delegate, [target, state_params, config]);
