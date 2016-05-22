@@ -84,6 +84,7 @@ HeaderCtrl.prototype = {
         this.auth.signout();
         this.cache.clear();
         this.recentlyViewed.clear();
+		this.$state.go("start");
     },
 
     goto_about_collection: function(state, collection_name) {

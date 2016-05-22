@@ -59,7 +59,8 @@ describe('auth-services', function() {
 		
 		it('should signin when credentials correct', function() {
 			$httpBackend.expectGET(apiClient.urls.login + '/goodtoken')
-				.respond(200, {response: {user: {authentication_token: "test-token"}}});
+				.respond(200, {response: {user: {authentication_token: "test-token"}},
+							   meta: {code: 200}});
 			$httpBackend.expectGET(apiClient.urls.user);
 			auth.login('goodtoken');
 			$httpBackend.flush();
@@ -72,7 +73,7 @@ describe('auth-services', function() {
 
 		it('should not signin when credentials are incorrect', function() {
 			$httpBackend.expectGET(apiClient.urls.login + '/badtoken')
-				.respond(400);
+				.respond(200, {meta: {code: 400}});
 			auth.login('badtoken');
 			$httpBackend.flush();
 			expect($window.localStorage.getItem('bhsclient_token')).toBe(null);
