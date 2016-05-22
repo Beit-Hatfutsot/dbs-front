@@ -2,7 +2,6 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 
 	var self = this,
 		advanced_fields = ['birth_place', 'marriage_place', 'death_place', 'tree_number', 'birth_year', 'marriage_year', 'death_year'];
-
 	this.individuals = [];
 	this.search_params = {};
 	this.query = '';
@@ -66,16 +65,16 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 	if (parameters.length > 0) {
 		this.query = parameters.join(' + ');
 		self.search(query);
-	}
+	};
 
 	if (self.persons_welcome_msg && $state.lastState.name !== 'ftrees') {
-		 $timeout(function(){
+		$timeout(function(){
 		    $modal.open({
 		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
-		     	controller: 'PersonsWelcomeController',
+		     	controller: 'PersonsWelcomeCtrl',
 		     	size: 'ftree'
-		    })
-	    }, 1000)
+		    });
+	   	}, 1000)
 	};
 };
 
