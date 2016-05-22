@@ -6,7 +6,7 @@
  * Controller for login link sent by email. It uses the start templates, and
  * sends the login token to the api server to get the authnitication token.
  */
-var LoginCtrl = function($state, $stateParams, auth, notification) {
+var LoginCtrl = function($location, $state, $stateParams, auth, notification) {
 
     var self = this;
 
@@ -14,8 +14,8 @@ var LoginCtrl = function($state, $stateParams, auth, notification) {
 	notification.loading(true);
 	auth.login(token).then(function () {
 		notification.loading(false);
-		if (auth.user.next_state)
-			$state.go(auth.user.next_state, auth.user.next_params)
+		if (auth.user.next)
+			$location.path(auth.user.next)
 		else
 			$state.go("mjs");
 	}, function(response) {
@@ -25,4 +25,4 @@ var LoginCtrl = function($state, $stateParams, auth, notification) {
 						  );
 }
 angular.module('auth').controller('LoginCtrl',
-		['$state', '$stateParams', 'auth', 'notification', LoginCtrl]);
+		['$location', '$state', '$stateParams', 'auth', 'notification', LoginCtrl]);
