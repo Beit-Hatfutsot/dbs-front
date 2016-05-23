@@ -45,9 +45,7 @@ angular.module('auth').
 				     	controller: 'AuthCtrl as authController',
 				     	size: 'sm',
 				     	resolve: {
-				     		isRegister: function() {
-				     			return config.register;
-				     		}
+				     		config: function () { return config; }
 				     	}
 				    });
 				}

@@ -6,14 +6,16 @@
  * Controller for auth modal template.
  * Handles auth modal scope.
  */
-var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister,
-						notification) {
+var AuthCtrl = function($scope, $modalInstance, langManager, auth,
+						notification, $state, config) {
     var self = this;
 
     this.$modalInstance = $modalInstance;
     this.auth = auth;
     this.notification = notification;
-    this.is_register = isRegister;
+    this.is_register = config.register;
+    this.config = config;
+	this.$state = $state;
 
     /**
      * @ngdoc property
@@ -167,7 +169,10 @@ AuthCtrl.prototype = {
      * Dismisses the auth modal.
      */
     dismiss: function() {
+		debugger;
         this.$modalInstance.dismiss();
+		if (this.config.mandatory)
+			this.$state.go(this.config.fallback_state);
     },
 
 
@@ -209,4 +214,4 @@ AuthCtrl.prototype = {
 }
 
 angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance',
-			'langManager', 'auth', 'isRegister', 'notification', AuthCtrl]);
+			'langManager', 'auth', 'notification', '$state', 'config', AuthCtrl]);
