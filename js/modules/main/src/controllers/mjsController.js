@@ -46,12 +46,12 @@ MjsController.prototype = {
 		var self = this;
 
 		this.mjs_items = [];
-		this.notification.put(6);
+		this.notification.loading(true);
+		debugger;
 
 		this.item.get_items(items_ids).then(function (ret) {
 				self.mjs_items = ret;
-				self.notification.clear();
-		});
+		}).finally(function() { self.notification.loading(false); });
 	},
 
 	stopPropagation: function($event) {

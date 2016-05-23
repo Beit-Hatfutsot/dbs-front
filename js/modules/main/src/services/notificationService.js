@@ -42,9 +42,6 @@ angular.module('main').
 }, 5: {
 	en: 'Sorry, failed to fetch item',
 	he: 'מצטערים, טעינת פריט נכשלה'
-}, 6: {
-	en: 'Loading Story...',
-	he: 'טוען את הסיפור...'
 }, 7: {
 	en: 'Item removed',
 	he: 'הפריט הוסר'
