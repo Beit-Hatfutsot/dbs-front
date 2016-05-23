@@ -99,6 +99,14 @@
 		margin: 50px 15px 0;
 		width: 200px;
 
+		code {
+            font-family: inherit;
+            
+            &:before, &:after {
+                content: "'";
+            }   
+        }
+
 		&--nothumb {
 			height: 88px;
 			width: 90%;

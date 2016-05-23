@@ -680,6 +680,13 @@
                     a:hover, a:active {
                         color: #444444;
                     }
+                    code {
+                        font-family: inherit;
+                        
+                        &:before, &:after {
+                            content: "'";
+                        }   
+                    }
                 }
 
                 &__bottom-bar {
