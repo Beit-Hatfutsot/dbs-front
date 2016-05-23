@@ -47,7 +47,6 @@ MjsController.prototype = {
 
 		this.mjs_items = [];
 		this.notification.loading(true);
-		debugger;
 
 		this.item.get_items(items_ids).then(function (ret) {
 				self.mjs_items = ret;
