@@ -82,8 +82,16 @@ MjsController.prototype = {
 		if(!this.in_edit_mode) {
 			this.selected_branch = branch_num;
 		}
-		else
-			this.notification.put(16);
+		else {
+			for(var branch in this.branch_edit_status) {
+				if (this.branch_edit_status[branch] && branch != branch_num) {
+					this.branch_edit_status[branch] = false;
+					break;
+				}
+			}
+			this.in_edit_mode = false;
+			this.selected_branch = branch_num;
+		}
 	},
 
 	toggle_branch_rmdialog: function()  {
