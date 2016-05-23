@@ -682,6 +682,10 @@
                     }
                     code {
                         font-family: inherit;
+                        
+                        &:before, &:after {
+                            content: "'";
+                        }   
                     }
                 }
 
