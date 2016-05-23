@@ -1,8 +1,8 @@
 angular.module('auth').
 
 	factory('auth', [
-	'$modal', '$state', '$stateParams', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
-	function($modal, $state, $stateParams, $http, apiClient, $q, $window, $rootScope, user) {
+	'$modal', '$state', '$location', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
+	function($modal, $state, $location, $http, apiClient, $q, $window, $rootScope, user) {
 		/**
 		 * @ngdoc service
 		 * @name auth
@@ -50,16 +50,6 @@ angular.module('auth').
 				     		}
 				     	}
 				    });
-
-				    authModalInstance.result.then(function(user_data) {
-				    	if (config.next_state) {
-				    		$state.go(config.next_state);
-				    	}
-				    }, function(dismiss_reason) {
-				    	if (config.fallback_state) {
-				    		$state.go(config.fallback_state, config.fallback_state_params);
-				    	}
-				    });
 				}
 		  	},
 
@@ -88,12 +78,13 @@ angular.module('auth').
 					try {
 				  		$http.post(apiClient.urls.login, {
 				    		email: email,
-							next_state:  $state.current.name,
-							next_params:  $stateParams
-							
+							next:  $location.path()
 				    	}).
 				    	success(function(response) {
-							signin_deferred.resolve();
+							if (response.meta.code == 200)
+								signin_deferred.resolve()
+							else
+								signin_deferred.reject();
 				    	}).
 				    	error(function() {
 				    		signin_deferred.reject();
