@@ -22,13 +22,13 @@ module.exports = function (grunt) {
     grunt.config.set('pkg', pkg);
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build-public', [
+    grunt.registerTask('build', [
         'clean:public',
         'copy:public',
         'concat:public',
         'sass:public'
     ]);
-    grunt.registerTask('build', [
+    grunt.registerTask('build-dist', [
         'clean:public',
         'clean:dist',
         'sass:public',
