@@ -45,6 +45,11 @@ ItemPreviewCtrl.prototype = {
 
     in_mjs_state: function() {
         return this.$state.current.name == 'mjs';
+    }, 
+
+    toggle_height: function() {
+        var wrapper = angular.element(document.getElementsByClassName("item-preview-wrapper"))[0];
+        wrapper.style.paddingBottom = wrapper.style.paddingBottom == "210px" ? "0" : "210px";
     }
 
 };
