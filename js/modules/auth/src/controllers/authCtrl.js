@@ -169,7 +169,6 @@ AuthCtrl.prototype = {
      * Dismisses the auth modal.
      */
     dismiss: function() {
-		debugger;
         this.$modalInstance.dismiss();
 		if (this.config.mandatory)
 			this.$state.go(this.config.fallback_state);
