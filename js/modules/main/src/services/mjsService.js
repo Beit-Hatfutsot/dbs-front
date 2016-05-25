@@ -21,6 +21,11 @@ angular.module('main').
 					 .then(mjs._update_latest);
 			},
 
+			rename_user: function(new_name) {
+				$http.put(apiClient.urls.user, {name: new_name})
+					 .then(mjs._update_latest);	
+			},
+
 			add: function(item_string) {
 				return $http.post(apiClient.urls.mjs, item_string)
 								  .then(mjs._update_latest);

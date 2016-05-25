@@ -1,6 +1,5 @@
 var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) {
 	var self = this;
-
 	this.notification = notification;
 	this.mjs = mjs;
 	this.item = item;
@@ -13,16 +12,15 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
             3: false,
             4: false,
     };
-    this.in_edit_mode = false;
-	
+    this.in_rename_mode = false;
 	this.rmdialog_status = false;
+	this.in_edit_mode = false;
 
 	Object.defineProperty(this, 'signedin', {
 		get: function() {
 			return auth.is_signedin();
 		}
 	});
-
 	$rootScope.$on('loggedin', function(event, user) {
 		var items_ids = [];
 		user.story_items.forEach(function (i) {
@@ -61,6 +59,10 @@ MjsController.prototype = {
 		this.mjs.rename_branch(branch_num, new_name);
 	},
 
+	rename_user: function(new_name) {
+		this.mjs.rename_user(new_name);
+	}, 
+
 	toggle_branch_edit: function(branch_num)  {
 		if (this.branch_edit_status[branch_num]) {
 			this.branch_edit_status[branch_num] = false;
@@ -85,7 +87,7 @@ MjsController.prototype = {
 	toggle_branch_rmdialog: function()  {
 		this.rmdialog_status = !(this.rmdialog_status);
 
-	}
+	},
 };
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',

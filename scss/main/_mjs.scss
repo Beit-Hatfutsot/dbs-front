@@ -108,6 +108,12 @@
                 }
 				
 				&__description {
+
+                    &:hover {
+                        .edit-branch-icon.username {
+                            display: inline-block;
+                        }
+                    }
 				 	
 				 	.en & {
 				 		margin-left: 10px;
@@ -115,7 +121,11 @@
 				 	.he & {
 				 		margin-right: 10px;
 				 	}
-				 }
+
+                    &__username {
+                        position: relative;
+                    }
+				}
 			}
 
 			.share-item {
@@ -489,6 +499,7 @@
 	height: 15px;
 	bottom: 6px;
     position: absolute;
+    @include hover-pointer();
 
     .en & {
     	right: 6px;
@@ -496,6 +507,18 @@
 
     .he & {
     	left: 6px;
+    }
+
+    &.username {
+        //display: inline-block;
+        .en & {
+            right: -20px;
+        }
+
+        .he & {
+            left: -20px;
+        }
+
     }
 }
 
