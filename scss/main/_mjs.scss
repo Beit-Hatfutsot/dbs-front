@@ -230,6 +230,7 @@
 					top: 50%;
 					left: 50%;
 					width: 78%;
+                    overflow: hidden;
 
 					&__num {
 						font-size: 14px;
@@ -253,7 +254,6 @@
     .item-preview-wrapper {
 	    margin: 20px auto;
 	    max-width: 1170px;
-	    padding-bottom: 206px;
 
 	    a {
 	        text-decoration: none;
