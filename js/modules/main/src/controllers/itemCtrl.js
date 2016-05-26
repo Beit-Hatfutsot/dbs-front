@@ -1,5 +1,6 @@
 
-function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs, recentlyViewed, $window, $timeout, $modal, $rootScope, langManager) {
+function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs,
+				  recentlyViewed, $window, $timeout, $modal, $rootScope, langManager, $location) {
 	var self = this;
 
 	this.$modal = $modal;
@@ -22,6 +23,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.pull_wizard_related();
 	this._Index = 0;
 	this.lang = langManager.lang;
+	this.article_abs_url = $location.absUrl();
 
 	function refresh_root_scope(item) {
 		// TODO: make language option 'En' & 'He' universal
@@ -60,13 +62,12 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		}
 	});
 
-	// TODO: loading notification
-	// notification.put(4);
 };
 
 ItemCtrl.prototype = {
 	get_item: function() {
 		var self = this;
+		self.notification.loading(true);
 		this.item.get(this.slug).
 			then(function(item_data) {
 
@@ -81,11 +82,13 @@ ItemCtrl.prototype = {
 					self.item.get_items(item_data.related).
 						then(function(related_data) {
 							self.parse_related_data(related_data);
+							self.notification.loading(false);
 						});
+				else
+					self.notification.loading(false);
 			},
 			function(error) {
 				self.error = error;
-				console.log(error);
 				self.notification.put(5);
 			});
 	},
@@ -162,10 +165,8 @@ ItemCtrl.prototype = {
 		if (index == undefined) {
 			index = this._Index;
 		}
-		var body = angular.element(document.getElementsByTagName('body')[0]),
-			gallery = this.item_data;
+		var	gallery = this.item_data;
 
-		body.addClass('backdrop');
 	    this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
@@ -179,8 +180,6 @@ ItemCtrl.prototype = {
 	     			return index
 	     		}
 	     	}
-	    }).result.finally(function() {
-	    	body.removeClass('backdrop');
 	    });
 	},
 
@@ -215,4 +214,4 @@ ItemCtrl.prototype = {
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
 	   'notification', 'itemTypeMap','wizard', 'header', 
 	   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope', 
-	   'langManager', ItemCtrl]);
+	   'langManager', '$location', ItemCtrl]);

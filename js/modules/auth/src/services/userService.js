@@ -7,7 +7,7 @@
  */
 
 angular.module('auth').
-	factory('user', ['$resource', 'apiClient',
-			function($resource, apiClient) {
-		return $resource(apiClient.urls.user).get();
+	factory('user', ['$window', '$resource', 'apiClient',
+			function($window, $resource, apiClient) {
+		return $resource(apiClient.urls.user) ;
 	}]);

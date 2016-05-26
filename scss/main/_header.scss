@@ -553,10 +553,12 @@
                 }
 
                 &__my-account {
+                    position: relative;
 
                     &.open {
                         .my-account-menu {
                             display: block;
+                            min-width: 100%;
                         }
                         .my-account-label {
                             background-color: $gray3 !important;
@@ -597,19 +599,15 @@
                     }
                     .my-account-menu {
                         position: absolute;
+                        @include border-radius(3px);
                         margin-top: 6px;
                         display: none;
+                        left: 50%;
+                        @include translateX(-50%);
                         @include box-shadow(0 0 6px 1px $gray4);
 
                         &.signed {
-                            box-shadow: none;
-                            .en & {
-                                left: -38px;
-                            }
-                            .he & {
-                                right: -38px;
-                            }
-                            
+                            box-shadow: none;   
                         }
 
                         &__row {
@@ -618,17 +616,17 @@
                             color: $gray3;
                             background-color: $gray6;
                             @include hover-pointer();
+                            @include border-radius(3px);
 
                             &.signed {
                                 margin-bottom: 6px;
-                                @include border-radius(4x);
                                 @include box-shadow(0 0 6px 0 $gray4);
                                
                                 .en & {
-                                    padding: 4px 94px 4px 16px;
+                                    padding: 4px 10px 4px 16px;
                                 }
                                 .he & {
-                                    padding: 4px 16px 4px 94px;
+                                    padding: 4px 16px 4px 10px;
                                 }
                             }
 

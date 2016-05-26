@@ -54,7 +54,7 @@
           </p>
         </div>
         <div class="dropdown-icons">
-          <!-- <div class="header-element dropdown-icons__my-account signed" dropdown>
+          <div class="header-element dropdown-icons__my-account signed" dropdown>
             <button class="my-account-label" dropdown-toggle>
               <div class="dropdown-icons__user" ng-if="headerController.is_signedin">
                 <icon class="dropdown-icons__user__pic" position="[-264, -588]"></icon>
@@ -63,27 +63,25 @@
               <he>החשבון שלי</he>
               <span class="caret"></span>
             </button>
-            <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
-              <div class="my-account-menu__row signed">
-                <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
-                <div class="dropdown-icons__user__name">{{headerController.username}}</div>
+            <div class="dropdown-menu">
+              <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
+                <div class="my-account-menu__row signed" ui-sref="mjs">
+                  <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
+                  <div class="dropdown-icons__user__name">{{headerController.username}}</div>
+                </div>
+                <div class="my-account-menu__row signed" ng-click="headerController.signout()">
+                  <en>Sign out</en>
+                  <he>יציאה</he>
+                </div>
               </div>
-              <div class="my-account-menu__row signed" ng-click="headerController.signout()">
-                <en>Sign out</en>
-                <he>יציאה</he>
-              </div>
-            </div>
-            <div class="my-account-menu" ng-if="!(headerController.is_signedin)">
-              <div class="my-account-menu__row" ng-click="headerController.signin()">
-                <en>Sign in</en>
-                <he>הכנס</he>
-              </div>
-              <div class="my-account-menu__row" ng-click="headerController.signup()">
-                <en>Create account</en>
-                <he>צור חשבון</he>
+              <div class="my-account-menu" ng-if="!(headerController.is_signedin)">
+                <div class="my-account-menu__row" ng-click="headerController.signin()">
+                  <en>Sign in</en>
+                  <he>הכנס</he>
+                </div>
               </div>
             </div>
-          </div> -->
+          </div>
 
           <div class="header-element newsletter-popup">
             <div class="newsletter-popup__button">
@@ -133,12 +131,23 @@
               </div>
             </a>
             </li>
-           <!--  <li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
+            <li class="header-menu-item ftree-tab"
+              ng-class="{'header-menu-item--active':
+              isCurrentState('persons') || isCurrentState('person-view')}" 
+              ng-click="headerController.goto_state('persons')"> 
+                <div>
+                    <en>Family Trees</en>
+                    <he>עצי משפחה</he>
+                </div>
+            </li>
+            <li class="mystory header-menu-item"
+                ng-class="{'header-menu-item--active': headerController.is_mjs_state}"
+                ui-sref="mjs">
               <div class="mystory__text">
                 <en>My Story</en>	
                 <he>הסיפור שלי</he>
               </div>
-            </li> -->
+            </li>
             <li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'general-search'}"
               ng-click="headerController.header.sub_header_state = 'general-search'">
               <div>
@@ -153,15 +162,6 @@
                 <he>נצפו לאחרונה</he>
               </div>
             </li>
-                  <li class="header-menu-item ftree-tab"
-                    ng-class="{'header-menu-item--active':
-                    isCurrentState('persons') || isCurrentState('person-view')}" 
-                    ng-click="headerController.goto_state('persons')"> 
-                      <div>
-                          <en>Family Trees</en>
-                          <he>עצי משפחה</he>
-                      </div>
-                  </li>
           </ul>
         </nav>
         <!-- <div class="dropdown-icons__upload" dropdown is-open>

@@ -68,12 +68,14 @@
 								<he>{{itemController.item_data.Header.He}}</he>
 							</h1>
 							<item-type type="itemController.item_type" image="itemController.item_data.thumbnail.data"></item-type>
-							<!-- <mjs-widget item="itemController.item_data"></mjs-widget> -->
+							<mjs-widget item="itemController.item_data"></mjs-widget>
 						</div>
 						<div class="item__article-text">
 			            	<en><span marked="itemController.item_data.UnitText1.En"></span></en>
 			              	<he><span marked="itemController.item_data.UnitText1.He"></span></he>
 						</div>
+                        <div class="OUTBRAIN" data-src="{{itemController.article_abs_url}}" data-widget-id="AR_1" data-ob-template="BeitHatfutsotIsrael" async="async"></div>
+                        <script type="text/javascript" src="http://widgets.outbrain.com/outbrain.js"></script> 
 						<div class="scroll-to-top"onclick="window.scroll(0, 0)">
 							<en>Back to top</en>
 							<he>חזרה למעלה</he>
@@ -103,7 +105,7 @@
                                 </span>
 							</div>
                         </div>
-                        <!-- <mjs-widget item="itemController.item_data"></mjs-widget> -->
+                        <mjs-widget item="itemController.item_data"></mjs-widget>
                         <div class="check-related vertical-middle">
                            <div class="check-related__text vertical-middle">
 								<en>Check the<br>related items</en>

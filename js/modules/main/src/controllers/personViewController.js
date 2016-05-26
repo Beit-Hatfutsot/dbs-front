@@ -1,6 +1,7 @@
 var PersonViewController = function ($http, $window, $document, $rootScope,
 							       $scope, $state, $stateParams, apiClient, 
-							       recentlyViewed, langManager, ftreeLayout) {
+							       recentlyViewed, langManager, ftreeLayout,
+								   notification) {
 	var self = this, script_loaded = true, node = {};
 	this.$scope = $scope;
 	this.$rootScope = $rootScope;
@@ -10,6 +11,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	this.apiClient = apiClient;
 	this.recentlyViewed = recentlyViewed;
 	this.langManager = langManager;
+	this.notification = notification;
 	this.ftrees_search_params = JSON.parse(this.$window.sessionStorage.getItem('ftrees_search_params'));
 
 	// renderer
@@ -113,6 +115,7 @@ PersonViewController.prototype = {
 			apiUrl = this.apiClient.base_url+
 				['/person',  params.tree_number, params.node_id].join('/');
 
+		self.notification.loading(true);
 		self.$http.get(apiUrl, { cache: true })
 			.success(function (item_data) {
 				var name = self.get_full_name(item_data.tree),
@@ -129,15 +132,13 @@ PersonViewController.prototype = {
 				// self.detailsShown = true;
 				self.node = item_data;
 				self.$rootScope.title = self.get_full_name(self.node.tree);
-				d3.select('.gif').remove();
-				d3.select('.backdrop').remove();
 
+				self.notification.loading(false);
 				if (d3 != null)
 					self.render(self.node)
 				else
 					console.log("where's d3?")
 			}, function (response) {
-				debugger;
 				console.log('error walking the tree', response)
 				console.log(response); 
 			});
@@ -333,13 +334,6 @@ PersonViewController.prototype = {
 					self.$scope.$apply();
 				}
 				else if (d.id) {
-					d3.select('#ftree-layout-container')
-					.append('div')
-					.classed('backdrop', true);
-					d3.select('#ftree-layout-container')
-					.append('img')
-					.classed('gif', true)
-					.attr('src', 'images/BH-Loading.gif');
 					self.$state.go((self.langManager.lang == 'he')?
 								     'he.he_person-view':'person-view',
 							   {tree_number: self.tree_number, node_id: d.id});
@@ -603,4 +597,5 @@ PersonViewController.prototype = {
 angular.module('main').controller('PersonViewController', 
 			  ['$http', '$window', '$document', '$rootScope', '$scope',
 			   '$state', '$stateParams', 'apiClient', 'recentlyViewed', 
-			   'langManager', 'ftreeLayout', PersonViewController]);
+			   'langManager', 'ftreeLayout', 'notification', 
+			   PersonViewController]);

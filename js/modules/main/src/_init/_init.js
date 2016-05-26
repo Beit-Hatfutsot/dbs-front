@@ -138,7 +138,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/search-results.html'
         },
 
-		/*
+		
         {
             name: 'mjs',
             url: '/mjs',
@@ -150,8 +150,21 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                     connection_set.repaint();
                 });
             }]
+        },
+
+         {
+            name: 'he.he_mjs',
+            url: '/mjs',
+            templateUrl: 'templates/main/mjs/mjs.html',
+            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
+                notification.clear();
+                plumbConnectionManager.connections = {};
+                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
+                    connection_set.repaint();
+                });
+            }]
         }, 
-		*/
+		
         {
             name: 'persons',
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
@@ -182,11 +195,20 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 header.show_recent();
             }]
         },
-
-
-		/*
-
         {
+            name: 'login',
+            url: '/login/:token',
+            controller: 'LoginCtrl as ctrl',
+            templateUrl: 'templates/main/start.html',
+            onEnter: ['cache', 'wizard', 'header', function(cache, wizard, header) {
+                wizard.clear();
+                header.sub_header_state = 'closed';
+            }]
+        },
+
+		
+
+        /*{
             name: 'upload',
             abstract: true,
             url: '/upload',
@@ -194,7 +216,21 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
+            name: 'he.he_upload',
+            abstract: true,
+            url: '/upload',
+            templateUrl: 'templates/main/upload/upload.html'
+        },
+
+        {
             name: 'upload.image',
+            url: '/image',
+            controller: 'UploadFormController as uploadFormCtrl',
+            templateUrl: 'templates/main/upload/image.html'
+        },
+
+        {
+            name: 'he.he_upload.image',
             url: '/image',
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/image.html'
@@ -219,7 +255,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             url: '/family_tree',
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
-        },
+        },*/
+        
 
         {
             name: 'verify_email',
@@ -227,8 +264,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'VerifyEmailController as verifyEmailCtrl',
             templateUrl: 'templates/main/verify_email.html'
         },
-		*/
-
+		
         {
             name: '404',
             templateUrl: 'templates/main/404.html'
@@ -256,12 +292,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
 			var target = state_name;
-			
-			if ($delegate.lastState)
-				var lastStateHe = $delegate.lastState.name.indexOf('he') === 0,
-				    targetHe = target.indexOf('he') === 0;
-				if (lastStateHe && !targetHe)
-					target = 'he.he_' + target;
+            if ($delegate.lastState) {
+                var lastStateHe = $delegate.current.name.indexOf('he') === 0,
+                    targetHe = target.indexOf('he') === 0;
+                if (lastStateHe && !targetHe) {
+                    target = 'he.he_' + target;
+                }
+            }
             $delegate.lastState = $delegate.current;
             $delegate.lastStateParams = $delegate.params;
             return old_go.apply($delegate, [target, state_params, config]);

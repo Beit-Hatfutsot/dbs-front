@@ -1,24 +1,24 @@
 <div class="mjs-widget-wrapper" dropdown is-open="mjsWidgetCtrl.item_added">
-  <ng-switch on="item.in_mjs">
-		<div class="mjs-widget-icon in-my-story" ng-switch-when="true" ng-click="mjsWidgetCtrl.remove_from_mjs()">
-			<div class="icon_upper_line">in</div>
-		 		<div class="icon_bottom_line">My Story</div>
-		 	<span class="sign-background">
-		 		<span class="v_sign"></span>
-		 	</span>
-		</div>
-		<div class="mjs-widget-icon"  ng-switch-when="false" ng-click="mjsWidgetCtrl.push_to_mjs()"> 
-			<div class="icon_upper_line">Add to</div>
-		 		<div class="icon_bottom_line">My Story</div>
-		 	<span class="sign-background">
-		 		 <span class="add-remove_sign">+</span>
-		 	</span>
-		</div>
-		<div class="mjs-widget-dialog">
-			<div class="mjs-widget-dialog__view" ui-sref="mjs">View in my story</div>
-			<span ng-if="!(item.ugc)">
-				<div class="mjs-widget-dialog__remove" ng-click="mjsWidgetCtrl.remove_from_mjs()">Remove item</div>
-			</span>
-		</div>
-  </ng-switch>
+  <div class="mjs-widget-icon in-my-story" ng-if="item.in_mjs"
+       ng-click="mjsWidgetCtrl.remove_from_mjs()">
+    <div class="icon_upper_line">in</div>
+      <div class="icon_bottom_line">My Story</div>
+    <span class="sign-background">
+      <span class="v_sign"></span>
+    </span>
+  </div>
+  <div class="mjs-widget-icon" ng-if="!item.in_mjs"
+       ng-click="mjsWidgetCtrl.push_to_mjs()">
+    <div class="icon_upper_line">Add to</div>
+      <div class="icon_bottom_line">My Story</div>
+    <span class="sign-background">
+       <span class="add-remove_sign">+</span>
+    </span>
+  </div>
+  <div class="mjs-widget-dialog">
+    <div class="mjs-widget-dialog__view" ui-sref="mjs">View in my story</div>
+    <span ng-if="!(item.ugc)">
+      <div class="mjs-widget-dialog__remove" ng-click="mjsWidgetCtrl.remove_from_mjs()">Remove item</div>
+    </span>
+  </div>
 </div>

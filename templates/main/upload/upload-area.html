@@ -1,20 +1,22 @@
 <div class="upload-droparea" flow-init="flowInstanceInit" flow-name="ctrl.flow" flow-file-success="ctrl.onSuccess()" flow-file-error="ctrl.onError($file, $message)" flow-drag-enter="style={'border-color': '#1ec3d2'}" flow-drag-leave="style={}" ng-style="style" flow-drop>
 	<div ng-show="!($flow.files[0]) && !(ctrl.failed)">
-		<div class="upload-droparea__cloud"></div>
-	    <div class="upload-droparea__instructions">
-	    	<en>
-		        Drag and drop files here to upload<br>
-		        or
-	        </en>
-	    	<he>
-	    		נא לגרור קבצים לכאן<br>
-	    		או
-	        </he>
-	   	</div>
-	    <div class="upload-droparea__browse" flow-btn>
-	    	<en>Click to browse</en>
-	    	<he>ללחוץ לפתיחה</he>
-	    </div>
+		<div class="upload-droparea__cloud">
+			<icon position="[-449, -717]" alt-text="{en: 'Upload', he: ''}"></icon>
+		</div>
+		<div class="upload-droparea-text">
+			<div class="upload-droparea__browse" flow-btn>
+	    		<en>Click here to upload a file from your device</en>
+	    		<he>לחצו כאן לבחירה קובץ מהמחשב</he>
+		    </div>
+		    <div class="upload-droparea__instructions">
+		    	<en>
+			        (You can also drag and drop your file here)<br>
+		        </en>
+		    	<he>
+		    		נא לגרור קבצים לכאן<br>
+		        </he>
+		   	</div>
+	   </div>
 	</div>
     <div ng-show="$flow.files[0] && !(ctrl.in_progress) && !(ctrl.failed)">
 		<ng-switch on="ctrl.is_image">

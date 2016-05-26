@@ -26,7 +26,8 @@ angular.module('auth').
  * Protects transcluded content with authentication modal. 
  *
  * @scope
- * @param {boolean} on Switches the directive on & off (for example, iff some property is true, request authentication). 
+ * @param {boolean} on Switches the directive on & off (for example, 
+ * 		            if some property is true, request authentication). 
  */
 angular.module('auth').
 	directive('authPrivate' ,[function() {

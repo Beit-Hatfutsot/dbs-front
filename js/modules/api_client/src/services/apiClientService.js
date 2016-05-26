@@ -19,7 +19,8 @@ angular.module('apiClient').
 
 	  		
 	  		endpoints: {
-	  			auth: 			apiConfig.auth,
+	  			signin: 		apiConfig.signing,
+	  			login: 			apiConfig.login, 
 	  			user: 			apiConfig.user, 
 	  			mjs: 			apiConfig.mjs, 
 	  			wizard_search: 	apiConfig.wizard_search,

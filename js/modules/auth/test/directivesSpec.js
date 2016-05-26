@@ -55,12 +55,7 @@ describe('auth-directives', function() {
 	    	scope.$digest()
 	    	expect(auth.authenticate).toHaveBeenCalledWith({ 
 	    		mandatory: true, 
-	    		fallback_state: {
-	    			name: 'test-fallback-state'
-	    		}, 
-	    		fallback_state_params: {
-	    			test_param: 'test-param'
-	    		}
+	    		fallback_state: 'start'
 	    	});
 	    });
 	});

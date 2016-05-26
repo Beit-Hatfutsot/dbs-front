@@ -16,7 +16,7 @@ angular.module('config', []).
      */
     constant('apiConfig', {
         baseUrl:        'localhost:5000',
-        auth:           'auth',
+        login:      	'login',
         user:           'user', 
         mjs:            'mjs', 
         wizard_search:  'wsearch',
@@ -28,5 +28,7 @@ angular.module('config', []).
         upload:         'upload',
         newsletter:         'newsletter',
         search:         'search'
-    });
+    }).
+	constant('europeanaUrl',
+			 'http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn');
 

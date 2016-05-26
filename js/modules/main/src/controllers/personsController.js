@@ -1,8 +1,7 @@
-var PersonsController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window) {
+var PersonsController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window, $location) {
 
 	var self = this,
 		advanced_fields = ['birth_place', 'marriage_place', 'death_place', 'tree_number', 'birth_year', 'marriage_year', 'death_year'];
-
 	this.individuals = [];
 	this.search_params = {};
 	this.query = '';
@@ -21,6 +20,7 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 	this.$stateParams = $stateParams;
 	this.$scope = $scope;
 	this.$window = $window;
+	this.$location = $location;
 	this.ftrees = ftrees;
 	this.notification = notification;
 	this.persons_welcome_msg = $window.localStorage.getItem('persons-welcome-msg') != 'dismissed';
@@ -65,20 +65,16 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 	if (parameters.length > 0) {
 		this.query = parameters.join(' + ');
 		self.search(query);
-	}
+	};
 
 	if (self.persons_welcome_msg && $state.lastState.name !== 'ftrees') {
-		 $timeout(function(){
-		    var body = angular.element(document.getElementsByTagName('body')[0]);
-			body.addClass('backdrop');
+		$timeout(function(){
 		    $modal.open({
 		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
-		     	controller: 'PersonsWelcomeController',
+		     	controller: 'PersonsWelcomeCtrl',
 		     	size: 'ftree'
-		    }).result.finally(function(){
-		    	body.removeClass('backdrop');
-		    })
-	    }, 1000)
+		    });
+	   	}, 1000)
 	};
 };
 
@@ -86,13 +82,13 @@ PersonsController.prototype = {
 	search: function(search_params) {
 		var self = this;
 
-		this.notification.put(1);
+		this.notification.loading(true);
 
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
 
-				self.notification.clear();
+				self.notification.loading(false);
 				if (individuals.total == 0)
 					self.notification.put(3);
 
@@ -104,13 +100,13 @@ PersonsController.prototype = {
 
 	fetch_more: function() {
 		var self = this;
-		self.notification.put(15);
+		this.notification.loading(true);
 		var search_params = angular.copy(this.search_params);
 		search_params.start = self.individuals.items.length;
 		this.ftrees.search(search_params).
 			then(function (r){
 				self.individuals.items = self.individuals.items.concat(r.items);
-				self.notification.clear();
+				self.notification.loading(false);
 			});
     },
 
@@ -160,6 +156,7 @@ PersonsController.prototype = {
  	clear_filters: function() {
  		for (var parameter in this.search_params) {
  			this.search_params[parameter] = '';
+ 			this.$location.search(parameter, null);
  		}
  	},
 
@@ -174,4 +171,4 @@ PersonsController.prototype = {
     },
 };
 
-angular.module('main').controller('PersonsController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', PersonsController]);
+angular.module('main').controller('PersonsController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', '$location', PersonsController]);

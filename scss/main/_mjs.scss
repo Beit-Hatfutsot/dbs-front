@@ -89,34 +89,45 @@
 				position: absolute;
 			    top: 50%;
 				color: $gray3;
-				display: block;
+				display: flex;
+                align-items: center;
+
+                 &:hover {
+                        .edit-branch-icon.username {
+                            display: inline-block;
+                        }
+                    }
 
 				.en & {
+                    padding-right: 74px;
 					left: -56px;
 					transform: translate(0%, -50%) skew(-16deg);
 				}
 
 				.he & {
+                    padding-left: 74px;
 					right: -56px;
 					transform: translate(0%, -50%) skew(16deg);
 				}
 
-				img {
-					display: inline-block;
-					margin-top: 18px;
-					position: absolute;
-				}
+                &__avatar {
+                    width: 119px;
+                    height: 114px;
+                }
 				
 				&__description {
-				 	display: inline-block;
 				 	
 				 	.en & {
-				 		margin-left: 116px;
+				 		margin-left: 10px;
 				 	}
 				 	.he & {
-				 		margin-right: 116px;
+				 		margin-right: 10px;
 				 	}
-				 }
+
+                    &__username {
+                        position: relative;
+                    }
+				}
 			}
 
 			.share-item {
@@ -174,7 +185,7 @@
                 color: #fff;
                 font-weight: 600;
                 @include hover-pointer();
-                padding: 4px 25px;
+                padding: 4px 4px;
                 vertical-align: middle;
                 margin-top: -10px;
 
@@ -231,12 +242,14 @@
 					top: 50%;
 					left: 50%;
 					width: 78%;
+                    overflow: hidden;
 
 					&__num {
 						font-size: 14px;
 					}
 				}
 				.rename {
+                    @include centering();
 					width: 90%;
 					background-color: inherit;
 				    border: none;
@@ -244,9 +257,6 @@
 				   	color: #fff;
 				    font-weight: inherit;
 				    outline: none;
-				    position: absolute;
-				    top: 50%;
-				    transform: translate(0, -50%);
 				}
             }
             
@@ -256,7 +266,6 @@
     .item-preview-wrapper {
 	    margin: 20px auto;
 	    max-width: 1170px;
-	    padding-bottom: 160px;
 
 	    a {
 	        text-decoration: none;
@@ -492,6 +501,7 @@
 	height: 15px;
 	bottom: 6px;
     position: absolute;
+    @include hover-pointer();
 
     .en & {
     	right: 6px;
@@ -499,6 +509,18 @@
 
     .he & {
     	left: 6px;
+    }
+
+    &.username {
+        //display: inline-block;
+        .en & {
+            right: -20px;
+        }
+
+        .he & {
+            left: -20px;
+        }
+
     }
 }
 
