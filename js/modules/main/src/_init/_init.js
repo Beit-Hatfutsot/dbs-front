@@ -150,6 +150,19 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                     connection_set.repaint();
                 });
             }]
+        },
+
+         {
+            name: 'he.he_mjs',
+            url: '/mjs',
+            templateUrl: 'templates/main/mjs/mjs.html',
+            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
+                notification.clear();
+                plumbConnectionManager.connections = {};
+                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
+                    connection_set.repaint();
+                });
+            }]
         }, 
 		
         {
@@ -195,7 +208,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 		
 
-        {
+        /*{
             name: 'upload',
             abstract: true,
             url: '/upload',
@@ -242,7 +255,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             url: '/family_tree',
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
-        },
+        },*/
         
 
         {
