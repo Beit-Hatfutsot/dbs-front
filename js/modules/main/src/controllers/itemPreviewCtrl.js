@@ -44,8 +44,8 @@ ItemPreviewCtrl.prototype = {
     },
 
     in_mjs_state: function() {
-        return this.$state.includes('mjs');
-    }, 
+        return this.$state.current.name.includes('mjs');
+    },
 
     toggle_height: function() {
         var wrapper = angular.element(document.getElementsByClassName("item-preview-wrapper"))[0];
