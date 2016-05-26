@@ -44,7 +44,7 @@ ItemPreviewCtrl.prototype = {
     },
 
     in_mjs_state: function() {
-        return this.$state.current.name == 'mjs';
+        return this.$state.includes('mjs');
     }, 
 
     toggle_height: function() {
