@@ -58,9 +58,10 @@
 	<div ng-if="previewData.in_mjs && itemPreviewController.in_mjs_state()" class="mjs" dropdown dropdown-toggle
 		 on-toggle="itemPreviewController.rmdialog_is_open = false; itemPreviewController.toggle_height();">
 			<span class="mjs__desc">
-				<en>This item appears in: </en>
-				<he>נושה זה מופיע ב:</he>
+				<en>Appears in:</en>
+				<he>מופיע ב:</he>
 			</span>
+      &nbsp;
 			<ul class="branch_preview vertical-middle">
 				<li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]"
 	      			ng-show="previewData.in_branch[idx]"></li>
