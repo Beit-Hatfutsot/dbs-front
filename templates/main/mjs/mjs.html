@@ -30,10 +30,11 @@
 						<en>The story of</en>
 						<he>הסיפור של</he><br>
 						<ng-switch on="mjsCtrl.in_rename_mode">
-							<span class="silhouette__description__username" ng-switch-when="false">{{mjsCtrl.mjs.latest.name == null?mjsCtrl.mjs.latest.email.split('@')[0]:mjsCtrl.mjs.latest.name}}
+							<span class="silhouette__description__username" ng-switch-when="false">
+								{{mjsCtrl.username}}
 								<icon class="edit-branch-icon username" position="[-231, -127]" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode"></icon>
 							</span>
-							<input ng-switch-when="true" class="rename" focus="true" type="text" ng-model="username" placeholder="{{mjsCtrl.mjs.latest.name == null?mjsCtrl.mjs.latest.email.split('@')[0]:mjsCtrl.mjs.latest.name}}" alter-username/>
+							<input ng-switch-when="true" class="rename" focus="true" type="text" ng-model="username" placeholder="{{mjsCtrl.username}}" alter-username/>
 						</ng-switch>
 					</h1>
 				</div>
@@ -85,7 +86,7 @@
 						<span class="branch_name__num">{{}}</span>
 					</div>
 
-					<icon ng-if="(branch > 0) && (branch < 5)" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit(branch)"></icon>
+					<icon ng-if="(branch > 0) && (branch < 5) && !mjsCtrl.branch_edit_status[branch]" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit(branch)"></icon>
 	    		</li>
 			</ul>
 	    </nav>

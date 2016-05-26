@@ -14,16 +14,20 @@ angular.module('main').
 			_update_latest: function (response) {
 				var user = response.data;
 				angular.extend(mjs.latest, user);
+				//$rootScope.$broadcast('mjs-updated', user);
 			},
 
 			rename_branch: function(branch_num, new_name) {
 				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name)
-					 .then(mjs._update_latest);
+					.then(mjs._update_latest);	
 			},
 
 			rename_user: function(new_name) {
 				$http.put(apiClient.urls.user, {name: new_name})
-					 .then(mjs._update_latest);	
+					.then(function (response) {
+						mjs._update_latest(response);
+						$rootScope.$broadcast('name-updated');
+					});
 			},
 
 			add: function(item_string) {

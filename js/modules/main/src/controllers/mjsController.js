@@ -6,6 +6,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 	this.selected_branch = 0;
 	this.mjs_items = [];
 	this.$scope = $scope;
+	this.username = '';
 	this.branch_edit_status = {
             1: false,
             2: false,
@@ -21,17 +22,24 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 			return auth.is_signedin();
 		}
 	});
+
 	$rootScope.$on('loggedin', function(event, user) {
 		var items_ids = [];
 		user.story_items.forEach(function (i) {
 			items_ids.push(i.id)
 		})
 		self.load(items_ids);
+		self.username = self.get_username(mjs.latest);
 	});
 
 	var items_ids = mjs.get_items_ids();
 	if (items_ids)
 		self.load(items_ids);
+
+
+	$rootScope.$on('name-updated', function() {
+		self.username = self.get_username(mjs.latest);
+	});
 };
 
 MjsController.prototype = {
@@ -49,6 +57,16 @@ MjsController.prototype = {
 		this.item.get_items(items_ids).then(function (ret) {
 				self.mjs_items = ret;
 		}).finally(function() { self.notification.loading(false); });
+	},
+
+	get_username: function(user) {
+		var name = "";
+		if (user.name)
+			name = user.name;
+		else {
+			name = user.email.split('@')[0];
+		}
+		return name;
 	},
 
 	stopPropagation: function($event) {
