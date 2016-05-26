@@ -34,7 +34,7 @@
 								{{mjsCtrl.username}}
 								<icon class="edit-branch-icon username" position="[-231, -127]" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode"></icon>
 							</span>
-							<input ng-switch-when="true" class="rename" focus="true" type="text" ng-model="username" placeholder="{{mjsCtrl.username}}" alter-username/>
+							<input ng-switch-when="true" maxlength="12" class="rename" focus="true" type="text" ng-model="username" placeholder="{{mjsCtrl.username}}" alter-username/>
 						</ng-switch>
 					</h1>
 				</div>
