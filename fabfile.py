@@ -19,11 +19,11 @@ def deploy(branch='dev', api_server=None):
     local('npm install && bower install')
     local('grunt karma')
     local('grunt build-dist')
-    local('tar czf /tmp/bhs-client-dist.tgz dist')
+    local('tar czf /tmp/bhs-client-dist.tgz public')
     put('/tmp/bhs-client-dist.tgz', 'client')
     with cd('client'):
         try:
-            run('mv dist dist-`date +%d.%m.%y-%H:%M:%S`')
+            run('mv public public-`date +%d.%m.%y-%H:%M:%S`')
         except:
             pass
         run('tar xzf bhs-client-dist.tgz')
