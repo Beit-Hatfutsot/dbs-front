@@ -4,7 +4,7 @@
  * @module config
  * @description
  * A module to hold BHSClient configuration.
- * This Module is compiled by the Grunt replace task in the project Gruntfile.
+ // * This Module is compiled by the Grunt replace task in the project Gruntfile.
  */
 angular.module('config', []).
     /**
@@ -15,7 +15,7 @@ angular.module('config', []).
      * A map object for API enpoint names.
      */
     constant('apiConfig', {
-        baseUrl:        'localhost:5000',
+        baseUrl:        'BaseUrlPlaceHolder',
         auth:           'auth',
         user:           'user', 
         mjs:            'mjs', 
@@ -26,7 +26,7 @@ angular.module('config', []).
         ftrees_get:     'get_ftree_url',
         ftrees_walk:    'fwalk',
         upload:         'upload',
-        newsletter:         'newsletter',
+        newsletter:      'newsletter',
         search:         'search'
     });
 
