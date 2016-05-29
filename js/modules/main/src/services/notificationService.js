@@ -1,5 +1,5 @@
 angular.module('main').
-	factory('notification', function(langManager) {
+	factory('notification', ['langManager',function(langManager) {
 
 	var DEFAULT_OPTIONS = {
 			'className': 'info',
@@ -131,4 +131,4 @@ angular.module('main').
 		};
 
 		return notification;
-	});
+	}]);

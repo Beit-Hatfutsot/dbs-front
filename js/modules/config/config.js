@@ -15,7 +15,7 @@ angular.module('config', []).
      * A map object for API enpoint names.
      */
     constant('apiConfig', {
-        baseUrl:        'localhost:5000',
+        baseUrl:        'devapi.dbs.bh.org.il',
         login:      	'login',
         user:           'user', 
         mjs:            'mjs', 
