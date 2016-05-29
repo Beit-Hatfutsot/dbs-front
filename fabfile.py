@@ -19,7 +19,7 @@ def deploy(branch='dev', api_server=None):
     local('npm install && bower install')
     local('grunt karma')
     local('grunt build-dist')
-    local('tar czf /tmp/bhs-client-dist.tgz dist')
+    local('tar czf /tmp/bhs-client-dist.tgz public')
     put('/tmp/bhs-client-dist.tgz', 'client')
     with cd('client'):
         try:

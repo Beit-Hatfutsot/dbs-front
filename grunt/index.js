@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         data: {}
     });
     grunt.config.set('public_dir', public_dir);
-    grunt.config.set('dist_dir', dist_dir);
+    grunt.config.set('dist_dir', public_dir);
     grunt.config.set('pkg', pkg);
 
     grunt.registerTask('default', ['build']);
@@ -30,10 +30,8 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('build-dist', [
         'clean:public',
-        'clean:dist',
         'sass:public',
         'copy:public',
-        'copy:dist',
         'concat:public',
         'ngAnnotate',
         'useminPrepare',
