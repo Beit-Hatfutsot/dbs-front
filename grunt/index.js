@@ -28,7 +28,7 @@ module.exports = function (grunt) {
     };
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build-public', function (env) {
+    grunt.registerTask('build', function (env) {
         var mappedBaseUrl = _baseUrlEnvMapping[env];
         if (mappedBaseUrl) {
 
@@ -49,7 +49,7 @@ module.exports = function (grunt) {
         grunt.task.run(buildTasks)
     });
 
-    grunt.registerTask('build', function (env) {
+    grunt.registerTask('build-dist', function (env) {
 
         var mappedBaseUrl = _baseUrlEnvMapping[env];
         if (mappedBaseUrl) {

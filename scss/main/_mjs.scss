@@ -92,12 +92,20 @@
 				display: flex;
                 align-items: center;
 
+                 &:hover {
+                        .edit-branch-icon.username {
+                            display: inline-block;
+                        }
+                    }
+
 				.en & {
+                    padding-right: 74px;
 					left: -56px;
 					transform: translate(0%, -50%) skew(-16deg);
 				}
 
 				.he & {
+                    padding-left: 74px;
 					right: -56px;
 					transform: translate(0%, -50%) skew(16deg);
 				}
@@ -115,7 +123,11 @@
 				 	.he & {
 				 		margin-right: 10px;
 				 	}
-				 }
+
+                    &__username {
+                        position: relative;
+                    }
+				}
 			}
 
 			.share-item {
@@ -230,6 +242,7 @@
 					top: 50%;
 					left: 50%;
 					width: 78%;
+                    overflow: hidden;
 
 					&__num {
 						font-size: 14px;
@@ -253,7 +266,6 @@
     .item-preview-wrapper {
 	    margin: 20px auto;
 	    max-width: 1170px;
-	    padding-bottom: 206px;
 
 	    a {
 	        text-decoration: none;
@@ -489,6 +501,7 @@
 	height: 15px;
 	bottom: 6px;
     position: absolute;
+    @include hover-pointer();
 
     .en & {
     	right: 6px;
@@ -496,6 +509,18 @@
 
     .he & {
     	left: 6px;
+    }
+
+    &.username {
+        //display: inline-block;
+        .en & {
+            right: -20px;
+        }
+
+        .he & {
+            left: -20px;
+        }
+
     }
 }
 

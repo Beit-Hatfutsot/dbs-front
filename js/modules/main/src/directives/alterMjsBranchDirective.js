@@ -7,17 +7,7 @@ angular.module('main').
 
 				element.bind('keydown', function($event) {
 					if ($event.keyCode === 13) {
-						if (!scope.branch_name_error) {
-							element[0].blur();
-							scope.mjsCtrl.rename_branch(scope.$index, scope.branch_name);
-							scope.mjsCtrl.branch_edit_status[scope.$index] = false;
-							scope.mjsCtrl.in_edit_mode = false;
-						}
-						else {
-							scope.mjsCtrl.branch_edit_status[scope.$index] = false;
-							scope.mjsCtrl.in_edit_mode = false;
-							scope.mjsCtrl.$scope.$digest();
-						}
+						alter();
 					}
 				});
 
@@ -32,6 +22,9 @@ angular.module('main').
 					else {
 						scope.mjsCtrl.rename_branch(scope.$index, scope.branch_name);
 					}
+					scope.mjsCtrl.branch_edit_status[scope.$index] = false;
+					scope.mjsCtrl.in_edit_mode = false;
+					scope.mjsCtrl.$scope.$digest();
 				};
 				
 				scope.$watch(function() {return scope.branch_name}, function(newVal, oldVal) {

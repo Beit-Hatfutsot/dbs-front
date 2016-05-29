@@ -26,12 +26,13 @@ angular.module('main', [
     'plumb',
     'rcSubmit',
     'gedcomParser',
-	'hc.marked'
+	'hc.marked',
+    'ui.gravatar'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
-	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider',
+	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider',
 
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider) {
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider, gravatarServiceProvider) {
 
 		// to be used we exiting the item pages
 	var slug_cleaner = ['$rootScope', function($rootScope) {
@@ -150,6 +151,19 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                     connection_set.repaint();
                 });
             }]
+        },
+
+         {
+            name: 'he.he_mjs',
+            url: '/mjs',
+            templateUrl: 'templates/main/mjs/mjs.html',
+            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
+                notification.clear();
+                plumbConnectionManager.connections = {};
+                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
+                    connection_set.repaint();
+                });
+            }]
         }, 
 		
         {
@@ -195,7 +209,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 		
 
-        {
+        /*{
             name: 'upload',
             abstract: true,
             url: '/upload',
@@ -242,7 +256,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             url: '/family_tree',
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
-        },
+        },*/
         
 
         {
