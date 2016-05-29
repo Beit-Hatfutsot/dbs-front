@@ -30,9 +30,9 @@ angular.module('main', [
     'ui.gravatar'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
-	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider',
+	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider',
 
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider) {
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider, gravatarServiceProvider) {
 
 		// to be used we exiting the item pages
 	var slug_cleaner = ['$rootScope', function($rootScope) {
