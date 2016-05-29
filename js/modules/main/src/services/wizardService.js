@@ -110,7 +110,7 @@ angular.module('main').
 
 	  				this.in_progress = true;
 
-					notification.put(10);
+					notification.loading(true);
 
 		  			var self = this, 
 		  				query_params = {},
@@ -132,7 +132,7 @@ angular.module('main').
 					success(function(result) {
 						// set search status
 						var search_status;
-						notification.clear();
+						notification.loading(false);
 
 		                if ( result.name.isNotEmpty() || result.place.isNotEmpty())  {
 		                    

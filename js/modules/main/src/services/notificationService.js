@@ -25,12 +25,15 @@ angular.module('main').
 	en: 'all is fine',
 	he: 'הכל אחלה',
 	options: pendingOptions
+}, 1: {
+	en: "Our pigeon is on its way, carrying your login link",
+	he: 'נשלחה הודעת דואל עם קישור לכניסה לחשבונך'
 }, 2: {
 	en: 'found some people in the family trees',
 	he: 'מצטתי אנשים בעצי המשפחהן',
 }, 3: {
 	en: "Sorry, didn't find any person",
-	he: 'מצטערת, לא מצאתי אנשים',
+	he: 'מצטערים, לא מצאתי אנשים',
 	options: errorOptions
 }, 4: {
 	en: 'Loading item...',
@@ -38,10 +41,7 @@ angular.module('main').
 	options: pendingOptions
 }, 5: {
 	en: 'Sorry, failed to fetch item',
-	he: 'מצטערת, טעינת פריט נכשלה'
-}, 6: {
-	en: 'Loding Story...',
-	he: 'טוען את הסיפור...'
+	he: 'מצטערים, טעינת פריט נכשלה'
 }, 7: {
 	en: 'Item removed',
 	he: 'הפריט הוסר'
@@ -51,6 +51,10 @@ angular.module('main').
 }, 9: {
 	en: 'Upload in progress...',
 	he: 'העלאה מתבצעת...'
+}, 10: {
+	en: 'Sending the login email has failed, please try again later.',
+	he: 'שליחת דואל הכניסה נשלחה, אנא נסו שוב בעוד מספר רגעים',
+	options: errorOptions
 }, 11: {
 	en: 'Search has failed.',
 	he: 'החיפוש נכשל.',
@@ -72,6 +76,19 @@ angular.module('main').
 	he: 'לא מצאנו את שם המפשחה שחיפשתם',
 	options: warnOptions
 
+}, 15: {
+	en: 'Fetching more items...',
+	he: 'אוסף עוד פריטים...',
+	options: pendingOptions
+	
+}, 16: {
+	en: 'You must complete renaming before navigating',
+	he: 'נא להשלים את שינוי השם',
+	options: errorOptions
+}, 17: {
+	en: 'Sorry, this login link is not valid anymore',
+	he: 'מצטערים, הקישור אינו תקין',
+	options: errorOptions
 }
 // next line ends the notifications dict
 	},
@@ -83,14 +100,15 @@ angular.module('main').
 		var notification = {
 			loading_gif: null,
 			loading: function(on) {
+				var view = angular.element(document.getElementById('view'));
 				if (on) {
-					jQuery('#view').addClass('backdrop');
+					view.addClass('backdrop');
 					this.loading_gif = jQuery('<img>')
 						.addClass('loading')
 						.attr('src', 'images/BH-Loading.gif')
 						.appendTo('body');
 				} else if (this.loading_gif) {
-					jQuery('#view').removeClass('backdrop');
+					view.removeClass('backdrop');
 					this.loading_gif.remove();
 					this.loading_gif == null;
 				}

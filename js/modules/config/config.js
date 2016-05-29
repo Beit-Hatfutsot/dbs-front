@@ -28,5 +28,7 @@ angular.module('config', []).
         upload:         'upload',
         newsletter:      'newsletter',
         search:         'search'
-    });
+    }).
+	constant('europeanaUrl',
+			 'http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn');
 

@@ -63,24 +63,22 @@
               <he>החשבון שלי</he>
               <span class="caret"></span>
             </button>
-            <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
-              <div class="my-account-menu__row signed">
-                <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
-                <div class="dropdown-icons__user__name">{{headerController.username}}</div>
+            <div class="dropdown-menu">
+              <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
+                <div class="my-account-menu__row signed" ui-sref="mjs">
+                  <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
+                  <div class="dropdown-icons__user__name">{{headerController.username}}</div>
+                </div>
+                <div class="my-account-menu__row signed" ng-click="headerController.signout()">
+                  <en>Sign out</en>
+                  <he>יציאה</he>
+                </div>
               </div>
-              <div class="my-account-menu__row signed" ng-click="headerController.signout()">
-                <en>Sign out</en>
-                <he>יציאה</he>
-              </div>
-            </div>
-            <div class="my-account-menu" ng-if="!(headerController.is_signedin)">
-              <div class="my-account-menu__row" ng-click="headerController.signin()">
-                <en>Sign in</en>
-                <he>הכנס</he>
-              </div>
-              <div class="my-account-menu__row" ng-click="headerController.signup()">
-                <en>Create account</en>
-                <he>צור חשבון</he>
+              <div class="my-account-menu" ng-if="!(headerController.is_signedin)">
+                <div class="my-account-menu__row" ng-click="headerController.signin()">
+                  <en>Sign in</en>
+                  <he>הכנס</he>
+                </div>
               </div>
             </div>
           </div>
@@ -133,7 +131,18 @@
               </div>
             </a>
             </li>
-            <li class="mystory header-menu-item" ng-class="{'header-menu-item--active': headerController.is_mjs_state}" ui-sref="mjs">
+            <li class="header-menu-item ftree-tab"
+              ng-class="{'header-menu-item--active':
+              isCurrentState('persons') || isCurrentState('person-view')}" 
+              ng-click="headerController.goto_state('persons')"> 
+                <div>
+                    <en>Family Trees</en>
+                    <he>עצי משפחה</he>
+                </div>
+            </li>
+            <li class="mystory header-menu-item"
+                ng-class="{'header-menu-item--active': headerController.is_mjs_state}"
+                ui-sref="mjs">
               <div class="mystory__text">
                 <en>My Story</en>	
                 <he>הסיפור שלי</he>
@@ -153,18 +162,9 @@
                 <he>נצפו לאחרונה</he>
               </div>
             </li>
-                  <li class="header-menu-item ftree-tab"
-                    ng-class="{'header-menu-item--active':
-                    isCurrentState('persons') || isCurrentState('person-view')}" 
-                    ng-click="headerController.goto_state('persons')"> 
-                      <div>
-                          <en>Family Trees</en>
-                          <he>עצי משפחה</he>
-                      </div>
-                  </li>
           </ul>
         </nav>
-        <!-- <div class="dropdown-icons__upload" dropdown is-open>
+        <div class="dropdown-icons__upload" dropdown is-open>
           <div class="upload-label" dropdown-toggle>
             <en>Upload</en>
             <he>העלו קובץ</he>
@@ -193,7 +193,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

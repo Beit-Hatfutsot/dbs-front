@@ -182,9 +182,18 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 header.show_recent();
             }]
         },
+        {
+            name: 'login',
+            url: '/login/:token',
+            controller: 'LoginCtrl as ctrl',
+            templateUrl: 'templates/main/start.html',
+            onEnter: ['cache', 'wizard', 'header', function(cache, wizard, header) {
+                wizard.clear();
+                header.sub_header_state = 'closed';
+            }]
+        },
 
-
-		/*
+		
 
         {
             name: 'upload',
@@ -194,7 +203,21 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
 
         {
+            name: 'he.he_upload',
+            abstract: true,
+            url: '/upload',
+            templateUrl: 'templates/main/upload/upload.html'
+        },
+
+        {
             name: 'upload.image',
+            url: '/image',
+            controller: 'UploadFormController as uploadFormCtrl',
+            templateUrl: 'templates/main/upload/image.html'
+        },
+
+        {
+            name: 'he.he_upload.image',
             url: '/image',
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/image.html'
@@ -220,7 +243,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
         },
-        */
+        
 
         {
             name: 'verify_email',
@@ -256,12 +279,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
 			var target = state_name;
-			
-			if ($delegate.lastState)
-				var lastStateHe = $delegate.lastState.name.indexOf('he') === 0,
-				    targetHe = target.indexOf('he') === 0;
-				if (lastStateHe && !targetHe)
-					target = 'he.he_' + target;
+            if ($delegate.lastState) {
+                var lastStateHe = $delegate.current.name.indexOf('he') === 0,
+                    targetHe = target.indexOf('he') === 0;
+                if (lastStateHe && !targetHe) {
+                    target = 'he.he_' + target;
+                }
+            }
             $delegate.lastState = $delegate.current;
             $delegate.lastStateParams = $delegate.params;
             return old_go.apply($delegate, [target, state_params, config]);

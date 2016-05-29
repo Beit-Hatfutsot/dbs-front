@@ -87,7 +87,6 @@ ItemCtrl.prototype = {
 			},
 			function(error) {
 				self.error = error;
-				console.log(error);
 				self.notification.put(5);
 			});
 	},
@@ -164,10 +163,8 @@ ItemCtrl.prototype = {
 		if (index == undefined) {
 			index = this._Index;
 		}
-		var body = angular.element(document.getElementsByTagName('body')[0]),
-			gallery = this.item_data;
+		var	gallery = this.item_data;
 
-		body.addClass('backdrop');
 	    this.$modal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
@@ -181,8 +178,6 @@ ItemCtrl.prototype = {
 	     			return index
 	     		}
 	     	}
-	    }).result.finally(function() {
-	    	body.removeClass('backdrop');
 	    });
 	},
 

@@ -6,12 +6,16 @@
  * Controller for auth modal template.
  * Handles auth modal scope.
  */
-var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
+var AuthCtrl = function($scope, $modalInstance, langManager, auth,
+						notification, $state, config) {
     var self = this;
 
     this.$modalInstance = $modalInstance;
     this.auth = auth;
-    this.is_register = isRegister;
+    this.notification = notification;
+    this.is_register = config.register;
+    this.config = config;
+	this.$state = $state;
 
     /**
      * @ngdoc property
@@ -60,8 +64,7 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
      * Object that binds to the signin form inputs.
      */
     this.signin_data = {
-        email:  '',
-        ps:     ''
+        email:  ''
     };
 
 
@@ -123,14 +126,9 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth, isRegister) {
      * Engilsh & Hebrew submit button values.
      */
     this.submit_values = {
-        register: {
-            en: 'Register',
-            he: 'הרשמה'
-        },
-
         signin: {
-            en: 'Sign In',
-            he: 'כניסה'
+            en: 'Email Me',
+            he: 'שלח לי'
         },
 
         processing: {
@@ -153,44 +151,13 @@ AuthCtrl.prototype = {
     signin: function() {
         var self = this;
 
-    	this.auth.signin(this.signin_data.email, this.signin_data.ps).
+    	this.auth.signin(this.signin_data.email).
             then(function() {
-                self.message = {
-                    en: 'Sign in succeeded',
-                    he: 'הכניסה התבצעה בהצלחה'
-                };
                 self.$modalInstance.close();
+                self.notification.put(1);
             }, function() {
-                self.message = {
-                    en: 'Sign in failed',
-                    he: 'הכניסה נכשלה'
-                };
-            });
-    },
-
-    /**
-     * @ngdoc method
-     * @name AuthCtrl#register
-     *
-     * @description
-     * Calls method register of {@link module:auth.service:auth} service, using registration form data.
-     * Defines the success and failure messages, displayed upon modal dismissal. 
-     */
-    register: function() {
-        var self = this;
-
-        this.auth.register(this.register_data.name, this.register_data.email, this.register_data.ps).
-            then(function() {
-                self.message ={
-                    en: 'Registered user ' + self.register_data.email + ' successfully',
-                    he: 'נרשם משתמש ' + self.register_data.email + ' בהצלחה'
-                };
                 self.$modalInstance.close();
-            }, function() {
-                self.message = {
-                    en: 'Registration failed',
-                    he: 'ההרשמה נכשלה'
-                };
+                self.notification.put(10);
             });
     },
 
@@ -202,7 +169,10 @@ AuthCtrl.prototype = {
      * Dismisses the auth modal.
      */
     dismiss: function() {
+		debugger;
         this.$modalInstance.dismiss();
+		if (this.config.mandatory)
+			this.$state.go(this.config.fallback_state);
     },
 
 
@@ -243,4 +213,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance', 'langManager', 'auth', 'isRegister', AuthCtrl]);
+angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance',
+			'langManager', 'auth', 'notification', '$state', 'config', AuthCtrl]);

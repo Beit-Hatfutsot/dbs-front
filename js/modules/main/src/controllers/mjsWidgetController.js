@@ -1,9 +1,10 @@
-var MjsWidgetController = function($scope, $state, mjs, auth, item) {
+var MjsWidgetController = function($rootScope, $scope, $state, mjs, auth, item) {
 	var self = this;
 
 	this.$state = $state;
 	this.$scope = $scope
 	this.mjs = mjs;
+	this.item = item;
 	this.auth = auth;
 	this.item_tobe_added = false;
 	this.item_added = false;
@@ -16,31 +17,30 @@ var MjsWidgetController = function($scope, $state, mjs, auth, item) {
 		}
 	});
 	
-	$scope.$on('signin', function() {
-		mjs.refresh().
-			then(function() {
-				if (self.item_tobe_added) {
-					self.mjs.add(self.item_string).
-						then(function() {
-							// open pop-over
-							self.item_added = true;
-							self.item_tobe_added = false;
-						});
-				}
-			});
+	/*
+	$rootScope.$on('mjs-updated', function() {
+		if (self.item_tobe_added) {
+					self.item_added = true;
+					self.item_tobe_added = false;
+		};
 	});
+	*/
+
 };
 
 MjsWidgetController.prototype = {
 	push_to_mjs: function() {
 		var self = this;
+		var slug = this.item.get_key(self.$scope.item);
+		self.$scope.item.slug = slug;
+
 		if (this.signedin) {
-			if (!this.item_data.in_mjs) {
-				this.mjs.add(self.item_string).then(function() {
-					// open pop-over
-					self.item_data.in_mjs = true;
-					self.item_added = true;
-				});
+			if (!self.$scope.item.in_mjs) {
+				this.mjs.add(self.$scope.item.slug).then(function() {
+				// open pop-over
+				self.$scope.item.in_mjs = true;
+				self.item_added = true;
+			});
 			}
 		}
 		else {
@@ -54,11 +54,11 @@ MjsWidgetController.prototype = {
 	remove_from_mjs: function() {
 		var self = this;
 		if(this.item_data.in_mjs && !(this.item_data.ugc)) {
-			this.mjs.remove(self.item_string).then(function() {
+			this.mjs.remove(self.$scope.item.Slug).then(function() {
 				self.item_data.in_mjs = false;
 			})	
 		}
 	}
 };
 
-angular.module('main').controller('MjsWidgetController', ['$scope', '$state', 'mjs', 'auth', 'item', MjsWidgetController]);
+angular.module('main').controller('MjsWidgetController', ['$rootScope', '$scope', '$state', 'mjs', 'auth', 'item', MjsWidgetController]);

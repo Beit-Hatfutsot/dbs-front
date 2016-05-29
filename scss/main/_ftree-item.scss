@@ -260,6 +260,7 @@
 				height: 100%;
                 color: #ffffff;
                 height: 48px;
+                @include hover-pointer();
                 .en & {
                     float: left;
                     padding-left: 7px;

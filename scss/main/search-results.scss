@@ -132,7 +132,7 @@
 #general-search-page {
     position: relative;
     width: $view-width;
-    margin: 0 auto;
+    margin: 6px auto 0;
     background-color: $gray7;
 
     .article {
@@ -142,6 +142,7 @@
 
         .article_title {
             font-weight: 700;
+            line-height: 2;
         }
 
         .content {

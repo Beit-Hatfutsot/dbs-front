@@ -8,7 +8,7 @@
  * the auth modal opens.
  */
 
-var AuthPrivateController = function($scope, $state, auth, user) {
+var AuthPrivateController = function($scope, $state, auth) {
 	var self = this;
 
 	/**
@@ -26,18 +26,12 @@ var AuthPrivateController = function($scope, $state, auth, user) {
 		}
 	});
 
-	$scope.$watch(function() {
-		return self.signedin || !(user.$resolved);
-	}, 
-	function(signedin) {
-		if ( !signedin && self.on ) {
-			auth.authenticate({
-				mandatory: true,
-				fallback_state: $state.lastState.name ? $state.lastState : 'start',
-				fallback_state_params: $state.lastStateParams
-			});
-		}
-	});
+	if ( !this.signedin) {
+		auth.authenticate({
+			mandatory: true,
+			fallback_state: 'start'
+		});
+	}
 };
 
 AuthPrivateController.prototype = {
