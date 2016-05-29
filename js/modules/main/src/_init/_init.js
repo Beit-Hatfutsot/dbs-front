@@ -26,7 +26,8 @@ angular.module('main', [
     'plumb',
     'rcSubmit',
     'gedcomParser',
-	'hc.marked'
+	'hc.marked',
+    'ui.gravatar'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider',
