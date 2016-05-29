@@ -29,6 +29,7 @@ module.exports = function(config) {
 		'bower_components/ngstorage/ngStorage.min.js',
 		'bower_components/jquery/dist/jquery.min.js',
 		'js/lib/notify.js',
+        'bower_components/angular-gravatar/build/angular-gravatar.js',
 
         // app modules & tests
         {pattern: 'js/modules/**/**/*.js/', included: true},
