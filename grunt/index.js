@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     grunt.config.set('pkg', pkg);
 
     var _baseUrlEnvMapping = {
-        dev: "devapi.dbs.bh.org.il‎",
+        dev: "devapi.dbs.bh.org.il",
         local: "localhost:5000",
         live: "api.dbs.bh.org.il"
     };
@@ -36,7 +36,7 @@ module.exports = function (grunt) {
 
         }
         else {
-            grunt.config.set('config', {baseUrl: "localhost:5000"});
+            grunt.config.set('config', {baseUrl: _baseUrlEnvMapping.dev});
 
         }
         var buildTasks = [
