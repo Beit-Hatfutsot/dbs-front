@@ -1,3 +1,5 @@
+![CI status](https://codeship.com/projects/70b6f6b0-0892-0134-2fd9-0a16241ce4dd/status?branch=dev)
+
 # Beit-Hatfusot Front-End README
 
 Welcome to the frontend of the museum of the jewish people.  The code is in
