@@ -37,7 +37,12 @@ angular.module('main').
 
 			remove: function(item_string) {
 				return $http.delete(apiClient.urls.mjs +'/'+ item_string)
-							.then(mjs._update_latest);
+						.then(function(response) {
+							mjs._update_latest(response);
+							debugger
+							$rootScope.$broadcast('item-removed');
+						});
+								
 			},
 
 			add_to_branch: function(item_string, branch_num) {

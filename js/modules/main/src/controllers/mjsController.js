@@ -40,6 +40,10 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 	$rootScope.$on('name-updated', function() {
 		self.username = self.get_username(mjs.latest);
 	});
+
+	$rootScope.$on('item-removed', function() {
+		self.load(mjs.get_items_ids());
+	});
 };
 
 MjsController.prototype = {
@@ -56,6 +60,7 @@ MjsController.prototype = {
 
 		this.item.get_items(items_ids).then(function (ret) {
 				self.mjs_items = ret;
+
 		}).finally(function() { self.notification.loading(false); });
 	},
 
