@@ -278,38 +278,6 @@
 						display: block;
 						width: 100%;
 						color: $gray3;
-
-						&.rtl {
-							direction: rtl;
-
-							.checkbox-label {
-								padding-right: 25px;
-
-								&:before {
-									right: 0;
-								}
-							}
-
-							input[type=checkbox]:checked + .checkbox-label:after {
-								right: 3px;
-							}
-						}
-
-						&.ltr {
-							direction: ltr;
-
-							.checkbox-label {
-								padding-left: 25px;
-
-								&:before {
-									left: 0;
-								}
-							}
-
-							input[type=checkbox]:checked + .checkbox-label:after {
-								left: 3px;
-							}
-						}
 						
 						input[type=checkbox] {
 	                        display: none;
