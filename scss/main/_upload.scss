@@ -501,14 +501,6 @@
 							color: $gray3;
 							//margin: 35px 0 42px;
 							font-size: 20px;
-
-							.en & {
-								direction: rtl;
-							}
-
-							.he & {
-								direction: ltr;
-							}
 						}
 
 						&__submit {
