@@ -22,14 +22,14 @@ module.exports = function (grunt) {
     grunt.config.set('pkg', pkg);
 
     var _baseUrlEnvMapping = {
-        dev: "devapi.dbs.bh.org.il",
         local: "localhost:5000",
+        test: "devapi.dbs.bh.org.il",
         live: "api.dbs.bh.org.il"
     };
 
     grunt.registerTask('default', ['build']);
     grunt.registerTask('build', function (env) {
-        var mappedBaseUrl = _baseUrlEnvMapping[env || 'dev'];
+        var mappedBaseUrl = _baseUrlEnvMapping[env || 'test'];
 		grunt.config.set('config', {baseUrl: mappedBaseUrl});
         var buildTasks = [
             'clean:public',
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build-dist', function (env) {
 
-        var mappedBaseUrl = _baseUrlEnvMapping[env || 'dev'];
+        var mappedBaseUrl = _baseUrlEnvMapping[env || 'test'];
 		grunt.config.set('config', {baseUrl: mappedBaseUrl});
 
         var buildTasks = [
