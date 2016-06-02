@@ -39,7 +39,6 @@ angular.module('main').
 				return $http.delete(apiClient.urls.mjs +'/'+ item_string)
 						.then(function(response) {
 							mjs._update_latest(response);
-							debugger
 							$rootScope.$broadcast('item-removed');
 						});
 								
