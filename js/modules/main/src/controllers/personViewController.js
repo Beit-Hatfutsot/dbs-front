@@ -358,10 +358,11 @@ PersonViewController.prototype = {
 		new_divs.append('div')
 				.classed('dates', true)
 				.classed('noselect', true)
-				.text(function(d) { 
-				 	var birth = d.birth_year ? d.birth_year : '?';
-				 	var death =  d.death_year ? d.death_year : '?';
-				 	return birth + ' ' + death});
+				.html(function(d) {
+				 	var birth = d.birth_year ? d.birth_year : '&#65533;';
+				 	var death =  d.death_year ? d.death_year : '&#65533;';
+				 	return birth + ' ' + death
+				});
 		new_divs.append('div')
 			    .classed('name', true)
 				  .classed('noselect', true)
