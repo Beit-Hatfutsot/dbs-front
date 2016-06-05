@@ -40,6 +40,16 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 	$rootScope.$on('name-updated', function() {
 		self.username = self.get_username(mjs.latest);
 	});
+
+	$rootScope.$on('item-removed', function(events, item_slug) {
+		var mjs_items = [];
+		for (var i in self.mjs_items) {
+			if(self.mjs_items[i].Slug.En != item_slug) {
+				mjs_items.push(self.mjs_items[i]);
+			}
+		}
+		self.mjs_items = mjs_items;
+	});
 };
 
 MjsController.prototype = {
@@ -56,6 +66,7 @@ MjsController.prototype = {
 
 		this.item.get_items(items_ids).then(function (ret) {
 				self.mjs_items = ret;
+
 		}).finally(function() { self.notification.loading(false); });
 	},
 
