@@ -41,7 +41,6 @@ angular.module('main').
 							mjs._update_latest(response);
 							$rootScope.$broadcast('item-removed', item_string);
 						});
-								
 			},
 
 			add_to_branch: function(item_string, branch_num) {

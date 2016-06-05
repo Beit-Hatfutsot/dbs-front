@@ -16,7 +16,7 @@ angular.module('config', []).
      */
     constant('apiConfig', {
         baseUrl:        'BaseUrlPlaceHolder',
-        login:          'login', 
+        login:          'login',
         auth:           'auth',
         user:           'user', 
         mjs:            'mjs', 
