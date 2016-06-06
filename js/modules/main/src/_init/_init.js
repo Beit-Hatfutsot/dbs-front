@@ -322,7 +322,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 	markedProvider.setOptions({ breaks: true })
 }]).
-run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootScope, langManager, header) {
+run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', function ($state, $rootScope, langManager, header, $window, $location) {
     
     Object.defineProperty($rootScope, 'lang', {
         get: function() {
@@ -337,7 +337,7 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
     Object.defineProperty($rootScope, 'header_visible', {
         get: function() {
             return header.is_visible;
-        }
+        }   
     });
 
     $rootScope.isCurrentState = function(state_name) {
@@ -350,6 +350,9 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
 	$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
+            if (!$window.ga)
+                return;
+            $window.ga('send', 'pageview', { page: $location.path() });
 	});
 
 }]);
