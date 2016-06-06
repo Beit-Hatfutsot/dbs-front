@@ -322,8 +322,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 	markedProvider.setOptions({ breaks: true })
 }]).
-run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', function ($state, $rootScope, langManager, header, $window, $location) {
-    
+run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'notification', function ($state, $rootScope, langManager, header, $window, $location, notification) {
+
     Object.defineProperty($rootScope, 'lang', {
         get: function() {
             return langManager.lang;
@@ -343,8 +343,6 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', fu
     $rootScope.isCurrentState = function(state_name) {
         return ($state.includes(state_name) || $state.includes('he.he_'+state_name));
     };
-    
-    // $rootScope.facebookAppId = 666465286777871;
 
     $state.go('start');
 	$rootScope.$on('$stateChangeStart',
