@@ -347,6 +347,10 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', fu
     // $rootScope.facebookAppId = 666465286777871;
 
     $state.go('start');
+	$rootScope.$on('$stateChangeStart',
+	  function(event, toState, toParams, fromState, fromParams){
+		  notification.loading(false);
+	});
 	$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
