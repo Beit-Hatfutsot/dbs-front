@@ -44,12 +44,12 @@
 	<form  name="upload_form" id="upload-form" ng-show="uploadCtrl.is_image" rc-submit="uploadCtrl.submit('image')" novalidate> 
 		<div ng-if="uploadCtrl.lang === 'en'">
 			<div class="upf__alt-instructions">
-				<en>במידה ואתם דוברי עברית, אנא מלאו את אותם פרטים גם בעברית</en>
+				<en>If you speak Hebrew, please fill the same details below</en>
 			</div>
-			<div class="checkbox rtl">
+			<div class="checkbox">
 				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
 				<label class="checkbox-label " for="language-checkbox">
-					<span class="checkbox-label-desc">אני דובר/ת עברית</span>
+					<span class="checkbox-label-desc">I speak Hebrew</span>
 				</label>
 			</div>
 			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
@@ -72,12 +72,12 @@
 
 		<div ng-if="uploadCtrl.lang === 'he'">
 			<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'he'">
-				<he>If you speak English, please fill the same details below</he>
+				<he>במידה ואתם דוברי אנגלית, אנא מלאו את אותם פרטים גם בעברית</he>
 			</div>
-			<div class="checkbox ltr">
+			<div class="checkbox">
 				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
 				<label class="checkbox-label" for="language-checkbox">
-					<span class="checkbox-label-desc">I speak English</span>
+					<span class="checkbox-label-desc">אני דובר/ת אנגלית</span>
 				</label>
 			</div>
 			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
