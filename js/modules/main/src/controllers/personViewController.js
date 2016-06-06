@@ -76,6 +76,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 			  function(event, toState, toParams, fromState, fromParams){ 
 				  if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
 					  event.preventDefault(); 
+					  notification.loading(false);
 					  // self.detailsShown = true;
 					  self.$state.transitionTo(toState.name, toParams, {notify: false});
 					  self.load(toParams);

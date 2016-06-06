@@ -322,7 +322,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 	markedProvider.setOptions({ breaks: true })
 }]).
-run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootScope, langManager, header) {
+run(['$state', '$rootScope', 'langManager', 'header', 'notification', function ($state, $rootScope, langManager, header, notification) {
     
     Object.defineProperty($rootScope, 'lang', {
         get: function() {
@@ -347,6 +347,10 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
     // $rootScope.facebookAppId = 666465286777871;
 
     $state.go('start');
+	$rootScope.$on('$stateChangeStart',
+	  function(event, toState, toParams, fromState, fromParams){
+		  notification.loading(false);
+	});
 	$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
