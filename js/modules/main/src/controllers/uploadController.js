@@ -291,7 +291,7 @@ UploadController.prototype = {
 	upload: function(type) {
         this.reset_flow_data();
 
-        this.flow.opts.headers.Authorization = 'Bearer ' + this.auth.get_token();
+        this.flow.opts.headers["Authorization-Token"] = this.auth.get_token();
         
         for (var field in this.meta_data[type].values) {
             this.flow.opts.query[field + '_en'] = this.meta_data[type].values[field].en;
@@ -352,19 +352,13 @@ UploadController.prototype = {
     },
 
     onError: function($file, $message) {
+		debugger;
         if ($message && JSON.parse($message).error.substr(-13) === 'not supported') {
-            this.notification.put({
-                en: 'This file type is not supported. Please upload a JPG or PNG file.',
-                he: 'שוג הקובץ הזה אינו נתמך, אנא נסו להעלות קובץ מסוג נתמך'
-            });
+            this.notification.put(18);
         }
         else {
-            this.notification.put({
-                en: 'Something went wrong, please try uploading again',
-                he: 'משהו השתבש, אנא נסו שוב'
-            });
+            this.notification.put(19);
         }
-
         this.failed = true;
     },
 

@@ -76,6 +76,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 			  function(event, toState, toParams, fromState, fromParams){ 
 				  if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
 					  event.preventDefault(); 
+					  notification.loading(false);
 					  // self.detailsShown = true;
 					  self.$state.transitionTo(toState.name, toParams, {notify: false});
 					  self.load(toParams);
@@ -358,10 +359,11 @@ PersonViewController.prototype = {
 		new_divs.append('div')
 				.classed('dates', true)
 				.classed('noselect', true)
-				.text(function(d) { 
-				 	var birth = d.birth_year ? d.birth_year : '?';
-				 	var death =  d.death_year ? d.death_year : '?';
-				 	return birth + ' ' + death});
+				.html(function(d) {
+				 	var birth = d.birth_year ? d.birth_year : '&#65533;';
+				 	var death =  d.death_year ? d.death_year : '&#65533;';
+				 	return birth + ' ' + death
+				});
 		new_divs.append('div')
 			    .classed('name', true)
 				  .classed('noselect', true)
