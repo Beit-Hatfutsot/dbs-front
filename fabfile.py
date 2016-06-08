@@ -4,15 +4,20 @@ from datetime import datetime
 import logging
 
 from fabric.api import *
-FRONTEND_BUCKET = {'test': 'gs://test.dbs.bh.org.il',
-                    'live': 'gs://dbs.bh.org.il'}
+
 env.user = 'bhs'
 
 env.now = datetime.now().strftime('%Y%m%d-%H%M')
 
-def deploy(conf='test'):
+def deploy(api_server='test'):
     local('npm install && bower install')
     local('grunt karma')
-    local('grunt build-dist:' + conf)
-    local('gsutil rsync -r dist ' + FRONTEND_BUCKET[conf])
-    local('gsutil cp dist/index.html ' + FRONTEND_BUCKET[conf]),
+    local('grunt build-dist:'+api_server)
+    local('tar czf /tmp/bhs-client-dist.tgz dist')
+    put('/tmp/bhs-client-dist.tgz', 'client')
+    with cd('client'):
+        try:
+            run('mv dist dist-`date +%d.%m.%y-%H:%M:%S`')
+        except:
+            pass
+        run('tar xzf bhs-client-dist.tgz')
