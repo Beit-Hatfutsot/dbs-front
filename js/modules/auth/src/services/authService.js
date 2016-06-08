@@ -48,6 +48,11 @@ angular.module('auth').
 				     		config: function () { return config; }
 				     	}
 				    });
+					authModalInstance.result.finally(function() {
+						if(config.mandatory) {
+							$state.go(config.fallback_state);
+						}
+				    })
 				}
 		  	},
 
