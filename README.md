@@ -58,5 +58,5 @@ not needed.
 In order to serve the docs http://localhost:3000 run:
 
     $ cd docs
-    $ gulp docs:serve
+    $ gulp docs:serve 
 
