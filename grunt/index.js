@@ -45,6 +45,7 @@ module.exports = function (grunt) {
 
         var mappedBaseUrl = _baseUrlEnvMapping[env || 'test'];
 		grunt.config.set('config', {baseUrl: mappedBaseUrl});
+		require('es6-promise').polyfill();
 
         var buildTasks = [
             'clean:public',

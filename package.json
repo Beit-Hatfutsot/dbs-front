@@ -5,6 +5,7 @@
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "6.3.6",
+    "es6-promise": "^3.2.1",
     "grunt": "~0.4.4",
     "grunt-contrib-clean": "~1.0.0",
     "grunt-contrib-concat": "~1.0.1",
