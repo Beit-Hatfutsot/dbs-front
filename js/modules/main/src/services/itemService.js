@@ -185,27 +185,35 @@ angular.module('main').
 					else {
 						try {
 							// fetch the non-cached items
-							// TODO: store items on the cache
-							var not_cached_slugs = not_cached_items.join(',');
-							itemResource.query({slugs: not_cached_slugs}).$promise.
-								then(function(item_data_arr) {
-									/*
-									item_data_arr.forEach(function(item_data) {
-										var collection_name = itemTypeMap.get_collection_name(item_data);
-										cache.put(item_data, collection_name);
-									});
-									*/
+							var items_to_get = not_cached_items.length,
+								items = [],
+								i = 0;
+
+							function get_items_chunk(item_data_arr) {
+								items = items.concat(item_data_arr);
+								items_to_get -= item_data_arr.length;
+								i += item_data_arr.length;
+								if (items_to_get > 0) {
+									var slugs_to_get = not_cached_slugs.slice(i,
+														max(items_to_get, i+9))
+									itemResource.query({slugs: slugs_to_get}).join(',')
+										.$promise.then(get_items_chunk)
+												 .finally(function() {
+													in_progress = false;
+												 });
+								}
+								else {
 									var ret = item_data_arr.concat(cached_items);
 									$rootScope.$broadcast('item-loaded', ret);
 									deferred.resolve(ret);
-								},
-								function() {
-									deferred.resolve( cached_items );
-									$rootScope.$broadcast('items-load');
-								}).
-								finally(function() {
-									in_progress = false;
-								});
+								}
+							};
+							if (not_cached_items.length > 0)
+								get_items_chunk([]);
+							else {
+								deferred.resolve( cached_items );
+								$rootScope.$broadcast('items-load');
+							}
 						}
 						catch(e) {
 							deferred.reject();
