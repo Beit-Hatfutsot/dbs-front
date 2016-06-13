@@ -30,7 +30,7 @@ describe('item', function() {
 			expect(item.get_key(item_data)).toEqual('שלום');
 		});
 	})
-	describe('networked operations', function () {
+	describe('single item networked operations', function () {
 		var item_data, item_url, cache, $httpBackend, $timeout;
 
 		beforeEach(inject(function(_cache_, _$httpBackend_, apiClient, _$timeout_) {
@@ -104,5 +104,37 @@ describe('item', function() {
 		});
 		*/
 
+	}),
+	describe('single item networked operations', function () {
+		var $httpBackend, $timeout, apiClient;
+		beforeEach(inject(function(_$httpBackend_, _apiClient_, _$timeout_) {
+			apiClient = _apiClient_;
+			$httpBackend = _$httpBackend_;
+			$timeout = _$timeout_;
+		}));
+		it('should fetch items from server', function() {
+			var retrieved, items_url;
+			var slugs = ['place_paris', 'place_amsterdam', 'place_london', 'place_rome'];
+			var items_data = [];
+			for (var i=0; i < slugs.length; i++)
+				items_data.push({
+					Slug: {En: slugs[i]},
+					data: 'bla bla bla',
+					UnitType: 5 //place
+				});
+
+			items_url = apiClient.urls.item + '/'+slugs.join(',');
+			$httpBackend.whenGET(items_url).
+				respond(200, items_data);
+
+			$httpBackend.expectGET(items_url);
+
+			item.get_items(slugs).
+				then(function(data) {
+					expect(data.length).toEqual(slugs.length);
+				});
+			$httpBackend.flush();
+
+		});
 	});
 });

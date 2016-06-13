@@ -183,43 +183,38 @@ angular.module('main').
 						deferred.resolve(cached_items);
 					} 
 					else {
-						try {
-							// fetch the non-cached items
-							var items_to_get = not_cached_items.length,
-								items = [],
-								i = 0;
-
-							function get_items_chunk(item_data_arr) {
-								items = items.concat(item_data_arr);
-								items_to_get -= item_data_arr.length;
-								i += item_data_arr.length;
-								if (items_to_get > 0) {
-									var slugs_to_get = not_cached_slugs.slice(i,
-														max(items_to_get, i+9))
-									itemResource.query({slugs: slugs_to_get}).join(',')
-										.$promise.then(get_items_chunk)
-												 .finally(function() {
-													in_progress = false;
-												 });
-								}
-								else {
-									var ret = item_data_arr.concat(cached_items);
-									$rootScope.$broadcast('item-loaded', ret);
-									deferred.resolve(ret);
-								}
-							};
-							if (not_cached_items.length > 0)
-								get_items_chunk([]);
-							else {
-								deferred.resolve( cached_items );
-								$rootScope.$broadcast('items-load');
+						// fetch the non-cached items
+						var items_to_get = not_cached_items.length,
+							items = [],
+							i = 0;
+						console.log(items_to_get);
+						function get_items_chunk(item_data_arr) {
+						debugger;
+							items = items.concat(item_data_arr);
+							items_to_get -= item_data_arr.length;
+							i += item_data_arr.length;
+							if (items_to_get > 0) {
+								var slugs_to_get = not_cached_items.slice(i,
+													Math.min(items_to_get, i+9))
+								itemResource.query({slugs: slugs_to_get}).join(',')
+									.$promise.then(get_items_chunk)
+											 .finally(function() {
+												in_progress = false;
+											 });
 							}
-						}
-						catch(e) {
-							deferred.reject();
+							else {
+								var ret = item_data_arr.concat(cached_items);
+								$rootScope.$broadcast('item-loaded', ret);
+								deferred.resolve(ret);
+							}
+						};
+						if (not_cached_items.length > 0)
+							get_items_chunk([]);
+						else {
+							deferred.resolve( cached_items );
+							$rootScope.$broadcast('items-load');
 						}
 					}
-
 					return deferred.promise;
 				}
 			}
