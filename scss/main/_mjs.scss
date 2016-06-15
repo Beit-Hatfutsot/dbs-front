@@ -423,7 +423,7 @@
 	        height: 20px;
 	        border-radius: 5px;
 	        margin-top: 4px;
-	        @include hover-pointer;
+	        @include hover-pointer();
 
 	        .en & {
 	           margin-right: 10px;
@@ -589,6 +589,7 @@
 }
 
 .rm-popover {
+    @include hover-pointer();
 	&.open {
 		.rmdialog {
 			display: block;
