@@ -57,7 +57,7 @@
           <div class="header-element dropdown-icons__my-account signed" dropdown>
             <button class="my-account-label" dropdown-toggle>
               <div class="dropdown-icons__user" ng-if="headerController.is_signedin">
-                <icon class="dropdown-icons__user__pic" position="[-264, -588]"></icon>
+                <img class="dropdown-icons__user__pic" gravatar-src="headerController.auth.user.email" gravatar-default="identicon" gravatar-size="25"/>
               </div>
               <en>My Account</en>
               <he>החשבון שלי</he>
@@ -66,15 +66,21 @@
             <div class="dropdown-menu">
               <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
                 <div class="my-account-menu__row signed" ui-sref="mjs">
-                  <icon class="dropdown-icons__user__pic signed" position="[-262, -526]"></icon>
-                  <div class="dropdown-icons__user__name">{{headerController.username}}</div>
+                  <img class="dropdown-icons__user__pic signed" gravatar-src="headerController.auth.user.email" gravatar-default="identicon" gravatar-size="55"/>
+                  <div class="dropdown-icons__user__name">
+                    <span>{{headerController.username}}</span><br/>
+                    <span class="small-text">
+                      <en>View Story</en>
+                      <he>הסיפור שלי</he>
+                    </span>
+                  </div>
                 </div>
                 <div class="my-account-menu__row signed" ng-click="headerController.signout()">
                   <en>Sign out</en>
                   <he>יציאה</he>
                 </div>
               </div>
-              <div class="my-account-menu" ng-if="!(headerController.is_signedin)">
+              <div class="my-account-menu unsigned" ng-if="!(headerController.is_signedin)">
                 <div class="my-account-menu__row" ng-click="headerController.signin()">
                   <en>Sign in</en>
                   <he>הכנס</he>
@@ -142,7 +148,7 @@
             </li>
             <li class="mystory header-menu-item"
                 ng-class="{'header-menu-item--active': headerController.is_mjs_state}"
-                ui-sref="mjs">
+                ng-click="headerController.goto_state('mjs')">
               <div class="mystory__text">
                 <en>My Story</en>	
                 <he>הסיפור שלי</he>

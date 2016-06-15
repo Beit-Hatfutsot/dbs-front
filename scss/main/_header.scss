@@ -556,7 +556,7 @@
                     position: relative;
 
                     &.open {
-                        .my-account-menu {
+                        .dropdown-menu {
                             display: block;
                             min-width: 100%;
                         }
@@ -597,20 +597,29 @@
                             border-left: 4px solid transparent;
                         }
                     }
-                    .my-account-menu {
+                    .dropdown-menu {
                         position: absolute;
-                        @include border-radius(3px);
+                        min-width: 100%;
                         margin-top: 6px;
                         display: none;
                         left: 50%;
                         @include translateX(-50%);
+                    }
+                    .my-account-menu {
+                        @include border-radius(3px);
                         @include box-shadow(0 0 6px 1px $gray4);
 
                         &.signed {
+                            width: 260px;
                             box-shadow: none;   
                         }
 
+                        &.unsigned {
+                            width: 100%;
+                        }
+
                         &__row {
+                            display: flex;
                             font-size: 16px;
                             padding: 4px 5px;
                             color: $gray3;
@@ -618,7 +627,9 @@
                             @include hover-pointer();
                             @include border-radius(3px);
 
+
                             &.signed {
+                                position: relative;
                                 margin-bottom: 6px;
                                 @include box-shadow(0 0 6px 0 $gray4);
                                
@@ -642,20 +653,22 @@
                     vertical-align: middle;
 
                     &__pic {
-                        width: 25px;
-                        height: 25px;
-                        
+                        border-radius: 30px;
+                        display: block;
                         .en & {
-                            margin: 0px 2px 0 -8px;
+                            margin-left: -7px;
                         }
                         .he & {
-                            margin: 0px -8px 0 2px;
+                            margin-right: -7px;
                         }
 
                         &.signed {
-                            width: 55px;
-                            height: 55px;
-                            display: inline-block;
+                            .en & {
+                                margin-right: 10px;
+                            }
+                            .he & {
+                                margin-left: 10px;
+                            }
                         }
                     }
 
@@ -664,13 +677,12 @@
                         color: $gray3;
                         font-weight: 600;
                         font-size: 18px;
-                        @include translate (0, -100%);
-
-                        .en & {
-                            margin-left: 5px;
-                        }
-                        .he {
-                            margin-right: 5px;
+                        line-height: 1;
+                        @include vertical-align(absolute);
+                        
+                        .small-text {
+                            font-weight: normal;
+                            font-size: 14px;
                         }
 
                     }

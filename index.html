@@ -13,8 +13,10 @@
 		<link href="css/bhsclient.css" rel="stylesheet" type="text/css" media="all">
 		<link href='fonts/opensans/stylesheet.css' rel='stylesheet' type='text/css'>
 		<!-- endbuild -->
-
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
+		<!--[if lt IE 9]>
+		    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
+		<![endif]-->
 	</head>
 	<body class="{{lang}}" lang="{{lang}}" ng-cloak flow-prevent-drop item-scroll>
 		<div id="app-container">
@@ -41,6 +43,7 @@
 		<script src="bower_components/marked/marked.min.js"></script>
 		<script src="bower_components/angular-marked/angular-marked.min.js"></script>
 		<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+		<script src="bower_components/angular-gravatar/build/angular-gravatar.min.js"></script>
 		<script type="text/javascript" src="js/lib/d3.min.js"></script>
 		<!-- endbuild -->
 		<!-- build:js({.tmp,public}) /scripts/scripts.js -->
@@ -55,7 +58,9 @@
 		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 		 
 		  ga('create', 'UA-8676522-4', 'auto');
-		  ga('send', 'pageview');
 		</script>
+		<en><a class="github-fork-ribbon right-bottom fixed" href="https://github.com/Beit-Hatfutsot/dbs-front" title="Fork me on GitHub" target="_blank">Fork me on GitHub</a></en>
+		<he><a class="github-fork-ribbon left-bottom fixed" href="https://github.com/Beit-Hatfutsot/dbs-front" title="Fork me on GitHub" target="_blank">Fork me on GitHub</a></he>
+
 	</body>
 </html>

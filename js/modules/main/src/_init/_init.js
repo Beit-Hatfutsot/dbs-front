@@ -26,12 +26,13 @@ angular.module('main', [
     'plumb',
     'rcSubmit',
     'gedcomParser',
-	'hc.marked'
+	'hc.marked',
+    'ui.gravatar'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
-	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider',
+	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider',
 
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider) {
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider, gravatarServiceProvider) {
 
 		// to be used we exiting the item pages
 	var slug_cleaner = ['$rootScope', function($rootScope) {
@@ -321,8 +322,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 	markedProvider.setOptions({ breaks: true })
 }]).
-run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootScope, langManager, header) {
-    
+run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'notification', function ($state, $rootScope, langManager, header, $window, $location, notification) {
+
     Object.defineProperty($rootScope, 'lang', {
         get: function() {
             return langManager.lang;
@@ -336,19 +337,24 @@ run(['$state', '$rootScope', 'langManager', 'header', function ($state, $rootSco
     Object.defineProperty($rootScope, 'header_visible', {
         get: function() {
             return header.is_visible;
-        }
+        }   
     });
 
     $rootScope.isCurrentState = function(state_name) {
         return ($state.includes(state_name) || $state.includes('he.he_'+state_name));
     };
-    
-    // $rootScope.facebookAppId = 666465286777871;
 
     $state.go('start');
+	$rootScope.$on('$stateChangeStart',
+	  function(event, toState, toParams, fromState, fromParams){
+		  notification.loading(false);
+	});
 	$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
+            if (!$window.ga)
+                return;
+            $window.ga('send', 'pageview', { page: $location.path() });
 	});
 
 }]);

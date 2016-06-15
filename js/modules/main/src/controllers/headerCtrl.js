@@ -92,7 +92,15 @@ HeaderCtrl.prototype = {
     },
 
     goto_state: function(state_name) {
-        this.$state.go(state_name);
+        if(state_name == 'mjs') {
+            if(this.is_signedin) {
+                this.$state.go(state_name);
+            }
+            else
+                this.auth.authenticate({mandatory: false});
+        }
+        else
+            this.$state.go(state_name);
     },
 
 	goto_lang: function(lang) {

@@ -43,6 +43,10 @@ html, body {
 			direction: rtl;
 		}
 
+        .github-fork-ribbon:before {
+            background-color: #E97600;
+        }
+
 		.modal {
 			overflow: auto;
 		}

@@ -18,28 +18,52 @@ module.exports = function (grunt) {
         data: {}
     });
     grunt.config.set('public_dir', public_dir);
-    grunt.config.set('dist_dir', public_dir);
+    grunt.config.set('dist_dir', dist_dir);
     grunt.config.set('pkg', pkg);
 
+    var _baseUrlEnvMapping = {
+        local: "localhost:5000",
+        test: "devapi.dbs.bh.org.il",
+        live: "api.dbs.bh.org.il"
+    };
+
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', [
-        'clean:public',
-        'copy:public',
-        'concat:public',
-        'sass:public'
-    ]);
-    grunt.registerTask('build-dist', [
-        'clean:public',
-        'sass:public',
-        'copy:public',
-        'concat:public',
-        'ngAnnotate',
-        'useminPrepare',
-        'concat:generated',
-        'cssmin',
-        'uglify',
-        'postcss',
-         'rev',
-        'usemin']);
+    grunt.registerTask('build', function (env) {
+        var mappedBaseUrl = _baseUrlEnvMapping[env || 'test'];
+		grunt.config.set('config', {baseUrl: mappedBaseUrl});
+        var buildTasks = [
+            'clean:public',
+            'copy:public',
+            'concat:public',
+            'replace:config',
+            'sass:public'
+        ];
+        grunt.task.run(buildTasks)
+    });
+
+    grunt.registerTask('build-dist', function (env) {
+
+        var mappedBaseUrl = _baseUrlEnvMapping[env || 'test'];
+		grunt.config.set('config', {baseUrl: mappedBaseUrl});
+		require('es6-promise').polyfill();
+
+        var buildTasks = [
+            'clean:public',
+            'clean:dist',
+            'sass:public',
+            'copy:public',
+            'copy:dist',
+            'concat:public',
+            'replace:config',
+            'ngAnnotate',
+            'useminPrepare',
+            'concat:generated',
+            'cssmin',
+            'uglify',
+            'postcss',
+            'rev',
+            'usemin'];
+        grunt.task.run(buildTasks)
+    })
 };
 

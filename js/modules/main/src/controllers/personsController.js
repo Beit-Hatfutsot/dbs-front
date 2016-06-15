@@ -1,4 +1,4 @@
-var PersonsController = function($scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window, $location) {
+var PersonsController = function($rootScope, $scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window, $location) {
 
 	var self = this,
 		advanced_fields = ['birth_place', 'marriage_place', 'death_place', 'tree_number', 'birth_year', 'marriage_year', 'death_year'];
@@ -31,6 +31,13 @@ var PersonsController = function($scope, $state, $stateParams, ftrees, notificat
 		}
 	}); 
 
+   $rootScope.$on('$stateChangeStart',
+	  function(event, toState, toParams, fromState, fromParams){
+		  if (toState.name.endsWith('persons') && fromState.name.endsWith('persons') && fromParams.more != toParams.more) {
+			  event.preventDefault();
+			  self.$state.transitionTo(toState.name, toParams, {notify: false});
+		  }
+	});
 	//search
 	var query = {},
 	    parameters = [],
@@ -111,24 +118,22 @@ PersonsController.prototype = {
     },
 
     toggle_more: function() {
-    	var params = this.$stateParams;
-    	if (params.more == '0' || params.more == undefined) {
-    		params.more = '1';
-    		if(params.place) {
-    			params.birth_place = params.place;
-    			params.place = '';
-
+    	var param = this.$stateParams;
+    	if (param.more == '0' || param.more == undefined) {
+    		param.more = '1';
+    		if(this.search_params.place) {
+    			this.search_params.birth_place = this.search_params.place;
+    			this.search_params.place = '';
     		}
-    		this.$state.go('persons', params);
     	}
     	else {
-     		params.more = '0';
-     		if(params.birth_place) {
-     			params.place = params.birth_place;
-     			params.birth_place = '';
+     		param.more = '0';
+     		if(this.search_params.birth_place) {
+     			this.search_params.place = this.search_params.birth_place;
+     			this.search_params.birth_place = '';
      		}
-    		this.$state.go('persons', params);
     	}
+    	this.$location.search(param);
     },
 
 	update: function() {
@@ -171,4 +176,4 @@ PersonsController.prototype = {
     },
 };
 
-angular.module('main').controller('PersonsController', ['$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', '$location', PersonsController]);
+angular.module('main').controller('PersonsController', ['$rootScope', '$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', '$location', PersonsController]);
