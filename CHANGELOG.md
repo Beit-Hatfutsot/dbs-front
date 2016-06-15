@@ -20,3 +20,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - improve grunt portability (fixing issues with codeship)
 - `fab` is now back to deploying on our server, instead of compute storage which
 returns 404 for any specific address other then "index.html"
+- support up to 50 items in mjs
