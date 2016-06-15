@@ -65,9 +65,9 @@
             </button>
             <div class="dropdown-menu">
               <div class="my-account-menu signed" ng-if="headerController.is_signedin" >
-                <div class="my-account-menu__row signed" >
+                <div class="my-account-menu__row signed" ui-sref="mjs">
                   <img class="dropdown-icons__user__pic signed" gravatar-src="headerController.auth.user.email" gravatar-default="identicon" gravatar-size="55"/>
-                  <div ui-sref="mjs" class="dropdown-icons__user__name">
+                  <div class="dropdown-icons__user__name">
                     <span>{{headerController.username}}</span><br/>
                     <span class="small-text">
                       <en>View Story</en>
