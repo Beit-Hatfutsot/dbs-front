@@ -242,9 +242,13 @@
 					left: 50%;
 					width: 78%;
                     overflow: hidden;
+                    word-break: break-word;
+                    max-height: 85%;
+                    text-overflow: ellipsis;
 
 					&__num {
 						font-size: 14px;
+                        display: inline-block;
 					}
 				}
 				.rename {
