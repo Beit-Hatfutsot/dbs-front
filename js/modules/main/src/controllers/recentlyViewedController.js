@@ -12,7 +12,7 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
 
     Object.defineProperty(this, 'scroll_offset', {
     	get: function() {
-    		return this.view_index * -68;
+    		return this.view_index * -84;
     	}
     });
 
@@ -29,7 +29,7 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
 
     Object.defineProperty(this, 'show_arrows', {
         get: function() {
-            if (this.items.length > 14) {
+            if (this.items.length > 13) {
                 return true;
             }
 
@@ -49,7 +49,7 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
         }
     });
 
-    this.max_items_inscroll = 14;
+    this.max_items_inscroll = 13;
     this.view_index = this.items.length > this.max_items_inscroll ? this.items.length - this.max_items_inscroll : 0;
 
     $scope.$watch(function() {return self.items.length}, function(newVal, oldVal) {

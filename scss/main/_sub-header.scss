@@ -201,7 +201,7 @@
 				position: relative;
 				width: 100%;
 				opacity: 1;
-				padding: 11px 0;
+				padding: 6px 0;
 
 				.recently-arrow {
 					display: inline-block;
@@ -296,7 +296,7 @@
 
 				&__items {
 					display: inline-block;
-					width: 952px;
+					max-width: 1090px;
 					white-space: nowrap;
 					vertical-align: middle;
 					overflow: hidden;
