@@ -4,6 +4,7 @@ angular.module('main').
             restrict: 'A',
             link: function(scope, element, attrs) {
                 var old_value_backup;
+				scope.username = scope.mjsCtrl.auth.user.name;
 
                 element.bind('keydown', function($event) {
                     if ($event.keyCode === 13) {
@@ -29,7 +30,7 @@ angular.module('main').
                 scope.$watch(function() {return scope.username}, function(newVal, oldVal) {
                     old_value_backup = oldVal;
 
-                    if (scope.mjsCtrl.mjs._latest.name == newVal || newVal == undefined || newVal == "") {
+                    if (scope.mjsCtrl.auth.user.name == newVal || newVal == undefined || newVal == "") {
                         scope.username_error = true;
                     }
                     else {

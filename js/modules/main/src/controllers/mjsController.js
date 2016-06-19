@@ -2,11 +2,11 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 	var self = this;
 	this.notification = notification;
 	this.mjs = mjs;
+	this.auth = auth;
 	this.item = item;
 	this.selected_branch = 0;
 	this.mjs_items = [];
 	this.$scope = $scope;
-	this.username = '';
 	this.branch_edit_status = {
             1: false,
             2: false,
@@ -29,17 +29,12 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope) 
 			items_ids.push(i.id)
 		})
 		self.load(items_ids);
-		self.username = self.get_username(mjs.latest);
 	});
 
 	var items_ids = mjs.get_items_ids();
 	if (items_ids)
 		self.load(items_ids);
 
-
-	$rootScope.$on('name-updated', function() {
-		self.username = self.get_username(mjs.latest);
-	});
 
 	$rootScope.$on('item-removed', function(events, item_slug) {
 		var mjs_items = [];
@@ -68,16 +63,6 @@ MjsController.prototype = {
 				self.mjs_items = ret;
 
 		}).finally(function() { self.notification.loading(false); });
-	},
-
-	get_username: function(user) {
-		var name = "";
-		if (user.name)
-			name = user.name;
-		else {
-			name = user.email.split('@')[0];
-		}
-		return name;
 	},
 
 	stopPropagation: function($event) {

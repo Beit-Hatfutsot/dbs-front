@@ -124,6 +124,7 @@
 				 	}
 
                     &__username {
+                        @include hover-pointer();
                         position: relative;
                     }
 				}
