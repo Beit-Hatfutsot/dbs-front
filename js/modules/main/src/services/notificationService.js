@@ -89,7 +89,17 @@ angular.module('main').
 	en: 'Sorry, this login link is not valid anymore',
 	he: 'מצטערים, הקישור אינו תקין',
 	options: errorOptions
+}, 18: {
+	en: 'This file type is not supported. Please upload a JPG or PNG file.',
+	he: 'שוג הקובץ הזה אינו נתמך, אנא נסו להעלות קובץ מסוג נתמך',
+	options: errorOptions
+}, 19: {
+	en: 'Something went wrong, please try uploading again',
+	he: 'משהו השתבש, אנא נסו שוב',
+	options: errorOptions
 }
+
+
 // next line ends the notifications dict
 	},
 	message = {

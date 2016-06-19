@@ -23,7 +23,7 @@
 		<he>מה עושים פה ולמה?</he>
 	</h2>
 	<p>
-		<en>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tellus felis, blandit sit amet enim a, volutpat tempor eros. Nullam lectus justo, consequat a rutrum eget, dapibus vel lorem. Aenean eget lectus ut leo posuere cursus eu at massa. Donec fermentum turpis sed orci imperdiet ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque viverra massa justo, eget posuere mi dapibus id. Suspendisse varius neque eget neque iaculis, ac commodo magna iaculis. Aliquam vitae fringilla ex. Suspendisse ac quam dapibus, imperdiet dui ac, vehicula nulla.</en>
+		<en>Do you have old family photographs? Those images tell a story. Not only your family's story, but the story of a time and a place and a people. The story of Jewish cultures, lifestyles and communities throughout history and around the world. Here at Beit Hatfutsot we want to collect these stories. For you, for future generations and for the collective memory of the Jewish people.</en>
 		<he>לכולנו יש תמונות המתעדות את הסיפור המשפחתי, את אורחות החיים ואת התרבות והמורשות של יהודיות בעולם - בעבר ובהווה. התצלומים שלכם מהווים מסמכי יקרי ערך. בבית התפוצות נשמור עליהם למען הדורות הבאים ולמען הזיכרון הקולקטיבי של העם היהודי.</he>
 	</p>
 	<h2>
@@ -44,12 +44,12 @@
 	<form  name="upload_form" id="upload-form" ng-show="uploadCtrl.is_image" rc-submit="uploadCtrl.submit('image')" novalidate> 
 		<div ng-if="uploadCtrl.lang === 'en'">
 			<div class="upf__alt-instructions">
-				<en>במידה ואתם דוברי עברית, אנא מלאו את אותם פרטים גם בעברית</en>
+				<en>If you speak Hebrew, please fill the same details below</en>
 			</div>
-			<div class="checkbox rtl">
+			<div class="checkbox">
 				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
 				<label class="checkbox-label " for="language-checkbox">
-					<span class="checkbox-label-desc">אני דובר/ת עברית</span>
+					<span class="checkbox-label-desc">I speak Hebrew</span>
 				</label>
 			</div>
 			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 
@@ -72,12 +72,12 @@
 
 		<div ng-if="uploadCtrl.lang === 'he'">
 			<div class="upf__alt-instructions" ng-if="uploadCtrl.lang === 'he'">
-				<he>If you speak English, please fill the same details below</he>
+				<he>במידה ואתם דוברי אנגלית, אנא מלאו את אותם פרטים גם בעברית</he>
 			</div>
-			<div class="checkbox ltr">
+			<div class="checkbox">
 				<input id="language-checkbox" type="checkbox" name="" value="" ng-model="uploadCtrl.is_bilingual">
 				<label class="checkbox-label" for="language-checkbox">
-					<span class="checkbox-label-desc">I speak English</span>
+					<span class="checkbox-label-desc">אני דובר/ת אנגלית</span>
 				</label>
 			</div>
 			<upload-fieldset	meta-data="uploadCtrl.meta_data.image" 

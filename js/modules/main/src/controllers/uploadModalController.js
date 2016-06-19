@@ -9,4 +9,4 @@ var UploadModalController = function($scope, $modalInstance, $window, $state) {
     };    
 };
 
-angular.module('main').controller('PersonsWelcomeController', ['$scope', '$modalInstance', '$window', '$state', UploadModalController]);
+angular.module('main').controller('UploadModalController', ['$scope', '$modalInstance', '$window', '$state', UploadModalController]);
