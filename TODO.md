@@ -4,3 +4,4 @@
 
 - Add autoprefixer
 - Adopt karma config for testing tasks
+- Update README
