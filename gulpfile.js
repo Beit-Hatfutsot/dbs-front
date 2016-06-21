@@ -128,7 +128,7 @@ gulp.task('assets', ['fonts', 'images']);
 /**
  * Dist
  */
-gulp.task('dist', ['vendors', 'assets', 'styles-dist', 'scripts-dist'], function () {
+gulp.task('dist', ['base-url', 'vendors', 'assets', 'styles-dist', 'scripts-dist'], function () {
   return gulp.src('./index.html')
     .pipe(g.inject(gulp.src('./dist/{js,css}/vendors.min.{js,css}'), {ignorePath: 'dist', starttag: '<!-- inject:vendor:{{ext}} -->', addRootSlash:false}))
     .pipe(g.inject(gulp.src('./dist/{js,css}/' + bower.name + '.min.{js,css}'), {ignorePath: 'dist', addRootSlash:false}))
