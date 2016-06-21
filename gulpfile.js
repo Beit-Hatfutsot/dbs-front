@@ -20,6 +20,23 @@ var htmlminOpts = {
 };
 
 /**
+ * Base url in config.js
+ */
+var _baseUrlEnvMapping = {
+	local: "localhost:5000",
+	test: "devapi.dbs.bh.org.il",
+	live: "api.dbs.bh.org.il"
+};
+
+gulp.task('base-url', function() {
+  var apiServer = process.env.API_SERVER || 'local';
+
+  return gulp.src('./js/modules/config/config.js')
+    .pipe(g.replace('BaseUrlPlaceHolder', _baseUrlEnvMapping[apiServer]))
+    .pipe(gulp.dest('./.tmp/'));
+});
+
+/**
  * CSS
  */
 gulp.task('clean-css', function (done) {
@@ -76,7 +93,7 @@ gulp.task('vendors', function () {
  * Index
  */
 gulp.task('index', index);
-gulp.task('build-all', ['styles', 'templates'], index);
+gulp.task('build-all', ['styles', 'templates', 'base-url'], index);
 
 function index () {
   var opt = {read: false};
@@ -182,7 +199,7 @@ gulp.task('default', ['build-all']);
 /**
  * Test
  */
-gulp.task('test', ['templates'], function () {
+gulp.task('test', ['templates', 'base-url'], function () {
   return testFiles()
     .pipe(g.karma({
       configFile: 'karma.conf.js',
@@ -194,7 +211,7 @@ gulp.task('test', ['templates'], function () {
  * Inject all files for tests into karma.conf.js
  * to be able to run `karma` without gulp.
  */
-gulp.task('karma-conf', ['templates'], function () {
+gulp.task('karma-conf', ['templates', 'base-url'], function () {
   return gulp.src('./karma.conf.js')
     .pipe(g.inject(testFiles(), {
       starttag: 'files: [',
@@ -232,10 +249,12 @@ function cssFiles (opt) {
 function appFiles () {
   var files = [
     './.tmp/' + bower.name + '-templates.js',
+    './.tmp/config.js',
     './js/**/*.js',
     '!./js/**/*Spec.js',
-	'!./js/test/**',
-	'!./js/modules/main/test/**'
+    '!./js/modules/config/**',
+    '!./js/test/**',
+    '!./js/modules/main/test/**'
   ];
   return gulp.src(files)
     .pipe(g.naturalSort())
