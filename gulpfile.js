@@ -33,7 +33,7 @@ gulp.task('styles', ['clean-css'], function () {
   ])
     .pipe(g.sourcemaps.init())
     .pipe(g.sass().on('error', g.sass.logError))
-    .pipe(g.sourcemaps.write())
+    .pipe(g.sourcemaps.write('./'))
     .pipe(gulp.dest('./.tmp/css/'))
     .pipe(g.cached('built-css'))
     .pipe(livereload());
