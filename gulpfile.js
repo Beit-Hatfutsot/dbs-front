@@ -242,6 +242,7 @@ function appFiles () {
 	'!./js/modules/main/test/**'
   ];
   return gulp.src(files)
+    .pipe(g.naturalSort())
     .pipe(g.angularFilesort());
 }
 
