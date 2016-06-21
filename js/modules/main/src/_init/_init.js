@@ -27,7 +27,8 @@ angular.module('main', [
     'rcSubmit',
     'gedcomParser',
 	'hc.marked',
-    'ui.gravatar'
+    'ui.gravatar',
+    'bhsclient-templates'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider',
