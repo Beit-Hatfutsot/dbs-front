@@ -238,7 +238,8 @@ function appFiles () {
     './.tmp/' + bower.name + '-templates.js',
     './js/**/*.js',
     '!./js/**/*Spec.js',
-	'!./js/test/**'
+	'!./js/test/**',
+	'!./js/modules/main/test/**'
   ];
   return gulp.src(files)
     .pipe(g.angularFilesort());
