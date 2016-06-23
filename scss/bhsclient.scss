@@ -44,7 +44,11 @@ html, body {
 		}
 
         .github-fork-ribbon:before {
-            background-color: #E97600;
+            background-color: $red3;
+        }
+
+        .github-fork-ribbon:after {
+            content: attr(data-title) !important;
         }
 
 		.modal {
