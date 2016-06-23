@@ -56,10 +56,21 @@
                         </div>
                         <div class="gallery-modal__info">
                             <div class="gallery-modal__info__picture-info">
-                                <en><span class="field-name" ng-if="itemController.item_data.UnitText1.En.isNotEmpty()">Description: </span>{{itemController.item_data.UnitText1.En}}</en><br/>
-                                <he><span class="field-name" ng-if="itemController.item_data.UnitText1.He.isNotEmpty()">תיאור: </span>{{itemController.item_data.UnitText.He}}</he>
-                                <en>© All Rights Reserved</en><br/>
-                                <he>© כל הזכויות שמורות</he>
+                                <en><span class="field-name" ng-if="itemController.item_data.UnitText1.En.isNotEmpty()">Description: </span>{{itemController.item_data.UnitText1.En}}<br></en>
+                                <he><span class="field-name" ng-if="itemController.item_data.UnitText1.He.isNotEmpty()">תיאור: </span>{{itemController.item_data.UnitText1.He}}<br></he>
+                                <span ng-if="itemController.item_data.UnitId">
+                                    <span class="field-name">
+                                        <en>Photo Unit Number: </en>
+                                        <he>מספר תמונה יחידה: </he>
+                                    </span>
+                                    {{itemController.item_data.UnitId}}
+                                    <br>
+                                </span>
+                                <span>
+                                    <en>© All Rights Reserved</en>
+                                    <he>© כל הזכויות שמורות</he>
+                                    <br>
+                                </span>
                             </div> 
                             <div class="gallery-modal__info__gallery-preview">
                                 <div class="gallery-modal__info__gallery-preview__title">
