@@ -5,7 +5,7 @@ describe('item', function() {
 	var item;
 
 	beforeEach(function() {
-		module('templates');
+		module('bhsclient-templates');
 		module('main');
 	});
 	beforeEach(inject(function(_item_) {
@@ -57,7 +57,7 @@ describe('item', function() {
 			item.get('test-collection', item_data._id).
 				then(function(data) {
 					retrieved = data;
-				}); 
+				});
 			$timeout.flush();
 
 			expect(retrieved).toEqual(item_data);

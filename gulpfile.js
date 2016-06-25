@@ -202,7 +202,7 @@ gulp.task('default', ['build-all']);
 gulp.task('test', ['templates', 'base-url'], function () {
   return testFiles()
     .pipe(g.karma({
-      configFile: 'karma.conf.js',
+      configFile: 'js/test/karma.conf.js',
       action: 'run'
     }));
 });
@@ -212,7 +212,7 @@ gulp.task('test', ['templates', 'base-url'], function () {
  * to be able to run `karma` without gulp.
  */
 gulp.task('karma-conf', ['templates', 'base-url'], function () {
-  return gulp.src('./karma.conf.js')
+  return gulp.src('./js/test/karma.conf.js')
     .pipe(g.inject(testFiles(), {
       starttag: 'files: [',
       endtag: ']',
@@ -221,7 +221,7 @@ gulp.task('karma-conf', ['templates', 'base-url'], function () {
         return '  \'' + filepath + '\'' + (i + 1 < length ? ',' : '');
       }
     }))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./js/test/'));
 });
 
 /**
@@ -229,6 +229,8 @@ gulp.task('karma-conf', ['templates', 'base-url'], function () {
  */
 function testFiles() {
   return new queue({objectMode: true})
+    .queue(gulp.src('./bower_components/jquery/dist/jquery.js'))
+    .queue(gulp.src('./bower_components/angular/angular.js'))
     .queue(gulp.src(bowerFiles()).pipe(g.filter('**/*.js')))
     .queue(gulp.src('./bower_components/angular-mocks/angular-mocks.js'))
     .queue(appFiles())

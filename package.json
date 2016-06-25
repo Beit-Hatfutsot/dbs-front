@@ -54,6 +54,7 @@
     "load-grunt-config": "0.19.1",
     "load-grunt-tasks": "3.5.0",
     "main-bower-files": "^2.13.1",
+    "node-sass": "^3.8.0",
     "npm": "~2.1.10",
     "phantomjs": "~1.9.7-1",
     "rimraf": "^2.5.2",
