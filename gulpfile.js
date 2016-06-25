@@ -50,6 +50,7 @@ gulp.task('styles', ['clean-css'], function () {
   ])
     .pipe(g.sourcemaps.init())
     .pipe(g.sass().on('error', g.sass.logError))
+    .pipe(g.autoprefixer({browsers: ['last 2 versions', '> 2%']}))
     .pipe(g.sourcemaps.write('./'))
     .pipe(gulp.dest('./.tmp/css/'))
     .pipe(g.cached('built-css'))
