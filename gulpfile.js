@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     queue = require('streamqueue'),
     lazypipe = require('lazypipe'),
     bower = require('./bower'),
+    runSequence = require('run-sequence'),
     isWatching = false;
 
 var htmlminOpts = {
@@ -129,12 +130,25 @@ gulp.task('assets', ['fonts', 'images']);
 /**
  * Dist
  */
-gulp.task('dist', ['base-url', 'vendors', 'assets', 'styles-dist', 'scripts-dist'], function () {
+gulp.task('dist-clean', function (done) {
+  rimraf('./dist', done);
+});
+
+gulp.task('dist-index', function() {
   return gulp.src('./index.html')
-    .pipe(g.inject(gulp.src('./dist/{js,css}/vendors.min.{js,css}'), {ignorePath: 'dist', starttag: '<!-- inject:vendor:{{ext}} -->', addRootSlash:false}))
-    .pipe(g.inject(gulp.src('./dist/{js,css}/' + bower.name + '.min.{js,css}'), {ignorePath: 'dist', addRootSlash:false}))
+    .pipe(g.inject(gulp.src('./dist/{js,css}/vendors*.min.{js,css}'), {ignorePath: 'dist', starttag: '<!-- inject:vendor:{{ext}} -->', addRootSlash:false}))
+    .pipe(g.inject(gulp.src('./dist/{js,css}/' + bower.name + '*.min.{js,css}'), {ignorePath: 'dist', addRootSlash:false}))
     .pipe(g.htmlmin(htmlminOpts))
     .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('dist', function (cb) {
+  runSequence(
+    'dist-clean',
+    ['base-url', 'vendors', 'assets', 'styles-dist', 'scripts-dist'],
+    'dist-index',
+    cb
+  );
 });
 
 
@@ -296,6 +310,7 @@ function buildTemplates () {
  */
 function dist (ext, name, opt) {
   opt = opt || {};
+  var stamp = new Date().getTime();
   return lazypipe()
     .pipe(g.concat, name + '.' + ext)
     // .pipe(gulp.dest, './dist/' + ext + '/')
@@ -303,7 +318,7 @@ function dist (ext, name, opt) {
     // .pipe(opt.ngAnnotate ? g.rename : noop, name + '.annotated.' + ext)
     // .pipe(opt.ngAnnotate ? gulp.dest : noop, './dist/' + ext)
     .pipe(ext === 'js' ? g.uglify : g.minifyCss)
-    .pipe(g.rename, name + '.min.' + ext)
+    .pipe(g.rename, name + '-' + stamp + '.min.' + ext)
     .pipe(gulp.dest, './dist/' + ext + '/')();
 }
 

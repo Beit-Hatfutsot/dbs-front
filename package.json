@@ -42,6 +42,7 @@
     "npm": "~2.1.10",
     "phantomjs": "~1.9.7-1",
     "rimraf": "^2.5.2",
+    "run-sequence": "^1.2.1",
     "streamqueue": "^1.1.1"
   },
   "scripts": {}
