@@ -192,6 +192,8 @@ gulp.task('watch', ['connect', 'default'], function () {
   gulp.watch('./js/**/*.js').on('change', function (evt) {
     if (evt.type !== 'changed') {
       gulp.start('index');
+    } else {
+      g.livereload.changed(evt);
     }
   });
   gulp.watch('./index.html', ['index']);
