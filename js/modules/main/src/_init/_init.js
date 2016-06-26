@@ -209,7 +209,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 		
 
-        {
+        /*{
             name: 'upload',
             abstract: true,
             url: '/upload',
@@ -256,7 +256,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             url: '/family_tree',
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
-        },
+        },*/
         
 
         {
