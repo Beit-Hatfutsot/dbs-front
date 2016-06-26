@@ -160,6 +160,7 @@ gulp.task('connect', function() {
   g.connect.server({
     port: 3000,
     root: ['./.tmp', './', './bower_components'],
+    fallback: './index.html',
     middleware: function() {
       return [
         // place required middleware here
