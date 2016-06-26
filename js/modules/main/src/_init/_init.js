@@ -349,12 +349,12 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
 	  function(event, toState, toParams, fromState, fromParams){
 		  notification.loading(false);
 	});
-	$rootScope.$on('$stateChangeSuccess',
+	/*$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
             if (!$window.ga)
                 return;
             $window.ga('send', 'pageview', { page: $location.path() });
-	});
+	});*/
 
 }]);
