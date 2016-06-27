@@ -17,8 +17,6 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.content_loaded = false;
 	this.item_data = {};
 	this.related_data = [];
-	this.wizard_name = {};
-	this.wizard_place = {};
 	this.itemTypeMap = itemTypeMap;
 	this._Index = 0;
 	this.lang = langManager.lang;
@@ -46,7 +44,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	$rootScope.$on('language-changed', function (event, lang) {
 		self.lang = lang;
 		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
-		
+
 	})
 	*/
 	Object.defineProperty(this, 'is_ugc_request', {
@@ -97,8 +95,6 @@ ItemCtrl.prototype = {
 		self.related_data = [];
 
 		related_data.forEach(function(related_item) {
-			// push related items after checking they were not pulled from wizard result
-			// if ( self.wizard_name._id !== related_item._id && self.wizard_place._id !== related_item._id ) {
 			var proper_lang = self.lang[0].toUpperCase() + self.lang[1];
 			if (related_item.Slug[proper_lang] != self.slug.api) {
 				self.related_data.push(related_item);
@@ -137,7 +133,7 @@ ItemCtrl.prototype = {
 	isActive: function (index) {
 		return this._Index === index;
 	},
-	
+
 	showPhoto: function (index) {
 		this._Index = index;
 	},
@@ -192,7 +188,7 @@ ItemCtrl.prototype = {
 
 };
 
-angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
-	   'notification', 'itemTypeMap','wizard', 'header', 
-	   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope', 
+angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item',
+	   'notification', 'itemTypeMap','wizard', 'header',
+	   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope',
 	   'langManager', '$location', ItemCtrl]);
