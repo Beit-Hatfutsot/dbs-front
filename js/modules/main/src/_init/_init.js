@@ -140,7 +140,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/search-results.html'
         },
 
-		
+
         {
             name: 'mjs',
             url: '/mjs',
@@ -165,8 +165,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                     connection_set.repaint();
                 });
             }]
-        }, 
-		
+        },
+
         {
             name: 'persons',
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
@@ -208,7 +208,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             }]
         },
 
-		
+
 
         /*{
             name: 'upload',
@@ -258,7 +258,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
         },*/
-        
+
 
         {
             name: 'verify_email',
@@ -266,7 +266,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'VerifyEmailController as verifyEmailCtrl',
             templateUrl: 'templates/main/verify_email.html'
         },
-		
+
         {
             name: '404',
             templateUrl: 'templates/main/404.html'
@@ -338,14 +338,13 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
     Object.defineProperty($rootScope, 'header_visible', {
         get: function() {
             return header.is_visible;
-        }   
+        }
     });
 
     $rootScope.isCurrentState = function(state_name) {
         return ($state.includes(state_name) || $state.includes('he.he_'+state_name));
     };
 
-    $state.go('start');
 	$rootScope.$on('$stateChangeStart',
 	  function(event, toState, toParams, fromState, fromParams){
 		  notification.loading(false);
