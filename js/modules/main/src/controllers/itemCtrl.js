@@ -20,7 +20,6 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.wizard_name = {};
 	this.wizard_place = {};
 	this.itemTypeMap = itemTypeMap;
-	this.pull_wizard_related();
 	this._Index = 0;
 	this.lang = langManager.lang;
 	this.article_abs_url = $location.absUrl();
@@ -91,24 +90,6 @@ ItemCtrl.prototype = {
 				self.error = error;
 				self.notification.put(5);
 			});
-	},
-
-	pull_wizard_related: function() {
-
-		if ( this.$state.lastState.name === 'start' ) {
-		
-			if ( this.wizard.result.name &&
-				 this.wizard.result.name.isNotEmpty() /*  &&
-				 this.wizard.result.name._id !== _id*/ ) {
-				this.wizard_name = angular.copy(this.wizard.result.name);
-			}
-
-			if ( this.wizard.result.place &&
-				this.wizard.result.place.isNotEmpty() /* &&
-				this.wizard.result.place._id !== _id */ )  {
-				this.wizard_place = angular.copy(this.wizard.result.place);
-			}
-		}
 	},
 
 	parse_related_data: function(related_data) {
