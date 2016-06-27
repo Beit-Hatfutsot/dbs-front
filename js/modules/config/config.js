@@ -15,17 +15,15 @@ angular.module('config', []).
      * A map object for API enpoint names.
      */
     constant('apiConfig', {
-        baseUrl:        'BaseUrlPlaceHolder',
+        baseUrl:        'BaseUrlPlaceHolder'+'/v1',
         login:          'login',
         auth:           'auth',
-        user:           'user', 
-        mjs:            'mjs', 
+        user:           'user',
+        mjs:            'mjs',
         wizard_search:  'wsearch',
         item:           'item',
         suggest:        'suggest',
-        ftrees_search:  'fsearch',
-        ftrees_get:     'get_ftree_url',
-        ftrees_walk:    'fwalk',
+        ftrees_search:  'person',
         upload:         'upload',
         newsletter:      'newsletter',
         search:         'search'
