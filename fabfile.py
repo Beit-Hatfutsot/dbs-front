@@ -11,7 +11,7 @@ env.now = datetime.now().strftime('%Y%m%d-%H%M')
 
 def deploy(api_server='test'):
     local('npm install && bower install')
-    local('grunt karma')
+    local('gulp test')
     push_dist(api_server)
 
 def push_dist(api_server='test'):
