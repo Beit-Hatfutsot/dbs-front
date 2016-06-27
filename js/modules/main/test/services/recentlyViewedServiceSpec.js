@@ -6,7 +6,7 @@ describe('recentlyViewedService', function() {
 		storage;
 
 	beforeEach(function() {
-		module('templates');
+		module('bhsclient-templates');
 		module('main');
 	});
 	beforeEach(inject(function(recentlyViewed, _$window_) {

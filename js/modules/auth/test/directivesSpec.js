@@ -4,9 +4,9 @@ describe('auth-directives', function() {
 
 	beforeEach(function() {
 		module('auth');
-		module('templates');
+		module('bhsclient-templates');
 		module(function($provide) {
-			$provide.provider('auth', function () { 
+			$provide.provider('auth', function () {
 		        this.$get = function () {
 		            return {
 		            	is_signedin: function() {return false},
@@ -16,7 +16,7 @@ describe('auth-directives', function() {
 		    });
 		});
 		module(function($provide) {
-			$provide.provider('$state', function () { 
+			$provide.provider('$state', function () {
 		        this.$get = function () {
 		            return {
 		            	lastState: {
@@ -30,7 +30,7 @@ describe('auth-directives', function() {
 		    });
 		});
 		module(function($provide) {
-			$provide.provider('user', function () { 
+			$provide.provider('user', function () {
 		        this.$get = function () {
 		            return {
 		            	$resolved: true
@@ -53,8 +53,8 @@ describe('auth-directives', function() {
 	    	var element = angular.element('<auth-private><div></div></auth-private>');
 	    	$compile(element)(scope);
 	    	scope.$digest()
-	    	expect(auth.authenticate).toHaveBeenCalledWith({ 
-	    		mandatory: true, 
+	    	expect(auth.authenticate).toHaveBeenCalledWith({
+	    		mandatory: true,
 	    		fallback_state: 'start'
 	    	});
 	    });

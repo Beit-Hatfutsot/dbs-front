@@ -3,16 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<!-- Let Goggle crawler know we use HTML5 push state API -->
-		<meta name="fragment" content="!">  
+		<meta name="fragment" content="!">
 		<base href="/">
         <title ng-bind="(title?title + '|BHS':'BHS')">BHS</title>
         <link rel="icon" href="http://www.bh.org.il/wp-content/uploads/cropped-favicon-512-32x32.png" sizes="32x32" /><link>
 
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,400italic' rel='stylesheet' type='text/css'>
-		<!-- build:css({.tmp,public}) /styles/main.css -->
-		<link href="css/bhsclient.css" rel="stylesheet" type="text/css" media="all">
-		<link href='fonts/opensans/stylesheet.css' rel='stylesheet' type='text/css'>
-		<!-- endbuild -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/css/bhsclient.css">
+    <!-- endinject -->
+
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
 		<!--[if lt IE 9]>
 		    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
@@ -33,30 +34,121 @@
 
 		<!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
 		<!--<script src="bower_components/angular/angular.min.js"></script>-->
-		<!-- build:js({.tmp,public}) /scripts/vendor.js -->
-		<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-		<script src="bower_components/angular-animate/angular-animate.js"></script>
-		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-		<script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
-		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-		<script src="bower_components/marked/marked.min.js"></script>
-		<script src="bower_components/angular-marked/angular-marked.min.js"></script>
-		<script src="bower_components/ngstorage/ngStorage.min.js"></script>
-		<script src="bower_components/angular-gravatar/build/angular-gravatar.min.js"></script>
-		<script type="text/javascript" src="js/lib/d3.min.js"></script>
-		<!-- endbuild -->
-		<!-- build:js({.tmp,public}) /scripts/scripts.js -->
-		<script type="text/javascript" src="js/lib/structures.js"></script>
-		<script type="text/javascript" src="js/lib/notify.js"></script>
-		<script src="js/bhsclient.js"></script>
-		<!-- endbuild -->
-		<!--<script>
+
+    <!-- inject:vendor:js -->
+    <script src="/angular-animate/angular-animate.js"></script>
+    <script src="/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/marked/lib/marked.js"></script>
+    <script src="/angular-mocks/angular-mocks.js"></script>
+    <script src="/angular-resource/angular-resource.js"></script>
+    <script src="/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/flow.js/dist/flow.js"></script>
+    <script src="/ngstorage/ngStorage.js"></script>
+    <script src="/angular-gravatar/build/angular-gravatar.js"></script>
+    <script src="/angular-marked/angular-marked.js"></script>
+    <script src="/ng-flow/dist/ng-flow.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:js -->
+    <script src="/js/modules/rc_submit/src/_init/_init.js"></script>
+    <script src="/js/modules/rc_submit/src/directives/rcSubmitDirective.js"></script>
+    <script src="/js/modules/main/src/_init/_init.js"></script>
+    <script src="/js/modules/plumb/src/_init/_init.js"></script>
+    <script src="/js/modules/plumb/src/services/services.js"></script>
+    <script src="/js/modules/plumb/src/directives/directives.js"></script>
+    <script src="/js/modules/plumb/src/controllers/controllers.js"></script>
+    <script src="/js/modules/main/src/services/wizardService.js"></script>
+    <script src="/js/modules/main/src/services/tokenVerifierService.js"></script>
+    <script src="/js/modules/main/src/services/suggestService.js"></script>
+    <script src="/js/modules/main/src/services/recentlyViewedService.js"></script>
+    <script src="/js/modules/main/src/services/notificationService.js"></script>
+    <script src="/js/modules/main/src/services/musicalChairsFactory.js"></script>
+    <script src="/js/modules/main/src/services/mjsService.js"></script>
+    <script src="/js/modules/main/src/services/itemTypeMapService.js"></script>
+    <script src="/js/modules/main/src/services/itemService.js"></script>
+    <script src="/js/modules/main/src/services/headerService.js"></script>
+    <script src="/js/modules/main/src/services/ftreesService.js"></script>
+    <script src="/js/modules/main/src/services/ftreeLayoutService.js"></script>
+    <script src="/js/modules/main/src/directives/uploadFormDirective.js"></script>
+    <script src="/js/modules/main/src/directives/uploadFieldsetDirective.js"></script>
+    <script src="/js/modules/main/src/directives/uploadAreaDirective.js"></script>
+    <script src="/js/modules/main/src/directives/treesPreviewDirective.js"></script>
+    <script src="/js/modules/main/src/directives/trackColorDirective.js"></script>
+    <script src="/js/modules/main/src/directives/subtreeDirective.js"></script>
+    <script src="/js/modules/main/src/directives/socialNetDirectives.js"></script>
+    <script src="/js/modules/main/src/directives/scrollTopDirective.js"></script>
+    <script src="/js/modules/main/src/directives/putValueDirective.js"></script>
+    <script src="/js/modules/main/src/directives/putIfDirective.js"></script>
+    <script src="/js/modules/main/src/directives/preventRightclickDirective.js"></script>
+    <script src="/js/modules/main/src/directives/personPreviewDirective.js"></script>
+    <script src="/js/modules/main/src/directives/noResultDirective.js"></script>
+    <script src="/js/modules/main/src/directives/mjsWidgetDirective.js"></script>
+    <script src="/js/modules/main/src/directives/mjsItemDirective.js"></script>
+    <script src="/js/modules/main/src/directives/laterNameDirective.js"></script>
+    <script src="/js/modules/main/src/directives/itemTypeDirective.js"></script>
+    <script src="/js/modules/main/src/directives/itemScrollDirective.js"></script>
+    <script src="/js/modules/main/src/directives/itemPreviewDirective.js"></script>
+    <script src="/js/modules/main/src/directives/iconDirective.js"></script>
+    <script src="/js/modules/main/src/directives/fudgedYearDirective.js"></script>
+    <script src="/js/modules/main/src/directives/fitThumbDirective.js"></script>
+    <script src="/js/modules/main/src/directives/filtersFieldDirective.js"></script>
+    <script src="/js/modules/main/src/directives/draggableDirective.js"></script>
+    <script src="/js/modules/main/src/directives/defaultFocusDirective.js"></script>
+    <script src="/js/modules/main/src/directives/alterUsernameDirective.js"></script>
+    <script src="/js/modules/main/src/directives/alterMjsBranchDirective.js"></script>
+    <script src="/js/modules/main/src/directives/addMjsBranchDirective.js"></script>
+    <script src="/js/modules/main/src/controllers/wizardFormCtrl.js"></script>
+    <script src="/js/modules/main/src/controllers/verifyEmailController.js"></script>
+    <script src="/js/modules/main/src/controllers/uploadModalController.js"></script>
+    <script src="/js/modules/main/src/controllers/uploadFormController.js"></script>
+    <script src="/js/modules/main/src/controllers/uploadController.js"></script>
+    <script src="/js/modules/main/src/controllers/treesPreviewController.js"></script>
+    <script src="/js/modules/main/src/controllers/subHeaderController.js"></script>
+    <script src="/js/modules/main/src/controllers/startController.js"></script>
+    <script src="/js/modules/main/src/controllers/recentlyViewedController.js"></script>
+    <script src="/js/modules/main/src/controllers/personViewController.js"></script>
+    <script src="/js/modules/main/src/controllers/personsWelcomeController.js"></script>
+    <script src="/js/modules/main/src/controllers/personsController.js"></script>
+    <script src="/js/modules/main/src/controllers/NewletterPopoverCtrl.js"></script>
+    <script src="/js/modules/main/src/controllers/mjsWidgetController.js"></script>
+    <script src="/js/modules/main/src/controllers/mjsController.js"></script>
+    <script src="/js/modules/main/src/controllers/itemPreviewCtrl.js"></script>
+    <script src="/js/modules/main/src/controllers/itemCtrl.js"></script>
+    <script src="/js/modules/main/src/controllers/headerCtrl.js"></script>
+    <script src="/js/modules/main/src/controllers/GeneralSearchController.js"></script>
+    <script src="/js/modules/main/src/controllers/galleryModalCtrl.js"></script>
+    <script src="/js/modules/main/src/animations/subHeaderAnimation.js"></script>
+    <script src="/js/modules/main/src/_init/polyfill.js"></script>
+    <script src="/js/modules/lang/src/_init/_init.js"></script>
+    <script src="/js/modules/lang/src/services/langManagerService.js"></script>
+    <script src="/js/modules/lang/src/directives/directives.js"></script>
+    <script src="/js/modules/gedcom_parser/src/_init/_init.js"></script>
+    <script src="/js/modules/gedcom_parser/src/services/gedcomParserService.js"></script>
+    <script src="/js/modules/cache/src/_init/_init.js"></script>
+    <script src="/js/modules/cache/src/services/cacheService.js"></script>
+    <script src="/js/modules/auth/src/_init/_init.js"></script>
+    <script src="/js/modules/auth/src/services/userService.js"></script>
+    <script src="/js/modules/auth/src/services/authService.js"></script>
+    <script src="/js/modules/auth/src/directives/directives.js"></script>
+    <script src="/js/modules/auth/src/controllers/loginCtrl.js"></script>
+    <script src="/js/modules/auth/src/controllers/authPrivateController.js"></script>
+    <script src="/js/modules/auth/src/controllers/authCtrl.js"></script>
+    <script src="/js/modules/api_client/src/_init/_init.js"></script>
+    <script src="/js/modules/api_client/src/services/apiClientService.js"></script>
+    <script src="/js/lib/structures.js"></script>
+    <script src="/js/lib/notify.js"></script>
+    <script src="/js/lib/d3.min.js"></script>
+    <script src="/config.js"></script>
+    <script src="/bhsclient-templates.js"></script>
+    <!-- endinject -->
+
+		<!-- script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		 
+
 		  ga('create', 'UA-8676522-4', 'auto');
 		</script>-->
 		<!-- Google Tag Manager -->

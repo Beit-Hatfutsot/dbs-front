@@ -15,7 +15,8 @@ def deploy(api_server='test'):
     push_dist(api_server)
 
 def push_dist(api_server='test'):
-    local('grunt build-dist:'+api_server)
+    with shell_env(API_SERVER=api_server):
+        local('gulp dist')
     local('tar czf /tmp/bhs-client-dist.tgz dist')
     put('/tmp/bhs-client-dist.tgz', 'client')
     with cd('client'):

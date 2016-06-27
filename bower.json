@@ -15,5 +15,13 @@
     "ng-flow": "~2",
     "ngstorage": "~0.3.10",
     "angular-gravatar": "0.4.2"
+  },
+  "overrides": {
+    "jquery": {
+      "ignore": true
+    },
+    "angular": {
+      "ignore": true
+    }
   }
 }

@@ -4,7 +4,7 @@ describe('StartController', function() {
 	var scope, wizard, $timeout;
 
 	beforeEach(function() {
-		module('templates');
+		module('bhsclient-templates');
 		module('main');
 	});
 
@@ -35,7 +35,7 @@ describe('StartController', function() {
 				return deferred.promise;
 			}
 		}
-		scope = $rootScope.$new(); 
+		scope = $rootScope.$new();
 		$controller('StartController as startCtrl', {$scope: scope, wizard: wizard});
 	}));
 
