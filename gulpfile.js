@@ -16,8 +16,7 @@ var htmlminOpts = {
   removeComments: true,
   collapseWhitespace: true,
   removeEmptyAttributes: false,
-  collapseBooleanAttributes: true,
-  removeRedundantAttributes: true
+  collapseBooleanAttributes: true
 };
 
 /**
@@ -174,6 +173,7 @@ gulp.task('serve:dist', function() {
   g.connect.server({
     port: 3000,
     root: ['./dist'],
+    fallback: './dist/index.html',
     middleware: function() {
       return [
         // place required middleware here
