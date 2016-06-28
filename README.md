@@ -12,7 +12,7 @@ museum visitors.  Our direct backend is an API server written in Python using
 Flask, accessing data in a Mongo & ElasticSearch cluster.  The cluster is filled
 with data from BHP using our migration bot.
 
-## Blog Ptosts
+## Blog Posts
 
 - [I toggled public, now what?](https://medium.com/@alonisser/i-toggled-public-now-what-6b42959db251)
 - [Freeing a Yack](https://medium.com/@daonb/freeing-a-yack-fc3799099eba)
