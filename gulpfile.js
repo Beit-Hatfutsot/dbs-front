@@ -14,7 +14,7 @@ var gulp = require('gulp'),
 
 var htmlminOpts = {
   removeComments: true,
-  collapseWhitespace: true,
+  /*collapseWhitespace: true,*/
   removeEmptyAttributes: false,
   collapseBooleanAttributes: true
 };
