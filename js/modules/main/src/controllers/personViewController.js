@@ -1,5 +1,5 @@
 var PersonViewController = function ($http, $window, $document, $rootScope,
-							       $scope, $state, $stateParams, apiClient, 
+							       $scope, $state, $stateParams, apiClient,
 							       recentlyViewed, langManager, ftreeLayout,
 								   notification) {
 	var self = this, script_loaded = true, node = {};
@@ -73,12 +73,15 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
     */
    self.detailsShown = false;
    $rootScope.$on('$stateChangeStart',
-			  function(event, toState, toParams, fromState, fromParams){ 
+			  function(event, toState, toParams, fromState, fromParams){
 				  if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
-					  event.preventDefault(); 
+					  event.preventDefault();
 					  notification.loading(false);
 					  // self.detailsShown = true;
 					  self.$state.transitionTo(toState.name, toParams, {notify: false});
+            if (fromParams.tree_number != toParams.tree_number) {
+              self.clear();
+            }
 					  self.load(toParams);
 				  }
 	})
@@ -111,6 +114,15 @@ PersonViewController.prototype = {
 		}
 	},
 
+  clear: function () {
+    this.elements = {};
+    this.vertices = {};
+    this.tree = null;
+    this.d3Nodes.remove();
+    this.d3Vertices.remove()
+    this.d3Circles.remove()
+  },
+
 	load: function (params) {
 		var self = this,
 			apiUrl = this.apiClient.base_url+
@@ -141,7 +153,7 @@ PersonViewController.prototype = {
 					console.log("where's d3?")
 			}, function (response) {
 				console.log('error walking the tree', response)
-				console.log(response); 
+				console.log(response);
 			});
 
 	},
@@ -380,7 +392,7 @@ PersonViewController.prototype = {
 				.style(self.vertical_pos,function(d) { return px(d.pos.x); })
 				.style('width',function(d) { return px(d.size.x); })
 				.style('height',function(d) { return px(d.size.y); })
-				.style('font-size',function(d) { 
+				.style('font-size',function(d) {
 					return d.class == 'individual'? "20px": px(d.size.y/2.5); });
 		}
 
@@ -549,7 +561,7 @@ PersonViewController.prototype = {
 			elapsed = Date.now() - this.lastPan,
 		    transform;
 
-		if ( elapsed < 60 ) return; 
+		if ( elapsed < 60 ) return;
 		this.pannedX += x;
 		this.pannedY += y;
 		transform = "translate("+this.pannedX+','+this.pannedY+")"+this.vertical_transform;
@@ -561,7 +573,7 @@ PersonViewController.prototype = {
 
 		this.d3Nodes
 			.transition('pan').duration(0)
-			.style(self.vertical_pos, function (d) { 
+			.style(self.vertical_pos, function (d) {
 				if (self.vertical_pos == 'left')
 					d.pos.x += x;
 				else
@@ -596,8 +608,8 @@ PersonViewController.prototype = {
 	}
 };
 
-angular.module('main').controller('PersonViewController', 
+angular.module('main').controller('PersonViewController',
 			  ['$http', '$window', '$document', '$rootScope', '$scope',
-			   '$state', '$stateParams', 'apiClient', 'recentlyViewed', 
-			   'langManager', 'ftreeLayout', 'notification', 
+			   '$state', '$stateParams', 'apiClient', 'recentlyViewed',
+			   'langManager', 'ftreeLayout', 'notification',
 			   PersonViewController]);
