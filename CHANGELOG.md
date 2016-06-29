@@ -3,8 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Display Photo Unit Number
+
 ### Changed
 - Using `gulp` instead of `grunt` for devOps
+- Using GTM instead of analytics
 
 ## [0.9.5] - 2016-06-14
 ### Added
