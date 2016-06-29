@@ -143,6 +143,7 @@ PersonViewController.prototype = {
 				self.tree_number = params.tree_number;
 				// self.detailsShown = true;
 				self.node = item_data;
+        self.node.Slug = {En: slug};
 				self.$rootScope.title = self.get_full_name(self.node.tree);
 
 				self.notification.loading(false);
