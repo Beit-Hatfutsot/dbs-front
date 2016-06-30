@@ -3,8 +3,8 @@ angular.module('main').
 		var recent;
 		var max_items = 50;
 
-		if( $window.sessionStorage !== undefined ) {
-			recent = $window.sessionStorage;
+		if( $window.localStorage !== undefined ) {
+			recent = $window.localStorage;
 		}
 		else {
 			recent = {
