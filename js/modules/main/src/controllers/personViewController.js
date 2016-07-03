@@ -1,5 +1,5 @@
 var PersonViewController = function ($http, $window, $document, $rootScope,
-							       $scope, $state, $stateParams, apiClient,
+							       $scope, $state, $stateParams, item,
 							       recentlyViewed, langManager, ftreeLayout,
 								   notification) {
 	var self = this, script_loaded = true, node = {};
@@ -8,7 +8,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	this.$state = $state;
 	this.$http = $http;
 	this.$window = $window;
-	this.apiClient = apiClient;
+	this.item = item;
 	this.recentlyViewed = recentlyViewed;
 	this.langManager = langManager;
 	this.notification = notification;
@@ -125,12 +125,11 @@ PersonViewController.prototype = {
 
 	load: function (params) {
 		var self = this,
-			apiUrl = this.apiClient.base_url+
-				['/person',  params.tree_number, params.node_id].join('/');
+        slug = 'person_' + params.tree_number + '.' + params.node_id;
 
 		self.notification.loading(true);
-		self.$http.get(apiUrl, { cache: true })
-			.success(function (item_data) {
+		self.item.get(slug)
+			.then(function (item_data) {
 				var name = self.get_full_name(item_data.tree),
 					thumbnail = null;
 				if (item_data.thumbnail)
@@ -144,6 +143,7 @@ PersonViewController.prototype = {
 				self.tree_number = params.tree_number;
 				// self.detailsShown = true;
 				self.node = item_data;
+        self.node.Slug = {En: slug};
 				self.$rootScope.title = self.get_full_name(self.node.tree);
 
 				self.notification.loading(false);
@@ -610,6 +610,6 @@ PersonViewController.prototype = {
 
 angular.module('main').controller('PersonViewController',
 			  ['$http', '$window', '$document', '$rootScope', '$scope',
-			   '$state', '$stateParams', 'apiClient', 'recentlyViewed',
+			   '$state', '$stateParams', 'item', 'recentlyViewed',
 			   'langManager', 'ftreeLayout', 'notification',
 			   PersonViewController]);
