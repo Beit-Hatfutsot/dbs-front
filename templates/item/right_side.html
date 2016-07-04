@@ -24,13 +24,7 @@
                 <en>{{itemController.search_result.name.Header.En}}</en>
                 <he>{{itemController.search_result.name.Header.He}}</he>
             </span>
-            <span ng-if="itemController.search_result.name.Header &&
-                         itemController.search_result.place.Header">
-                <br/>
-                    <en>at</en>
-                    <he>מ</he>
-            </span>
-            <span ng-if="itemController.search_result.place.Header">
+            <span ng-if="!itemController.search_result.name.Header && itemController.search_result.place.Header">
                 <en>{{itemController.search_result.place.Header.En}}</en>
                 <he>{{itemController.search_result.place.Header.He}}</he>
             </span>
@@ -43,5 +37,5 @@
         <en>Related Items:</en>
         <he>ערכים קשורים:</he>
     </div>
-    <item-preview ng-repeat="r_data in itemController.related_data | limitTo: 6" preview-data="r_data" item-source="bh"></item-preview> 
+    <item-preview ng-repeat="r_data in itemController.related_data | limitTo: 6" preview-data="r_data" item-source="bh"></item-preview>
 </div>

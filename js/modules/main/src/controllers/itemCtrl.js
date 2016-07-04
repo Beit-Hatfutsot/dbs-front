@@ -116,7 +116,7 @@ ItemCtrl.prototype = {
 
 		if (this.search_result.name.Header)
 		    params.last_name  = this.search_result.name.Header[lang]
-		if (this.search_result.place.Header)
+    else if (this.search_result.place.Header)
 		    params.place = this.search_result.place.Header[lang];
 
     	this.$state.go('persons', params);
