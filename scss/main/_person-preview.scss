@@ -1,5 +1,8 @@
-.person-preview {
+a {
+  color: $gray3;
+}
 
+.person-preview {
     @extend %item-preview;
     margin: 20px 37px;
     background-color: #fff;
@@ -43,7 +46,7 @@
                 border: 1px solid $gray4;
                 border-radius: 50px;
                 margin: 0 auto;
-                width: 82px;    
+                width: 82px;
             }
         }
     }
@@ -112,7 +115,7 @@
                 display: block;
                 color: $gray3;
                 width: 100%;
-                white-space: nowrap; 
+                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 font-weight: 600;

@@ -13,7 +13,7 @@
 			width: 1070px;
 			height: 100%;
 			background-color: #fff;
-			
+
 			.en & {
 				transform: skew(16deg);
 			}
@@ -25,7 +25,7 @@
 			    height: 100%;
 			    width: 10px;
 			    background: $yellow3;
-			    
+
 			    .en & {
 			    	float: right;
 			    }
@@ -113,9 +113,9 @@
                     width: 119px;
                     height: 114px;
                 }
-				
+
 				&__description {
-				 	
+
 				 	.en & {
 				 		margin-left: 10px;
 				 	}
@@ -136,7 +136,7 @@
 			    position: absolute;
 			    justify-content: space-between;
     			width: 180px;
-			    
+
 			    .en & {
 			    	left: 18px;
 			    	transform: skew(-16deg);
@@ -199,8 +199,8 @@
 
                 &:after {
                 	content: "";
-                	width: 0; 
-					height: 0; 
+                	width: 0;
+					height: 0;
 					border-top: 10px solid transparent;
 					top: 0;
 					position: absolute;
@@ -263,7 +263,7 @@
 				    outline: none;
 				}
             }
-            
+
         }
     }
 
@@ -281,15 +281,26 @@
 	    }
 
 	    .mjs {
-			width: inherit;
-		    line-height: 24px;
-		    font-size: 12px;
-		    padding: 0 10px;
-		    font-weight: 600;
-		    color: $gray3;
-			background-color: $gray6;
-			@include box-shadow(0 0 6px 0 $gray4);
-			position: relative;
+  			width: inherit;
+  		  line-height: 24px;
+  		  font-size: 12px;
+  		  padding: 0 10px;
+  		  font-weight: 600;
+  		  color: $gray3;
+  			background-color: $gray6;
+  			@include box-shadow(0 0 6px 0 $gray4);
+  			position: relative;
+
+        &--person {
+          top: 144px;
+
+          .en & {
+            left: -6px;
+          }
+          .he & {
+            right: -6px;
+          }
+        }
 
 			&.open {
 				.mjs_branches_popover {
@@ -314,7 +325,7 @@
 					width: 20px;
 					height: 20px;
 					display: inline-block;
-					
+
 					.en & {
 						margin-right: 4px;
 						float: left;
@@ -413,7 +424,7 @@
         }
 
         &__desc {
-        	
+
         	.en & {
         		margin-left: 30px;
         	}
@@ -442,7 +453,7 @@
 	        &.checked {
 				&:after {
 					opacity: 1;
-				}	        	
+				}
 	        }
 
 	        &:after {
@@ -557,7 +568,7 @@
 		border-bottom-color: $gray6;
 		border-width: 9px;
 	}
-	
+
 	&:before {
 		border-bottom-color: $gray4;
 		border-width: 9px;
