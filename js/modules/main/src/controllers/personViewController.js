@@ -233,6 +233,11 @@ PersonViewController.prototype = {
 			siblingsClusters = -1;
 		data.push( this.getElement(cn, 'individual') );
 		if ( 'parents' in cn ) {
+      // create the parents_ids helper array
+      var parents_ids = []
+      cn.parents.forEach(function (parent, _parent) {
+        parents_ids[_parent] = parent.id;
+      });
 			cn.parents.forEach(function (parent, _parent) {
 				data.push( self.getElement(parent,'parent') );
 				if ( _parent == 0 ) {
@@ -263,9 +268,9 @@ PersonViewController.prototype = {
 					});
 				}
 				if ( parent.partners ) {
-					parent.partners.forEach( function (stepparent, _stepparent) {
-						// make sure it's really a stepparent
-						if ((cn.parents.length == 1) || (stepparent.id != cn.parents[1-_parent].id)) {
+					parent.partners.forEach( function (stepparent) {
+						// make sure it's really a stepparent == not one of the parents
+						if (parents_ids.indexOf(stepparent.id) == -1) {
 							data.push( self.getElement(stepparent,'stepparent') );
 							vdata.push( self.getVertex(stepparent, parent, 'spouse') );
 						}
