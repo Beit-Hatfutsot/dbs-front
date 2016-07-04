@@ -3,7 +3,7 @@
 		<div id="search-params">
 			<form class="filters" name="filters" ng-class="{'filters--expanded': ctrl.advanced_search}">
 				<div class="filters__general">
-						<div class="title"> 
+						<div class="title">
 							<span class="title__arrow"></span>
 							<h3 class="title__text">
 								<en>Type in any field below<br>to start a new search</en>
@@ -20,7 +20,7 @@
 							<input type="text" ng-model="ctrl.search_params.first_name" placeholder="{{(lang=='en')?'Moshe, Liat...':'משה, ליאת...'}}">
 						</div>
 					</div>
-					<filters-field  class="filters__field" 
+					<filters-field  class="filters__field"
 									label-text-en="Family Name"
 			                        label-text-he="שם משפחה"
 			                        model="last_name"
@@ -109,7 +109,7 @@
 											model="marriage_place"
 											placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
 							</filters-field>
-							<filters-field class="filters__field" 
+							<filters-field class="filters__field"
 											label-text-en="Place of Death"
 											label-text-he="מקום פטירה"
 											model="death_place"
@@ -200,10 +200,10 @@
         </div>
 
 		<div class="item-preview-wrapper">
-			<person-preview  ng-repeat="individual in ctrl.individuals.items" 
-							 sex="individual.G"
-							 individual="individual">
-			</person-preview>
+      <item-preview ng-repeat="individual in ctrl.individuals.items"
+            preview-data="individual"
+            sex="individual.G">
+      </item-preview>
 			<div class="loader" ng-click="ctrl.fetch_more()" ng-if="ctrl.individuals.total>ctrl.individuals.items.length">
                 <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                 <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>

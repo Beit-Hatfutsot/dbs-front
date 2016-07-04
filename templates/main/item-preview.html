@@ -1,116 +1,171 @@
-<div class="item-preview">
-	<a ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='cjh'||itemSource=='europeana'?'_blank': null}}">
-		<div class="thumbnail" ng-if="previewData.thumbnail.data">
-			<img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
-				 alt="Preview Image"/>
-			 <img ng-if="itemSource!='bh'" ng-src="{{previewData.thumbnail.data}}"
-				 alt="Preview Image"/>
-		</div>
-		<div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data), 'white-part1--thumbnail': previewData.thumbnail.data}">
-			<div class="diagonal-block" ng-if="previewData.thumbnail.data"
-           ng-class="{'diagonal-block--ext-result': itemSource!='bh'}">
-				<div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
-				<div  class="diagonal-separator" style="right:-10px; opacity:0.7"
-					  ng-show="$index == 0 || previewData.Pictures.length > 1">
-				</div>
-				<div  class="diagonal-separator" style="right:2px; opacity:0.4"
-					  ng-show="$index == 0 || previewData.Pictures.length > 1">
-				</div>
-			</div>
-			<ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
-				<div ng-switch-when="true" class="text text--nothumb">
-					{{previewData.FN}}<br>{{previewData.LN}}
-				</div>
-				<div ng-switch-default>
-					<div class="header" 
-						ng-class="{'header--nothumb': !(previewData.thumbnail.data),
-                       'isExtResult': itemSource != 'bh'}">
-						<en>{{previewData.Header.En}}</en>
-						<he>{{previewData.Header.He}}</he>
-					</div>
-					<div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}"> 	
-			            <en><span marked="previewData.UnitText1.En"></span></en>
-			            <he><span marked="previewData.UnitText1.He"></span></he>
-					</div>
-				</div>
-				<div class="remove" ng-if="removable && !(previewData.ugc)"
-					 ng-click="itemPreviewController.remove_from_mjs($event)">
-					<icon position="[-229, -104]"></icon>
-				</div>
-			</ng-switch>
-			<div ng-if="itemSource!='bh'" class="europeana-label">
-        <ng-switch on="itemSource">
-          <span ng-switch-when="europeana">
-            <en>Europeana</en>
-            <he>יורופיאנה</he>
-          </span>
-          <span ng-switch-when="cjh">
-            <en>Center for Jewish History</en>
-            <he>המרכז להיסטוריה יהודית</he>
-          </span>
-        </ng-switch>
-			</div>
-			<item-type type="itemPreviewController.item_type"
-	   			   image="previewData.thumbnail.data">
-			</item-type>
-		</div>
-	</a>
-	<div ng-if="previewData.in_mjs && itemPreviewController.in_mjs_state()" class="mjs" dropdown dropdown-toggle
-		 on-toggle="itemPreviewController.rmdialog_is_open = false; itemPreviewController.toggle_height();">
-			<span class="mjs__desc">
-				<en>Appears in:</en>
-				<he>מופיע ב:</he>
-			</span>
-      &nbsp;
-			<ul class="branch_preview vertical-middle">
-				<li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]"
-	      			ng-show="previewData.in_branch[idx]"></li>
-			</ul> 
-			<span class="arrow-down vertical-middle"></span>
-		<div class="mjs_branches_popover" ng-click="$event.stopPropagation()">
-		    <div class="mjs_branches_popover__line" ng-repeat="i in [0,1,2,3]">
-		        <!-- <icon  class="edit-branch-icon" position="[-231, -127]"></icon> -->
-		        <input  id="branch--{{previewData._id}}--{{i+1}}" 
-		                type="checkbox" 
-                   	 	ng-model="previewData.in_branch[i]"
-                   	 	ng-click="itemPreviewController.update_branch(i)">
-		        <label  class="branch--{{i+1}}" 
-		                for="branch--{{previewData._id}}--{{i+1}}"
-		                ng-class="{'checked': previewData.in_branch[i]}">
-		        </label>
-		        <div class="mjs_branches_popover__line__desc">
-		            <en>{{itemPreviewController.mjs._latest.story_branches[i] || "Name this family branch"}}</en>
-		            <he>{{itemPreviewController.mjs._latest.story_branches[i] || "בחרו שם עבור ענף משפחתי זה"}}</he>
-		        </div>
-		    </div>
-		    <div class="mjs_branches_popover__line rm-popover"
-		    	 ng-click="itemPreviewController.rmdialog_is_open = !itemPreviewController.rmdialog_is_open">
-		        <icon class="remove-icon" position="[-230, -105]"></icon>
-		        <div class="mjs_branches_popover__line__desc">
-		            <en>Remove this item from my story</en>
-		            <he>הסר נושא זה מהסיפור שלי</he>
-		        </div>
-		        <div class="rmdialog" ng-show="itemPreviewController.rmdialog_is_open">
-		            <span class="rmdialog__title">
-		                <en>Are you sure you want to remove this?</en>
-		                <he>Are you sure you want to remove this?</he>
-		            </span>
-		           	<div class="rmdialog__actions ">
-		                <button class="rmdialog__actions__action" ng-click="itemPreviewController.remove_from_mjs()">
-		                    <icon class="rmdialog__actions__action__remove-icon" position="[-230, -105]"></icon>
-		                    <en>Yes</en>
-		                    <he>כן</he>
-		                </button>
-		           	</div>
-	        	</div>
-		    </div>
-		    <div class="close-button-back" ng-hide="itemPreviewController.rmdialog_is_open" dropdown-toggle>
-		        <span class="close-button">x</span>
-		    </div>
-		</div>
-	</div>
-</div>
+<div class="{{itemPreviewController.collection_name==='genTreeIndividuals'? 'person-preview':'item-preview'}}">
+  <ng-switch on="itemPreviewController.collection_name==='genTreeIndividuals'">
+    <a ng-switch-when="true" ui-sref="person-view({tree_number: previewData.GTN, node_id: previewData.II})">
+      <div class="top">
+          <div class="tree-num">
+              <div class="tree-num__title">
+                  <en>Tree number</en>
+                  <he>מספר עץ</he>
+              </div>
+              <div class="tree-num__num">{{previewData.GTN}}</div>
+          </div>
+          <div class="family parents" title="{{previewData.tree.parents[0].name[0] + ' & ' + previewData.tree.parents[1].name[0]}}" ng-if="previewData.tree.parents[0].name[0]&&previewData.tree.parents[1].name[0]">
+              <div class="family__members">{{previewData.tree.parents[0].name[0]}} & {{previewData.tree.parents[1].name[0] }}</div>
+              <div class="family__title">
+                  <en>Parents</en>
+                  <he>הורים</he>
+              </div>
+          </div>
+          <div class="add-to-story"></div>
+      </div>
+      <div class="node" ng-class="{'node--f': sex === 'F', 'node--m' : sex == 'M'}">
+          <ng-switch on="sex">
+              <div class="avatar flip" ng-switch-when="M">
+                  <icon position="[-197, -404]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
+              </div>
+              <div class="avatar flip" ng-switch-when="F">
+                  <icon position="[-197, -473]" alt-text="{en: 'Female', he: 'נקבה'}"></icon>
+              </div>
+              <div class="avatar" ng-switch-when="U">
+                  <icon position="[-197, -541]" alt-text="{en: 'Unknown', he: ''}"></icon>
+              </div>
+          </ng-switch>
+          <div class="preview-data" title="{{person_info}}">
+              <div class="name">
+                 <put-value value="previewData.FN + ' ' + previewData.LN"></put-value><br>
+              </div>
+              <div class="data-preview">
+                  {{person_info}}
+              </div>
+          </div>
+      </div>
+      <div class="bottom">
+          <div class="family children" title="{{children}}" ng-if="children && previewData.tree">
+              <ng-switch on="children_num">
+                  <div ng-switch-when="1" class="family__title">
+                      <en>1 Child</en>
+                      <he>1 ילד</he>
+                  </div>
+                  <div ng-switch-default class="family__title">
+                      <en>{{children_num + " "}}Children</en>
+                      <he>{{children_num + " "}}ילדים</he></div>
+              </ng-switch>
+              <div class="family__members">{{children}}</div>
+          </div>
+      </div>
+    </a>
 
+    <a  ng-switch-when="false" ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='cjh'||itemSource=='europeana'?'_blank': null}}">
+      <div class="thumbnail" ng-if="previewData.thumbnail.data">
+        <img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
+           alt="Preview Image"/>
+         <img ng-if="itemSource!='bh'" ng-src="{{previewData.thumbnail.data}}"
+           alt="Preview Image"/>
+      </div>
+      <div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data), 'white-part1--thumbnail': previewData.thumbnail.data}">
+        <div class="diagonal-block" ng-if="previewData.thumbnail.data"
+             ng-class="{'diagonal-block--ext-result': itemSource!='bh'}">
+          <div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
+          <div  class="diagonal-separator" style="right:-10px; opacity:0.7"
+              ng-show="$index == 0 || previewData.Pictures.length > 1">
+          </div>
+          <div  class="diagonal-separator" style="right:2px; opacity:0.4"
+              ng-show="$index == 0 || previewData.Pictures.length > 1">
+          </div>
+        </div>
+        <ng-switch on="itemPreviewController.collection_name === 'genTreeIndividuals'">
+          <div ng-switch-when="true" class="text text--nothumb">
+            {{previewData.FN}}<br>{{previewData.LN}}
+          </div>
+          <div ng-switch-default>
+            <div class="header"
+              ng-class="{'header--nothumb': !(previewData.thumbnail.data),
+                         'isExtResult': itemSource != 'bh'}">
+              <en>{{previewData.Header.En}}</en>
+              <he>{{previewData.Header.He}}</he>
+            </div>
+            <div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
+                    <en><span marked="previewData.UnitText1.En"></span></en>
+                    <he><span marked="previewData.UnitText1.He"></span></he>
+            </div>
+          </div>
+          <div class="remove" ng-if="removable && !(previewData.ugc)"
+             ng-click="itemPreviewController.remove_from_mjs($event)">
+            <icon position="[-229, -104]"></icon>
+          </div>
+        </ng-switch>
+        <div ng-if="itemSource!='bh'" class="europeana-label">
+          <ng-switch on="itemSource">
+            <span ng-switch-when="europeana">
+              <en>Europeana</en>
+              <he>יורופיאנה</he>
+            </span>
+            <span ng-switch-when="cjh">
+              <en>Center for Jewish History</en>
+              <he>המרכז להיסטוריה יהודית</he>
+            </span>
+          </ng-switch>
+        </div>
+        <item-type type="itemPreviewController.item_type"
+               image="previewData.thumbnail.data">
+        </item-type>
+      </div>
+    </a>
+  </ng-switch>
+  <div ng-if="previewData.in_mjs && itemPreviewController.in_mjs_state()" class="mjs" ng-class="{'mjs--person':itemPreviewController.collection_name==='genTreeIndividuals'}" dropdown dropdown-toggle
+     on-toggle="itemPreviewController.rmdialog_is_open = false; itemPreviewController.toggle_height();">
+      <span class="mjs__desc">
+        <en>Appears in:</en>
+        <he>מופיע ב:</he>
+      </span>
+      &nbsp;
+      <ul class="branch_preview vertical-middle">
+        <li class="branch--{{idx + 1}}" ng-repeat="idx in [0,1,2,3]"
+              ng-show="previewData.in_branch[idx]"></li>
+      </ul>
+      <span class="arrow-down vertical-middle"></span>
+      <div class="mjs_branches_popover" ng-click="$event.stopPropagation()">
+        <div class="mjs_branches_popover__line" ng-repeat="i in [0,1,2,3]">
+            <input  id="branch--{{previewData._id}}--{{i+1}}"
+                    type="checkbox"
+                      ng-model="previewData.in_branch[i]"
+                      ng-click="itemPreviewController.update_branch(i)">
+            <label  class="branch--{{i+1}}"
+                    for="branch--{{previewData._id}}--{{i+1}}"
+                    ng-class="{'checked': previewData.in_branch[i]}">
+            </label>
+            <div class="mjs_branches_popover__line__desc">
+                <en>{{itemPreviewController.mjs._latest.story_branches[i] || "Name this family branch"}}</en>
+                <he>{{itemPreviewController.mjs._latest.story_branches[i] || "בחרו שם עבור ענף משפחתי זה"}}</he>
+            </div>
+        </div>
+        <div class="mjs_branches_popover__line rm-popover"
+           ng-click="itemPreviewController.rmdialog_is_open = !itemPreviewController.rmdialog_is_open">
+            <icon class="remove-icon" position="[-230, -105]"></icon>
+            <div class="mjs_branches_popover__line__desc">
+                <en>Remove this item from my story</en>
+                <he>הסר נושא זה מהסיפור שלי</he>
+            </div>
+            <div class="rmdialog" ng-show="itemPreviewController.rmdialog_is_open">
+                <span class="rmdialog__title">
+                    <en>Are you sure you want to remove this?</en>
+                    <he>Are you sure you want to remove this?</he>
+                </span>
+                <div class="rmdialog__actions ">
+                    <button class="rmdialog__actions__action" ng-click="itemPreviewController.remove_from_mjs()">
+                        <icon class="rmdialog__actions__action__remove-icon" position="[-230, -105]"></icon>
+                        <en>Yes</en>
+                        <he>כן</he>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="close-button-back" ng-hide="itemPreviewController.rmdialog_is_open" dropdown-toggle>
+            <span class="close-button">x</span>
+        </div>
+      </div>
+  </div>
+</div>
 
 
 
