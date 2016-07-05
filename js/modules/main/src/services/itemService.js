@@ -92,7 +92,7 @@ angular.module('main').
 					params,
 					state;
 
-				
+
 				//TODO: try and remove the next 3 lines as url should be based
 				// on current language
 				if (item_data.slug) {
@@ -114,7 +114,7 @@ angular.module('main').
 					state = 'he.he_'+state;
 				return $state.href(state, params);
 			},
-			
+
 			get_data_string: function(item_data) {
 				return itemTypeMap.get_item_string(item_data);
 			},
@@ -181,7 +181,7 @@ angular.module('main').
 					if (not_cached_items.isEmpty()) {
 						$rootScope.$broadcast('item-loaded', cached_items);
 						deferred.resolve(cached_items);
-					} 
+					}
 					else {
 						try {
 							// fetch the non-cached items
