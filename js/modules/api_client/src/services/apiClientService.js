@@ -28,7 +28,8 @@ angular.module('apiClient').
           ftrees_search:  'v1/person',
           upload:         'v1/upload',
           newsletter:     'v1/newsletter',
-          search:         'v1/search'
+          search:         'v1/search',
+          story:         'v1/story'
         }
 	  	};
 

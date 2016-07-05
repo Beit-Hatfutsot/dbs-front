@@ -142,6 +142,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 
         {
+            name: 'story',
+            url: '/story/{user_id}',
+            templateUrl: 'templates/main/story.html',
+        },
+
+        {
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
