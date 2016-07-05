@@ -110,7 +110,7 @@ angular.module('main').
 			loading_gif: null,
 			loading: function(on) {
 				var view = angular.element(document.getElementById('view'));
-				if (on) {
+				if (on && this.loading_gif == null) {
 					view.addClass('backdrop');
 					this.loading_gif = jQuery('<img>')
 						.addClass('loading')
