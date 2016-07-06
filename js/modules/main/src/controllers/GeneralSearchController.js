@@ -1,9 +1,9 @@
-var GeneralSearchController = function(europeanaUrl, $scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, notification) {
+var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, notification) {
     var self = this, params = {};
     this.$state = $state;
     this.$window = $window;
     this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'allResults';
-    this.results = {hits: []};    
+    this.results = {hits: []};
     this.eurp_results = [];
     this.cjh_results = [];
     this.$modal = $modal;
@@ -16,11 +16,11 @@ var GeneralSearchController = function(europeanaUrl, $scope, $state, langManager
     this.$scope = $scope;
     this.eurp_total = '';
     this.cjh_total = '';
-    this.loading = true;
     this.loading_eurp = true;
     this.loading_cjh = true;
     this.google_query = "";
     this.langManager = langManager;
+    this.notification = notification;
     this.query_words = [
         {en:'Jewish', he:'יהודי', selected: false},
         {en:'Jews', he:'יהודים', selected: false},
@@ -34,9 +34,9 @@ var GeneralSearchController = function(europeanaUrl, $scope, $state, langManager
 
         allResults: {
             En: 'All results',
-            He: 'כל התוצאות' 
+            He: 'כל התוצאות'
         },
-        
+
         places: {
             En:'Places',
             He: 'מקומות'
@@ -58,7 +58,7 @@ var GeneralSearchController = function(europeanaUrl, $scope, $state, langManager
             En: 'Family names',
             He: 'שמות משפחה'
         }
-    };    
+    };
 
     Object.defineProperty(this, 'query', {
         get: function() {
@@ -78,38 +78,58 @@ var GeneralSearchController = function(europeanaUrl, $scope, $state, langManager
 
         set: function(new_collection) {
             this._collection = new_collection;
+            this.results = {hits: []};
+            this.eurp_results = [];
+            this.cjh_results = [];
             $state.go('general-search', {q: this.header.query, collection: new_collection});
         }
     });
-    if ($stateParams.q !== undefined) {
-       header.query = this.query = $stateParams.q;
 
-	    notification.loading(true);
-        $http.get(apiClient.urls.search, {params: this.api_params()})
-        .success(function (r) {  
+    if ($stateParams.q !== undefined) {
+        header.query = this.query = $stateParams.q;
+        self.load();
+    };
+
+    $rootScope.$on('$stateChangeStart',
+        function(event, toState, toParams, fromState, fromParams){
+          if (toState.name.endsWith('general-search') && fromState.name.endsWith('general-search')) {
+            event.preventDefault();
+            $state.transitionTo(toState.name, toParams, {notify: false});
+            self.load(toParams);
+          }
+    })
+};
+
+GeneralSearchController.prototype = {
+
+    load: function() {
+        var self = this;
+        self.notification.loading(true);
+        self.$http.get(self.apiClient.urls.search, {params: self.api_params()})
+        .success(function (r) {
             self.results = r.hits;
-			notification.loading(false);
-            self.loading = false;
+            self.notification.loading(false);
         });
 
         if(this.collection == 'allResults' || this.collection == 'media') {
-			this.search_europeana(function(r) {
+            this.search_europeana(function(r) {
                 self.eurp_total = r.totalResults;
                 self.push_eurp_items(r);
                 self.loading_eurp = false;
             });
 
-            $http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
+            self.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
             .success(function(r) {
                 self.cjh_total = r.response.numFound;
                 self.push_cjh_items(r);
                 self.loading_cjh = false;
             })
-        };
-    };
-}; 
-        
-GeneralSearchController.prototype = {
+        }
+        else {
+            this.eurp_total = '';
+            this.cjh_total = '';
+        }
+    },
 
     push_eurp_items: function(r) {
         if (r.items) {
@@ -117,7 +137,7 @@ GeneralSearchController.prototype = {
                 var item = r.items[i];
                 if (item.edmPreview)
                     this.eurp_results.push({thumbnail: {data: item.edmPreview[0]}, UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
-                else 
+                else
                     this.eurp_results.push({UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
             }
         }
@@ -129,7 +149,7 @@ GeneralSearchController.prototype = {
                 var item = r.response.docs[i];
                 if (item.thumbnail)
                     this.cjh_results.push({thumbnail: {data: item.thumbnail}, UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
-                else 
+                else
                      this.cjh_results.push({UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
             }
         }
@@ -146,7 +166,7 @@ GeneralSearchController.prototype = {
         }
         params.from_ = this.results.hits.length;
         return params;
-    }, 
+    },
 
     fetch_more: function() {
         var query_string = this.query_string,
@@ -156,7 +176,7 @@ GeneralSearchController.prototype = {
         .success(function (r){
             results.hits = results.hits.concat(r.hits.hits);
         });
-    }, 
+    },
 
     search_europeana: function (callback) {
         var params = {qf: 'PROVIDER:"Judaica Europeana"',
@@ -177,9 +197,9 @@ GeneralSearchController.prototype = {
 
         if (this.collection == 'media')
 			params.q = params.q.concat(' dtype: Photographs');
-        
+
         params.start = this.cjh_results.length;
-        return params; 
+        return params;
     },
 
     fetch_more_eurp: function() {
@@ -238,4 +258,4 @@ GeneralSearchController.prototype = {
     }
 };
 
-angular.module('main').controller('GeneralSearchController', ['europeanaUrl', '$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'notification', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['$rootScope', 'europeanaUrl', '$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'notification', GeneralSearchController]);
