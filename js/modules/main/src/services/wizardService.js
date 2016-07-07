@@ -52,7 +52,7 @@ angular.module('main').
 			 * The result of the last wizard search.
 			 */
 			result: {},
-			
+
 
 			/**
 			 * @ngdoc property
@@ -75,7 +75,7 @@ angular.module('main').
 				name: '',
 				place: ''
 			},
-			
+
 			/**
 			 * @ngdoc method
 			 * @name wizard#clear
@@ -87,7 +87,7 @@ angular.module('main').
 				this.result = {};
 				this.search_status = '';
 			},
-			
+
 			/**
 			 * @ngdoc method
 			 * @name wizard#search
@@ -97,7 +97,7 @@ angular.module('main').
 			 * Sets search_status, last_search, result.
 			 * Filters (live) individual data.
 			 * It also handles notifications.
-			 * 
+			 *
 			 * @returns
 			 * {Promise}
 			 */
@@ -112,7 +112,7 @@ angular.module('main').
 
 					notification.loading(true);
 
-		  			var self = this, 
+		  			var self = this,
 		  				query_params = {},
 		  				query = this.query,
 		  				search_promise,
@@ -125,7 +125,7 @@ angular.module('main').
 		  			if (query.place) {
 		  				query_params.place = query.place;
 		  			}
-		  			
+
 		  			$http.get(apiClient.urls.wizard_search, {
 						params: query_params
 					}).
@@ -135,11 +135,11 @@ angular.module('main').
 						notification.loading(false);
 
 		                if ( result.name.isNotEmpty() || result.place.isNotEmpty())  {
-		                    
+
 		                	if (result.name.isNotEmpty()) {
 		                		cache.put(result.name);
 		                	}
-		                	
+
 	                		if (result.place.isNotEmpty()) {
 		                		cache.put(result.place)
 		                    }
@@ -160,7 +160,6 @@ angular.module('main').
 		                }
 		                else {
 		                    self.search_status =  'none';
-		                    notification.put(12);
 		                }
 
 						self.result = result;

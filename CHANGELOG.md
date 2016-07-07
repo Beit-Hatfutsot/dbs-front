@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Allow users to add persons to their story
 
 
 ## [0.9.6] - 2016-06-29
@@ -15,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Github ribbon is now redo
 - Recently Viewed now displays all the items than it stores
 - Typos
-- User rename now wrosk as expected (was flaky)
+- User rename now works as expected (was flaky)
 - Limiting branch name in my story to 26 chars
 - Unlimit the number of item in my story
 

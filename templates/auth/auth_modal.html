@@ -3,16 +3,16 @@
 	<div>
 		<div class="auth-modal__title">
 			<en>Sign In</en>
-			<he>כניסה</he>
+			<he>הרשמה לאתר</he>
 		</div>
     <p>
       <en>
-        To save your family's story you need to be logged in.<br />
-        To log in just enter your email and we will send you a login link.
+        To save your story you need to be logged in.<br />
+        Just enter your email below and we will send you a login link.
      </en>
      <he>
-       כדי לשמור את סיפור המשפחה שלך עליך להכנס לחשבונך.<br />
-       אנא הכנס את הדואל שלך ואנו נשלח קישור שיכניסך.
+       כדי שנוכל ליצור עבורכם עמוד אישי ולשמור בו פריטים שמעניינים אתכם, אנא הירשמו לאתר.
+       הזינו כתובת אימייל ואנחנו נשלח לשם קישור לכניסה לחשבון.
      </he>
     </p>
 		<form name="signin_form" class="auth-form" rc-submit="authController.signin()" novalidate>
@@ -26,8 +26,8 @@
 							ng-blur="authController.select_field(null)"
 							required>
 					<label for="signin-name" ng-class="{'bhf__field__label--up': authController.selected_field === 'email' || authController.signin_data.email || rc.signin_form.needsAttention(signin_form.email), 'bhf__field__label--down': authController.selected_field !== 'email' && !(authController.signin_data.email) && !(rc.signin_form.needsAttention(signin_form.email))}">
-						<en>Email</en>
-						<he>מייל</he>
+						<en>Enter your email here</en>
+						<he>הזינו פה כתובת אימייל</he>
 					</label>
 					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.email)">
 						<en>Please enter an email</en>

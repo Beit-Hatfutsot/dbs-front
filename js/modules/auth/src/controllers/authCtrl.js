@@ -15,7 +15,7 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth,
     this.notification = notification;
     this.is_register = config.register;
     this.config = config;
-	this.$state = $state;
+    this.$state = $state;
 
     /**
      * @ngdoc property
@@ -23,7 +23,7 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth,
      *
      * @description
      * Passes the `lang` property from langManager.
-     * Probably should be removed & replaced in the template, 
+     * Probably should be removed & replaced in the template,
      * since there is a `lang` property on $rootScope,
      * unless `lang` is removed from $rootScope.
      */
@@ -128,7 +128,7 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth,
     this.submit_values = {
         signin: {
             en: 'Email Me',
-            he: 'שלח לי'
+            he: 'שליחה'
         },
 
         processing: {
@@ -146,7 +146,7 @@ AuthCtrl.prototype = {
      *
      * @description
      * Calls method signin of {@link module:auth.service:auth} service, using signin form data.
-     * Defines the success and failure messages, displayed upon modal dismissal. 
+     * Defines the success and failure messages, displayed upon modal dismissal.
      */
     signin: function() {
         var self = this;
