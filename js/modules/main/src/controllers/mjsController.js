@@ -1,5 +1,5 @@
 var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
-                             $stateParams, $http, apiClient) {
+                             $state, $stateParams, $http, apiClient) {
 	var self = this;
 	this.notification = notification;
 	this.mjs = mjs;
@@ -24,15 +24,6 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
 		}
 	});
 
-	$rootScope.$on('loggedin', function(event, user) {
-		var items_ids = [];
-    self.user = user;
-		user.story_items.forEach(function (i) {
-			items_ids.push(i.id)
-		})
-		self.load(items_ids);
-	});
-
   if ($stateParams.user_id) {
     // another user's story - story.html
     $http.get(apiClient.urls.story+'/'+$stateParams.user_id)
@@ -47,11 +38,24 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
   }
   else {
     // logged in user story - mjs.html
-    var items_ids = mjs.get_items_ids();
-    self.user = auth.user;
-    if (items_ids.length > 0)
-      self.load(items_ids);
-  }
+    if(!auth.user) {
+      $rootScope.$on('loggedin', function(event, user) {
+        var items_ids = [];
+        self.user = user;
+        user.story_items.forEach(function (i) {
+          items_ids.push(i.id)
+        })
+        self.load(items_ids);
+        self.public_url = $state.href('story',{user_id: user.hash},{absolute: true});
+      });
+    } else {
+      var items_ids = mjs.get_items_ids();
+      self.user = auth.user;
+      if (items_ids.length > 0) {
+        self.load(items_ids);
+      }
+    }
+  };
 
 
 	$rootScope.$on('item-removed', function(events, item_slug) {
@@ -139,5 +143,6 @@ MjsController.prototype = {
 };
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',
-								  'item', 'auth', '$rootScope', '$scope', '$stateParams', '$http', 'apiClient',
+								  'item', 'auth', '$rootScope', '$scope', '$state',
+                  '$stateParams', '$http', 'apiClient',
                   MjsController]);
