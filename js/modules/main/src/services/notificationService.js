@@ -26,8 +26,8 @@ angular.module('main').
       	he: 'הכל אחלה',
       	options: pendingOptions
       }, 1: {
-      	en: "Our pigeon is on its way, carrying your login link",
-      	he: 'נשלחה הודעת דואל עם קישור לכניסה לחשבונך'
+      	en: "Check your inbox for your login link",
+      	he: 'הקישור לכניסה לחשבון שלכם נשלח לאימייל שלכם'
       }, 2: {
       	en: 'found some people in the family trees',
       	he: 'מצטתי אנשים בעצי המשפחהן',
