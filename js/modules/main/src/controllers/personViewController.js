@@ -2,7 +2,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 							       $scope, $state, $stateParams, item,
 							       recentlyViewed, langManager, ftreeLayout,
 								   notification) {
-	var self = this, script_loaded = true, node = {};
+	var self = this, script_loaded = true, node = undefined;
 	this.$scope = $scope;
 	this.$rootScope = $rootScope;
 	this.$state = $state;
@@ -74,10 +74,10 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 		self.mouseUp(e)
 	});
   $rootScope.title = '';
-  if (!d3)
+  if (!$window.d3)
     jQuery.getScript('https://d3js.org/d3.v3.min.js', function () {
       // if the node is already loaded, render it
-      if (self.node !== {})
+      if ((self.node !== undefined))
         self.render(self.node);
     })
   this.load($stateParams);
@@ -138,7 +138,7 @@ PersonViewController.prototype = {
 				self.$rootScope.title = self.get_full_name(self.node.tree);
 
 				self.notification.loading(false);
-				if (d3 != null)
+				if (self.$window.d3)
 					self.render(self.node)
 				else
 					console.log("waiting for d3 to load")
