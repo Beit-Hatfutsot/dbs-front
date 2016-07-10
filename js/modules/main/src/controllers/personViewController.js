@@ -56,21 +56,6 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
         // - siblingMargin: (horizontal,vertical,right)
         siblingMargin: { horizontal:10, vertical:34, right:30, top: -50 },
     });
-	/* TODO: dynamiclly load d3
-    var scriptTag = document[0].createElement('script');
-    scriptTag.type = 'text/javascript';
-    scriptTag.async = true;
-    scriptTag.src = 'js/lib/d3.min.js';
-    scriptTag.onload = function () {
-		self.d3 = $window.d3;
-		var element = document.getElementById('tree-layout');
-		self.layoutEngine.chartSize =  new Tuple(element.clientWidth, element.clientHeight);
-		if (node != {})
-			self.render(node);
-	}
-    var s = document[0].getElementsByTagName('body')[0];
-    s.appendChild(scriptTag);
-    */
    self.detailsShown = false;
    $rootScope.$on('$stateChangeStart',
 			  function(event, toState, toParams, fromState, fromParams){
@@ -88,8 +73,14 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	document.documentElement.addEventListener('mouseup', function (e) {
 		self.mouseUp(e)
 	});
-	this.load($stateParams);
-	$rootScope.title = '';
+  $rootScope.title = '';
+  if (!d3)
+    jQuery.getScript('https://d3js.org/d3.v3.min.js', function () {
+      // if the node is already loaded, render it
+      if (self.node !== {})
+        self.render(self.node);
+    })
+  this.load($stateParams);
 };
 
 PersonViewController.prototype = {
@@ -132,6 +123,7 @@ PersonViewController.prototype = {
 			.then(function (item_data) {
 				var name = self.get_full_name(item_data.tree),
 					thumbnail = null;
+				self.node = item_data;
 				if (item_data.thumbnail)
 					thumbnail = item_data.thumbnail.data;
 				self.recentlyViewed.put({
@@ -142,7 +134,6 @@ PersonViewController.prototype = {
 				});
 				self.tree_number = params.tree_number;
 				// self.detailsShown = true;
-				self.node = item_data;
         self.node.Slug = {En: slug};
 				self.$rootScope.title = self.get_full_name(self.node.tree);
 
@@ -150,7 +141,7 @@ PersonViewController.prototype = {
 				if (d3 != null)
 					self.render(self.node)
 				else
-					console.log("where's d3?")
+					console.log("waiting for d3 to load")
 			}, function (response) {
 				console.log('error walking the tree', response)
 				console.log(response);
