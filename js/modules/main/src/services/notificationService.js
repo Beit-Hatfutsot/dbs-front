@@ -107,19 +107,18 @@ angular.module('main').
   	}
 
 		var notification = {
-			loading_gif: null,
 			loading: function(on) {
+        var loading_gif = angular.element('.loading');
 				var view = angular.element(document.getElementById('view'));
-				if (on && this.loading_gif == null) {
+				if (on && (loading_gif.length == 0)) {
 					view.addClass('backdrop');
-					this.loading_gif = jQuery('<img>')
+					jQuery('<img>')
 						.addClass('loading')
 						.attr('src', 'images/BH-Loading.gif')
 						.appendTo('body');
-				} else if (this.loading_gif) {
+				} else if (!on && (loading_gif.length > 0)) {
 					view.removeClass('backdrop');
-					this.loading_gif.remove();
-					this.loading_gif == null;
+					loading_gif.remove();
 				}
 			},
 			put: function(msg_id) {
