@@ -51,6 +51,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
     } else {
       var items_ids = mjs.get_items_ids();
       self.user = auth.user;
+      self.public_url = $state.href('story',{user_id: self.user.hash},{absolute: true});
       if (items_ids.length > 0) {
         self.load(items_ids);
       }
