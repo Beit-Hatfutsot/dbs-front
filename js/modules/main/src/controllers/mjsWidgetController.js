@@ -50,8 +50,9 @@ MjsWidgetController.prototype = {
 
   remove_from_mjs: function() {
     var self = this;
-      if(self.$scope.item.in_mjs) {
-        self.mjs.remove(self.$scope.item.Slug).then(function() {
+    if(this.$scope.item.in_mjs) {
+      var slug = this.item.get_key(this.$scope.item);
+      this.mjs.remove(slug).then(function() {
         self.$scope.item.in_mjs = false;
       })
     }
