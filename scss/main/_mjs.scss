@@ -130,33 +130,6 @@
 				}
 			}
 
-			.share-item {
-				display: flex;
-			    bottom: 26px;
-			    position: absolute;
-			    justify-content: space-between;
-    			width: 180px;
-
-			    .en & {
-			    	left: 18px;
-			    	transform: skew(-16deg);
-			    }
-
-			    .he & {
-			    	right: 18px;
-			    	transform: skew(16deg);
-			    }
-
-			    &__header {
-			    	margin-top: 6px;
-			    	font-size: 10px;
-			    }
-
-			    &__icon {
-			    	width: 30px;
-			    	height: 30px;
-			    }
-			}
 		}
 	}
 
