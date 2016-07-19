@@ -4,6 +4,12 @@
 #link-button:hover .fg, #twitter-button:hover .fg, #facebook-button:hover .fg {fill:#fff;}
 
 .share-item {
+  .popover-content {
+    width: 250px;
+    input {
+      width: 224px;
+    }
+  }
   display: flex;
     bottom: 26px;
     position: absolute;
@@ -31,12 +37,6 @@
     }
   }
 
-  button {
-    padding: 0;
-    margin-left: 16px;
-    border-width: 0;
-    background-color: transparent;
-  }
 }
 // unskew the mjs header
 #mjs-header-wrapper .share-item {

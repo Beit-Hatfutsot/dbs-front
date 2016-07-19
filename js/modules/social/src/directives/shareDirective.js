@@ -10,10 +10,12 @@ angular.module('social').directive('share', function() {
 			facebook: '=',
 			twitter: '='
 		},
-		link: function(scope, element) { },
-		controller: ['$scope', function($scope) {
-			$scope.href = window.encodeURIComponent($scope.href);
-		}]
+		link: function(scope, element, attrs) {
+			scope.$watch('href', function(href) {
+				if (href)
+					scope.safe_href = window.encodeURIComponent(href);
+			});
+		}
 	};
 });
 
