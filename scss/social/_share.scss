@@ -1,0 +1,54 @@
+#link-button:hover .bg {fill:#fbb034;}
+#twitter-button:hover .bg {fill:#278cb7;}
+#facebook-button:hover .bg {fill:#3c5a80;}
+#link-button:hover .fg, #twitter-button:hover .fg, #facebook-button:hover .fg {fill:#fff;}
+
+.share-item {
+  .popover-content {
+    width: 250px;
+    input {
+      width: 224px;
+    }
+  }
+  display: flex;
+    bottom: 26px;
+    position: absolute;
+    justify-content: space-between;
+
+    &__header {
+      margin-top: 6px;
+      font-size: 10px;
+    }
+
+    &__icon {
+      width: 30px;
+      height: 30px;
+    }
+  .bg {fill: #ddd;}
+  .fg {fill: #999999; }
+  svg { height: 32px; }
+  a {
+    .en & {
+      margin-left: 16px;
+    }
+
+    .he & {
+      margin-right: 16px;
+    }
+  }
+
+}
+// unskew the mjs header
+#mjs-header-wrapper .share-item {
+    .en & {
+      left: 18px;
+      transform: skew(-16deg);
+    }
+
+    .he & {
+      right: 18px;
+      transform: skew(16deg);
+    }
+}
+
+

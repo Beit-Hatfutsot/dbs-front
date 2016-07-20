@@ -24,6 +24,7 @@ angular.module('main', [
     'apiClient',
     'cache',
     'plumb',
+    'social',
     'rcSubmit',
     'gedcomParser',
 	'hc.marked',

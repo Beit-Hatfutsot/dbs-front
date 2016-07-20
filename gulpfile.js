@@ -274,7 +274,7 @@ function appFiles () {
     '!./js/**/*Spec.js',
     '!./js/modules/config/**',
     '!./js/test/**',
-    '!./js/modules/main/test/**'
+    '!./js/modules/*/test/**'
   ];
   return gulp.src(files)
     .pipe(g.naturalSort())
