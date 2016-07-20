@@ -19,7 +19,7 @@ angular.module('main').
 		messages = {
       500: {
       	en: 'Sorry, but the Server is down. Please try again later',
-      	he: 'צטערת, השרת נפל. אנא נסה שנית מאוחר יותר.',
+      	he: 'מצטערים, נראה שהשרת נפל. אנא נסו שנית מאוחר יותר.',
       	options: errorOptions
       }, 0: {
       	en: 'all is fine',

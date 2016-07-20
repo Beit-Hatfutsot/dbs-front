@@ -65,7 +65,7 @@ If you like to test the built version using the local development server, after
 
 ## Contributing
 
-Contributions from both Jews and Gentiles are welcomed! We even have a
+Contributions from both Jews and non-Jews are welcomed! We even have a
 `beginner` label to help you start with (hopefully) simple issues.
 Once you have an issue, just follow these simple steps:
 
