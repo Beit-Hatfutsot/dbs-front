@@ -30,6 +30,14 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		$rootScope.slug = item.Slug;
 	};
 
+	$rootScope.$on('$stateChangeStart',
+	    function(event, toState, toParams, fromState, fromParams){
+	      if (fromState.name.endsWith('item-view') && fromParams.collection == 'video') {
+	      	var video_element = angular.element(document.querySelector('.item__content__media-container')).find("video")[0];
+			video_element.pause();
+	      }
+	});
+
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
@@ -58,10 +66,10 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 			self.get_item();
 		}
 	});
-
 };
 
 ItemCtrl.prototype = {
+
 	get_item: function() {
 		var self = this;
 		self.notification.loading(true);
