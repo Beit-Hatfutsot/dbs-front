@@ -18,8 +18,10 @@ angular.module('main').
 			},
 
 			rename_branch: function(branch_num, new_name) {
+                new_name = new_name.toString();
 				notification.loading(true);
-				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name)
+				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name,
+                           {headers: {'Content-Type': 'text/plain'} } )
 					.then(mjs._update_latest)
 					.finally(function () {
 						notification.loading(false);
