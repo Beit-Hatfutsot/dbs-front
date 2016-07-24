@@ -104,7 +104,7 @@ ItemCtrl.prototype = {
 
 		related_data.forEach(function(related_item) {
 			var proper_lang = self.lang[0].toUpperCase() + self.lang[1];
-			if (related_item.Slug[proper_lang] != self.slug.api) {
+			if (related_item.Slug && related_item.Slug[proper_lang] != self.slug.api) {
 				self.related_data.push(related_item);
 			}
 		});

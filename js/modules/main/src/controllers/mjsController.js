@@ -26,6 +26,8 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
 
   if ($stateParams.user_id) {
     // another user's story - story.html
+	self.public_url = $state.href('story',{user_id: $stateParams.user_id},
+								  {absolute: true});
     $http.get(apiClient.urls.story+'/'+$stateParams.user_id)
          .then(function(res) {
            var items_ids = []
