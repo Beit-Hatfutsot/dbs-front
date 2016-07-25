@@ -32,7 +32,7 @@
                             <img    class="picture"
                                     ng-show="itemController.isActive($index)"
                                     ng-repeat="pic in itemController.item_data.Pictures"
-                                    ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
+                                    ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"
                                     alt="Item Image"
                                     ng-click="itemController.open_gallery()"
                                     prevent-rightclick
@@ -45,7 +45,7 @@
                                 <en>Click to view</en>
                                 <he>ליחצו לצפייה</he>
                             </div> -->
-                        </div> 
+                        </div>
                         <div class="header-wrapper">
                             <h1 class="item__article-header">
                                 <en>{{itemController.item_data.Header.En}}</en>
@@ -71,7 +71,7 @@
                                     <he>© כל הזכויות שמורות</he>
                                     <br>
                                 </span>
-                            </div> 
+                            </div>
                             <div class="gallery-modal__info__gallery-preview">
                                 <div class="gallery-modal__info__gallery-preview__title">
                                     <en>{{itemController.item_data.Header.En}} Pictures ({{itemController.item_data.Pictures.length}} found)</en>
@@ -114,13 +114,11 @@
                                     <en>Check the<br>related items</en>
                                     <he>עיינו בערכים<br>הקשורים</he>
                                 </div>
-                        </div>
-                        <div class="OUTBRAIN" data-src="{{itemController.article_abs_url}}" data-widget-id="AR_1" data-ob-template="BeitHatfutsotIsrael" async="async"></div>
-                        <script type="text/javascript" src="http://widgets.outbrain.com/outbrain.js"></script> 
+                            </div>
                         </div>
                     </div>
-                    
-                </div>  
+
+                </div>
             </div>
         </div>
         <div class="right-side">

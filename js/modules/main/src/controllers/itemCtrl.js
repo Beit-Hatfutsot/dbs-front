@@ -1,6 +1,6 @@
 
 function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs,
-				  recentlyViewed, $window, $timeout, $modal, $rootScope, langManager, $location) {
+				  recentlyViewed, $window, $timeout, $modal, $rootScope, langManager) {
 	var self = this;
 
 	this.$modal = $modal;
@@ -20,7 +20,6 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.itemTypeMap = itemTypeMap;
 	this._Index = 0;
 	this.lang = langManager.lang;
-	this.article_abs_url = $location.absUrl();
 
 	function refresh_root_scope(item) {
 		// TODO: make language option 'En' & 'He' universal
@@ -199,4 +198,4 @@ ItemCtrl.prototype = {
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item',
 	   'notification', 'itemTypeMap','wizard', 'header',
 	   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope',
-	   'langManager', '$location', ItemCtrl]);
+	   'langManager', ItemCtrl]);

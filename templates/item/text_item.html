@@ -33,7 +33,7 @@
 								<div class="main-img-wrapper" ng-class="{'main-img-wrapper--display-more': itemController.item_data.Pictures.length > 1}">
 									<img 	class="picture"
 											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
-											ng-src="{{itemController.item_data.main_image_url}}" 
+											ng-src="{{itemController.item_data.main_image_url}}"
 											alt="Item Image"
 											ng-click="itemController.open_gallery(itemController.get_main_pic_index())"
 											prevent-rightclick>
@@ -53,7 +53,7 @@
 							<div class="white-part" ng-show="itemController.item_data.Pictures.length > 1">
 								<div class="pictures-info">
 									<en> + {{itemController.item_data.Pictures.length-1}} Pictures<br/>Click to View</en>
-									<he> + {{itemController.item_data.Pictures.length-1}} תמונות<br/>לחצו לצפייה</he> 
+									<he> + {{itemController.item_data.Pictures.length-1}} תמונות<br/>לחצו לצפייה</he>
 								</div>
 								<div class="diagonal-block">
 									<div  class="diagonal-separator" style="left:-63px; opacity:1;"></div>
@@ -61,7 +61,7 @@
 									<div  class="diagonal-separator" style="left:-23px; opacity:0.4;"></div>
 								</div>
 							</div>
-						</div> 
+						</div>
 						<div class="header-wrapper">
 							<h1 class="item__article-header">
 								<en>{{itemController.item_data.Header.En}}</en>
@@ -71,11 +71,9 @@
 							<mjs-widget item="itemController.item_data"></mjs-widget>
 						</div>
 						<div class="item__article-text">
-			            	<en><span marked="itemController.item_data.UnitText1.En"></span></en>
-			              	<he><span marked="itemController.item_data.UnitText1.He"></span></he>
+	            	<en><span marked="itemController.item_data.UnitText1.En"></span></en>
+	              	<he><span marked="itemController.item_data.UnitText1.He"></span></he>
 						</div>
-                        <div class="OUTBRAIN" data-src="{{itemController.article_abs_url}}" data-widget-id="AR_1" data-ob-template="BeitHatfutsotIsrael" async="async"></div>
-                        <script type="text/javascript" src="http://widgets.outbrain.com/outbrain.js"></script> 
 						<div class="scroll-to-top"onclick="window.scroll(0, 0)">
 							<en>Back to top</en>
 							<he>חזרה למעלה</he>
@@ -113,7 +111,7 @@
 							</div>
                         </div>
                     </div>
-				</div>	
+				</div>
 			</div>
 		</div>
 		<div class="right-side">
