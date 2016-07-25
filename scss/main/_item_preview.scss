@@ -8,7 +8,10 @@
 
 	&:hover {
 		.white-part1 {
-			width: 240px;
+
+      &--thumbnail {
+        width: 240px;
+      }
 
 			&--nothumb {
 				width: initial;
