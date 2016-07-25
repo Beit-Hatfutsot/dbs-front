@@ -249,6 +249,9 @@ GeneralSearchController.prototype = {
     },
 
     goto_results: function (collection_name) {
+        if (this.collection == collection_name) {
+            return;
+        }
         if (this.header.query !==  '') {
             this.collection = collection_name;
         }
