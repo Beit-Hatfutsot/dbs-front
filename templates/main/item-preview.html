@@ -101,7 +101,7 @@
       </div>
     </a>
   </ng-switch>
-  <div ng-if="previewData.in_mjs && itemPreviewController.in_mjs_state()" class="mjs" ng-class="{'mjs--person':itemPreviewController.collection_name==='genTreeIndividuals'}" dropdown dropdown-toggle
+  <div ng-if="itemPreviewController.in_mjs_state()" class="mjs" ng-class="{'mjs--person':itemPreviewController.collection_name==='genTreeIndividuals'}" dropdown dropdown-toggle
      on-toggle="itemPreviewController.rmdialog_is_open = false; itemPreviewController.toggle_height();">
       <span class="mjs__desc">
         <en>Appears in:</en>

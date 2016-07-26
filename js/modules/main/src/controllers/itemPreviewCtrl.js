@@ -1,5 +1,5 @@
 var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item) {
-    
+
     var self = this;
     this.$state = $state;
     this.mjs = mjs;
@@ -28,14 +28,14 @@ ItemPreviewCtrl.prototype = {
         }
     },
 
-	
+
     remove_from_mjs: function() {
         this.mjs.remove(this.item_string);
     },
-	
+
     update_branch: function(branch) {
         if (this.in_branch[branch]) {
-            
+
             this.mjs.add_to_branch(this.item_string, branch);
         }
         else {
@@ -44,7 +44,7 @@ ItemPreviewCtrl.prototype = {
     },
 
     in_mjs_state: function() {
-        return this.$state.current.name.includes('mjs');
+        return this.$state.current.name.endsWith('mjs');
     },
 
     toggle_height: function() {
