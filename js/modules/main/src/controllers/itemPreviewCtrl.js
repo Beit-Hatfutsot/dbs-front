@@ -44,7 +44,10 @@ ItemPreviewCtrl.prototype = {
     },
 
     in_mjs_state: function() {
-        return this.$state.current.name.endsWith('mjs');
+        //return this.$state.current.name.includes('mjs');
+        var state_name = this.$state.current.name;
+        var str = 'mjs';
+        return state_name.indexOf(str, state_name.length - str.length) !== -1;
     },
 
     toggle_height: function() {
