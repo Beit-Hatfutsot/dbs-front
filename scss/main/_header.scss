@@ -107,10 +107,10 @@
 
                     .site-item {
                         position: relative;
-                        
+
                         .en & {
                             float: left;
-                            margin: 30px 15px 0 0;  
+                            margin: 30px 15px 0 0;
                         }
                         .he & {
                             float: right;
@@ -145,7 +145,7 @@
                         }
 
                         &:hover {
-                            
+
                             .en & {
                                 margin: 18px 4px 0 -11px;
                             }
@@ -160,7 +160,7 @@
                         }
 
                         &.active {
-                            
+
                             .en & {
                                 margin: 0 15px 0 0;
                             }
@@ -248,7 +248,7 @@
                 display: flex;
                 align-items: center;
                 z-index: 2;
-                
+
                 .en & {
                     right: 50%;
                     @include translate($view-width /2 - 5px, 0);
@@ -361,7 +361,7 @@
                                 .newsletter-groups {
                                     margin-top: 15px;
                                     overflow: hidden;
-                                
+
                                     small {
                                         margin-bottom: 5px;
                                         display: block;
@@ -382,7 +382,7 @@
                                             margin-left: 80px;
                                             float: right;
                                         }
-                                        
+
                                         &:hover {
                                             background-color: $blue3;
                                         }
@@ -426,7 +426,7 @@
                                     }
                                     input[type=checkbox] {
                                         display: none;
-                                        
+
                                         &:checked + label {
                                             background-color: $blue3;
                                         }
@@ -445,13 +445,13 @@
                                     margin: 5px 0;
                                     font-size: 12px;
                                     color: #ed1c24;
-                                    
+
                                     &.succes {
                                         color: #009e4b;
                                         display: inline-block;
                                     }
                                 }
-                                
+
                                 .newsletter-submit {
                                     margin-top: 15px;
                                     width: 186px;
@@ -483,14 +483,14 @@
                                 .loader {
                                     position: absolute;
                                     top: -28px;
-                                    
+
                                     .en & {
                                         right: 196px;
                                     }
                                     .he & {
                                         left: 196px;
                                     }
-                                    
+
                                     &:before {
                                         display: none;
                                     }
@@ -503,11 +503,11 @@
                                     padding-top: 5px;
                                     font-size: 12px;
                                     text-align: center;
-                                    
+
                                     &.success {
                                         color: green;
                                     }
-                                    
+
                                     &.error {
                                         color: red;
                                     }
@@ -529,7 +529,7 @@
                             .he & {
                                 left: 10px;
                             }
-                        }   
+                        }
                     }
                 }
 
@@ -611,7 +611,7 @@
 
                         &.signed {
                             width: 260px;
-                            box-shadow: none;   
+                            box-shadow: none;
                         }
 
                         &.unsigned {
@@ -632,7 +632,7 @@
                                 position: relative;
                                 margin-bottom: 6px;
                                 @include box-shadow(0 0 6px 0 $gray4);
-                               
+
                                 .en & {
                                     padding: 4px 10px 4px 16px;
                                 }
@@ -679,7 +679,7 @@
                         font-size: 18px;
                         line-height: 1;
                         @include vertical-align(absolute);
-                        
+
                         .small-text {
                             font-weight: normal;
                             font-size: 14px;
@@ -732,7 +732,7 @@
 
                     li.menu-item, li.header-menu-item {
                         position: relative;
-                        display: table-cell;
+                        display: inline-block;
                         color: $gray3;
                         @include hover-pointer();
 
@@ -740,7 +740,7 @@
                             text-decoration: none;
                             color: $gray3;
                         }
-                                             
+
 
                         .item-before {
                             position: absolute;
@@ -780,7 +780,7 @@
                     li.header-menu-item {
                         line-height: 40px;
                         padding: 0 25px;
-                        font-size: 21px; 
+                        font-size: 21px;
 
                         &:hover {
                             background-color: $gray5;
@@ -795,7 +795,7 @@
                                 background-color: $red3;
 
                             }
-    
+
                         }
                     }
                 }
@@ -837,7 +837,7 @@
                             color: #ffffff;
                             background-color: $red2;
                             @include hover-pointer();
-                                
+
                             &:hover {
                                 background-color: $red1;
                             }
@@ -865,7 +865,7 @@
 
                             &__title {
                                 color: #ffffff;
-                                background: $red1; 
+                                background: $red1;
                             }
 
                             &__row {
@@ -887,7 +887,7 @@
                                     }
 
                                     .he & {
-                                        left: -5px; 
+                                        left: -5px;
                                     }
                                 }
 
