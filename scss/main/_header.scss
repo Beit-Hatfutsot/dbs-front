@@ -763,6 +763,7 @@
                     li.menu-item {
                         line-height: 20px;
                         font-size: 18px;
+                        height: 48px;
                         padding: 4px 25px;
                         text-align: center;
                         vertical-align: middle;
@@ -774,6 +775,11 @@
                             background-color: $yellow3;
                             color: #fff;
                             font-weight: 600;
+                        }
+
+                        .text {
+                          display: block;
+                          @include vertical-align;
                         }
                     }
 

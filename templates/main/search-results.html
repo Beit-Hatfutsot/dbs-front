@@ -2,34 +2,34 @@
     <nav class="menu gsearch">
         <ul class="nav">
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'allResults'}" ng-click="generalSearchCtrl.goto_results('allResults')">
-                <div>
+                <span class="text">
                     <en>All Results</en>
                     <he>כל התוצאות</he>
-                </div>
+                </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'places'}" ng-click="generalSearchCtrl.goto_results('places')">
-                <div>
-                    <en>Places</en>   
+                <span class="text">
+                    <en>Places</en>
                     <he>מקומות</he>
-                </div>
+                </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'media'}" ng-click="generalSearchCtrl.goto_results('media')">
-                <div>
+                <span class="text">
                     <en>Images<br>& Videos</en>
                     <he>תמונות + וידאו</he>
-                </div>
+                </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'luminaries'}" ng-click="generalSearchCtrl.goto_results('luminaries')">
-                <div>
-                    <en>Luminaries</en>   
+                <span class="text">
+                    <en>Luminaries</en>
                     <he>אישים</he>
-                </div>
+                </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'familyNames'}" ng-click="generalSearchCtrl.goto_results('familyNames')">
-                <div>
-                    <en>Family Names</en>   
+                <span class="text">
+                    <en>Family Names</en>
                     <he>שמות משפחה</he>
-                </div>
+                </span>
             </li>
         </ul>
     </nav>
@@ -42,7 +42,7 @@
                         <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן</a><br></he>
                     </span>
                 </div>
-            </div> 
+            </div>
             <div ng-switch-when='places' class="about-bh">
                 <div class="title">
                     <span>
