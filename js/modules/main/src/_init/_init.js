@@ -23,7 +23,6 @@ angular.module('main', [
     'auth',
     'apiClient',
     'cache',
-    'plumb',
     'social',
     'rcSubmit',
     'gedcomParser',
@@ -158,26 +157,18 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
-            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
+            /*onEnter: ['notification', function(notification) {
                 notification.clear();
-                plumbConnectionManager.connections = {};
-                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
-                    connection_set.repaint();
-                });
-            }]
+            }]*/
         },
 
          {
             name: 'he.he_mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
-            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
+            /*onEnter: ['notification', function(notification) {
                 notification.clear();
-                plumbConnectionManager.connections = {};
-                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
-                    connection_set.repaint();
-                });
-            }]
+            }]*/
         },
 
         {
