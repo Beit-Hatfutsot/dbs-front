@@ -1,7 +1,7 @@
 <div id="main-header-container" ng-controller="HeaderCtrl as headerController">
   <div class="main-header">
     <div class="upper-container">
-      <div class="sub-upper-container">	
+      <div class="sub-upper-container">
         <div class="sites">
           <ul class="sites">
             <li class="site-item museum">
@@ -68,7 +68,7 @@
                 <div class="my-account-menu__row signed" ui-sref="mjs">
                   <img class="dropdown-icons__user__pic signed" gravatar-src="headerController.auth.user.email" gravatar-default="identicon" gravatar-size="55"/>
                   <div class="dropdown-icons__user__name">
-                    <span>{{headerController.username}}</span><br/>
+                    <span>{{headerController.username[lang]}}</span><br/>
                     <span class="small-text">
                       <en>View Story</en>
                       <he>הסיפור שלי</he>
@@ -98,7 +98,7 @@
               </button>
             </div>
           </div>
-          
+
           <div class="header-element dropdown-icons__language-selector">
             <div class="language-icon">
               <en>
@@ -129,7 +129,7 @@
         <nav class="menu">
           <ul class="nav">
             <li class="logo header-menu-item">
-             <a ng-href="{{lang == 'en' ? '/' : '/he/'}}"> 
+             <a ng-href="{{lang == 'en' ? '/' : '/he/'}}">
               <span class="item_before" selector></span>
               <div>
                 <en>Home</en>
@@ -139,8 +139,8 @@
             </li>
             <li class="header-menu-item ftree-tab"
               ng-class="{'header-menu-item--active':
-              isCurrentState('persons') || isCurrentState('person-view')}" 
-              ng-click="headerController.goto_state('persons')"> 
+              isCurrentState('persons') || isCurrentState('person-view')}"
+              ng-click="headerController.goto_state('persons')">
                 <div>
                     <en>Family Trees</en>
                     <he>עצי משפחה</he>
@@ -150,7 +150,7 @@
                 ng-class="{'header-menu-item--active': headerController.is_mjs_state}"
                 ng-click="headerController.goto_state('mjs')">
               <div class="mystory__text">
-                <en>My Story</en>	
+                <en>My Story</en>
                 <he>הסיפור שלי</he>
               </div>
             </li>
@@ -162,7 +162,7 @@
               </div>
             </li>
             <li class="recently-viewed-trigger header-menu-item" ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'recently-viewed'}"
-              ng-click="headerController.header.sub_header_state = 'recently-viewed'"> 
+              ng-click="headerController.header.sub_header_state = 'recently-viewed'">
               <div>
                 <en>Recently Viewed</en>
                 <he>נצפו לאחרונה</he>

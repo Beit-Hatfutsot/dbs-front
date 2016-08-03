@@ -32,12 +32,12 @@
 						<he>הסיפור של</he><br>
 						<ng-switch on="mjsCtrl.in_rename_mode">
 							<span class="silhouette__description__username" ng-switch-when="false" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode">
-								{{mjsCtrl.auth.user.name||(lang=='en'?"[click to enter name]":
+								{{mjsCtrl.auth.user.name[lang]||(lang=='en'?"[click to enter name]":
                                                        "[לחץ להכניס שם]")}}
 								<icon class="edit-branch-icon username" position="[-231, -127]" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode"></icon>
 							</span>
 							<input ng-switch-when="true" maxlength="12" class="rename"
-              focus="true" type="text" ng-model="username" value="{{mjsCtrl.auth.user.name}}" alter-username/>
+              focus="true" type="text" ng-model="username[lang]" value="{{mjsCtrl.auth.user.name[lang]}}" alter-username/>
 						</ng-switch>
 					</h1>
 				</div>

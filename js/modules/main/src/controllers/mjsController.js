@@ -1,5 +1,5 @@
 var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
-                             $state, $stateParams, $http, apiClient) {
+                             $state, $stateParams, $http, apiClient, langManager) {
 	var self = this;
 	this.notification = notification;
 	this.mjs = mjs;
@@ -17,6 +17,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
     this.in_rename_mode = false;
 	this.rmdialog_status = false;
 	this.in_edit_mode = false;
+    this.langManager = langManager;
 
 	Object.defineProperty(this, 'signedin', {
 		get: function() {
@@ -115,7 +116,8 @@ MjsController.prototype = {
 	},
 
 	rename_user: function(new_name) {
-		this.mjs.rename_user(new_name);
+        var current_lang = this.langManager.lang;
+		this.mjs.rename_user(new_name, current_lang);
 	},
 
 	toggle_branch_edit: function(branch_num)  {
@@ -147,5 +149,5 @@ MjsController.prototype = {
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',
 								  'item', 'auth', '$rootScope', '$scope', '$state',
-                  '$stateParams', '$http', 'apiClient',
+                  '$stateParams', '$http', 'apiClient', 'langManager',
                   MjsController]);
