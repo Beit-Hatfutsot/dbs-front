@@ -32,7 +32,7 @@ angular.module('main').
 				notification.loading(true);
                 var username_obj = {};
                 username_obj[lang] = new_name;
-                $http.put(apiClient.urls.user, {name: user_obj},
+                $http.put(apiClient.urls.user, {name: username_obj},
                          {headers: {'Content-Type': 'application/json'}})
 					.then(function (response) {
 						mjs._update_latest(response);
