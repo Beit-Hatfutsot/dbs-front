@@ -26,7 +26,7 @@ angular.module('main').
 			  "שם נרדף": "synonyms",
 			  "lexicon": "lexicon",
 			  "מלון": "lexicon",
-			  "personality": "personalities",
+			  "luminary": "personalities",
 			  "אישיות": "personalities",
 			  "place": "places",
 			  "מקום": "places",

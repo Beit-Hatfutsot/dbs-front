@@ -63,17 +63,27 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 header.sub_header_state = 'closed';
             }]
         },
+		{
+			name: 'personality-redirect',
+			url: '/personality/{local_slug}',
+            onEnter: ['$state', '$stateParams', function($state, $stateParams) {
+				$state.go('item-view', {collection: 'luminary',
+							     		local_slug: $stateParams.local_slug})
+			}]
+
+		},
+
 
         {
             name: 'item-view',
-            url: '/{collection: (?:place|image|personality|familyname|video)}/{local_slug}',
+            url: '/{collection: (?:place|image|luminary|familyname|video)}/{local_slug}',
             controller: 'ItemCtrl as itemController',
             onExit: slug_cleaner,
 			templateUrl: function(params) {
 				// TODO: rinse - this code was copied from itemService.js
 				var slug_collection_map = {
 					  "image": "photoUnits",
-					  "personality": "personalities",
+					  "luminary": "personalities",
 					  "place": "places",
 					  "familyname": "familyNames",
 					  "video": "movies"};
