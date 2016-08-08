@@ -21,16 +21,19 @@ angular.module('main').
                 new_name = new_name.toString();
 				notification.loading(true);
 				$http.post(apiClient.urls.mjs +'/'+ branch_num + '/name', new_name,
-                           {headers: {'Content-Type': 'text/plain'} } )
+                    {headers: {'Content-Type': 'text/plain'} } )
 					.then(mjs._update_latest)
 					.finally(function () {
 						notification.loading(false);
 					});
 			},
 
-			rename_user: function(new_name) {
+			rename_user: function(new_name, lang) {
 				notification.loading(true);
-				$http.put(apiClient.urls.user, {name: new_name})
+                var username_obj = {};
+                username_obj[lang] = new_name;
+                $http.put(apiClient.urls.user, {name: username_obj},
+                         {headers: {'Content-Type': 'application/json'}})
 					.then(function (response) {
 						mjs._update_latest(response);
 						$rootScope.$broadcast('name-updated');

@@ -1,13 +1,13 @@
 var PersonsWelcomeCtrl = function($scope, $modalInstance, $window, $state) {
 
     $scope.cancel = function () {
-        $modalInstance.dismiss();
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.dismiss = function () {
-        $window.localStorage.setItem('persons-welcome-msg', 'dismissed');
-        $scope.cancel();
+        $modalInstance.close();
     };
+
     $scope.go_to_tree = function(tree_num, node) {
         return $state.href('person-view', {tree_number: tree_num, node_id: node});
     }

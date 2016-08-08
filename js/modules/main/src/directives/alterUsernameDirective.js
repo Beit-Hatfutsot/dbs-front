@@ -4,8 +4,8 @@ angular.module('main').
             restrict: 'A',
             link: function(scope, element, attrs) {
                 var old_value_backup;
-				scope.username = scope.mjsCtrl.auth.user.name;
-
+                var curr_lang = scope.mjsCtrl.langManager.lang;
+				scope.username = scope.mjsCtrl.auth.user.name[curr_lang];
                 element.bind('keydown', function($event) {
                     if ($event.keyCode === 13) {
                         alter();
@@ -26,7 +26,7 @@ angular.module('main').
                     scope.mjsCtrl.in_rename_mode = false;
                     scope.mjsCtrl.$scope.$digest();
                 };
-                
+
                 scope.$watch(function() {return scope.username}, function(newVal, oldVal) {
                     old_value_backup = oldVal;
 
