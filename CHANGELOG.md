@@ -4,8 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Allow users to add persons to their story
+- A User can share his story
+- A User can share another user's story
 
+### Changed
+- A User can have a name in both English and Hebrew languages
+- A User can use numeric characters in the MJS tabs.
+
+### Fixed
+- Fix Internet Explorer display issues
+
+## [0.9.7] - 2016-07-11
+### Added
+- A User can add persons to his story
 
 ## [0.9.6] - 2016-06-29
 ### Added
