@@ -679,6 +679,12 @@
                         font-size: 18px;
                         line-height: 1;
                         @include vertical-align(absolute);
+                        .en & {
+                          left: 74px;
+                        }
+                        .he & {
+                          right: 74px;
+                        }
 
                         .small-text {
                             font-weight: normal;
