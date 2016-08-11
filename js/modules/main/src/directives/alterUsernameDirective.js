@@ -5,7 +5,7 @@ angular.module('main').
             link: function(scope, element, attrs) {
                 var old_value_backup;
                 var curr_lang = scope.mjsCtrl.langManager.lang;
-				scope.username = scope.mjsCtrl.auth.user.name[curr_lang];
+                scope.username = scope.mjsCtrl.auth.user.name ? scope.mjsCtrl.auth.user.name[curr_lang] : "";
                 element.bind('keydown', function($event) {
                     if ($event.keyCode === 13) {
                         alter();
