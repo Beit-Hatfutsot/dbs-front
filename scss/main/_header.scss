@@ -610,7 +610,7 @@
                         @include box-shadow(0 0 6px 1px $gray4);
 
                         &.signed {
-                            width: 260px;
+                            width: 270px;
                             box-shadow: none;
                         }
 
@@ -674,6 +674,8 @@
 
                     &__name {
                         display: inline-block;
+                        overflow-wrap: break-word;
+                        max-width: 190px;
                         color: $gray3;
                         font-weight: 600;
                         font-size: 18px;

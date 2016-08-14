@@ -1,93 +1,93 @@
 <auth-private>
-	<div id="mjs-page-container" ng-controller="MjsController as mjsCtrl">
-		<div id="mjs-header-wrapper">
-			<div class="mjs-header">
-				<div class="image-separator"></div>
-				<div class="ftree-pic-wrapper">
-					<en>
-						<img class="top-pic" ng-src="images/Top-Ftree-Eng.jpg">
-					</en>
-					<he>
-						<img class="top-pic" ng-src="images/Top-Ftree-Heb.jpg">
-					</he>
-				</div>
-				<div class="image-separator"></div>
-				<div class="item-preview-pic1">
-					<img class="top-pic" ng-src="images/Top-Picture-1.jpg">
-				</div>
-				<div class="image-separator"></div>
-				<div class="item-preview-pic2">
-					<img class="top-pic" ng-src="images/Top-Picture-2.jpg">
-				</div>
-				<div class="diagonal-block">
-					<div  class="diagonal-separator" style="left:-10px; opacity:1;"></div>
-					<div  class="diagonal-separator" style="left:-30px; opacity:0.7;"></div>
-					<div  class="diagonal-separator" style="left:-50px; opacity:0.4;"></div>
-				</div>
-				<div id="silhouette" class="silhouette">
-					<!-- <icon position="[-524, -566]" class="silhouette__avatar"></icon> -->
-					<img gravatar-src="mjsCtrl.mjs.latest.email" gravatar-default="identicon" gravatar-size="100"/>
-					<h1 class="silhouette__description">
-						<en>The story of</en>
-						<he>הסיפור של</he><br>
-						<ng-switch on="mjsCtrl.in_rename_mode">
-							<span class="silhouette__description__username" ng-switch-when="false" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode">
-								{{mjsCtrl.auth.user.name[lang]||(lang=='en'?"[click to enter name]":
+  <div id="mjs-page-container" ng-controller="MjsController as mjsCtrl">
+    <div id="mjs-header-wrapper">
+      <div class="mjs-header">
+        <div class="image-separator"></div>
+        <div class="ftree-pic-wrapper">
+          <en>
+            <img class="top-pic" ng-src="images/Top-Ftree-Eng.jpg">
+          </en>
+          <he>
+            <img class="top-pic" ng-src="images/Top-Ftree-Heb.jpg">
+          </he>
+        </div>
+        <div class="image-separator"></div>
+        <div class="item-preview-pic1">
+          <img class="top-pic" ng-src="images/Top-Picture-1.jpg">
+        </div>
+        <div class="image-separator"></div>
+        <div class="item-preview-pic2">
+          <img class="top-pic" ng-src="images/Top-Picture-2.jpg">
+        </div>
+        <div class="diagonal-block">
+          <div  class="diagonal-separator" style="left:-10px; opacity:1;"></div>
+          <div  class="diagonal-separator" style="left:-30px; opacity:0.7;"></div>
+          <div  class="diagonal-separator" style="left:-50px; opacity:0.4;"></div>
+        </div>
+        <div id="silhouette" class="silhouette">
+          <!-- <icon position="[-524, -566]" class="silhouette__avatar"></icon> -->
+          <img gravatar-src="mjsCtrl.mjs.latest.email" gravatar-default="identicon" gravatar-size="100"/>
+          <h1 class="silhouette__description">
+            <en>The story of</en>
+            <he>הסיפור של</he><br>
+            <ng-switch on="mjsCtrl.in_rename_mode">
+              <span class="silhouette__description__username" ng-switch-when="false" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode">
+                {{mjsCtrl.auth.user.name[lang]||(lang=='en'?"[click to enter name]":
                                                        "[לחץ להכניס שם]")}}
-								<icon class="edit-branch-icon username" position="[-231, -127]" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode"></icon>
-							</span>
-							<input ng-switch-when="true" maxlength="12" class="rename" focus="true" type="text" ng-model="username" value="{{mjsCtrl.auth.user.name[lang]}}" alter-username/>
-						</ng-switch>
-					</h1>
-				</div>
+                <icon class="edit-branch-icon username" position="[-231, -127]" ng-click="mjsCtrl.in_rename_mode = !mjsCtrl.in_rename_mode"></icon>
+              </span>
+              <input ng-switch-when="true" maxlength="20" class="rename" focus="true" type="text" ng-model="username" value="{{mjsCtrl.auth.user.name[lang]}}" alter-username/>
+            </ng-switch>
+          </h1>
+        </div>
         <share href="mjsCtrl.public_url" link text="My jewish story">
-			</div>
-		</div>
-		<nav class="mjs-menu">
-	        <ul class="nav">
-	        	<li class="menu-item branch--{{$index}}" ng-class="{'menu-item--selected': mjsCtrl.selected_branch === $index}" ng-repeat="branch in [0,1,2,3,4,5]">
+      </div>
+    </div>
+    <nav class="mjs-menu">
+          <ul class="nav">
+            <li class="menu-item branch--{{$index}}" ng-class="{'menu-item--selected': mjsCtrl.selected_branch === $index}" ng-repeat="branch in [0,1,2,3,4,5]">
 
-					<div ng-if="branch == 0" class="branch_name" ng-click="mjsCtrl.navigate_to_branch(branch)">
-						<en>The whole story</en>
-						<he>הסיפור שלי</he>
-						<div class="branch_name__num">({{mjsCtrl.mjs_items.length}})</div>
-					</div>
+          <div ng-if="branch == 0" class="branch_name" ng-click="mjsCtrl.navigate_to_branch(branch)">
+            <en>The whole story</en>
+            <he>הסיפור שלי</he>
+            <div class="branch_name__num">({{mjsCtrl.mjs_items.length}})</div>
+          </div>
 
-					<div class="clickable-area" ng-if="(branch > 0) && (branch < 5)" ng-click="mjsCtrl.navigate_to_branch(branch)">
-						<ng-switch on="mjsCtrl.branch_edit_status[branch]">
-							<div ng-switch-when="false" class="branch_name">
-								{{mjsCtrl.mjs._latest.story_branches[branch-1]}}
-								<div class="branch_name__num">
-									({{mjsCtrl.mjs.items_counters[branch-1]}})
-								</div>
-							</div>
-							<div ng-switch-when="true">
-								<input  class="rename"
-										focus="true"
-										maxlength="26"
-										ng-model="branch_name"
-										alter-mjs-branch />
-							</div>
-						</ng-switch>
-					</div>
+          <div class="clickable-area" ng-if="(branch > 0) && (branch < 5)" ng-click="mjsCtrl.navigate_to_branch(branch)">
+            <ng-switch on="mjsCtrl.branch_edit_status[branch]">
+              <div ng-switch-when="false" class="branch_name">
+                {{mjsCtrl.mjs._latest.story_branches[branch-1]}}
+                <div class="branch_name__num">
+                  ({{mjsCtrl.mjs.items_counters[branch-1]}})
+                </div>
+              </div>
+              <div ng-switch-when="true">
+                <input  class="rename"
+                    focus="true"
+                    maxlength="26"
+                    ng-model="branch_name"
+                    alter-mjs-branch />
+              </div>
+            </ng-switch>
+          </div>
 
-					<div ng-if="branch == 5" class="branch_name" ng-click="mjsCtrl.navigate_to_branch(branch)">
-						<en>My upload</en>
-						<he>ההעלאות שלי </he>
-						<div class="branch_name__num">(0)</div>
-					</div>
+          <div ng-if="branch == 5" class="branch_name" ng-click="mjsCtrl.navigate_to_branch(branch)">
+            <en>My upload</en>
+            <he>ההעלאות שלי </he>
+            <div class="branch_name__num">(0)</div>
+          </div>
 
-					<icon ng-if="(branch > 0) && (branch < 5) && !mjsCtrl.branch_edit_status[branch]" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit(branch)"></icon>
-	    		</li>
-			</ul>
-	    </nav>
-		<div class="item-preview-wrapper">
-	    	<item-preview ng-repeat="item in mjsCtrl.mjs_items"
-	    		ng-if="(mjsCtrl.selected_branch == 0) || item.in_branch[mjsCtrl.selected_branch-1]"
-	    		preview-data="item"
+          <icon ng-if="(branch > 0) && (branch < 5) && !mjsCtrl.branch_edit_status[branch]" class="edit-branch-icon" position="[-231, -127]" ng-click="mjsCtrl.toggle_branch_edit(branch)"></icon>
+          </li>
+      </ul>
+      </nav>
+    <div class="item-preview-wrapper">
+        <item-preview ng-repeat="item in mjsCtrl.mjs_items"
+          ng-if="(mjsCtrl.selected_branch == 0) || item.in_branch[mjsCtrl.selected_branch-1]"
+          preview-data="item"
           sex="item.G"
-	    		item-source="bh">
-	    	</item-preview>
-		</div>
-	</div>
+          item-source="bh">
+        </item-preview>
+    </div>
+  </div>
 </auth-private>
