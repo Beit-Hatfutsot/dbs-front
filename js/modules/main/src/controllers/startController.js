@@ -17,7 +17,7 @@ var StartController = function($scope, $state, wizard, item) {
 	 *
 	 * @description
 	 * Indicates that the wizard service is busy
-	 * 
+	 *
 	 * @returns {boolean} wizard busy/not busy
 	 */
 	Object.defineProperty(this, 'in_progress', {
@@ -37,15 +37,18 @@ var StartController = function($scope, $state, wizard, item) {
 			var params = {};
 			if (self.wizard.last_search.name != '')
 				params.last_name = self.wizard.last_search.name;
-			if (self.wizard.last_search.place != '')
-				params.place = self.wizard.last_search.place;
-			$state.go('persons', params)
+			else {
+				if (self.wizard.last_search.place.name != '' ) {
+					params.place = self.wizard.last_search.place;
+				}
+			}
+			$state.go('persons', params);
 		}
 	});
 };
 
 StartController.prototype = {
-	
+
 	/**
 	 * @ngdoc method
 	 * @name StartController#choose_result
