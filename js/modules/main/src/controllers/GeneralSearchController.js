@@ -86,7 +86,7 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
     });
 
     if ($stateParams.q !== undefined) {
-        header.query = this.query = $stateParams.q;
+        this.query = header.query = $stateParams.q;
         self.load();
     };
 
@@ -94,6 +94,9 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
         function(event, toState, toParams, fromState, fromParams){
           if (toState.name.endsWith('general-search') && fromState.name.endsWith('general-search')) {
             event.preventDefault();
+             if (toParams.q !== undefined) {
+                self.query = header.query = toParams.q;
+            }
             $state.transitionTo(toState.name, toParams, {notify: false});
             self.load(toParams);
           }
