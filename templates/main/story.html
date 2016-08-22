@@ -30,7 +30,8 @@
 						<en>The story of</en>
 						<he>הסיפור של</he><br>
 							<span class="silhouette__description__username">
-                {{mjsCtrl.user.name}}
+                 {{mjsCtrl.auth.user.name[lang]||(lang=='en'?"[click to enter name]":
+                                                       "[לחץ להכניס שם]")}}
 					</h1>
 				</div>
         <share href="mjsCtrl.public_url" link text="A jewish story">
