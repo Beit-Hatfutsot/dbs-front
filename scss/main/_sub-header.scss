@@ -4,7 +4,7 @@
 		height: 34px;
 		color: #666;
 		text-transform: capitalize;
-		
+
 		.en & {
 			padding-left: 10px;
 		}
@@ -24,7 +24,7 @@
 	.he & {
 		margin-left: 10px;
 	}
-}	
+}
 .gsearch-box-wrapper {
 	position: relative;
 	display: inline-block;
@@ -70,23 +70,23 @@
 		}
 	}
 }
-.sub-header-container {	
+.sub-header-container {
 	position: relative;
 	z-index: 1;
 	height: 74px;
 	width: 100%;
-	margin-top: -64px;
+	margin-top: -74px;
 	background-color: #fff;
-	
-	@include transition(margin, 1s, ease); 
-	
+
+	@include transition(margin, 1s, ease);
+
 	&--general-search, &--recently-viewed {
-		margin-top: 10px;
+		margin-top: 0px;
 		@include box-shadow(0 1px 5px 1px #b0b0b0);
 	}
 
-	&--closed-add, 
-	&--closed-remove { 
+	&--closed-add,
+	&--closed-remove {
 		z-index: 0;
 		/*min-height: 94px !important; */
 	}
@@ -105,7 +105,7 @@
 		}
 
 		.border-adhoc:after {
-			
+
 			.en & {
 				left: 178px;
 			}
@@ -120,7 +120,7 @@
 		//min-height: 92px;
 
 		.border-adhoc:before {
-			
+
 			.en & {
 				left: 215px;
 			}
@@ -156,7 +156,7 @@
 				padding: 35px 0;
 				opacity: 1;
 				@include transition(all, 0.3s, ease);
-				
+
 				&.ng-hide {
 					opacity: 0;
 				}
@@ -165,7 +165,7 @@
 					height: 0;
 					opacity: 0;
 				}
-				
+
 				.wizard-form {
 					margin: 0 auto;
 
@@ -212,9 +212,9 @@
 
 						&:hover {
 							cursor: default;
-							
+
 							.recently-arrow__icon {
-								
+
 								img {
 									@include important-translate(0, 0);
 								}
@@ -239,8 +239,8 @@
 				}
 				/*
 				.arrow-right {
-					width: 0; 
-					height: 0; 
+					width: 0;
+					height: 0;
 					border-top: 15px solid transparent;
 					border-bottom: 15px solid transparent;
 
@@ -257,39 +257,39 @@
 					&--disabled {
 
 						.en & {
-							border-left: 15px solid #999999;						
+							border-left: 15px solid #999999;
 						}
 
 						.he & {
-							border-right: 15px solid #999999;						
+							border-right: 15px solid #999999;
 						}
 					}
 				}
 
 				.arrow-left {
-					width: 0; 
-					height: 0; 
+					width: 0;
+					height: 0;
 					border-top: 15px solid transparent;
-					border-bottom: 15px solid transparent; 
+					border-bottom: 15px solid transparent;
 
 					.en & {
-						border-right: 15px solid #666666; 
+						border-right: 15px solid #666666;
 						margin-right: 5px;
 					}
 
 					.he & {
-						border-left: 15px solid #666666; 
+						border-left: 15px solid #666666;
 						margin-left: 5px;
 					}
 
 					&--disabled {
 
 						.en & {
-							border-right: 15px solid #999999; 
+							border-right: 15px solid #999999;
 						}
 
 						.he & {
-							border-left: 15px solid #999999; 	
+							border-left: 15px solid #999999;
 						}
 					}
 				}*/
@@ -325,10 +325,10 @@
 					margin: 6px 2px;
 					@include border-radius(4px);
 					@include hover-pointer();
-					overflow: hidden; 
+					overflow: hidden;
 					@include box-shadow(0 0 5px 0 #999);
 					background-color: #f4f4f4;
-					
+
 					.en & {
 						margin-right: 8px;
 					}
@@ -384,7 +384,7 @@
 						}
 					}
 				}
-			}	
+			}
 		}
 	}
-}	
+}
