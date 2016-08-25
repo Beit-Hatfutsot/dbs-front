@@ -17,7 +17,7 @@
     font-weight: 700;
     background-color: #fff;
     @include box-shadow(0 0 6px 0 #999);
-    @include hover-pointer(); 
+    @include hover-pointer();
 
     &:hover {
 
@@ -69,7 +69,7 @@
         }
 
         .med-font {
-           font-size: 14px; 
+           font-size: 14px;
         }
 
         .ext-src-name {
@@ -121,7 +121,12 @@
     @extend .menu;
 
     &.gsearch {
-        @include box-shadow(0 1px 5px 1px #b0b0b0);
+      @include box-shadow(0 1px 5px 1px #b0b0b0);
+
+      ul.nav {
+        max-width: 1140px;
+        margin: 0 auto;
+      }
     }
 }
 
@@ -162,7 +167,7 @@
         &__top {
             background-image: url(/images/Ftree-AlbertEinstein.png);;
             background-repeat: no-repeat;
-            
+
             .en & {
                 background-position: right top;
             }
@@ -207,7 +212,7 @@
 
         &__bottom {
            display: flex;
-           justify-content: space-between; 
+           justify-content: space-between;
 
            .subtitle {
                 font-size: 20px;
@@ -260,7 +265,7 @@
             color: #666;
             display: table;
             position: relative;
-            margin: 20px 0;  
+            margin: 20px 0;
 
             &:after {
                 position: absolute;
@@ -438,7 +443,7 @@
             .loader {
                 @extend %loader;
             }
-        } 
+        }
     }
 }
 
@@ -451,7 +456,7 @@
 .item-preview {
     @extend %item-preview;
 
-    
+
 
     .type {
         @extend %item-type;
@@ -463,9 +468,9 @@
             width: 26px;
 
             .type-desc-container {
-                width: 0; 
+                width: 0;
             }
-        } 
+        }
     }
 }*/
 
