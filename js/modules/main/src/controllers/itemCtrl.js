@@ -20,14 +20,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.itemTypeMap = itemTypeMap;
 	this._Index = 0;
 	this.lang = langManager.lang;
-
-	function refresh_root_scope(item) {
-		// TODO: make language option 'En' & 'He' universal
-		var language_map = {'en': 'En', 'he': 'He'},
-			lang = language_map[$rootScope.lang];
-		$rootScope.title = item.Header[lang];
-		$rootScope.slug = item.Slug;
-	};
+	this.$rootScope = $rootScope;
 
 	$rootScope.$on('$stateChangeStart',
 	    function(event, toState, toParams, fromState, fromParams){
@@ -41,19 +34,13 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
 
+	/*
 	var unwatch_item_load = $rootScope.$on('item-loaded', function(event, item) {
-		refresh_root_scope(item);
 		unwatch_item_load();
 	});
+	*/
 	this.get_item();
 
-	/*
-	$rootScope.$on('language-changed', function (event, lang) {
-		self.lang = lang;
-		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
-
-	})
-	*/
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
 			return this.slug.collection === 'ugc';
@@ -69,6 +56,23 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 
 ItemCtrl.prototype = {
 
+	refresh_root_scope: function() {
+		var item = this.item_data,
+			$rootScope = this.$rootScope;
+		// TODO: make language option 'En' & 'He' universal
+		var language_map = {'en': 'En', 'he': 'He'},
+			lang = language_map[$rootScope.lang];
+		$rootScope.title = item.Header[lang];
+		$rootScope.og_type = 'article';
+		var description_sentences = item.UnitText1[lang].split('.')
+		if (description_sentences.length > 3)
+			$rootScope.description = description_sentences.slice(0,3).join('. ')+'...';
+		else
+			$rootScope.description = item.UnitText1[lang];
+		$rootScope.slug = item.Slug;
+		$rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[this.get_main_pic_index()].PictureId + ".jpg";
+	},
+
 	get_item: function() {
 		var self = this;
 		self.notification.loading(true);
@@ -82,6 +86,7 @@ ItemCtrl.prototype = {
 					});
 				self.item_data = item_data;
 				self.content_loaded = true;
+				self.refresh_root_scope();
 				if (item_data.related)
 					self.item.get_items(item_data.related).
 						then(function(related_data) {
