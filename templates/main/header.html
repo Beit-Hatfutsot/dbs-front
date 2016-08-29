@@ -124,11 +124,12 @@
         </div>
       </div>
     </div>
-    <div class="bottom-container" ng-show="!(isCurrentState('start'))">
+    <div class="bottom-container">
       <div id="header-container">
         <nav class="menu">
-          <ul class="nav">
-            <li class="logo header-menu-item">
+          <ul class="nav left">
+            <li class="logo header-menu-item"
+                ng-class="{'header-menu-item--active': isCurrentState('start')}">
              <a ng-href="{{lang == 'en' ? '/' : '/he/'}}">
               <span class="item_before" selector></span>
               <div>
@@ -136,15 +137,6 @@
                 <he>ראשי</he>
               </div>
             </a>
-            </li>
-            <li class="header-menu-item ftree-tab"
-              ng-class="{'header-menu-item--active':
-              isCurrentState('persons') || isCurrentState('person-view')}"
-              ng-click="headerController.goto_state('persons')">
-                <div>
-                    <en>Family Trees</en>
-                    <he>עצי משפחה</he>
-                </div>
             </li>
             <li class="mystory header-menu-item"
                 ng-class="{'header-menu-item--active': headerController.is_mjs_state}"
@@ -154,6 +146,17 @@
                 <he>הסיפור שלי</he>
               </div>
             </li>
+            <li class="ftree-tab header-menu-item"
+              ng-class="{'header-menu-item--active':
+              isCurrentState('persons') || isCurrentState('person-view')}"
+              ng-click="headerController.goto_state('persons')">
+                <div>
+                    <en>Family Trees</en>
+                    <he>עצי משפחה</he>
+                </div>
+            </li>
+          </ul>
+          <ul class="nav right">
             <li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'general-search'}"
               ng-click="headerController.header.sub_header_state = 'general-search'">
               <div>
@@ -168,38 +171,41 @@
                 <he>נצפו לאחרונה</he>
               </div>
             </li>
+            <!-- <li class="header-menu-item upload" dropdown is-open> -->
+              <div class="dropdown-icons__upload" dropdown is-open>
+                <div class="upload-label" dropdown-toggle>
+                  <en>Upload</en>
+                  <he>העלו קובץ</he>
+                </div>
+                <div class="upload-menu">
+                  <div class="upload-menu__title">
+                    <en>Upload your item</en>
+                    <he>העלו את הפריט שלכם</he>
+                  </div>
+                  <div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
+                    <div class="upload-icon__image">
+                      <icon alt-text="{en: 'Image', he: 'תמונה'}" position="[-29, -218]"></icon>
+                    </div>
+                    <div class="upload-menu__row__desc">
+                      <en>Image</en>
+                      <he>תמונה</he>
+                    </div>
+                  </div>
+                  <div class="upload-menu__row" ng-click="headerController.goto_state('upload.family_tree')">
+                    <div class="upload-icon__ftree">
+                      <icon alt-text="{en: 'Family tree', he: 'עץ משפחה'}" position="[-26, -68]"></icon>
+                    </div>
+                    <div class="upload-menu__row__desc">
+                      <en>Family tree</en>
+                      <he>עץ משפחה</he>
+                    </div>
+                  </div>
+                </div>
+              <!-- </div> -->
+
           </ul>
         </nav>
-        <!-- <div class="dropdown-icons__upload" dropdown is-open>
-          <div class="upload-label" dropdown-toggle>
-            <en>Upload</en>
-            <he>העלו קובץ</he>
-          </div>
-          <div class="upload-menu">
-            <div class="upload-menu__title">
-              <en>Upload your item</en>
-              <he>העלו את הפריט שלכם</he>
-            </div>
-            <div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
-              <div class="upload-icon__image">
-                <icon alt-text="{en: 'Image', he: 'תמונה'}" position="[-29, -218]"></icon>
-              </div>
-              <div class="upload-menu__row__desc">
-                <en>Image</en>
-                <he>תמונה</he>
-              </div>
-            </div>
-            <div class="upload-menu__row" ng-click="headerController.goto_state('upload.family_tree')">
-              <div class="upload-icon__ftree">
-                <icon alt-text="{en: 'Family tree', he: 'עץ משפחה'}" position="[-26, -68]"></icon>
-              </div>
-              <div class="upload-menu__row__desc">
-                <en>Family tree</en>
-                <he>עץ משפחה</he>
-              </div>
-            </div>
-          </div>
-        </div> -->
+
       </div>
     </div>
   </div>

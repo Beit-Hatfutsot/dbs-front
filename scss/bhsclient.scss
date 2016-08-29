@@ -81,7 +81,8 @@ html, body {
 			}
 
             @at-root #main-header-container {
-                height: $header-height + $notification-bar-height;
+                /*height: $header-height + $notification-bar-height;*/
+                height: $header-height;
             }
 			@at-root #view {
 				height: 100%;

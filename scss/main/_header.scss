@@ -734,9 +734,16 @@
                 background: inherit;
 
                 ul.nav {
+                    max-width: 50%;
                     padding: 0;
-                    margin: 0 auto;
-                    max-width: 1170px;
+
+                    &.left {
+                      float: left;
+                    }
+                    &.right {
+                      float: right;
+                    }
+
 
                     li.menu-item, li.header-menu-item {
                         position: relative;
@@ -803,7 +810,11 @@
                         &--active {
                             background-color: $red3;
                             color: #fff;
-                            font-weight: 600;
+                            text-shadow: -1px 0 0 #fff;
+
+                            a {
+                              color: #fff;
+                            }
 
                             &:hover {
                                 background-color: $red3;
@@ -820,21 +831,20 @@
                 &__upload {
                     position: relative;
                     margin: 0 auto;
-                    background-color: $red2;
-                    color: #fff;
+                    background-color: $pink1;
+                    color: #gray3;
                     display: inline-block;
-
-                        .en & {
-                            float: right;
-                        }
-                        .he & {
-                            float: left
-                        }
 
                         &.open {
 
                             .upload-label {
-                                background-color: $red1;
+                                background-color: $red3;
+                                color: #fff;
+                                text-shadow: -1px 0 0 #fff;
+
+                                &:hover {
+                                  background-color: $red3;
+                                }
                             }
 
                             .upload-menu {
@@ -843,17 +853,16 @@
                         }
 
                         .upload-label {
-                            margin-top: -50px;
-                            padding: 0 40px;
-                            line-height: 50px;
+                            margin-top: -40px;
+                            padding: 0 44px;
+                            line-height: 40px;
                             font-size: 21px;
-                            font-weight: 700;
-                            color: #ffffff;
-                            background-color: $red2;
+                            color: $gray3;
+                            background-color: $pink1;
                             @include hover-pointer();
 
                             &:hover {
-                                background-color: $red1;
+                                background-color: $gray5;
                             }
                         }
 
@@ -879,7 +888,7 @@
 
                             &__title {
                                 color: #ffffff;
-                                background: $red1;
+                                background: $red2;
                             }
 
                             &__row {

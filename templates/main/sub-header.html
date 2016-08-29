@@ -1,13 +1,12 @@
-<div 	ng-controller="SubHeaderController as subHeaderCtrl" 
-		class="sub-header-container" 
-		ng-hide="isCurrentState('start')"
-		ng-class="{'sub-header-container--closed': subHeaderCtrl.header.sub_header_state == 'closed' || isCurrentState('start'),
+<div 	ng-controller="SubHeaderController as subHeaderCtrl"
+		class="sub-header-container"
+		ng-class="{'sub-header-container--closed': subHeaderCtrl.header.sub_header_state == 'closed',
 				'sub-header-container--general-search': subHeaderCtrl.header.sub_header_state == 'general-search',
 				'sub-header-container--recently-viewed': subHeaderCtrl.header.sub_header_state == 'recently-viewed'}">
 	<div id="sub-header">
 		<div class="border-adhoc">
 			<ng-switch on="subHeaderCtrl.header.sub_header_state">
-				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.header.sub_header_state == 'general-search'"> 
+				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.header.sub_header_state == 'general-search'">
 					<label for="search-input" class="search-button-label">
 			        	<en>Search: </en>
 			        	<he>חיפוש כללי: </he>
@@ -16,17 +15,17 @@
 				    	<input  id="search-input"
 				    			ng-model="subHeaderCtrl.header.query"
 				    			autofocus
-				    			ng-keydown="subHeaderCtrl.search_on_enter($event)" 
+				    			ng-keydown="subHeaderCtrl.search_on_enter($event)"
 				    			type="text"
-				    			placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
+				    			placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}">
 				    	<button class="search-button-back" ng-click="subHeaderCtrl.search()" ng-disabled="subHeaderCtrl.header.query.length < 2">
 			    			<icon  class="button" alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
 				    	</button>
 			    	</div>
 				</div>
 				<div ng-switch-when="recently-viewed" class="recently-viewed" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
-					<div 	class="recently-arrow" 
-							ng-show="recentlyViewedCtrl.show_arrows" 
+					<div 	class="recently-arrow"
+							ng-show="recentlyViewedCtrl.show_arrows"
 							ng-click="recentlyViewedCtrl.scroll_left()"
 							ng-class="{'recently-arrow--disabled': !recentlyViewedCtrl.can_scroll_left}">
 							<he>
@@ -49,8 +48,8 @@
 							</mjs-item>
 						</div>
 					</div>
-					<div 	class="recently-arrow" 
-							ng-show="recentlyViewedCtrl.show_arrows" 
+					<div 	class="recently-arrow"
+							ng-show="recentlyViewedCtrl.show_arrows"
 							ng-click="recentlyViewedCtrl.scroll_right()"
 							ng-class="{'recently-arrow--disabled': !recentlyViewedCtrl.can_scroll_right}">
 							<en>
@@ -67,7 +66,7 @@
 							</he>
 					</div>
 				</div>
-			</ng-switch>	
+			</ng-switch>
 		</div>
 	</div>
 </div>
