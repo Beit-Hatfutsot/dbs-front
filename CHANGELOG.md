@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Undeployed]
+### Added
+- meta tags for item and my story pages
+
+### API Server Fixes
+- `/login`: Validate `next` when creating a user,
+    fixing cases where the login link was in `next` and the user is locked out
+- `/user`: remove POST
+
+
 ## [0.9.8] - 2016-08-16
 ### Added
 - A User can share his story
