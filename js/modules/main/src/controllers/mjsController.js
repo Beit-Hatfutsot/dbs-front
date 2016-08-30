@@ -157,7 +157,6 @@ MjsController.prototype = {
 								.filter(function(a) {return a!=''})
 								.join(', ');
 
-								debugger;
 		if (lang == 'En') {
 			if (this.user.name && this.user.name.en) {
 				$rootScope.title = this.user.name.en + " Family Story";
