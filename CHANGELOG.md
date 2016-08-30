@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - meta tags for item and my story pages
 
 ### Fixed
-- Consecutive searches
+- Consecutive searches - #161
 - Clear the page title before navigation
 - Fix username on public view of a User's MJS
 
