@@ -6,11 +6,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - meta tags for item and my story pages
 
+### Fixed
+- Consecutive searches
+- Clear the page title before navigation
+
+### Changed
+- Redesign subheader
+- My Story: the entire line clickable when adding/removing an item to/from branch
+
 ### API Server Fixes
 - `/login`: Validate `next` when creating a user,
     fixing cases where the login link was in `next` and the user is locked out
 - `/user`: remove POST
-
 
 ## [0.9.8] - 2016-08-16
 ### Added
@@ -26,6 +33,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix Internet Explorer display issues
 - Family tree welcome dialog appears one per session
+- Fix username on public view of a User's MJS
 
 ## [0.9.7] - 2016-07-11
 ### Added
