@@ -58,19 +58,24 @@ ItemCtrl.prototype = {
 
 	refresh_root_scope: function() {
 		var item = this.item_data,
-			$rootScope = this.$rootScope;
+			$rootScope = this.$rootScope,
+			main_pic_index = this.get_main_pic_index();
 		// TODO: make language option 'En' & 'He' universal
 		var language_map = {'en': 'En', 'he': 'He'},
 			lang = language_map[$rootScope.lang];
 		$rootScope.title = item.Header[lang];
 		$rootScope.og_type = 'article';
-		var description_sentences = item.UnitText1[lang].split('.')
-		if (description_sentences.length > 3)
-			$rootScope.description = description_sentences.slice(0,3).join('. ')+'...';
-		else
-			$rootScope.description = item.UnitText1[lang];
+		if (item.UnitText1[lang]) {
+			var description_sentences = item.UnitText1[lang].split('.')
+			if (description_sentences.length > 3)
+				$rootScope.description = description_sentences.slice(0,3).join('. ')+'...';
+			else
+				$rootScope.description = item.UnitText1[lang];
+		}
 		$rootScope.slug = item.Slug;
-		$rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[this.get_main_pic_index()].PictureId + ".jpg";
+		if (main_pic_index !== undefined) {
+			$rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
+		}
 	},
 
 	get_item: function() {
