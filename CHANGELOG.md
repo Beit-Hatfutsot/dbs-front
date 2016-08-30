@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Consecutive searches
 - Clear the page title before navigation
+- Fix username on public view of a User's MJS
 
 ### Changed
 - Redesign subheader
@@ -33,7 +34,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix Internet Explorer display issues
 - Family tree welcome dialog appears one per session
-- Fix username on public view of a User's MJS
 
 ## [0.9.7] - 2016-07-11
 ### Added
