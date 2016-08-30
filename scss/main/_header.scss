@@ -738,10 +738,21 @@
                     padding: 0;
 
                     &.left {
-                      float: left;
+                        .en & {
+                            float: left;
+                        }
+                        .he & {
+                            float: right;
+                        }
                     }
+
                     &.right {
-                      float: right;
+                      .en & {
+                        float: right;
+                      }
+                      .he & {
+                        float:  left;
+                      }
                     }
 
 
