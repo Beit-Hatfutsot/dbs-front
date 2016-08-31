@@ -304,7 +304,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     /*** End of state definitions ***/
 
     // Add current state data to $state when calling $state.go
-    $provide.decorator('$state', ['$delegate', '$stateParams', function($delegate, $stateParams) {
+    $provide.decorator('$state', ['$delegate', '$stateParams', '$rootScope',
+					   function($delegate, $stateParams, $rootScope) {
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
 			var target = state_name;
@@ -317,6 +318,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             }
             $delegate.lastState = $delegate.current;
             $delegate.lastStateParams = $delegate.params;
+
             return old_go.apply($delegate, [target, state_params, config]);
         };
         return $delegate;
@@ -359,9 +361,16 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
         return ($state.includes(state_name) || $state.includes('he.he_'+state_name));
     };
 
-	$rootScope.$on('$stateChangeStart',
-	  function(event, toState, toParams, fromState, fromParams){
-		  notification.loading(false);
+	$rootScope.$on('$stateChangeStart', function(event, toState, toParams,
+												 fromState, fromParams){
+		notification.loading(false);
+		$rootScope.title = undefined;
+		$rootScope.og_image = undefined;
+		$rootScope.description = undefined;
+		$rootScope.og_type = 'website';
+		$rootScope.canonical_url = $state.href(toState,toParams,
+											   {absolute: true});
+
 	});
 	/*$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){

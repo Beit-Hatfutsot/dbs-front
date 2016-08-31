@@ -18,11 +18,15 @@
 		<!--[if lt IE 9]>
 		    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
 		<![endif]-->
-    <meta property="og:url"           content="http://test.dbs.bh.org.il/story/6505d2e4d38decdec47590ba68c8fd60" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Your Website Title" />
-    <meta property="og:description"   content="Your description" />
-    <!--<meta property="og:image"         content="" />-->
+      <meta property="og:site_name"
+      content="{{(lang=='en')?'Museum of The Jewish People - Beit Hatfutsot':'בית התפוצות - מוזיאון העם היהודי'}}">
+    <meta property="og:url" content="{{canonical_url}}" ng-if="canonical_url" />
+    <meta property="og:type" content="{{og_type}}" ng-if="og_type" />
+    <meta property="og:title" content="{{title}}" ng-if="title" />
+    <meta property="og:description" content="{{description}}" ng-if="description" />
+    <meta property="og:image" content="{{og_image}}" ng-if="og_image"/>
+    <meta property="twitter:site" content="@BeitHatfutsot" />
+    <meta property="twitter:card" content="{{og_image?'summary_large_image':'summary'}}" />
 	</head>
 	<body class="{{lang}}" lang="{{lang}}" ng-cloak flow-prevent-drop item-scroll>
 		<div id="app-container">

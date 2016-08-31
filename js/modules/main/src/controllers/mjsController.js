@@ -18,6 +18,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
 	this.rmdialog_status = false;
 	this.in_edit_mode = false;
     this.langManager = langManager;
+	this.$rootScope = $rootScope;
 
 	Object.defineProperty(this, 'signedin', {
 		get: function() {
@@ -33,6 +34,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
          .then(function(res) {
            var items_ids = []
            self.user = res.data;
+		   self.refresh_root_scope();
            res.data.story_items.forEach(function(i) {
              items_ids.push(i.id)
            });
@@ -45,6 +47,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
       $rootScope.$on('loggedin', function(event, user) {
         var items_ids = [];
         self.user = user;
+	    self.refresh_root_scope();
         user.story_items.forEach(function (i) {
           items_ids.push(i.id)
         })
@@ -55,6 +58,7 @@ var MjsController = function(mjs, notification, item, auth, $rootScope, $scope,
       var items_ids = mjs.get_items_ids();
       self.user = auth.user;
       self.public_url = $state.href('story',{user_id: self.user.hash},{absolute: true});
+	  self.refresh_root_scope();
       if (items_ids.length > 0) {
         self.load(items_ids);
       }
@@ -145,6 +149,41 @@ MjsController.prototype = {
 		this.rmdialog_status = !(this.rmdialog_status);
 
 	},
+	refresh_root_scope: function() {
+		var $rootScope = this.$rootScope;
+			language_map = {'en': 'En', 'he': 'He'},
+			lang = language_map[$rootScope.lang],
+			branches = this.user.story_branches
+								.filter(function(a) {return a!=''})
+								.join(', ');
+
+		if (lang == 'En') {
+			if (this.user.name && this.user.name.en) {
+				$rootScope.title = this.user.name.en + " Family Story";
+				$rootScope.description = this.user.name.en + " has collected photos, stories ";
+			}
+			else {
+				$rootScope.title = "My Family Story";
+				$rootScope.description = "A collection of photos, stories ";
+			}
+			if (branches)
+				$rootScope.description += "divided into the "+branches+" branches.";
+			else
+				$rootScope.description += "and more.";
+		}
+		else {
+			if (this.user.name && this.user.name.he) {
+				$rootScope.title = "סיפור המשפחה של " + this.user.name.he;
+				$rootScope.description = "אסף תמונות ומאמרים אודות המשפחתה של " + this.user.name.he + ".";
+			}
+			else {
+				$rootScope.title = "סיפור משפחתי";
+				$rootScope.description = "אוסף תמונות ומאמרים אודות המשפחה.";
+			}
+			if (branches)
+				$rootScope.description += " האוסף כולל את הענפים: "+branches;
+		}
+	}
 };
 
 angular.module('main').controller('MjsController', ['mjs', 'notification',
