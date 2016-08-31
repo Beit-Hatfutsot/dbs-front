@@ -127,8 +127,14 @@
                             .title {
                                 line-height: 16px;
                                 font-size: 15px;
-                                font-weight: 600;
                                 color: #ffffff;
+
+                                .en & {
+                                    font-weight: 600;
+                                }
+                                .he & {
+                                    font-weight: 700;
+                                }
                             }
 
                             .icon {
@@ -185,15 +191,20 @@
                                     display: block;
 
                                     .en & {
-                                        @include icon (-388px -179px);
-                                        width: 78px;
-                                        height: 58px;
+                                        width: 110px;
                                     }
                                     .he & {
-                                        @include icon (-304px -182px);
-                                        width: 72px;
-                                        height: 53px;
+                                        width: 80px;
+                                        margin-right: 8px;
                                     }
+                                }
+                            }
+                        }
+
+                        &.active {
+                            a {
+                                .icon {
+                                    margin-top: 6px;
                                 }
                             }
                         }

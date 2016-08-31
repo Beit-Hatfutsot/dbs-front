@@ -25,7 +25,11 @@
             <li class="site-item mjs active">
               <a href="#">
                 <div class="title">My Story</div>
-                <div class="icon active"></div>
+
+                <div class="icon active">
+                  <ng-include src="'templates/svgs/main-header-btn.html'"></ng-include>
+                </div>
+
               </a>
               <en><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="Beta" position="[-590, -530]"></icon></en>
               <he><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="'בטא'" position="[-541, -530]"></icon></he>
