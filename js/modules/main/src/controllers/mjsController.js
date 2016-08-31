@@ -157,6 +157,9 @@ MjsController.prototype = {
 								.filter(function(a) {return a!=''})
 								.join(', ');
 
+		if (this.public_url)
+			$rootScope.canonical_url = this.public_url;
+
 		if (lang == 'En') {
 			if (this.user.name && this.user.name.en) {
 				$rootScope.title = this.user.name.en + " Family Story";
