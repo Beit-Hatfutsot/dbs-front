@@ -7,8 +7,7 @@ angular.module('main').directive('itemPreview', function() {
 			previewData: '=',
 			hideText: '=',
 			removable: '=',
-			itemSource: '@',
-      sex: '='
+			itemSource: '@'
 		},
      link: function(scope, element) {
       /*building person data*/

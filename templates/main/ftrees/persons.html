@@ -201,8 +201,7 @@
 
 		<div class="item-preview-wrapper">
       <item-preview ng-repeat="individual in ctrl.individuals.items"
-            preview-data="individual"
-            sex="individual.G">
+            preview-data="individual">
       </item-preview>
 			<div class="loader" ng-click="ctrl.fetch_more()" ng-if="ctrl.individuals.total>ctrl.individuals.items.length">
                 <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>

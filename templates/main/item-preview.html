@@ -9,7 +9,9 @@
               </div>
               <div class="tree-num__num">{{previewData.GTN}}</div>
           </div>
-          <div class="family parents" title="{{previewData.tree.parents[0].name[0] + ' & ' + previewData.tree.parents[1].name[0]}}" ng-if="previewData.tree.parents[0].name[0]&&previewData.tree.parents[1].name[0]">
+          <div class="family parents"
+               title="{{previewData.tree.parents[0].name[0] + ' & ' + previewData.tree.parents[1].name[0]}}"
+               ng-if="previewData.tree.parents[0].name[0]&&previewData.tree.parents[1].name[0]">
               <div class="family__members">{{previewData.tree.parents[0].name[0]}} & {{previewData.tree.parents[1].name[0] }}</div>
               <div class="family__title">
                   <en>Parents</en>
@@ -18,8 +20,8 @@
           </div>
           <div class="add-to-story"></div>
       </div>
-      <div class="node" ng-class="{'node--f': sex === 'F', 'node--m' : sex == 'M'}">
-          <ng-switch on="sex">
+      <div class="node" ng-class="{'node--f': previewData.tree.sex === 'F', 'node--m' : previewData.tree.sex == 'M'}">
+          <ng-switch on="previewData.tree.sex">
               <div class="avatar flip" ng-switch-when="M">
                   <icon position="[-197, -404]" alt-text="{en: 'Male', he: 'זכר'}"></icon>
               </div>
@@ -32,7 +34,7 @@
           </ng-switch>
           <div class="preview-data" title="{{person_info}}">
               <div class="name">
-                 <put-value value="previewData.FN + ' ' + previewData.LN"></put-value><br>
+                 <put-value value="previewData.tree.name[0] + ' ' + previewData.tree.name[1]"></put-value><br>
               </div>
               <div class="data-preview">
                   {{person_info}}
