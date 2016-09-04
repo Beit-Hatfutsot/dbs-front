@@ -152,39 +152,30 @@ MjsController.prototype = {
 	refresh_root_scope: function() {
 		var $rootScope = this.$rootScope;
 			language_map = {'en': 'En', 'he': 'He'},
-			lang = language_map[$rootScope.lang],
-			branches = this.user.story_branches
-								.filter(function(a) {return a!=''})
-								.join(', ');
+			lang = language_map[$rootScope.lang];
 
 		if (this.public_url)
 			$rootScope.canonical_url = this.public_url;
 
 		if (lang == 'En') {
 			if (this.user.name && this.user.name.en) {
-				$rootScope.title = this.user.name.en + " Family Story";
-				$rootScope.description = this.user.name.en + " has collected photos, stories ";
+				$rootScope.title = this.user.name.en + "'s story";
+				$rootScope.description = this.user.name.en + "'s Jewish Story lives here. Find your photos, family tree, stories and more and learn how you are part of the story.";
 			}
 			else {
-				$rootScope.title = "My Family Story";
-				$rootScope.description = "A collection of photos, stories ";
+				$rootScope.title = "This is My Jewish Story";
+				$rootScope.description = "My Story lives here. Find your photos, family tree, stories and more and learn how you are part of the story.";
 			}
-			if (branches)
-				$rootScope.description += "divided into the "+branches+" branches.";
-			else
-				$rootScope.description += "and more.";
 		}
 		else {
 			if (this.user.name && this.user.name.he) {
-				$rootScope.title = "סיפור המשפחה של " + this.user.name.he;
-				$rootScope.description = "אסף תמונות ומאמרים אודות המשפחתה של " + this.user.name.he + ".";
+				$rootScope.title = "הסיפור של " + this.user.name.he;
+				$rootScope.description = "הסיפור היהודי של "+ this.user.name.he +"נמצא כאן. בואו לגלות את התמונות, עצי המשפחה וסיפורי הקהילה שלכם, ולהפוך להיות חלק מהסיפור.";
 			}
 			else {
-				$rootScope.title = "סיפור משפחתי";
-				$rootScope.description = "אוסף תמונות ומאמרים אודות המשפחה.";
+				$rootScope.title = "הסיפור שלי";
+				$rootScope.description = "הסיפור היהודי שלי נמצא כאן. בואו לגלות את התמונות, עצי המשפחה וסיפורי הקהילה שלכם, ולהפוך להיות חלק מהסיפור.";
 			}
-			if (branches)
-				$rootScope.description += " האוסף כולל את הענפים: "+branches;
 		}
 	}
 };
