@@ -5,11 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Undeployed]
 ### Added
 - meta tags for item and my story pages
+- caching for collections (in the API server)
 
 ### Fixed
 - Consecutive searches - #161
 - Clear the page title before navigation
 - Fix username on public view of a User's MJS
+- Tree drag and release - #76
 
 ### Changed
 - Redesign subheader
