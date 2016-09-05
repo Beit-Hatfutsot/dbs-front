@@ -1,6 +1,6 @@
 #ftree-layout  {
     overflow: hidden;
-    cursor: all-scroll;
+    cursor: grab;
 }
 
 #ftree-layout-container {
@@ -76,7 +76,7 @@
                 height:16px;
             }
 		}
-        
+
     }
     .node[role="grandparent"], .node[role="sibling"] {
 
@@ -202,7 +202,7 @@
 			position: relative;
 			display: block;
 			width: 100%;
-			height: 50px; 
+			height: 50px;
 			background-color: $gray6;
 			color: black;
 
@@ -316,7 +316,7 @@
 			position: absolute;
 			top: 13px;
 			display: inline-block;
-			
+
 			.en & {
 				right: 189px;
 			}
@@ -371,7 +371,7 @@
 #ftree-node-details {
     position: absolute;
     width: 272px;
-    overflow: hidden; 
+    overflow: hidden;
     z-index: 10;
     line-height: 2;
     color: $gray3;

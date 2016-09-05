@@ -537,14 +537,14 @@ PersonViewController.prototype = {
 			this.lastMouseY = e.clientY;
 			this.mousePressed = true;
 			angular.element(document.getElementById(this.rootId))
-				.css("cursor", "-webkit-grabbing")
+				.css("cursor", "grabbing")
 		}
 	},
 	mouseUp: function (e) {
 		if (e.which == 1) {
 			this.mousePressed = false;
 			angular.element(document.getElementById(this.rootId))
-				.css("cursor", "all-scroll")
+				.css("cursor", "grab")
 		}
 	},
 	pan: function (e) {
