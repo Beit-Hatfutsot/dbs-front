@@ -137,7 +137,6 @@ PersonViewController.prototype = {
         self.node.Slug = {En: slug};
 				self.$rootScope.title = self.get_full_name(self.node.tree);
 
-				self.notification.loading(false);
 				if (self.$window.d3)
 					self.render(self.node)
 				else
@@ -145,6 +144,8 @@ PersonViewController.prototype = {
 			}, function (response) {
 				console.log('error walking the tree', response)
 				console.log(response);
+			}).finally(function() {
+				self.notification.loading(false);
 			});
 
 	},
