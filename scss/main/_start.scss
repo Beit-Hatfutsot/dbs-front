@@ -9,7 +9,7 @@
       font-size: 12px;
       display: block;
       margin: 0 auto;
-      width: 60%;
+      width: 58%;
       line-height: 22px;
     }
   }
@@ -23,11 +23,15 @@
 
 		@at-root #wizard {
 			position: relative;
-			height: 620px;
+			height: 558px;
+
+      width: auto;
       left: 50%;
       z-index: 1;
       @include translate(-50%, 0);
 			@include bg_image("Home-Page-Pic1.jpg");
+      background-position: center;
+      background-size: cover;
 
 			@at-root #wizard-form-strip {
         position: absolute;
@@ -60,7 +64,7 @@
             text-align: center;
 						&__title {
 							.en & {
-                font-size: 36px;
+                font-size: 30px;
               }
               .he & {
                 font-size: 34px;
@@ -93,8 +97,7 @@
 						}
 
 						&__content {
-							font-size: 25px;
-							margin-bottom: 35px;
+							font-size: 22px;
 						}
 					}
 				}
@@ -121,8 +124,16 @@
       position: relative;
 
       &:nth-child(2) {
-        height: 620px;
+        height: 558px;
         @include bg_image("Home-Page-Pic1.jpg");
+        left: 50%;
+        @include translate(-50%, 0);
+        background-position: center;
+        background-size: cover;
+      }
+
+      &:not(:nth-child(1)) {
+        height: 558px;
       }
 
       .article {
@@ -132,19 +143,16 @@
       .title, .description {
         display: block;
         margin: 0 auto;
-        width: 60%;
+        width: 58%;
       }
 
       .title {
-        font-size: 68px;
+        font-size: 48px;
         display: block;
+        font-weight: normal;
 
         &.light {
           color: #fff;
-        }
-
-        &.main {
-          font-size: 72px;
         }
       }
 
