@@ -57,7 +57,7 @@
   		&:hover {
   			.arrow-left, .arrow-right {
   				opacity: 1;
-  			}	
+  			}
 		}
 
   		img {
@@ -130,7 +130,7 @@
 		  			height: 90px;
 		  			cursor: pointer;
 		  			vertical-align: middle;
-		  			
+
 		  			&:hover {
 		  				@include box-shadow(0 0 10px -1px #000);
 		  			}
@@ -150,7 +150,7 @@
 	width: 116px;
 	height: 26px;
 	background: #f6f6f6;
-	color: #999; 
+	color: #999;
 	font-size: 10px;
 	transition: width 1s;
 	white-space: nowrap;
@@ -286,7 +286,7 @@
 }
 
 %bhs-fieldset {
-	
+
 	.bhf {
 		margin: 0;
 		padding: 0;
@@ -343,7 +343,7 @@
 				}
 			}
 
-			input[type=text], 
+			input[type=text],
 			input[type=password],
 			input[type=email],
 			textarea {
@@ -363,10 +363,15 @@
 				color: #c73420;
 				@include transition(all, 0.5s, linear);
 
-				&.ng-hide {
+				/*&.ng-hide {
 					opacity: 0;
 					bottom: 0;
-				}
+				}*/
+
+        &--hide {
+          display: none;
+          opacity: 0;
+        }
 			}
 		}
 	}

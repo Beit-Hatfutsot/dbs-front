@@ -1,57 +1,169 @@
-#start {
-	position: relative;
-	width: 100%;
-	background: $gray7;
-	//overflow-x: hidden;
-	//margin-top: -$notification-bar-height;
-	//@include transition(all, 1s, linear);
+
+%caption {
+    background: $gray5;
+    //background: rgba(249, 249, 249, 0.65);
+    width: 100%;
+
+    &__text {
+      color: $gray2;
+      font-size: 12px;
+      display: block;
+      margin: 0 auto;
+      width: 60%;
+      line-height: 22px;
+    }
+  }
+
+  .light  {
+    color: #fff;
+  }
 
 	@at-root #wizard-container {
-		position: relative;
-		height: 810px;
-		z-index: 3;
+    display: block;
 
 		@at-root #wizard {
-			position: absolute;
-			top: 0px;
-			left: 50%;
-			width: 1920px;
-			height: 694px;
-			@include bg_image("start.jpg");
-			@include translate(-50%, 0);
+			position: relative;
+			height: 620px;
+      left: 50%;
+      z-index: 1;
+      @include translate(-50%, 0);
+			@include bg_image("Home-Page-Pic1.jpg");
 
 			@at-root #wizard-form-strip {
+        position: absolute;
 				width: 100%;
-				height: 345px;
-				background: rgba(249, 249, 249, 0.85);
-				border-bottom: 4px solid #5ec5d6;
+        height: 100%;
+        left: 50%;
+				color: #fff;
+        @include translate(-50%, 0);
 
 				.wizard-form-container {
-					margin: 130px auto;
-					padding: 35px 0;
-					width: 825px;
+          position: absolute;
+          @include translate(-50%, 0);
+          left: 50%;
+          margin: 0 auto;
+					padding: 10px 0;
 					height: 100%;
+
+          .en & {
+            width: 970px;
+          }
+          .he & {
+            width: 1100px;
+          }
 
 					&--in-progress {
 						opacity: 0.7;
 					}
 
 					&__text {
-
+            text-align: center;
 						&__title {
-							color: #5dc2d4;
-							font-size: 72px;
-							font-family: helvatica;
-							margin-bottom: 10px;
+							.en & {
+                font-size: 36px;
+              }
+              .he & {
+                font-size: 34px;
+              }
+
+              .main {
+                font-weight: 600;
+
+                .en & {
+                  font-size: 120px;
+                  line-height: 120px;
+                  margin: -15px 0 20px;
+                }
+                .he & {
+                  font-size: 110px;
+                  line-height: 110px;
+                  margin: -15px 0 6px;
+                }
+              }
+
+              .med {
+                .en & {
+                  font-size: 30px;
+                }
+                .he & {
+                  font-size: 32px;
+                }
+              }
+
 						}
 
 						&__content {
-							font-size: 22px;
+							font-size: 25px;
 							margin-bottom: 35px;
 						}
 					}
 				}
 			}
 		}
+
+    .caption {
+      @extend %caption;
+
+      &__text {
+        @extend %caption__text;
+      }
+    }
 	}
-}
+
+  #site-tutorial {
+    width: 100%;
+    display: block;
+
+    section {
+      display: block;
+      width: 100%;
+      background: $blue6;
+      position: relative;
+
+      &:nth-child(2) {
+        height: 620px;
+        @include bg_image("Home-Page-Pic1.jpg");
+      }
+
+      .article {
+        padding: 100px 0 50px;
+      }
+
+      .title, .description {
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+      }
+
+      .title {
+        font-size: 68px;
+        display: block;
+
+        &.light {
+          color: #fff;
+        }
+
+        &.main {
+          font-size: 72px;
+        }
+      }
+
+      .description {
+        font-size: 24px;
+        display: block;
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        @extend %caption;
+
+        &__text {
+          @extend %caption__text;
+        }
+      }
+
+    }
+  }
