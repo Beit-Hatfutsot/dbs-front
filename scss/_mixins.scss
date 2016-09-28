@@ -17,8 +17,10 @@
 @mixin bg_image($url) {
 	background: url($images + $url);
 	background-repeat: no-repeat;
-	background-position: 0 0;
-	background-size: 100% 100%;
+	/*background-position: 0 0;
+	background-size: 100% 100%;*/
+  background-position: center;
+  background-size: cover;
 }
 
 @mixin icon($position: 0 0) {

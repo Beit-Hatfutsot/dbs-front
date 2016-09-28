@@ -1,177 +1,184 @@
+@at-root #wizard-container {
+  width: 100%;
+  display: block;
 
-%caption {
-    background: $gray5;
-    //background: rgba(249, 249, 249, 0.65);
-    width: 100%;
-
-    &__text {
-      color: $gray2;
-      font-size: 12px;
-      display: block;
-      margin: 0 auto;
-      width: 58%;
-      line-height: 22px;
-    }
-  }
-
-  .light  {
-    color: #fff;
-  }
-
-	@at-root #wizard-container {
+  section {
     display: block;
+    width: 100%;
+    position: relative;
+    height: 580px;
 
-		@at-root #wizard {
-			position: relative;
-			height: 558px;
+    &:not(:nth-child(2)) {
+      height: 580px;
+    }
 
-      width: auto;
-      left: 50%;
+    &:nth-child(2) {
+      height: 860px;
+    }
+
+    @at-root #wizard {
+      position: relative;
+      height: 558px;
       z-index: 1;
-      @include translate(-50%, 0);
-			@include bg_image("Home-Page-Pic1.jpg");
-      background-position: center;
-      background-size: cover;
+      color: #fff;
+      padding: 10px 0;
 
-			@at-root #wizard-form-strip {
-        position: absolute;
-				width: 100%;
-        height: 100%;
-        left: 50%;
-				color: #fff;
-        @include translate(-50%, 0);
+      &--in-progress {
+        opacity: 0.7;
+      }
 
-				.wizard-form-container {
-          position: absolute;
-          @include translate(-50%, 0);
-          left: 50%;
-          margin: 0 auto;
-					padding: 10px 0;
-					height: 100%;
+      .wizard-form-container {
+        text-align: center;
+
+        &__title {
 
           .en & {
-            width: 970px;
+            font-size: 30px;
           }
           .he & {
-            width: 1100px;
+            font-size: 34px;
           }
 
-					&--in-progress {
-						opacity: 0.7;
-					}
+          .main {
+            font-weight: 600;
 
-					&__text {
-            text-align: center;
-						&__title {
-							.en & {
-                font-size: 30px;
-              }
-              .he & {
-                font-size: 34px;
-              }
 
-              .main {
-                font-weight: 600;
+            .en & {
+              font-size: 100px;
+              line-height: 100px;
+              margin: -10px 0 8px;
+            }
+            .he & {
+              font-size: 110px;
+              line-height: 110px;
+              margin: -15px 0 6px;
+            }
+          }
 
-                .en & {
-                  font-size: 120px;
-                  line-height: 120px;
-                  margin: -15px 0 20px;
-                }
-                .he & {
-                  font-size: 110px;
-                  line-height: 110px;
-                  margin: -15px 0 6px;
-                }
-              }
+          .med {
+            .en & {
+              font-size: 30px;
+            }
+            .he & {
+              font-size: 32px;
+            }
+          }
 
-              .med {
-                .en & {
-                  font-size: 30px;
-                }
-                .he & {
-                  font-size: 32px;
-                }
-              }
+        }
 
-						}
+        &__content {
+          font-size: 22px;
+        }
+      }
 
-						&__content {
-							font-size: 22px;
-						}
-					}
-				}
-			}
-		}
+
+    }
+
+    .title, .description {
+      display: block;
+      margin: 0 auto;
+      width: 1140px;
+
+      &.light {
+        color: #fff;
+      }
+
+    }
+
+    .title {
+      font-size: 48px;
+      display: block;
+      font-weight: normal;
+    }
+
+    .description {
+      font-size: 22px;
+      display: block;
+    }
 
     .caption {
-      @extend %caption;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(249, 249, 249, 0.65);
+      width: 100%;
 
       &__text {
-        @extend %caption__text;
-      }
-    }
-	}
-
-  #site-tutorial {
-    width: 100%;
-    display: block;
-
-    section {
-      display: block;
-      width: 100%;
-      background: $blue6;
-      position: relative;
-
-      &:nth-child(2) {
-        height: 558px;
-        @include bg_image("Home-Page-Pic1.jpg");
-        left: 50%;
-        @include translate(-50%, 0);
-        background-position: center;
-        background-size: cover;
-      }
-
-      &:not(:nth-child(1)) {
-        height: 558px;
-      }
-
-      .article {
-        padding: 100px 0 50px;
-      }
-
-      .title, .description {
+        color: $gray2;
+        font-size: 12px;
         display: block;
         margin: 0 auto;
-        width: 58%;
+        width: 1140px;
+        line-height: 22px;
+      }
+    }
+
+  }
+
+  #section--0 {
+    z-index: 1;
+    @include bg_image("section0.jpg");
+  }
+
+  #section--1 {
+    .article {
+      .en & {
+        padding-top: 20px;
       }
 
-      .title {
-        font-size: 48px;
-        display: block;
-        font-weight: normal;
-
-        &.light {
-          color: #fff;
-        }
+      .he & {
+        padding-top: 64px;
       }
+    }
+    @include bg_image("section1.jpg");
+  }
 
-      .description {
-        font-size: 24px;
-        display: block;
-      }
+  #section--2 {
+    .article {
+      padding-top: 256px;
+    }
+    @include bg_image("section2.jpg");
+  }
 
-      .caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        @extend %caption;
+  #section--3 {
+    .article {
+      padding-top: 290px;
+    }
+    @include bg_image("section3.jpg");
+  }
 
-        &__text {
-          @extend %caption__text;
-        }
-      }
+  #section--4 {
+    .article {
+      padding-top: 210px;
+    }
+    @include bg_image("section4.jpg");
+  }
 
+  #section--5 {
+    .article {
+      padding-top: 130px;
+    }
+    @include bg_image("section5.jpg");
+  }
+
+  #section--6 {
+    .article {
+      padding-top: 290px;
+    }
+    @include bg_image("section6.jpg");
+  }
+
+}
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+  #wizard-container section .article {
+    .description {
+      font-size: 20px;
+    }
+
+    .title {
+      font-size: 46px;
     }
   }
+}

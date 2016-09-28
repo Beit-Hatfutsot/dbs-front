@@ -1,59 +1,47 @@
 <div id="wizard-container">
-  <div id="wizard">
-    <div id="wizard-form-strip">
-      <div class="wizard-form-container" ng-class="{'wizard-form-container--in-progress': startCtrl.in_progress}">
-        <div class="wizard-form-container__text">
-          <div class="wizard-form-container__text__title">
-            <en><b>Welcome to</b><br>
-              <h1 class="main">Open Databases</h1>
-              <p class="med"><b>Of the Museum of the Jewish People at Beit Hatfutsot</b></p>
-            </en>
-            <he><b>ברוכים הבאים אל</b><br>
-              <h1 class="main">מאגרי המידע הפתוחים</h1>
-              <p class="med">של מוזיאון העם היהודי - בבית התפוצות</p>
-            </he>
-          </div>
-          <div class="wizard-form-container__text__content">
-            <en>
-              Discover millions of pictures, family trees, music
-              pieces, stories of communities and more.
-            </en>
-            <he>בואו לשוטט בין מליוני תמונות, עצי משפחה, קבצי מוזיקה, סיפורי קהילות ועוד.
-            </he>
-          </div>
+  <section id="section--0">
+    <div id="wizard" ng-class="{'wizard--in-progress': startCtrl.in_progress}">
+      <div class="wizard-form-container">
+        <div class="wizard-form-container__title">
+          <en><b>Welcome to</b><br>
+            <h1 class="main">OPEN DATABASES</h1>
+            <p class="med"><b>Of the Museum of the Jewish People at Beit Hatfutsot</b></p>
+          </en>
+          <he><b>ברוכים הבאים אל</b><br>
+            <h1 class="main">מאגרי המידע הפתוחים</h1>
+            <p class="med">של מוזיאון העם היהודי - בבית התפוצות</p>
+          </he>
         </div>
-        <ng-include src="'templates/main/wizard-form.html'"></ng-include>
+        <div class="wizard-form-container__content">
+          <en>
+            Discover millions of pictures, family trees, music
+            pieces, stories of communities and more.
+          </en>
+          <he>בואו לשוטט בין מליוני תמונות, עצי משפחה, קבצי מוזיקה, סיפורי קהילות ועוד.
+          </he>
+        </div>
       </div>
+      <ng-include src="'templates/main/wizard-form.html'"></ng-include>
     </div>
-  </div>
-  <div class="caption">
-    <span class="caption__text">
-      <en>Image Details: Vova Tretznik and Lena Levit on their wedding day. Moscow, U.S.S.R, May 1990.</en>
-      <he>Image Details: Vova Tretznik and Lena Levit on their wedding day. Moscow, U.S.S.R, May 1990.</he>
-    </span>
-  <div>
-</div>
 
-<div id="site-tutorial">
-  <section>
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Vova Tretznik and Lena Levit on their wedding day. Moscow, U.S.S.R, May 1990.</en>
+        <he>Image Details: Vova Tretznik and Lena Levit on their wedding day. Moscow, U.S.S.R, May 1990.</he>
+      </span>
+    </div>
+  </section>
+
+  <section id="section--1">
     <div class="article">
       <h3 class="title">
         <en>ARE YOU READY FOR A JOURNEY?</en>
         <he>מוכנים לצאת לדרך?</he>
       </h3>
       <p class="description">
-        <en>For almost four decades, Beit Hatfutsot has collected a unique and intriguing corpus of
-            knowledge: over 5 million individuals in thousands of family trees, hundreds of thousands of
-            photos and films, music files, both old and new, articles about the origins of Jewish family names
-            and the history of Jewish communities around the world – all the little pieces of the great Jewish
-            story.<br>
-            Up until now all these materials were available in an internal database – but now they are online!
-            You are invited to explore your family story in this new website we've constructed so that the
-            information is available to everyone everywhere anytime – free of charge.<br><br>
-            The journey takes various paths and trails in changing landscapes, among model figures who
-            changed history, and will enable you to expand your knowledges. Before you know it, others will
-            join you. An unfamiliar cousin might reveal the great grandfather who was the town's doctor,
-            mother's aunt who was a singer…
+        <en>For almost four decades, Beit Hatfutsot has collected a unique and intriguing corpus of knowledge: over 5 million individuals in thousands of family trees, hundreds of thousands of photos and films, music files, both old and new, articles about the origins of Jewish family names and the history of Jewish communities around the world – all the little pieces of the great Jewish story.<br>
+            Up until now all these materials were available in an internal database – but now they are online! You are invited to explore your family story in this new website we've constructed so that the information is available to everyone everywhere anytime – free of charge.<br>
+            The journey takes various paths and trails in changing landscapes, among model figures who changed history, and will enable you to expand your knowledges. Before you know it, others will join you. An unfamiliar cousin might reveal the great grandfather who was the town's doctor, mother's aunt who was a singer…
         </en>
         <he>במשך 30 שנה צבר בית התפוצות אוצר של ידע מפתיע, נדיר ומסקרן: מעל 5 מיליון איש בעצי משפחה, מאות אלפי
             צילומים וסרטים, קבצי מוזיקה יהודית מהעבר וההווה, פירושים ומקורות של עשרות אלפי שמות משפחה, ומידע על אלפי
@@ -75,20 +63,18 @@
     </div>
   </section>
 
-  <section>
+  <section id="section--2">
     <div class="article">
       <h3 class="title light">
         <en>REVEAL</en>
         <he>מגלים</he>
       </h3>
       <p class="description light">
-        <en>The first step is to type in the family name, and the place of origin.
-            Then it's magic's time!
-            A rich, fascinating content is reveled to you: the meaning of your family name, the story of your
-            forefathers' community, leaders and famous persons, moving photos, the local typical music, and
-            films.
-            Take a deep breath. You are about to discover your roots; to discover yourselves.
-            Click to search by name and place
+        <en>The first step is to type in the family name, and the place of origin.<br>
+            Then it's magic's time!<br>
+            A rich, fascinating content is reveled to you: the meaning of your family name, the story of your forefathers' community, leaders and famous persons, moving photos, the local typical music, and films.<br>
+            Take a deep breath. You are about to discover your roots; to discover yourselves.<br>
+            Click to search by name and place.
         </en>
         <he>הצעד הראשון במסע מתחיל בכתיבת שם משפחה והמקום שממנו היא הגיעה. ואז מופיע הקסם...
             ברגע אחד תחשפו לעולם תוכן עשיר ומרתק: משמעות שם המשפחה שלכם, סיפורה של הקהילה היהודית בה חיו אבותיכם,
@@ -106,19 +92,14 @@
     </div>
   </section>
 
-
-  <section>
+  <section id="section--3">
     <div class="article">
       <h3 class="title">
         <en>COMPILE</en>
         <he>בונים</he>
       </h3>
       <p class="description">
-        <en>You are now travelling into various contents of the database, and it's time to start compiling your
-            Jewish story. Found some interesting information about your family? Ran into a new item that
-            reveals an old forgotten story? Saw a nice photo? Add it to your story by clicking ADD TO MY
-            STORY. Use the MY STORY tab on the top of each page to enter your personal area, where all the
-            contents you have collected along the way are safely kept.
+        <en>You are now travelling into various contents of the database, and it's time to start compiling your Jewish story. Found some interesting information about your family? Ran into a new item that reveals an old forgotten story? Saw a nice photo? Add it to your story by clicking ADD TO MY STORY. Use the MY STORY tab on the top of each page to enter your personal area, where all the contents you have collected along the way are safely kept.
         </en>
         <he>יצאתם לדרך ואתם משוטטים בין תכני המאגרים, וזה הזמן להתחיל לבנות את הסיפור היהודי שלכם! מצאתם במאגרים מידע
             על המשפחה? נתקלתם באייטם חדש שחושף סיפור ישן? בצילום יפה?
@@ -135,21 +116,16 @@
     </div>
   </section>
 
-  <section>
+  <section id="section--4">
     <div class="article">
       <h3 class="title">
         <en>SHARE</en>
         <he>משתפים</he>
       </h3>
       <p class="description">
-        <en>We each have family memorabilia items at home: photo albums, diaries, letters, art and artifacts
-            etc. Without them, our family story will never be whole.
-            Now you can add these items to the MY STORY page and share it with the rest of the family or
-            with friends and internet acquaintances. This way you both enrich your own page, as well as
-            assist others to find useful information.
-            Our experts are working to join each fact, item and photo so that the Jewish story is best
-            revealed. New information is sometimes the missing link – therefore we seek information from
-            you. We invite you to contribute new items for the database and enrich the entire Jewish story.
+        <en>We each have family memorabilia items at home: photo albums, diaries, letters, art and artifacts etc. Without them, our family story will never be whole.<br>
+            Now you can add these items to the MY STORY page and share it with the rest of the family or with friends and internet acquaintances. This way you both enrich your own page, as well as assist others to find useful information.<br>
+            Our experts are working to join each fact, item and photo so that the Jewish story is best revealed. New information is sometimes the missing link – therefore we seek information from you. We invite you to contribute new items for the database and enrich the entire Jewish story.<br>
             Search for the UPLOAD button at the right top corner of each page.
         </en>
         <he>לכל אחד מאתנו יש בבית פריטי זיכרון משפחתיים: אלבומי תמונות, יומנים, מכתבים, פריטי אמנות ויזואליים ועוד,
@@ -171,25 +147,16 @@
     </div>
   </section>
 
-  <section>
+  <section id="section--5">
     <div class="article">
       <h3 class="title light">
         <en>FAMILY</en>
         <he>משפחתיים</he>
       </h3>
       <p class="description light">
-        <en>The world of family trees is both unique and fascinating, as well as challenging. Bear in mind,
-            that searching for a common family name might yield too many results. You might use a
-            different or incorrect spelling of the name than the person who added the family tree. Do not
-            worry, we have many tips for you. Let us begin.
-            GETTING STARTED
-            Look up a name and choose the most suitable result out of the list. Once you click on a name,
-            the individual's family tree is formed, surrounding the person you picked - two generations up,
-            two down. Start exploring the tree by clicking on names and learning details about individuals,
-            revealing more generations and finding contacts you did not know about. The trees in our
-            database were submitted by the families who built them, so a lack in information or accuracy is
-            possible. Any new information you may have can help us show a more accurate data, so please
-            contact us for updates.
+        <en>The world of family trees is both unique and fascinating, as well as challenging. Bear in mind, that searching for a common family name might yield too many results. You might use a different or incorrect spelling of the name than the person who added the family tree. Do not worry, we have many tips for you. Let us begin.<br>
+            GETTING STARTED<br>
+            Look up a name and choose the most suitable result out of the list. Once you click on a name, the individual's family tree is formed, surrounding the person you picked - two generations up, two down. Start exploring the tree by clicking on names and learning details about individuals, revealing more generations and finding contacts you did not know about. The trees in our database were submitted by the families who built them, so a lack in information or accuracy is possible. Any new information you may have can help us show a more accurate data, so please contact us for updates.
         </en>
         <he>עולם עצי המשפחה הוא ייחודי ומרתק, אך הוא יכול להיות מעט מאתגר. למה? מכמה סיבות. למשל, חיפוש רק לפי
             שם משפחה נפוץ (כהן או כץ, לדוגמה) יכול להביא תוצאות רבות מדי. חיפוש לפי שם פרטי ושם משפחה נדיר יכול
@@ -212,18 +179,15 @@
     </div>
   </section>
 
-  <section>
+  <section id="section--6">
     <div class="article">
       <h3 class="title">
         <en>GENERAL</en>
         <he>משלימים</he>
       </h3>
       <p class="description">
-        <en>In order to maximize the results you can receive, we are co-operating with several large
-            databases such as the database of the Center for Jewish History (over 5 million items) and
-            the Europeana Collections project, with over 50 million items. With time we shall add links
-            to other databases as well, so that you can receive richer and fuller results.
-            Click and enter the General Search page
+        <en>In order to maximize the results you can receive, we are co-operating with several large databases such as the database of the Center for Jewish History (over 5 million items) and the Europeana Collections project, with over 50 million items. With time we shall add links to other databases as well, so that you can receive richer and fuller results.<br>
+        Click and enter the General Search page.<br>
         </en>
         <he>לא מצליחים למצוא מידע ספציפי שמעניין אתכם? רוצים לחפש גם לפי נושא כללי או תחום ידע? אין בעיה: בנוסף
             לחיפוש הממוקד לפי שם ומקום אנו מאפשרים לכם לבצע "חיפוש כללי", ולקבל את כל התוצאות הרלוונטיות ואת כל סוגי התכנים.
