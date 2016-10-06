@@ -201,6 +201,22 @@ ItemCtrl.prototype = {
 
 	get_additional_pic_url: function () {
 		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
+	},
+
+	sort_pictures: function() {
+		var digitized = [],
+			nondigitized = [];
+		for (var i = 0; i < this.item_data.Pictures.length; i++) {
+			var pic = this.item_data.Pictures[i];
+			if(pic.PictureId !== '') {
+				digitized.push(pic);
+			}
+			else {
+				nondigitized.push(pic);
+			}
+		}
+		digitized.push.apply(digitized, nondigitized);
+		return digitized;
 	}
 
 };

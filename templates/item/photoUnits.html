@@ -27,24 +27,30 @@
                 </div>
                 <div class="item-wrapper">
                     <div printSection class="item__content">
-                        <div    class="item__content__media-container"
-                                ng-class="{'item__content__media-container--photoUnit': itemController.item_type === 'photoUnits'}">
-                            <img    class="picture"
+                        <div  class="item__content__media-container"
+                              ng-class="{'item__content__media-container--photoUnit': itemController.item_type === 'photoUnits'}">
+                            <div ng-repeat="pic in itemController.sort_pictures()" ng-switch on="pic.PictureId != ''">
+                              <img  ng-switch-when="true"
+                                    class="picture"
                                     ng-show="itemController.isActive($index)"
-                                    ng-repeat="pic in itemController.item_data.Pictures"
                                     ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"
-                                    alt="Item Image"
                                     ng-click="itemController.open_gallery()"
                                     prevent-rightclick
                                     fit-thumb>
+
+                              <a    ng-switch-default
+                                    ng-href="{{itemController.lang=='en'?'http://www.bh.org.il/about-us/volunteering/':'http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/'}}"
+                                    target="blank">
+                                <img  class="picture notdigitized"
+                                      ng-show="itemController.isActive($index)"
+                                      ng-src="images/digitization-{{itemController.lang}}.jpg"
+                                      prevent-rightclick>
+                              </a>
+                            </div>
                             <div class="arrows" ng-if="itemController.item_data.Pictures.length > 1">
                                 <div class="arrow-left" ng-click="itemController.showPrev()"></div>
                                 <div class="arrow-right" ng-click="itemController.showNext()"></div>
                             </div>
-                            <!-- <div class="notification vertical-middle" ng-click="itemController.open_gallery()">
-                                <en>Click to view</en>
-                                <he>ליחצו לצפייה</he>
-                            </div> -->
                         </div>
                         <div class="header-wrapper">
                             <h1 class="item__article-header">
@@ -78,8 +84,9 @@
                                     <he>{{itemController.item_data.Header.He}} Pictures ({{itemController.item_data.Pictures.length}} found)</he>
                                 </div>
                                  <ul class="gallery-modal__info__gallery-preview__minified-picture">
-                                    <li ng-repeat="pic in itemController.item_data.Pictures" ng-class="{'active':itemController.isActive($index)}" ng-hide="isHidden($index)">
-                                        <img ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" ng-click="itemController.showPhoto($index)"/>
+                                    <li ng-repeat="pic in itemController.sort_pictures()" ng-class="{'active':itemController.isActive($index)}" ng-hide="isHidden($index)">
+                                        <img ng-src="{{pic.PictureId == '' ? 'images/digitization-sm-'+itemController.lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
+                                             ng-click="itemController.showPhoto($index)"/>
                                     </li>
                                 </ul>
                             </div>

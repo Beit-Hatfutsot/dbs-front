@@ -65,11 +65,11 @@
 
             .share-item-header {
                 .en & {
-                    margin-right: 10px;    
+                    margin-right: 10px;
                 }
                 .he & {
                     margin-left: 10px;
-                } 
+                }
             }
 
             tweet {
@@ -125,7 +125,7 @@
         position: relative;
         display: inline-block;
         @include translate(0, -50%);
-        
+
         .en & {
             margin-right: 60px;
         }
@@ -145,7 +145,7 @@
 
         .en & {
            padding-left: 10px;
-           margin-right: 25px; 
+           margin-right: 25px;
         }
         .he & {
             padding-right: 10px;
@@ -205,7 +205,7 @@
             vertical-align: top;
             width: 310px;
             margin-top: 20px;
-            
+
             .en & {
                 float: right;
             }
@@ -224,7 +224,7 @@
             width: 800px;
             height: auto;
             margin: 20px 0;
-            
+
 
             .item {
                 position: relative;
@@ -294,7 +294,7 @@
                         &:before {
                             border-bottom-color: #c4c4c4;
                             border-width: 9px;
-                            
+
                             .en & {
                                 left: 19px;
                             }
@@ -349,7 +349,7 @@
                                 }
 
                                 .he & {
-                                    margin-right: 3px;                                    
+                                    margin-right: 3px;
                                 }
                             }
 
@@ -410,7 +410,7 @@
                             }
                             .arrow-left, .arrow-right {
                                 opacity: 1;
-                            } 
+                            }
                             .notification {
                                 display: block;
                             }
@@ -422,7 +422,11 @@
                         }
 
                         &--photoUnit {
-
+                            .picture {
+                                &.notdigitized {
+                                    height: 80%;
+                                }
+                            }
                             .arrows {
                                 @extend %arrows;
                             }
@@ -432,14 +436,14 @@
                             &:hover {
                                 .arrow-left, .arrow-right {
                                     opacity: 1;
-                                } 
+                                }
                             }
                         }
 
                         video {
                             display: block;
                             margin-left: auto;
-                            margin-right: auto; 
+                            margin-right: auto;
                         }
 
                         %image-wrapper {
@@ -475,7 +479,7 @@
                                 .picture {
 
                                     &--display-more {
-                                        
+
                                         .en & {
                                             transform: translate(-38%, -50%) skew(-16deg);
                                         }
@@ -509,7 +513,7 @@
 
                                 .picture {
                                     &--display-more {
-                                        
+
                                         .en & {
                                             transform: translate(-50%, -50%) skew(-16deg);
                                         }
@@ -584,12 +588,12 @@
                                 border-right: 105px solid transparent;
                                 left: 0;
                             }
-                        
+
                             .diagonal-block {
                                 .he & {
                                     @include flip ();
                                 }
-                                .diagonal-separator {   
+                                .diagonal-separator {
                                     position: absolute;
                                     top: -367px;
                                     height: 300px;
@@ -682,10 +686,10 @@
                     }
                     code {
                         font-family: inherit;
-                        
+
                         &:before, &:after {
                             content: "'";
-                        }   
+                        }
                     }
                 }
 
@@ -726,7 +730,7 @@
                         width: 28px;
                     }
                     .type-desc-container {
-                        width: 0; 
+                        width: 0;
                     }
                 }
 
