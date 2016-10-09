@@ -6,11 +6,11 @@
  * Controller for auth modal template.
  * Handles auth modal scope.
  */
-var AuthCtrl = function($scope, $modalInstance, langManager, auth,
+var AuthCtrl = function($scope, $uibModalInstance, langManager, auth,
 						notification, $state, config) {
     var self = this;
 
-    this.$modalInstance = $modalInstance;
+    this.$uibModalInstance = $uibModalInstance;
     this.auth = auth;
     this.notification = notification;
     this.is_register = config.register;
@@ -153,10 +153,10 @@ AuthCtrl.prototype = {
 
     	this.auth.signin(this.signin_data.email).
             then(function() {
-                self.$modalInstance.close();
+                self.$uibModalInstance.close();
                 self.notification.put(1);
             }, function() {
-                self.$modalInstance.close();
+                self.$uibModalInstance.close();
                 self.notification.put(10);
             });
     },
@@ -169,7 +169,7 @@ AuthCtrl.prototype = {
      * Dismisses the auth modal.
      */
     dismiss: function() {
-        this.$modalInstance.dismiss();
+        this.$uibModalInstance.dismiss();
 		if (this.config.mandatory)
 			this.$state.go(this.config.fallback_state);
     },
