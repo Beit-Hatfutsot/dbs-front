@@ -1,4 +1,4 @@
-var UploadController = function($scope, $state, auth, apiClient, langManager, mjs, notification, $modal) {
+var UploadController = function($scope, $state, auth, apiClient, langManager, mjs, notification, $uibModal) {
     var self = this;
 
     this.$scope = $scope;
@@ -6,11 +6,11 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
     this.langManager = langManager;
     this.mjs = mjs;
     this.notification = notification;
-    this.$modal = $modal;
+    this.$uibModal = $uibModal;
     this.placement = langManager.lang === 'en' ? 'left':'right';
     this.flow_init = {
-        target:             apiClient.urls.upload, 
-        testChunks:         false, 
+        target:             apiClient.urls.upload,
+        testChunks:         false,
         singleFile:         true,
         supportDirectory:   false
     };
@@ -20,9 +20,9 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
     this.copyright = false;
     // configure tab_status properties
     [
-        'image', 
-        'video', 
-        'music', 
+        'image',
+        'video',
+        'music',
         'family_tree'
     ].
     forEach(function(state) {
@@ -75,7 +75,7 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
                 description: {
                     en: '',
                     he: ''
-                },  
+                },
                 location: {
                     en: '',
                     he: ''
@@ -177,7 +177,7 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
                 description: {
                     en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
-                },  
+                },
                 location: {
                     en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
@@ -271,8 +271,8 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
 
     $scope.$watch(function() {
         return self.in_progress;
-    }, 
-    function(newVal) { 
+    },
+    function(newVal) {
         if (newVal) {
             notification.put(9);
         }
@@ -283,13 +283,13 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
 
 UploadController.prototype = {
     submit_file: function(event, $flow, files) {
-        
+
     },
 
 	upload: function(type) {
         this.reset_flow_data();
 
-        this.flow.opts.headers["authentication-token"] = this.auth.get_token();        
+        this.flow.opts.headers["authentication-token"] = this.auth.get_token();
         for (var field in this.meta_data[type].values) {
             this.flow.opts.query[field + '_en'] = this.meta_data[type].values[field].en;
             this.flow.opts.query[field + '_he'] = this.meta_data[type].values[field].he;
@@ -327,13 +327,13 @@ UploadController.prototype = {
         //document.getElementsByClassName('upload-droparea')[0].scrollIntoView(false);
         jQuery('html, body').animate({
             scrollTop: jQuery('.upload-droparea').offset().top - 110
-        }, 1000);    
+        }, 1000);
     },
 
     onSuccess: function() {
         //this.mjs.refresh();
         this.clear_form();
-        this.$modal.open({
+        this.$uibModal.open({
             templateUrl: 'templates/main/upload/successful-upload.html',
             controller: 'UploadModalController',
             size: 'ftree'
@@ -366,7 +366,7 @@ UploadController.prototype = {
 
         this.uploadFormCtrl.$scope.rc.upload_form.attempted = false;
         this.uploadFormCtrl.$scope.upload_form.$setPristine();
-        
+
         this.reset_flow();
 
         this.failed = false;
@@ -381,4 +381,4 @@ UploadController.prototype = {
     }
 };
 
-angular.module('main').controller('UploadController', ['$scope', '$state', 'auth', 'apiClient', 'langManager', 'mjs', 'notification', '$modal', UploadController]);
+angular.module('main').controller('UploadController', ['$scope', '$state', 'auth', 'apiClient', 'langManager', 'mjs', 'notification', '$uibModal', UploadController]);

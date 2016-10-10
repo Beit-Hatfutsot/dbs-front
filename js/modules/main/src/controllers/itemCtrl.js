@@ -1,9 +1,9 @@
 
 function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs,
-				  recentlyViewed, $window, $timeout, $modal, $rootScope, langManager) {
+				  recentlyViewed, $window, $timeout, $uibModal, $rootScope, langManager) {
 	var self = this;
 
-	this.$modal = $modal;
+	this.$uibModal = $uibModal;
 	this.$state = $state;
 	this.slug = item.parse_state($stateParams);
 	this.item_type =   this.slug.item_type;
@@ -161,7 +161,7 @@ ItemCtrl.prototype = {
 		}
 		var	gallery = this.item_data;
 
-	    this.$modal.open({
+	    this.$uibModal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
 	     	size: 'lg',
@@ -223,5 +223,5 @@ ItemCtrl.prototype = {
 
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item',
 	   'notification', 'itemTypeMap','wizard', 'header',
-	   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope',
+	   'mjs', 'recentlyViewed', '$window', '$timeout', '$uibModal', '$rootScope',
 	   'langManager', ItemCtrl]);

@@ -1,11 +1,11 @@
-var PersonsWelcomeCtrl = function($scope, $modalInstance, $window, $state) {
+var PersonsWelcomeCtrl = function($scope, $uibModalInstance, $window, $state) {
 
     $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('cancel');
     };
 
     $scope.dismiss = function () {
-        $modalInstance.close();
+        $uibModalInstance.close();
     };
 
     $scope.go_to_tree = function(tree_num, node) {
@@ -13,4 +13,4 @@ var PersonsWelcomeCtrl = function($scope, $modalInstance, $window, $state) {
     }
 };
 
-angular.module('main').controller('PersonsWelcomeCtrl', ['$scope', '$modalInstance', '$window', '$state', PersonsWelcomeCtrl]);
+angular.module('main').controller('PersonsWelcomeCtrl', ['$scope', '$uibModalInstance', '$window', '$state', PersonsWelcomeCtrl]);

@@ -1,4 +1,4 @@
-var PersonsController = function($rootScope, $scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window, $location) {
+var PersonsController = function($rootScope, $scope, $state, $stateParams, ftrees, notification, $timeout, $uibModal, $window, $location) {
 
 	var self = this,
 		advanced_fields = ['birth_place', 'marriage_place', 'death_place', 'tree_number', 'birth_year', 'marriage_year', 'death_year'];
@@ -46,9 +46,10 @@ var PersonsController = function($rootScope, $scope, $state, $stateParams, ftree
 
 	if (!self.persons_welcome_msg) {
 
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
 		     	controller: 'PersonsWelcomeCtrl',
+		     	animation: true,
 		     	size: 'ftree'
 	    });
 
@@ -189,4 +190,4 @@ PersonsController.prototype = {
     },
 };
 
-angular.module('main').controller('PersonsController', ['$rootScope', '$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', '$location', PersonsController]);
+angular.module('main').controller('PersonsController', ['$rootScope', '$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$uibModal', '$window', '$location', PersonsController]);

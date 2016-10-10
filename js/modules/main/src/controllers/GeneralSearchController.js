@@ -1,4 +1,4 @@
-var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state, langManager, $stateParams, $http, apiClient, $modal, $q, $location, header, $window, notification) {
+var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state, langManager, $stateParams, $http, apiClient, $uibModal, $q, $location, header, $window, notification) {
     var self = this, params = {};
     this.$state = $state;
     this.$window = $window;
@@ -6,7 +6,7 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
     this.results = {hits: []};
     this.eurp_results = [];
     this.cjh_results = [];
-    this.$modal = $modal;
+    this.$uibModal = $uibModal;
     this.$location = $location;
     this.$http = $http;
     this.apiClient = apiClient;
@@ -264,4 +264,4 @@ GeneralSearchController.prototype = {
     }
 };
 
-angular.module('main').controller('GeneralSearchController', ['$rootScope', 'europeanaUrl', '$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$modal', '$q', '$location', 'header', '$window', 'notification', GeneralSearchController]);
+angular.module('main').controller('GeneralSearchController', ['$rootScope', 'europeanaUrl', '$scope', '$state', 'langManager', '$stateParams', '$http', 'apiClient', '$uibModal', '$q', '$location', 'header', '$window', 'notification', GeneralSearchController]);

@@ -1,4 +1,4 @@
-var GalleryModalCtrl = function($scope, langManager, gallery, index, $modalInstance) {
+var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalInstance) {
     $scope.gallery = gallery;
     $scope.index = index;
     $scope.lang = langManager.lang;
@@ -17,7 +17,7 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $modalInsta
 		$scope.index = index;
 	};
 	$scope.dismiss = function () {
-        $modalInstance.dismiss();
+        $uibModalInstance.dismiss();
     };
     $scope.print = function () {
 		window.print();
@@ -39,4 +39,4 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $modalInsta
     }
 };
 
-angular.module('main').controller('GalleryModalCtrl', ['$scope', 'langManager', 'gallery', 'index', '$modalInstance', GalleryModalCtrl]);
+angular.module('main').controller('GalleryModalCtrl', ['$scope', 'langManager', 'gallery', 'index', '$uibModalInstance', GalleryModalCtrl]);

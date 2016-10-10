@@ -58,8 +58,8 @@
           </p>
         </div>
         <div class="dropdown-icons">
-          <div class="header-element dropdown-icons__my-account signed" dropdown>
-            <button class="my-account-label" dropdown-toggle>
+          <div class="header-element dropdown-icons__my-account signed" uib-dropdown>
+            <button class="my-account-label" uib-dropdown-toggle>
               <div class="dropdown-icons__user" ng-if="headerController.is_signedin">
                 <img class="dropdown-icons__user__pic" gravatar-src="headerController.auth.user.email" gravatar-default="identicon" gravatar-size="25"/>
               </div>
@@ -95,7 +95,7 @@
 
           <div class="header-element newsletter-popup">
             <div class="newsletter-popup__button">
-              <button class="label" ng-controller="NewsLetterPopoverCtrl as enewsCtrl" popover-template="'templates/enews-popover.html'" popover-is-open="enewsCtrl.popover.is_open"
+              <button class="label" ng-controller="NewsLetterPopoverCtrl as enewsCtrl" uib-popover-template="'templates/enews-popover.html'" popover-placement="bottom" popover-trigger="'outsideClick'" popover-is-open="enewsCtrl.popover.is_open"
                   ng-class="{'label--active': enewsCtrl.popover.is_open}">
                 <en>ENews</en>
                 <he>ניוזלטר</he>
@@ -175,9 +175,9 @@
                 <he>נצפו לאחרונה</he>
               </div>
             </li>
-            <!-- <li class="header-menu-item upload" dropdown is-open> -->
+            <!-- <li class="header-menu-item upload" uib-dropdown is-open> -->
               <!-- <div class="dropdown-icons__upload" dropdown is-open>
-                <div class="upload-label" dropdown-toggle>
+                <div class="upload-label" uib-dropdown-toggle>
                   <en>Upload</en>
                   <he>העלו קובץ</he>
                 </div>

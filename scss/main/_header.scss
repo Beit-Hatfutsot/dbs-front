@@ -285,69 +285,74 @@
 
 
                     &__button {
-                        .label {
-                            background-color: $yellow3;
-                            padding: 0 5px;
-                            line-height: 30px;
-                            font-size: 13px;
-                            font-weight: 600;
-                            color: #fff;
-                            border: none;
-                            outline: none;
-                            @include hover-pointer();
+                      .label {
+                          background-color: $yellow3;
+                          padding: 0 5px;
+                          line-height: 30px;
+                          font-size: 13px;
+                          font-weight: 600;
+                          color: #fff;
+                          border: none;
+                          outline: none;
+                          @include hover-pointer();
 
-                            &:hover {
-                                background-color: $gray3 !important;
-                            }
+                          &:hover {
+                              background-color: $gray3 !important;
+                          }
 
-                            &--active {
-                                background-color: $yellow2 !important;
-                            }
-                        }
+                          &--active {
+                              background-color: $yellow2 !important;
+                          }
+                      }
                     }
-                    &__content {
-                        position: absolute;
-                        top: 35px;
-                        width: 340px;
-                        line-height: normal;
-                        border: 1px solid $gray5;
-                        @include border-radius(3px);
-                        background-color: $gray6;
-                        @include box-shadow(0 0 6px 0 $gray4);
 
-                        .en & {
-                            left: -144px;
-                        }
-                        .he & {
-                            right: -144px;
-                        }
+                    .popover {
+                      width: 340px;
+                      max-width: 340px;
+                      padding: 0;
+                      line-height: normal;
+                      border: 1px solid $gray5;
+                      @include border-radius(3px);
+                      background-color: $gray6;
+                      @include box-shadow(rgba(0,0,0,0.2));
 
-                        .widgettitle {
-                            position: relative;
-                            margin: 0;
-                            line-height: 34px;
-                            font-size: 18px;
-                            font-weight: 600;
-                            color: #ffffff;
-                            background-color: $gray4;
-                            text-align: center;
+                      .arrow {
+                        display: none;
+                      }
 
-                            &:before {
-                                content: "";
-                                position: absolute;
-                                top: 3px;
-                                width: 22px;
-                                height: 27px;
-                                @include icon(-273px -366px);
+                      .popover-inner {
+                        width: 100%;
+                        padding: 0;
 
-                                .en & {
-                                    left: 10px;
-                                }
-                                .he & {
-                                    right: 10px;
-                                }
-                            }
-                        }
+                        .popover-content {
+                          padding: 0;
+
+                          .widgettitle {
+                              position: relative;
+                              margin: 0;
+                              line-height: 34px;
+                              font-size: 18px;
+                              font-weight: 600;
+                              color: #ffffff;
+                              background-color: $gray4;
+                              text-align: center;
+
+                              &:before {
+                                  content: "";
+                                  position: absolute;
+                                  top: 3px;
+                                  width: 22px;
+                                  height: 27px;
+                                  @include icon(-273px -366px);
+
+                                  .en & {
+                                      left: 10px;
+                                  }
+                                  .he & {
+                                      right: 10px;
+                                  }
+                              }
+                          }
 
                         .widgetcontent {
                             padding: 7px 15px;
@@ -400,7 +405,7 @@
 
                                         span {
                                             position: relative;
-                                            top: -2px;
+                                            top: 2px;
                                             font-size: 13px;
                                             font-weight: 400;
 
@@ -541,7 +546,10 @@
                                 left: 10px;
                             }
                         }
+                      }
                     }
+                  }
+
                 }
 
 

@@ -1,4 +1,4 @@
-<div class="newsletter-popup__content"> 
+<div class="popover-content">
     <h2 class="widgettitle">
         <en>Are you part of the story?</en>
         <he>רוצים להיות חלק מהסיפור?</he>
@@ -16,7 +16,7 @@
                 </small>
             </label>
             <input ng-model="enewsCtrl.email" class="mm_newemail" name="email" type="email" placeholder="{{(lang=='en')?'Email Address':'כתובת המייל'}}" required />
-            <div ng-show="myForm.$dirty && myForm.email.$invalid" class="errph"> 
+            <div ng-show="myForm.$dirty && myForm.email.$invalid" class="errph">
                 <en>Email address is missing or incorrect</en>
                 <he>כתובת מייל שגויה או חסרה</he>
             </div>
@@ -38,15 +38,15 @@
                     <he>יש לבחור לפחות שפה אחת</he>
                 </div>
             </div>
-            <input  class="newsletter-submit" type="submit" ng-value="(lang=='en')?'Register':'הרשמה'" 
+            <input  class="newsletter-submit" type="submit" ng-value="(lang=='en')?'Register':'הרשמה'"
                     ng-disabled="myForm.$invalid"/>
-            <div class="errph succes" ng-show="enewsCtrl.registered"> 
+            <div class="errph succes" ng-show="enewsCtrl.registered">
                 <en>Registration was successful, thank you!</en>
                 <he>הרישום בוצע בהצלחה, תודה רבה!</he>
             </div>
         </form>
     </div>
-    <div>  
+    <div>
         <icon position="[-224, -306]" class="close-button" ng-click="enewsCtrl.popover.close()"></icon>
     </div>
 </div>

@@ -212,5 +212,5 @@ AuthCtrl.prototype = {
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance',
+angular.module('auth').controller('AuthCtrl', ['$scope', '$uibModalInstance',
 			'langManager', 'auth', 'notification', '$state', 'config', AuthCtrl]);

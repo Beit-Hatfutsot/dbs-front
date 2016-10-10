@@ -9,18 +9,18 @@ describe('auth-controllers', function() {
 
     describe('AuthCtrl', function() {
 
-        var scope, modalInstance, $timeout, auth, notification;
+        var scope, uibModalInstance, $timeout, auth, notification;
 
         beforeEach(inject(function($rootScope, $controller, $q, _$timeout_,
 								  langManager) {
             $timeout = _$timeout_;
             scope = $rootScope.$new();
 
-            modalInstance = {
-                close: jasmine.createSpy('modalInstance.close'),
-                dismiss: jasmine.createSpy('modalInstance.dismiss'),
+            uibModalInstance = {
+                close: jasmine.createSpy('uibModalInstance.close'),
+                dismiss: jasmine.createSpy('uibModalInstance.dismiss'),
                 result: {
-                  then: jasmine.createSpy('modalInstance.result.then')
+                  then: jasmine.createSpy('uibModalInstance.result.then')
                 }
             };
 
@@ -47,7 +47,7 @@ describe('auth-controllers', function() {
 
             $controller('AuthCtrl as ctrl', {
                 $scope: scope,
-                $modalInstance: modalInstance,
+                $uibModalInstance: uibModalInstance,
 				langManager: langManager,
                 auth: auth,
 				notification: notification,
@@ -60,7 +60,7 @@ describe('auth-controllers', function() {
             scope.ctrl.signin_data = { email: 'test@example.com' };
             scope.ctrl.signin();
             $timeout.flush();
-            expect(modalInstance.close).toHaveBeenCalled();
+            expect(uibModalInstance.close).toHaveBeenCalled();
             expect(notification.put).toHaveBeenCalledWith(1);
         });
 
@@ -73,7 +73,7 @@ describe('auth-controllers', function() {
 
         it('should close modal after dsimissal', function() {
             scope.ctrl.dismiss();
-            expect(modalInstance.dismiss).toHaveBeenCalled();    
+            expect(uibModalInstance.dismiss).toHaveBeenCalled();
         });
     });
 });

@@ -103,8 +103,8 @@
       </div>
     </a>
   </ng-switch>
-  <div ng-if="itemPreviewController.in_mjs_state()" class="mjs" ng-class="{'mjs--person':itemPreviewController.collection_name==='genTreeIndividuals'}" dropdown dropdown-toggle
-     on-toggle="itemPreviewController.rmdialog_is_open = false; itemPreviewController.toggle_height();">
+  <div ng-if="itemPreviewController.in_mjs_state()" class="mjs" ng-class="{'mjs--person':itemPreviewController.collection_name==='genTreeIndividuals'}" uib-dropdown uib-dropdown-toggle
+     on-toggle="itemPreviewController.rmdialog_is_open = false; itemPreviewController.toggle_height(); "> <!-- window.scrollBy(0, 200)" -->
       <span class="mjs__desc">
         <en>Appears in:</en>
         <he>מופיע ב:</he>
@@ -154,7 +154,7 @@
                 </div>
             </div>
         </div>
-        <div class="close-button-back" ng-hide="itemPreviewController.rmdialog_is_open" dropdown-toggle>
+        <div class="close-button-back" ng-hide="itemPreviewController.rmdialog_is_open" uib-dropdown-toggle>
             <span class="close-button">x</span>
         </div>
       </div>
