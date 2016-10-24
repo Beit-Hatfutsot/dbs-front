@@ -57,7 +57,8 @@
       </div>
     </a>
 
-    <a  ng-switch-when="false" ng-href="{{itemPreviewController.get_item_url(previewData)}}" target="{{itemSource=='cjh'||itemSource=='europeana'?'_blank': null}}">
+    <a  ng-switch-when="false"  ng-href="{{itemPreviewController.get_item_url(previewData)}}"
+        target="{{itemSource=='cjh'||itemSource=='europeana'?'_blank': '_self'}}">
       <div class="thumbnail" ng-if="previewData.thumbnail.data">
         <img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
            alt="Preview Image"/>
@@ -71,10 +72,25 @@
           <en>{{previewData.Header.En}}</en>
           <he>{{previewData.Header.He}}</he>
         </div>
-        <div class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
-                <en><span marked="previewData.UnitText1.En"></span></en>
-                <he><span marked="previewData.UnitText1.He"></span></he>
+        <div ng-if="itemSource != 'bh'" class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
+            <en><span marked="previewData.UnitText1.En"></span></en>
+            <he><span marked="previewData.UnitText1.He"></span></he>
         </div>
+        <div ng-if="itemSource == 'bh'">
+          <ng-switch on="previewData.UnitText1.{{itemPreviewController.uc_first()}} != '' && previewData.UnitText1.{{itemPreviewController.uc_first()}} != null">
+            <div ng-switch-when="true" class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
+              <en><span marked="previewData.UnitText1.En"></span></en>
+              <he><span marked="previewData.UnitText1.He"></span></he>
+            </div>
+            <div ng-switch-when="false" class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
+              <en>This item only exists in Hebrew at the moment.<br>
+                  But not all is lost.<br>Click on the card to view it in Hebrew.
+              </en>
+              <he>Sorry, עמוד זה קיים באנגלית בלבד. אבל יש תקווה באופק - לחצו על הכרטיסייה על מנת לעבור לעמוד באנגלית.</he>
+            </div>
+          </ng-switch>
+        </div>
+
         <div class="diagonal-block" ng-if="previewData.thumbnail.data"
            ng-class="{'diagonal-block--ext-result': itemSource!='bh'}">
           <div  class="diagonal-separator" style="right:-22px; opacity:1"></div>

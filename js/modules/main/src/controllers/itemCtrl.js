@@ -21,6 +21,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this._Index = 0;
 	this.lang = langManager.lang;
 	this.$rootScope = $rootScope;
+	this.proper_link = '';
 
 	$rootScope.$on('$stateChangeStart',
 	    function(event, toState, toParams, fromState, fromParams){
@@ -83,13 +84,13 @@ ItemCtrl.prototype = {
 		self.notification.loading(true);
 		this.item.get(this.slug).
 			then(function(item_data) {
-
 				self.recentlyViewed.put(
 					{Slug: item_data.Slug,
 					 header: item_data.Header,
 					 thumbnail: item_data.thumbnail.data
 					});
 				self.item_data = item_data;
+				self.proper_link = self.item.get_url(self.item_data);
 				self.content_loaded = true;
 				self.refresh_root_scope();
 				if (item_data.related)
@@ -165,7 +166,6 @@ ItemCtrl.prototype = {
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
 	     	size: 'lg',
-
 	     	resolve : {
 	     		gallery: function () {
 	     			return gallery
@@ -204,7 +204,8 @@ ItemCtrl.prototype = {
 	},
 
 	sort_pictures: function() {
-		var digitized = [],
+		if (this.item_data.Pictures) {
+			var digitized = [],
 			nondigitized = [];
 		for (var i = 0; i < this.item_data.Pictures.length; i++) {
 			var pic = this.item_data.Pictures[i];
@@ -217,7 +218,13 @@ ItemCtrl.prototype = {
 		}
 		digitized.push.apply(digitized, nondigitized);
 		return digitized;
-	}
+		}
+	},
+
+	uc_first: function() {
+		var lang = this.lang;
+    	return lang.charAt(0).toUpperCase() + lang.slice(1);
+    }
 
 };
 

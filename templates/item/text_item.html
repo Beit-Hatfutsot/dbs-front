@@ -70,10 +70,40 @@
 							<item-type type="itemController.item_type" image="itemController.item_data.thumbnail.data"></item-type>
 							<mjs-widget item="itemController.item_data"></mjs-widget>
 						</div>
-						<div class="item__article-text">
-	            	<en><span marked="itemController.item_data.UnitText1.En"></span></en>
-	              	<he><span marked="itemController.item_data.UnitText1.He"></span></he>
-						</div>
+            <div ng-switch on="itemController.item_data.UnitText1.{{itemController.uc_first()}} !== ''
+                              && itemController.item_data.UnitText1.{{itemController.uc_first()}} != null">
+              <div ng-switch-when="true" class="item__article-text">
+                <en><span marked="itemController.item_data.UnitText1.En"></span></en>
+                <he><span marked="itemController.item_data.UnitText1.He"></span></he>
+              </div>
+              <div ng-switch-default="false" class="item__article-text">
+                <en>
+                  <span>
+                    <p class="err-preview">This item only exists in Hebrew at the moment...<br>
+                    But not all is lost! <span class="err-preview-sm"><a ng-href="{{itemController.proper_link}}" target="_self">Click here</a> to view it in Hebrew.</span></p>
+                    <h3>Why is this happening?</h3>
+                    <p>The search results are derived from a wide array of sources, including a rich repository of Hebrew texts. Our experts are hard at work translating these texts, but unfortunately there are some results we haven't gotten to yet. Rest assured, we're working on it!</p>
+                    <h3>Can you help us translate this item?</h3>
+                    <p>If you are fluent in both English and Hebrew, we invite you to contribute to our database by translating, editing and giving feedback on items such as this.
+                    <a ng-href="http://www.bh.org.il/about-us/volunteering/" target="_blank">Click here for more details</a>.</p>
+                  </span>
+                </en>
+                <he><span>
+                  <p class="err-preview">Sorry, עמוד זה קיים באנגלית בלבד.<br> אבל יש תקווה באופק - <span class="err-preview-sm">
+                    <a ng-href="{{itemController.proper_link}}" target="_self">לחצו כאן</a> כדי לעבור לעמוד באנגלית.</span></p>
+                  <h3>מדוע זה קורה?</h3>
+                    <p>מאגר המדע של בית התפוצות נבנה לאורך עשרןת שנים בעמל רב בידי אנשי מקצוע מסורים.<br>
+                      האייטמים נאספו ממספר מקורות רחב ומגוון - עבודה שהתקשתה על עבודה התרגום לעברית.<br>
+                      בימים אלו צוות בית התפוצות עובד על תרגום כל האייטמים, אולם לצערנו עדיין נותרו מםפר דפים לא מתורגמים.
+                    </p>
+                    <h3>רוצים לעזור בתרגום?</h3>
+                    <p>אם אתם שולטים בעברית ובאנגלית ברמת שפת אם, הנכם מוזמנים לסייע לנו בעבודת התרגום, העריכה, ההגהה ועוד
+                      <a ng-href="http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/" target="_blank">לפרטים נוספים</a>.
+                    </p>
+                </span>
+              </div>
+            </div>
+
 						<div class="scroll-to-top"onclick="window.scroll(0, 0)">
 							<en>Back to top</en>
 							<he>חזרה למעלה</he>

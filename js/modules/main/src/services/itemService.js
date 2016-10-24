@@ -87,11 +87,15 @@ angular.module('main').
 					return $state.href('item-view', item_data.slug.full);
 				}
 				*/
+
 			    var lang = $rootScope.lang,
 					proper_lang = lang[0].toUpperCase() + lang.slice(1),
 					params,
 					state;
-
+				if (item_data.UnitText1[proper_lang] == null || item_data.UnitText1[proper_lang] == '') {
+					proper_lang == 'En' ? proper_lang = 'He' : proper_lang = 'En';
+					lang = proper_lang.toLowerCase();
+				}
 
 				//TODO: try and remove the next 3 lines as url should be based
 				// on current language
@@ -112,7 +116,9 @@ angular.module('main').
 				}
 				if (lang == 'he')
 					state = 'he.he_'+state;
+
 				return $state.href(state, params);
+
 			},
 
 			get_data_string: function(item_data) {
