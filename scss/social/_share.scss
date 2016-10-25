@@ -26,7 +26,9 @@
     }
   .bg {fill: #ddd;}
   .fg {fill: #999999; }
-  svg { height: 32px; }
+  svg { height: 32px;
+        width: 32px;
+     }
   a {
     .en & {
       margin-left: 16px;
