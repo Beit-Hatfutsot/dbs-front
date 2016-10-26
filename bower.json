@@ -15,7 +15,8 @@
     "ng-flow": "~2",
     "ngstorage": "~0.3.10",
     "angular-gravatar": "0.4.2",
-    "clipboard": "^1.5.12"
+    "clipboard": "^1.5.12",
+    "angular-scroll": "^1.0.0"
   },
   "overrides": {
     "jquery": {

@@ -28,7 +28,8 @@ angular.module('main', [
     'gedcomParser',
 	'hc.marked',
     'ui.gravatar',
-    'bhsclient-templates'
+    'bhsclient-templates',
+    'duScroll'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider',
