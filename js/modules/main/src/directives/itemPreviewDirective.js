@@ -13,7 +13,7 @@ angular.module('main').directive('itemPreview', function() {
       /*building person data*/
             var children = [];
             try {
-                scope.previewData.tree.partners.forEach(function(partner) {
+                scope.previewData.partners.forEach(function(partner) {
                     partner.children.forEach(function(child) {
                         children.push(child.name[0]);
                     })

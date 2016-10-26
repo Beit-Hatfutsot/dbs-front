@@ -116,7 +116,7 @@ PersonViewController.prototype = {
 
 	load: function (params) {
 		var self = this,
-        slug = 'person_' + params.tree_number + '.' + params.node_id;
+        slug = 'person_' + params.tree_number + ';' + params.version + '.' + params.node_id;
 
 		self.notification.loading(true);
 		self.item.get(slug)
@@ -135,7 +135,7 @@ PersonViewController.prototype = {
 				self.tree_number = params.tree_number;
 				// self.detailsShown = true;
         self.node.Slug = {En: slug};
-				self.$rootScope.title = self.get_full_name(self.node.tree);
+				self.$rootScope.title = self.get_full_name(self.node);
 
 				if (self.$window.d3)
 					self.render(self.node)
@@ -214,7 +214,7 @@ PersonViewController.prototype = {
 	},
 
 	render: function(node) {
-		var cn = node.tree;
+		var cn = node;
 		var self = this;
 		if ( !cn.pos ) {
 			this.layoutEngine.layoutNode(cn);

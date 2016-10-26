@@ -196,7 +196,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
         {
             name: 'person-view',
-            url: '/person/:tree_number/:node_id',
+			// TODO: make the version optional
+			url: '/person/:tree_number/:version/:node_id',
             controller: 'PersonViewController as ctrl',
             templateUrl: 'templates/main/ftrees/person.html',
             onEnter: ['header', function(header) {
