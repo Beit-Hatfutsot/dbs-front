@@ -5,7 +5,7 @@
       <he>{{item.header.He}}</he>
     </div>
     <div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" data="item">
-      <img src="data:image/jpeg;base64,{{item.thumbnail}}" alt="Item Thumbnail Image" fit-thumb>
+      <img data-ng-src="data:image/jpeg;base64,{{item.thumbnail}}" alt="Item Thumbnail Image" fit-thumb>
     </div>
   </ng-switch>
 </a>
