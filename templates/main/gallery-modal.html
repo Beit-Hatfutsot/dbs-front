@@ -5,7 +5,7 @@
        <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
     <div class="gallery-modal__stage noselect">
-      <div ng-repeat="pic in sort_pictures()" ng-switch on="pic.PictureId != ''">
+      <div ng-repeat="pic in sort_pictures()" ng-switch on="pic.PictureId != undefined">
         <img  ng-switch-when="true"
               ng-show="isActive($index)"
               ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"
@@ -52,7 +52,7 @@
             </div>
             <ul class="gallery-modal__info__gallery-preview__minified-picture">
                 <li ng-repeat="pic in sort_pictures()" ng-class="{'active':isActive($index)}">
-                    <img  ng-src="{{pic.PictureId == '' ? 'images/digitization-sm-'+lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
+                    <img  ng-src="{{pic.PictureId == undefined  ? 'images/digitization-sm-'+lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
                           ng-click="showPhoto($index)"/>
                 </li>
             </ul>

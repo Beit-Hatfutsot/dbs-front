@@ -92,9 +92,10 @@ angular.module('main').
 					proper_lang = lang[0].toUpperCase() + lang.slice(1),
 					params,
 					state;
-				if (item_data.UnitText1[proper_lang] == null || item_data.UnitText1[proper_lang] == '') {
-					proper_lang == 'En' ? proper_lang = 'He' : proper_lang = 'En';
-					lang = proper_lang.toLowerCase();
+				//get url with another language if the item's description in current is missing
+				if (item_data.UnitText1 && (item_data.UnitText1[proper_lang] == null || item_data.UnitText1[proper_lang] == '')) {
+				proper_lang == 'En' ? proper_lang = 'He' : proper_lang = 'En';
+				lang = proper_lang.toLowerCase();
 				}
 
 				//TODO: try and remove the next 3 lines as url should be based

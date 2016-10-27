@@ -29,7 +29,7 @@
                     <div printSection class="item__content">
                         <div  class="item__content__media-container"
                               ng-class="{'item__content__media-container--photoUnit': itemController.item_type === 'photoUnits'}">
-                            <div ng-repeat="pic in itemController.sort_pictures()" ng-switch on="pic.PictureId != ''">
+                            <div ng-repeat="pic in itemController.sort_pictures()" ng-switch on="pic.PictureId != undefined">
                               <img  ng-switch-when="true"
                                     class="picture"
                                     ng-show="itemController.isActive($index)"
@@ -38,7 +38,7 @@
                                     prevent-rightclick
                                     fit-thumb>
 
-                              <a    ng-switch-default
+                              <a    ng-switch-when="false"
                                     ng-href="{{itemController.lang=='en'?'http://www.bh.org.il/about-us/volunteering/':'http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/'}}"
                                     target="blank">
                                 <img  class="picture notdigitized"
@@ -85,7 +85,7 @@
                                 </div>
                                  <ul class="gallery-modal__info__gallery-preview__minified-picture">
                                     <li ng-repeat="pic in itemController.sort_pictures()" ng-class="{'active':itemController.isActive($index)}" ng-hide="isHidden($index)">
-                                        <img ng-src="{{pic.PictureId == '' ? 'images/digitization-sm-'+itemController.lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
+                                        <img ng-src="{{pic.PictureId == undefined ? 'images/digitization-sm-'+itemController.lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
                                              ng-click="itemController.showPhoto($index)"/>
                                     </li>
                                 </ul>
