@@ -28,7 +28,7 @@
     <meta property="twitter:site" content="@BeitHatfutsot" />
     <meta property="twitter:card" content="{{og_image?'summary_large_image':'summary'}}" />
 	</head>
-	<body class="{{lang}}" lang="{{lang}}" ng-cloak flow-prevent-drop item-scroll>
+	<body ng-class="{'visible-scroll' : isCurrentState('general-search')}" class="{{lang}}" lang="{{lang}}" ng-cloak flow-prevent-drop item-scroll>
 		<div id="app-container">
 			<ng-include src="'templates/main/header.html'"></ng-include>
 			<ng-include src="'templates/main/sub-header.html'" ng-if="header_visible"></ng-include>
