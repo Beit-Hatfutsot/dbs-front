@@ -140,6 +140,10 @@
                             .icon {
                                 margin: 0 auto;
                                 display: none;
+
+                                svg .cls-1 {
+                                  fill: #fff;
+                                }
                             }
 
                             .title,
