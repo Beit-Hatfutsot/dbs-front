@@ -33,7 +33,7 @@ angular.module('main').
       	he: 'מצטתי אנשים בעצי המשפחהן',
       }, 3: {
       	en: "Sorry, didn't find any person",
-      	he: 'מצטערים, לא מצאתי אנשים',
+      	he: 'מצטערים, לא נמצאו אנשים בשם זה',
       	options: errorOptions
       }, 4: {
       	en: 'Loading item...',
