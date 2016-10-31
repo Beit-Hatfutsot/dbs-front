@@ -61,29 +61,29 @@
     <a  ng-switch-when="false"  ng-href="{{itemPreviewController.get_item_url(previewData)}}"
         target="{{itemSource=='cjh'||itemSource=='europeana'?'_blank': '_self'}}">
       <div class="thumbnail" ng-if="previewData.thumbnail.data">
-        <img ng-if="itemSource=='bh'" ng-src="data:image/jpeg;base64,{{previewData.thumbnail.data}}"
+        <img ng-if="itemSource=='bh'" ng-src="https://storage.googleapis.com/bhs-flat-pics/{{previewData.thumbnail.data}}.jpg"
            alt="Preview Image"/>
          <img ng-if="itemSource!='bh'" ng-src="{{previewData.thumbnail.data}}"
            alt="Preview Image"/>
       </div>
-      <div class="white-part1" ng-class="{'white-part1--nothumb': !(previewData.thumbnail.data), 'white-part1--thumbnail': previewData.thumbnail.data}">
+      <div class="white-part1" ng-class="{'white-part1--nothumb': !previewData.thumbnail.data, 'white-part1--thumbnail': previewData.thumbnail.data}">
         <div class="header"
-          ng-class="{'header--nothumb': !(previewData.thumbnail.data),
+          ng-class="{'header--nothumb': !previewData.thumbnail.data,
                      'isExtResult': itemSource != 'bh'}">
           <en>{{previewData.Header.En}}</en>
           <he>{{previewData.Header.He}}</he>
         </div>
-        <div ng-if="itemSource != 'bh'" class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
+        <div ng-if="itemSource != 'bh'" class="text" ng-class="{'text--nothumb': !previewData.thumbnail.data}">
             <en><span marked="previewData.UnitText1.En"></span></en>
             <he><span marked="previewData.UnitText1.He"></span></he>
         </div>
         <div ng-if="itemSource == 'bh'">
           <ng-switch on="previewData.UnitText1.{{itemPreviewController.uc_first()}} != '' && previewData.UnitText1.{{itemPreviewController.uc_first()}} != null">
-            <div ng-switch-when="true" class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
+            <div ng-switch-when="true" class="text" ng-class="{'text--nothumb': !previewData.thumbnail.data}">
               <en><span marked="previewData.UnitText1.En"></span></en>
               <he><span marked="previewData.UnitText1.He"></span></he>
             </div>
-            <div ng-switch-when="false" class="text" ng-class="{'text--nothumb': !(previewData.thumbnail.data)}">
+            <div ng-switch-when="false" class="text" ng-class="{'text--nothumb': !previewData.thumbnail.data}">
               <en>This item only exists in Hebrew at the moment.<br>
                   But not all is lost.<br>Click on the card to view it in Hebrew.
               </en>

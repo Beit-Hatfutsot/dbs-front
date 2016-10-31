@@ -111,6 +111,21 @@ GeneralSearchController.prototype = {
         self.$http.get(self.apiClient.urls.search, {params: self.api_params()})
         .success(function (r) {
             self.results = r.hits;
+            //add thumbnail
+            var hits = self.results.hits;
+            hits.forEach(function (hit, _hit) {
+                if (hit._source.Pictures) {
+                    var thumbnail = false;
+                    hit._source.Pictures.every (function (picture) {
+                        if (picture.IsPreview == '1') {
+                            self.results.hits[_hit]._source['thumbnail'] = { 'data' : picture.PictureId };
+                            thumbnail = true;
+                        }
+                        return !thumbnail;
+                    })
+                }
+            });
+
             self.notification.loading(false);
         });
 
