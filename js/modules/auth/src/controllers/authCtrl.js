@@ -209,6 +209,11 @@ AuthCtrl.prototype = {
      */
     select_field: function(key) {
         this.selected_field = key;
+    },
+
+    focus_field: function() {
+        var target = angular.element(document.querySelector('#signin-name'));
+        target.focus();
     }
 }
 

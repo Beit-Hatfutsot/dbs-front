@@ -24,12 +24,13 @@
 							ng-model="authController.signin_data.email"
 							ng-focus="authController.select_field('email')"
 							ng-blur="authController.select_field(null)"
-							required>
+              required>
+
 					<label for="signin-name" ng-class="{'bhf__field__label--up': authController.selected_field === 'email' || authController.signin_data.email || rc.signin_form.needsAttention(signin_form.email), 'bhf__field__label--down': authController.selected_field !== 'email' && !(authController.signin_data.email) && !(rc.signin_form.needsAttention(signin_form.email))}">
 						<en>Enter your email here</en>
 						<he>הזינו פה כתובת אימייל</he>
 					</label>
-					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.email)">
+					<div class="bhf__field__error" ng-show="rc.signin_form.needsAttention(signin_form.email)" ng-click="authController.focus_field()">
 						<en>Please enter an email</en>
 						<he>אנא הכניסו דוא"ל</he>
 					</div>
