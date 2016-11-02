@@ -102,9 +102,7 @@ var PersonsController = function($rootScope, $scope, $state, $stateParams, ftree
 PersonsController.prototype = {
 	search: function(search_params) {
 		var self = this;
-
 		this.notification.loading(true);
-
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
@@ -122,8 +120,9 @@ PersonsController.prototype = {
 	fetch_more: function() {
 		var self = this;
 		this.notification.loading(true);
-		var search_params = angular.copy(this.search_params);
+		var search_params = angular.copy(self.search_params);
 		search_params.start = self.individuals.items.length;
+		this.handle_search_modifiers(search_params);
 		this.ftrees.search(search_params).
 			then(function (r){
 				self.individuals.items = self.individuals.items.concat(r.items);
@@ -150,6 +149,15 @@ PersonsController.prototype = {
     	this.$location.search(param);
     },
 
+    handle_search_modifiers: function(search_params) {
+		for (var modifier in this.search_modifiers) {
+			var modifier_string = this.search_modifiers[modifier];
+			if (this.search_params[modifier] !== undefined && modifier_string !== '') {
+				search_params[modifier] += ';' + modifier_string;
+			}
+		}
+    },
+
 	update: function() {
 		var search_params = angular.copy(this.search_params);
 
@@ -158,19 +166,13 @@ PersonsController.prototype = {
 				delete search_params[param];
 			}
 		}
-
-		// insert search modifiers & fudge_factors into query string
-		for (var modifier in this.search_modifiers) {
-			var modifier_string = this.search_modifiers[modifier];
-			if (search_params[modifier] !== undefined && modifier_string !== '') {
-				search_params[modifier] += ';' + modifier_string;
-			}
-		}
+		this.handle_search_modifiers(search_params);
 		search_params.more = this.$stateParams.more;
-
 		this.$state.go('persons', search_params, {inherit: false});
 		this.$window.sessionStorage.setItem('ftrees_search_params', JSON.stringify(search_params));
 	},
+
+
 
  	clear_filters: function() {
  		for (var parameter in this.search_params) {
