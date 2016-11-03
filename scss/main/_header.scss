@@ -559,19 +559,12 @@
 
                 .logo {
                     display: inline-block;
-                    vertical-align: bottom;
-                    top: 10px;
-                    width: 114px;
-                    height: 57px;
+                    width: auto;
                     z-index: 1;
 
-                    .en &{
-                        width: 114px;
-                        height: 57px;
-                    }
-                    .he & {
-                        width: 126px;
-                        height: 57px;
+                    svg {
+                      height: 56px;
+                      vertical-align: middle;
                     }
                 }
 
