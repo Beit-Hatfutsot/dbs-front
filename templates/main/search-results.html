@@ -1,4 +1,4 @@
-﻿<div id="item-page-container">
+<div id="item-page-container">
     <nav class="menu gsearch">
         <ul class="nav">
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'allResults'}" ng-click="generalSearchCtrl.goto_results('allResults')">
@@ -13,10 +13,16 @@
                     <he>מקומות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'media'}" ng-click="generalSearchCtrl.goto_results('media')">
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'images'}" ng-click="generalSearchCtrl.goto_results('images')">
                 <span class="text">
-                    <en>Images<br>& Videos</en>
-                    <he>תמונות + וידאו</he>
+                    <en>Images</en>
+                    <he>תמונות</he>
+                </span>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'videos'}" ng-click="generalSearchCtrl.goto_results('videos')">
+                <span class="text">
+                    <en>Videos</en>
+                    <he>וידאו</he>
                 </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'luminaries'}" ng-click="generalSearchCtrl.goto_results('luminaries')">
@@ -51,7 +57,15 @@
                     </span>
                 </div>
             </div>
-            <div ng-switch-when='media' class="about-bh">
+            <div ng-switch-when='images' class="about-bh">
+                <div class="title">
+                    <span>
+                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
+                    </span>
+                </div>
+            </div>
+            <div ng-switch-when='videos' class="about-bh">
                 <div class="title">
                     <span>
                         <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>

@@ -13,10 +13,16 @@
                     <he>מקומות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'media'}" ng-click="generalSearchCtrl.goto_results('media')">
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'images'}" ng-click="generalSearchCtrl.goto_results('images')">
                 <span class="text">
-                    <en>Images<br>& Videos</en>
-                    <he>תמונות + וידאו</he>
+                    <en>Images</en>
+                    <he>תמונות</he>
+                </span>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'videos'}" ng-click="generalSearchCtrl.goto_results('videos')">
+                <span class="text">
+                    <en>Videos</en>
+                    <he>וידאו</he>
                 </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'luminaries'}" ng-click="generalSearchCtrl.goto_results('luminaries')">
@@ -79,7 +85,32 @@
                     </div>
                 </div>
             </div>
-            <div class="about_center" ng-switch-when='media'>
+            <!--To do: use 'ng-switch-when-separator="|"' -->
+            <div class="about_center" ng-switch-when="images">
+                <div class="article">
+                    <h3 class="article_title">
+                        <en>About Bernard H. and Miriam Oster Visual Documentation Center</en>
+                        <he>אודות מרכז לתיעוד חזותי ע"ש ברנרד ה. ומרים אוסטר בבית התפוצות</he>
+                    </h3>
+                    <div class="content">
+                        <en>
+                            <p>If a picture paints a thousand words, then the Bernard H. and Miriam Oster Visual Documentation Center of Beit Hatfutsot speaks countless volumes.</p>
+                            <p>Indeed, the Center is one of the richest and most diverse collections of photographs depicting Jewish history, heritage, creativity and communal life, and over 800 rare films and self-produced documentaries about Jewish life across the globe.</p>
+                            <p>The Center constitutes an internationally recognized center of Jewish documentation. It is a valuable resource for scholars, publishers, journalists, the media, institutions and members of the general public who are interested in Jewish culture, history and communal life.</p>
+                            <p>The visual documentation collections cover a vast array of Jewish life, including: communities, synagogues, public institutions, culture, art, holidays, ceremonies, family and home life, lifestyles, trades, professions, key personalities and events.</p>
+                            <p>To receive more information about the photo and video collections, or to donate photographs, prints, slides, or films, please contact the Bernard H. and Miriam Oster Visual Documentation Center at rachels@bh.org.il or tel: 972-3-7457851.</p>
+                        </en>
+                        <he>
+                            <p>המרכז לתיעוד חזותי ע"ש ברנרד ה. ומרים אוסטר בבית התפוצות הוא בית לאוסף התמונות וסרטים, מהעשירים בעולם היהודי.</p>
+                            <p>התמונות במרכז מתארות את ההיסטוריה, המורשת, היצירה וחיי הקהילה היהודית, ומכסות תחומי חיים נרחבים, בהם קהילות, בתי כנסת, מוסדות ציבור, תרבות ואמנות, חגים וטקסים, חיי משפחה וחיי יום-יום, סגנונות ואורחות חיים, מקצועות ועיסוקים, אישים ואירועים. עוד במרכז אוסף של יותר מ-800 סרטים, רבים נדירים, חלקם סרטים תיעודיים שהופקו על ידי בית התפוצות.</p>
+                            <p>המרכז משרת לא רק את הקהל הרחב, אלא גם חוקרים, מוציאים לאור, עיתונאים, כלי תקשורת ומוסדות מקצועיים נוספים ברחבי העולם.</p>
+                            <p>לקבלת מידע נוסף על אוספי התמונות והסרטים, לאפשרויות רכישה באיכות גבוהה, או לתרומה של תמונות, הדפסים, שקופיות או סרטים, אנא צרו קשר:</p>
+                            <p>מייל: rachels@bh.org.il<br>טלפון: 03-7457850</p>
+                        </he>
+                    </div>
+                </div>
+            </div>
+            <div class="about_center" ng-switch-when="videos">
                 <div class="article">
                     <h3 class="article_title">
                         <en>About Bernard H. and Miriam Oster Visual Documentation Center</en>

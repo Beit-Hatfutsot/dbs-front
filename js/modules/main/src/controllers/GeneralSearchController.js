@@ -14,8 +14,8 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
     header.show_search_box();
     this.header = header;
     this.$scope = $scope;
-    this.eurp_total = '';
-    this.cjh_total = '';
+    this.eurp_total = 0;
+    this.cjh_total = 0;
     this.loading_eurp = true;
     this.loading_cjh = true;
     this.google_query = "";
@@ -42,10 +42,16 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
             He: 'מקומות'
         },
 
-        media: {
-            En: 'Images & Videos',
-            He: 'תמונות + וידאו',
-            api: 'photoUnits,movies'
+        images: {
+            En: 'Images',
+            He: 'תמונות',
+            api: 'photoUnits'
+        },
+
+        videos: {
+            En: 'Videos',
+            He: 'וידאו',
+            api: 'movies'
         },
 
         luminaries: {
@@ -115,23 +121,29 @@ GeneralSearchController.prototype = {
             self.notification.loading(false);
         });
 
-        if(this.collection == 'allResults' || this.collection == 'media') {
+
+
+        if(this.collection == 'allResults' || this.collection == 'images' || this.collection == 'videos') {
+            this.eurp_total = 0;
+            this.cjh_total = 0;
             this.search_europeana(function(r) {
                 self.eurp_total = r.totalResults;
                 self.push_eurp_items(r);
                 self.loading_eurp = false;
             });
-
-            self.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
-            .success(function(r) {
-                self.cjh_total = r.response.numFound;
-                self.push_cjh_items(r);
-                self.loading_cjh = false;
-            })
+            if (this.collection !== 'videos') {
+                self.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
+                .success(function(r) {
+                    self.cjh_total = r.response.numFound;
+                    console.log(self.cjh_total);
+                    self.push_cjh_items(r);
+                    self.loading_cjh = false;
+                })
+            }
         }
         else {
-            this.eurp_total = '';
-            this.cjh_total = '';
+            this.eurp_total = 0;
+            this.cjh_total = 0;
         }
     },
 
@@ -206,8 +218,11 @@ GeneralSearchController.prototype = {
 				      rows: 5};
         params.query = this.header.query;
 
-		if (this.collection == 'media')
-            params.qf += ' TYPE:(IMAGE OR VIDEO)';
+		if (this.collection == 'images')
+            params.qf += ' TYPE:IMAGE';
+
+        if (this.collection == 'videos')
+            params.qf += ' TYPE:VIDEO';
 
         params.start = this.eurp_results.length || 1;
 		this.$http.get(this.europeanaUrl, {params: params})
@@ -217,8 +232,7 @@ GeneralSearchController.prototype = {
     api_params_cjh: function () {
        var params = {};
         params.q = this.header.query;
-
-        if (this.collection == 'media')
+        if (this.collection == 'images')
 			params.q = params.q.concat(' dtype: Photographs');
 
         params.start = this.cjh_results.length;
