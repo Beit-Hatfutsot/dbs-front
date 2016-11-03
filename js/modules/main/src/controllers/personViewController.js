@@ -121,7 +121,7 @@ PersonViewController.prototype = {
 		self.notification.loading(true);
 		self.item.get(slug)
 			.then(function (item_data) {
-				var name = self.get_full_name(item_data.tree),
+				var name = self.get_full_name(item_data),
 					thumbnail = null;
 				self.node = item_data;
 				if (item_data.thumbnail)

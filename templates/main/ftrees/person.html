@@ -6,18 +6,13 @@
         <en>People in this tree:</en>
         <he>מספר אנשים בעץ זה:</he>
       </h3>
-      <h2>{{ctrl.node.tree.meta.num_nodes || "..." }}</h2>
+      <h2>{{ctrl.node.tree_size || "..." }}</h2>
 			<icon class="ftree-title__tree-icon" position="[-145, -451]"></icon>
       <h3>
         <en>Tree ID number:</en>
         <he>מספר סידורי של העץ</he>
       </h3>
       <h2>{{ctrl.tree_number}}</h2>
-      <h3 ng-if="ctrl.tree.node.meta.date">
-        <en>This tree uploaded in:</en>
-        <he>העץ עודכן בשנת:</he>
-      </h3>
-      <h2>{{ctrl.tree.node.meta.date|date:'yyyy' || "..."}}</h2>
 
       <div class="pull-right">
         <h3>
