@@ -117,7 +117,7 @@ GeneralSearchController.prototype = {
         self.$http.get(self.apiClient.urls.search, {params: self.api_params()})
         .success(function (r) {
             self.results = r.hits;
-            self.add_preview_image(self.results);
+			self.add_preview_image(self.results);
             self.notification.loading(false);
         });
 
@@ -148,6 +148,7 @@ GeneralSearchController.prototype = {
     },
 
     add_preview_image: function (items) {
+		return
         var self = this;
         var hits = items.hits;
         hits.forEach(function (hit, _hit) {
@@ -209,7 +210,7 @@ GeneralSearchController.prototype = {
         this.$http.get(this.apiClient.urls.search, {params: this.api_params()})
         .success(function (r){
             results.hits = results.hits.concat(r.hits.hits);
-            self.add_preview_image(results);
+			// self.add_preview_image(results);
         });
     },
 
