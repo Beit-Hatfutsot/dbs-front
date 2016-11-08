@@ -21,7 +21,15 @@
     height: 34px;
 
     svg {
-      fill: #cb5947;
+      .btn-backcolor {fill: #cb5947;}
+      .cls-2 {fill:#fff;}
+      .cls-3 {
+        fill:none;
+        stroke: #666766;
+        stroke-linecap:round;
+        stroke-miterlimit:10;
+        stroke-width:3.6px;
+      }
     }
 
     svg:hover {
