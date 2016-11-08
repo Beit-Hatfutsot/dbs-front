@@ -38,8 +38,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 		// to be used we exiting the item pages
 	var slug_cleaner = ['$rootScope', function($rootScope) {
-											$rootScope.slug = null;
-									  }],
+		$rootScope.slug = null;
+	}],
 		// all of the states
 		//TODO: rinse, we should have one item-view state for all languages
         states = [
@@ -308,6 +308,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     // Add current state data to $state when calling $state.go
     $provide.decorator('$state', ['$delegate', '$stateParams', '$rootScope',
 					   function($delegate, $stateParams, $rootScope) {
+        //console.log($rootScope);
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
 			var target = state_name;
@@ -364,7 +365,13 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
     };
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams,
-												 fromState, fromParams){
+												 fromState, fromParams) {
+        if (toState.name.indexOf('start') !==-1) {
+            if ($window.localStorage.getItem('bhsclient_token')) {
+                event.preventDefault();
+                $state.go('mjs');
+            }
+        }
 		notification.loading(false);
 		$rootScope.title = undefined;
 		$rootScope.og_image = undefined;
@@ -374,6 +381,7 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
 											   {absolute: true});
 
 	});
+
 	/*$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
