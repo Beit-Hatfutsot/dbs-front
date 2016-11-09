@@ -117,7 +117,6 @@ GeneralSearchController.prototype = {
         self.$http.get(self.apiClient.urls.search, {params: self.api_params()})
         .success(function (r) {
             self.results = r.hits;
-			self.add_preview_image(self.results);
             self.notification.loading(false);
         });
 
@@ -147,30 +146,12 @@ GeneralSearchController.prototype = {
         }
     },
 
-    add_preview_image: function (items) {
-		return
-        var self = this;
-        var hits = items.hits;
-        hits.forEach(function (hit, _hit) {
-            if (hit._source.Pictures) {
-                var thumbnail = false;
-                hit._source.Pictures.every (function (picture) {
-                    if (picture.IsPreview == '1') {
-                        self.results.hits[_hit]._source['thumbnail'] = { 'data' : picture.PictureId };
-                        thumbnail = true;
-                    }
-                    return !thumbnail;
-                })
-            }
-        });
-    },
-
     push_eurp_items: function(r) {
         if (r.items) {
             for (var i=0; i < r.items.length; i++) {
                 var item = r.items[i];
                 if (item.edmPreview)
-                    this.eurp_results.push({thumbnail: {data: item.edmPreview[0]}, UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+                    this.eurp_results.push({thumbnail_url: item.edmPreview[0], UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
                 else
                     this.eurp_results.push({UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
             }
@@ -182,7 +163,7 @@ GeneralSearchController.prototype = {
             for (var i=0; i < r.response.docs.length; i++) {
                 var item = r.response.docs[i];
                 if (item.thumbnail)
-                    this.cjh_results.push({thumbnail: {data: item.thumbnail}, UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
+                    this.cjh_results.push({thumbnail_url: item.thumbnail, UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
                 else
                      this.cjh_results.push({UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
             }
@@ -210,7 +191,6 @@ GeneralSearchController.prototype = {
         this.$http.get(this.apiClient.urls.search, {params: this.api_params()})
         .success(function (r){
             results.hits = results.hits.concat(r.hits.hits);
-			// self.add_preview_image(results);
         });
     },
 
