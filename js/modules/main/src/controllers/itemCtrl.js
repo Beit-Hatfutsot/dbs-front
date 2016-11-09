@@ -87,7 +87,7 @@ ItemCtrl.prototype = {
 				self.recentlyViewed.put(
 					{Slug: item_data.Slug,
 					 header: item_data.Header,
-					 thumbnail: item_data.thumbnail.data
+					 thumbnail: item_data.thumbnail_url
 					});
 				self.item_data = item_data;
 				self.proper_link = self.item.get_url(self.item_data);
