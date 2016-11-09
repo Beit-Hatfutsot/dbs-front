@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add Hebrew "Add to My Story" button 
 - Display notification for items that only exist in one language
+- A migration process now runs every 5 minutes, bringing new data from BHP
+- Person URL now includes a tree version to better support updating of trees
 
 ### Fixed
 - Fix Internet Explorer display issues
@@ -17,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Make MJS homepage for signed-in users
 - Improve navigation in recently viewed
 - Split "Images & Videos" tab in search ressults
+- Related items are based only on BHP data
 
 ## [0.9.9] - 2016-09-07
 ### Added
