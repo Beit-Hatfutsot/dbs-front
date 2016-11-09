@@ -122,14 +122,14 @@ PersonViewController.prototype = {
 		self.item.get(slug)
 			.then(function (item_data) {
 				var name = self.get_full_name(item_data),
-					thumbnail = null;
+					thumbnail_url = null;
 				self.node = item_data;
-				if (item_data.thumbnail)
-					thumbnail = item_data.thumbnail.data;
+				if (item_data.thumbnail_url)
+					thumbnail_url = item_data.thumbnail_url;
 				self.recentlyViewed.put({
 					params: params,
 					state: 'person-view',
-					thumbnail: thumbnail,
+					thumbnail: thumbnail_url,
 					header: {En: name, He: name}
 				});
 				self.tree_number = params.tree_number;
