@@ -4,6 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Undeployed]
 ### Added
+- Add Hebrew "Add to My Story" button 
+- Display notification for items that only exist in one language
+
+### Fixed
+- Fix Internet Explorer display issues
+- On Item Page, display thumbnails for places
+- Fix fetch more persons when query contains modificators
+
+### Changed
+- Redesign homepage
+- Make MJS homepage for signed-in users
+- Improve navigation in recently viewed
+- Split "Images & Videos" tab in search ressults
+
+## [0.9.9] - 2016-09-07
+### Added
 - meta tags for item and my story pages
 - caching for collections (in the API server)
 
