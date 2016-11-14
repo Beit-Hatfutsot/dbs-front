@@ -16,6 +16,12 @@
       height: 860px;
     }
 
+    &:not(:nth-child(2)) {
+      .article {
+        @include vertical-align();
+      }
+    }
+
     @at-root #wizard {
       position: relative;
       height: 558px;
@@ -94,6 +100,19 @@
     .description {
       font-size: 22px;
       display: block;
+
+      .aligned {
+        .en & {
+          float: right;
+        }
+        .he & {
+          float: left;
+        }
+      }
+      .form-link {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
 
     .caption {
@@ -133,37 +152,36 @@
   }
 
   #section--2 {
-    .article {
-      padding-top: 256px;
-    }
     @include bg_image("section2.jpg");
   }
 
   #section--3 {
     .article {
-      padding-top: 290px;
+      svg#add_to_story {
+        width: 100px;
+        .btn-backcolor {fill: #cb5947;}
+      .cls-2 {fill:#fff;}
+      .cls-3 {
+        fill:none;
+        stroke: #666766;
+        stroke-linecap:round;
+        stroke-miterlimit:10;
+        stroke-width:3.6px;
+      }
+      }
     }
     @include bg_image("section3.jpg");
   }
 
   #section--4 {
-    .article {
-      padding-top: 210px;
-    }
     @include bg_image("section4.jpg");
   }
 
   #section--5 {
-    .article {
-      padding-top: 130px;
-    }
     @include bg_image("section5.jpg");
   }
 
   #section--6 {
-    .article {
-      padding-top: 290px;
-    }
     @include bg_image("section6.jpg");
   }
 

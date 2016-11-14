@@ -384,6 +384,12 @@ WizardFormCtrl.prototype = {
         }
     },
 
+    scroll_toForm: function() {
+        this.$document.duScrollToElementAnimated(wizard, 130, 500);
+        var target = angular.element(document.querySelector('#wizard-name'));
+        target.focus();
+    },
+
 
     /**
      * @ngdoc method
