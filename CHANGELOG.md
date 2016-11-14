@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Undeployed]
+## [0.9.10] - 2016-11-16
 ### Added
 - Add Hebrew "Add to My Story" button 
 - Display notification for items that only exist in one language
