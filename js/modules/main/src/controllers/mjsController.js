@@ -90,25 +90,31 @@ MjsController.prototype = {
 		this.notification.loading(true);
 
 		this.item.get_items(items_ids).then(function (items) {
-        var counters = [0,0,0,0]
-        items.forEach(function (item_data) {
-          var item_string = self.item.get_key(item_data);
-          self.user.story_items.every(function(item) {
-              if (item_string == item.id) {
-                  item_data.in_branch = item.in_branch.slice();
-                  return false;
-              }
-              return true;
-          });
-          item_data.in_branch.forEach(function(in_branch, i) {
-            if (in_branch)
-              counters[i] += 1;
-          });
-        });
-				self.mjs_items = items;
-        self.items_counters = counters;
+            var counters = [0,0,0,0]
+            items.forEach(function (item_data) {
+                if(!item_data.error_code) {
+                    var item_string = self.item.get_key(item_data);
+                    self.user.story_items.every(function(item) {
+                        if (item_string == item.id) {
+                          item_data.in_branch = item.in_branch.slice();
+                          return false;
+                        }
+                        return true;
+                    });
+                    item_data.in_branch.forEach(function(in_branch, i) {
+                        if (in_branch)
+                            counters[i] += 1;
+                    });
+                }
+                else
+                    console.log(item_data.slug + " error_code: " + item_data.error_code);
+            })
+    		self.mjs_items = items;
+            self.items_counters = counters;
 
-		}).finally(function() { self.notification.loading(false); });
+		}).finally(function() {
+            self.notification.loading(false);
+        });
 	},
 
 	stopPropagation: function($event) {
