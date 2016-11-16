@@ -1,208 +1,108 @@
 .mjs-widget-wrapper {
-	position: relative;
-	display: inline-block;
-	line-height: 26px;
+  position: relative;
+  display: inline-block;
+  line-height: 26px;
+  z-index: 1;
+  @include hover-pointer();
 
-	&.open {
-		.mjs-widget-icon {
-			background-color: #676767;
-		}
-
-		.mjs-widget-dialog {
-			display: block;
-		}
-	}
-
-	.mjs-widget-icon{
-	    position: relative;
-		background-color: #cb5947;
-		font-weight: 600;
-		color: #fff;
-		width: 112px;
-		border-radius: 20px;
-		height: 34px;
-		font-size: 12px;
-		@include hover-pointer();
-
-		&:hover {
-			background-color: #676767;
-		}
-
-		&.in-my-story {
-
-			&:hover {
-
-				.v_sign {
-					display: none;
-				}
-
-				.icon_upper_line {
-					display: none;
-				}
-
-				&:before {
-					content: "Remove from";
-					font-size: 10px;
-
-					.en & {
-						margin-left: 36px;
-					}
-					.he & {
-						margin-right: 36px;
-					}
-				}
-				&:after {
-					content: '+';
-                	position: absolute;
-                	color: #666;
-			  		font-size: 46px;
-			  		font-weight: 600;
-					top: 3px; 
-					@include rotate($degrees:-45deg);
-
-					.en & {
-						left: 3px;
-					}
-					.he & {
-						right: 3px;
-					}
-				}
-			}
-
-		}
-	}
-
-	.icon_bottom_line {
-		margin-top: -16px;
-      	font-size: 15px;
-    }
-		  
-   .icon_upper_line, .icon_bottom_line {
-	    
-	    .en & {
-	    	margin-left: 36px;
-	    }
-	    .he & {
-	    	margin-right: 36px;
-	    }
-    }
-	.sign-background {
-		position: absolute;
-	    background-color: #fff;
-	    width: 30px;
-	    height: 30px;
-	    border-radius: 50px;
-	    top: 50%;
-	    @include translate (0, -50%);
-	    
-	    .en & {
-	    	left: 2px;
-	    }
-	    .he & {
-	    	right: 2px;
-	    }
+  &.open {
+    .mjs-widget-icon svg{
+      .btn-backcolor{fill:#666766;}
     }
 
-    .add-remove_sign {
-    	position: absolute;
-    	color: #666;
-  		font-size: 46px;
-  		font-weight: 600;
-		top: 1px; 
-
-		.en & {
-			left: 2px;
-		}
-		.he & {
-			right: 2px;
-		}
+    .mjs-widget-dialog {
+      display: block;
     }
-    .v_sign {
-    	content: '';
-        position: absolute;
-        top: 8px;
-        width: 20px;
-        height: 12px;
-        border: 4px solid #666;
-        border-top: none;
-        border-right: none;
-        background: transparent;
-        @include rotate($degrees:-45deg);
+  }
+
+  .mjs-widget-icon{
+    position: relative;
+    width: 112px;
+    height: 34px;
+
+    svg {
+      .btn-backcolor {fill: #cb5947;}
+      .cls-2 {fill:#fff;}
+      .cls-3 {
+        fill:none;
+        stroke: #666766;
+        stroke-linecap:round;
+        stroke-miterlimit:10;
+        stroke-width:3.6px;
+      }
+    }
+
+    svg:hover {
+      .btn-backcolor{fill:#666766;}
+    }
+  }
+
+  .mjs-widget-dialog {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 40px;
+    text-align: center;
+    font-size: 14px;
+    @include box-shadow(0 0 6px 0 #999);
+
+    .en & {
+      right: -18px;
+    }
+
+    .he & {
+      left: -18px;
+    }
+
+    &__view, &__remove {
+      padding: 10px 15px;
+      background-color: #d6d6d6;
+      width: 140px;
+      color: #666666;
+      text-decoration: none;
+
+      @include hover-pointer();
+
+      .en & {
+        text-align: left;
+      }
+      .he & {
+        text-align: right;
+      }
+
+      &:hover {
+        background-color: #c8c8c8;
+      }
+    }
+
+    .mystory {
+      position: relative;
+      height: 25px;
+      display: inline-block;
+      vertical-align: bottom;
+      z-index: 1;
+      @include hover-pointer();
+
+      &__icon {
+        width: 25px;
+        height: 24px;
+        display: inline-block;
 
         .en & {
-        	left: 4px;
+          margin-left: 3px;
         }
+
         .he & {
-        	right: 4px;
+          margin-right: 3px;
         }
+      }
+
+      &__text {
+        display: inline-block;
+        vertical-align: bottom;
+        padding: 0 0 3px;
+        //text-decoration: underline;
+      }
     }
-
-	.mjs-widget-dialog {
-		display: none;
-		position: absolute;
-		z-index: 1;
-		top: 40px;
-		text-align: center;
-		font-size: 14px;
-		@include box-shadow(0 0 6px 0 #999);
-
-		.en & {
-			right: -18px;
-		}
-
-		.he & {
-			left: -18px;
-		}
-
-		&__view, &__remove {
-			padding: 10px 15px;
-			background-color: #d6d6d6;
-			width: 140px;
-			color: #666666;
-			text-decoration: none;
-
-			@include hover-pointer();
-
-			.en & {
-				text-align: left;
-			}
-			.he & {
-				text-align: right;
-			}
-
-			&:hover {
-				background-color: #c8c8c8;
-			}
-		}
-
-		.mystory {
-			position: relative;
-			height: 25px;
-			display: inline-block;
-			vertical-align: bottom;
-			z-index: 1;
-			@include hover-pointer();
-
-			&__icon {
-				width: 25px;
-				height: 24px;
-				display: inline-block;
-
-				.en & {
-					margin-left: 3px;
-				}
-
-				.he & {
-					margin-right: 3px;									
-				}
-			}
-
-			&__text {
-				display: inline-block;
-				vertical-align: bottom;
-				padding: 0 0 3px;
-				//text-decoration: underline;
-			}
-		}
-	}
+  }
 }

@@ -1,24 +1,23 @@
-<div class="mjs-widget-wrapper" dropdown is-open="mjsWidgetCtrl.item_added">
-  <div class="mjs-widget-icon in-my-story" ng-if="item.in_mjs"
-       ng-click="mjsWidgetCtrl.remove_from_mjs()">
-    <div class="icon_upper_line">in</div>
-      <div class="icon_bottom_line">My Story</div>
-    <span class="sign-background">
-      <span class="v_sign"></span>
-    </span>
+<div class="mjs-widget-wrapper" uib-dropdown uib-dropdown-toggle >
+  <!-- {{mjsWidgetCtrl.item_added}} -->
+
+  <div class="mjs-widget-icon" ng-if="item.in_mjs">
+    <ng-include src="'templates/svgs/in-my-story.html'"></ng-include>
   </div>
-  <div class="mjs-widget-icon" ng-if="!item.in_mjs"
-       ng-click="mjsWidgetCtrl.push_to_mjs()">
-    <div class="icon_upper_line">Add to</div>
-      <div class="icon_bottom_line">My Story</div>
-    <span class="sign-background">
-       <span class="add-remove_sign">+</span>
-    </span>
+
+  <div class="mjs-widget-icon" ng-if="!item.in_mjs" ng-click="mjsWidgetCtrl.push_to_mjs()">
+    <ng-include src="'templates/svgs/add-to-story.html'"></ng-include>
   </div>
-  <div class="mjs-widget-dialog">
-    <div class="mjs-widget-dialog__view" ui-sref="mjs">View in my story</div>
-    <span ng-if="!(item.ugc)">
-      <div class="mjs-widget-dialog__remove" ng-click="mjsWidgetCtrl.remove_from_mjs()">Remove item</div>
-    </span>
+
+  <div class="mjs-widget-dialog" ng-if="item.in_mjs">
+    <div class="mjs-widget-dialog__view" ui-sref="mjs">
+      <en>View in my story</en>
+      <he>לצפות בסיפור שלי</he>
+    </div>
+    <div class="mjs-widget-dialog__remove" ng-click="mjsWidgetCtrl.remove_from_mjs()">
+      <en>Remove item</en>
+      <he>להסיר מהסיפור שלי</he>
+    </div>
   </div>
+
 </div>

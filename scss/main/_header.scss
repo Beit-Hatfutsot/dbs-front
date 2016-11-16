@@ -107,10 +107,10 @@
 
                     .site-item {
                         position: relative;
-                        
+
                         .en & {
                             float: left;
-                            margin: 30px 15px 0 0;  
+                            margin: 30px 15px 0 0;
                         }
                         .he & {
                             float: right;
@@ -127,13 +127,23 @@
                             .title {
                                 line-height: 16px;
                                 font-size: 15px;
-                                font-weight: 600;
                                 color: #ffffff;
+
+                                .en & {
+                                    font-weight: 600;
+                                }
+                                .he & {
+                                    font-weight: 700;
+                                }
                             }
 
                             .icon {
                                 margin: 0 auto;
                                 display: none;
+
+                                svg .cls-1 {
+                                  fill: #fff;
+                                }
                             }
 
                             .title,
@@ -145,7 +155,7 @@
                         }
 
                         &:hover {
-                            
+
                             .en & {
                                 margin: 18px 4px 0 -11px;
                             }
@@ -160,7 +170,7 @@
                         }
 
                         &.active {
-                            
+
                             .en & {
                                 margin: 0 15px 0 0;
                             }
@@ -185,15 +195,20 @@
                                     display: block;
 
                                     .en & {
-                                        @include icon (-388px -179px);
-                                        width: 78px;
-                                        height: 58px;
+                                        width: 110px;
                                     }
                                     .he & {
-                                        @include icon (-304px -182px);
-                                        width: 72px;
-                                        height: 53px;
+                                        width: 80px;
+                                        margin-right: 8px;
                                     }
+                                }
+                            }
+                        }
+
+                        &.active {
+                            a {
+                                .icon {
+                                    margin-top: 6px;
                                 }
                             }
                         }
@@ -248,7 +263,7 @@
                 display: flex;
                 align-items: center;
                 z-index: 2;
-                
+
                 .en & {
                     right: 50%;
                     @include translate($view-width /2 - 5px, 0);
@@ -274,69 +289,74 @@
 
 
                     &__button {
-                        .label {
-                            background-color: $yellow3;
-                            padding: 0 5px;
-                            line-height: 30px;
-                            font-size: 13px;
-                            font-weight: 600;
-                            color: #fff;
-                            border: none;
-                            outline: none;
-                            @include hover-pointer();
+                      .label {
+                          background-color: $yellow3;
+                          padding: 0 5px;
+                          line-height: 30px;
+                          font-size: 13px;
+                          font-weight: 600;
+                          color: #fff;
+                          border: none;
+                          outline: none;
+                          @include hover-pointer();
 
-                            &:hover {
-                                background-color: $gray3 !important;
-                            }
+                          &:hover {
+                              background-color: $gray3 !important;
+                          }
 
-                            &--active {
-                                background-color: $yellow2 !important;
-                            }
-                        }
+                          &--active {
+                              background-color: $yellow2 !important;
+                          }
+                      }
                     }
-                    &__content {
-                        position: absolute;
-                        top: 35px;
-                        width: 340px;
-                        line-height: normal;
-                        border: 1px solid $gray5;
-                        @include border-radius(3px);
-                        background-color: $gray6;
-                        @include box-shadow(0 0 6px 0 $gray4);
 
-                        .en & {
-                            left: -144px;
-                        }
-                        .he & {
-                            right: -144px;
-                        }
+                    .popover {
+                      width: 340px;
+                      max-width: 340px;
+                      padding: 0;
+                      line-height: normal;
+                      border: 1px solid $gray5;
+                      @include border-radius(3px);
+                      background-color: $gray6;
+                      @include box-shadow(rgba(0,0,0,0.2));
 
-                        .widgettitle {
-                            position: relative;
-                            margin: 0;
-                            line-height: 34px;
-                            font-size: 18px;
-                            font-weight: 600;
-                            color: #ffffff;
-                            background-color: $gray4;
-                            text-align: center;
+                      .arrow {
+                        display: none;
+                      }
 
-                            &:before {
-                                content: "";
-                                position: absolute;
-                                top: 3px;
-                                width: 22px;
-                                height: 27px;
-                                @include icon(-273px -366px);
+                      .popover-inner {
+                        width: 100%;
+                        padding: 0;
 
-                                .en & {
-                                    left: 10px;
-                                }
-                                .he & {
-                                    right: 10px;
-                                }
-                            }
-                        }
+                        .popover-content {
+                          padding: 0;
+
+                          .widgettitle {
+                              position: relative;
+                              margin: 0;
+                              line-height: 34px;
+                              font-size: 18px;
+                              font-weight: 600;
+                              color: #ffffff;
+                              background-color: $gray4;
+                              text-align: center;
+
+                              &:before {
+                                  content: "";
+                                  position: absolute;
+                                  top: 3px;
+                                  width: 22px;
+                                  height: 27px;
+                                  @include icon(-273px -366px);
+
+                                  .en & {
+                                      left: 10px;
+                                  }
+                                  .he & {
+                                      right: 10px;
+                                  }
+                              }
+                          }
 
                         .widgetcontent {
                             padding: 7px 15px;
@@ -361,7 +381,7 @@
                                 .newsletter-groups {
                                     margin-top: 15px;
                                     overflow: hidden;
-                                
+
                                     small {
                                         margin-bottom: 5px;
                                         display: block;
@@ -382,14 +402,14 @@
                                             margin-left: 80px;
                                             float: right;
                                         }
-                                        
+
                                         &:hover {
                                             background-color: $blue3;
                                         }
 
                                         span {
                                             position: relative;
-                                            top: -2px;
+                                            top: 2px;
                                             font-size: 13px;
                                             font-weight: 400;
 
@@ -426,7 +446,7 @@
                                     }
                                     input[type=checkbox] {
                                         display: none;
-                                        
+
                                         &:checked + label {
                                             background-color: $blue3;
                                         }
@@ -445,13 +465,13 @@
                                     margin: 5px 0;
                                     font-size: 12px;
                                     color: #ed1c24;
-                                    
+
                                     &.succes {
                                         color: #009e4b;
                                         display: inline-block;
                                     }
                                 }
-                                
+
                                 .newsletter-submit {
                                     margin-top: 15px;
                                     width: 186px;
@@ -483,14 +503,14 @@
                                 .loader {
                                     position: absolute;
                                     top: -28px;
-                                    
+
                                     .en & {
                                         right: 196px;
                                     }
                                     .he & {
                                         left: 196px;
                                     }
-                                    
+
                                     &:before {
                                         display: none;
                                     }
@@ -503,11 +523,11 @@
                                     padding-top: 5px;
                                     font-size: 12px;
                                     text-align: center;
-                                    
+
                                     &.success {
                                         color: green;
                                     }
-                                    
+
                                     &.error {
                                         color: red;
                                     }
@@ -529,26 +549,30 @@
                             .he & {
                                 left: 10px;
                             }
-                        }   
+                        }
+                      }
                     }
+                  }
+
                 }
 
 
                 .logo {
                     display: inline-block;
-                    vertical-align: bottom;
-                    top: 10px;
-                    width: 114px;
-                    height: 57px;
+                    width: auto;
                     z-index: 1;
 
-                    .en &{
-                        width: 114px;
-                        height: 57px;
-                    }
-                    .he & {
-                        width: 126px;
-                        height: 57px;
+                    svg {
+                      height: 56px;
+                      width: 148px;
+                      vertical-align: middle;
+
+                      .logo-cls-1 {fill:#fbaf34;}
+                      .logo-cls-2 {fill:#46c2d2;}
+                      .logo-cls-3{fill:#be311a;}
+                      .logo-cls-4{fill:#232f83;}
+                      .logo-cls-5{fill:#cae9ed;}
+                      .logo-cls-6{fill:#666;}
                     }
                 }
 
@@ -610,8 +634,8 @@
                         @include box-shadow(0 0 6px 1px $gray4);
 
                         &.signed {
-                            width: 260px;
-                            box-shadow: none;   
+                            width: 270px;
+                            box-shadow: none;
                         }
 
                         &.unsigned {
@@ -632,7 +656,7 @@
                                 position: relative;
                                 margin-bottom: 6px;
                                 @include box-shadow(0 0 6px 0 $gray4);
-                               
+
                                 .en & {
                                     padding: 4px 10px 4px 16px;
                                 }
@@ -674,12 +698,20 @@
 
                     &__name {
                         display: inline-block;
+                        overflow-wrap: break-word;
+                        max-width: 190px;
                         color: $gray3;
                         font-weight: 600;
                         font-size: 18px;
                         line-height: 1;
                         @include vertical-align(absolute);
-                        
+                        .en & {
+                          left: 74px;
+                        }
+                        .he & {
+                          right: 74px;
+                        }
+
                         .small-text {
                             font-weight: normal;
                             font-size: 14px;
@@ -726,13 +758,31 @@
                 background: inherit;
 
                 ul.nav {
+                    max-width: 50%;
                     padding: 0;
-                    margin: 0 auto;
-                    max-width: 1170px;
+
+                    &.left {
+                        .en & {
+                            float: left;
+                        }
+                        .he & {
+                            float: right;
+                        }
+                    }
+
+                    &.right {
+                      .en & {
+                        float: right;
+                      }
+                      .he & {
+                        float:  left;
+                      }
+                    }
+
 
                     li.menu-item, li.header-menu-item {
                         position: relative;
-                        display: table-cell;
+                        display: inline-block;
                         color: $gray3;
                         @include hover-pointer();
 
@@ -740,7 +790,7 @@
                             text-decoration: none;
                             color: $gray3;
                         }
-                                             
+
 
                         .item-before {
                             position: absolute;
@@ -763,6 +813,7 @@
                     li.menu-item {
                         line-height: 20px;
                         font-size: 18px;
+                        height: 48px;
                         padding: 4px 25px;
                         text-align: center;
                         vertical-align: middle;
@@ -775,12 +826,17 @@
                             color: #fff;
                             font-weight: 600;
                         }
+
+                        .text {
+                          display: block;
+                          @include vertical-align;
+                        }
                     }
 
                     li.header-menu-item {
                         line-height: 40px;
                         padding: 0 25px;
-                        font-size: 21px; 
+                        font-size: 21px;
 
                         &:hover {
                             background-color: $gray5;
@@ -789,13 +845,17 @@
                         &--active {
                             background-color: $red3;
                             color: #fff;
-                            font-weight: 600;
+                            text-shadow: -1px 0 0 #fff;
+
+                            a {
+                              color: #fff;
+                            }
 
                             &:hover {
                                 background-color: $red3;
 
                             }
-    
+
                         }
                     }
                 }
@@ -806,21 +866,20 @@
                 &__upload {
                     position: relative;
                     margin: 0 auto;
-                    background-color: $red2;
-                    color: #fff;
+                    background-color: $pink1;
+                    color: #gray3;
                     display: inline-block;
-
-                        .en & {
-                            float: right;
-                        }
-                        .he & {
-                            float: left
-                        }
 
                         &.open {
 
                             .upload-label {
-                                background-color: $red1;
+                                background-color: $red3;
+                                color: #fff;
+                                text-shadow: -1px 0 0 #fff;
+
+                                &:hover {
+                                  background-color: $red3;
+                                }
                             }
 
                             .upload-menu {
@@ -829,17 +888,16 @@
                         }
 
                         .upload-label {
-                            margin-top: -50px;
-                            padding: 0 40px;
-                            line-height: 50px;
+                            margin-top: -40px;
+                            padding: 0 44px;
+                            line-height: 40px;
                             font-size: 21px;
-                            font-weight: 700;
-                            color: #ffffff;
-                            background-color: $red2;
+                            color: $gray3;
+                            background-color: $pink1;
                             @include hover-pointer();
-                                
+
                             &:hover {
-                                background-color: $red1;
+                                background-color: $gray5;
                             }
                         }
 
@@ -865,7 +923,7 @@
 
                             &__title {
                                 color: #ffffff;
-                                background: $red1; 
+                                background: $red2;
                             }
 
                             &__row {
@@ -887,7 +945,7 @@
                                     }
 
                                     .he & {
-                                        left: -5px; 
+                                        left: -5px;
                                     }
                                 }
 

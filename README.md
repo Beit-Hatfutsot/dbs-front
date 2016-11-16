@@ -12,7 +12,7 @@ museum visitors.  Our direct backend is an API server written in Python using
 Flask, accessing data in a Mongo & ElasticSearch cluster.  The cluster is filled
 with data from BHP using our migration bot.
 
-## Blog Ptosts
+## Blog Posts
 
 - [I toggled public, now what?](https://medium.com/@alonisser/i-toggled-public-now-what-6b42959db251)
 - [Freeing a Yack](https://medium.com/@daonb/freeing-a-yack-fc3799099eba)
@@ -21,9 +21,7 @@ with data from BHP using our migration bot.
 ## Dependencies
 
     $ sudo su
-    $ apt-get install ruby
-    $ gem install sass
-    $ npm install -g grunt-cli
+    $ npm install -g gulp
     $ npm install -g bower
     $ exit
 
@@ -35,15 +33,39 @@ with data from BHP using our migration bot.
     $ npm install
     $ bower install
 
+## Run the live reloading development server
+
+    $ gulp serve
+
+Then head to `http://localhost:3000` in your browser.
+
 ## Test & Build
 
-    $ grunt karma
-    $ grunt build
+    $ gulp test
+    $ gulp build-all
 
+To send request to different server than the default `local` server
+`http://localhost:5000`, set the `API_SERVER` environment variable to one of
+`live`, `test`, `local`:
+
+    $ API_SERVER=live gulp serve
+
+## Distrubution
+
+To build a distribution for live deployment, run:
+
+    $ API_SERVER=live gulp dist
+
+Don't forget to set `API_SERVER` to the desired one.
+
+If you like to test the built version using the local development server, after
+`gulp dist` run:
+
+    $ gulp serve:dist
 
 ## Contributing
 
-Contributions from both Jews and Gentiles are welcomed! We even have a
+Contributions from both Jews and non-Jews are welcomed! We even have a
 `beginner` label to help you start with (hopefully) simple issues.
 Once you have an issue, just follow these simple steps:
 
@@ -66,5 +88,4 @@ In order to serve the docs http://localhost:3000 run:
 
     $ cd docs
     $ bower install
-    $ gulp docs:serve 
-
+    $ gulp docs:serve

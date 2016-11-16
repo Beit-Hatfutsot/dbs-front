@@ -23,11 +23,13 @@ angular.module('main', [
     'auth',
     'apiClient',
     'cache',
-    'plumb',
+    'social',
     'rcSubmit',
     'gedcomParser',
 	'hc.marked',
-    'ui.gravatar'
+    'ui.gravatar',
+    'bhsclient-templates',
+    'duScroll'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider',
@@ -36,8 +38,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
 		// to be used we exiting the item pages
 	var slug_cleaner = ['$rootScope', function($rootScope) {
-											$rootScope.slug = null;
-									  }],
+		$rootScope.slug = null;
+	}],
 		// all of the states
 		//TODO: rinse, we should have one item-view state for all languages
         states = [
@@ -62,17 +64,27 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
                 header.sub_header_state = 'closed';
             }]
         },
+		{
+			name: 'personality-redirect',
+			url: '/personality/{local_slug}',
+            onEnter: ['$state', '$stateParams', function($state, $stateParams) {
+				$state.go('item-view', {collection: 'luminary',
+							     		local_slug: $stateParams.local_slug})
+			}]
+
+		},
+
 
         {
             name: 'item-view',
-            url: '/{collection: (?:place|image|personality|familyname|video)}/{local_slug}',
+            url: '/{collection: (?:place|image|luminary|familyname|video)}/{local_slug}',
             controller: 'ItemCtrl as itemController',
             onExit: slug_cleaner,
 			templateUrl: function(params) {
 				// TODO: rinse - this code was copied from itemService.js
 				var slug_collection_map = {
 					  "image": "photoUnits",
-					  "personality": "personalities",
+					  "luminary": "personalities",
 					  "place": "places",
 					  "familyname": "familyNames",
 					  "video": "movies"};
@@ -139,33 +151,37 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             templateUrl: 'templates/main/search-results.html'
         },
 
-		
+
+        {
+            name: 'story',
+            url: '/story/{user_id}',
+            templateUrl: 'templates/main/story.html',
+        },
+
+        {
+            name: 'he.he_story',
+            url: '/story/{user_id}',
+            templateUrl: 'templates/main/story.html',
+        },
+
         {
             name: 'mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
-            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
+            /*onEnter: ['notification', function(notification) {
                 notification.clear();
-                plumbConnectionManager.connections = {};
-                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
-                    connection_set.repaint();
-                });
-            }]
+            }]*/
         },
 
          {
             name: 'he.he_mjs',
             url: '/mjs',
             templateUrl: 'templates/main/mjs/mjs.html',
-            onEnter: ['notification', 'plumbConnectionManager', 'plumbConnectionSetManager', function(notification, plumbConnectionManager, plumbConnectionSetManager) {
+            /*onEnter: ['notification', function(notification) {
                 notification.clear();
-                plumbConnectionManager.connections = {};
-                angular.forEach(plumbConnectionSetManager.sets, function(connection_set) {
-                    connection_set.repaint();
-                });
-            }]
-        }, 
-		
+            }]*/
+        },
+
         {
             name: 'persons',
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
@@ -180,7 +196,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
         {
             name: 'person-view',
-            url: '/person/:tree_number/:node_id',
+			// TODO: make the version optional
+			url: '/person/:tree_number/:version/:node_id',
             controller: 'PersonViewController as ctrl',
             templateUrl: 'templates/main/ftrees/person.html',
             onEnter: ['header', function(header) {
@@ -207,7 +224,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             }]
         },
 
-		
+
 
         /*{
             name: 'upload',
@@ -257,7 +274,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'UploadFormController as uploadFormCtrl',
             templateUrl: 'templates/main/upload/tree.html'
         },*/
-        
+
 
         {
             name: 'verify_email',
@@ -265,7 +282,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'VerifyEmailController as verifyEmailCtrl',
             templateUrl: 'templates/main/verify_email.html'
         },
-		
+
         {
             name: '404',
             templateUrl: 'templates/main/404.html'
@@ -289,7 +306,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
     /*** End of state definitions ***/
 
     // Add current state data to $state when calling $state.go
-    $provide.decorator('$state', ['$delegate', '$stateParams', function($delegate, $stateParams) {
+    $provide.decorator('$state', ['$delegate', '$stateParams', '$rootScope',
+					   function($delegate, $stateParams, $rootScope) {
         var old_go = $delegate.go;
         $delegate.go = function(state_name, state_params, config) {
 			var target = state_name;
@@ -302,6 +320,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             }
             $delegate.lastState = $delegate.current;
             $delegate.lastStateParams = $delegate.params;
+
             return old_go.apply($delegate, [target, state_params, config]);
         };
         return $delegate;
@@ -337,24 +356,31 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
     Object.defineProperty($rootScope, 'header_visible', {
         get: function() {
             return header.is_visible;
-        }   
+        }
     });
 
     $rootScope.isCurrentState = function(state_name) {
         return ($state.includes(state_name) || $state.includes('he.he_'+state_name));
     };
 
-    $state.go('start');
-	$rootScope.$on('$stateChangeStart',
-	  function(event, toState, toParams, fromState, fromParams){
-		  notification.loading(false);
+	$rootScope.$on('$stateChangeStart', function(event, toState, toParams,
+												 fromState, fromParams) {
+		notification.loading(false);
+		$rootScope.title = undefined;
+		$rootScope.og_image = undefined;
+		$rootScope.description = undefined;
+		$rootScope.og_type = 'website';
+		$rootScope.canonical_url = $state.href(toState,toParams,
+											   {absolute: true});
+
 	});
-	$rootScope.$on('$stateChangeSuccess',
+
+	/*$rootScope.$on('$stateChangeSuccess',
 		function(event, toState, toParams, fromState, fromParams){
 			$rootScope.title = ('title' in toState)?toState.title:"";
             if (!$window.ga)
                 return;
             $window.ga('send', 'pageview', { page: $location.path() });
-	});
+	});*/
 
 }]);

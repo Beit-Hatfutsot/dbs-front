@@ -1,11 +1,11 @@
 <a ng-href="{{url}}">
-  <ng-switch on="(item.thumbnail == undefined) || (item.thumbnail == '')">
+  <ng-switch on="(item.thumbnail_url == undefined)">
     <div class="item-thumbnail item-thumbnail--text" ng-switch-when="true" data="item">
       <en>{{item.header.En}}</en>
       <he>{{item.header.He}}</he>
     </div>
     <div class="item-thumbnail item-thumbnail--pic" ng-switch-when="false" data="item">
-      <img src="data:image/jpeg;base64,{{item.thumbnail}}" alt="Item Thumbnail Image" fit-thumb>
+      <img data-ng-src="{{item.thumbnail_url}}" alt="Item Thumbnail Image" fit-thumb>
     </div>
   </ng-switch>
 </a>

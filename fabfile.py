@@ -11,11 +11,12 @@ env.now = datetime.now().strftime('%Y%m%d-%H%M')
 
 def deploy(api_server='test'):
     local('npm install && bower install')
-    local('grunt karma')
+    local('gulp test')
     push_dist(api_server)
 
 def push_dist(api_server='test'):
-    local('grunt build-dist:'+api_server)
+    with shell_env(API_SERVER=api_server):
+        local('gulp dist')
     local('tar czf /tmp/bhs-client-dist.tgz dist')
     put('/tmp/bhs-client-dist.tgz', 'client')
     with cd('client'):

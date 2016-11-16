@@ -2,34 +2,40 @@
     <nav class="menu gsearch">
         <ul class="nav">
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'allResults'}" ng-click="generalSearchCtrl.goto_results('allResults')">
-                <div>
+                <span class="text">
                     <en>All Results</en>
                     <he>כל התוצאות</he>
-                </div>
+                </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'places'}" ng-click="generalSearchCtrl.goto_results('places')">
-                <div>
-                    <en>Places</en>   
+                <span class="text">
+                    <en>Places</en>
                     <he>מקומות</he>
-                </div>
+                </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'media'}" ng-click="generalSearchCtrl.goto_results('media')">
-                <div>
-                    <en>Images<br>& Videos</en>
-                    <he>תמונות + וידאו</he>
-                </div>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'images'}" ng-click="generalSearchCtrl.goto_results('images')">
+                <span class="text">
+                    <en>Images</en>
+                    <he>תמונות</he>
+                </span>
+            </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'videos'}" ng-click="generalSearchCtrl.goto_results('videos')">
+                <span class="text">
+                    <en>Videos</en>
+                    <he>וידאו</he>
+                </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'luminaries'}" ng-click="generalSearchCtrl.goto_results('luminaries')">
-                <div>
-                    <en>Luminaries</en>   
+                <span class="text">
+                    <en>Luminaries</en>
                     <he>אישים</he>
-                </div>
+                </span>
             </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'familyNames'}" ng-click="generalSearchCtrl.goto_results('familyNames')">
-                <div>
-                    <en>Family Names</en>   
+                <span class="text">
+                    <en>Family Names</en>
                     <he>שמות משפחה</he>
-                </div>
+                </span>
             </li>
         </ul>
     </nav>
@@ -42,7 +48,7 @@
                         <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן</a><br></he>
                     </span>
                 </div>
-            </div> 
+            </div>
             <div ng-switch-when='places' class="about-bh">
                 <div class="title">
                     <span>
@@ -51,7 +57,15 @@
                     </span>
                 </div>
             </div>
-            <div ng-switch-when='media' class="about-bh">
+            <div ng-switch-when='images' class="about-bh">
+                <div class="title">
+                    <span>
+                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
+                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
+                    </span>
+                </div>
+            </div>
+            <div ng-switch-when='videos' class="about-bh">
                 <div class="title">
                     <span>
                         <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
@@ -156,7 +170,7 @@
             <div id="europeana" ng-if="generalSearchCtrl.eurp_total > 0">
                 <div class="db-results-exttitle">
                     <en><strong>{{generalSearchCtrl.eurp_total}}</strong> Results from <a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></en>
-                    <he><strong>{{generalSearchCtrl.eurp_total}}</strong> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">ממאגרי יורפיאנה</a></span></he>
+                    <he><strong>{{generalSearchCtrl.eurp_total}}</strong> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">ממאגרי יורופיאנה</a></span></he>
                 </div>
                 <div class="item-preview-wrapper">
                     <div class="spinner" ng-if="generalSearchCtrl.loading_eurp">
@@ -172,7 +186,7 @@
                     <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                     <div class="loader-desc ext">
                         <en><strong>More</strong><span class="med-font"> from</span><br><span class="ext-src-name">Europeana</span></en>
-                        <he><strong>עוד תוצאות</strong><br><span class="med-font">מיורפיאנה</span></he>
+                        <he><strong>עוד תוצאות</strong><br><span class="med-font">מיורופיאנה</span></he>
                         <span class="results-number">
                             <en>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} results)</en>
                             <he>({{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} תוצאות)</he>

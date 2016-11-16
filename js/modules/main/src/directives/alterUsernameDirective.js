@@ -4,7 +4,8 @@ angular.module('main').
             restrict: 'A',
             link: function(scope, element, attrs) {
                 var old_value_backup;
-
+                var curr_lang = scope.mjsCtrl.langManager.lang;
+                scope.username = scope.mjsCtrl.auth.user.name ? scope.mjsCtrl.auth.user.name[curr_lang] : "";
                 element.bind('keydown', function($event) {
                     if ($event.keyCode === 13) {
                         alter();
@@ -25,11 +26,11 @@ angular.module('main').
                     scope.mjsCtrl.in_rename_mode = false;
                     scope.mjsCtrl.$scope.$digest();
                 };
-                
+
                 scope.$watch(function() {return scope.username}, function(newVal, oldVal) {
                     old_value_backup = oldVal;
 
-                    if (scope.mjsCtrl.mjs._latest.name == newVal || newVal == undefined || newVal == "") {
+                    if (scope.mjsCtrl.auth.user.name == newVal || newVal == undefined || newVal == "") {
                         scope.username_error = true;
                     }
                     else {

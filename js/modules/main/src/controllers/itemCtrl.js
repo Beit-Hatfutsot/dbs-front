@@ -1,9 +1,9 @@
 
 function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs,
-				  recentlyViewed, $window, $timeout, $modal, $rootScope, langManager, $location) {
+				  recentlyViewed, $window, $timeout, $uibModal, $rootScope, langManager) {
 	var self = this;
 
-	this.$modal = $modal;
+	this.$uibModal = $uibModal;
 	this.$state = $state;
 	this.slug = item.parse_state($stateParams);
 	this.item_type =   this.slug.item_type;
@@ -17,39 +17,31 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.content_loaded = false;
 	this.item_data = {};
 	this.related_data = [];
-	this.wizard_name = {};
-	this.wizard_place = {};
 	this.itemTypeMap = itemTypeMap;
-	this.pull_wizard_related();
 	this._Index = 0;
 	this.lang = langManager.lang;
-	this.article_abs_url = $location.absUrl();
+	this.$rootScope = $rootScope;
+	this.proper_link = '';
 
-	function refresh_root_scope(item) {
-		// TODO: make language option 'En' & 'He' universal
-		var language_map = {'en': 'En', 'he': 'He'},
-			lang = language_map[$rootScope.lang];
-		$rootScope.title = item.Header[lang];
-		$rootScope.slug = item.Slug;
-	};
+	$rootScope.$on('$stateChangeStart',
+	    function(event, toState, toParams, fromState, fromParams){
+	      if (fromState.name.endsWith('item-view') && fromParams.collection == 'video') {
+	      	var video_element = angular.element(document.querySelector('.item__content__media-container')).find("video")[0];
+			video_element.pause();
+	      }
+	});
 
 	if(this.$window.sessionStorage.wizard_result) {
 		this.search_result = JSON.parse(this.$window.sessionStorage.wizard_result);
 	}
 
+	/*
 	var unwatch_item_load = $rootScope.$on('item-loaded', function(event, item) {
-		refresh_root_scope(item);
 		unwatch_item_load();
 	});
+	*/
 	this.get_item();
 
-	/*
-	$rootScope.$on('language-changed', function (event, lang) {
-		self.lang = lang;
-		$rootScope.title = self.item_data.Header[{'en': 'En', 'he': 'He'}[lang]];
-		
-	})
-	*/
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
 			return this.slug.collection === 'ugc';
@@ -61,23 +53,46 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 			self.get_item();
 		}
 	});
-
 };
 
 ItemCtrl.prototype = {
+
+	refresh_root_scope: function() {
+		var item = this.item_data,
+			$rootScope = this.$rootScope,
+			main_pic_index = this.get_main_pic_index();
+		// TODO: make language option 'En' & 'He' universal
+		var language_map = {'en': 'En', 'he': 'He'},
+			lang = language_map[$rootScope.lang];
+		$rootScope.title = item.Header[lang];
+		$rootScope.og_type = 'article';
+		if (item.UnitText1[lang]) {
+			var description_sentences = item.UnitText1[lang].split('.')
+			if (description_sentences.length > 3)
+				$rootScope.description = description_sentences.slice(0,3).join('. ')+'...';
+			else
+				$rootScope.description = item.UnitText1[lang];
+		}
+		$rootScope.slug = item.Slug;
+		if (main_pic_index !== undefined) {
+			$rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
+		}
+	},
+
 	get_item: function() {
 		var self = this;
 		self.notification.loading(true);
 		this.item.get(this.slug).
 			then(function(item_data) {
-
 				self.recentlyViewed.put(
 					{Slug: item_data.Slug,
 					 header: item_data.Header,
-					 thumbnail: item_data.thumbnail.data
+					 thumbnail: item_data.thumbnail_url
 					});
 				self.item_data = item_data;
+				self.proper_link = self.item.get_url(self.item_data);
 				self.content_loaded = true;
+				self.refresh_root_scope();
 				if (item_data.related)
 					self.item.get_items(item_data.related).
 						then(function(related_data) {
@@ -93,33 +108,13 @@ ItemCtrl.prototype = {
 			});
 	},
 
-	pull_wizard_related: function() {
-
-		if ( this.$state.lastState.name === 'start' ) {
-		
-			if ( this.wizard.result.name &&
-				 this.wizard.result.name.isNotEmpty() /*  &&
-				 this.wizard.result.name._id !== _id*/ ) {
-				this.wizard_name = angular.copy(this.wizard.result.name);
-			}
-
-			if ( this.wizard.result.place &&
-				this.wizard.result.place.isNotEmpty() /* &&
-				this.wizard.result.place._id !== _id */ )  {
-				this.wizard_place = angular.copy(this.wizard.result.place);
-			}
-		}
-	},
-
 	parse_related_data: function(related_data) {
 		var self = this;
 		self.related_data = [];
 
 		related_data.forEach(function(related_item) {
-			// push related items after checking they were not pulled from wizard result
-			// if ( self.wizard_name._id !== related_item._id && self.wizard_place._id !== related_item._id ) {
 			var proper_lang = self.lang[0].toUpperCase() + self.lang[1];
-			if (related_item.Slug[proper_lang] != self.slug.api) {
+			if (related_item.Slug && related_item.Slug[proper_lang] != self.slug.api) {
 				self.related_data.push(related_item);
 			}
 		});
@@ -139,7 +134,7 @@ ItemCtrl.prototype = {
 
 		if (this.search_result.name.Header)
 		    params.last_name  = this.search_result.name.Header[lang]
-		if (this.search_result.place.Header)
+    else if (this.search_result.place.Header)
 		    params.place = this.search_result.place.Header[lang];
 
     	this.$state.go('persons', params);
@@ -156,7 +151,7 @@ ItemCtrl.prototype = {
 	isActive: function (index) {
 		return this._Index === index;
 	},
-	
+
 	showPhoto: function (index) {
 		this._Index = index;
 	},
@@ -167,11 +162,10 @@ ItemCtrl.prototype = {
 		}
 		var	gallery = this.item_data;
 
-	    this.$modal.open({
+	    this.$uibModal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
 	     	controller: 'GalleryModalCtrl as galleryModalController',
 	     	size: 'lg',
-
 	     	resolve : {
 	     		gallery: function () {
 	     			return gallery
@@ -207,11 +201,34 @@ ItemCtrl.prototype = {
 
 	get_additional_pic_url: function () {
 		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
-	}
+	},
+
+	sort_pictures: function() {
+		if (this.item_data.Pictures) {
+			var digitized = [],
+			nondigitized = [];
+		for (var i = 0; i < this.item_data.Pictures.length; i++) {
+			var pic = this.item_data.Pictures[i];
+			if(pic.PictureId !== '') {
+				digitized.push(pic);
+			}
+			else {
+				nondigitized.push(pic);
+			}
+		}
+		digitized.push.apply(digitized, nondigitized);
+		return digitized;
+		}
+	},
+
+	uc_first: function() {
+		var lang = this.lang;
+    	return lang.charAt(0).toUpperCase() + lang.slice(1);
+    }
 
 };
 
-angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item', 
-	   'notification', 'itemTypeMap','wizard', 'header', 
-	   'mjs', 'recentlyViewed', '$window', '$timeout', '$modal', '$rootScope', 
-	   'langManager', '$location', ItemCtrl]);
+angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item',
+	   'notification', 'itemTypeMap','wizard', 'header',
+	   'mjs', 'recentlyViewed', '$window', '$timeout', '$uibModal', '$rootScope',
+	   'langManager', ItemCtrl]);

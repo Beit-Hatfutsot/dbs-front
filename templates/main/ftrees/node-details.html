@@ -14,68 +14,68 @@
     <!-- </div> -->
   </div>
   <div class="body" ng-show="ctrl.detailsShown">
-    <h6 ng-show="ctrl.node.tree.NAME_GIVN">
+    <h6 ng-show="ctrl.node.name">
       <en>First Name:</en>
       <he>שם פרטי:</he>
     </h6>
-    {{ctrl.node.tree.NAME_GIVN}}
-    <h6 ng-show="ctrl.node.tree.NAME_SURN">
+    {{ctrl.node.name[0]}}
+    <h6 ng-show="ctrl.node.name">
       <en>Family Name:</en>
       <he>שם משפחה:</he>
     </h6>
-    {{ctrl.node.tree.NAME_SURN}}
+    {{ctrl.node.name[1]}}
     <h6>
       <en>Sex:</en>
       <he>מין:</he>
     </h6>
-    <span ng-if="ctrl.node.tree.sex=='M'">
+    <span ng-if="ctrl.node.sex=='M'">
       <en>Male</en>
       <he>זכר</he>
     </span>
-    <span ng-if="ctrl.node.tree.sex=='F'">
+    <span ng-if="ctrl.node.sex=='F'">
       <en>Female</en>
       <he>נקבה</he>
     </span>
-    <h6 ng-show="ctrl.node.tree.BIRT_DATE">
+    <h6 ng-show="ctrl.node.BIRT_DATE">
       <en>Date of Birth:</en>
       <he>תאריך לידה:</he>
     </h6>
-    {{ctrl.node.tree.BIRT_DATE}}
-    <h6 ng-show="ctrl.node.tree.BIRT_PLAC">
+    {{ctrl.node.BIRT_DATE}}
+    <h6 ng-show="ctrl.node.BIRT_PLAC">
       <en>Place of Birth:</en>
       <he>מקום לידה:</he>
     </h6>
-    {{ctrl.node.tree.BIRT_PLAC}}
-    <h6 ng-show="ctrl.node.tree.MARR_DATE">
+    {{ctrl.node.BIRT_PLAC}}
+    <h6 ng-show="ctrl.node.MARR_DATE">
       <en>Date of Marriage:</en>
       <he>תאריך חתונה:</he>
     </h6>
-    {{ctrl.node.tree.MARR_DATE}}
-    <h6 ng-show="ctrl.node.tree.MARR_PLAC">
+    {{ctrl.node.MARR_DATE}}
+    <h6 ng-show="ctrl.node.MARR_PLAC">
       <en>Place of Marriage:</en>
       <he>מקום חתונה:</he>
     </h6>
-    {{ctrl.node.tree.MARR_PLAC}}
-    <h6 ng-show="ctrl.node.tree.DEAT_DATE">
+    {{ctrl.node.MARR_PLAC}}
+    <h6 ng-show="ctrl.node.DEAT_DATE">
       <en>Date of Death:</en>
       <he>תאריך פטירה:</he>
     </h6>
-    {{ctrl.node.tree.DEAT_DATE}}
-    <h6 ng-show="ctrl.node.tree.DEAT_PLAC">
+    {{ctrl.node.DEAT_DATE}}
+    <h6 ng-show="ctrl.node.DEAT_PLAC">
       <en>Place of Death:</en>
       <he>מקום פטירה:</he>
     </h6>
-    {{ctrl.node.tree.DEAT_PLAC}}
-    <h6 ng-show="ctrl.node.tree.OCCU">
+    {{ctrl.node.DEAT_PLAC}}
+    <h6 ng-show="ctrl.node.OCCU">
       <en>Occupation:</en>
       <he>מקצוע:</he>
     </h6>
-      {{ctrl.node.tree.OCCU}}
-    <h6 ng-show="ctrl.node.tree.NOTE">
+      {{ctrl.node.OCCU}}
+    <h6 ng-show="ctrl.node.NOTE">
       <en>Notes:</en>
       <he>הערות:</he>
     </h6>
-      {{ctrl.node.tree.NOTE}}
+      {{ctrl.node.NOTE}}
     </div>
 </div>
 

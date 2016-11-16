@@ -1,27 +1,217 @@
-<div id="start">	
-	<div id="wizard-container">
-		<div id="wizard-background"></div>
-		<div id="wizard">
-			<div id="wizard-form-strip">
-				<div class="wizard-form-container" ng-class="{'wizard-form-container--in-progress': startCtrl.in_progress}">
-					<div class="wizard-form-container__text">
-						<div class="wizard-form-container__text__title">
-							<en>My Jewish Story</en>
-							<he>הסיפור היהודי שלי</he>
-						</div>
-						<div class="wizard-form-container__text__content">
-							<en>
-								Come stroll among thousands of content items:<br>
-								Pictures, family trees, music, stories of communities and more.
-							</en>
-							<he>בואו לשוטט בין מליוני התכנים במאגרים שלנו - תמונות, עצי משפחה, קבצי מוזיקה, סיפורי קהילות - ולבנות מתוכם את סיפור המשפחה שלכם.
- 							כדי להתחיל, הזינו פרטים של בן משפחה:
-							</he>
-						</div>
-					</div>
-					<ng-include src="'templates/main/wizard-form.html'"></ng-include>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="wizard-container" ng-controller="WizardFormCtrl as wizardFormController">
+  <section id="section--0">
+    <div id="wizard" ng-class="{'wizard--in-progress': startCtrl.in_progress}">
+      <div class="wizard-form-container">
+        <div class="wizard-form-container__title">
+          <en><b>Welcome to My Jewish Story</b><br>
+            <h1 class="main">THE OPEN DATABASES PROJECT</h1>
+            <p class="med"><b>of The Museum of the Jewish People</b></p>
+          </en>
+          <he><b>ברוכים הבאים אל</b><br>
+            <h1 class="main">מאגרי המידע הפתוחים</h1>
+            <p class="med">של מוזיאון העם היהודי - בבית התפוצות</p>
+          </he>
+        </div>
+        <div class="wizard-form-container__content">
+          <en>
+            Discover millions of pictures, family trees, music
+            pieces, stories of communities and more
+          </en>
+          <he>גלו את הסיפור שלכם מתוך מליוני תמונות, עצי משפחה, קבצי מוזיקה, סיפורי קהילות ועוד
+          </he>
+        </div>
+      </div>
+      <ng-include src="'templates/main/wizard-form.html'"></ng-include>
+    </div>
+
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Boys choir in a synagogue, USA, 1950s.</en>
+        <he>פרטי התמונה: מקהלת בנים של בית כנסת, ארה"ב, שנות ה-1950.</he>
+      </span>
+    </div>
+  </section>
+
+  <section id="section--1">
+    <div class="article">
+      <h3 class="title">
+        <en>ARE YOU READY FOR A JOURNEY?</en>
+        <he>מוכנים לצאת לדרך?</he>
+      </h3>
+      <p class="description">
+        <en>For almost four decades, The Museum of the Jewish People at Beit Hatfutsot has been amassing a unique and intriguing body of knowledge: the family trees of over five million individuals, hundreds of thousands of images and films, an abundance of music — both old and new, and archival research into the origins of Jewish family names and the histories of Jewish communities around the world — all the little pieces that, together, comprise the great mosaic of the Jewish story.<br><br>
+        You are invited to explore your own Jewish story and benefit from a wealth of information that is now available to everyone, everywhere, any time – free of charge.<br><br>
+        <small>The journey takes you through changing landscapes that will reshape your understanding of both past and present. Before you know it, others will join you on your remarkable voyage: an unfamiliar cousin might reveal a great grandfather who was the town's doctor, your mother's aunt who was a singer…</small>
+        <span class="aligned">Ready to discover something?</span>
+        </en>
+        <he>במשך 30 שנה צבר בית התפוצות אוצר של ידע מפתיע, נדיר ומסקרן: מעל 5 מיליון איש בעצי משפחה, מאות אלפי צילומים וסרטים, קבצי מוזיקה יהודית מהעבר וההווה, פירושים ומקורות של
+            עשרות אלפי שמות משפחה, ומידע על אלפי קהילות יהודיות ברחבי הגלובוס. ובקיצור, כל מה שמרכיב את הסיפור של העם היהודי.<br><br>
+            עד היום החומרים האלו נחו בארכיונים שלנו, וכעת הם נמצאים כאן, במרחק נגיעה! אנו מזמינים אתכם להרכיב את הסיפור המשפחתי שלכם כאן
+            באתר הזה שבנינו במיוחד כדי שהתכנים האלו יהיו נגישים לכולם. השימוש באתר ובתכנים ללא עלות.<br><br>
+            המסע שלכם יהיה חווייתי ומתמשך. תדלגו בין נופים משתנים, תפגשו דמויות מופת שעיצבו את פני ההיסטוריה, ותלמדו דברים חדשים שלא ידעתם. ופתאום זה יקרה...
+            מבלי שתשימו לב יצטרפו אליכם למסע עוד ועוד אנשים. בן-דוד שלא הכרתם שגר לידכם באותה שכונה, סבא-רבה ששימש כרופא העיירה, דודה של אימא שהייתה זמרת ידועה ועוד הפתעות מרגשות.<br><br>
+            <big class="aligned">כי ככה זה כשמוזיאון בית התפוצות עושה פרויקט שורשים.</big>
+        </he>
+      </p>
+    </div>
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Jewish scouts on the way to summer camp in France, Algiers, Algeria 1960.</en>
+        <he>פרטי התמונה: ילדים יהודים, חברי הצופים, בדרך למחנה קיץ בדרום צרפת. אלג'יר, אלג'יריה 1960.</he>
+      </span>
+    </div>
+  </section>
+
+  <section id="section--2">
+    <div class="article">
+      <h3 class="title light">
+        <en>REVEAL</en>
+        <he>מגלים</he>
+      </h3>
+      <p class="description light">
+        <en>The first step is to enter the family name and place of origin of one of your ancestors. Then, it's magic time!<br><br>
+            A rich and fascinating world will be revealed to you: the meaning of your family name, the stories of your forebears’ communities, the unknown histories of
+            important leaders and famous figures from those locales, regional sounds and flavors, moving photos and films…<br><br>
+            You are about to discover your roots, and, in so doing, discover yourself.<br>
+            Click to search by <span class="form-link" ng-click="wizardFormController.scroll_toForm()"> name and place</span>.
+        </en>
+        <he>הצעד הראשון במסע מתחיל בכתיבת שם משפחה והמקום שממנו היא הגיעה.<br>
+            ואז מופיע הקסם...<br><br>
+            ברגע אחד תחשפו לעולם תוכן עשיר ומרתק: משמעות שם המשפחה שלכם, סיפורה של הקהילה היהודית בה חיו אבותיכם, אישים מפורסמים שגרו באזור, תמונות וצילומים עוצרי נשימה,
+            המוסיקה המקומית הייחודית, סרטי תעודה מקוריים ועוד.<br><br>
+            תנשמו עמוק. אתם עומדים לצאת למסע לגילוי השורשים המשפחתיים והיהודים שלכם -
+            המסע לגילוי עצמכם.<br>
+            לחיפוש לפי <span class="form-link" ng-click="wizardFormController.scroll_toForm()">שם ומקום</span>
+        </he>
+      </p>
+    </div>
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Young girl operating a computer-like machine, Israel, 1963.</en>
+        <he>פרטי התמונה: צעירה מפעילה מכשיר דמוי מחשב, ישראל, 1963.</he>
+      </span>
+    </div>
+  </section>
+
+  <section id="section--3">
+    <div class="article">
+      <h3 class="title">
+        <en>COMPILE</en>
+        <he>בונים</he>
+      </h3>
+      <p class="description">
+        <en>Now that you are journeying through the rich compendium of our database, it’s time to start compiling your Jewish story.<br><br>
+            Discovered some interesting facts about your family? Ran into some new information that reveals an old forgotten story?
+            Saw a photo you loved?<br> Add it to your story by clicking ADD TO MY STORY.<ng-include src="'templates/svgs/add-to-story.html'"></ng-include><br><br>
+            Then use the MY STORY tab at the top of each page to access all of the content you have collected along the way.
+        </en>
+        <he>יצאתם לדרך ואתם משוטטים בין תכני המאגרים, וזה הזמן להתחיל לבנות את הסיפור היהודי שלכם! מצאתם במאגרים מידע על המשפחה? נתקלתם באייטם חדש שחושף סיפור ישן? בצילום יפה?<br><br>
+            הוסיפו אותו לסיפור שלכם באמצעות לחיצה על הכפתור "הוספה לסיפור שלי" שנמצא ליד כל ערך במאגרים.<ng-include src="'templates/svgs/add-to-story.html'"></ng-include><br><br>
+            בנוסף, בראש כל עמוד באתר מופיעה הלשונית "הסיפור שלי". זו הכניסה לעמוד האישי שלכם, שבו ישמרו כל החומרים שאספתם במהלך הדרך.
+        </he>
+      </p>
+    </div>
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Working on the National Water Carrier project, Israel, 1960s.</en>
+        <he>פרטי התמונה: הקמת מפעל המוביל הארצי, ישראל, שנות ה- 1960.</he>
+      </span>
+    </div>
+  </section>
+
+  <section id="section--4">
+    <div class="article">
+      <h3 class="title">
+        <en>SHARE <small>(coming soon)</small></en>
+        <he>משתפים <small>(בקרוב)</small></he>
+      </h3>
+      <p class="description">
+        <en>Each of us has some family memorabilia at home: photo albums, diaries, letters, and more. These relics are what make our family stories come to life.<br><br>
+            Now you can add these items to your MY STORY page and share them with family and friends.
+            By doing so, you enrich your own page and assist others in finding useful information.<br><br>
+            Our experts are hard at work connecting facts, items, and photos so that the larger Jewish story might be illuminated.
+            New information is sometimes the missing link, and so we welcome your contributions.<br><br>
+            Look for the UPLOAD button in the upper right corner of each page.
+        </en>
+        <he>לכל אחד מאתנו יש בבית פריטי זיכרון משפחתיים: אלבומי תמונות, יומנים, מכתבים, פריטי אמנות ויזואליים ועוד, אשר בלעדיהם הסיפור המשפחתי שלנו לא שלם.<br><br>
+            מהיום אפשר להוסיף פריטים אלו לעמוד "הסיפור שלי" ולשתף אותם עם בני משפחה, חברים וגולשים נוספים. ככה גם תעשירו את הסיפור המשפחתי שלכם וגם תסייעו
+            לגולשים אחרים במציאת מידע שיכול להיות חשוב גם עבורם.<br><br>
+            המומחים של בית התפוצות עמלים לצרף עובדה לעובדה על מנת להנגיש את הסיפור היהודי בצורה הטובה ביותר.
+            אינפורמציה חדשה היא לעתים בדיוק החתיכה החסרה בפאזל הגדול, ולכן עשויה לסייע לנו מאוד.<br><br>
+            בואו להעלות פריטים אלו למאגרים ולתרום לבניית הסיפור היהודי של כולנו.
+        </he>
+      </p>
+    </div>
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Boys and girls during GADNA trip, Israel, 1950s.</en>
+        <he>פרטי התמונה: נערים ונערות בטיול גדנ"ע, ישראל, שנות ה- 1950.</he>
+      </span>
+    </div>
+  </section>
+
+  <section id="section--5">
+    <div class="article">
+      <h3 class="title light">
+        <en>FAMILY TREES</en>
+        <he>משפחתיים</he>
+      </h3>
+      <p class="description light">
+        <en>The world of genealogy is compelling and fascinating, and Beit Hatfutsot offers the largest and most comprehensive database of
+            Jewish family trees in the world. However, seeking the roots and branches can present its own unique challenges. Don’t worry;
+            tips will be available to help you along the way, so let's get started:<br><br>
+            Look up a name and choose the best result from the list. Once you click on a name, a section of that individual's family tree
+            will appear, including two generations before and two generations after. Start exploring the tree by clicking on the names within
+            it and learning details about individuals, revealing more generations and discovering new branches of your tree. The trees in our
+            database were submitted by the families who created them, so you may encounter missing information and/or inaccuracies.
+            Any new information you may have can help us to present more accurate data, so please contact us with feedback, corrections, and updates.
+        </en>
+        <he>עולם עצי המשפחה הוא ייחודי ומרתק, אך הוא יכול להיות מעט מאתגר. למה? מכמה סיבות. למשל, חיפוש רק לפי שם משפחה נפוץ (כהן או כץ, לדוגמה) יכול להביא תוצאות
+            רבות מדי. חיפוש לפי שם פרטי ושם משפחה נדיר יכול להביא לתוצאות מעטות מדי. ויכול להיות גם שהאיות שבו השתמשתם לחיפוש שם מסוים שונה מהאופן שמי שיצר את העץ מאיית את שמו.<br>
+            אבל אל דאגה, יש לנו הרבה טיפים שיעזרו לכם. בינתיים בואו נתחיל...<br><br>
+            איך מתחילים? מחפשים שם, ומתוך הרשימה שמתקבלת בוחרים תוצאה שנראית הקרובה ביותר. ברגע שתעשו את זה, ייבנה העץ כולו סביב האדם שבחרתם (שני דורות למעלה ושני דורות למטה).
+            התחילו לנווט בתוך העץ עצמו על ידי לחיצה על שמות של אנשים כדי לגלות עליהם יותר פרטים, לחשוף דורות נוספים ולמצוא קשרים שלא הכרתם.<br>
+            העצים במאגר שלנו נתרמו על ידי האנשים שבנו אותם. לכן ייתכן מידע חסר, לא מדויק או לא מעודכן. כל מידע חדש שיש ברשותכם על קרובי משפחה יעזור לנו להציג תמונה מלאה ומדויקת יותר
+            של העצים, ולכן אתם מוזמנים לפנות אלינו ואנו נעדכן את המידע. מתחילים?
+        </he>
+      </p>
+    </div>
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Children, Israel, 1970s.</en>
+        <he>פרטי התמונה: ילדים, ישראל, שנות ה-1970.</he>
+      </span>
+    </div>
+  </section>
+
+  <section id="section--6">
+    <div class="article">
+      <h3 class="title">
+        <en>EXPLORE</en>
+        <he>משלימים</he>
+      </h3>
+      <p class="description">
+        <en>Couldn’t find any specific information that was relevant to you? Want to search by a general subject?<br>
+            Go ahead! In addition to searching by name and place, you can also perform a general search. Just type in
+            the keyword(s) for the topic you’re interested in, and your search will yield relevant results for that topic.<br><br>
+            In order to maximize the resources available to you, we have joined our efforts with several large organizations,
+            including the Center for Jewish History (5 million item database) and Europeana Collections (50 million item database).
+            In time we will collaborate with additional organizations, integrating their databases so that you can receive an even wider range of results.<br><br>
+            Click the Search tab on the top of the page.<br>
+        </en>
+        <he>לא מצליחים למצוא מידע ספציפי שמעניין אתכם? רוצים לחפש גם לפי נושא כללי או תחום ידע? אין בעיה: בנוסף לחיפוש הממוקד לפי שם ומקום אנו מאפשרים לכם לבצע "חיפוש כללי",
+            ולקבל את כל התוצאות הרלוונטיות ואת כל סוגי התכנים.<br><br>
+            בנוסף, כדי למקסם את מספר התוצאות שתקבלו יצרנו שיתופי עם מספר מאגרים מרכזיים כמו המאגר של המרכז להיסטוריה יהודית, המכיל למעלה מ-5 מיליון פריטי ארכיון ופרויקט "יורופיאנה",
+            שמכיל מידע על כ-50 מיליון פריטים. עם הזמן נוסיף עוד מאגרים חיצוניים כדי לתת לכם חוויה טובה יותר ותוצאות עשירות יותר.<br><br>
+            לחצו על "חיפוש" שבראש כל עמוד
+        </he>
+      </p>
+    </div>
+    <div class="caption">
+      <span class="caption__text">
+        <en>Image Details: Children with school bags on the first day of school, Haifa, Israel 1950s.</en>
+        <he>פרטי התמונה: ילדים עם ילקוטים ביום הראשון ללימודים, חיפה 1950 בקירוב.</he>
+      </span>
+    </div>
+  </section>
 </div>

@@ -9,18 +9,18 @@
                    <div class="text">
                         <en>
                             <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
-                                Your search result for {{itemController.item_data.Header.En}} 
+                                Your Search Result for {{itemController.item_data.Header.En}}:
                             </span>
                             <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">
-                                Your selected item
+                                Your Selected Item:
                             </span>
                         </en>
                         <he>
                             <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
-                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}
+                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}:
                             </span>
                             <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">
-                                נושא הנבחר
+                                הערך הנבחר:
                             <span>
                         </he>
                     </div>
@@ -30,13 +30,14 @@
                         <div    class="item__content__media-container"
                                 ng-class="{'item__content__media-container--movie': itemController.item_type === 'movies'}">
                                 <video ng-src="{{itemController.item_data.video_url}}" controls type="video/mp4" prevent-rightclick autoplay></video>
-                        </div> 
+                        </div>
                         <div class="header-wrapper">
                             <h1 class="item__article-header">
-                                <en>{{itemController.item_data.Header.En}}</en>
-                                <he>{{itemController.item_data.Header.He}}</he>
+                                <en><span>{{itemController.item_data.Header.En}}</span></en>
+                                <he><span>{{itemController.item_data.Header.He}}</span></he>
                             </h1>
-                            <item-type type="itemController.item_type" image="itemController.item_data.thumbnail.data"></item-type>
+                            <item-type type="itemController.item_type"
+                              image="itemController.item_data.thumbnail_url"></item-type>
                             <mjs-widget item="itemController.item_data"></mjs-widget>
                         </div>
                         <div class="gallery-modal__info">
@@ -53,7 +54,7 @@
                                 <he><span class="field-name">תאריך הפקה: </span>{{itemController.item_data.ProductionYear}}</he>
                                 <en>© All Rights Reserved</en><br/>
                                 <he>© כל הזכויות שמורות</he>
-                            </div> 
+                            </div>
                             <div class="gallery-modal__info__gallery-preview">
                                 <div class="gallery-modal__info__gallery-preview__title">
                                     <en>More languages / subtitles:</en>
@@ -98,10 +99,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="OUTBRAIN" data-src="{{itemController.article_abs_url}}" data-widget-id="AR_1" data-ob-template="BeitHatfutsotIsrael" async="async"></div>
-                        <script type="text/javascript" src="http://widgets.outbrain.com/outbrain.js"></script> 
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
         <div class="right-side">

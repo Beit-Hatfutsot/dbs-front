@@ -6,12 +6,12 @@ describe('recentlyViewedService', function() {
 		storage;
 
 	beforeEach(function() {
-		module('templates');
+		module('bhsclient-templates');
 		module('main');
 	});
 	beforeEach(inject(function(recentlyViewed, _$window_) {
 		service = recentlyViewed;
-		storage = _$window_.sessionStorage;
+		storage = _$window_.localStorage;
 	}));
 
 	it("should clear the storage when it's bad", function() {

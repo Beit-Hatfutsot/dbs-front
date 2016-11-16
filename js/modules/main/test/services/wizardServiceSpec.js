@@ -5,10 +5,10 @@ describe('wizard', function() {
 
 	beforeEach(function() {
 		module('main');
-		module('templates')
+		module('bhsclient-templates')
 	});
 
-	beforeEach(inject(function(_wizard_, _apiClient_, _$httpBackend_, _cache_) { 
+	beforeEach(inject(function(_wizard_, _apiClient_, _$httpBackend_, _cache_) {
 		wizard 			= _wizard_;
 		apiClient 		= _apiClient_;
 		$httpBackend 	= _$httpBackend_;
@@ -19,11 +19,11 @@ describe('wizard', function() {
 		$httpBackend.whenGET(query_url).
 			respond(200, {
 				name: {
-					header:'test-name', 
+					header:'test-name',
 					_id: 'name-id'
-				}, 
+				},
 				place: {
-					header: 'test-place', 
+					header: 'test-place',
 					_id: 'place-id'
 				},
 				individuals: [
@@ -31,7 +31,7 @@ describe('wizard', function() {
 						FN: 'Mr',
 						LN: 'Vampire',
 						BD: '1.1.1070',
-						DD: '1.1.1995', 
+						DD: '1.1.1995',
 						MP: 'Transilvania'
 					},
 					{
@@ -57,7 +57,7 @@ describe('wizard', function() {
 		$httpBackend.flush();
 	}));
 
-	
+
 	it('should wizard search, set result & search status', function() {
 		expect(wizard.result.name.header).toEqual('test-name');
 		expect(wizard.result.place.header).toEqual('test-place');
@@ -72,9 +72,9 @@ describe('wizard', function() {
 		$httpBackend.whenGET(query_url).
 			respond(200, {
 				name: {
-					header:'test-name', 
+					header:'test-name',
 					_id: 'name-id'
-				}, 
+				},
 				place: {},
 				individuals: {}
 			});
@@ -92,9 +92,9 @@ describe('wizard', function() {
 		query_url = wizard_search_url + '?name=non-existing-name&place=test-place';
 		$httpBackend.whenGET(query_url).
 			respond(200, {
-				name: {}, 
+				name: {},
 				place: {
-					header: 'test-place', 
+					header: 'test-place',
 					_id: 'place-id'
 				},
 				individuals: {}

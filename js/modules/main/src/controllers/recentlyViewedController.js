@@ -1,6 +1,6 @@
 var RecentlyViewedController = function($scope, $state, recentlyViewed, itemTypeMap, langManager) {
     var self = this;
-    
+
 	this.$state = $state;
 	this.itemTypeMap = itemTypeMap;
 
@@ -12,7 +12,7 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
 
     Object.defineProperty(this, 'scroll_offset', {
     	get: function() {
-    		return this.view_index * -68;
+    		return this.view_index * -84;
     	}
     });
 
@@ -22,17 +22,16 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
                 return {left: this.scroll_offset + 'px'};
             }
             else if (langManager.lang === 'he') {
-                return {right: this.scroll_offset + 'px'};   
+                return {right: this.scroll_offset + 'px'};
             }
         }
-    });    
+    });
 
     Object.defineProperty(this, 'show_arrows', {
         get: function() {
-            if (this.items.length > 14) {
+            if (this.items.length > 13) {
                 return true;
             }
-
             return false;
         }
     });
@@ -49,7 +48,7 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
         }
     });
 
-    this.max_items_inscroll = 14;
+    this.max_items_inscroll = 13;
     this.view_index = this.items.length > this.max_items_inscroll ? this.items.length - this.max_items_inscroll : 0;
 
     $scope.$watch(function() {return self.items.length}, function(newVal, oldVal) {
@@ -57,7 +56,7 @@ var RecentlyViewedController = function($scope, $state, recentlyViewed, itemType
             self.scroll_right();
         }
     });
-};	
+};
 
 RecentlyViewedController.prototype = {
 	goto_item: function(item_data) {
@@ -66,13 +65,16 @@ RecentlyViewedController.prototype = {
 
     scroll_left: function() {
         if (this.can_scroll_left) {
-        	this.view_index--;
+            var next_index = this.view_index - 12;
+            next_index >= 0 ? this.view_index = next_index : this.view_index = 0;
         }
     },
 
     scroll_right: function() {
     	if (this.can_scroll_right) {
-            this.view_index++;
+            var next_index = this.view_index + 12;
+            var last_index = this.items.length - this.max_items_inscroll;
+            next_index >= last_index? this.view_index = last_index : this.view_index = next_index;
         }
     }
 };

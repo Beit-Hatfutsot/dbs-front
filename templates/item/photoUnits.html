@@ -9,66 +9,85 @@
                     <div class="text">
                         <en>
                             <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
-                                Your search result for {{itemController.item_data.Header.En}} 
+                                Your Search Result for {{itemController.item_data.Header.En}}:
                             </span>
                             <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">
-                                Your selected item
+                                Your Selected Item:
                             </span>
                         </en>
                         <he>
                             <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
-                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}
+                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}:
                             </span>
                             <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">
-                                נושא הנבחר
+                                הערך הנבחר:
                             <span>
                         </he>
                     </div>
                 </div>
                 <div class="item-wrapper">
                     <div printSection class="item__content">
-                        <div    class="item__content__media-container"
-                                ng-class="{'item__content__media-container--photoUnit': itemController.item_type === 'photoUnits'}">
-                            <img    class="picture"
+                        <div  class="item__content__media-container"
+                              ng-class="{'item__content__media-container--photoUnit': itemController.item_type === 'photoUnits'}">
+                            <div ng-repeat="pic in itemController.sort_pictures()" ng-switch on="pic.PictureId != undefined">
+                              <img  ng-switch-when="true"
+                                    class="picture"
                                     ng-show="itemController.isActive($index)"
-                                    ng-repeat="pic in itemController.item_data.Pictures"
-                                    ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" 
-                                    alt="Item Image"
+                                    ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"
                                     ng-click="itemController.open_gallery()"
                                     prevent-rightclick
                                     fit-thumb>
+
+                              <a    ng-switch-when="false"
+                                    ng-href="{{itemController.lang=='en'?'http://www.bh.org.il/about-us/volunteering/':'http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/'}}"
+                                    target="blank">
+                                <img  class="picture notdigitized"
+                                      ng-show="itemController.isActive($index)"
+                                      ng-src="images/digitization-{{itemController.lang}}.jpg"
+                                      prevent-rightclick>
+                              </a>
+                            </div>
                             <div class="arrows" ng-if="itemController.item_data.Pictures.length > 1">
                                 <div class="arrow-left" ng-click="itemController.showPrev()"></div>
                                 <div class="arrow-right" ng-click="itemController.showNext()"></div>
                             </div>
-                            <!-- <div class="notification vertical-middle" ng-click="itemController.open_gallery()">
-                                <en>Click to view</en>
-                                <he>ליחצו לצפייה</he>
-                            </div> -->
-                        </div> 
+                        </div>
                         <div class="header-wrapper">
                             <h1 class="item__article-header">
                                 <en>{{itemController.item_data.Header.En}}</en>
                                 <he>{{itemController.item_data.Header.He}}</he>
                             </h1>
-                            <item-type type="itemController.item_type" image="itemController.item_data.thumbnail.data"></item-type>
+                            <item-type type="itemController.item_type"
+                              image="itemController.item_data.thumbnail_url"></item-type>
                             <mjs-widget item="itemController.item_data"></mjs-widget>
                         </div>
                         <div class="gallery-modal__info">
                             <div class="gallery-modal__info__picture-info">
-                                <en><span class="field-name" ng-if="itemController.item_data.UnitText1.En.isNotEmpty()">Description: </span>{{itemController.item_data.UnitText1.En}}</en><br/>
-                                <he><span class="field-name" ng-if="itemController.item_data.UnitText1.He.isNotEmpty()">תיאור: </span>{{itemController.item_data.UnitText.He}}</he>
-                                <en>© All Rights Reserved</en><br/>
-                                <he>© כל הזכויות שמורות</he>
-                            </div> 
+                                <en><span class="field-name" ng-if="itemController.item_data.UnitText1.En.isNotEmpty()">Description: </span>{{itemController.item_data.UnitText1.En}}<br></en>
+                                <he><span class="field-name" ng-if="itemController.item_data.UnitText1.He.isNotEmpty()">תיאור: </span>{{itemController.item_data.UnitText1.He}}<br></he>
+                                <span ng-if="itemController.item_data.UnitId">
+                                    <span class="field-name">
+                                        <en>Photo Unit Number: </en>
+                                        <he>מספר תמונה יחידה: </he>
+                                    </span>
+                                    {{itemController.item_data.UnitId}}
+                                    <br>
+                                </span>
+                                <span>
+                                    <en>© All Rights Reserved</en>
+                                    <he>© כל הזכויות שמורות</he>
+                                    <br>
+                                </span>
+                            </div>
                             <div class="gallery-modal__info__gallery-preview">
                                 <div class="gallery-modal__info__gallery-preview__title">
                                     <en>{{itemController.item_data.Header.En}} Pictures ({{itemController.item_data.Pictures.length}} found)</en>
                                     <he>{{itemController.item_data.Header.He}} Pictures ({{itemController.item_data.Pictures.length}} found)</he>
                                 </div>
                                  <ul class="gallery-modal__info__gallery-preview__minified-picture">
-                                    <li ng-repeat="pic in itemController.item_data.Pictures" ng-class="{'active':itemController.isActive($index)}" ng-hide="isHidden($index)">
-                                        <img ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg" ng-click="itemController.showPhoto($index)"/>
+                                    <li ng-repeat="pic in itemController.sort_pictures()" ng-class="{'active':itemController.isActive($index)}" ng-hide="isHidden($index)">
+                                        <img ng-src="{{pic.PictureId == undefined ? 'images/digitization-sm-'+itemController.lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
+                                             ng-click="itemController.showPhoto($index)"/>
                                     </li>
                                 </ul>
                             </div>
@@ -103,13 +122,11 @@
                                     <en>Check the<br>related items</en>
                                     <he>עיינו בערכים<br>הקשורים</he>
                                 </div>
-                        </div>
-                        <div class="OUTBRAIN" data-src="{{itemController.article_abs_url}}" data-widget-id="AR_1" data-ob-template="BeitHatfutsotIsrael" async="async"></div>
-                        <script type="text/javascript" src="http://widgets.outbrain.com/outbrain.js"></script> 
+                            </div>
                         </div>
                     </div>
-                    
-                </div>  
+
+                </div>
             </div>
         </div>
         <div class="right-side">

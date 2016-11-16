@@ -10,18 +10,20 @@ var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, he
 	this.langManager = langManager;
     this.beta_notification_open = $window.localStorage.getItem('beta-welcome-msg') != 'dismissed';
     this.$window = $window;
+    this.host = $location.host();
+    this.museum_link = this.host.indexOf('test') === 0?'http://test.bh.org.il':'http://www.bh.org.il';
 
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',
         'he': 'חפשו קהילות, פירושי שמות משפחה ואישים'
     };
-    
+
     Object.defineProperty(this, 'is_signedin', {
         get: function() {
             return auth.is_signedin();
         }
     });
-    
+
     Object.defineProperty(this, 'notification_message', {
         get: function() {
             return notification.get();
@@ -142,6 +144,6 @@ HeaderCtrl.prototype = {
 
 };
 
-angular.module('main').controller('HeaderCtrl', ['$rootScope', '$state', '$location', 
+angular.module('main').controller('HeaderCtrl', ['$rootScope', '$state', '$location',
 		  'langManager', 'wizard', 'header', 'notification', 'auth', 'mjs',
 		  'cache', 'recentlyViewed', 'item', '$window', HeaderCtrl]);

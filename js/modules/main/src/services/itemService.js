@@ -26,7 +26,7 @@ angular.module('main').
 			  "שם נרדף": "synonyms",
 			  "lexicon": "lexicon",
 			  "מלון": "lexicon",
-			  "personality": "personalities",
+			  "luminary": "personalities",
 			  "אישיות": "personalities",
 			  "place": "places",
 			  "מקום": "places",
@@ -87,12 +87,17 @@ angular.module('main').
 					return $state.href('item-view', item_data.slug.full);
 				}
 				*/
+
 			    var lang = $rootScope.lang,
 					proper_lang = lang[0].toUpperCase() + lang.slice(1),
 					params,
 					state;
+				//get url with another language if the item's description in current is missing
+				if (item_data.UnitText1 && (item_data.UnitText1[proper_lang] == null || item_data.UnitText1[proper_lang] == '')) {
+				proper_lang == 'En' ? proper_lang = 'He' : proper_lang = 'En';
+				lang = proper_lang.toLowerCase();
+				}
 
-				
 				//TODO: try and remove the next 3 lines as url should be based
 				// on current language
 				if (item_data.slug) {
@@ -112,9 +117,11 @@ angular.module('main').
 				}
 				if (lang == 'he')
 					state = 'he.he_'+state;
+
 				return $state.href(state, params);
+
 			},
-			
+
 			get_data_string: function(item_data) {
 				return itemTypeMap.get_item_string(item_data);
 			},
@@ -181,7 +188,7 @@ angular.module('main').
 					if (not_cached_items.isEmpty()) {
 						$rootScope.$broadcast('item-loaded', cached_items);
 						deferred.resolve(cached_items);
-					} 
+					}
 					else {
 						try {
 							// fetch the non-cached items

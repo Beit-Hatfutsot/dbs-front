@@ -1,14 +1,14 @@
 var PersonViewController = function ($http, $window, $document, $rootScope,
-							       $scope, $state, $stateParams, apiClient, 
+							       $scope, $state, $stateParams, item,
 							       recentlyViewed, langManager, ftreeLayout,
 								   notification) {
-	var self = this, script_loaded = true, node = {};
+	var self = this, script_loaded = true, node = undefined;
 	this.$scope = $scope;
 	this.$rootScope = $rootScope;
 	this.$state = $state;
 	this.$http = $http;
 	this.$window = $window;
-	this.apiClient = apiClient;
+	this.item = item;
 	this.recentlyViewed = recentlyViewed;
 	this.langManager = langManager;
 	this.notification = notification;
@@ -56,37 +56,31 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
         // - siblingMargin: (horizontal,vertical,right)
         siblingMargin: { horizontal:10, vertical:34, right:30, top: -50 },
     });
-	/* TODO: dynamiclly load d3
-    var scriptTag = document[0].createElement('script');
-    scriptTag.type = 'text/javascript';
-    scriptTag.async = true;
-    scriptTag.src = 'js/lib/d3.min.js';
-    scriptTag.onload = function () {
-		self.d3 = $window.d3;
-		var element = document.getElementById('tree-layout');
-		self.layoutEngine.chartSize =  new Tuple(element.clientWidth, element.clientHeight);
-		if (node != {})
-			self.render(node);
-	}
-    var s = document[0].getElementsByTagName('body')[0];
-    s.appendChild(scriptTag);
-    */
    self.detailsShown = false;
    $rootScope.$on('$stateChangeStart',
-			  function(event, toState, toParams, fromState, fromParams){ 
+			  function(event, toState, toParams, fromState, fromParams){
 				  if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
-					  event.preventDefault(); 
+					  event.preventDefault();
 					  notification.loading(false);
 					  // self.detailsShown = true;
 					  self.$state.transitionTo(toState.name, toParams, {notify: false});
+            if (fromParams.tree_number != toParams.tree_number) {
+              self.clear();
+            }
 					  self.load(toParams);
 				  }
 	})
 	document.documentElement.addEventListener('mouseup', function (e) {
 		self.mouseUp(e)
 	});
-	this.load($stateParams);
-	$rootScope.title = '';
+  $rootScope.title = '';
+  if (!$window.d3)
+    jQuery.getScript('https://d3js.org/d3.v3.min.js', function () {
+      // if the node is already loaded, render it
+      if ((self.node !== undefined))
+        self.render(self.node);
+    })
+  this.load($stateParams);
 };
 
 PersonViewController.prototype = {
@@ -111,37 +105,47 @@ PersonViewController.prototype = {
 		}
 	},
 
+  clear: function () {
+    this.elements = {};
+    this.vertices = {};
+    this.tree = null;
+    this.d3Nodes.remove();
+    this.d3Vertices.remove()
+    this.d3Circles.remove()
+  },
+
 	load: function (params) {
 		var self = this,
-			apiUrl = this.apiClient.base_url+
-				['/person',  params.tree_number, params.node_id].join('/');
+        slug = 'person_' + params.tree_number + ';' + params.version + '.' + params.node_id;
 
 		self.notification.loading(true);
-		self.$http.get(apiUrl, { cache: true })
-			.success(function (item_data) {
-				var name = self.get_full_name(item_data.tree),
-					thumbnail = null;
-				if (item_data.thumbnail)
-					thumbnail = item_data.thumbnail.data;
+		self.item.get(slug)
+			.then(function (item_data) {
+				var name = self.get_full_name(item_data),
+					thumbnail_url = null;
+				self.node = item_data;
+				if (item_data.thumbnail_url)
+					thumbnail_url = item_data.thumbnail_url;
 				self.recentlyViewed.put({
 					params: params,
 					state: 'person-view',
-					thumbnail: thumbnail,
+					thumbnail: thumbnail_url,
 					header: {En: name, He: name}
 				});
 				self.tree_number = params.tree_number;
 				// self.detailsShown = true;
-				self.node = item_data;
-				self.$rootScope.title = self.get_full_name(self.node.tree);
+        self.node.Slug = {En: slug};
+				self.$rootScope.title = self.get_full_name(self.node);
 
-				self.notification.loading(false);
-				if (d3 != null)
+				if (self.$window.d3)
 					self.render(self.node)
 				else
-					console.log("where's d3?")
+					console.log("waiting for d3 to load")
 			}, function (response) {
 				console.log('error walking the tree', response)
-				console.log(response); 
+				console.log(response);
+			}).finally(function() {
+				self.notification.loading(false);
 			});
 
 	},
@@ -210,7 +214,7 @@ PersonViewController.prototype = {
 	},
 
 	render: function(node) {
-		var cn = node.tree;
+		var cn = node;
 		var self = this;
 		if ( !cn.pos ) {
 			this.layoutEngine.layoutNode(cn);
@@ -221,6 +225,11 @@ PersonViewController.prototype = {
 			siblingsClusters = -1;
 		data.push( this.getElement(cn, 'individual') );
 		if ( 'parents' in cn ) {
+      // create the parents_ids helper array
+      var parents_ids = []
+      cn.parents.forEach(function (parent, _parent) {
+        parents_ids[_parent] = parent.id;
+      });
 			cn.parents.forEach(function (parent, _parent) {
 				data.push( self.getElement(parent,'parent') );
 				if ( _parent == 0 ) {
@@ -251,9 +260,9 @@ PersonViewController.prototype = {
 					});
 				}
 				if ( parent.partners ) {
-					parent.partners.forEach( function (stepparent, _stepparent) {
-						// make sure it's really a stepparent
-						if ((cn.parents.length == 1) || (stepparent.id != cn.parents[1-_parent].id)) {
+					parent.partners.forEach( function (stepparent) {
+						// make sure it's really a stepparent == not one of the parents
+						if (parents_ids.indexOf(stepparent.id) == -1) {
 							data.push( self.getElement(stepparent,'stepparent') );
 							vdata.push( self.getVertex(stepparent, parent, 'spouse') );
 						}
@@ -380,7 +389,7 @@ PersonViewController.prototype = {
 				.style(self.vertical_pos,function(d) { return px(d.pos.x); })
 				.style('width',function(d) { return px(d.size.x); })
 				.style('height',function(d) { return px(d.size.y); })
-				.style('font-size',function(d) { 
+				.style('font-size',function(d) {
 					return d.class == 'individual'? "20px": px(d.size.y/2.5); });
 		}
 
@@ -529,14 +538,14 @@ PersonViewController.prototype = {
 			this.lastMouseY = e.clientY;
 			this.mousePressed = true;
 			angular.element(document.getElementById(this.rootId))
-				.css("cursor", "-webkit-grabbing")
+				.css("cursor", "grabbing")
 		}
 	},
 	mouseUp: function (e) {
 		if (e.which == 1) {
 			this.mousePressed = false;
 			angular.element(document.getElementById(this.rootId))
-				.css("cursor", "all-scroll")
+				.css("cursor", "grab")
 		}
 	},
 	pan: function (e) {
@@ -549,7 +558,7 @@ PersonViewController.prototype = {
 			elapsed = Date.now() - this.lastPan,
 		    transform;
 
-		if ( elapsed < 60 ) return; 
+		if ( elapsed < 60 ) return;
 		this.pannedX += x;
 		this.pannedY += y;
 		transform = "translate("+this.pannedX+','+this.pannedY+")"+this.vertical_transform;
@@ -561,7 +570,7 @@ PersonViewController.prototype = {
 
 		this.d3Nodes
 			.transition('pan').duration(0)
-			.style(self.vertical_pos, function (d) { 
+			.style(self.vertical_pos, function (d) {
 				if (self.vertical_pos == 'left')
 					d.pos.x += x;
 				else
@@ -596,8 +605,8 @@ PersonViewController.prototype = {
 	}
 };
 
-angular.module('main').controller('PersonViewController', 
+angular.module('main').controller('PersonViewController',
 			  ['$http', '$window', '$document', '$rootScope', '$scope',
-			   '$state', '$stateParams', 'apiClient', 'recentlyViewed', 
-			   'langManager', 'ftreeLayout', 'notification', 
+			   '$state', '$stateParams', 'item', 'recentlyViewed',
+			   'langManager', 'ftreeLayout', 'notification',
 			   PersonViewController]);

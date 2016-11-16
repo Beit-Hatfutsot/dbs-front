@@ -1,12 +1,12 @@
-var UploadModalController = function($scope, $modalInstance, $window, $state) {
+var UploadModalController = function($scope, $uibModalInstance, $window, $state) {
 
     $scope.return = function () {
-        $modalInstance.dismiss();
+        $uibModalInstance.dismiss();
     };
 
     $scope.go_to_story = function() {
         return $state.href('mjs');
-    };    
+    };
 };
 
-angular.module('main').controller('PersonsWelcomeController', ['$scope', '$modalInstance', '$window', '$state', UploadModalController]);
+angular.module('main').controller('UploadModalController', ['$scope', '$uibModalInstance', '$window', '$state', UploadModalController]);

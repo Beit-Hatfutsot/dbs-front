@@ -1,6 +1,7 @@
 @import "params";
 @import "mixins";
 @import "placeholders";
+@import "popover";
 @import "main/icon";
 @import "main/header";
 @import "main/sub-header";
@@ -18,6 +19,7 @@
 @import "main/item_preview";
 @import "main/search-results";
 @import "main/person-preview";
+@import "social/share";
 
 * {
 	box-sizing: border-box;
@@ -35,6 +37,10 @@ html, body {
 		overflow-x: hidden;
 		overflow-y: auto;
 
+    &.visible-scroll {
+      overflow-y: scroll;
+    }
+
 		&.en {
 			direction: ltr;
 		}
@@ -44,7 +50,11 @@ html, body {
 		}
 
         .github-fork-ribbon:before {
-            background-color: #E97600;
+            background-color: $red3;
+        }
+
+        .github-fork-ribbon:after {
+            content: attr(data-title) !important;
         }
 
 		.modal {
@@ -72,10 +82,11 @@ html, body {
 				&.he {
 					float: left;
 				}
-			}		
+			}
 
             @at-root #main-header-container {
-                height: $header-height + $notification-bar-height;
+                /*height: $header-height + $notification-bar-height;*/
+                height: $header-height;
             }
 			@at-root #view {
 				height: 100%;
@@ -101,7 +112,7 @@ html, body {
 				   	-o-transition:all .5s ease-in-out;
 				   	transition:all .5s ease-in-out;
 				}
-				
+
 				&.ng-enter {
 				  opacity: 0;
 				  -webkit-transform:scale3d(0.5, 0.5, 0.5);
@@ -115,9 +126,9 @@ html, body {
 				  -moz-transform:scale3d(1, 1, 1);
 				  transform:scale3d(1, 1, 1);
 				}
-				
+
 				&.ng-leave {
-				  	opacity: 1; 
+				  	opacity: 1;
 				  	-webkit-transform:translate3d(0, 0, 0);
 				  	-moz-transform:translate3d(0, 0, 0);
 				  	transform:translate3d(0, 0, 0);
@@ -150,7 +161,7 @@ html, body {
         padding-right: 15px;
         position: absolute;
         top: 0;
-        width: 100%; 
+        width: 100%;
         .bg {
             background: url("http://www.bh.org.il/wp-content/themes/bh/images/general/404.png")
                 no-repeat scroll 0 100%;
@@ -167,10 +178,10 @@ html, body {
                 font-size: 50px;
                 margin-top: 185px;
                 text-align: center;
-                .small { 
+                .small {
                     font-size: 15px;
                 }
-                .big { 
+                .big {
                     font-size: 92px;
                 }
                 .top {

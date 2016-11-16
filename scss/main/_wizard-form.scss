@@ -1,108 +1,121 @@
 .wizard-form {
-	
-	&__instructions {
-		font-size: 20px;
-		margin-bottom: 5px;
-	}
-			
-	&__field {
-		display: inline-block;
-		vertical-align: top;
-		width: 300px;
+  position: absolute;
+  bottom: 24px;
+  width: 900px;
+  left: 50%;
+  @include translateX(-50%);
+  @include italic-placeholder;
 
-		label {
-			font-size: 12px;
-		}
+  &__instructions {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
 
-		input {
-			width: 100%;
-			height: 38px;
-			padding: 0 8px;
-			border: 1px solid #a09e9b;
-			@include border-radius(3px);
-		}
-	
-		&--place {
+  &__field {
+    display: inline-block;
+    vertical-align: top;
+    width: 370px;
 
-			.en & {
-				margin: 0 0 0 35px;	
-			}
+    label {
+      font-size: 14px;
+      color: #fff;
+    }
 
-			.he & {
-				margin: 0 35px 0 0;	
-			}
-		}
+    input {
+      width: 100%;
+      height: 38px;
+      padding: 0 8px;
+      //font-style: italic;
+      border: 2px solid $blue3;
+      @include border-radius(3px);
+      font-size: 22px;
+    }
 
-		&__autosuggest-wrapper {
-			position: relative;
+    &--place {
 
-			&__autosuggest {
-				position: absolute;
-				width: 100%;
-				padding: 0;
-				background: #ffffff;
-				border-left: 1px solid #a09e9b;
-				border-right: 1px solid #a09e9b;
-				border-bottom: 1px solid #a09e9b;
+      .en & {
+        margin: 0 0 0 20px;
+      }
 
-				&__instuctions {
-					width: 100%;
-					color: #ffffff;
-					background-color: #999999;
-					padding: 0 8px;
-				}
+      .he & {
+        margin: 0 20px 0 0;
+      }
+    }
 
-				&__type-wrapper {
-					padding: 0 5px;
+    &__autosuggest-wrapper {
+      position: relative;
+      color: #333;
 
-					&__type {
-						margin: 5px auto;
+      &__autosuggest {
+        position: absolute;
+        width: 100%;
+        padding: 0;
+        background: #ffffff;
+        border-left: 1px solid #a09e9b;
+        border-right: 1px solid #a09e9b;
+        border-bottom: 1px solid #a09e9b;
 
-						&__title {
-							color: #b0b0b0;
-							font-weight: bold;
-							padding: 0 3px;
+        &__instuctions {
+          width: 100%;
+          color: #ffffff;
+          background-color: #999999;
+          padding: 0 8px;
+        }
 
-							&--selected {
-								color: #68d1d7;
-							}
-						}
+        &__type-wrapper {
+          padding: 0 5px;
 
-						&__item {
-							width: 100%;
-							padding: 0 33px;
-							margin: 0 auto;
-							@include hover_pointer();
-							
-							&--selected {
-								background: #c4edf1;
-								width: 100%;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+          &__type {
+            margin: 5px auto;
 
-	&__btn {
-		display: inline-block;
-		vertical-align: top;
-		width: 144px;
-		height: 38px;
-		@extend %submit-btn;
+            &__title {
+              color: #b0b0b0;
+              font-weight: bold;
+              padding: 0 3px;
 
-		.en & {
-			margin-left: 35px;
-		}
+              &--selected {
+                color: #68d1d7;
+              }
+            }
 
-		.he & {
-			margin-right: 35px;
-		}
+            &__item {
+              width: 100%;
+              padding: 0 33px;
+              margin: 0 auto;
+              @include hover_pointer();
 
-		&:disabled {
-			background: grey;
-			cursor: default;
-		}
-	}
+              &--selected {
+                background: #c4edf1;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__btn {
+    font-size: 28px;
+    font-weight: 600;
+    background-color: $blue3;
+    display: inline-block;
+    vertical-align: top;
+    width: 110px;
+    height: 38px;
+    @extend %submit-btn;
+
+    .en & {
+      margin-left: 20px;
+    }
+
+    .he & {
+      margin-right: 20px;
+    }
+
+    &:disabled {
+      //background: grey;
+      cursor: default;
+    }
+  }
 }

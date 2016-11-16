@@ -1,6 +1,6 @@
 angular.module('main')
 .directive('focus',
-    function($timeout) {
+    ['$timeout', function($timeout) {
         return {
             scope : {
                 trigger : '@focus'
@@ -15,5 +15,5 @@ angular.module('main')
                 });
             }
         };
-    }
-); 
+    }]
+);

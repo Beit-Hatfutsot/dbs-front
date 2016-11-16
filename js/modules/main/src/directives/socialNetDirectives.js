@@ -1,5 +1,5 @@
 /**
- * AngularJS directives for social sharing buttons - Facebook Like, Google+, Twitter and Pinterest 
+ * AngularJS directives for social sharing buttons - Facebook Like, Google+, Twitter and Pinterest
  * @author Jason Watmore <jason@pointblankdevelopment.com.au> (http://jasonwatmore.com)
  * @version 1.2.0
  */
@@ -9,12 +9,14 @@ angular.module('main')
 			  restrict: 'E',
 			  link: function (scope, element, attrs) {
 				  if (!$window.FB) {
-					  // Load Facebook SDK if not already loaded
+            // Load Facebook SDK if not already loaded
 					  jQuery.getScript('http://connect.facebook.net/en_US/sdk.js', function () {
 						  $window.FB.init({
-							  appId: '155587034485772',
-							  xfbml: true,
-							  version: 'v2.0'
+							    appId: '1116428245070195',
+                  status: true,
+                  cookie: true,
+                  xfbml: true,
+                  version: 'v2.4'
 						  });
 						  renderButton();
 					  });
@@ -49,7 +51,7 @@ angular.module('main')
 			  restrict: 'E',
 			  scope: {
 				  text: '@',
-				  href: '='
+				  href: '@'
 			  },
 			  link: function (scope, element, attrs) {
 				  if (!$window.twttr) {
@@ -91,6 +93,6 @@ angular.module('main')
 			  scope: {
 				  'url': "=?"
 			  }
-		  }	
+		  }
 	  }
   ])

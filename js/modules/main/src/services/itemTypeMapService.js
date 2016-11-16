@@ -6,7 +6,7 @@ angular.module('main').service('itemTypeMap', function() {
     	5: 'places',
     	6: 'familyNames',
     	8: 'personalities',
-    	9: 'movies', 
+    	9: 'movies',
     	'IMAGE': 'photoUnits',
     	'VIDEO': 'movies',
     	'TEXT': 'text',
@@ -25,7 +25,7 @@ angular.module('main').service('itemTypeMap', function() {
 		}
 		else {
 			type = 'unknown';
-		} 
+		}
 
 		return type;
 	};
@@ -34,7 +34,7 @@ angular.module('main').service('itemTypeMap', function() {
 		if (item_data.ugc) {
 			return 'ugc';
 		}
-		else if (item_data.GTN) {
+		else if (item_data.tree_num) {
 			return 'genTreeIndividuals';
 		}
 		else {
@@ -47,7 +47,7 @@ angular.module('main').service('itemTypeMap', function() {
 			var collection_name = this.get_collection_name(item_data);
 			return collection_name + '.' + item_data._id;
 		}
-		
+
 		return false;
 	};
 });

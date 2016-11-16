@@ -1,11 +1,11 @@
 <div id="main-header-container" ng-controller="HeaderCtrl as headerController">
   <div class="main-header">
     <div class="upper-container">
-      <div class="sub-upper-container">	
+      <div class="sub-upper-container">
         <div class="sites">
           <ul class="sites">
             <li class="site-item museum">
-              <a ng-href="{{lang == 'en' ? 'http://www.bh.org.il/' : 'http://www.bh.org.il/he/'}}" target="_self">
+              <a ng-href="{{lang == 'en' ? headerController.museum_link : headerController.museum_link + '/he/'}}" target="_self">
                 <div class="title">
                   <en>Museum</en>
                   <he>מוזיאון</he>
@@ -14,7 +14,7 @@
               </a>
             </li>
             <li class="site-item shop" highlighter='bottom'>
-              <a ng-href="{{lang == 'en' ? 'http://www.bh.org.il/shop/' : 'http://www.bh.org.il/he/חנות/'}}" target="_self">
+              <a ng-href="{{lang == 'en' ? headerController.museum_link + '/shop/' : headerController.museum_link + '/he/חנות/'}}" target="_self">
                 <div class="title">
                   <en>Shop</en>
                   <he>חנות</he>
@@ -25,7 +25,11 @@
             <li class="site-item mjs active">
               <a href="#">
                 <div class="title">My Story</div>
-                <div class="icon active"></div>
+
+                <div class="icon active">
+                  <ng-include src="'templates/svgs/main-header-btn.html'"></ng-include>
+                </div>
+
               </a>
               <en><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="Beta" position="[-590, -530]"></icon></en>
               <he><icon ng-click="headerController.toggle_beta_notification()" class="beta-icon" alt-text="'בטא'" position="[-541, -530]"></icon></he>
@@ -54,8 +58,8 @@
           </p>
         </div>
         <div class="dropdown-icons">
-          <div class="header-element dropdown-icons__my-account signed" dropdown>
-            <button class="my-account-label" dropdown-toggle>
+          <div class="header-element dropdown-icons__my-account signed" uib-dropdown>
+            <button class="my-account-label" uib-dropdown-toggle>
               <div class="dropdown-icons__user" ng-if="headerController.is_signedin">
                 <img class="dropdown-icons__user__pic" gravatar-src="headerController.auth.user.email" gravatar-default="identicon" gravatar-size="25"/>
               </div>
@@ -68,7 +72,7 @@
                 <div class="my-account-menu__row signed" ui-sref="mjs">
                   <img class="dropdown-icons__user__pic signed" gravatar-src="headerController.auth.user.email" gravatar-default="identicon" gravatar-size="55"/>
                   <div class="dropdown-icons__user__name">
-                    <span>{{headerController.username}}</span><br/>
+                    <span>{{headerController.username[lang]}}</span><br/>
                     <span class="small-text">
                       <en>View Story</en>
                       <he>הסיפור שלי</he>
@@ -91,14 +95,14 @@
 
           <div class="header-element newsletter-popup">
             <div class="newsletter-popup__button">
-              <button class="label" ng-controller="NewsLetterPopoverCtrl as enewsCtrl" popover-template="'templates/enews-popover.html'" popover-is-open="enewsCtrl.popover.is_open"
+              <button class="label" ng-controller="NewsLetterPopoverCtrl as enewsCtrl" uib-popover-template="'templates/enews-popover.html'" popover-placement="bottom" popover-trigger="'outsideClick'" popover-is-open="enewsCtrl.popover.is_open"
                   ng-class="{'label--active': enewsCtrl.popover.is_open}">
                 <en>ENews</en>
                 <he>ניוזלטר</he>
               </button>
             </div>
           </div>
-          
+
           <div class="header-element dropdown-icons__language-selector">
             <div class="language-icon">
               <en>
@@ -116,20 +120,18 @@
             </div>
           </div>
           <div class="header-element logo">
-            <en>
-              <icon alt-text="{en: 'Home', he: 'בית'}" position="[-314, -636]"></icon>
-            </en>
-            <he><icon alt-text="{en: 'Home', he: 'בית'}" position="[-306, -575]"></icon></he>
+             <ng-include src="'templates/svgs/main-header-logo.html'"></ng-include>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottom-container" ng-show="!(isCurrentState('start'))">
+    <div class="bottom-container">
       <div id="header-container">
         <nav class="menu">
-          <ul class="nav">
-            <li class="logo header-menu-item">
-             <a ng-href="{{lang == 'en' ? '/' : '/he/'}}"> 
+          <ul class="nav left">
+            <li class="logo header-menu-item"
+                ng-class="{'header-menu-item--active': isCurrentState('start')}">
+             <a ng-href="{{lang == 'en' ? '/' : '/he/'}}">
               <span class="item_before" selector></span>
               <div>
                 <en>Home</en>
@@ -137,23 +139,25 @@
               </div>
             </a>
             </li>
-            <li class="header-menu-item ftree-tab"
+            <li class="mystory header-menu-item"
+                ng-class="{'header-menu-item--active': isCurrentState('mjs')}"
+                ng-click="headerController.goto_state('mjs')">
+              <div class="mystory__text">
+                <en>My Story</en>
+                <he>הסיפור שלי</he>
+              </div>
+            </li>
+            <li class="ftree-tab header-menu-item"
               ng-class="{'header-menu-item--active':
-              isCurrentState('persons') || isCurrentState('person-view')}" 
-              ng-click="headerController.goto_state('persons')"> 
+              isCurrentState('persons') || isCurrentState('person-view')}"
+              ng-click="headerController.goto_state('persons')">
                 <div>
                     <en>Family Trees</en>
                     <he>עצי משפחה</he>
                 </div>
             </li>
-            <li class="mystory header-menu-item"
-                ng-class="{'header-menu-item--active': headerController.is_mjs_state}"
-                ng-click="headerController.goto_state('mjs')">
-              <div class="mystory__text">
-                <en>My Story</en>	
-                <he>הסיפור שלי</he>
-              </div>
-            </li>
+          </ul>
+          <ul class="nav right">
             <li class="general-search-trigger header-menu-item"  ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'general-search'}"
               ng-click="headerController.header.sub_header_state = 'general-search'">
               <div>
@@ -162,44 +166,47 @@
               </div>
             </li>
             <li class="recently-viewed-trigger header-menu-item" ng-class="{'header-menu-item--active': headerController.header.sub_header_state == 'recently-viewed'}"
-              ng-click="headerController.header.sub_header_state = 'recently-viewed'"> 
+              ng-click="headerController.header.sub_header_state = 'recently-viewed'">
               <div>
                 <en>Recently Viewed</en>
                 <he>נצפו לאחרונה</he>
               </div>
             </li>
+            <!-- <li class="header-menu-item upload" uib-dropdown is-open> -->
+              <!-- <div class="dropdown-icons__upload" dropdown is-open>
+                <div class="upload-label" uib-dropdown-toggle>
+                  <en>Upload</en>
+                  <he>העלו קובץ</he>
+                </div>
+                <div class="upload-menu">
+                  <div class="upload-menu__title">
+                    <en>Upload your item</en>
+                    <he>העלו את הפריט שלכם</he>
+                  </div>
+                  <div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
+                    <div class="upload-icon__image">
+                      <icon alt-text="{en: 'Image', he: 'תמונה'}" position="[-29, -218]"></icon>
+                    </div>
+                    <div class="upload-menu__row__desc">
+                      <en>Image</en>
+                      <he>תמונה</he>
+                    </div>
+                  </div>
+                  <div class="upload-menu__row" ng-click="headerController.goto_state('upload.family_tree')">
+                    <div class="upload-icon__ftree">
+                      <icon alt-text="{en: 'Family tree', he: 'עץ משפחה'}" position="[-26, -68]"></icon>
+                    </div>
+                    <div class="upload-menu__row__desc">
+                      <en>Family tree</en>
+                      <he>עץ משפחה</he>
+                    </div>
+                  </div>
+                </div> -->
+              <!-- </div> -->
+
           </ul>
         </nav>
-        <!-- <div class="dropdown-icons__upload" dropdown is-open>
-          <div class="upload-label" dropdown-toggle>
-            <en>Upload</en>
-            <he>העלו קובץ</he>
-          </div>
-          <div class="upload-menu">
-            <div class="upload-menu__title">
-              <en>Upload your item</en>
-              <he>העלו את הפריט שלכם</he>
-            </div>
-            <div class="upload-menu__row" ng-click="headerController.goto_state('upload.image')">
-              <div class="upload-icon__image">
-                <icon alt-text="{en: 'Image', he: 'תמונה'}" position="[-29, -218]"></icon>
-              </div>
-              <div class="upload-menu__row__desc">
-                <en>Image</en>
-                <he>תמונה</he>
-              </div>
-            </div>
-            <div class="upload-menu__row" ng-click="headerController.goto_state('upload.family_tree')">
-              <div class="upload-icon__ftree">
-                <icon alt-text="{en: 'Family tree', he: 'עץ משפחה'}" position="[-26, -68]"></icon>
-              </div>
-              <div class="upload-menu__row__desc">
-                <en>Family tree</en>
-                <he>עץ משפחה</he>
-              </div>
-            </div>
-          </div>
-        </div> -->
+
       </div>
     </div>
   </div>

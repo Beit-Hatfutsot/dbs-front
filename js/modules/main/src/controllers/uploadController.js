@@ -1,4 +1,4 @@
-var UploadController = function($scope, $state, auth, apiClient, langManager, mjs, notification) {
+var UploadController = function($scope, $state, auth, apiClient, langManager, mjs, notification, $uibModal) {
     var self = this;
 
     this.$scope = $scope;
@@ -6,11 +6,11 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
     this.langManager = langManager;
     this.mjs = mjs;
     this.notification = notification;
+    this.$uibModal = $uibModal;
     this.placement = langManager.lang === 'en' ? 'left':'right';
-
     this.flow_init = {
-        target:             apiClient.urls.upload, 
-        testChunks:         false, 
+        target:             apiClient.urls.upload,
+        testChunks:         false,
         singleFile:         true,
         supportDirectory:   false
     };
@@ -18,13 +18,11 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
     this.tab_status = {};
     this.is_bilingual = false;
     this.copyright = false;
-
-
     // configure tab_status properties
     [
-        'image', 
-        'video', 
-        'music', 
+        'image',
+        'video',
+        'music',
         'family_tree'
     ].
     forEach(function(state) {
@@ -77,7 +75,7 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
                 description: {
                     en: '',
                     he: ''
-                },  
+                },
                 location: {
                     en: '',
                     he: ''
@@ -179,7 +177,7 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
                 description: {
                     en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
-                },  
+                },
                 location: {
                     en: 'This field is mandatory',
                     he: 'שדה זה הינו שדה חובה'
@@ -273,31 +271,29 @@ var UploadController = function($scope, $state, auth, apiClient, langManager, mj
 
     $scope.$watch(function() {
         return self.in_progress;
-    }, 
-    function(newVal) { 
+    },
+    function(newVal) {
         if (newVal) {
             notification.put(9);
         }
     });
 
-    window.ctrl = this
+    window.ctrl = this;
 };
 
 UploadController.prototype = {
     submit_file: function(event, $flow, files) {
-        
+
     },
 
 	upload: function(type) {
         this.reset_flow_data();
 
-        this.flow.opts.headers.Authorization = 'Bearer ' + this.auth.get_token();
-        
+        this.flow.opts.headers["authentication-token"] = this.auth.get_token();
         for (var field in this.meta_data[type].values) {
             this.flow.opts.query[field + '_en'] = this.meta_data[type].values[field].en;
             this.flow.opts.query[field + '_he'] = this.meta_data[type].values[field].he;
         }
-
         this.flow.files[0].retry();
 	},
 
@@ -331,19 +327,17 @@ UploadController.prototype = {
         //document.getElementsByClassName('upload-droparea')[0].scrollIntoView(false);
         jQuery('html, body').animate({
             scrollTop: jQuery('.upload-droparea').offset().top - 110
-        }, 1000);    
+        }, 1000);
     },
 
     onSuccess: function() {
-        this.mjs.refresh();
+        //this.mjs.refresh();
         this.clear_form();
-        $timeout(function(){
-            $modal.open({
-                templateUrl: 'templates/main/upload/successful-upload.html',
-                controller: 'UploadModalController',
-                size: 'ftree'
-            })
-        }, 1000)
+        this.$uibModal.open({
+            templateUrl: 'templates/main/upload/successful-upload.html',
+            controller: 'UploadModalController',
+            size: 'ftree'
+        });
         /*this.notification.put({
             en: 'Upload succeeded.',
             he: 'העלאת הקובץ הסתיימה בהצלחה.'
@@ -353,18 +347,11 @@ UploadController.prototype = {
 
     onError: function($file, $message) {
         if ($message && JSON.parse($message).error.substr(-13) === 'not supported') {
-            this.notification.put({
-                en: 'This file type is not supported. Please upload a JPG or PNG file.',
-                he: 'שוג הקובץ הזה אינו נתמך, אנא נסו להעלות קובץ מסוג נתמך'
-            });
+            this.notification.put(18);
         }
         else {
-            this.notification.put({
-                en: 'Something went wrong, please try uploading again',
-                he: 'משהו השתבש, אנא נסו שוב'
-            });
+            this.notification.put(19);
         }
-
         this.failed = true;
     },
 
@@ -379,7 +366,7 @@ UploadController.prototype = {
 
         this.uploadFormCtrl.$scope.rc.upload_form.attempted = false;
         this.uploadFormCtrl.$scope.upload_form.$setPristine();
-        
+
         this.reset_flow();
 
         this.failed = false;
@@ -394,4 +381,4 @@ UploadController.prototype = {
     }
 };
 
-angular.module('main').controller('UploadController', ['$scope', '$state', 'auth', 'apiClient', 'langManager', 'mjs', 'notification', UploadController]);
+angular.module('main').controller('UploadController', ['$scope', '$state', 'auth', 'apiClient', 'langManager', 'mjs', 'notification', '$uibModal', UploadController]);

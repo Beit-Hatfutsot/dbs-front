@@ -6,16 +6,16 @@
  * Controller for auth modal template.
  * Handles auth modal scope.
  */
-var AuthCtrl = function($scope, $modalInstance, langManager, auth,
+var AuthCtrl = function($scope, $uibModalInstance, langManager, auth,
 						notification, $state, config) {
     var self = this;
 
-    this.$modalInstance = $modalInstance;
+    this.$uibModalInstance = $uibModalInstance;
     this.auth = auth;
     this.notification = notification;
     this.is_register = config.register;
     this.config = config;
-	this.$state = $state;
+    this.$state = $state;
 
     /**
      * @ngdoc property
@@ -23,7 +23,7 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth,
      *
      * @description
      * Passes the `lang` property from langManager.
-     * Probably should be removed & replaced in the template, 
+     * Probably should be removed & replaced in the template,
      * since there is a `lang` property on $rootScope,
      * unless `lang` is removed from $rootScope.
      */
@@ -128,7 +128,7 @@ var AuthCtrl = function($scope, $modalInstance, langManager, auth,
     this.submit_values = {
         signin: {
             en: 'Email Me',
-            he: 'שלח לי'
+            he: 'שליחה'
         },
 
         processing: {
@@ -146,17 +146,17 @@ AuthCtrl.prototype = {
      *
      * @description
      * Calls method signin of {@link module:auth.service:auth} service, using signin form data.
-     * Defines the success and failure messages, displayed upon modal dismissal. 
+     * Defines the success and failure messages, displayed upon modal dismissal.
      */
     signin: function() {
         var self = this;
 
     	this.auth.signin(this.signin_data.email).
             then(function() {
-                self.$modalInstance.close();
+                self.$uibModalInstance.close();
                 self.notification.put(1);
             }, function() {
-                self.$modalInstance.close();
+                self.$uibModalInstance.close();
                 self.notification.put(10);
             });
     },
@@ -169,7 +169,7 @@ AuthCtrl.prototype = {
      * Dismisses the auth modal.
      */
     dismiss: function() {
-        this.$modalInstance.dismiss();
+        this.$uibModalInstance.dismiss();
 		if (this.config.mandatory)
 			this.$state.go(this.config.fallback_state);
     },
@@ -209,8 +209,13 @@ AuthCtrl.prototype = {
      */
     select_field: function(key) {
         this.selected_field = key;
+    },
+
+    focus_field: function() {
+        var target = angular.element(document.querySelector('#signin-name'));
+        target.focus();
     }
 }
 
-angular.module('auth').controller('AuthCtrl', ['$scope', '$modalInstance',
+angular.module('auth').controller('AuthCtrl', ['$scope', '$uibModalInstance',
 			'langManager', 'auth', 'notification', '$state', 'config', AuthCtrl]);

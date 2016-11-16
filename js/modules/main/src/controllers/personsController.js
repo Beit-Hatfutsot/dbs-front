@@ -1,11 +1,11 @@
-var PersonsController = function($rootScope, $scope, $state, $stateParams, ftrees, notification, $timeout, $modal, $window, $location) {
+var PersonsController = function($rootScope, $scope, $state, $stateParams, ftrees, notification, $timeout, $uibModal, $window, $location) {
 
 	var self = this,
 		advanced_fields = ['birth_place', 'marriage_place', 'death_place', 'tree_number', 'birth_year', 'marriage_year', 'death_year'];
 	this.individuals = [];
 	this.search_params = {};
 	this.query = '';
-	
+
 	this.search_modifiers = {
 		first_name: 	'',
 		last_name: 		'',
@@ -23,21 +23,45 @@ var PersonsController = function($rootScope, $scope, $state, $stateParams, ftree
 	this.$location = $location;
 	this.ftrees = ftrees;
 	this.notification = notification;
-	this.persons_welcome_msg = $window.localStorage.getItem('persons-welcome-msg') != 'dismissed';
+	this.persons_welcome_msg = ($window.sessionStorage.getItem('persons-welcome-msg') == 'dismissed') ||
+		  					   ($window.localStorage.getItem('persons-welcome-msg') == 'dismissed');
 
 	Object.defineProperty($scope, '$stateParams', {
 		get: function() {
 			return $stateParams;
 		}
-	}); 
-
-   $rootScope.$on('$stateChangeStart',
-	  function(event, toState, toParams, fromState, fromParams){
-		  if (toState.name.endsWith('persons') && fromState.name.endsWith('persons') && fromParams.more != toParams.more) {
-			  event.preventDefault();
-			  self.$state.transitionTo(toState.name, toParams, {notify: false});
-		  }
 	});
+
+   	$rootScope.$on('$stateChangeStart',
+	    function(event, toState, toParams, fromState, fromParams) {
+		  	var str = 'persons';
+		  	var from_person_state = fromState.name.indexOf(str, fromState.name.length - str.length) !== -1;
+		  	var to_person_state = toState.name.indexOf(str, toState.name.length - str.length) !== -1;
+
+		  	if (to_person_state && from_person_state && fromParams.more != toParams.more) {
+		  		event.preventDefault();
+			  	self.$state.transitionTo(toState.name, toParams, {notify: false});
+		  	}
+	});
+
+	if (!self.persons_welcome_msg) {
+
+		var modalInstance = $uibModal.open({
+		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
+		     	controller: 'PersonsWelcomeCtrl',
+		     	animation: true,
+		     	size: 'ftree'
+	    });
+
+		modalInstance.result.then(function () {
+		    $window.localStorage.setItem('persons-welcome-msg', 'dismissed');
+
+		}, function () {
+		    $window.sessionStorage.setItem('persons-welcome-msg', 'dismissed');
+		});
+	};
+
+
 	//search
 	var query = {},
 	    parameters = [],
@@ -73,24 +97,12 @@ var PersonsController = function($rootScope, $scope, $state, $stateParams, ftree
 		this.query = parameters.join(' + ');
 		self.search(query);
 	};
-
-	if (self.persons_welcome_msg && $state.lastState.name !== 'ftrees') {
-		$timeout(function(){
-		    $modal.open({
-		     	templateUrl: 'templates/main/ftrees/persons-welcome-message.html',
-		     	controller: 'PersonsWelcomeCtrl',
-		     	size: 'ftree'
-		    });
-	   	}, 1000)
-	};
 };
 
 PersonsController.prototype = {
 	search: function(search_params) {
 		var self = this;
-
 		this.notification.loading(true);
-
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
@@ -108,8 +120,9 @@ PersonsController.prototype = {
 	fetch_more: function() {
 		var self = this;
 		this.notification.loading(true);
-		var search_params = angular.copy(this.search_params);
+		var search_params = angular.copy(self.search_params);
 		search_params.start = self.individuals.items.length;
+		this.handle_search_modifiers(search_params);
 		this.ftrees.search(search_params).
 			then(function (r){
 				self.individuals.items = self.individuals.items.concat(r.items);
@@ -136,6 +149,15 @@ PersonsController.prototype = {
     	this.$location.search(param);
     },
 
+    handle_search_modifiers: function(search_params) {
+		for (var modifier in this.search_modifiers) {
+			var modifier_string = this.search_modifiers[modifier];
+			if (this.search_params[modifier] !== undefined && modifier_string !== '') {
+				search_params[modifier] += ';' + modifier_string;
+			}
+		}
+    },
+
 	update: function() {
 		var search_params = angular.copy(this.search_params);
 
@@ -144,19 +166,13 @@ PersonsController.prototype = {
 				delete search_params[param];
 			}
 		}
-
-		// insert search modifiers & fudge_factors into query string
-		for (var modifier in this.search_modifiers) {
-			var modifier_string = this.search_modifiers[modifier]; 
-			if (search_params[modifier] !== undefined && modifier_string !== '') {
-				search_params[modifier] += ';' + modifier_string;
-			}
-		}
+		this.handle_search_modifiers(search_params);
 		search_params.more = this.$stateParams.more;
-
 		this.$state.go('persons', search_params, {inherit: false});
 		this.$window.sessionStorage.setItem('ftrees_search_params', JSON.stringify(search_params));
 	},
+
+
 
  	clear_filters: function() {
  		for (var parameter in this.search_params) {
@@ -176,4 +192,4 @@ PersonsController.prototype = {
     },
 };
 
-angular.module('main').controller('PersonsController', ['$rootScope', '$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$modal', '$window', '$location', PersonsController]);
+angular.module('main').controller('PersonsController', ['$rootScope', '$scope', '$state', '$stateParams', 'ftrees', 'notification', '$timeout', '$uibModal', '$window', '$location', PersonsController]);

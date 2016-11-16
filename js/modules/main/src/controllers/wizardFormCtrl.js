@@ -5,11 +5,12 @@
  * @description
  * Wizard form controller.
  */
-var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
+var WizardFormCtrl = function ($timeout, langManager, wizard, suggest, $document) {
 
     this.$timeout = $timeout;
 	this.wizard = wizard;
     this.suggest = suggest;
+    this.$document = $document;
 
     /**
      * @ngdoc property
@@ -18,7 +19,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
      * @description
      * Place holder texts (English & hebrew) for the wizard search fields.
      */
-	this.placeholders = { 
+	this.placeholders = {
         name: {
             en: 'Family Name',
             he: 'שם משפחה'
@@ -65,7 +66,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
      * @name WizardFormCtrl#suggested_open
      *
      * @description
-     * Indicates that a name/place suggestion popover is opened 
+     * Indicates that a name/place suggestion popover is opened
      * (twoway binding - setting one of the properties to true will open a suggestion popover).
      */
     this.suggested_open = {
@@ -101,7 +102,7 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
         }
     });
 
-    // getters & setters for wizard query. the wizard form inputs bind to this. 
+    // getters & setters for wizard query. the wizard form inputs bind to this.
     Object.defineProperty(this.wizard_query, 'name', {
         get: function() {
             return wizard.query.name;
@@ -185,21 +186,21 @@ var WizardFormCtrl = function ($timeout, langManager, wizard, suggest) {
      * For example, if the suggestions for name contain 1 exact match, 2 "starts-with",
      * 3 "contains" and 1 "sounds like", `suggested_distribution.names` will be: `[1, 2, 3, 1]`.
      *
-     * TODO: Condider moving this functionality to `get_suggetions()`, 
+     * TODO: Condider moving this functionality to `get_suggetions()`,
      * in order to not run the getter function when there was no change in the suggestions.
      */
     Object.defineProperty(this, 'suggested_distribution', {
         get: function() {
-            return { 
+            return {
                 names: [
-                    suggest.suggested.names.exact.length, 
-                    suggest.suggested.names.starts_with.length, 
+                    suggest.suggested.names.exact.length,
+                    suggest.suggested.names.starts_with.length,
                     suggest.suggested.names.contains.length,
                     suggest.suggested.names.phonetic.length
-                ], 
+                ],
                 places: [
-                    suggest.suggested.places.exact.length, 
-                    suggest.suggested.places.starts_with.length, 
+                    suggest.suggested.places.exact.length,
+                    suggest.suggested.places.starts_with.length,
                     suggest.suggested.places.contains.length,
                     suggest.suggested.places.phonetic.length
                 ]
@@ -219,6 +220,7 @@ WizardFormCtrl.prototype = {
      */
 	search: function() {
         this.wizard.search();
+        this.$document.duScrollTop();
     },
 
 
@@ -274,7 +276,7 @@ WizardFormCtrl.prototype = {
      * Adopt a suggestion for a place or a name.
      */
     adopt: function(type) {
-        
+
         switch(type) {
             case 'name':
                 this.wizard_query.name = this.suggested.names[ this.suggested_index.name ];
@@ -308,7 +310,7 @@ WizardFormCtrl.prototype = {
         if (suggested_count > 0) {
             if($event.keyCode === 40) {
                 $event.preventDefault();
-                
+
                 if (this.suggested_index[type] === suggested_count - 1) {
                     this.suggested_index[type] = 0;
                 }
@@ -318,12 +320,12 @@ WizardFormCtrl.prototype = {
             }
             else if ($event.keyCode === 38) {
                 $event.preventDefault();
-                
+
                 if (this.suggested_index[type] === 0 || this.suggested_index[type] === -1) {
                     this.suggested_index[type] = suggested_count - 1;
                 }
                 else {
-                    this.suggested_index[type] -=1 ;    
+                    this.suggested_index[type] -=1 ;
                 }
             }
             else if ($event.keyCode === 13) {
@@ -362,7 +364,7 @@ WizardFormCtrl.prototype = {
      * Mark a suggestion as selected (highlighted).
      */
     select_suggested: function(type, value) {
-        this.suggested_index[type] = this.suggested[type + 's'].indexOf(value); 
+        this.suggested_index[type] = this.suggested[type + 's'].indexOf(value);
     },
 
     /**
@@ -377,7 +379,15 @@ WizardFormCtrl.prototype = {
     open_suggested: function(type) {
         if ( this.suggested[type + 's'].length > 0 && this.wizard_query[type] ) {
             this.suggested_open[type] = true;
+            this.$document.duScrollToElementAnimated(wizard_form, 130, 500);
+
         }
+    },
+
+    scroll_toForm: function() {
+        this.$document.duScrollToElementAnimated(wizard, 130, 500);
+        var target = angular.element(document.querySelector('#wizard-name'));
+        target.focus();
     },
 
 
@@ -406,8 +416,8 @@ WizardFormCtrl.prototype = {
      * @param type {String} suggestion type (name or place).
      *
      * @description
-     * Deduce from `suggested_distribution` & `suggested_index` 
-     * what type of suggestion ("starts with", "contains" or "sounds like") is sleceted. 
+     * Deduce from `suggested_distribution` & `suggested_index`
+     * what type of suggestion ("starts with", "contains" or "sounds like") is sleceted.
      */
     get_active_title: function(type) {
         if (this.suggested_index[type] >= this.suggested_distribution[type + 's'][0]) {
@@ -427,4 +437,4 @@ WizardFormCtrl.prototype = {
     }
 };
 
-angular.module('main').controller('WizardFormCtrl', ['$timeout', 'langManager', 'wizard', 'suggest', WizardFormCtrl]);
+angular.module('main').controller('WizardFormCtrl', ['$timeout', 'langManager', 'wizard', 'suggest', '$document', WizardFormCtrl]);

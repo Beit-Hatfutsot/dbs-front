@@ -1,8 +1,8 @@
 angular.module('auth').
 
 	factory('auth', [
-	'$modal', '$state', '$location', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
-	function($modal, $state, $location, $http, apiClient, $q, $window, $rootScope, user) {
+	'$uibModal', '$state', '$location', '$http', 'apiClient', '$q', '$window', '$rootScope', 'user',
+	function($uibModal, $state, $location, $http, apiClient, $q, $window, $rootScope, user) {
 		/**
 		 * @ngdoc service
 		 * @name auth
@@ -25,8 +25,8 @@ angular.module('auth').
 	  		/**
 	  		 * @ngdoc method
 		     * @name auth#authenticate
-			 * 
-			 * @param {Object} config 
+			 *
+			 * @param {Object} config
 			 * Configuration object
 			 * Configuration parameters:
 			 *  - **register** – `{boolean}` – set to true to open a Register dialog.
@@ -35,12 +35,12 @@ angular.module('auth').
 		     *  - **fallback_state_params** – `{Object}`.
 			 *
 			 * @description
-			 * A call to this method opens a Sign-in/Register dialog (modal). 
+			 * A call to this method opens a Sign-in/Register dialog (modal).
 		     */
 	  		authenticate: function(config) {
 
 	  			if ( !(this.is_signedin()) ) {
-				    var authModalInstance = $modal.open({
+				    var authModalInstance = $uibModal.open({
 				     	templateUrl: 'templates/auth/auth_modal.html',
 				     	controller: 'AuthCtrl as authController',
 				     	size: 'sm',
@@ -59,9 +59,9 @@ angular.module('auth').
 		  	/**
 	  		 * @ngdoc method
 		     * @name auth#signin
-		     * 
+		     *
 		     * @param email {String} user email
-			 * 
+			 *
 			 * @description
 			 * Sign a user in:
 			 * Sends a request to the auth API endpoint with user credentials.
@@ -119,7 +119,7 @@ angular.module('auth').
 				  		$http.get(url+'/'+token, {
 							headers: {Accept: 'application/json'}
 						}).then(function(response) {
-								if (response.data.meta.code == 200) {		
+								if (response.data.meta.code == 200) {
 								   // success
 									var auth_token = response.data.response.user.authentication_token;
 									if (auth_token) {
@@ -132,7 +132,7 @@ angular.module('auth').
 									} else {
 										login_deferred.reject(response);
 									}
-								} else 
+								} else
 									login_deferred.reject(response);
 
 							}, function(response) {
@@ -154,7 +154,7 @@ angular.module('auth').
 		  	/**
 	  		 * @ngdoc method
 		     * @name auth#signout
-			 * 
+			 *
 			 * @description
 			 * Signs a signed-in user out.
 			 */
@@ -165,7 +165,7 @@ angular.module('auth').
 		  	/**
 	  		 * @ngdoc method
 		     * @name auth#is_signedin
-			 * 
+			 *
 			 * @description
 			 * Checks localStorage for data indicating a signed-in user.
 			 *
@@ -184,7 +184,7 @@ angular.module('auth').
 		  	/**
 	  		 * @ngdoc method
 		     * @name auth#get_token
-			 * 
+			 *
 			 * @description
 			 * The authentication token is saved in `localStorage`,
 			 * and is added to every subsequent request to the API.
@@ -209,7 +209,7 @@ angular.module('auth').
 
 angular.module('auth').
 	factory('authInterceptor', ['$q', '$window', 'apiClient', function ($q, $window, apiClient) {
-	  	
+
 	  	/**
 		 * @ngdoc service
 		 * @name authInterceptor
@@ -222,7 +222,7 @@ angular.module('auth').
 		  	/**
 	  		 * @ngdoc method
 		     * @name authInterceptor#request
-			 * 
+			 *
 			 * @description
 			 * Once recieved, the token is saved in `localStorage`,
 			 * and is added to every subsequent request to the API.
@@ -250,9 +250,9 @@ angular.module('auth').
 		    /**
 	  		 * @ngdoc method
 		     * @name authInterceptor#response
-			 * 
+			 *
 			 * @description
-			 * Removes JWT token from `localStorage` 
+			 * Removes JWT token from `localStorage`
 			 * if a response with status 401 is recieved from the API.
 			 *
 			 * @param {Object} response Response object
@@ -272,7 +272,7 @@ angular.module('auth').
 	  	 * @ngdoc function
 	  	 * @name is_api_url
 	  	 * @module auth
-	  	 * 
+	  	 *
 	  	 * @description
 	  	 * Tests whether a string is an API url or not.
 	  	 *

@@ -1,57 +1,201 @@
-#start {
-	position: relative;
-	width: 100%;
-	background: $gray7;
-	//overflow-x: hidden;
-	margin-top: -$notification-bar-height;
-	//@include transition(all, 1s, linear);
+@at-root #wizard-container {
+  width: 100%;
+  display: block;
 
-	@at-root #wizard-container {
-		position: relative;
-		height: 810px;
-		z-index: 3;
+  section {
+    display: block;
+    width: 100%;
+    position: relative;
+    height: 580px;
 
-		@at-root #wizard {
-			position: absolute;
-			top: 15px;
-			left: 50%;
-			width: 1920px;
-			height: 694px;
-			@include bg_image("start.jpg");
-			@include translate(-50%, 0);
+    &:not(:nth-child(2)) {
+      height: 580px;
+    }
 
-			@at-root #wizard-form-strip {
-				width: 100%;
-				height: 345px;
-				background: rgba(249, 249, 249, 0.85);	
-				border-bottom: 4px solid #5ec5d6;
+    &:nth-child(2) {
+      height: 860px;
+    }
 
-				.wizard-form-container {
-					margin: 130px auto;
-					padding: 35px 0;
-					width: 825px;
-					height: 100%;
+    &:not(:nth-child(2)) {
+      .article {
+        @include vertical-align();
+      }
+    }
 
-					&--in-progress {
-						opacity: 0.7;
-					}
+    @at-root #wizard {
+      position: relative;
+      height: 558px;
+      z-index: 1;
+      color: #fff;
+      padding: 10px 0;
 
-					&__text {
+      &--in-progress {
+        opacity: 0.7;
+      }
 
-						&__title {
-							color: #5dc2d4;
-							font-size: 72px;
-							font-family: helvatica;
-							margin-bottom: 10px;
-						}
+      .wizard-form-container {
+        text-align: center;
 
-						&__content {
-							font-size: 22px;
-							margin-bottom: 35px;
-						}
-					}
-				}
-			}
-		}
-	}
+        &__title {
+
+          .en & {
+            font-size: 30px;
+          }
+          .he & {
+            font-size: 34px;
+          }
+
+          .main {
+            font-weight: 600;
+
+
+            .en & {
+              font-size: 100px;
+              line-height: 100px;
+              margin: -10px 0 8px;
+            }
+            .he & {
+              font-size: 110px;
+              line-height: 110px;
+              margin: -15px 0 6px;
+            }
+          }
+
+          .med {
+            .en & {
+              font-size: 30px;
+            }
+            .he & {
+              font-size: 32px;
+            }
+          }
+
+        }
+
+        &__content {
+          font-size: 22px;
+        }
+      }
+
+
+    }
+
+    .title, .description {
+      display: block;
+      margin: 0 auto;
+      width: 1140px;
+
+      &.light {
+        color: #fff;
+      }
+
+    }
+
+    .title {
+      font-size: 48px;
+      display: block;
+      font-weight: normal;
+    }
+
+    .description {
+      font-size: 22px;
+      display: block;
+
+      .aligned {
+        .en & {
+          float: right;
+        }
+        .he & {
+          float: left;
+        }
+      }
+      .form-link {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 0;
+      background: rgba(249, 249, 249, 0.65);
+      width: 100%;
+
+      &__text {
+        color: $gray2;
+        font-size: 12px;
+        display: block;
+        margin: 0 auto;
+        width: 1140px;
+        line-height: 22px;
+      }
+    }
+
+  }
+
+  #section--0 {
+    z-index: 1;
+    @include bg_image("section0.jpg");
+  }
+
+  #section--1 {
+    .article {
+      .en & {
+        padding-top: 20px;
+      }
+
+      .he & {
+        padding-top: 64px;
+      }
+    }
+    @include bg_image("section1.jpg");
+  }
+
+  #section--2 {
+    @include bg_image("section2.jpg");
+  }
+
+  #section--3 {
+    .article {
+      svg#add_to_story {
+        width: 100px;
+        height: 32px;
+        .btn-backcolor {fill: #cb5947;}
+      .cls-2 {fill:#fff;}
+      .cls-3 {
+        fill:none;
+        stroke: #666766;
+        stroke-linecap:round;
+        stroke-miterlimit:10;
+        stroke-width:3.6px;
+      }
+      }
+    }
+    @include bg_image("section3.jpg");
+  }
+
+  #section--4 {
+    @include bg_image("section4.jpg");
+  }
+
+  #section--5 {
+    @include bg_image("section5.jpg");
+  }
+
+  #section--6 {
+    @include bg_image("section6.jpg");
+  }
+
+}
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+  #wizard-container section .article {
+    .description {
+      font-size: 20px;
+    }
+
+    .title {
+      font-size: 46px;
+    }
+  }
 }

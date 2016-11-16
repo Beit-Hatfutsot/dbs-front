@@ -4,6 +4,7 @@ angular.module('main').
 			restrict: 'A',
 			link: function(scope, element, attrs) {
 				var old_value_backup;
+				scope.branch_name = scope.mjsCtrl.mjs._latest.story_branches[scope.$index-1];
 
 				element.bind('keydown', function($event) {
 					if ($event.keyCode === 13) {

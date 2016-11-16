@@ -5,7 +5,7 @@ describe("My Story Service", function() {
 	var mjs, mjs_url, user_url, $httpBackend, $sessionStorage;
 
 	beforeEach(function() {
-		module('templates');
+		module('bhsclient-templates');
 		module('main');
 	});
 
@@ -21,7 +21,7 @@ describe("My Story Service", function() {
 						   story_items:
 								[{id:'someid',
 								  in_branch: [false, false, false, true]}],
-						   story_branches: ['father'] 
+						   story_branches: ['father']
 			};
 	}));
 

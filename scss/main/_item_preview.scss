@@ -8,7 +8,10 @@
 
 	&:hover {
 		.white-part1 {
-			width: 240px;
+
+      &--thumbnail {
+        width: 240px;
+      }
 
 			&--nothumb {
 				width: initial;
@@ -18,9 +21,9 @@
             width: 26px;
 
             .type-desc-container {
-                width: 0; 
+                width: 0;
             }
-        } 
+        }
 	}
 
     .type {
@@ -46,11 +49,10 @@
 			background: $yellow3;
 		}
 	}
-		
+
 	.white-part1 {
-		position: relative;
+		  position: relative;
 	  	border-bottom: 150px solid #ffffff;
-	  	transition: width 1s;
 	  	width: 292px;
 	  	top: 0px;
 
@@ -62,7 +64,11 @@
 	  		border-left: 42px solid transparent;
 	  	}
 
-	  	&--nothumb {
+      &--thumbnail {
+        transition: width 1s;
+      }
+
+      &--nothumb {
 			width: 100%;
 
 			.en & {
@@ -101,10 +107,10 @@
 
 		code {
             font-family: inherit;
-            
+
             &:before, &:after {
                 content: "'";
-            }   
+            }
         }
 
 		&--nothumb {
@@ -112,14 +118,14 @@
 			width: 90%;
 		}
         p {
-            display: inline; 
+            display: inline;
             a {
                 pointer-events: none;
                 text-decoration: none;
                 color: $gray3;
             }
 	    }
-    }	
+    }
 
 	.thumbnail {
 		position: absolute;
@@ -150,7 +156,7 @@
 
 	.remove {
 		width: 18px;
-		height: 20px;	
+		height: 20px;
 		overflow: hidden;
 		margin-top: 8px;
 

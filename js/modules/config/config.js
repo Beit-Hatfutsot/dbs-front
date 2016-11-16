@@ -4,8 +4,9 @@
  * @module config
  * @description
  * A module to hold BHSClient configuration.
- // * This Module is compiled by the Grunt replace task in the project Gruntfile.
+ * This Module is edited by the Gulp base-url task
  */
+
 angular.module('config', []).
     /**
      * @ngdoc service
@@ -16,19 +17,6 @@ angular.module('config', []).
      */
     constant('apiConfig', {
         baseUrl:        'BaseUrlPlaceHolder',
-        login:          'login',
-        auth:           'auth',
-        user:           'user', 
-        mjs:            'mjs', 
-        wizard_search:  'wsearch',
-        item:           'item',
-        suggest:        'suggest',
-        ftrees_search:  'fsearch',
-        ftrees_get:     'get_ftree_url',
-        ftrees_walk:    'fwalk',
-        upload:         'upload',
-        newsletter:      'newsletter',
-        search:         'search'
     }).
 	constant('europeanaUrl',
 			 'http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn');
