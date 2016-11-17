@@ -9,7 +9,7 @@ var PersonsWelcomeCtrl = function($scope, $uibModalInstance, $window, $state) {
     };
 
     $scope.go_to_tree = function(tree_num, node) {
-        return $state.href('person-view', {tree_number: tree_num, node_id: node});
+        return $state.href('person-view', {tree_number: tree_num, version: 0, node_id: node});
     }
 };
 
