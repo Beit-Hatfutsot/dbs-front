@@ -194,6 +194,17 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             controller: 'PersonsController as ctrl',
             templateUrl: 'templates/main/ftrees/persons.html'
         },
+
+        {
+            name: 'person-view-redirect',
+            url: '/person/:tree_number/:node_id',
+            onEnter: ['$state', '$stateParams', 'langManager', function($state, $stateParams, langManager) {
+                $state.go(langManager.lang == 'he'?'he.he_person-view':'person-view',
+                               {tree_number: $stateParams.tree_number, version: 0, node_id: $stateParams.node_id});
+            }]
+
+        },
+
         {
             name: 'person-view',
 			// TODO: make the version optional
