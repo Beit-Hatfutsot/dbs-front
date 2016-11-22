@@ -207,8 +207,8 @@ angular.module('main').
 						try {
 							// fetch the non-cached items
 							// TODO: store items on the cache
-							self.check_person_slug (not_cached_slugs);
-							not_cached_slugs = not_cached_slugs.join(',');
+							not_cached_slugs = self.check_person_slug(not_cached_slugs).join(',');
+
 							itemResource.query({slugs: not_cached_slugs}).$promise.
 								then(function(item_data_arr) {
 									/*

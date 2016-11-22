@@ -2,11 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.9.10] - 2016-11-16
+## [0.9.10] - 2016-11-22
 ### Added
 - Add Hebrew "Add to My Story" button 
 - Display notification for items that only exist in one language
-- A migration process now runs every 5 minutes, bringing new data from BHP
+- A migration process now runs every day, bringing new data from BHP
 - Person URL now includes a tree version to better support updating of trees
 
 ### Fixed
@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Improve navigation in recently viewed
 - Split "Images & Videos" tab in search ressults
 - Related items are based only on BHP data
+- General Search now uses AND by default
 
 ## [0.9.9] - 2016-09-07
 ### Added
