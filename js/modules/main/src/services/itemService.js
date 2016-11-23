@@ -166,26 +166,12 @@ angular.module('main').
 				}
 			},
 
-			check_person_slug: function (slugs) {
-				slugs.forEach (function (slug, i) {
-					if (slug.indexOf('person') == 0) {
-						var str = slug.split('.');
-						if (str[0].indexOf(';') == -1 ) {
-							str[0] += ';0.';
-							slugs[i] = str[0] + str[1];
-						}
-					}
-
-				});
-				return slugs;
-			},
-
 			get_items: function(slugs) {
 				if ( !in_progress ) {
 					var self 				= this,
 						deferred			= $q.defer(),
 						cached_items		= [],
-						not_cached_slugs	= [];
+						not_cached_items	= [];
 
 					slugs.forEach(function(slug) {
 						if(!slug) return;
@@ -195,11 +181,11 @@ angular.module('main').
 							cached_items.push(cached);
 						}
 						else {
-							not_cached_slugs.push(slug);
+							not_cached_items.push(slug);
 						}
 					});
 
-					if (not_cached_slugs.isEmpty()) {
+					if (not_cached_items.isEmpty()) {
 						$rootScope.$broadcast('item-loaded', cached_items);
 						deferred.resolve(cached_items);
 					}
@@ -207,8 +193,7 @@ angular.module('main').
 						try {
 							// fetch the non-cached items
 							// TODO: store items on the cache
-							self.check_person_slug (not_cached_slugs);
-							not_cached_slugs = not_cached_slugs.join(',');
+							var not_cached_slugs = not_cached_items.join(',');
 							itemResource.query({slugs: not_cached_slugs}).$promise.
 								then(function(item_data_arr) {
 									/*
