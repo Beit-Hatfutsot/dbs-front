@@ -1,4 +1,3 @@
-
 function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs,
 				  recentlyViewed, $window, $timeout, $uibModal, $rootScope, langManager) {
 	var self = this;
@@ -87,7 +86,7 @@ ItemCtrl.prototype = {
 				self.recentlyViewed.put(
 					{Slug: item_data.Slug,
 					 header: item_data.Header,
-					 thumbnail: item_data.thumbnail_url
+					 thumbnail_url: item_data.thumbnail_url
 					});
 				self.item_data = item_data;
 				self.proper_link = self.item.get_url(self.item_data);
