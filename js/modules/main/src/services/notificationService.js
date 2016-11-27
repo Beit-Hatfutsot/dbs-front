@@ -5,7 +5,7 @@ angular.module('main').
 			'className': 'info',
 			globalPosition: 'top center'
 		},
-	    pendingOptions = {
+            pendingOptions = {
 			 autoHide: false,
 			 showDuration: 50
 		},
@@ -96,7 +96,12 @@ angular.module('main').
       	en: 'Something went wrong, please try uploading again',
       	he: 'משהו השתבש, אנא נסו שוב',
       	options: errorOptions
+      }, 20: {
+            en: "Just searched that. Please review the results.",
+            he: "בדיוק חיפשתי כאלו. אנא בדוק את התוצאות.",
+            options: warnOptions
       }
+
 
 
 // next line ends the notifications dict

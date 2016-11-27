@@ -159,8 +159,8 @@ PersonsController.prototype = {
     },
 
 	update: function() {
+		var self = this;
 		var search_params = angular.copy(this.search_params);
-
 		for (var param in search_params) {
 			if (search_params[param] === '') {
 				delete search_params[param];
@@ -168,6 +168,10 @@ PersonsController.prototype = {
 		}
 		this.handle_search_modifiers(search_params);
 		search_params.more = this.$stateParams.more;
+		var prev_search = this.$window.sessionStorage.getItem('ftrees_search_params');
+		if (JSON.stringify(search_params) === prev_search) {
+			self.notification.put(20);
+		}
 		this.$state.go('persons', search_params, {inherit: false});
 		this.$window.sessionStorage.setItem('ftrees_search_params', JSON.stringify(search_params));
 	},
