@@ -23,7 +23,11 @@ ItemPreviewCtrl.prototype = {
             return this.url;
         }
         if (this.collection_name === 'genTreeIndividuals') {
-            return this.$state.href('ftree-item', {individual_id: this.$scope.previewData.II, tree_number: this.$scope.previewData.GTN});
+            var state_name = this.proper_lang=='he'?'he.he_person-view':'person-view';
+            return this.$state.href(state_name,
+                                    {tree_number:item_data.tree_num,
+                                    version:item_data.tree_version,
+                                    node_id: item_data.id});
         }
         else {
 			return this.item.get_url(item_data);

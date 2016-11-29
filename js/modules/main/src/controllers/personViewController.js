@@ -20,6 +20,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	this.elements = {};
 	this.vertices = {};
 	this.tree_number = $stateParams.tree_number;
+	this.tree_version = $stateParams.version;
 	this.tree = null;
 
 	// TODO: get the size from the dom
@@ -345,8 +346,8 @@ PersonViewController.prototype = {
 				}
 				else if (d.id) {
 					self.$state.go((self.langManager.lang == 'he')?
-								     'he.he_person-view':'person-view',
-							   {tree_number: self.tree_number, node_id: d.id});
+								    'he.he_person-view':'person-view',
+							   {tree_number: self.tree_number, version: self.tree_version||0, node_id: d.id});
 				}
 			})
 			.attr('role',function(d) { return d.hasOwnProperty('class') ? d.class : 'unknown'; })

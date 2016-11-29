@@ -217,7 +217,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
         },
         {
             name: 'he.he_person-view',
-            url: '/person/:tree_number/:node_id',
+            url: '/person/:tree_number/:version/:node_id',
             controller: 'PersonViewController as ctrl',
             templateUrl: 'templates/main/ftrees/person.html',
             onEnter: ['header', function(header) {
