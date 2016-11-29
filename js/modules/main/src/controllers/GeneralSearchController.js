@@ -87,6 +87,8 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
             this.results = {hits: []};
             this.eurp_results = [];
             this.cjh_results = [];
+            this.cjh_total = 0;
+            this.eurp_total = 0;
             $state.go('general-search', {q: this.header.query, collection: new_collection});
         }
     });
@@ -120,22 +122,17 @@ GeneralSearchController.prototype = {
             self.notification.loading(false);
         });
 
-
-
         if(this.collection == 'allResults' || this.collection == 'images' || this.collection == 'videos') {
-            this.eurp_total = 0;
-            this.cjh_total = 0;
-            this.search_europeana(function(r) {
+            self.search_europeana(function(r) {
                 self.eurp_total = r.totalResults;
-                self.push_eurp_items(r);
+                self.eurp_results = self.push_eurp_items(r);
                 self.loading_eurp = false;
             });
+
             if (this.collection !== 'videos') {
-                self.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
-                .success(function(r) {
+                self.search_cjh(function(r) {
                     self.cjh_total = r.response.numFound;
-                    console.log(self.cjh_total);
-                    self.push_cjh_items(r);
+                    self.cjh_results = self.push_cjh_items(r);
                     self.loading_cjh = false;
                 })
             }
@@ -143,30 +140,6 @@ GeneralSearchController.prototype = {
         else {
             this.eurp_total = 0;
             this.cjh_total = 0;
-        }
-    },
-
-    push_eurp_items: function(r) {
-        if (r.items) {
-            for (var i=0; i < r.items.length; i++) {
-                var item = r.items[i];
-                if (item.edmPreview)
-                    this.eurp_results.push({thumbnail_url: item.edmPreview[0], UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
-                else
-                    this.eurp_results.push({UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
-            }
-        }
-    },
-
-    push_cjh_items: function(r) {
-        if (r.response.docs) {
-            for (var i=0; i < r.response.docs.length; i++) {
-                var item = r.response.docs[i];
-                if (item.thumbnail)
-                    this.cjh_results.push({thumbnail_url: item.thumbnail, UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
-                else
-                     this.cjh_results.push({UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
-            }
         }
     },
 
@@ -183,6 +156,65 @@ GeneralSearchController.prototype = {
         return params;
     },
 
+    search_europeana: function (callback) {
+        var params = {};
+        params = {qf: 'PROVIDER:"Judaica Europeana"',
+                      rows: 5};
+        params.query = this.header.query;
+
+        if (this.collection == 'images')
+            params.qf += ' TYPE:IMAGE';
+
+        if (this.collection == 'videos')
+            params.qf += ' TYPE:VIDEO';
+
+        params.start = this.eurp_results.length+1 || 1;
+        this.$http.get(this.europeanaUrl, {params: params})
+            .success(callback)
+    },
+
+    search_cjh: function (callback) {
+        var params = {};
+        params.q = this.header.query;
+        if (this.collection == 'images')
+            params.q = params.q.concat(' dtype: Photographs');
+        params.start = this.cjh_results.length || 0;
+        this.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: params})
+            .success(callback)
+
+    },
+
+    push_eurp_items: function(r) {
+        var eurp_results = [];
+        if (r.items) {
+            for (var i=0; i < r.items.length; i++) {
+                var item = r.items[i];
+                if (item.edmPreview){
+                    eurp_results.push({thumbnail_url: item.edmPreview[0], UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+                }
+                else
+                    eurp_results.push({UnitType: item.type, Header: {En: item.title[0], He: item.title[0]}, url: item.guid, UnitText1: {En: item.title[1], He: item.title[1]}});
+            }
+        }
+        return eurp_results;
+    },
+
+    push_cjh_items: function(r) {
+        var cjh_results = [];
+        if (r.response.docs) {
+            for (var i=0; i < r.response.docs.length; i++) {
+                var item = r.response.docs[i];
+                if (item.thumbnail)
+                    cjh_results.push({thumbnail_url: item.thumbnail, UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
+                else
+                    cjh_results.push({UnitType: item.dtype, Header: {En: item.title[0], He: item.title[0]}, url: item.fulllink, UnitText1: {En: item.description[0], He: item.description[0]}});
+            }
+        }
+        return cjh_results;
+
+    },
+
+
     fetch_more: function() {
         var self = this;
         var query_string = this.query_string,
@@ -194,46 +226,24 @@ GeneralSearchController.prototype = {
         });
     },
 
-    search_europeana: function (callback) {
-        var params = {qf: 'PROVIDER:"Judaica Europeana"',
-				      rows: 5};
-        params.query = this.header.query;
-
-		if (this.collection == 'images')
-            params.qf += ' TYPE:IMAGE';
-
-        if (this.collection == 'videos')
-            params.qf += ' TYPE:VIDEO';
-
-        params.start = this.eurp_results.length || 1;
-		this.$http.get(this.europeanaUrl, {params: params})
-            .success(callback)
-    },
-
-    api_params_cjh: function () {
-       var params = {};
-        params.q = this.header.query;
-        if (this.collection == 'images')
-			params.q = params.q.concat(' dtype: Photographs');
-
-        params.start = this.cjh_results.length;
-        return params;
-    },
-
     fetch_more_eurp: function() {
         var query_string = this.query_string,
             self = this;
 
-		this.search_europeana(function (r) { self.push_eurp_items(r)});
+        this.search_europeana(function (r) {
+            self.eurp_results = self.eurp_results.concat(self.push_eurp_items(r));
+        });
     },
 
     fetch_more_cjh: function() {
         var query_string = this.query_string,
             self = this;
-        this.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: this.api_params_cjh()})
-        .success(function (r) { self.push_cjh_items(r)});
 
+        this.search_cjh(function(r) {
+            self.cjh_results = self.cjh_results.concat(self.push_cjh_items(r));
+        });
     },
+
 
     google_search: function() {
         this.$window.open('http://google.com/?q=' + this.google_query, '_blank');

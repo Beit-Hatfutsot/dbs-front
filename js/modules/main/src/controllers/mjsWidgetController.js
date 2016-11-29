@@ -15,15 +15,21 @@ var MjsWidgetController = function($rootScope, $scope, $state, mjs, auth, item) 
     }
   });
 
-  /*
-  $rootScope.$on('mjs-updated', function() {
-    if (self.item_tobe_added) {
-          self.item_added = true;
-          self.item_tobe_added = false;
-    };
-  });
-  */
 
+  $scope.$on('loggedin', function (event, user) {
+    //check if current item in mjs
+    if ($scope.item.isNotEmpty()) {
+      var item_slug = item.get_key($scope.item);
+      var in_mjs = false;
+      user.story_items.every(function(i) {
+        if (item_slug == i.id) {
+          in_mjs = true;
+        }
+        return !in_mjs;
+      });
+      $scope.item.in_mjs = in_mjs;
+    }
+    });
 };
 
 MjsWidgetController.prototype = {
