@@ -16,7 +16,8 @@
     "ngstorage": "~0.3.10",
     "angular-gravatar": "0.4.2",
     "clipboard": "^1.5.12",
-    "angular-scroll": "^1.0.0"
+    "angular-scroll": "^1.0.0",
+    "angulartics-google-analytics": "^0.3.0"
   },
   "overrides": {
     "jquery": {

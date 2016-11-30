@@ -29,12 +29,17 @@ angular.module('main', [
 	'hc.marked',
     'ui.gravatar',
     'bhsclient-templates',
-    'duScroll'
+    'duScroll',
+    'angulartics',
+    'angulartics.google.analytics'
     ]).
 config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
-	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider',
+	   '$httpProvider', '$provide', '$sceDelegateProvider', 'markedProvider', 'gravatarServiceProvider', '$analyticsProvider',
 
-function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider, gravatarServiceProvider) {
+function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $provide, $sceDelegateProvider, markedProvider, gravatarServiceProvider, $analyticsProvider) {
+
+    $analyticsProvider.firstPageview(true); /* Records pages that don't use $state or $route */
+    $analyticsProvider.withAutoBase(true);  /* Records full path */
 
 		// to be used we exiting the item pages
 	var slug_cleaner = ['$rootScope', function($rootScope) {
@@ -385,13 +390,14 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
 											   {absolute: true});
 
 	});
-
-	/*$rootScope.$on('$stateChangeSuccess',
-		function(event, toState, toParams, fromState, fromParams){
-			$rootScope.title = ('title' in toState)?toState.title:"";
-            if (!$window.ga)
-                return;
-            $window.ga('send', 'pageview', { page: $location.path() });
-	});*/
+    var dataLayer = window.dataLayer = window.dataLayer || [];
+	$rootScope.$on('$stateChangeSuccess', function() {
+			dataLayer.push({
+            event: 'ngRouteChange',
+            attributes: {
+                route: $location.path()
+            }
+      });
+	});
 
 }]);
