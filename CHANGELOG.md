@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.11] - 2016-11-29
+### Fixed
+- Recentley viewed thumbnails are back
+- Clear Europeana search result when sending a new search term
+- Add feedback message for unchanged person search
+- "Add to My story" button is no longer confused by items already in the story
+
 ## [0.9.10] - 2016-11-16
 ### Added
 - Add Hebrew "Add to My Story" button 
