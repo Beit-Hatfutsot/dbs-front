@@ -398,7 +398,7 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
 		dataLayer.push({
             event: 'ngRouteChange',
             attributes: {
-                route: $location.path()
+                route: $location.url()
             }
         });
 	});
