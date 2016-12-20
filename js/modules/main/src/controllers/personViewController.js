@@ -375,14 +375,6 @@ PersonViewController.prototype = {
 				});
 
 		new_divs.append('div')
-				.classed('dates', true)
-				.classed('noselect', true)
-				.html(function(d) {
-				 	var birth = d.birth_year ? d.birth_year : '&#65533;';
-				 	var death =  d.death_year ? d.death_year : '&#65533;';
-				 	return birth + ' ' + death
-				});
-		new_divs.append('div')
 			    .classed('name', true)
 				  .classed('noselect', true)
 				  .text(function(d) {
@@ -424,6 +416,18 @@ PersonViewController.prototype = {
 		els.selectAll("span")
 			.style('width',function(d) { return px(d.size.x); })
 			.style('height',function(d) { return px(d.size.y); })
+
+		// add the dates for the middle individual
+		var indi = els.filter(function(d) { return d.id == cn.id });
+		indi.select('.dates').remove();
+		indi.insert('div', '.name')
+				.classed('dates', true)
+				.classed('noselect', true)
+				.html(function(d) {
+				 	var birth = cn.birth_year ? cn.birth_year : '&#65533;';
+				 	var death =  cn.death_year ? cn.death_year : '&#65533;';
+				 	return birth + ' ' + death
+				});
 
 		// CIRCLES
 		var circles = d3.select('.vertices').selectAll(".child-ep")
