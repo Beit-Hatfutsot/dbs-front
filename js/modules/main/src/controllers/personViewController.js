@@ -1,7 +1,7 @@
 var PersonViewController = function ($http, $window, $document, $rootScope,
 							       $scope, $state, $stateParams, item,
 							       recentlyViewed, langManager, ftreeLayout,
-								   notification) {
+								   notification, $location) {
 	var self = this, script_loaded = true, node = undefined;
 	this.$scope = $scope;
 	this.$rootScope = $rootScope;
@@ -12,6 +12,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	this.recentlyViewed = recentlyViewed;
 	this.langManager = langManager;
 	this.notification = notification;
+	this.$location = $location;
 	this.ftrees_search_params = JSON.parse(this.$window.sessionStorage.getItem('ftrees_search_params'));
 
 	// renderer
@@ -57,23 +58,31 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
         // - siblingMargin: (horizontal,vertical,right)
         siblingMargin: { horizontal:10, vertical:34, right:30, top: -50 },
     });
-   self.detailsShown = false;
-   $rootScope.$on('$stateChangeStart',
-			  function(event, toState, toParams, fromState, fromParams){
-				  if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
-					  event.preventDefault();
-					  notification.loading(false);
-					  // self.detailsShown = true;
-					  self.$state.transitionTo(toState.name, toParams, {notify: false});
+    self.detailsShown = false;
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+		if (toState.name.endsWith('person-view') && fromState.name.endsWith('person-view')) {
+			event.preventDefault();
+			notification.loading(false);
+			// self.detailsShown = true;
+			self.$state.transitionTo(toState.name, toParams, {notify: false});
             if (fromParams.tree_number != toParams.tree_number) {
-              self.clear();
+            	self.clear();
             }
-					  self.load(toParams);
-				  }
-	})
+			self.load(toParams);
+			dataLayer.push({
+                event: 'ngRouteChange',
+                attributes: {
+                    route: $location.path()
+                }
+            });
+	    }
+
+	});
+
 	document.documentElement.addEventListener('mouseup', function (e) {
 		self.mouseUp(e)
 	});
+
   $rootScope.title = '';
   if (!$window.d3)
     jQuery.getScript('https://d3js.org/d3.v3.min.js', function () {
@@ -118,7 +127,6 @@ PersonViewController.prototype = {
 	load: function (params) {
 		var self = this,
         slug = 'person_' + params.tree_number + ';' + params.version + '.' + params.node_id;
-
 		self.notification.loading(true);
 		self.item.get(slug)
 			.then(function (item_data) {
@@ -609,5 +617,5 @@ PersonViewController.prototype = {
 angular.module('main').controller('PersonViewController',
 			  ['$http', '$window', '$document', '$rootScope', '$scope',
 			   '$state', '$stateParams', 'item', 'recentlyViewed',
-			   'langManager', 'ftreeLayout', 'notification',
+			   'langManager', 'ftreeLayout', 'notification', '$location',
 			   PersonViewController]);
