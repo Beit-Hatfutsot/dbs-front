@@ -68,15 +68,8 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
             if (fromParams.tree_number != toParams.tree_number) {
             	self.clear();
             }
-			self.load(toParams);
-			dataLayer.push({
-                event: 'ngRouteChange',
-                attributes: {
-                    route: $location.path()
-                }
-            });
+            self.load(toParams);
 	    }
-
 	});
 
 	document.documentElement.addEventListener('mouseup', function (e) {
@@ -145,6 +138,13 @@ PersonViewController.prototype = {
 				// self.detailsShown = true;
         self.node.Slug = {En: slug};
 				self.$rootScope.title = self.get_full_name(self.node);
+				//register url changes while walking the tree
+				dataLayer.push({
+	                event: 'ngRouteChange',
+	                attributes: {
+	                    route: self.$location.path()
+	                }
+            	});
 
 				if (self.$window.d3)
 					self.render(self.node)
