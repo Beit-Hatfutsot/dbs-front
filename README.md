@@ -20,10 +20,7 @@ with data from BHP using our migration bot.
 
 ## Dependencies
 
-    $ sudo su
-    $ npm install -g gulp
-    $ npm install -g bower
-    $ exit
+    $ sudo npm install -g gulp bower
 
 ## Getting the code and dependecies
 
