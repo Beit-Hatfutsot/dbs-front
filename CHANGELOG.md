@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Fixed
+- Update GA when navigating the tree
+- Use Elastic Search for Wizard suggestions
+- In wizard, exact match is case insensitive
+- Fix persons date when navigating trees
+
 ## [0.9.11] - 2016-11-29
 ### Fixed
 - Recentley viewed thumbnails are back

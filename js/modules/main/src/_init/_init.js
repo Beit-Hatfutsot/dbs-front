@@ -40,7 +40,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
     $analyticsProvider.firstPageview(true); /* Records pages that don't use $state or $route */
     $analyticsProvider.withAutoBase(true);  /* Records full path */
+    $analyticsProvider.virtualPageviews(false);
 
+
+    var dataLayer = window.dataLayer = window.dataLayer || [];
 		// to be used we exiting the item pages
 	var slug_cleaner = ['$rootScope', function($rootScope) {
 		$rootScope.slug = null;
@@ -392,12 +395,12 @@ run(['$state', '$rootScope', 'langManager', 'header', '$window', '$location', 'n
 	});
     var dataLayer = window.dataLayer = window.dataLayer || [];
 	$rootScope.$on('$stateChangeSuccess', function() {
-			dataLayer.push({
+		dataLayer.push({
             event: 'ngRouteChange',
             attributes: {
-                route: $location.path()
+                route: $location.url()
             }
-      });
+        });
 	});
 
 }]);

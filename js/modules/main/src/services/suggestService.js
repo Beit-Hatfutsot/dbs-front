@@ -2,7 +2,7 @@
  * @ngdoc service
  * @name suggest
  * @module main
- * 
+ *
  * @description
  * Handles search suggestions.
  */
@@ -10,7 +10,7 @@ angular.module('main').
 	factory('suggest', ['$http', 'apiClient', function($http, apiClient) {
 
 		var collection_name_map = {
-			names: 'familyNames', 
+			names: 'familyNames',
 			places: 'places'
 		},
 
@@ -38,13 +38,14 @@ angular.module('main').
 			},
 
 			suggest_places: function(place) {
-				return get_suggestions('places', place);	
+				return get_suggestions('places', place);
 			}
-		};	
+		};
 
 		function get_suggestions(what, value) {
 
 				var count, exact, all_suggestions;
+				var value_lc = value.toLowerCase();
 
 				return $http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
 					success(function(response) {
@@ -67,14 +68,14 @@ angular.module('main').
 
 						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
 							response[group].forEach(function(suggestion) {
-								if (suggestion === value) {
+								if (suggestion.toLowerCase() === value_lc) {
 									exact = suggestion;
 								}
 								else {
 									all_suggestions	= suggest.suggested[what].starts_with.
 										concat(suggest.suggested[what].contains.
 											concat(suggest.suggested[what].phonetic)
-										); 
+										);
 									if (all_suggestions.indexOf(suggestion) === -1) {
 										suggest.suggested[what][group].push(suggestion);
 									}
