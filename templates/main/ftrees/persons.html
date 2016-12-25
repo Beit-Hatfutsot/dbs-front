@@ -140,7 +140,11 @@
 										<en>Tree Serial Number</en>
 										<he>מספר סידורי של העץ</he>
 									</label>
-									<input type="number" ng-model="ctrl.search_params.tree_number" placeholder="12345">
+									<input type="number"
+                         ng-model="ctrl.search_params.tree_number"
+                         placeholder="12345"
+                         onfocus="this.placeholder=''"
+                         onblur="this.placeholder='12345'">
 								</div>
 							</div>
 						</div>
