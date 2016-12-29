@@ -424,8 +424,8 @@ PersonViewController.prototype = {
 				.classed('dates', true)
 				.classed('noselect', true)
 				.html(function(d) {
-				 	var birth = cn.birth_year ? cn.birth_year : '&#65533;';
-				 	var death =  cn.death_year ? cn.death_year : '&#65533;';
+				 	var birth = cn.birth_year ? cn.birth_year : '';
+				 	var death =  cn.death_year ? cn.death_year : '';
 				 	return birth + ' ' + death
 				});
 

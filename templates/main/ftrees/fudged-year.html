@@ -8,9 +8,9 @@
 		</he>
 	</label>
 	<div class="text">
-		<input type="number" ng-model="year" placeholder="1948...">
+		<input type="number" ng-model="year" placeholder="1948..." onfocus="this.placeholder=''" onblur="this.placeholder='1948...'">
 	</div>
-	<div class="notIE"> 
+	<div class="notIE">
 		<div class="fudge">
 			<en>
 				<select ng-options="option.label.en for option in fudge_options"
@@ -26,5 +26,5 @@
 				<icon  class="fancyArrow__selectbox-icon" position="[-178, -663]"></icon>
 			</div>
 		</div>
-	</div> 
+	</div>
 </div>

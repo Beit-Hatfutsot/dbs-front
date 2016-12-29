@@ -135,7 +135,7 @@
 
 		.name {
 			font-size: 14px;
-			font-weight: 700;
+			font-weight: 600;
 		}
 
     }
@@ -209,11 +209,11 @@
             .pull-right {margin-top: 0; position: relative; height: inherit; }
             .en & {
                 padding: 0 0 0 20px;
-                .pull-right { float: right; }
+                .pull-right { float: right !important; }
             }
             .he & {
                 padding: 0 20px 0 0px;
-                .pull-right { float: left; }
+                .pull-right { float: left !important; }
             }
 
 
