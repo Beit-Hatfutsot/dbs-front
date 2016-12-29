@@ -135,7 +135,7 @@
 
   #section--0 {
     z-index: 1;
-    @include bg_image("section0.jpg");
+    @include bg_image("girls-soldiers-standing-on-a-truck-israel-1950s.jpg");
   }
 
   #section--1 {
@@ -148,11 +148,11 @@
         padding-top: 64px;
       }
     }
-    @include bg_image("section1.jpg");
+    @include bg_image("jewish-scouts-on-the-way-to-summer-camp-in-france-algiers-algeria-1960.jpg");
   }
 
   #section--2 {
-    @include bg_image("section2.jpg");
+    @include bg_image("young-girl-operating-a-computer-like-machine-israel-1963.jpg");
   }
 
   #section--3 {
@@ -171,19 +171,19 @@
       }
       }
     }
-    @include bg_image("section3.jpg");
+    @include bg_image("working-on-the-national-water-carrier-project-israel-1960s.jpg");
   }
 
   #section--4 {
-    @include bg_image("section4.jpg");
+    @include bg_image("boys-and-girls-during-gadna-trip-israel-1950s.jpg");
   }
 
   #section--5 {
-    @include bg_image("section5.jpg");
+    @include bg_image("children-israel-1970s.jpg");
   }
 
   #section--6 {
-    @include bg_image("section6.jpg");
+    @include bg_image("children-with-school-bagson-the-first-day-of-schoo-haifa-israel-1950s.jpg");
   }
 
 }
