@@ -37,6 +37,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 
 	$rootScope.$on('$stateChangeStart',
 	    function(event, toState, toParams, fromState, fromParams){
+
 	      if (fromState.name.endsWith('item-view') && fromParams.collection == 'video') {
 	      	var video_element = angular.element(document.querySelector('.item__content__media-container')).find("video")[0];
 			video_element.pause();
@@ -81,18 +82,27 @@ ItemCtrl.prototype = {
 		    mymap.invalidateSize();
 		}, 0);
 
-		var CustomIcon = L.Icon.extend({
+		var smCustomIcon = L.Icon.extend({
 			options: {
-				iconUrl: '/templates/svgs/leaflet-marker.svg',
+				iconSize: [19.5, 27], iconAnchor: [10, 27], popupAnchor: [0, -27]
 			}
 		});
 
-		var city_icon = new CustomIcon({iconSize: [26.25, 35], iconAnchor: [13, 35], popupAnchor: [0, -35]}),
-			town_icon = new CustomIcon({iconSize: [19.5, 27], iconAnchor: [10, 27], popupAnchor: [0, -27]});
+		var bgCustomIcon = L.Icon.extend({
+			options: {
+				iconSize: [26.25, 35], iconAnchor: [13, 35], popupAnchor: [0, -35]
+			}
+		});
+
+		var	active_icon_s = new smCustomIcon({iconUrl: '/images/active_marker.png'}),
+			icon_s = new smCustomIcon({iconUrl: '/images/marker.png'}),
+			active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png'}),
+			icon_b = new bgCustomIcon({iconUrl: '/images/marker.png'});
 
 		L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
 		  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 		  maxZoom: 10,
+		  minZoom:7,
 		  subdomains: ['a', 'b', 'c']
 		}).addTo(mymap);
 
@@ -101,11 +111,11 @@ ItemCtrl.prototype = {
 		var lng = data.geometry.coordinates[0];
 		var title = data.Header[self.proper_lang];
 
-		if (data.PlaceTypeDesc['En'] == 'Town') {
-			var mark = L.marker([lat, lng], {icon: town_icon}).bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>').addTo(mymap);
+		if (data.PlaceTypeDesc['En'] == 'Town' || data.PlaceTypeDesc['En'] == 'Village') {
+			var mark = L.marker([lat, lng], {icon: active_icon_s}).bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>').addTo(mymap);
 		}
 		else {
-			var mark = L.marker([lat, lng], {icon: city_icon}).bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>').addTo(mymap);
+			var mark = L.marker([lat, lng], {icon: active_icon_b}).bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>').addTo(mymap);
 		};
 
 		this.$http.get(this.apiClient.urls.geojson).success(function(places){
@@ -116,15 +126,14 @@ ItemCtrl.prototype = {
 					var title = r.Header[self.proper_lang];
 
 					if (title !== place_name) {
-
-						if (data.PlaceTypeDesc['En'] == 'Town') {
-							marker = new L.marker([lat, lng], {icon: town_icon})
+						if (r.PlaceTypeDesc['En'] == 'Town' || r.PlaceTypeDesc['En'] == 'Village') {
+							marker = new L.marker([lat, lng], {icon: icon_s})
 								.bindPopup('<a href="' + self.get_item_url(r.Slug) + '" target="_self">'+title+'</a>')
 								.addTo(mymap);
 
 						}
 						else {
-							marker = new L.marker([lat, lng], {icon: city_icon})
+							marker = new L.marker([lat, lng], {icon: icon_b})
 								.bindPopup('<a href="' + self.get_item_url(r.Slug) + '" target="_self">'+title+'</a>')
 								.addTo(mymap);
 						}
