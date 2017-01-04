@@ -29,7 +29,8 @@ angular.module('apiClient').
           upload:         'v1/upload',
           newsletter:     'v1/newsletter',
           search:         'v1/search',
-          story:         'v1/story'
+          story:          'v1/story',
+          geojson:        'v1/geo/places'
         }
 	  	};
 
