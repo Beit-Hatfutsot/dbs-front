@@ -99,13 +99,34 @@ ItemCtrl.prototype = {
 			active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png'}),
 			icon_b = new bgCustomIcon({iconUrl: '/images/marker.png'});
 
-		L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+		var pngTiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
 		  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 		  maxZoom: 10,
 		  minZoom:7,
 		  subdomains: ['a', 'b', 'c']
 		}).addTo(mymap);
 
+		var jsonLayer = L.geoJson().addTo(mymap);
+
+		pngTiles.on("tileload", function( event ){
+			var title = event.tile.src.split("/");
+			var z = title[title.length-3];
+			var x = title[title.length-2];
+			var y = title[title.length-1].split(".")[0];
+
+			// Construct the json string out of the z, x and y
+			var jsonString = "http://" + title[2] + "/terrain/" + z + "/" + x + "/" +  y + ".json";
+
+			// Get jQuery to make the ajax request for the file
+			jQuery.getJSON( jsonString, function(json){
+				jsonLayer.addData(json);
+			} );
+
+		} );
+
+		mymap.on("zoomend", function(){
+			jsonLayer.clearLayers();
+		});
 
 		var lat = data.geometry.coordinates[1];
 		var lng = data.geometry.coordinates[0];
