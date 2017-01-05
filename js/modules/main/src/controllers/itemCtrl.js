@@ -95,9 +95,9 @@ ItemCtrl.prototype = {
 		});
 
 		var	active_icon_s = new smCustomIcon({iconUrl: '/images/active_marker.png'}),
-			icon_s = new smCustomIcon({iconUrl: '/images/marker.png'}),
+			icon_s = new smCustomIcon({iconUrl: '/images/blue_marker.png'}),
 			active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png'}),
-			icon_b = new bgCustomIcon({iconUrl: '/images/marker.png'});
+			icon_b = new bgCustomIcon({iconUrl: '/images/blue_marker.png'});
 
 		var pngTiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
 		  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -108,7 +108,7 @@ ItemCtrl.prototype = {
 
 		var jsonLayer = L.geoJson().addTo(mymap);
 
-		pngTiles.on("tileload", function( event ){
+		pngTiles.on("tileload", function( event ) {
 			var title = event.tile.src.split("/");
 			var z = title[title.length-3];
 			var x = title[title.length-2];
