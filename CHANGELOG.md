@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 ### Fixed
+- Display persons' dates and places in persons search results
+
+## [0.9.14] - 2016-12-29
+Give home page images meaningful names
+
+## [0.9.13] - 2016-12-29
+### Fixed
+
+## [0.9.12] - 2016-12-22
+### Fixed
 - Update GA when navigating the tree
 - Use Elastic Search for Wizard suggestions
 - In wizard, exact match is case insensitive
