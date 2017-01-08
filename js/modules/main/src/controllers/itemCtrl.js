@@ -133,10 +133,21 @@ ItemCtrl.prototype = {
 		var title = data.Header[self.proper_lang];
 
 		if (data.PlaceTypeDesc['En'] == 'Town' || data.PlaceTypeDesc['En'] == 'Village') {
-			var mark = L.marker([lat, lng], {icon: active_icon_s}).bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>').addTo(mymap);
+			var mark = L.marker([lat, lng], {icon: active_icon_s})
+					    .bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>')
+					    .addTo(mymap);
+					    mark.on('mouseover', function (e) {
+				            this.openPopup();
+				        });
 		}
 		else {
-			var mark = L.marker([lat, lng], {icon: active_icon_b}).bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>').addTo(mymap);
+			var mark = L.marker([lat, lng], {icon: active_icon_b})
+			            .bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>')
+			            .addTo(mymap);
+			            mark.on('mouseover', function (e) {
+					 	    this.openPopup();
+						});
+
 		};
 
 		this.$http.get(this.apiClient.urls.geojson).success(function(places){
@@ -151,12 +162,17 @@ ItemCtrl.prototype = {
 							marker = new L.marker([lat, lng], {icon: icon_s})
 								.bindPopup('<a href="' + self.get_item_url(r.Slug) + '" target="_self">'+title+'</a>')
 								.addTo(mymap);
-
+								marker.on('mouseover', function (e) {
+						            this.openPopup();
+						        });
 						}
 						else {
 							marker = new L.marker([lat, lng], {icon: icon_b})
 								.bindPopup('<a href="' + self.get_item_url(r.Slug) + '" target="_self">'+title+'</a>')
 								.addTo(mymap);
+								marker.on('mouseover', function (e) {
+						            this.openPopup();
+						        });
 						}
 					}
 
