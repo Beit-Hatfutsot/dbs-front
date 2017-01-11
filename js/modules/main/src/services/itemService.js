@@ -42,6 +42,7 @@ angular.module('main').
 
 		var item_service = {
 
+
 			parse_state: function(state) {
 				var ret =  {collection: state.collection,
 							local_slug: state.local_slug}
@@ -70,6 +71,15 @@ angular.module('main').
 					return item_data.Slug.En || item_data.Slug.He;
 				if (item_data.params)
 					return JSON.stringify(item_data.params)
+			},
+
+		    get_marker_link: function(slug) {
+		    	var lang = $rootScope.lang,
+	    			state = lang == 'he'? 'he.he_item-view': 'item-view',
+					parts = slug.split('_'),
+					params = {collection: parts[0],
+							  local_slug : parts[1]};
+			    return $state.href(state, params);
 			},
 
 			get_url: function (item_data) {
@@ -165,7 +175,6 @@ angular.module('main').
 					return deferred.promise;
 				}
 			},
-
 			get_items: function(slugs) {
 				if ( !in_progress ) {
 					var self 				= this,
