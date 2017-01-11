@@ -54,9 +54,9 @@ angular.module('main').directive('leaflet', [
           });
 
           var active_icon_s = new smCustomIcon({iconUrl: '/images/active_marker.png'}),
-              icon_s = new smCustomIcon({iconUrl: '/images/marker.png'}),
+              icon_s = new smCustomIcon({iconUrl: '/images/blue_marker.png'}),
               active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png'}),
-              icon_b = new bgCustomIcon({iconUrl: '/images/marker.png'});
+              icon_b = new bgCustomIcon({iconUrl: '/images/blue_marker.png'});
 
           var slug = data.Slug[cap_lang];
               place_type = data.PlaceTypeDesc['En'];
