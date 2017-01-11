@@ -62,7 +62,7 @@ angular.module('main').directive('leaflet', [
               place_type = data.PlaceTypeDesc['En'];
               active_icon = eval(get_active_icon(place_type));
 
-          var mark = L.marker([act_lat, act_lng], {icon: active_icon})
+          var mark = L.marker([act_lat, act_lng], {icon: active_icon, title: active_place_title})
                     .bindPopup('<a href="' + item.get_marker_link(slug) + '" target="_self">'+active_place_title+'</a>')
                     .addTo(map);
 
@@ -78,7 +78,7 @@ angular.module('main').directive('leaflet', [
                     icon = eval(get_icon(type));
 
                 if (title !== active_place_title) {
-                   marker = new L.marker([lat, lng], {icon: icon})
+                   marker = new L.marker([lat, lng], {icon: icon, title: title})
                       .bindPopup('<a href="' + item.get_marker_link(slug) + '" target="_self">'+title+'</a>')
                       .addTo(map);
                 }
