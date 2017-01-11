@@ -25,43 +25,43 @@ angular.module('main').directive('itemPreview', function() {
                 scope.children = [];
             };
             var sex = scope.previewData.G;
+			// build the person info
             var person_info = "(";
-            scope.birth_date = scope.previewData.BD,
-            scope.birth_place = scope.previewData.BP;
-            scope.death_date = scope.previewData.DD;
-            scope.death_place = scope.previewData.DP;
-            person_info += scope.birth_date || '?';
+            person_info += scope.previewData.birth_year || '?';
             person_info += ' - ';
-            person_info += scope.death_date || '?';
+            person_info += scope.previewData.death_year || '?';
             if (person_info == '(? - ?')
                 person_info = ''
             else
                 person_info += ') ';
-            if (scope.birth_place) {
-                var bp = scope.birth_place.toLowerCase();
+
+		    var birth_place = scope.previewData.birth_place;
+            if (birth_place) {
+                var bp = birth_place.toLowerCase();
                 if ((bp[0]>='a') && (bp[0] <= 'z'))
-                    person_info += 'Born in '+scope.birth_place;
+                    person_info += 'Born in '+birth_place;
                 else
                     if(sex == 'F')
-                        person_info += 'נולדה ב'+scope.birth_place;
+                        person_info += 'נולדה ב'+birth_place;
                     else if (sex == 'M')
-                        person_info += 'נולד ב'+scope.birth_place;
+                        person_info += 'נולד ב'+birth_place;
                     else
-                        person_info += 'נולד ב'+scope.birth_place;
+                        person_info += 'נולד ב'+birth_place;
 
                 person_info += ' , '
             }
-            if (scope.death_place) {
-                var dp = scope.death_place.toLowerCase();
+		    var death_place = scope.previewData.death_place;
+            if (death_place) {
+                var dp = death_place.toLowerCase();
                 if ((dp[0]>='a') && (dp[0] <= 'z'))
-                    person_info += 'Died in '+scope.death_place;
+                    person_info += 'Died in '+death_place;
                 else
                     if (sex == 'F')
-                        person_info += 'נפטרה ב'+scope.death_place;
+                        person_info += 'נפטרה ב'+death_place;
                     else if (sex == 'M')
-                        person_info += 'נפטר ב'+scope.death_place;
+                        person_info += 'נפטר ב'+death_place;
                     else
-                        person_info += 'נפטר ב'+scope.death_place;
+                        person_info += 'נפטר ב'+death_place;
 
                 person_info += ' '
             }
