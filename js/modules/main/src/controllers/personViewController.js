@@ -318,7 +318,8 @@ PersonViewController.prototype = {
 				});
 			})
 		};
-		if ( 'siblings' in cn ) {
+		var parent = cn.parents[0];
+		if ( ('siblings' in cn) && (parent != undefined)) {
 			var parent = cn.parents[0];
 			cn.siblings.forEach(function  (sibling, _sibling) {
 				data.push( self.getElement(sibling, 'sibling') );
