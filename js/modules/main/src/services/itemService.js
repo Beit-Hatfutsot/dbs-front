@@ -79,7 +79,7 @@ angular.module('main').
 					parts = slug.split('_'),
 					params = {collection: parts[0],
 							  local_slug : parts[1]};
-			    return $state.href(state, params);
+			    return $state.go(state, params);
 			},
 
 			get_url: function (item_data) {

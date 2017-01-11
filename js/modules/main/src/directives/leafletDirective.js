@@ -58,12 +58,11 @@ angular.module('main').directive('leaflet', [
               active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png'}),
               icon_b = new bgCustomIcon({iconUrl: '/images/blue_marker.png'});
 
-          var slug = data.Slug[cap_lang];
-              place_type = data.PlaceTypeDesc['En'];
+          var place_type = data.PlaceTypeDesc['En'];
               active_icon = eval(get_active_icon(place_type));
 
           var mark = L.marker([act_lat, act_lng], {icon: active_icon, title: active_place_title})
-                    .bindPopup('<a href="' + item.get_marker_link(slug) + '" target="_self">'+active_place_title+'</a>')
+                    .on('click', function(e) { item.get_marker_link(data.Slug[cap_lang])})
                     .addTo(map);
 
           //bring all places marks
@@ -73,13 +72,12 @@ angular.module('main').directive('leaflet', [
                 var lat = r.geometry.coordinates[1];
                     lng = r.geometry.coordinates[0];
                     title = r.Header[cap_lang],
-                    slug = r.Slug[cap_lang],
                     type = r.PlaceTypeDesc['En'],
                     icon = eval(get_icon(type));
 
                 if (title !== active_place_title) {
                    marker = new L.marker([lat, lng], {icon: icon, title: title})
-                      .bindPopup('<a href="' + item.get_marker_link(slug) + '" target="_self">'+title+'</a>')
+                      .on('click', function(e) {item.get_marker_link(r.Slug[cap_lang])})
                       .addTo(map);
                 }
               }
@@ -90,7 +88,6 @@ angular.module('main').directive('leaflet', [
         function get_icon (type) {
           return icon = (type == 'Town' || type == 'Village') ?
                 'icon_s' : 'icon_b';
-
         };
 
         function get_active_icon (type) {
