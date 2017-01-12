@@ -26,7 +26,7 @@ angular.module('main').directive('leaflet', [
           var act_lat = data.geometry.coordinates[1],
               act_lng = data.geometry.coordinates[0],
               map = L.map(element[0])
-              .setView([act_lat, act_lng], 10);
+              .setView([act_lat, act_lng], 7);
 
           $timeout(function () {
             map.invalidateSize();
@@ -36,7 +36,7 @@ angular.module('main').directive('leaflet', [
           var pngTiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 10,
-            minZoom:7,
+            minZoom: 7,
             subdomains: ['a', 'b', 'c']
           }).addTo(map);
 
