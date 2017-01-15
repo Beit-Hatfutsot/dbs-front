@@ -1,6 +1,6 @@
 angular.module('main').directive('leaflet', [
-           'leaflet', 'langManager', '$http', 'apiClient', '$timeout', 'item',
-  function (leaflet, langManager, $http, apiClient, $timeout, item) {
+           'leaflet', 'langManager', '$http', 'apiClient', 'item',
+  function (leaflet, langManager, $http, apiClient, item) {
     return {
       template: '<div></div>',
       replace: true,
@@ -24,13 +24,12 @@ angular.module('main').directive('leaflet', [
 
           //set map center
           var act_lat = data.geometry.coordinates[1],
-              act_lng = data.geometry.coordinates[0],
-              map = L.map(element[0])
+              act_lng = data.geometry.coordinates[0];
+
+          var map = L.map(element[0])
               .setView([act_lat, act_lng], 7);
 
-          $timeout(function () {
-            map.invalidateSize();
-           }, 0);
+          setTimeout(function() {map.invalidateSize();}, 1000);
 
           //add tiles
           var pngTiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
