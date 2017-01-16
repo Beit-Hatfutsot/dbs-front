@@ -39,6 +39,29 @@ angular.module('main').directive('leaflet', [
             subdomains: ['a', 'b', 'c']
           }).addTo(map);
 
+          var bounds = {};
+          map.on('moveend', function () {
+            bounds = map.getBounds();
+            //bring places marks within display bounds
+            leaflet.get_geo_places(bounds).then(function (places) {
+              places.forEach(function(r) {
+                if (r.geometry.coordinates) {
+                  var lat = r.geometry.coordinates[1];
+                      lng = r.geometry.coordinates[0];
+                      title = r.Header[cap_lang],
+                      type = r.PlaceTypeDesc['En'],
+                      icon = eval(get_icon(type));
+
+                  if (title !== active_place_title) {
+                     marker = new L.marker([lat, lng], {icon: icon, title: title})
+                        .on('click', function(e) {item.get_marker_link(r.Slug[cap_lang])})
+                        .addTo(map);
+                  }
+                }
+              })
+            });
+          });
+
           //build custom markers
           var smCustomIcon = L.Icon.extend({
               options: {
@@ -64,24 +87,6 @@ angular.module('main').directive('leaflet', [
                     .on('click', function(e) { item.get_marker_link(data.Slug[cap_lang])})
                     .addTo(map);
 
-          //bring all places marks
-          leaflet.get_geo_places().then(function (places) {
-            places.forEach(function(r) {
-              if (r.geometry.coordinates) {
-                var lat = r.geometry.coordinates[1];
-                    lng = r.geometry.coordinates[0];
-                    title = r.Header[cap_lang],
-                    type = r.PlaceTypeDesc['En'],
-                    icon = eval(get_icon(type));
-
-                if (title !== active_place_title) {
-                   marker = new L.marker([lat, lng], {icon: icon, title: title})
-                      .on('click', function(e) {item.get_marker_link(r.Slug[cap_lang])})
-                      .addTo(map);
-                }
-              }
-            })
-          });
         };
 
         function get_icon (type) {
