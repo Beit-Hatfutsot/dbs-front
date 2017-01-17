@@ -73,7 +73,7 @@ angular.module('main').directive('leaflet', [
                 // create the control container with a particular class name
                 var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
                 container.style.backgroundColor = '#fff';
-                container.style.backgroundImage = "url('/images/Icon_Souvenirs-grey.svg')";
+                container.style.backgroundImage = "url('/images/focus_icon.png')";
                 container.style.backgroundSize = "26px 26px";
                 container.style.width = '26px';
                 container.style.height = '26px';
