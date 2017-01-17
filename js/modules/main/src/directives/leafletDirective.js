@@ -62,6 +62,32 @@ angular.module('main').directive('leaflet', [
             });
           });
 
+
+          //add 'pin to start' control
+          var ToStartControl = L.Control.extend({
+              options: {
+                  position: 'topleft',
+              },
+
+              onAdd: function (map) {
+                // create the control container with a particular class name
+                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                container.style.backgroundColor = '#fff';
+                container.style.backgroundImage = "url('/images/Icon_Souvenirs-grey.svg')";
+                container.style.backgroundSize = "26px 26px";
+                container.style.width = '26px';
+                container.style.height = '26px';
+                container.style.cursor = "pointer";
+
+                container.onclick = function(){
+                  map.panTo([act_lat, act_lng], {options: {animate:true}});
+                }
+                return container;
+              }
+          });
+
+          map.addControl(new ToStartControl());
+
           //build custom markers
           var smCustomIcon = L.Icon.extend({
               options: {
