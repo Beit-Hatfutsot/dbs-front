@@ -6,10 +6,10 @@ angular.module('main')
           get_geo_places: function (bounds) {
             return $http.get(apiClient.urls.geojson,
               {params:
-                {'southWestLat': bounds._southWest.lat,
-                'southWestLng': bounds._southWest.lng,
-                'northEastLat': bounds._northEast.lat,
-                 'northEastLng': bounds._northEast.lng
+                {'sw_lat': bounds._southWest.lat,
+                 'sw_lng': bounds._southWest.lng,
+                 'ne_lat': bounds._northEast.lat,
+                 'ne_lng': bounds._northEast.lng
                 }
               }).then(function (resp) {
                 return resp.data;
