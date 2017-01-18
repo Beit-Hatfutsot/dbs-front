@@ -83,9 +83,6 @@ ItemCtrl.prototype = {
 		self.notification.loading(true);
 		this.item.get(this.slug).
 			then(function(item_data) {
-				if(item_data.UnitType == '5') {
-					self.$rootScope.$broadcast('item_data-loaded', item_data);
-				}
 				self.recentlyViewed.put(
 					{Slug: item_data.Slug,
 					 header: item_data.Header,
