@@ -70,15 +70,11 @@ angular.module('main').directive('leaflet', [
               },
 
               onAdd: function (map) {
-                // create the control container with a particular class name
-                var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-                container.style.backgroundColor = '#fff';
-                container.style.backgroundImage = "url('/images/focus_icon.png')";
-                container.style.backgroundSize = "26px 26px";
-                container.style.width = '26px';
-                container.style.height = '26px';
-                container.style.cursor = "pointer";
-
+                // create custom control that centers map
+                var container = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar leaflet-control');
+                container.innerHTML = '<a class="leaflet-control-zoom-in" href="#"' +
+                                      ' title="Center map" style="background-image:url(/images/focus_icon.png)"'+
+                                      ' role="button"></a>';
                 container.onclick = function(){
                   map.panTo([act_lat, act_lng], {options: {animate:true}});
                 }
