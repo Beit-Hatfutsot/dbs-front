@@ -40,7 +40,7 @@ angular.module('main').directive('leaflet', [
           }).addTo(map);
 
           var bounds = {};
-          map.on('moveend', function () {
+          map.on('moveend resize', function () {
             bounds = map.getBounds();
             //bring places marks within display bounds
             leaflet.get_geo_places(bounds).then(function (places) {
