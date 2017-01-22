@@ -10,10 +10,14 @@
 
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,400italic' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+
+
+
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/bhsclient.css">
     <!-- endinject -->
-
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
 		<!--[if lt IE 9]>
 		    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
@@ -28,7 +32,7 @@
     <meta property="twitter:site" content="@BeitHatfutsot" />
     <meta property="twitter:card" content="{{og_image?'summary_large_image':'summary'}}" />
 	</head>
-	<body ng-class="{'visible-scroll' : isCurrentState('general-search')}" class="{{lang}}" lang="{{lang}}" ng-cloak flow-prevent-drop item-scroll>
+	<body ng-class="{'visible-scroll' : isCurrentState('general-search')}" class="{{lang}}" lang="{{lang}}">
 		<div id="app-container">
 			<ng-include src="'templates/main/header.html'"></ng-include>
 			<ng-include src="'templates/main/sub-header.html'" ng-if="header_visible"></ng-include>
@@ -77,6 +81,7 @@
     <script src="/js/modules/main/src/services/notificationService.js"></script>
     <script src="/js/modules/main/src/services/musicalChairsFactory.js"></script>
     <script src="/js/modules/main/src/services/mjsService.js"></script>
+    <script src="/js/modules/main/src/services/leafletService.js"></script>
     <script src="/js/modules/main/src/services/itemTypeMapService.js"></script>
     <script src="/js/modules/main/src/services/itemService.js"></script>
     <script src="/js/modules/main/src/services/headerService.js"></script>
@@ -96,6 +101,7 @@
     <script src="/js/modules/main/src/directives/noResultDirective.js"></script>
     <script src="/js/modules/main/src/directives/mjsWidgetDirective.js"></script>
     <script src="/js/modules/main/src/directives/mjsItemDirective.js"></script>
+    <script src="/js/modules/main/src/directives/leafletDirective.js"></script>
     <script src="/js/modules/main/src/directives/laterNameDirective.js"></script>
     <script src="/js/modules/main/src/directives/itemTypeDirective.js"></script>
     <script src="/js/modules/main/src/directives/itemScrollDirective.js"></script>
@@ -124,6 +130,7 @@
     <script src="/js/modules/main/src/controllers/NewletterPopoverCtrl.js"></script>
     <script src="/js/modules/main/src/controllers/mjsWidgetController.js"></script>
     <script src="/js/modules/main/src/controllers/mjsController.js"></script>
+    <script src="/js/modules/main/src/controllers/LeafletController.js"></script>
     <script src="/js/modules/main/src/controllers/itemPreviewCtrl.js"></script>
     <script src="/js/modules/main/src/controllers/itemCtrl.js"></script>
     <script src="/js/modules/main/src/controllers/headerCtrl.js"></script>

@@ -1,5 +1,5 @@
 function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap, wizard, header, mjs,
-				  recentlyViewed, $window, $timeout, $uibModal, $rootScope, langManager) {
+				  recentlyViewed, $window, $uibModal, $rootScope, langManager, $timeout, $http, $location, apiClient) {
 	var self = this;
 
 	this.$uibModal = $uibModal;
@@ -21,9 +21,23 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.lang = langManager.lang;
 	this.$rootScope = $rootScope;
 	this.proper_link = '';
+	this.$http = $http;
+	this.host = $location.host();
+	this.$timeout = $timeout;
+	this.apiClient = apiClient;
+	this.proper_lang = this.lang[0].toUpperCase() + this.lang.slice(1);
+
+	this.get_item();
+
+	$rootScope.$on("item_data-loaded", function(event, data) {
+		if (data.geometry) {
+			self.render_map(data);
+		}
+	});
 
 	$rootScope.$on('$stateChangeStart',
 	    function(event, toState, toParams, fromState, fromParams){
+
 	      if (fromState.name.endsWith('item-view') && fromParams.collection == 'video') {
 	      	var video_element = angular.element(document.querySelector('.item__content__media-container')).find("video")[0];
 			video_element.pause();
@@ -39,7 +53,6 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 		unwatch_item_load();
 	});
 	*/
-	this.get_item();
 
 	Object.defineProperty(this, 'is_ugc_request', {
 		get: function() {
@@ -55,6 +68,128 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 };
 
 ItemCtrl.prototype = {
+
+	render_map: function (data) {
+		var self = this;
+		var place_name = data.Header[self.proper_lang];
+		var coordinates = [],
+			mymap;
+		if (mymap != undefined) { mymap.remove(); }
+
+		var mymap = L.map('mapid').setView([data.geometry.coordinates[1], data.geometry.coordinates[0]], 10);
+
+		this.$timeout(function () {
+		    mymap.invalidateSize();
+		}, 0);
+
+		var smCustomIcon = L.Icon.extend({
+			options: {
+				iconSize: [19.5, 27], iconAnchor: [10, 27], popupAnchor: [0, -27]
+			}
+		});
+
+		var bgCustomIcon = L.Icon.extend({
+			options: {
+				iconSize: [26.25, 35], iconAnchor: [13, 35], popupAnchor: [0, -35]
+			}
+		});
+
+		var	active_icon_s = new smCustomIcon({iconUrl: '/images/active_marker.png'}),
+			icon_s = new smCustomIcon({iconUrl: '/images/blue_marker.png'}),
+			active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png'}),
+			icon_b = new bgCustomIcon({iconUrl: '/images/blue_marker.png'});
+
+		var pngTiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+		  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		  maxZoom: 10,
+		  minZoom:7,
+		  subdomains: ['a', 'b', 'c']
+		}).addTo(mymap);
+
+		var jsonLayer = L.geoJson().addTo(mymap);
+
+		pngTiles.on("tileload", function( event ) {
+			var title = event.tile.src.split("/");
+			var z = title[title.length-3];
+			var x = title[title.length-2];
+			var y = title[title.length-1].split(".")[0];
+
+			// Construct the json string out of the z, x and y
+			var jsonString = "http://" + title[2] + "/terrain/" + z + "/" + x + "/" +  y + ".json";
+
+			// Get jQuery to make the ajax request for the file
+			jQuery.getJSON( jsonString, function(json){
+				jsonLayer.addData(json);
+			} );
+
+		} );
+
+		mymap.on("zoomend", function(){
+			jsonLayer.clearLayers();
+		});
+
+		var lat = data.geometry.coordinates[1];
+		var lng = data.geometry.coordinates[0];
+		var title = data.Header[self.proper_lang];
+
+		if (data.PlaceTypeDesc['En'] == 'Town' || data.PlaceTypeDesc['En'] == 'Village') {
+			var mark = L.marker([lat, lng], {icon: active_icon_s})
+					    .bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>')
+					    .addTo(mymap);
+					    mark.on('mouseover', function (e) {
+				            this.openPopup();
+				        });
+		}
+		else {
+			var mark = L.marker([lat, lng], {icon: active_icon_b})
+			            .bindPopup('<a href="' + self.get_item_url(data.Slug) + '" target="_self">'+title+'</a>')
+			            .addTo(mymap);
+			            mark.on('mouseover', function (e) {
+					 	    this.openPopup();
+						});
+
+		};
+
+		this.$http.get(this.apiClient.urls.geojson).success(function(places){
+			places.forEach(function(r){
+				if (r.geometry.coordinates) {
+					var lat = r.geometry.coordinates[1];
+					var lng = r.geometry.coordinates[0];
+					var title = r.Header[self.proper_lang];
+
+					if (title !== place_name) {
+						if (r.PlaceTypeDesc['En'] == 'Town' || r.PlaceTypeDesc['En'] == 'Village') {
+							marker = new L.marker([lat, lng], {icon: icon_s})
+								.bindPopup('<a href="' + self.get_item_url(r.Slug) + '" target="_self">'+title+'</a>')
+								.addTo(mymap);
+								marker.on('mouseover', function (e) {
+						            this.openPopup();
+						        });
+						}
+						else {
+							marker = new L.marker([lat, lng], {icon: icon_b})
+								.bindPopup('<a href="' + self.get_item_url(r.Slug) + '" target="_self">'+title+'</a>')
+								.addTo(mymap);
+								marker.on('mouseover', function (e) {
+						            this.openPopup();
+						        });
+						}
+					}
+
+				}
+			})
+		});
+	},
+
+
+    get_item_url: function(slug) {
+    	var self = this;
+    		state = this.lang == 'he'? 'he.he_item-view': 'item-view';
+			var parts = slug[self.proper_lang].split('_'),
+				params = {collection: parts[0],
+						  local_slug : parts[1]};
+	    return this.$state.href(state, params);
+	},
 
 	refresh_root_scope: function() {
 		var item = this.item_data,
@@ -83,6 +218,9 @@ ItemCtrl.prototype = {
 		self.notification.loading(true);
 		this.item.get(this.slug).
 			then(function(item_data) {
+				if(item_data.UnitType == '5') {
+					self.$rootScope.$broadcast('item_data-loaded', item_data);
+				}
 				self.recentlyViewed.put(
 					{Slug: item_data.Slug,
 					 header: item_data.Header,
@@ -229,5 +367,5 @@ ItemCtrl.prototype = {
 
 angular.module('main').controller('ItemCtrl', ['$scope', '$state', '$stateParams', 'item',
 	   'notification', 'itemTypeMap','wizard', 'header',
-	   'mjs', 'recentlyViewed', '$window', '$timeout', '$uibModal', '$rootScope',
-	   'langManager', ItemCtrl]);
+	   'mjs', 'recentlyViewed', '$window', '$uibModal', '$rootScope',
+	   'langManager', '$timeout', '$http', '$location', 'apiClient', ItemCtrl]);

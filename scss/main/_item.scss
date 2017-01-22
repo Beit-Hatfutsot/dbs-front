@@ -1,3 +1,4 @@
+
 %bottom-bar {
     position: relative;
     display: inline-block;
@@ -745,6 +746,20 @@
                 }
 
             }
+        }
+
+        #mapid {
+          height: 400px;
+          z-index: 0;
+        }
+
+        .map {
+          &__header {
+            font-size: 24px;
+            padding: 0 10px;
+            color: #999999;
+            margin-bottom: 15px;
+          }
         }
 
         .related {
