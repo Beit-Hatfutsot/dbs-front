@@ -762,6 +762,10 @@
           width: 100%;
           border: 1px solid #AAA;
           margin-bottom: 15px;
+
+          img .topmost {
+            z-index: 100 !important;
+          }
         }
 
 

@@ -97,9 +97,9 @@ angular.module('main').directive('leaflet', [
               }
           });
 
-          var active_icon_s = new smCustomIcon({iconUrl: '/images/active_marker.png'}),
+          var active_icon_s = new smCustomIcon({iconUrl: '/images/active_marker.png', className: 'topmost'}),
               icon_s = new smCustomIcon({iconUrl: '/images/blue_marker.png'}),
-              active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png'}),
+              active_icon_b = new bgCustomIcon({iconUrl: '/images/active_marker.png', className: 'topmost'}),
               icon_b = new bgCustomIcon({iconUrl: '/images/blue_marker.png'});
 
           var place_type = data.PlaceTypeDesc['En'];
