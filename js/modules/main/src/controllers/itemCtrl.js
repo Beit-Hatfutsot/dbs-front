@@ -103,7 +103,7 @@ ItemCtrl.prototype = {
 			},
 			function(error) {
 				self.error = error;
-				self.notification.put(5);
+				self.notification.put(5, error.status);
 			});
 	},
 
