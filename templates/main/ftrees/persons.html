@@ -1,213 +1,213 @@
 <div id="family-trees-container" ng-class="{'tree-view': ctrl.tree_view}">
-	<div id="tree-sort">
-		<div id="search-params">
-			<form class="filters" name="filters" ng-class="{'filters--expanded': ctrl.advanced_search}">
-				<div class="filters__general">
-						<div class="title">
-							<span class="title__arrow"></span>
-							<h3 class="title__text">
-								<en>Type in any field below<br>to start a new search</en>
-								<he>לחיפוש נוסף הזינו טקסט בשדה אחד לפחות:</he>
-							</h3>
-						</div>
+  <div id="tree-sort">
+    <div id="search-params">
+      <form class="filters" name="filters" ng-class="{'filters--expanded': ctrl.advanced_search}">
+        <div class="filters__general">
+            <div class="title">
+              <span class="title__arrow"></span>
+              <h3 class="title__text">
+                <en>Type in any field below<br>to start a new search</en>
+                <he>לחיפוש נוסף הזינו טקסט בשדה אחד לפחות:</he>
+              </h3>
+            </div>
 
-					<div class="filters__field">
-						<div class="container">
-							<label>
-								<en>First Name</en>
-								<he>שם פרטי</he>
-							</label>
-							<input type="text" ng-model="ctrl.search_params.first_name" placeholder="{{(lang=='en')?'Moshe, Liat...':'משה, ליאת...'}}">
-						</div>
-					</div>
-					<filters-field  class="filters__field"
-									label-text-en="Family Name"
-			                        label-text-he="שם משפחה"
-			                        model="last_name"
-			                        placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
+          <div class="filters__field">
+            <div class="container">
+              <label>
+                <en>First Name</en>
+                <he>שם פרטי</he>
+              </label>
+              <input type="text" ng-model="ctrl.search_params.first_name" placeholder="{{(lang=='en')?'Moshe, Liat...':'משה, ליאת...'}}">
+            </div>
+          </div>
+          <filters-field  class="filters__field"
+                  label-text-en="Family Name"
+                              label-text-he="שם משפחה"
+                              model="last_name"
+                              placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
                     </filters-field>
-		            <ng-switch on="ctrl.$stateParams.more">
-		            	<div ng-switch-when="1" class="filters__sex" >
-							<label>
-								<en>Sex</en>
-								<he>מין</he>
-							</label>
-							<div class="filters__sex__choices">
-								<input type="radio" name="sex" value="m" ng-model="ctrl.search_params.sex" id="choice-male" checked="checked">
-								<label class="label-sex" for="choice-male">
-									<en>Male</en>
-									<he>זכר</he>
-								</label>
-								<input type="radio" name="sex" value="f" ng-model="ctrl.search_params.sex" id="choice-female">
-								<label class="label-sex" for="choice-female">
-									<en>Female</en>
-									<he>נקבה</he>
-								</label>
-								<input type="radio" name="sex" value="n" ng-model="ctrl.search_params.sex" id="choice-nm">
-								<label class="label-sex" for="choice-nm">
-									<en>Never mind</en>
-									<he>לא משנה</he>
-								</label>
-							</div>
-						</div>
-						<filters-field  ng-switch-default
-		            					class="filters__field"
-		            					label-text-en="Place of Birth / Marriage / Death"
-		            					label-text-he="מקום לידה \ נישואין \ פטירה"
-		            					model="place"
-		            					placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
-        				</filters-field>
-					</ng-switch>
+                <ng-switch on="ctrl.$stateParams.more">
+                  <div ng-switch-when="1" class="filters__sex" >
+              <label>
+                <en>Sex</en>
+                <he>מין</he>
+              </label>
+              <div class="filters__sex__choices">
+                <input type="radio" name="sex" value="m" ng-model="ctrl.search_params.sex" id="choice-male" checked="checked">
+                <label class="label-sex" for="choice-male">
+                  <en>Male</en>
+                  <he>זכר</he>
+                </label>
+                <input type="radio" name="sex" value="f" ng-model="ctrl.search_params.sex" id="choice-female">
+                <label class="label-sex" for="choice-female">
+                  <en>Female</en>
+                  <he>נקבה</he>
+                </label>
+                <input type="radio" name="sex" value="n" ng-model="ctrl.search_params.sex" id="choice-nm">
+                <label class="label-sex" for="choice-nm">
+                  <en>Never mind</en>
+                  <he>לא משנה</he>
+                </label>
+              </div>
+            </div>
+            <filters-field  ng-switch-default
+                          class="filters__field"
+                          label-text-en="Place of Birth / Marriage / Death"
+                          label-text-he="מקום לידה \ נישואין \ פטירה"
+                          model="place"
+                          placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+                </filters-field>
+          </ng-switch>
 
-		            <a href="" class="filters__expand" ng-click="ctrl.toggle_more()">
-		            	<ng-switch on="ctrl.$stateParams.more">
-			            	<span ng-switch-when="1">
-			            		<en>Less Fields</en>
-			            		<he>פחות שדות</he>
-		            		</span>
-			            	<span ng-switch-default>
-			            		<en>More Fields</en>
-			            		<he>עוד שדות</he>
-		            		</span>
-	            		</ng-switch>
-		            </a>
-		            <button class="filters__update" ng-click="ctrl.update()">
-						<en>Search</en>
-						<he>חיפוש</he>
-					</button>
-					<a href="" class="filters__clear" ng-click="ctrl.clear_filters()" ng-if="ctrl.$stateParams.more == '1'">
-						<en>Clear</en>
-						<he>ניקוי</he>
-					</a>
-				</div>
+                <a href="" class="filters__expand" ng-click="ctrl.toggle_more()">
+                  <ng-switch on="ctrl.$stateParams.more">
+                    <span ng-switch-when="1">
+                      <en>Less Fields</en>
+                      <he>פחות שדות</he>
+                    </span>
+                    <span ng-switch-default>
+                      <en>More Fields</en>
+                      <he>עוד שדות</he>
+                    </span>
+                  </ng-switch>
+                </a>
+                <button class="filters__update" ng-click="ctrl.update()">
+            <en>Search</en>
+            <he>חיפוש</he>
+          </button>
+          <a href="" class="filters__clear" ng-click="ctrl.clear_filters()" ng-if="ctrl.$stateParams.more == '1'">
+            <en>Clear</en>
+            <he>ניקוי</he>
+          </a>
+        </div>
 
-				<div class="filters__advanced">
-					<div class="filters__advanced__head">
-						<div class="about-bh">
-			                <div class="about-collection-title">
-			                    <span ng-click="ctrl.read_about_center('familyTree')">
-			                        <en>About <a class="linked">Douglas E. Goldman Jewish<br>Genealogy Center databases</a></en>
-			                        <he>אודות <a class="linked">המרכז לגנאלוגיה יהודית<br>ע"ש דגלס א. גולדמן</a></he>
-			                    </span>
-			                </div>
-			            </div>
-					</div>
-					<div class="pic-wpapper" ng-if="!ctrl.$stateParams.more||ctrl.$stateParams.more =='0'">
-						<img ng-src="/images/Ftrees-Photos_Eng+Heb3.jpg">
-					</div>
-					<div class="advanced-filters" ng-if="ctrl.$stateParams.more=='1'">
-						<div class="col2">
-							<filters-field class="filters__field"
-											label-text-en="Place of Birth"
-											label-text-he="מקום לידה"
-											model="birth_place"
-											placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
-							</filters-field>
-							<filters-field class="filters__field"
-											label-text-en="Place of Marriage"
-											label-text-he="מקום נישואין"
-											model="marriage_place"
-											placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
-							</filters-field>
-							<filters-field class="filters__field"
-											label-text-en="Place of Death"
-											label-text-he="מקום פטירה"
-											model="death_place"
-											placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
-							</filters-field>
-						</div>
+        <div class="filters__advanced">
+          <div class="filters__advanced__head">
+            <div class="about-bh">
+                      <div class="about-collection-title">
+                          <span ng-click="ctrl.read_about_center('familyTree')">
+                              <en>About <a class="linked">Douglas E. Goldman Jewish<br>Genealogy Center databases</a></en>
+                              <he>אודות <a class="linked">המרכז לגנאלוגיה יהודית<br>ע"ש דגלס א. גולדמן</a></he>
+                          </span>
+                      </div>
+                  </div>
+          </div>
+          <div class="pic-wpapper" ng-if="!ctrl.$stateParams.more||ctrl.$stateParams.more =='0'">
+            <img ng-src="/images/Ftrees-Photos_Eng+Heb3.jpg">
+          </div>
+          <div class="advanced-filters" ng-if="ctrl.$stateParams.more=='1'">
+            <div class="col2">
+              <filters-field class="filters__field"
+                      label-text-en="Place of Birth"
+                      label-text-he="מקום לידה"
+                      model="birth_place"
+                      placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+              </filters-field>
+              <filters-field class="filters__field"
+                      label-text-en="Place of Marriage"
+                      label-text-he="מקום נישואין"
+                      model="marriage_place"
+                      placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+              </filters-field>
+              <filters-field class="filters__field"
+                      label-text-en="Place of Death"
+                      label-text-he="מקום פטירה"
+                      model="death_place"
+                      placeholder="{{lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+              </filters-field>
+            </div>
 
-						<div class="col3">
-							<fudged-year   class="filters__fudge-field"
-										   label-text-en="Year of Birth"
-										   label-text-he="שנת לידה"
-										   search-param="ctrl.search_params.birth_year">
-							</fudged-year>
-							<fudged-year    class="filters__fudge-field"
-											label-text-en="Year of Marriage"
-											label-text-he="שנת נישואין"
-											search-param="ctrl.search_params.marriage_year">
-							</fudged-year>
-							<fudged-year	class="filters__fudge-field"
-											label-text-en="Year of Death"
-											label-text-he="שנת פטירה"
-											search-param="ctrl.search_params.death_year">
-							</fudged-year>
-							<div class="filters__field">
-								<div class="container">
-									<label>
-										<icon position="[-29, -69]" class="tree-icon"></icon>
-										<en>Tree Serial Number</en>
-										<he>מספר סידורי של העץ</he>
-									</label>
-									<input type="number"
+            <div class="col3">
+              <fudged-year   class="filters__fudge-field"
+                       label-text-en="Year of Birth"
+                       label-text-he="שנת לידה"
+                       search-param="ctrl.search_params.birth_year">
+              </fudged-year>
+              <fudged-year    class="filters__fudge-field"
+                      label-text-en="Year of Marriage"
+                      label-text-he="שנת נישואין"
+                      search-param="ctrl.search_params.marriage_year">
+              </fudged-year>
+              <fudged-year  class="filters__fudge-field"
+                      label-text-en="Year of Death"
+                      label-text-he="שנת פטירה"
+                      search-param="ctrl.search_params.death_year">
+              </fudged-year>
+              <div class="filters__field">
+                <div class="container">
+                  <label>
+                    <icon position="[-29, -69]" class="tree-icon"></icon>
+                    <en>Tree Serial Number</en>
+                    <he>מספר סידורי של העץ</he>
+                  </label>
+                  <input type="number"
                          ng-model="ctrl.search_params.tree_number"
                          placeholder="12345"
                          onfocus="this.placeholder=''"
                          onblur="this.placeholder='12345'">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="start" ng-hide="ctrl.individuals.total > 0">
-			<div class="start__top" ng-show="ctrl.individuals.isEmpty()">
-				<div class="start__top__text">
-					<en>
-						<h2>Searching for long lost relatives?</h2>
-						<p><span class="subtitle">Simply type names in one of fields above and go on a fascinating family journey!</span>
-						For centuries Jews have travelled and wandered. In many cases they left behind assets, texts and documents. Unfortunately, only a few families recorded their history, and many precious memories were bound to be lost and forgotten. Now you can record all information about your family at the Douglas E. Goldman Jewish Genealogy Center in Beit Hatfutsot and make sure that the family heritage is safe for future generations.<br>
-						The Douglas E. Goldman Jewish Genealogy Center is the only center of its kind in the world. At the Center, visitors can search a computerized database containing thousands of genealogies of Jewish families from all over the world and can also register their own family trees.<br>
-						It is important to state that the information in the database meets the restrictions of the privacy protection law of 1981. Therefore, searching for living individuals can only yield partial results such as gender, given namese, and family name.<br>
-						Over 5 million individuals have already been recorded in the continuously expanding database. Visitors from all backgrounds can explore their ancestry, record and preserve their own family trees for future generations, thus adding their own “branch” to the family tree of the Jewish People.</p>
-					</en>
-					<he>
-						<h2>מחפשים קרוב משפחה רחוק?</h2>
-						<p><span class="subtitle">פשוט הקלידו באחד השדות למעלה וצאו למסע משפחתי מרתק!</span>
-						במרוצת הדורות עברו משפחות יהודיות ממקום למקום. במקרים רבים הותירו מאחור נכסים, דברי-ערך, מזכרות ורשומות. למרבה הצער, רק לעתים רחוקות תיעדו וכתבו את תולדות המשפחה, ורשמי העבר נותרו רק בזיכרון. כיום אתם יכולים לתעד את המידע על משפחתכם במרכז לגנאלוגיה יהודית של בית התפוצות, ולהבטיח את שימורו של הסיפור המשפחתי לדורות הבאים.<br>
-						המרכז לגנאלוגיה יהודית ע"ש דאגלס א. גולדמן הוא יחיד במינו בעולם. במאגר מליוני אנשים ועשרות אלפי עצי משפחה של משפחות יהודיות מקצווי תבל אשר נתרמו לבית התפוצות באופן ישיר ואישי, ללא התערבות חיצונית כלשהי. מבקרים יכולים לערוך חיפוש וגם להוסיף את עץ המשפחה שלהם. המידע במאגר עומד בתקן "חוק הגנת הפרטיות –התשמ"א". אשר על כן, חיפוש אנשים שנמצאים בין החיים הינו חלקי וכולל רק משתנים כמו מין, שם פרטי ושם משפחה.<br>
-						מעל ל-5 מיליוני בני אדם כבר רשומים במרכז לגנאלוגיה יהודית בבית התפוצות, והמאגר גדל מדי יום ומדי שעה. מבקרים ממגוון מקומות ואורחות חיים באים להתחקות אחר שורשיהם, לתעד ולהנציח את עץ המשפחה שלהם עבור הדורות הבאים, ובכך הם מוסיפים עוד ענף לעץ הגדול של העם היהודי.</p>
-					</he>
-				</div>
-				<img ng-src="/images/Ftrees-Photos_Start.jpg">
-			</div>
-			<div ng-show="ctrl.individuals.total == '0'" class="start__top">
-				<div class="start__top__text">
-					<en>
-						<h2>Found no results? Do not give up!</h2>
-						<span class="subtitle">In order for your search to yield maximum results, please do the following:</span>
-						<ol>
-							<li>Type the name again, spelled differently</li>
-							<li>Try searching in Hebrew – Some data can be found in Hebrew.</li>
-							<li>Remove some of the search words. Not all trees include dates and places. If you are no certain about some data – do use it in your search.</li>
-						</ol>
-					</en>
-					<he>
-						<h2>לא נמצאו תוצאות? אין ייאוש בעולם!</h2>
-						<span class="subtitle">על מנת לייעל את החיפוש, אנא בצעו אחת או יותר מהפעולות הבאות:</span>
-						<ol>
-							<li>נסו איותים שונים לשם שהזנתם.</li>
-							<li>נסו לחפש באנגלית או אפילו בשפות אחרות - מאגר העצים שלנו גדול ויש סבירות שקרוב המשפחה שאתם מחפשים רשום בו דווקא בלעז.</li>
-							<li>הורידו משתנים מהשדות – בעצים מסוימים אין תיעוד של תאריכים ומקומות, ולכן אם אתם לא משוכנעים במאה
-								אחוז במידע כלשהו, אל תכניסו אותו.</li>
-						</ol>
-					</he>
-				</div>
-			</div>
-			<ng-include ng-show="ctrl.individuals.total == '0' || ctrl.individuals.isEmpty()" src="'templates/main/ftrees/add-family-tree.html'"></ng-include>
-		</div>
-		<div class="cards-title" ng-if="ctrl.individuals.total > 0">
-            <en><strong>{{ctrl.individuals.total}}</strong> Results found for <strong>{{ctrl.query}}</strong></en>
-            <he>נמצאו <strong>{{ctrl.individuals.total}}</strong> תוצאות עבור <strong>{{ctrl.query}}</strong></he>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="start" ng-hide="ctrl.individuals.total > 0">
+      <div class="start__top" ng-show="ctrl.individuals.isEmpty()">
+        <div class="start__top__text">
+          <en>
+            <h2>Searching for long lost relatives?</h2>
+            <p><span class="subtitle">Simply type names in one of fields above and go on a fascinating family journey!</span>
+            For centuries Jews have travelled and wandered. In many cases they left behind assets, texts and documents. Unfortunately, only a few families recorded their history, and many precious memories were bound to be lost and forgotten. Now you can record all information about your family at the Douglas E. Goldman Jewish Genealogy Center in Beit Hatfutsot and make sure that the family heritage is safe for future generations.<br>
+            The Douglas E. Goldman Jewish Genealogy Center is the only center of its kind in the world. At the Center, visitors can search a computerized database containing thousands of genealogies of Jewish families from all over the world and can also register their own family trees.<br>
+            It is important to state that the information in the database meets the restrictions of the privacy protection law of 1981. Therefore, searching for living individuals can only yield partial results such as gender, given namese, and family name.<br>
+            Over 5 million individuals have already been recorded in the continuously expanding database. Visitors from all backgrounds can explore their ancestry, record and preserve their own family trees for future generations, thus adding their own “branch” to the family tree of the Jewish People.</p>
+          </en>
+          <he>
+            <h2>מחפשים קרוב משפחה רחוק?</h2>
+            <p><span class="subtitle">פשוט הקלידו באחד השדות למעלה וצאו למסע משפחתי מרתק!</span>
+            במרוצת הדורות עברו משפחות יהודיות ממקום למקום. במקרים רבים הותירו מאחור נכסים, דברי-ערך, מזכרות ורשומות. למרבה הצער, רק לעתים רחוקות תיעדו וכתבו את תולדות המשפחה, ורשמי העבר נותרו רק בזיכרון. כיום אתם יכולים לתעד את המידע על משפחתכם במרכז לגנאלוגיה יהודית של בית התפוצות, ולהבטיח את שימורו של הסיפור המשפחתי לדורות הבאים.<br>
+            המרכז לגנאלוגיה יהודית ע"ש דאגלס א. גולדמן הוא יחיד במינו בעולם. במאגר מליוני אנשים ועשרות אלפי עצי משפחה של משפחות יהודיות מקצווי תבל אשר נתרמו לבית התפוצות באופן ישיר ואישי, ללא התערבות חיצונית כלשהי. מבקרים יכולים לערוך חיפוש וגם להוסיף את עץ המשפחה שלהם. המידע במאגר עומד בתקן "חוק הגנת הפרטיות –התשמ"א". אשר על כן, חיפוש אנשים שנמצאים בין החיים הינו חלקי וכולל רק משתנים כמו מין, שם פרטי ושם משפחה.<br>
+            מעל ל-5 מיליוני בני אדם כבר רשומים במרכז לגנאלוגיה יהודית בבית התפוצות, והמאגר גדל מדי יום ומדי שעה. מבקרים ממגוון מקומות ואורחות חיים באים להתחקות אחר שורשיהם, לתעד ולהנציח את עץ המשפחה שלהם עבור הדורות הבאים, ובכך הם מוסיפים עוד ענף לעץ הגדול של העם היהודי.</p>
+          </he>
+        </div>
+        <img ng-src="/images/Ftrees-Photos_Start.jpg">
+      </div>
+      <div ng-show="ctrl.individuals.total == '0'" class="start__top">
+        <div class="start__top__text">
+          <en>
+            <h2>Found no results? Do not give up!</h2>
+            <span class="subtitle">In order for your search to yield maximum results, please do the following:</span>
+            <ol>
+              <li>Type the name again, spelled differently</li>
+              <li>Try searching in Hebrew – Some data can be found in Hebrew.</li>
+              <li>Remove some of the search words. Not all trees include dates and places. If you are no certain about some data – do use it in your search.</li>
+            </ol>
+          </en>
+          <he>
+            <h2>לא נמצאו תוצאות? אין ייאוש בעולם!</h2>
+            <span class="subtitle">על מנת לייעל את החיפוש, אנא בצעו אחת או יותר מהפעולות הבאות:</span>
+            <ol>
+              <li>נסו איותים שונים לשם שהזנתם.</li>
+              <li>נסו לחפש באנגלית או אפילו בשפות אחרות - מאגר העצים שלנו גדול ויש סבירות שקרוב המשפחה שאתם מחפשים רשום בו דווקא בלעז.</li>
+              <li>הורידו משתנים מהשדות – בעצים מסוימים אין תיעוד של תאריכים ומקומות, ולכן אם אתם לא משוכנעים במאה
+                אחוז במידע כלשהו, אל תכניסו אותו.</li>
+            </ol>
+          </he>
+        </div>
+      </div>
+      <ng-include ng-show="ctrl.individuals.total == '0' || ctrl.individuals.isEmpty()" src="'templates/main/ftrees/add-family-tree.html'"></ng-include>
+    </div>
+    <div class="cards-title" ng-if="ctrl.individuals.total > 0">
+            <en><strong>{{ctrl.individuals.total}}</strong> Results found for your query</en>
+            <he>נמצאו <strong>{{ctrl.individuals.total}}</strong> תוצאות עבור החיפוש שלכם</he>
         </div>
 
-		<div class="item-preview-wrapper">
+    <div class="item-preview-wrapper">
       <item-preview ng-repeat="individual in ctrl.individuals.items"
             preview-data="individual">
       </item-preview>
-			<div class="loader" ng-click="ctrl.fetch_more()" ng-if="ctrl.individuals.total>ctrl.individuals.items.length">
+      <div class="loader" ng-click="ctrl.fetch_more()" ng-if="ctrl.individuals.total>ctrl.individuals.items.length">
                 <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                 <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                 <div class="loader-desc">
@@ -219,6 +219,6 @@
                     </span>
                 </div>
             </div>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
