@@ -58,19 +58,23 @@ ItemCtrl.prototype = {
 
 	refresh_root_scope: function() {
 		var item = this.item_data,
-			$rootScope = this.$rootScope,
-			main_pic_index = this.get_main_pic_index();
+		var description = {
+			'En': 'Discover the history of the Jewish community of '+
+				  item.Header[lang]+
+				  '. Explore photos, family trees and more of the open databases of The Museum of the Jewish People',
+		    'He': 'גלו את ההיסטוריה והתרבות של קהילת יהודי ' +item.Header[lang]+
+				  ', עצי משפחה, פירוש שמות משפחה, צילומים ועוד במאגרי המידע הפתוחים של בית התפוצות, מוזיאון העם היהודי בתל אביב'
+		};
+
+		$rootScope = this.$rootScope,
+		main_pic_index = this.get_main_pic_index();
 		// TODO: make language option 'En' & 'He' universal
 		var language_map = {'en': 'En', 'he': 'He'},
 			lang = language_map[$rootScope.lang];
 		$rootScope.title = item.Header[lang];
 		$rootScope.og_type = 'article';
-		if (item.UnitText1[lang]) {
-			var description_sentences = item.UnitText1[lang].split('.')
-			if (description_sentences.length > 3)
-				$rootScope.description = description_sentences.slice(0,3).join('. ')+'...';
-			else
-				$rootScope.description = item.UnitText1[lang];
+		if (item.UnitText1[lang] && item.Header[lang]) {
+			$rootScope.description = lang == 'En'? description['En']: description['He'];
 		}
 		$rootScope.slug = item.Slug;
 		if (main_pic_index !== undefined) {
