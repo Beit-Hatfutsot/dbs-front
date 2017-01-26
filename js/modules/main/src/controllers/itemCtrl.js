@@ -58,7 +58,7 @@ ItemCtrl.prototype = {
 
 	refresh_root_scope: function() {
 		var item = this.item_data,
-			description = {
+		var description = {
 			'En': 'Discover the history of the Jewish community of '+
 				  item.Header[lang]+
 				  '. Explore photos, family trees and more of the open databases of The Museum of the Jewish People',
