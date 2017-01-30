@@ -151,9 +151,11 @@ PersonsController.prototype = {
 
     handle_search_modifiers: function(search_params) {
 		for (var modifier in this.search_modifiers) {
-			var modifier_string = this.search_modifiers[modifier];
-			if (this.search_params[modifier] !== undefined && modifier_string !== '') {
-				search_params[modifier] += ';' + modifier_string;
+			if (modifier in search_params) {
+				var modifier_string = this.search_modifiers[modifier];
+				if (this.search_params[modifier] !== undefined && modifier_string !== '') {
+					search_params[modifier] += ';' + modifier_string;
+				}
 			}
 		}
     },
@@ -162,7 +164,7 @@ PersonsController.prototype = {
 		var self = this;
 		var search_params = angular.copy(this.search_params);
 		for (var param in search_params) {
-			if (search_params[param] === '') {
+			if (search_params[param] === '' || search_params[param] == undefined) {
 				delete search_params[param];
 			}
 		}
