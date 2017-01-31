@@ -18,8 +18,8 @@
                   <he>הורים</he>
               </div>
           </div>
-          <div class="add-to-story" ng-hide="itemPreviewController.in_mjs_state()">
-            <mjs-widget type="card" item="previewData"></mjs-widget>
+          <div class="add-to-story">
+            <mjs-widget ng-hide="itemPreviewController.in_mjs_state()" type="card" item="previewData"></mjs-widget>
           </div>
       </div>
       <div class="node" ng-class="{'node--f': previewData.sex === 'F', 'node--m' : previewData.sex == 'M'}">

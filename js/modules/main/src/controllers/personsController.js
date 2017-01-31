@@ -5,6 +5,7 @@ var PersonsController = function($rootScope, $scope, $state, $stateParams, ftree
 	this.individuals = [];
 	this.search_params = {};
 	this.query = '';
+	this.$rootScope = $rootScope;
 
 	this.search_modifiers = {
 		first_name: 	'',
@@ -106,7 +107,7 @@ PersonsController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
-
+				self.$rootScope.$broadcast('item-loaded', individuals.items);
 				self.notification.loading(false);
 				if (individuals.total == 0)
 					self.notification.put(3);
