@@ -18,7 +18,9 @@
                   <he>הורים</he>
               </div>
           </div>
-          <div class="add-to-story"></div>
+          <div class="add-to-story">
+            <mjs-widget type="card" item="previewData"></mjs-widget>
+          </div>
       </div>
       <div class="node" ng-class="{'node--f': previewData.sex === 'F', 'node--m' : previewData.sex == 'M'}">
           <ng-switch on="previewData.sex">

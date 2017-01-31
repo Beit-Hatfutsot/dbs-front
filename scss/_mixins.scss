@@ -171,6 +171,13 @@
     transform: translate(-50%, -50%);
 }
 
+@mixin horizontal-centering($position: absolute) {
+    position: $position;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
 
 @mixin italic-placeholder {
   ::-webkit-input-placeholder {
