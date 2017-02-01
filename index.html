@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<!-- Let Goggle crawler know we use HTML5 push state API -->
 		<meta name="fragment" content="!">
+    <meta name="google-site-verification" content="hAGcyZg5qbnZLTiBNYxH6h0SRIRP0f0i8p5C1EPjyzk"/>
 		<base href="/">
         <title ng-bind="(title?title + ' | BHS':'BHS')">BHS</title>
         <link rel="icon" href="http://www.bh.org.il/wp-content/uploads/cropped-favicon-512-32x32.png" sizes="32x32" /><link>
@@ -18,10 +19,6 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/bhsclient.css">
     <!-- endinject -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
-		<!--[if lt IE 9]>
-		    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
-		<![endif]-->
       <meta property="og:site_name"
       content="{{(lang=='en')?'Museum of The Jewish People - Beit Hatfutsot':'בית התפוצות - מוזיאון העם היהודי'}}">
     <meta property="og:url" content="{{canonical_url}}" ng-if="canonical_url" />
@@ -177,8 +174,7 @@
 		})(window,document,'script','dataLayer','GTM-PSCTSP');</script>
 		<!-- End Google Tag Manager -->
 
-		<en><a class="github-fork-ribbon right-bottom fixed" href="https://github.com/Beit-Hatfutsot/dbs-front/blob/dev/README.md" data-title="Fork me on GitHub" title="What's This?" target="_blank">Fork me on GitHub</a></en>
-		<he><a class="github-fork-ribbon left-bottom fixed" href="https://github.com/Beit-Hatfutsot/dbs-front/blob/dev/README.md" data-title="Fork me on GitHub" title="מה זה?" target="_blank">Fork me on GitHub</a></he>
+     <ng-include src="'templates/svgs/octocat.html'"></ng-include>
 
 	</body>
 </html>

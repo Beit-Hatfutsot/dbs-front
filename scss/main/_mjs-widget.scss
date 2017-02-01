@@ -3,7 +3,7 @@
   display: inline-block;
   line-height: 26px;
   z-index: 1;
-  @include hover-pointer();
+  cursor: pointer;
 
   &.open {
     .mjs-widget-icon svg{
@@ -17,12 +17,25 @@
 
   .mjs-widget-icon{
     position: relative;
-    width: 112px;
-    height: 34px;
+
+    #add_to_story, #in_my_story {
+      width: 112px;
+      height: 34px;
+    }
+    #add_to_story_sm, #in_my_story_sm {
+      width: 66px;
+      height: 34px;
+    }
 
     svg {
       .btn-backcolor {fill: #cb5947;}
+      .btn-backcolor-sm {fill:#e6e6e6;}
+
       .cls-2 {fill:#fff;}
+      .cls-2-sm {fill:#666;}
+
+      .circle-sm {fill:#fff;}
+
       .cls-3 {
         fill:none;
         stroke: #666766;
@@ -33,26 +46,19 @@
     }
 
     svg:hover {
-      .btn-backcolor{fill:#666766;}
+      .btn-backcolor, .btn-backcolor-sm{fill:#666766;}
+      .cls-2-sm{fill:#fff;}
     }
   }
 
   .mjs-widget-dialog {
     display: none;
-    position: absolute;
+    @include horizontal-centering();
     z-index: 1;
     top: 40px;
     text-align: center;
     font-size: 14px;
     @include box-shadow(0 0 6px 0 #999);
-
-    .en & {
-      right: -18px;
-    }
-
-    .he & {
-      left: -18px;
-    }
 
     &__view, &__remove {
       padding: 10px 15px;
@@ -60,8 +66,7 @@
       width: 140px;
       color: #666666;
       text-decoration: none;
-
-      @include hover-pointer();
+      cursor: pointer;
 
       .en & {
         text-align: left;
@@ -81,7 +86,7 @@
       display: inline-block;
       vertical-align: bottom;
       z-index: 1;
-      @include hover-pointer();
+      cursor: pointer;
 
       &__icon {
         width: 25px;

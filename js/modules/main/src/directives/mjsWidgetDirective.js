@@ -5,7 +5,8 @@ angular.module('main').
 			templateUrl: 'templates/main/mjs/mjs-widget.html',
 			controller: 'MjsWidgetController as mjsWidgetCtrl',
 			scope: {
-				item: '='
+				item: '=',
+				type: '@'
 			}
 		};
 	}]);

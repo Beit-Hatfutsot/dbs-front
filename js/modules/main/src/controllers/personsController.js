@@ -5,6 +5,7 @@ var PersonsController = function($rootScope, $scope, $state, $stateParams, ftree
 	this.individuals = [];
 	this.search_params = {};
 	this.query = '';
+	this.$rootScope = $rootScope;
 
 	this.search_modifiers = {
 		first_name: 	'',
@@ -106,7 +107,7 @@ PersonsController.prototype = {
 		this.ftrees.search(search_params).
 			then(function(individuals) {
 				self.individuals = individuals;
-
+				self.$rootScope.$broadcast('item-loaded', individuals.items);
 				self.notification.loading(false);
 				if (individuals.total == 0)
 					self.notification.put(3);
@@ -151,9 +152,11 @@ PersonsController.prototype = {
 
     handle_search_modifiers: function(search_params) {
 		for (var modifier in this.search_modifiers) {
-			var modifier_string = this.search_modifiers[modifier];
-			if (this.search_params[modifier] !== undefined && modifier_string !== '') {
-				search_params[modifier] += ';' + modifier_string;
+			if (modifier in search_params) {
+				var modifier_string = this.search_modifiers[modifier];
+				if (this.search_params[modifier] !== undefined && modifier_string !== '') {
+					search_params[modifier] += ';' + modifier_string;
+				}
 			}
 		}
     },
@@ -162,7 +165,7 @@ PersonsController.prototype = {
 		var self = this;
 		var search_params = angular.copy(this.search_params);
 		for (var param in search_params) {
-			if (search_params[param] === '') {
+			if (search_params[param] === '' || search_params[param] == undefined) {
 				delete search_params[param];
 			}
 		}

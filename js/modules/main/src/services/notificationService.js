@@ -126,10 +126,15 @@ angular.module('main').
 					loading_gif.remove();
 				}
 			},
-			put: function(msg_id) {
+			put: function(msg_id, code) {
 				message = messages[msg_id];
 				var options = angular.extend({}, DEFAULT_OPTIONS, message.options),
 					text = message[langManager.lang];
+                        if(code) {
+                              var error_code = {'en': 'code', 'he': 'קוד'};
+                              error_code = ' (' + error_code[langManager.lang] + ': '+code+')';
+                              text += error_code;
+                        }
 				jQuery.notify(text, options);
 			},
 

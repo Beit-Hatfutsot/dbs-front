@@ -3,8 +3,30 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
+### Changed
+- Change "Fork me on Github" design
+- Change meta-description for place items
+
+### Fixed
+- Persons Search query title
+- Places Map: display red icons on top of blue ones
+- Reset empty fields operators in Persons Search before producing new search 
+
+### Added
+- A User can add person to his story from Persons Search results page
+- Indicate the error code in "Sorry, failed to fetch item" notification
+- Meta tag to verify site ownership
+
+## [0.10.0] - 2017-01-18
 ### Fixed
 - Display persons' dates and places in persons search results
+- Clean all the search results before starting a new search
+- Family Trees: in case there are no years, don't show questions marks
+- Make placeholder texts in the Person Search disappear once field has focus
+
+### Added
+- Add maps to places item page
+- Return "Back to Search Results" button to family trees
 
 ## [0.9.14] - 2016-12-29
 Give home page images meaningful names
