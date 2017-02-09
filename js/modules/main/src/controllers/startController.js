@@ -5,11 +5,10 @@
  * @description
  * The Home page controller.
  */
-var StartController = function($scope, $state, wizard, item) {
+var StartController = function($rootScope, $scope, langManager, $state, wizard, item) {
 	var self = this;
 
 	this.wizard = wizard;
-	this.lang = $scope.lang.charAt(0).toUpperCase()+$scope.lang.charAt(1);
 
 	/**
 	 * @ngdoc property
@@ -45,6 +44,10 @@ var StartController = function($scope, $state, wizard, item) {
 			$state.go('persons', params);
 		}
 	});
+
+	$rootScope.description = langManager.lang=='en'?'':'ארכיון תמונות ווידאו, פירוש שמות משפחה,'+
+												' אילן יוחסין, עצי משפחה, קהילות יהודיות בעולם, אישים ועוד.'+
+												' מאגרי המידע הפתוחים של מוזיאון העם היהודי - בית התפוצות';
 };
 
 StartController.prototype = {
@@ -77,4 +80,4 @@ StartController.prototype = {
 	}
 }
 
-angular.module('main').controller('StartController', ['$scope', '$state', 'wizard', 'item',StartController]);
+angular.module('main').controller('StartController', ['$rootScope', '$scope', 'langManager', '$state', 'wizard', 'item',StartController]);
