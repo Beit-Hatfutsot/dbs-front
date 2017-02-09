@@ -62,19 +62,35 @@ ItemCtrl.prototype = {
 			lang = language_map[$rootScope.lang],
 			item = this.item_data,
 			description = {
-				'En': 'Discover the history of the Jewish community of '+
-					  item.Header[lang]+
-					  '. Explore photos, family trees and more of the open databases of The Museum of the Jewish People',
-			    'He': 'גלו את ההיסטוריה והתרבות של קהילת יהודי ' +item.Header[lang]+
-					  ', עצי משפחה, פירוש שמות משפחה, צילומים ועוד במאגרי המידע הפתוחים של בית התפוצות, מוזיאון העם היהודי בתל אביב'
+				5: {
+					'En': 'Discover the history of the Jewish community of '+
+						  item.Header["En"]+
+						  '. Explore photos, family trees and more of the open databases of The Museum of the Jewish People',
+				    'He': 'גלו את ההיסטוריה והתרבות של קהילת יהודי ' +item.Header["He"]+
+						  ', עצי משפחה, פירוש שמות משפחה, צילומים ועוד במאגרי המידע הפתוחים של בית התפוצות, מוזיאון העם היהודי בתל אביב'
+				}
+			},
+
+			title = {
+				5: {
+					'En': 'The Jewish Community of '+ item.Header["En"] + ' | BH Open Databases',
+			    	'He': 'קהילת יהודי ' + item.Header["He"] + ' | מאגרי מידע - בית התפוצות'
+				},
+
+				'deflt': {
+					'En': item.Header["En"] + ' | BH Open Databases',
+				    'He': item.Header["He"] + ' | מאגרי מידע - בית התפוצות'
+				}
 			};
+
+		$rootScope.title = title[item.UnitType]?title[item.UnitType][lang]:title['deflt'][lang];
+		$rootScope.description = description[item.UnitType]?description[item.UnitType][lang]:'';
 		main_pic_index = this.get_main_pic_index();
 		// TODO: make language option 'En' & 'He' universal
-		$rootScope.title = item.Header[lang];
 		$rootScope.og_type = 'article';
-		if (item.UnitText1[lang] && item.Header[lang]) {
-			$rootScope.description = lang == 'En'? description['En']: description['He'];
-		}
+
+
+
 		$rootScope.slug = item.Slug;
 		if (main_pic_index !== undefined) {
 			$rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
