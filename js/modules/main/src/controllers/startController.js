@@ -7,7 +7,7 @@
  */
 var StartController = function($rootScope, $scope, langManager, $state, wizard, item) {
 	var self = this;
-
+	this.lang = $scope.lang.charAt(0).toUpperCase()+$scope.lang.charAt(1);
 	this.wizard = wizard;
 
 	/**
