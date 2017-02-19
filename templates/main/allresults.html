@@ -1,37 +1,37 @@
 <div id="item-page-container">
     <nav class="menu gsearch">
         <ul class="nav">
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'allResults'}" ng-click="generalSearchCtrl.goto_results('allResults')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'allResults'}" ng-click="gsCtrl.goto_results('allResults')">
                 <span class="text">
                     <en>All Results</en>
                     <he>כל התוצאות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'places'}" ng-click="generalSearchCtrl.goto_results('places')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'places'}" ng-click="gsCtrl.goto_results('places')">
                 <span class="text">
                     <en>Places</en>
                     <he>מקומות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'images'}" ng-click="generalSearchCtrl.goto_results('images')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'images'}" ng-click="gsCtrl.goto_results('images')">
                 <span class="text">
                     <en>Images</en>
                     <he>תמונות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'videos'}" ng-click="generalSearchCtrl.goto_results('videos')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'videos'}" ng-click="gsCtrl.goto_results('videos')">
                 <span class="text">
                     <en>Videos</en>
                     <he>וידאו</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'luminaries'}" ng-click="generalSearchCtrl.goto_results('luminaries')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'luminaries'}" ng-click="gsCtrl.goto_results('luminaries')">
                 <span class="text">
                     <en>Luminaries</en>
                     <he>אישים</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'familyNames'}" ng-click="generalSearchCtrl.goto_results('familyNames')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'familyNames'}" ng-click="gsCtrl.goto_results('familyNames')">
                 <span class="text">
                     <en>Family Names</en>
                     <he>שמות משפחה</he>
@@ -40,7 +40,7 @@
         </ul>
     </nav>
     <div  id="general-search-page">
-        <ng-switch on="generalSearchCtrl.collection">
+        <ng-switch on="gsCtrl.collection">
             <div class="about_center" ng-switch-when='allResults'>
                 <div class="article">
                     <h3 class="article_title">

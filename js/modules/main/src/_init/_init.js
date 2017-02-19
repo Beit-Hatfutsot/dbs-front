@@ -103,22 +103,22 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'general-search',
-            url: '/search?q&size&from_&collection',
-            controller: 'GeneralSearchController as generalSearchCtrl',
+            url: '/search?q&size&from_&epfrom_&cjhfrom_&collection',
+            controller: 'GeneralSearchController as gsCtrl',
             templateUrl: 'templates/main/search-results.html'
         },
 
         {
             name: 'about_center',
             url: '/about/:collection',
-            controller: 'GeneralSearchController as generalSearchCtrl',
+            controller: 'GeneralSearchController as gsCtrl',
             templateUrl: 'templates/main/allresults.html'
         },
 
         {
             name: 'he.he_about_center',
             url: '/אודות/:collection',
-            controller: 'GeneralSearchController as generalSearchCtrl',
+            controller: 'GeneralSearchController as gsCtrl',
             templateUrl: 'templates/main/allresults.html'
         },
 
@@ -154,8 +154,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'he.he_general-search',
-            url: '/חפשו?q&size&from_&collection',
-            controller: 'GeneralSearchController as generalSearchCtrl',
+            url: '/חפשו?q&size&from_&epfrom_&cjhfrom_&collection',
+            controller: 'GeneralSearchController as gsCtrl',
             templateUrl: 'templates/main/search-results.html'
         },
 

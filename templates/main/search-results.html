@@ -1,37 +1,37 @@
 <div id="item-page-container">
     <nav class="menu gsearch">
         <ul class="nav">
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'allResults'}" ng-click="generalSearchCtrl.goto_results('allResults')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'allResults'}" ng-click="gsCtrl.goto_results('allResults')">
                 <span class="text">
                     <en>All Results</en>
                     <he>כל התוצאות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'places'}" ng-click="generalSearchCtrl.goto_results('places')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'places'}" ng-click="gsCtrl.goto_results('places')">
                 <span class="text">
                     <en>Places</en>
                     <he>מקומות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'images'}" ng-click="generalSearchCtrl.goto_results('images')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'images'}" ng-click="gsCtrl.goto_results('images')">
                 <span class="text">
                     <en>Images</en>
                     <he>תמונות</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'videos'}" ng-click="generalSearchCtrl.goto_results('videos')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'videos'}" ng-click="gsCtrl.goto_results('videos')">
                 <span class="text">
                     <en>Videos</en>
                     <he>וידאו</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'luminaries'}" ng-click="generalSearchCtrl.goto_results('luminaries')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'luminaries'}" ng-click="gsCtrl.goto_results('luminaries')">
                 <span class="text">
                     <en>Luminaries</en>
                     <he>אישים</he>
                 </span>
             </li>
-            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'familyNames'}" ng-click="generalSearchCtrl.goto_results('familyNames')">
+            <li class="menu-item" ng-class="{'menu-item--active': gsCtrl.collection == 'familyNames'}" ng-click="gsCtrl.goto_results('familyNames')">
                 <span class="text">
                     <en>Family Names</en>
                     <he>שמות משפחה</he>
@@ -40,162 +40,193 @@
         </ul>
     </nav>
     <div id="general-search-page">
-        <ng-switch on="generalSearchCtrl.collection">
+        <ng-switch on="gsCtrl.collection">
             <div ng-switch-when='allResults' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot Databases:</br>The Vision of Douglas E. Goldman</a><br></en>
-                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן</a><br></he>
+                        <en>About the <a class="linked" ng-click="gsCtrl.read_about_center()">Beit Hatfutsot Databases:</br>The Vision of Douglas E. Goldman</a><br></en>
+                        <he>אודות <a class="linked" ng-click="gsCtrl.read_about_center()">מאגרי המידע של בית:<br>התפוצות בחזונו של נחום גולדמן</a><br></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when='places' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot Jewish<br>Communities Database</a></en>
-                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגר הקהילות<br>היהודיות של בית התפוצות</a></he>
+                        <en>About the <a class="linked" ng-click="gsCtrl.read_about_center()">Beit Hatfutsot Jewish<br>Communities Database</a></en>
+                        <he>אודות <a class="linked" ng-click="gsCtrl.read_about_center()">מאגר הקהילות<br>היהודיות של בית התפוצות</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when='images' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
-                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
+                        <en>About <a class="linked" ng-click="gsCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
+                        <he>אודות <a class="linked" ng-click="gsCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when='videos' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
-                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
+                        <en>About <a class="linked" ng-click="gsCtrl.read_about_center()">Bernard H. and Miriam Oster<br>Visual Documentation Center</a></en>
+                        <he>אודות <a class="linked" ng-click="gsCtrl.read_about_center()">המרכז לתיעוד חזותי<br>ע"ש ברנרד ה. ומרים אוסטר</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when='luminaries' class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Beit Hatfutsot Jewish<br>Luminaries Database</a></en>
-                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגר האישים<br>של בית התפוצות</a></he>
+                        <en>About the <a class="linked" ng-click="gsCtrl.read_about_center()">Beit Hatfutsot Jewish<br>Luminaries Database</a></en>
+                        <he>אודות <a class="linked" ng-click="gsCtrl.read_about_center()">מאגר האישים<br>של בית התפוצות</a></he>
                     </span>
                 </div>
             </div>
             <div ng-switch-when="familyNames" class="about-bh">
                 <div class="title">
                     <span>
-                        <en>About the <a class="linked" ng-click="generalSearchCtrl.read_about_center()">Memi De-Shalit Database<br>of Jewish Family Names</a></en>
-                        <he>אודות <a class="linked" ng-click="generalSearchCtrl.read_about_center()">מאגר השמות<br>ע"ש ממי דה-שליט</a></he>
+                        <en>About the <a class="linked" ng-click="gsCtrl.read_about_center()">Memi De-Shalit Database<br>of Jewish Family Names</a></en>
+                        <he>אודות <a class="linked" ng-click="gsCtrl.read_about_center()">מאגר השמות<br>ע"ש ממי דה-שליט</a></he>
                     </span>
                 </div>
             </div>
         </ng-switch>
         <div class="search-results-page">
-            <div ng-if="generalSearchCtrl.results.total > 0">
+            <div ng-if="gsCtrl.results.total > 0">
                 <div class="db-results-title">
-                    <en><strong>{{generalSearchCtrl.results.total}}</strong> results found for <strong>{{generalSearchCtrl.query}}</strong> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].En}})</en>
-                    <he>נמצאו <strong>{{generalSearchCtrl.results.total}}</strong> תוצאות עבור <strong>{{generalSearchCtrl.query}}</strong> ({{generalSearchCtrl.collection_map[generalSearchCtrl.collection].He}})</he>
+                    <en><strong>{{gsCtrl.results.total}}</strong> results found for <strong>{{gsCtrl.query}}</strong> ({{gsCtrl.collection_map[gsCtrl.collection].En}})</en>
+                    <he>נמצאו <strong>{{gsCtrl.results.total}}</strong> תוצאות עבור <strong>{{gsCtrl.query}}</strong> ({{gsCtrl.collection_map[gsCtrl.collection].He}})</he>
                 </div>
+                <ul uib-pagination
+                    items-per-page="gsCtrl.int_items_per_page"
+                    rotate="true"
+                    total-items="gsCtrl.results.total"
+                    ng-change="gsCtrl.update('gs_search', curr_page)"
+                    ng-model="curr_page"
+                    max-size="gsCtrl.max_size"
+                    class="pagination-sm"
+                    boundary-links="true"
+                    force-ellipses="true"></ul>
+
                 <div class="item-preview-wrapper">
-                    <div class="spinner" ng-if="generalSearchCtrl.loading && generalSearchCtrl.query">
+                    <!-- <div class="spinner" ng-if="gsCtrl.loading && gsCtrl.query">
                         <img src="images/BH-Loading.gif">
-                    </div>
+                    </div> -->
                     <item-preview item-source="bh"
-                                  ng-repeat="r_data in generalSearchCtrl.results.hits"
+                                  ng-repeat="r_data in gsCtrl.results.hits"
                                   preview-data="r_data._source">
                     </item-preview>
-                    <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
+                    <!-- <div class="loader" ng-click="gsCtrl.fetch_more()" ng-if="gsCtrl.results.total>gsCtrl.results.hits.length">
                         <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                         <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                         <div class="loader-desc">
                             <en><strong>More</strong><br></en>
                             <he>לראות עוד<br></he>
                             <span class="results-number">
-                                <en>(+{{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} results)</en>
-                                <he>({{generalSearchCtrl.results.total-generalSearchCtrl.results.hits.length}} תוצאות)</he>
+                                <en>(+{{gsCtrl.results.total-gsCtrl.results.hits.length}} results)</en>
+                                <he>({{gsCtrl.results.total-gsCtrl.results.hits.length}} תוצאות)</he>
                             </span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0 || generalSearchCtrl.cjh_total > 0">
-                    <en><strong>{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</strong> results elsewhere on the internet for <strong>{{generalSearchCtrl.query}}</strong></en>
-                    <he>נמצאו <strong>{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</strong> תוצאות עבור <strong>{{generalSearchCtrl.query}}</strong></he>
+                <div class="db-results-title" ng-if="gsCtrl.eurp_total > 0 || gsCtrl.cjh_total > 0">
+                    <en><strong>{{gsCtrl.eurp_total + gsCtrl.cjh_total}}</strong> results elsewhere on the internet for <strong>{{gsCtrl.query}}</strong></en>
+                    <he>נמצאו <strong>{{gsCtrl.eurp_total + gsCtrl.cjh_total}}</strong> תוצאות עבור <strong>{{gsCtrl.query}}</strong></he>
                 </div>
             </div>
 
-            <div ng-if="generalSearchCtrl.results.total == 0">
+            <div ng-if="gsCtrl.results.total == 0">
                 <div class="no-res-notif">
-                    <en>We couldn't find any items matching "{{generalSearchCtrl.query}}".<br/>Please try again with a different spelling, try a different query, or:</en>
-                    <he>לא הצלחנו למצוא תוצאות עבור "{{generalSearchCtrl.query}}" במאגרים שלנו.<br>אנא בדקו שאין בטקסט שהזנתם שגיאות כתיב ונסו שוב, או הזינו טקסט חדש לחיפוש.<br>
+                    <en>We couldn't find any items matching "{{gsCtrl.query}}".<br/>Please try again with a different spelling, try a different query, or:</en>
+                    <he>לא הצלחנו למצוא תוצאות עבור "{{gsCtrl.query}}" במאגרים שלנו.<br>אנא בדקו שאין בטקסט שהזנתם שגיאות כתיב ונסו שוב, או הזינו טקסט חדש לחיפוש.<br>
                         באפשרותכם גם לבחור באחת מהאפשרויות הבאות:<br/></he>
                 </div>
-                <div class="db-results-title" ng-if="generalSearchCtrl.eurp_total > 0 || generalSearchCtrl.cjh_total > 0">
+                <div class="db-results-title" ng-if="gsCtrl.eurp_total > 0 || gsCtrl.cjh_total > 0">
                     <en><strong>See results from elsewhere on the Internet</strong></en>
                     <he><strong>בדקו את התוצאות שמצאנו עבורכם במאגרי מידע נוספים</strong></he>
                 </div>
-                <div class="title-desc" ng-if="generalSearchCtrl.eurp_total > 0 || generalSearchCtrl.cjh_total > 0">
+                <div class="title-desc" ng-if="gsCtrl.eurp_total > 0 || gsCtrl.cjh_total > 0">
                     <en>Beit Hatfutsot has partnered with other archives to offer you even more results:</en>
                     <he>בית התפוצות חבר לארכיונים ומאגרי מידע בעולם, על מנת לתת לכם כמה שיותר תוצאות רלוונטיות.</he>
                 </div>
             </div>
 
-            <div id="cjh" ng-if="generalSearchCtrl.cjh_total > 0">
+            <div id="cjh" ng-if="gsCtrl.cjh_total > 0">
                 <div class="db-results-exttitle">
-                    <en><strong>{{generalSearchCtrl.cjh_total}}</strong> Results from <a class="link" href="http://www.cjh.org/" target="_blank">the Center for Jewish History</a></en>
-                    <he><strong>{{generalSearchCtrl.cjh_total}}</strong> תוצאות <a class="link" href="http://www.cjh.org/" target="_blank">ממאגרי המרכז להיסטוריה יהודית</a></he>
+                    <en><strong>{{gsCtrl.cjh_total}}</strong> Results from <a class="link" href="http://www.cjh.org/" target="_blank">the Center for Jewish History</a></en>
+                    <he><strong>{{gsCtrl.cjh_total}}</strong> תוצאות <a class="link" href="http://www.cjh.org/" target="_blank">ממאגרי המרכז להיסטוריה יהודית</a></he>
                 </div>
+                <ul uib-pagination
+                    items-per-page="gsCtrl.ext_items_per_page"
+                    rotate="true"
+                    total-items="gsCtrl.cjh_total"
+                    ng-change="gsCtrl.update('cjh_search', cjhcurr_page)"
+                    ng-model="cjhcurr_page"
+                    max-size="gsCtrl.max_size"
+                    class="pagination-sm"
+                    boundary-links="true"
+                    force-ellipses="true"></ul>
                 <div class="item-preview-wrapper">
-                    <div class="spinner" ng-if="generalSearchCtrl.loading_cjh && generalSearchCtrl.query">
+                    <div class="spinner" ng-if="gsCtrl.loading_cjh && gsCtrl.query">
                         <img src="images/BH-Loading.gif">
                     </div>
                     <item-preview
                         item-source="cjh"
-                        ng-repeat="r_data in generalSearchCtrl.cjh_results"
+                        ng-repeat="r_data in gsCtrl.cjh_results"
                         preview-data="r_data">
                     </item-preview>
-                    <div class="loader" ng-click="generalSearchCtrl.fetch_more_cjh()" ng-if="generalSearchCtrl.cjh_total>generalSearchCtrl.cjh_results.length">
+                    <!-- <div class="loader" ng-click="gsCtrl.fetch_more_cjh()" ng-if="gsCtrl.cjh_total>gsCtrl.cjh_results.length">
                         <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]"></icon>
                         <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                         <div class="loader-desc ext">
                             <en><strong>More</strong><span class="med-font"> from</strong><br><span class="ext-src-name">Center for<br>Jewish History</span></en>
                             <he><strong>עוד תוצאות</strong><br><span class="med-font">מהמרכז<br> להיסטוריה יהודית</span></he>
                             <span class="results-number">
-                                <en>(+{{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} results)</en>
-                                <he>({{generalSearchCtrl.cjh_total-generalSearchCtrl.cjh_results.length}} תוצאות)</he>
+                                <en>(+{{gsCtrl.cjh_total-gsCtrl.cjh_results.length}} results)</en>
+                                <he>({{gsCtrl.cjh_total-gsCtrl.cjh_results.length}} תוצאות)</he>
                             </span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div id="europeana" ng-if="generalSearchCtrl.eurp_total > 0">
+            <div id="europeana" ng-if="gsCtrl.eurp_total > 0">
                 <div class="db-results-exttitle">
-                    <en><strong>{{generalSearchCtrl.eurp_total}}</strong> Results from <a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></en>
-                    <he><strong>{{generalSearchCtrl.eurp_total}}</strong> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">ממאגרי יורופיאנה</a></span></he>
+                    <en><strong>{{gsCtrl.eurp_total}}</strong> Results from <a class="link" href="http://www.europeana.eu/portal/" target="_blank">Europeana</a></en>
+                    <he><strong>{{gsCtrl.eurp_total}}</strong> תוצאות <a class="link" href="http://www.europeana.eu/portal/" target="_blank">ממאגרי יורופיאנה</a></span></he>
                 </div>
+                <ul uib-pagination
+                    items-per-page="gsCtrl.ext_items_per_page"
+                    rotate="true"
+                    total-items="gsCtrl.eurp_total"
+                    ng-change="gsCtrl.update('ep_search', epcurr_page)"
+                    ng-model="epcurr_page"
+                    max-size="gsCtrl.max_size"
+                    class="pagination-sm"
+                    boundary-links="true"
+                    force-ellipses="true"></ul>
                 <div class="item-preview-wrapper">
-                    <div class="spinner" ng-if="generalSearchCtrl.loading_eurp">
+                    <div class="spinner" ng-if="gsCtrl.loading_eurp">
                         <img src="images/BH-Loading.gif">
                     </div>
                     <item-preview
                         item-source="europeana"
-                        ng-repeat="r_data in generalSearchCtrl.eurp_results"
+                        ng-repeat="r_data in gsCtrl.eurp_results"
                         preview-data="r_data">
                     </item-preview>
-                    <div class="loader" ng-click="generalSearchCtrl.fetch_more_eurp()" ng-if="generalSearchCtrl.eurp_total>generalSearchCtrl.eurp_results.length">
+                    <!-- <div class="loader" ng-click="gsCtrl.fetch_more_eurp()" ng-if="gsCtrl.eurp_total>gsCtrl.eurp_results.length">
                     <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
                     <icon class="eye-open-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-444, -567]"></icon>
                     <div class="loader-desc ext">
                         <en><strong>More</strong><span class="med-font"> from</span><br><span class="ext-src-name">Europeana</span></en>
                         <he><strong>עוד תוצאות</strong><br><span class="med-font">מיורופיאנה</span></he>
                         <span class="results-number">
-                            <en>(+{{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} results)</en>
-                            <he>({{generalSearchCtrl.eurp_total-generalSearchCtrl.eurp_results.length}} תוצאות)</he>
+                            <en>(+{{gsCtrl.eurp_total-gsCtrl.eurp_results.length}} results)</en>
+                            <he>({{gsCtrl.eurp_total-gsCtrl.eurp_results.length}} תוצאות)</he>
                         </span>
                     </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
+            <ng-include src="'templates/main/google-it.html'" ng-if="gsCtrl.results.total == 0"></ng-include>
         </div>
     </div>
 </div>
