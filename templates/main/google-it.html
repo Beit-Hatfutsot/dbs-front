@@ -10,23 +10,23 @@
     </div>
     <div class="google-search-box-wrapper">
         <input  id="search-input"
-                ng-model="gsCtrl.google_query"
-                ng-keydown="gsCtrl.google_search_on_enter($event)"
+                ng-model="generalSearchCtrl.google_query"
+                ng-keydown="generalSearchCtrl.google_search_on_enter($event)"
                 autofocus
                 type="text"
-                placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}">
+                placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}"> 
         <ul class="google-key-words">
             <li  class="key-word"
-                 ng-repeat="query_word in gsCtrl.query_words"
+                 ng-repeat="query_word in generalSearchCtrl.query_words"
                  ng-class="{'key-word--active' : query_word.selected}"
-                 ng-click="gsCtrl.toggle_selected(query_word)">
+                 ng-click="generalSearchCtrl.toggle_selected(query_word)">
                 <en>{{query_word.en}}</en>
                 <he>{{query_word.he}}</he>
             </li>
         </ul>
         <button  class="google-search-btn"
-                 ng-click="gsCtrl.google_search()"
-                 ng-disabled="gsCtrl.google_query.length < 2">
+                 ng-click="generalSearchCtrl.google_search()"
+                 ng-disabled="generalSearchCtrl.google_query.length < 2">
             <en><a>Search this</a></en>
             <he><a>חיפוש</a></he>
         </button>
