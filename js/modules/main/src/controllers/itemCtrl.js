@@ -81,8 +81,16 @@ ItemCtrl.prototype = {
 					'En': item.Header["En"] + ' | BH Open Databases',
 				    'He': item.Header["He"] + ' | מאגרי מידע - בית התפוצות'
 				}
+			},
+
+			keywords = {
+				5: {
+					'En': 'Jewish community of ' + item.Header["En"] + ', Jews in ' + item.Header["En"],
+			    	'He': item.Header["He"] + ' יהודי, קהילת יהודי '+ item.Header["He"]+ ', יהדות ' + item.Header["He"]
+				},
 			};
 
+		$rootScope.keywords = keywords[item.UnitType]?keywords[item.UnitType][lang]:'';
 		$rootScope.title = title[item.UnitType]?title[item.UnitType][lang]:title['deflt'][lang];
 		$rootScope.description = description[item.UnitType]?description[item.UnitType][lang]:'';
 		main_pic_index = this.get_main_pic_index();
