@@ -86,7 +86,7 @@ ItemCtrl.prototype = {
 			keywords = {
 				5: {
 					'En': 'Jewish community of ' + item.Header["En"] + ', Jews in ' + item.Header["En"],
-			    	'He': item.Header["He"] + ' יהודי, קהילת יהודי '+ item.Header["He"]+ ', יהדות ' + item.Header["He"]
+			    	'He': 'קהילת יהודי ' + item.Header["He"]+ ', יהדות ' + item.Header["He"]+', יהודי ' + item.Header["He"],
 				},
 			};
 
