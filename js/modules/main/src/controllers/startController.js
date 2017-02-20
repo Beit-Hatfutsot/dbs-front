@@ -44,10 +44,11 @@ var StartController = function($rootScope, $scope, langManager, $state, wizard, 
 			$state.go('persons', params);
 		}
 	});
-
+	$rootScope.title = langManager.lang == 'en'?'':'מאגרים: תמונות, פירוש שם, אילן יוחסין, קהילות | בית התפוצות';
 	$rootScope.description = langManager.lang=='en'?'':'ארכיון תמונות ווידאו, פירוש שמות משפחה,'+
 												' אילן יוחסין, עצי משפחה, קהילות יהודיות בעולם, אישים ועוד.'+
 												' מאגרי המידע הפתוחים של מוזיאון העם היהודי - בית התפוצות';
+	$rootScope.keywords = langManager.lang == 'en'?'':'פירוש שמות משפחה, אילן יוחסין, עצי משפחה, קהילות יהודיות';
 };
 
 StartController.prototype = {
