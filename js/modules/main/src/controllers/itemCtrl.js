@@ -68,13 +68,24 @@ ItemCtrl.prototype = {
 						  '. Explore photos, family trees and more of the open databases of The Museum of the Jewish People',
 				    'He': 'גלו את ההיסטוריה והתרבות של קהילת יהודי ' +item.Header["He"]+
 						  ', עצי משפחה, פירוש שמות משפחה, צילומים ועוד במאגרי המידע הפתוחים של בית התפוצות, מוזיאון העם היהודי בתל אביב'
+				},
+
+				6: {
+					'En': '',
+					'He': 'מקור שם משפחה ' +item.Header["He"]+ ' – באתר בית התפוצות ניתן לאתר אילנות יוחסין, פירושים לשמות משפחה, תולדותיהן של קהילות ברחבי העולם, צילומים, תמונות, סרטים ועוד',
 				}
 			},
 
 			title = {
+				//places
 				5: {
 					'En': 'The Jewish Community of '+ item.Header["En"] + ' | BH Open Databases',
 			    	'He': 'קהילת יהודי ' + item.Header["He"] + ' | מאגרי מידע - בית התפוצות'
+				},
+				//family names
+				6: {
+					'En': '',
+			    	'He': 'מקור השם ' + item.Header["He"]+  ' | מאגרי מידע - בית התפוצות',
 				},
 
 				'deflt': {
@@ -88,6 +99,11 @@ ItemCtrl.prototype = {
 					'En': 'Jewish community of ' + item.Header["En"] + ', Jews in ' + item.Header["En"],
 			    	'He': 'קהילת יהודי ' + item.Header["He"]+ ', יהדות ' + item.Header["He"]+', יהודי ' + item.Header["He"],
 				},
+
+				6: {
+					'En': '',
+					'He': 'מקור שם המשפחה ' + item.Header["He"]+ ', מקור השם '+ item.Header["He"] + ', ' + item.Header["He"],
+				}
 			};
 
 		$rootScope.keywords = keywords[item.UnitType]?keywords[item.UnitType][lang]:'';
