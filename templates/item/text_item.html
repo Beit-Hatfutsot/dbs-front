@@ -63,12 +63,11 @@
 							</div>
 						</div>
 						<div class="header-wrapper">
-							<h1 class="item__article-header">
-								<en>{{itemController.item_data.Header.En}}</en>
-								<he>{{itemController.item_data.Header.He}}</he>
-							</h1>
-							<item-type type="itemController.item_type"
-                image="itemController.item_data.thumbnail_url"></item-type>
+							<item-type type="itemController.item_type"></item-type>
+              <h1 class="item__article-header">
+                <en>{{itemController.item_data.Header.En}}</en>
+                <he>{{itemController.item_data.Header.He}}</he>
+              </h1>
 							<mjs-widget item="itemController.item_data"></mjs-widget>
 						</div>
             <div ng-switch on="itemController.item_data.UnitText1.{{itemController.uc_first()}} !== ''

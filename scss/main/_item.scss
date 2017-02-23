@@ -629,14 +629,14 @@
                         }
                     }
 
-                    .type {
-                        @extend %item-type;
-                    }
                 }
                 .header-wrapper {
                     position: relative;
                     padding: 26px 0;
 
+                    .item-type {
+                        @extend %item-type;
+                    }
                     .mjs-widget-wrapper {
                         padding-top: 35px;
                         padding-bottom: 10px;
@@ -731,7 +731,7 @@
                 padding: 0 15px;
                 @include hover-pointer();
 
-                .type {
+                .item-type {
                     @extend %item-type;
                     bottom: 10px;
                 }
