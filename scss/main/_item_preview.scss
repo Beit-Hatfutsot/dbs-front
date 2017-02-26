@@ -64,20 +64,34 @@
     }
   }
 
-  .item-type {
-    @extend %item-type;
-  }
 
-	.header {
-		position: absolute;
-    display: inline-block;
-		color: $red2;
-		font-weight: 700;
+  .header {
+    position: absolute;
+    display: block;
     margin-top: 10px;
-    font-size: 13px;
-		width: 164px;
-		max-height: 36px;
-  	overflow: hidden;
+    width: 190px;
+    max-height: 36px;
+    line-height: 1;
+    overflow: hidden;
+
+    .en & {
+      margin-left: 10px;
+    }
+
+    .he & {
+      margin-right: 10px;
+    }
+
+    &__text {
+      font-size: 14px;
+      color: $red2;
+      font-weight: 700;
+    }
+
+    .item-type {
+      @extend %item-type;
+    }
+
 
 		&--nothumb {
 			width: 94%;

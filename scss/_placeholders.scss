@@ -145,66 +145,52 @@
 }
 
 %item-type {
-
+    vertical-align: text-top;
     display: inline-block;
-    margin-top: 10px;
 
     .en & {
-      float: left;
-      margin-right: 6px;
-      margin-left: 10px;
+      margin-right: 3px;
     }
     .he & {
-      float: right;
-      margin-left: 6px;
-      margin-right: 10px;
+      margin-left: 3px;
     }
 
     .tree-icon {
       width: 12px;
       height: 16px;
-      /*@include icon(-29px -69px);*/
     }
 
     .surname-icon {
-      width: 22px;
-      height: 18px;
-      /*@include icon(-28px -161px);*/
+      width: 25px;
+      height: 16px;
     }
 
     .place-icon {
-      width: 15px;
-      height: 17px;
-      /*@include icon(-30px -106px);*/
+      width: 17px;
+      height: 23px;
     }
 
     .photo-icon {
       width: 17px;
       height: 17px;
-      padding-top: 4px;
-      /*@include icon(-29px -218px);*/
     }
 
     .movie-icon {
       width: 22px;
       height: 22px;
-      /*@include icon(-26px -192px);*/
     }
 
     .personality-icon {
-      width: 16px;
-      height: 17px;
-      /*@include icon(-29px -132px);*/
+      width: 22px;
+      height: 22px;
     }
     .text-icon {
-      width: 18px;
-      height: 16px;
-      /*@include icon (-28px -161px);*/
+      width: 20px;
+      height: 19px;
     }
     .audio-icon {
       width: 15px;
       height: 15px;
-      /*@include icon (-28px -244px);*/
     }
 }
 

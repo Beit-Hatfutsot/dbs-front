@@ -631,8 +631,16 @@
 
                 }
                 .header-wrapper {
-                    position: relative;
-                    padding: 26px 0;
+                  position: relative;
+                  padding: 26px 0;
+
+                  .en & {
+                    margin-left: 26px;
+                  }
+
+                  .he & {
+                    margin-right: 26px;
+                  }
 
                     .item-type {
                         @extend %item-type;
@@ -655,10 +663,9 @@
                 }
 
                 &__article-header {
-                    margin: 0px 26px;
+                    display: inline;
                     color: $red2;
                     max-width: 640px;
-                    line-height: 26px;
                     font-size: 1.5em;
                     .en & {
                         font-weight: 700;
