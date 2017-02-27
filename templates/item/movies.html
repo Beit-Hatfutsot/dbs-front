@@ -32,12 +32,12 @@
                                 <video ng-src="{{itemController.item_data.video_url}}" controls type="video/mp4" prevent-rightclick autoplay></video>
                         </div>
                         <div class="header-wrapper">
+                            <item-type type="itemController.item_type"
+                              image="itemController.item_data.thumbnail_url"></item-type>
                             <h1 class="item__article-header">
                                 <en><span>{{itemController.item_data.Header.En}}</span></en>
                                 <he><span>{{itemController.item_data.Header.He}}</span></he>
                             </h1>
-                            <item-type type="itemController.item_type"
-                              image="itemController.item_data.thumbnail_url"></item-type>
                             <mjs-widget item="itemController.item_data"></mjs-widget>
                         </div>
                         <div class="gallery-modal__info">
