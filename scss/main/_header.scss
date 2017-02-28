@@ -71,7 +71,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #FFF;
     z-index: 1000;
 
     .upper-container {
@@ -80,6 +79,7 @@
         border-bottom-width: 10px;
         border-bottom-style: solid;
         border-bottom-color: $red3;
+        background-color: #FFF;
 
         .sub-upper-container {
             position: relative;
@@ -843,19 +843,16 @@
                         }
 
                         &--active {
-                            background-color: $red3;
+                            background-color: transparent !important;
+                            background-image: url(/images/header-item-bg.png);
+                            background-size: 100% 100%;
                             color: #fff;
                             text-shadow: -1px 0 0 #fff;
+                            padding-bottom: 7px;
 
                             a {
                               color: #fff;
                             }
-
-                            &:hover {
-                                background-color: $red3;
-
-                            }
-
                         }
                     }
                 }
