@@ -26,8 +26,18 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.$timeout = $timeout;
 	this.apiClient = apiClient;
 	this.proper_lang = this.lang[0].toUpperCase() + this.lang.slice(1);
+	this.is_expanded = false;
 
 	this.get_item();
+
+	Object.defineProperty(this, 'is_expandable', {
+		get: function() {
+    		var max_height = 598;
+			var el = angular.element(document.getElementsByClassName("item__article-texts"))[0];
+    		var text_height = el.offsetHeight;
+			return text_height == max_height?true:false;
+		}
+	});
 
 	$rootScope.$on('$stateChangeStart',
 	    function(event, toState, toParams, fromState, fromParams) {
