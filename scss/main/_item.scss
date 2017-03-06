@@ -562,6 +562,207 @@
                         }
                     }
 
+
+                    .media-accordion {
+                      .panel-collapse  {
+                        display: none;
+
+                        &.in {
+                          display: block;
+                        }
+                      }
+
+                      .panel-body {
+                        position: relative;
+
+                        .dropdown-btn {
+                            cursor: pointer;
+                            width: 30px;
+                            height: 20px;
+                            top: 106%;
+                            border-bottom-left-radius: 6px;
+                            border-bottom-right-radius: 6px;
+                            background-color: $yellow3;
+                            @include horizontal-centering();
+                            z-index: 1;
+
+                            .arrow {
+                              border-left: 6px solid transparent;
+                              border-right: 6px solid transparent;
+                              @include centering();
+
+                              &--down {
+                                border-top: 10px solid #fff;
+                              }
+                              &--up {
+                                border-bottom: 10px solid #fff;
+
+                              }
+                            }
+                          }
+                        .content {
+                          position: relative;
+                          @include box-shadow(0 0 6px 0 #999);
+                          padding: 15px 30px;
+                          display: flex;
+                          width: 100%;
+                          justify-content: space-between;
+                          align-items: center;
+
+                          &:after  {
+                            content: "";
+                            @include horizontal-centering();
+                            top: 100%;
+                            width: 30px;
+                            height: 20px;
+                            background-color: #fff;
+                            border-bottom-left-radius: 6px;
+                            border-bottom-right-radius: 6px;
+                            @include box-shadow (0 4px 2px 0 #999);
+                          }
+
+                          .mjs-widget-wrapper {
+                            svg {
+                              vertical-align: middle;
+                            }
+                          }
+
+
+
+                          .print-btn {
+                            width: 34px;
+                            height: 34px;
+                            background: $gray4;
+                            border-radius: 17px;
+                            position: relative;
+                            display: inline-block;
+                            cursor: pointer;
+
+                            img {
+                              height: 20px;
+                              width: 20px;
+                              @include centering();
+                            }
+
+                            &:hover {
+                              background: $red3;
+                            }
+
+                          }
+
+                          .share-btn {
+                            display: flex;
+
+                              &__fb, &__twit {
+                                width: 34px;
+                                height: 34px;
+                                background: $gray4;
+                                border-radius: 17px;
+                                position: relative;
+                                display: inline-block;
+                                cursor: pointer;
+
+                                .en & {
+                                  margin-right: 10px;
+                                }
+
+                                .he & {
+                                  margin-left: 10px;
+                                }
+
+
+                                img {
+                                  height: 20px;
+                                  width: 20px;
+                                  @include centering();
+                                }
+
+                              }
+                              &__fb:hover {
+                                background: #3c5a80;
+                              }
+
+                              &__twit:hover {
+                                background: #278cb7;
+                              }
+
+                          }
+
+                          .font-size {
+                            display: inline-block;
+                            color: $gray5;
+
+                            span {
+                              display: inline;
+                              padding: 10px 6px;
+                              cursor: pointer;
+
+                              &:hover {
+                                color: $gray3;
+                                border-bottom: 10px solid $gray4;
+                              }
+                            }
+
+                            span.active {
+                              color: $gray3;
+                              border-bottom: 10px solid $gray4;
+                            }
+                            &--s {
+                              font-size: 18px;
+                            }
+
+                            &--m {
+                              font-size: 20px;
+                            }
+
+                            &--l {
+                              font-size: 22px;
+                            }
+                          }
+
+                        }
+                      }
+
+                      .panel-default {
+
+                        .panel-heading {
+                          background-color: #fff;
+                          border-color: #ddd;
+
+                          .dropdown-btn {
+                            position: relative;
+                            width: 30px;
+                            height: 20px;
+                            margin: 0 auto;
+                            background-color: $yellow3;
+                            border-bottom-left-radius: 6px;
+                            border-bottom-right-radius: 6px;
+
+                            &:hover {
+                              background-color: $yellow2;
+                            }
+
+                            .arrow {
+                              border-left: 6px solid transparent;
+                              border-right: 6px solid transparent;
+                              @include centering();
+
+                              &--down {
+                                border-top: 10px solid #fff;
+                              }
+                              &--up {
+                                border-bottom: 10px solid #fff;
+
+                              }
+                            }
+                          }
+                        }
+
+                        .panel-default > .panel-heading + .panel-collapse > .panel-body {
+                          border-top-color: #ddd;
+                        }
+                      }
+                    }
                 }
                 .header-wrapper {
                   position: relative;

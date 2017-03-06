@@ -59,6 +59,46 @@
 							</div>
 						</div>
 
+
+            <uib-accordion class="media-accordion">
+              <div uib-accordion-group
+                   class="panel-default"
+                   is-open="itemController.accordion_is_open">
+                <uib-accordion-heading>
+                  <div ng-show="!itemController.accordion_is_open" class="dropdown-btn">
+                    <span class="arrow arrow--down"></span>
+                  </div>
+                </uib-accordion-heading>
+                <div class="content">
+                  <mjs-widget item="itemController.item_data"></mjs-widget>
+                  <div class="print-btn" ng-click="itemController.print()">
+                    <img src="/templates/svgs/print-btn.svg">
+                  </div>
+
+                  <div class="share-btn">
+                    <div class="share-btn__fb">
+                      <img src="/templates/svgs/facebook.svg">
+                    </div>
+                    <div class="share-btn__twit">
+                      <img src="/templates/svgs/twitter.svg">
+                    </div>
+                      <!-- <! <tweet text="{{title}} via @BeitHatfutsot"></tweet>
+                      <fb-share></fb-share> -->
+                  </div>
+                  <div class="font-size">
+                    <span class="font-size--l">אA</span>
+                    <span class="font-size--m">אA</span>
+                    <span class="font-size--s active">אA</span>
+                  </div>
+                </div>
+                <div  class="dropdown-btn"
+                      ng-click="itemController.accordion_is_open = false"
+                      ng-show="itemController.accordion_is_open">
+                  <span class="arrow arrow--up"></span>
+                </div>
+              </div>
+            </uib-accordion>
+
 						<div class="header-wrapper">
 							<item-type type="itemController.item_type"></item-type>
               <h1 class="item__article-header">

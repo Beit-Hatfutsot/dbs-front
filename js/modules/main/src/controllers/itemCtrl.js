@@ -27,6 +27,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.apiClient = apiClient;
 	this.proper_lang = this.lang[0].toUpperCase() + this.lang.slice(1);
 	this.is_expanded = false;
+	this.accordion_is_open = false;
 
 	this.get_item();
 
