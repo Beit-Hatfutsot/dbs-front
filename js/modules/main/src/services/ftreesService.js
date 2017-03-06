@@ -18,19 +18,20 @@ angular.module('main').
                     if (contributor_md_match) {
                         var contributor_id = contributor_md_match[0].split(':')[1].split('>')[0];
 				        if (contributor_id in contributor_images) {
-					        return contributor_images[contributor_id];	
+					        return contributor_images[contributor_id];
 				        }
 				    }
                 }
 			},
 
 			search: function(params) {
-				//if (!in_progress) { 
+				//if (!in_progress) {
 					var self = this;
 
 					in_progress = true;
 					var deferred = $q.defer();
-					
+					params = angular.copy(params);
+					params.max_count_results = 1001;
 					$http.get(apiClient.urls.ftrees_search, {params: params}).
 						success(function(individuals) {
 							deferred.resolve(individuals);

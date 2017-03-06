@@ -198,7 +198,7 @@ gulp.task('watch', ['connect', 'default'], function () {
     }
   });
   gulp.watch('./index.html', ['index']);
-  gulp.watch(['./templates/**/*.html'], ['templates']);
+  gulp.watch(['./templates/**/*.html', './templates/**/*.svg'], ['templates']);
   gulp.watch(['./scss/**/*.scss']).on('change', function (evt) {
     if (evt.type !== 'changed') {
       gulp.start('index');
@@ -285,7 +285,7 @@ function appFiles () {
  * All AngularJS templates/partials as a stream
  */
 function templateFiles (opt) {
-  return gulp.src(['./templates/**/*.html'], opt)
+  return gulp.src(['./templates/**/*.html', './templates/**/*.svg'], opt)
     .pipe(opt && opt.min ? g.htmlmin(htmlminOpts) : noop());
 }
 
