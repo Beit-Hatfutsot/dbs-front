@@ -707,17 +707,19 @@
                               color: $gray3;
                               border-bottom: 10px solid $gray4;
                             }
-                            &--s {
-                              font-size: 18px;
+
+                            .small {
+                                font-size: 18px;
                             }
 
-                            &--m {
+                            .medium {
                               font-size: 20px;
                             }
 
-                            &--l {
-                              font-size: 22px;
+                            .large {
+                                font-size: 22px;
                             }
+
                           }
 
                         }

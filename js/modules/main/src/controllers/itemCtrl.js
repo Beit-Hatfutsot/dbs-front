@@ -28,7 +28,8 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.proper_lang = this.lang[0].toUpperCase() + this.lang.slice(1);
 	this.is_expanded = false;
 	this.accordion_is_open = false;
-
+	this.active_font = 's';
+	this.font_sizes = {'s':18, 'm':20, 'l':22};
 	this.get_item();
 
 	Object.defineProperty(this, 'is_expandable', {
@@ -237,6 +238,12 @@ ItemCtrl.prototype = {
 
 	print: function () {
 		window.print();
+	},
+
+	resize_font: function(size) {
+		var el = document.getElementsByClassName("item__article-texts")[0];
+		angular.element(el).css("font-size", this.font_sizes[size] + "px");
+		this.active_font = size;
 	},
 
 	get_main_pic_index: function() {

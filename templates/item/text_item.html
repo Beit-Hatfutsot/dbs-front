@@ -86,9 +86,15 @@
                       <fb-share></fb-share> -->
                   </div>
                   <div class="font-size">
-                    <span class="font-size--l">אA</span>
-                    <span class="font-size--m">אA</span>
-                    <span class="font-size--s active">אA</span>
+                    <span class="large"
+                          ng-click="itemController.resize_font('l')"
+                          ng-class="{'active': itemController.active_font=='l'}">אA</span>
+                    <span class="medium"
+                          ng-click="itemController.resize_font('m')"
+                          ng-class="{'active': itemController.active_font=='m'}">אA</span>
+                    <span class="small"
+                          ng-click="itemController.resize_font('s')"
+                          ng-class="{'active': itemController.active_font=='s'}">אA</span>
                   </div>
                 </div>
                 <div  class="dropdown-btn"
