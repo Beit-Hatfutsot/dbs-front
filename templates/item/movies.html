@@ -44,7 +44,7 @@
                     <div class="content">
                       <mjs-widget item="itemController.item_data"></mjs-widget>
                       <div class="print-btn" ng-click="itemController.print()">
-                        <img src="/templates/svgs/print-btn.svg">
+                        <ng-include src="'/templates/svgs/print-btn.svg'"></ng-include>
                       </div>
                       <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.proper_lang]}}"/>
                       <div class="font-size">

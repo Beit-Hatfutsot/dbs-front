@@ -72,7 +72,7 @@
                 <div class="content">
                   <mjs-widget item="itemController.item_data"></mjs-widget>
                   <div class="print-btn" ng-click="itemController.print()">
-                    <img src="/templates/svgs/print-btn.svg">
+                     <ng-include src="'/templates/svgs/print-btn.svg'"></ng-include>
                   </div>
                   <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.proper_lang]}}"/>
                   <div class="font-size">
@@ -156,7 +156,7 @@
             </div>
 
             <div class="item__bottom-bar">
-              <img class="museum-icon" src="/templates/svgs/museum.svg" alt="Museum">
+              <ng-include class="museum-icon" src="'/templates/svgs/museum.svg'" alt="Museum"></ng-include>
               <en>Official text written by Researchers of The Museum of The Jewish People at Beit Hatfutsot</en>
               <he>תוצופתה תיבב ידוהיה םעה ןואיזומ - ונלש םירקוח י“ע בתכנש ימשר טסקט</he>
             </div>
