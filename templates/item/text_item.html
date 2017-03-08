@@ -74,17 +74,7 @@
                   <div class="print-btn" ng-click="itemController.print()">
                     <img src="/templates/svgs/print-btn.svg">
                   </div>
-
-                  <div class="share-btn">
-                    <div class="share-btn__fb">
-                      <img src="/templates/svgs/facebook.svg">
-                    </div>
-                    <div class="share-btn__twit">
-                      <img src="/templates/svgs/twitter.svg">
-                    </div>
-                      <!-- <! <tweet text="{{title}} via @BeitHatfutsot"></tweet>
-                      <fb-share></fb-share> -->
-                  </div>
+                  <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.proper_lang]}}"/>
                   <div class="font-size">
                     <span class="large"
                           ng-click="itemController.resize_font('l')"

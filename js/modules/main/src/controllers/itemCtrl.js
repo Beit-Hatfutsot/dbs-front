@@ -31,6 +31,9 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.active_font = 's';
 	this.font_sizes = {'s':18, 'm':20, 'l':22};
 	this.get_item();
+	this.public_url = $state.href(($rootScope.lang=='en'?'item-view': 'he.he_item-view'),
+								 {collection: $stateParams.collection, local_slug: $stateParams.local_slug},
+								 {absolute: true});
 
 	Object.defineProperty(this, 'is_expandable', {
 		get: function() {
@@ -129,7 +132,7 @@ ItemCtrl.prototype = {
 
 		$rootScope.slug = item.Slug;
 		if (main_pic_index !== undefined) {
-			$rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
+			$rootScope.og_image = "http://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
 		}
 	},
 

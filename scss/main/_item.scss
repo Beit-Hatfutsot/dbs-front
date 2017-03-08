@@ -27,114 +27,6 @@
             margin-left: 4px;
         }
     }
-
-    .footer {
-        position: relative;
-        width: 440px;
-        height: 66px;
-        display: inline-block;
-        background-color: #48C3D3;
-        color: #ffffff;
-        font-size: 14px;
-        font-weight: 600;
-
-        &.modal-gallery {
-            width: 52%;
-            bottom: -1px;
-        }
-
-        .en & {
-            margin-right: 60px;
-        }
-        .he & {
-            margin-left: 60px;
-        }
-
-        &:after {
-            border-top: solid 66px #48C3D3;
-            position: absolute;
-            content: "";
-            width: 0;
-            height: 0;
-            top: 0;
-
-            .en & {
-                border-right: solid 30px transparent;
-                left: 100%;
-            }
-            .he & {
-                border-left: solid 30px transparent;
-                right: 100%;
-            }
-        }
-        .share-item {
-            display: flex;
-
-            .en & {
-                left: 26px;
-            }
-
-            .he & {
-                right: 26px;
-            }
-
-            .share-item-header {
-                .en & {
-                    margin-right: 10px;
-                }
-                .he & {
-                    margin-left: 10px;
-                }
-            }
-
-            tweet {
-                  margin-right: 10px;
-            }
-        }
-        .print-icon-wrapper {
-            display: flex;
-
-            .en & {
-                right: 20px;
-            }
-            .he & {
-                left: 20px;
-            }
-
-            &.modal-gallery {
-
-                .en & {
-                    right: 50px;
-                }
-                .he & {
-                    left: 50px;
-                }
-            }
-
-            .print-descr {
-
-                margin-top: 4px;
-
-                .en & {
-                    margin-right: 10px;
-                }
-                .he & {
-                    margin-left: 10px;
-                }
-            }
-
-            .print-ntf {
-                font-weight: normal;
-                margin-right: 10px;
-                line-height: 16px;
-            }
-
-            .print-icon {
-                width: 30px;
-                height: 30px;
-            }
-        }
-    }
 }
 
 #item-page-container {
@@ -627,8 +519,6 @@
                             }
                           }
 
-
-
                           .print-btn {
                             width: 34px;
                             height: 34px;
@@ -648,45 +538,13 @@
                               background: $red3;
                             }
 
-                          }
-
-                          .share-btn {
-                            display: flex;
-
-                              &__fb, &__twit {
-                                width: 34px;
-                                height: 34px;
-                                background: $gray4;
-                                border-radius: 17px;
-                                position: relative;
-                                display: inline-block;
-                                cursor: pointer;
-
-                                .en & {
-                                  margin-right: 10px;
+                            }
+                          .share-item {
+                            position: inherit;
+                                svg {
+                                    vertical-align: middle;
                                 }
-
-                                .he & {
-                                  margin-left: 10px;
-                                }
-
-
-                                img {
-                                  height: 20px;
-                                  width: 20px;
-                                  @include centering();
-                                }
-
-                              }
-                              &__fb:hover {
-                                background: #3c5a80;
-                              }
-
-                              &__twit:hover {
-                                background: #278cb7;
-                              }
-
-                          }
+                            }
 
                           .font-size {
                             display: inline-block;
@@ -701,23 +559,23 @@
                                 color: $gray3;
                                 border-bottom: 10px solid $gray4;
                               }
-                            }
 
-                            span.active {
-                              color: $gray3;
-                              border-bottom: 10px solid $gray4;
-                            }
+                              &.active {
+                                color: $gray3;
+                                border-bottom: 10px solid $gray4;
 
-                            .small {
-                                font-size: 18px;
-                            }
+                              }
+                                &.small {
+                                    font-size: 18px;
+                                }
 
-                            .medium {
-                              font-size: 20px;
-                            }
+                                &.medium {
+                                  font-size: 20px;
+                                }
 
-                            .large {
-                                font-size: 22px;
+                                &.large {
+                                    font-size: 22px;
+                                }
                             }
 
                           }
