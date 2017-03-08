@@ -16,9 +16,13 @@
     }
 
     .museum-icon {
-        vertical-align: text-top;
-        width: 18px;
-        height: 18px;
+
+        svg {
+          vertical-align: text-top;
+          width: 18px;
+          height: 18px;
+
+        }
 
         .en & {
             margin-right: 4px;
@@ -528,10 +532,12 @@
                             display: inline-block;
                             cursor: pointer;
 
-                            img {
+                            #print-btn {
                               height: 20px;
                               width: 20px;
                               @include centering();
+
+                              .cls-1 {fill: #fff;}
                             }
 
                             &:hover {
@@ -541,6 +547,7 @@
                             }
                           .share-item {
                             position: inherit;
+                            display: inline-block;
                                 svg {
                                     vertical-align: middle;
                                 }
