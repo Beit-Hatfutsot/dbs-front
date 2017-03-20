@@ -773,7 +773,13 @@
                 .item-type {
                     @extend %item-type;
                     bottom: 10px;
+                    position: relative;
+                    top: 1em;
                 }
+
+              p.vertical-middle {
+                margin-left: 2em;
+              }
 
                 &:hover {
                     %item-type {
