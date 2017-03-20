@@ -778,7 +778,12 @@
                 }
 
               p.vertical-middle {
-                margin-left: 2em;
+                .he & {
+                  margin-right: 2em;
+                }
+                .en & {
+                  margin-left: 2em;
+                }
               }
 
                 &:hover {
