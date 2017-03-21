@@ -4,11 +4,11 @@
         <he>תוצאות חיפוש:</he>
     </div>
     <div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
-        <p class="vertical-middle">
+      <p class="vertical-middle">
             <en>{{itemController.search_result.name.Header.En}}</en>
             <he>{{itemController.search_result.name.Header.He}}</he>
         </p>
-        <item-type type="'familyNames'"></item-type>
+      <item-type type="'familyNames'"></item-type>
     </div>
     <div class="search-results__field" ng-if="itemController.search_result.place.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.place)">
         <p class="vertical-middle">

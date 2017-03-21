@@ -16,6 +16,7 @@ angular.module('main').
 		            _sub_header_state = 'closed';
 		        }
 		        else {
+		            window.scroll(0, 0);
 		            _sub_header_state = new_state;
 				}
 			},

@@ -17,78 +17,81 @@
 				width: initial;
 			}
 		}
-        .type {
-            width: 26px;
-
-            .type-desc-container {
-                width: 0;
-            }
-        }
 	}
 
-    .type {
-        @extend %item-type;
-        top: 118px;
 
-        &--thumbData {
-            @extend %item-type--thumbData;
-        }
+  .diagonal-block {
+    .he & {
+        @include flip ();
     }
 
-	.diagonal-block {
+    .diagonal-separator {
+      position: absolute;
+      height: 150px;
+      width: 8px;
+      @include skew(16deg);
+      background: $yellow3;
+    }
+  }
 
-        .he & {
-            @include flip ();
-        }
+  .white-part1 {
+      position: relative;
+      border-bottom: 150px solid #ffffff;
+      width: 292px;
+      top: 0px;
 
-		.diagonal-separator {
-			position: absolute;
-			height: 150px;
-			width: 8px;
-			@include skew(16deg);
-			background: $yellow3;
-		}
-	}
+      .en & {
+        border-right: 42px solid transparent;
+      }
 
-	.white-part1 {
-		  position: relative;
-	  	border-bottom: 150px solid #ffffff;
-	  	width: 292px;
-	  	top: 0px;
-
-	  	.en & {
-	  		border-right: 42px solid transparent;
-	  	}
-
-	  	.he & {
-	  		border-left: 42px solid transparent;
-	  	}
+      .he & {
+        border-left: 42px solid transparent;
+      }
 
       &--thumbnail {
         transition: width 1s;
       }
 
       &--nothumb {
-			width: 100%;
+      width: 100%;
 
-			.en & {
-				border-right: 0px solid #ffffff;
-			}
-			.he & {
-				border-left: 0px solid #ffffff;
-			}
-		}
-	}
+      .en & {
+        border-right: 0px solid #ffffff;
+      }
+      .he & {
+        border-left: 0px solid #ffffff;
+      }
+    }
+  }
 
-	.header {
-		position: absolute;
-		color: $red2;
-		font-weight: 700;
-		margin: 10px 15px 10px;
-		font-size: 13px;
-		width: 164px;
-		max-height: 36px;
-  		overflow: hidden;
+
+  .header {
+    position: absolute;
+    display: block;
+    margin-top: 10px;
+    width: 190px;
+    max-height: 36px;
+    line-height: 1;
+    overflow: hidden;
+
+    .en & {
+      margin-left: 10px;
+    }
+
+    .he & {
+      margin-right: 10px;
+    }
+
+    &__text {
+      font-size: 14px;
+      color: $red2;
+      font-weight: 700;
+    }
+
+    .item-type {
+      @extend %item-type;
+    }
+
 
 		&--nothumb {
 			width: 94%;
@@ -106,26 +109,27 @@
 		width: 200px;
 
 		code {
-            font-family: inherit;
+      font-family: inherit;
 
-            &:before, &:after {
-                content: "'";
-            }
-        }
+      &:before, &:after {
+          content: "'";
+      }
+    }
 
 		&--nothumb {
 			height: 88px;
 			width: 90%;
 		}
-        p {
-            display: inline;
-            a {
-                pointer-events: none;
-                text-decoration: none;
-                color: $gray3;
-            }
-	    }
+
+    p {
+      display: inline;
+      a {
+          pointer-events: none;
+          text-decoration: none;
+          color: $gray3;
+      }
     }
+  }
 
 	.thumbnail {
 		position: absolute;

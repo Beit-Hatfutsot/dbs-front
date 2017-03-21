@@ -24,7 +24,7 @@
                   label-text-en="Family Name"
                               label-text-he="שם משפחה"
                               model="last_name"
-                              placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, קפקא...'}}">
+                              placeholder="{{(lang=='en')?'Cohen, Kafka...':'כהן, אינשטיין...'}}">
                     </filters-field>
                 <ng-switch on="ctrl.$stateParams.more">
                   <div ng-switch-when="1" class="filters__sex" >
@@ -199,9 +199,9 @@
       <ng-include ng-show="ctrl.individuals.total == '0' || ctrl.individuals.isEmpty()" src="'templates/main/ftrees/add-family-tree.html'"></ng-include>
     </div>
     <div class="cards-title" ng-if="ctrl.individuals.total > 0">
-            <en><strong>{{ctrl.individuals.total}}</strong> Results found for your query</en>
-            <he>נמצאו <strong>{{ctrl.individuals.total}}</strong> תוצאות עבור החיפוש שלכם</he>
-        </div>
+        <en><strong ng-bind="ctrl.individuals.total > 1000 ? 'More than 1000 results' : ctrl.individuals.total+' Results'"></strong> found for your query</en>
+        <he>נמצאו <strong ng-bind="ctrl.individuals.total > 1000 ? 'יותר מ-1000' : ctrl.individuals.total"></strong> תוצאות עבור החיפוש שלכם</he>
+    </div>
 
     <div class="item-preview-wrapper">
       <item-preview ng-repeat="individual in ctrl.individuals.items"

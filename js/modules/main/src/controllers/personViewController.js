@@ -98,16 +98,6 @@ PersonViewController.prototype = {
 		}
 	},
 
-	get_fname: function(d) {
-		try {
-			return d.name[0];
-		}
-		catch (e) {
-			// something's wrong so we return a smile
-			return "\u263a";
-		}
-	},
-
   clear: function () {
     this.elements = {};
     this.vertices = {};
@@ -379,9 +369,7 @@ PersonViewController.prototype = {
 			    .classed('name', true)
 				  .classed('noselect', true)
 				  .text(function(d) {
-					return ['individual', 'partner', 'parent']
-						   .indexOf(d.class) >= 0 ? self.get_full_name(d):
-													self.get_fname(d)
+					return self.get_full_name(d);
 					});
 
 

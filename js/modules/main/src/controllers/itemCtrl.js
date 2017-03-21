@@ -26,8 +26,23 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.$timeout = $timeout;
 	this.apiClient = apiClient;
 	this.proper_lang = this.lang[0].toUpperCase() + this.lang.slice(1);
-
+	this.is_expanded = false;
+	this.accordion_is_open = false;
+	this.active_font = 's';
+	this.font_sizes = {'s':18, 'm':20, 'l':22};
 	this.get_item();
+	this.public_url = $state.href(($rootScope.lang=='en'?'item-view': 'he.he_item-view'),
+								 {collection: $stateParams.collection, local_slug: $stateParams.local_slug},
+								 {absolute: true});
+
+	Object.defineProperty(this, 'is_expandable', {
+		get: function() {
+    		var max_height = 598;
+			var el = angular.element(document.getElementsByClassName("item__article-texts"))[0];
+    		var text_height = el.offsetHeight;
+			return text_height == max_height?true:false;
+		}
+	});
 
 	$rootScope.$on('$stateChangeStart',
 	    function(event, toState, toParams, fromState, fromParams) {
@@ -117,7 +132,7 @@ ItemCtrl.prototype = {
 
 		$rootScope.slug = item.Slug;
 		if (main_pic_index !== undefined) {
-			$rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
+			$rootScope.og_image = "http://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
 		}
 	},
 
@@ -226,6 +241,12 @@ ItemCtrl.prototype = {
 
 	print: function () {
 		window.print();
+	},
+
+	resize_font: function(size) {
+		var el = document.getElementsByClassName("item__article-texts")[0];
+		angular.element(el).css("font-size", this.font_sizes[size] + "px");
+		this.active_font = size;
 	},
 
 	get_main_pic_index: function() {

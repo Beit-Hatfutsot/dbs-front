@@ -62,7 +62,7 @@
       	.name {
             font-size: 12px;
             overflow: hidden;
-            @include vertical-align()
+            @include vertical-align();
 		}
     }
 
@@ -83,6 +83,10 @@
         img {
             height: 28px;
         }
+      .name {
+        line-height: 1em;
+        height: 1em;
+      }
 	}
 
     .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"],

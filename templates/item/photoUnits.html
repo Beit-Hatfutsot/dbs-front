@@ -52,14 +52,49 @@
                                 <div class="arrow-right" ng-click="itemController.showNext()"></div>
                             </div>
                         </div>
+
+                        <uib-accordion class="media-accordion">
+                          <div uib-accordion-group
+                               class="panel-default"
+                               is-open="itemController.accordion_is_open">
+                            <uib-accordion-heading>
+                              <div ng-show="!itemController.accordion_is_open" class="dropdown-btn">
+                                <span class="arrow arrow--down"></span>
+                              </div>
+                            </uib-accordion-heading>
+                            <div class="content">
+                              <mjs-widget item="itemController.item_data"></mjs-widget>
+                              <div class="print-btn" ng-click="itemController.print()">
+                                <ng-include src="'templates/svgs/print-btn.svg'"></ng-include>
+                              </div>
+                              <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.proper_lang]}}"/>
+                              <div class="font-size">
+                                <span class="large"
+                                      ng-click="itemController.resize_font('l')"
+                                      ng-class="{'active': itemController.active_font=='l'}">אA</span>
+                                <span class="medium"
+                                      ng-click="itemController.resize_font('m')"
+                                      ng-class="{'active': itemController.active_font=='m'}">אA</span>
+                                <span class="small"
+                                      ng-click="itemController.resize_font('s')"
+                                      ng-class="{'active': itemController.active_font=='s'}">אA</span>
+                              </div>
+                            </div>
+                            <div  class="dropdown-btn"
+                                  ng-click="itemController.accordion_is_open = false"
+                                  ng-show="itemController.accordion_is_open">
+                              <span class="arrow arrow--up"></span>
+                            </div>
+                          </div>
+                        </uib-accordion>
+
                         <div class="header-wrapper">
+                            <item-type type="itemController.item_type"
+                              image="itemController.item_data.thumbnail_url"></item-type>
                             <h1 class="item__article-header">
                                 <en>{{itemController.item_data.Header.En}}</en>
                                 <he>{{itemController.item_data.Header.He}}</he>
                             </h1>
-                            <item-type type="itemController.item_type"
-                              image="itemController.item_data.thumbnail_url"></item-type>
-                            <mjs-widget item="itemController.item_data"></mjs-widget>
                         </div>
                         <div class="gallery-modal__info">
                             <div class="gallery-modal__info__picture-info">
@@ -92,38 +127,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="item__bottom-bar">
-                            <div class="footer">
-                                <!-- <div class="share-item vertical-middle">
-                                    <div class="share-item-header">
-                                        <en>Share this item</en>
-                                        <he>שתפו:</he>
-                                    </div>
-                                    <tweet text="{{title}} via @BeitHatfutsot"></tweet>
-                                    <fb-share></fb-share>
-                                </div> -->
-                                <div id="printbutton" class="print-icon-wrapper vertical-middle" ng-click="itemController.print()">
-                                    <span class="print-descr">
-                                        <en>Print</en>
-                                        <he>הדפיסו</he>
-                                    </span>
-                                    <span class="print-icon" ng-click="window.print()">
-                                        <icon position="[-411, -408]" alt-text="{en: 'Print', he: 'הדפסה'}" hover-offset="[0, -35]"></icon>
-                                    </span>
-                                    <span class="print-ntf">
-                                        <en></en>
-                                        <he>גרסה מותאמת<br>להדפסה</he>
-                                    </span>
-                                </div>
-                            </div>
-                            <mjs-widget item="itemController.item_data"></mjs-widget>
-                            <div class="check-related vertical-middle">
-                                <div class="check-related__text vertical-middle">
-                                    <en>Check the<br>related items</en>
-                                    <he>עיינו בערכים<br>הקשורים</he>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- <div class="item__bottom-bar">
+                          <img class="museum-icon" src="/templates/svgs/museum.svg" alt="Museum">
+                          <en>Official text written by Researchers of The Museum of The Jewish People at Beit Hatfutsot</en>
+                          <he>תוצופתה תיבב ידוהיה םעה ןואיזומ - ונלש םירקוח י“ע בתכנש ימשר טסקט</he>
+                        </div> -->
                     </div>
 
                 </div>

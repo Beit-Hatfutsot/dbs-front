@@ -27,6 +27,7 @@ with data from BHP using our migration bot.
     $ mkdir bh
     $ cd bh
     $ git clone http://....
+    $ cd dbs-front
     $ npm install
     $ bower install
 

@@ -1,84 +1,54 @@
-<div class="type" ng-class="{'type--thumbData': (image)}">
+<div class="item-type">
  	<ng-switch on="type">
 		<div ng-switch-when="genTreeIndividuals" >
-			<div class="type-icon-container vertical-middle">
-				<div class="tree-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Family Tree</en>
-				<he>עץ משפחה</he>
-			</div>
+			<div class="tree-icon">
+        <ng-include src="'templates/svgs/family_tree.svg'"></ng-include>
+      </div>
 		</div>
+
 		<div ng-switch-when="familyNames">
-			<div class="type-icon-container vertical-middle">
-				<div class="surname-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Family Name</en>
-				<he>שם משפחה</he>
+      <div class="surname-icon">
+        <ng-include src="'templates/svgs/family_names.svg'"></ng-include>
 			</div>
 		</div>
+
 		<div ng-switch-when="places">
-			<div class="type-icon-container vertical-middle">
-				<div class="place-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Place</en>
-				<he>מקום</he>
-			</div>
+			<div class="place-icon">
+        <ng-include src="'templates/svgs/places.svg'"></ng-include>
+      </div>
 		</div>
+
 		<div ng-switch-when="photoUnits">
-			<div class="type-icon-container vertical-middle">
-				<div class="photo-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Image</en>
-				<he>תמונה</he>
-			</div>
+			<div class="photo-icon">
+        <ng-include src="'templates/svgs/photo_units.svg'"></ng-include>
+      </div>
 		</div>
-		<div ng-switch-when="movies">
-			<div class="type-icon-container vertical-middle">
-				<div class="movie-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Video</en>
-				<he>וידאו</he>
-			</div>
-		</div>
+
 		<div ng-switch-when="personalities">
-			<div class="type-icon-container vertical-middle">
-				<div class="personality-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Luminary</en>
-				<he>אישיות</he>
-			</div>
+			<div class="personality-icon">
+        <ng-include src="'templates/svgs/luminary.svg'"></ng-include>
+      </div>
 		</div>
+
 		<div ng-switch-when="text">
-			<div class="type-icon-container vertical-middle">
-				<div class="text-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Text</en>
-				<he>מלל</he>
-			</div>
+			<div class="text-icon">
+        <ng-include src="'templates/svgs/compendium.svg'"></ng-include>
+      </div>
 		</div>
+
+    <div ng-switch-when="movies">
+      <div class="movie-icon">
+        <ng-include src="'templates/svgs/video.svg'"></ng-include>
+      </div>
+    </div>
+
 		<div ng-switch-when="audio">
-			<div class="type-icon-container vertical-middle">
-				<div class="audio-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>Music</en>
-				<he>מוזיקה</he>
-			</div>
+		  <div class="audio-icon"></div>
 		</div>
+
 		<div ng-switch-when="3D">
-			<div class="type-icon-container vertical-middle">
+			<div class="type-icon-container">
 				<div class="3D-icon"></div>
-			</div>
-			<div class="type-desc-container">
-				<en>3D</en>
-				<he>3D</he>
 			</div>
 		</div>
 	</ng-switch>

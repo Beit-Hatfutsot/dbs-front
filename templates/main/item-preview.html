@@ -68,11 +68,14 @@
       <div class="white-part1" ng-class="{'white-part1--nothumb':
         !(previewData.thumbnail_url), 'white-part1--thumbnail':
         previewData.thumbnail_url}">
-        <div class="header"
-          ng-class="{'header--nothumb': !(previewData.thumbnail_url),
+
+        <div class="header" ng-class="{'header--nothumb': !(previewData.thumbnail_url),
                      'isExtResult': itemSource != 'bh'}">
-          <en>{{previewData.Header.En}}</en>
-          <he>{{previewData.Header.He}}</he>
+          <item-type type="itemPreviewController.item_type"></item-type>
+          <span class="header__text">
+            <en>{{previewData.Header.En}}</en>
+            <he>{{previewData.Header.He}}</he>
+          </span>
         </div>
         <div ng-if="itemSource != 'bh'" class="text" ng-class="{'text--nothumb':
           !(previewData.thumbnail_url)}">
@@ -118,9 +121,6 @@
             </span>
           </ng-switch>
         </div>
-        <item-type type="itemPreviewController.item_type"
-               image="previewData.thumbnail_url">
-        </item-type>
       </div>
     </a>
   </ng-switch>
