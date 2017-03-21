@@ -76,6 +76,10 @@
                 height:16px;
             }
 		}
+      .name {
+        line-height: 1em;
+        height: 1em;
+      }
 
     }
     .node[role="grandparent"], .node[role="sibling"] {
@@ -83,10 +87,6 @@
         img {
             height: 28px;
         }
-      .name {
-        line-height: 1em;
-        height: 1em;
-      }
 	}
 
     .node[role="grandchild"], .node[role="inlaw"], .node[role="stepparent"],
