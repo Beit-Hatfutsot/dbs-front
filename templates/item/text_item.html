@@ -1,25 +1,25 @@
 <div id="item-page-container">
-  <pre ng-if="itemController.error" style="color:red;">
+    <pre ng-if="itemController.error" style="color:red;">
       {{itemController.error.data.error}}
   </pre>
-	<div id="item-page" class="clearfix" ng-show="itemController.content_loaded">
-		<div class="item-container">
-			<div class="item">
-				<div class="item__header">
-          <div class="text">
-            <en>
-              <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
+    <div id="item-page" class="clearfix" ng-show="itemController.content_loaded">
+        <div class="item-container">
+            <div class="item">
+                <div class="item__header">
+                    <div class="text">
+                        <en>
+                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
                   Your Search Result for {{itemController.item_data.Header.En}}:
               </span>
-              <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">
+                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">
                   Your Selected Item:
               </span>
-            </en>
-            <he>
-              <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
+                        </en>
+                        <he>
+                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
                   תוצאות חיפוש עבור {{itemController.item_data.Header.He}}:
               </span>
-              <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">
+                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">
                   הערך הנבחר:
               <span>
             </he>
@@ -87,90 +87,81 @@
                           ng-class="{'active': itemController.active_font=='s'}">אA</span>
                   </div>
                 </div>
-                <div  class="dropdown-btn"
-                      ng-click="itemController.accordion_is_open = false"
-                      ng-show="itemController.accordion_is_open">
-                  <span class="arrow arrow--up"></span>
+                </uib-accordion-heading>
+                  <div class="dropdown-btn" ng-click="itemController.accordion_is_open = false" ng-show="itemController.accordion_is_open">
+                    <span class="arrow arrow--up"></span>
+                  </div>
                 </div>
-              </div>
-            </uib-accordion>
+              </uib-accordion>
 
-						<div class="header-wrapper">
-							<item-type type="itemController.item_type"></item-type>
-              <h1 class="item__article-header">
-                <en>{{itemController.item_data.Header.En}}</en>
-                <he>{{itemController.item_data.Header.He}}</he>
-              </h1>
-						</div>
+                <div class="header-wrapper">
+                    <item-type type="itemController.item_type"></item-type>
+                    <h1 class="item__article-header">
+                        <en>{{itemController.item_data.Header.En}}</en>
+                        <he>{{itemController.item_data.Header.He}}</he>
+                    </h1>
+                </div>
 
-            <ng-switch on="itemController.item_data.UnitText1.{{itemController.uc_first()}} !== ''
+                <ng-switch on="itemController.item_data.UnitText1.{{itemController.uc_first()}} !== ''
                           && itemController.item_data.UnitText1.{{itemController.uc_first()}} != null">
-              <div ng-switch-when="true" class="item__article-texts" ng-class="{'expand': itemController.is_expanded}">
-                <en>
-                  <p marked="itemController.item_data.UnitText1.En"></p>
-                </en>
-                <he>
-                  <span marked="itemController.item_data.UnitText1.He"></span>
-                </he>
-              </div>
-              <div ng-switch-default="false" class="item__article-texts">
-                <en>
-                  <span>
+                    <div ng-switch-when="true" class="item__article-texts" ng-class="{'expand': itemController.is_expanded}">
+                        <en>
+                            <p marked="itemController.item_data.UnitText1.En"></p>
+                        </en>
+                        <he>
+                            <span marked="itemController.item_data.UnitText1.He"></span>
+                        </he>
+                    </div>
+                    <div ng-switch-default="false" class="item__article-texts">
+                        <en>
+                            <span>
                     <p class="err-preview">This item only exists in Hebrew at the moment...<br>
                     But not all is lost! <span class="err-preview-sm"><a ng-href="{{itemController.proper_link}}" target="_self">Click here</a> to view it in Hebrew.</span></p>
-                    <h3>Why is this happening?</h3>
-                    <p>The search results are derived from a wide array of sources, including a rich repository of Hebrew texts. Our experts are hard at work translating these texts, but unfortunately there are some results we haven't gotten to yet. Rest assured, we're working on it!</p>
-                    <h3>Can you help us translate this item?</h3>
-                    <p>If you are fluent in both English and Hebrew, we invite you to contribute to our database by translating, editing and giving feedback on items such as this.
-                    <a ng-href="http://www.bh.org.il/about-us/volunteering/" target="_blank">Click here for more details</a>.</p>
-                  </span>
-                </en>
-                <he>
-                  <span>
+                            <h3>Why is this happening?</h3>
+                            <p>The search results are derived from a wide array of sources, including a rich repository of Hebrew texts. Our experts are hard at work translating these texts, but unfortunately there are some results we haven't gotten to yet.
+                                Rest assured, we're working on it!</p>
+                            <h3>Can you help us translate this item?</h3>
+                            <p>If you are fluent in both English and Hebrew, we invite you to contribute to our database by translating, editing and giving feedback on items such as this.
+                                <a ng-href="http://www.bh.org.il/about-us/volunteering/" target="_blank">Click here for more details</a>.</p>
+                            </span>
+                        </en>
+                        <he>
+                            <span>
                     <p class="err-preview">Sorry, עמוד זה קיים באנגלית בלבד.<br> אבל יש תקווה באופק - <span class="err-preview-sm">
                       <a ng-href="{{itemController.proper_link}}" target="_self">לחצו כאן</a> כדי לעבור לעמוד באנגלית.</span></p>
-                    <h3>מדוע זה קורה?</h3>
-                      <p>מאגר המדע של בית התפוצות נבנה לאורך עשרות שנים בעמל רב בידי אנשי מקצוע מסורים.<br>
-                        האייטמים נאספו ממספר מקורות רחב ומגוון - עבודה שהתקשתה על עבודה התרגום לעברית.<br>
-                        בימים אלו צוות בית התפוצות עובד על תרגום כל האייטמים, אולם לצערנו עדיין נותרו מםפר דפים לא מתורגמים.
-                      </p>
-                      <h3>רוצים לעזור בתרגום?</h3>
-                      <p>אם אתם שולטים בעברית ובאנגלית ברמת שפת אם, הנכם מוזמנים לסייע לנו בעבודת התרגום, העריכה, ההגהה ועוד
-                        <a ng-href="http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/" target="_blank">לפרטים נוספים</a>.
-                      </p>
-                  </span>
-                </he>
-              </div>
-            </ng-switch>
+                            <h3>מדוע זה קורה?</h3>
+                            <p>מאגר המדע של בית התפוצות נבנה לאורך עשרות שנים בעמל רב בידי אנשי מקצוע מסורים.<br> האייטמים נאספו ממספר מקורות רחב ומגוון - עבודה שהתקשתה על עבודה התרגום לעברית.<br> בימים אלו צוות בית התפוצות עובד על תרגום כל האייטמים, אולם
+                                לצערנו עדיין נותרו מםפר דפים לא מתורגמים.
+                            </p>
+                            <h3>רוצים לעזור בתרגום?</h3>
+                            <p>אם אתם שולטים בעברית ובאנגלית ברמת שפת אם, הנכם מוזמנים לסייע לנו בעבודת התרגום, העריכה, ההגהה ועוד
+                                <a ng-href="http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/" target="_blank">לפרטים נוספים</a>.
+                            </p>
+                            </span>
+                        </he>
+                    </div>
+                </ng-switch>
 
-            <div class="item__article-options">
-              <p  class="read-more"
-                  ng-if="!itemController.is_expanded && itemController.is_expandable"
-                  ng-click="itemController.is_expanded = true">
-                <a href="#" class="button">
-                  <en>Continue reading</en>
-                  <he>להמשך קריאה</he>
-                </a>
-              </p>
-              <mjs-widget item="itemController.item_data"></mjs-widget>
-            </div>
+                <div class="item__article-options">
+                    <p class="read-more" ng-if="!itemController.is_expanded && itemController.is_expandable" ng-click="itemController.is_expanded = true">
+                        <a href="#" class="button">
+                            <en>Continue reading</en>
+                            <he>להמשך קריאה</he>
+                        </a>
+                    </p>
+                    <mjs-widget item="itemController.item_data"></mjs-widget>
+                </div>
 
-            <div class="item__bottom-bar">
-              <ng-include class="museum-icon" src="'templates/svgs/museum.svg'" alt="Museum"></ng-include>
-              <en>Official text written by Researchers of The Museum of The Jewish People at Beit Hatfutsot</en>
-              <he>תוצופתה תיבב ידוהיה םעה ןואיזומ - ונלש םירקוח י“ע בתכנש ימשר טסקט</he>
+                <div class="item__bottom-bar">
+                    <ng-include class="museum-icon" src="'templates/svgs/museum.svg'" alt="Museum"></ng-include>
+                    <en>Official text written by Researchers of The Museum of The Jewish People at Beit Hatfutsot</en>
+                    <he>טקסט רשמי שנכתב ע“י חוקרים שלנו - מוזיאון העם היהודי בבית התפוצות</he>
+                </div>
             </div>
-				</div>
-			</div>
-		</div>
-  </div>
-  <div class="right-side">
-    <ng-include src="'templates/item/right_side.html'"></ng-include>
-  </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
+<div class="right-side">
+    <ng-include src="'templates/item/right_side.html'"></ng-include>
+</div>
+</div>
