@@ -67,8 +67,8 @@
                               <div class="print-btn" ng-click="itemController.print()">
                                 <ng-include src="'templates/svgs/print-btn.svg'"></ng-include>
                               </div>
-                              <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.proper_lang]}}"/>
-                              <div class="font-size">
+                              <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.proper_lang]}}"></share>
+                              <div class="font-resize">
                                 <span class="large"
                                       ng-click="itemController.resize_font('l')"
                                       ng-class="{'active': itemController.active_font=='l'}">אA</span>

@@ -244,7 +244,11 @@ ItemCtrl.prototype = {
 	},
 
 	resize_font: function(size) {
-		var el = document.getElementsByClassName("item__article-texts")[0];
+		var collection = this.slug.collection;
+		var el = collection == 'video' || collection == 'image'?
+			document.getElementsByClassName("gallery-modal__info__picture-info")[0]:
+			document.getElementsByClassName("item__article-texts")[0];
+
 		angular.element(el).css("font-size", this.font_sizes[size] + "px");
 		this.active_font = size;
 	},
