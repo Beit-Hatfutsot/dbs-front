@@ -8,3 +8,4 @@ docs/.tmp/**
 .tmp
 dist
 /venv
+.DS_Store
