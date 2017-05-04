@@ -11,8 +11,7 @@ angular.module('main').
 
 		var collection_name_map = {
 			names: 'familyNames',
-			places: 'places',
-			general: '*'
+			places: 'places'
 		},
 
 		suggest = {
@@ -31,12 +30,6 @@ angular.module('main').
 					starts_with: [],
 					contains: [],
 					phonetic: []
-				},
-				general: {
-					exact: [],
-					starts_with: [],
-					contains: [],
-					phonetic: []
 				}
 			},
 
@@ -46,9 +39,6 @@ angular.module('main').
 
 			suggest_places: function(place) {
 				return get_suggestions('places', place);
-			},
-			suggest_general: function(query) {
-				return get_suggestions('general', query);
 			}
 		};
 
@@ -71,57 +61,26 @@ angular.module('main').
 								starts_with: [],
 								contains: [],
 								phonetic: []
-							},
-							general: {
-								exact: [],
-								starts_with: [],
-								contains: [],
-								phonetic: []
 							}
 						};
 						exact = null;
 						all_suggestions = [];
 
 						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
-							if (what == 'general') {
-								for (var collection in response[group]) {
-									for(var i=0; i<response[group][collection].length; i++) {
-										var suggestion = response[group][collection][i];
-
-								    	if (suggestion.toLowerCase() === value_lc) {
-											exact = suggestion;
-										}
-										else {
-											all_suggestions	= suggest.suggested[what].starts_with.
-												concat(suggest.suggested[what].contains.
-													concat(suggest.suggested[what].phonetic)
-												);
-
-											if (all_suggestions.indexOf(suggestion) === -1) {
-												suggest.suggested[what][group].push(suggestion);
-											}
-										}
+							response[group].forEach(function(suggestion) {
+								if (suggestion.toLowerCase() === value_lc) {
+									exact = suggestion;
+								}
+								else {
+									all_suggestions	= suggest.suggested[what].starts_with.
+										concat(suggest.suggested[what].contains.
+											concat(suggest.suggested[what].phonetic)
+										);
+									if (all_suggestions.indexOf(suggestion) === -1) {
+										suggest.suggested[what][group].push(suggestion);
 									}
 								}
-
-							}
-							else {
-								response[group].forEach(function(suggestion) {
-									if (suggestion.toLowerCase() === value_lc) {
-											exact = suggestion;
-									}
-									else {
-										all_suggestions	= suggest.suggested[what].starts_with.
-											concat(suggest.suggested[what].contains.
-												concat(suggest.suggested[what].phonetic)
-											);
-
-										if (all_suggestions.indexOf(suggestion) === -1) {
-											suggest.suggested[what][group].push(suggestion);
-										}
-									}
-								})
-							}
+							});
 						});
 
 						if (exact) {
