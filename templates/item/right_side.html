@@ -40,6 +40,29 @@
   <leaflet preview-data="itemController.item_data" id="mapid"></leaflet>
 </div>
 
+<div ng-if="itemController.search_result" class="search-results">
+    <div class="search-results__header">
+        <en>All Search Results for:</en>
+        <he>לכל התוצאות עבור:</he>
+    </div>
+    <div class="search-results__field search"
+          ng-attr-title="{{itemController.item_data.Header[itemController.proper_lang]}}"
+          ui-sref="general-search({q: itemController.item_data.Header.{{itemController.proper_lang}}})">
+      <p class="vertical-middle">
+            <en>{{itemController.item_data.Header.En}}</en>
+            <he>{{itemController.item_data.Header.He}}</he>
+      </p>
+      <div class="item-type">
+        <div class="search-icon">
+          <ng-include src="'templates/svgs/search_icon.svg'"></ng-include>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
 <div class="related" ng-show="itemController.related_data.length > 0">
     <div class="related__header">
         <en>Related Items:</en>
