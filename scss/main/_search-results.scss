@@ -1,3 +1,208 @@
+.persons-filter-form-wrapper {
+  box-shadow: 0 7px 3px -5px #b0b0b0;
+  width: 100%;
+
+form {
+  display: flex;
+}
+ .persons-filter-form {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1040px;
+  margin: 0 auto;
+
+  .left-side {
+    font-size: 22px;
+}
+.right-side {
+    display: block;
+    padding: 25px 25px;
+
+    .form-actions-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+
+        .filter-btn {
+            border: none;
+            outline:none;
+            cursor: pointer;
+            padding: 4px 39px;
+            background: $red3;
+            border-radius: 10px;
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .expand {
+            margin-bottom: 10px;
+        }
+        .filters__clear {
+            margin-bottom: 10px;
+        }
+
+    }
+  }
+
+.container {
+        margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+
+    label {
+        display: inline-table;
+        margin-right: 10px;
+        font-size: 15px;
+    }
+
+    .filters {
+        &__sex {
+        font-size: 14px;
+        margin-bottom: 15px;
+
+        &__title {
+            margin-bottom: 8px;
+            text-align: center;
+            color: $gray3;
+        }
+
+        &__choices {
+            input[type="radio"] {
+                display: none;
+                .en & {
+                    margin-right: 10px;
+                }
+                .he & {
+                    margin-left: 10px;
+                }
+            }
+            input[type="radio"]:checked + .label-sex {
+                font-weight: 600;
+                border-bottom: 4px solid $red3;
+                color: $gray1;
+                bottom: 4px;
+            }
+            .label-sex {
+
+                display: inline;
+                color: $gray4;
+                font-size: 14px;
+                position: relative;
+                cursor: pointer;
+
+                &:hover {
+                    bottom: 4px;
+                    border-bottom: 4px solid $red3;
+                }
+            }
+        }
+    }
+}
+
+    input {
+        padding: 0 10px;
+        flex: 1;
+    }
+
+  .notIE {
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+
+
+    .fudge {
+        display: inline-block;
+        position: relative;
+        height: 24px;
+
+        &:hover {
+            select, .fancyArrow {
+                background-color: $gray5;
+            }
+        }
+
+        .fancyArrow {
+            bottom: 2px;
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 14px solid $red3;
+            right: 0;
+        }
+    }
+    .fudge select {
+        padding: 0 4px;
+        outline-style:none;
+        //position: relative;
+        height: 100%;
+        outline: none;
+        color: $gray3;
+        border: none;
+        background: $gray6;
+        -moz-appearance: none;
+        font-size: 12px;
+        @include hover-pointer();
+            padding: 0 4pxpx;
+    font-size: 14px;
+    outline-style: none;
+    height: 100%;
+    outline: none;
+    color: #666666;
+    border: none;
+    border-left: 2px solid $gray5;
+    background: inherit;
+    -moz-appearance: none;
+    position: relative;
+
+
+    }
+  }
+
+
+
+
+}
+
+  .left-side {
+    padding: 20px 25px;
+    font-size: 20px;
+    color: #666;
+  }
+
+  .form-fields {
+    min-width: 720px;
+    display: block;
+    padding: 25px 0;
+
+    &.more {
+        display: flex;
+        justify-content: space-between;
+
+        .text-fields, .years-fields {
+            width: 48%;
+        }
+    }
+
+
+    input[type=text], input[type=number] {
+      border: none;
+      border-bottom: 2px solid $gray5;
+      background: inherit;
+    }
+  }
+
+ }
+}
+
  %db-results-exttitle {
     color: $gray3;
     font-size: 18px;
@@ -124,7 +329,9 @@
       @include box-shadow(0 1px 5px 1px #b0b0b0);
 
       ul.nav {
-        max-width: 1140px;
+        max-width: 1040px;
+        display: flex;
+        justify-content: space-between;
         margin: 0 auto;
       }
     }

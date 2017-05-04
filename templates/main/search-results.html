@@ -19,6 +19,12 @@
                     <he>תמונות</he>
                 </span>
             </li>
+            <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'persons'}" ng-click="generalSearchCtrl.goto_results('persons')">
+                <span class="text">
+                    <en>People (Family Trees)</en>
+                    <he>אנשים (עצי משפחה)</he>
+                </span>
+            </li>
             <li class="menu-item" ng-class="{'menu-item--active': generalSearchCtrl.collection == 'videos'}" ng-click="generalSearchCtrl.goto_results('videos')">
                 <span class="text">
                     <en>Videos</en>
@@ -39,8 +45,163 @@
             </li>
         </ul>
     </nav>
+    <div class="persons-filter-form-wrapper">
+      <div class="persons-filter-form" ng-show="generalSearchCtrl.collection == 'persons'">
+        <div class="left-side">
+          <en>Filter By</en>
+          <he></he>
+        </div>
+        <form name="filters" ng-controller="GeneralSearchController as ctrl">
+          <div class="form-fields" ng-class="{'more' : ctrl.$stateParams.more == '1'}">
+            <div class="text-fields" >
+                <persons-field class="filters__field"
+                                input-type = "text"
+                                search-type = "text"
+                                label-text-en="First Name:"
+                                label-text-he="שם פרטי:"
+                                model="first"
+                                placeholder="{{ctrl.lang == 'en'?'Moshe, Liat...':'משה, ליאת...'}}">
+               </persons-field>
+               <persons-field   class="filters__field"
+                                input-type = "text"
+                                search-type = "text"
+                                label-text-en="Last Name:"
+                                label-text-he="שם משפחה:"
+                                model="last"
+                                placeholder="{{(ctrl.lang=='en')?'Cohen, Kafka...':'כהן, אינשטיין...'}}">
+                </persons-field>
+                <ng-switch on="ctrl.$stateParams.more">
+                    <persons-field  ng-switch-when="1" class="filters__field"
+                                    input-type = "text"
+                                    search-type = "text"
+                                    label-text-en="Place of Birth:"
+                                    label-text-he="מקום לידה"
+                                    model="pob"
+                                    placeholder="{{ctrl.lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+                    </persons-field>
+                    <persons-field  ng-switch-default class="filters__field"
+                                    input-type = "text"
+                                    search-type = "text"
+                                    label-text-en="Place of Birth / Marriage / Death"
+                                    label-text-he="מקום לידה \ נישואין \ פטירה"
+                                    model="pob"
+                                    placeholder="{{ctrl.lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+                    </persons-field>
+                </ng-switch>
+
+                <div ng-show="ctrl.$stateParams.more == '1'">
+                    <persons-field  class="filters__field"
+                                    input-type = "text"
+                                    search-type = "text"
+                                    label-text-en="Place of Marriage:"
+                                    label-text-he="מקום נישואין:"
+                                    model="pom"
+                                    placeholder="{{ctrl.lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+                    </persons-field>
+                    <persons-field  class="filters__field"
+                                    input-type = "text"
+                                    search-type = "text"
+                                    label-text-en="Place of Death:"
+                                    label-text-he="מקום פטירה:"
+                                    model="pod"
+                                    placeholder="{{ctrl.lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
+                    </persons-field>
+
+                </div>
+            </div>
+            <div class="years-fields" ng-show="ctrl.$stateParams.more == '1'">
+                <persons-field  class="filters__field"
+                                search-type = "sex"
+                                label-text-en="Sex:"
+                                label-text-he="מין:"
+                                model="sex">
+                </persons-field>
+            <!-- <label>
+                <en>Sex</en>
+                <he>מין</he>
+            </label>
+            <div class="filters__sex__choices">
+                <input type="radio" name="sex" value="m" ng-model="ctrl.search_params.sex" id="choice-male" checked="checked">
+                <label class="label-sex" for="choice-male">
+                  <en>Male</en>
+                  <he>זכר</he>
+                </label>
+                <input type="radio" name="sex" value="f" ng-model="ctrl.search_params.sex" id="choice-female">
+                <label class="label-sex" for="choice-female">
+                  <en>Female</en>
+                  <he>נקבה</he>
+                </label>
+                <input type="radio" name="sex" value="n" ng-model="ctrl.search_params.sex" id="choice-nm">
+                <label class="label-sex" for="choice-nm">
+                  <en>Never mind</en>
+                  <he>לא משנה</he>
+                </label>-->
+
+                <persons-field  class="filters__field"
+                                input-type = "number"
+                                search-type = "year"
+                                label-text-en="Year of Birth:"
+                                label-text-he="שנת לידה:"
+                                model="yob"
+                                placeholder="1978...">
+                </persons-field>
+
+                <persons-field  class="filters__field"
+                                input-type = "number"
+                                search-type = "year"
+                                label-text-en="Year of Marriage:"
+                                label-text-he="שנת נישואין:"
+                                model="yom"
+                                placeholder="1948...">
+                </persons-field>
+
+                <persons-field  class="filters__field"
+                                input-type = "number"
+                                search-type = "year"
+                                label-text-en="Year of Death:"
+                                label-text-he="שנת פטירה:"
+                                model="yod"
+                                placeholder="1948...">
+                </persons-field>
+
+                <persons-field  class="filters__field"
+                                input-type = "number"
+                                search-type = "treenum"
+                                label-text-en="Tree Serial Number:"
+                                label-text-he="מספר סידורי של העץ:"
+                                model="treenum"
+                                placeholder="12345...">
+                </persons-field>
+            </div>
+
+          </div>
+          <div class="right-side">
+            <div class="form-actions-wrapper">
+                <a class="expand" href="" class="filters__expand" ng-click="ctrl.toggle_more()">
+                  <ng-switch on="ctrl.$stateParams.more">
+                    <span ng-switch-when="1">
+                      <en>Less Fields</en>
+                      <he>פחות שדות</he>
+                    </span>
+                    <span ng-switch-default>
+                      <en>More Fields</en>
+                      <he>עוד שדות</he>
+                    </span>
+                  </ng-switch>
+                </a>
+                <button class="filter-btn" ng-click="ctrl.update()" value="Filter">Filter</button>
+                <a href="" class="filters__clear" ng-click="ctrl.clear_filters()" ng-if="ctrl.$stateParams.more == '1'">
+                    <en>Clear</en>
+                    <he>ניקוי</he>
+                </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <div id="general-search-page">
-        <ng-switch on="generalSearchCtrl.collection">
+        <!-- <ng-switch on="generalSearchCtrl.collection">
             <div ng-switch-when='allResults' class="about-bh">
                 <div class="title">
                     <span>
@@ -89,7 +250,7 @@
                     </span>
                 </div>
             </div>
-        </ng-switch>
+        </ng-switch> -->
         <div class="search-results-page">
             <div ng-if="generalSearchCtrl.results.total > 0">
                 <div class="db-results-title">
