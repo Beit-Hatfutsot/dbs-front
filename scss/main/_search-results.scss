@@ -57,8 +57,13 @@ form {
 
     label {
         display: inline-table;
-        margin-right: 10px;
         font-size: 15px;
+        .en & {
+          margin-right: 10px;
+        }
+        .he & {
+          margin-left: 10px;
+        }
     }
 
     .filters {
@@ -112,8 +117,13 @@ form {
 
   .notIE {
     position: absolute;
-    right: 0;
     bottom: 2px;
+    .en & {
+      right: 0;
+    }
+    .he & {
+      left: 0;
+    }
 
 
     .fudge {
@@ -136,7 +146,12 @@ form {
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
             border-top: 14px solid $red3;
-            right: 0;
+            .en & {
+              right: 0;
+            }
+            .he & {
+              left: 0;
+            }
         }
     }
     .fudge select {
@@ -158,10 +173,15 @@ form {
     outline: none;
     color: #666666;
     border: none;
-    border-left: 2px solid $gray5;
     background: inherit;
     -moz-appearance: none;
     position: relative;
+    .en & {
+      border-left: 2px solid $gray5;
+    }
+    .he & {
+      border-right: 2px solid #c2c2c2;
+    }
 
 
     }

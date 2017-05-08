@@ -49,7 +49,7 @@
       <div class="persons-filter-form" ng-show="generalSearchCtrl.collection == 'persons'">
         <div class="left-side">
           <en>Filter By</en>
-          <he></he>
+          <he>סינון על פי</he>
         </div>
         <form name="filters" ng-controller="GeneralSearchController as ctrl">
           <div class="form-fields" ng-class="{'more' : ctrl.$stateParams.more == '1'}">
@@ -75,7 +75,7 @@
                                     input-type = "text"
                                     search-type = "text"
                                     label-text-en="Place of Birth:"
-                                    label-text-he="מקום לידה"
+                                    label-text-he="מקום לידה:"
                                     model="pob"
                                     placeholder="{{ctrl.lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
                     </persons-field>
@@ -83,7 +83,7 @@
                                     input-type = "text"
                                     search-type = "text"
                                     label-text-en="Place of Birth / Marriage / Death"
-                                    label-text-he="מקום לידה \ נישואין \ פטירה"
+                                    label-text-he="מקום לידה \ נישואין \ פטירה:"
                                     model="pob"
                                     placeholder="{{ctrl.lang == 'en'?'Tel-Aviv, Israel...':'תל-אביב, ישראל'}}">
                     </persons-field>
