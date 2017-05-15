@@ -82,28 +82,25 @@ angular.module('main').
 									// collection == "familyNames"
 									// suggestion == "Hoch"
 									if (["familyNames", "places"].indexOf(collection) > -1) {
-										sections["Articles"].push(suggestion);
+										if (sections["Articles"].indexOf(suggestion) == -1) {
+											sections["Articles"].push(suggestion);
+										}
 									} else if (["persons", "personalities"].indexOf(collection) > -1) {
-										sections["People"].push(suggestion);
+										if (sections["People"].indexOf(suggestion) == -1) {
+											sections["People"].push(suggestion);
+										}
 									} else if (["photoUnits", "movies"].indexOf(collection) > -1) {
-										sections["Media"].push(suggestion);
+										if (sections["Media"].indexOf(suggestion) == -1) {
+											sections["Media"].push(suggestion);
+										}
 									}
 								}
 							}
 
 							Object.keys(sections).forEach(function(section) {
-									sections[section].sort();
-									//remove duplicates
-									var sorted_arr = [];
-									for (var i = 0; i < sections[section].length - 1; i++) {
-									    if (sections[section][i + 1] !== sections[section][i]) {
-									        sorted_arr.push(sections[section][i]);
-									    }
-									}
-									//return no more than 6 results
-									sections[section] = sorted_arr.slice(0, 6);
-							})
-
+								//sort and remove duplicates
+								sections[section] = sections[section].sort().slice(0, 6);
+							});
 							suggest.suggested[what] = sections;
 						}
 						else {
