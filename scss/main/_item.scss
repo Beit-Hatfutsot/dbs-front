@@ -670,6 +670,10 @@
                     top: 1em;
                 }
                 p.vertical-middle {
+                  max-width: 80%;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
                     .he & {
                         margin-right: 2em;
                     }
@@ -677,13 +681,28 @@
                         margin-left: 2em;
                     }
                 }
-                &:hover {
-                    %item-type {
-                        width: 28px;
+
+                &.search {
+                  .en & {
+                    padding-right: 10px;
+                  }
+                  .he & {
+                    padding-left: 10px;
+                  }
+                  p.vertical-middle {
+                    margin: 0;
+                  }
+
+                  .item-type {
+                    .en & {
+                      float: right;
                     }
-                    .type-desc-container {
-                        width: 0;
+                    .he & {
+                      float: left;
+                      @include flip ();
+
                     }
+                  }
                 }
             }
         }

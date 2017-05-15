@@ -116,26 +116,6 @@
                                 label-text-he="מין:"
                                 model="sex">
                 </persons-field>
-            <!-- <label>
-                <en>Sex</en>
-                <he>מין</he>
-            </label>
-            <div class="filters__sex__choices">
-                <input type="radio" name="sex" value="m" ng-model="ctrl.search_params.sex" id="choice-male" checked="checked">
-                <label class="label-sex" for="choice-male">
-                  <en>Male</en>
-                  <he>זכר</he>
-                </label>
-                <input type="radio" name="sex" value="f" ng-model="ctrl.search_params.sex" id="choice-female">
-                <label class="label-sex" for="choice-female">
-                  <en>Female</en>
-                  <he>נקבה</he>
-                </label>
-                <input type="radio" name="sex" value="n" ng-model="ctrl.search_params.sex" id="choice-nm">
-                <label class="label-sex" for="choice-nm">
-                  <en>Never mind</en>
-                  <he>לא משנה</he>
-                </label>-->
 
                 <persons-field  class="filters__field"
                                 input-type = "number"
@@ -201,7 +181,7 @@
     </div>
 
     <div id="general-search-page">
-        <!-- <ng-switch on="generalSearchCtrl.collection">
+        <ng-switch on="generalSearchCtrl.collection">
             <div ng-switch-when='allResults' class="about-bh">
                 <div class="title">
                     <span>
@@ -250,7 +230,7 @@
                     </span>
                 </div>
             </div>
-        </ng-switch> -->
+        </ng-switch>
         <div class="search-results-page">
             <div ng-if="generalSearchCtrl.results.total > 0">
                 <div class="db-results-title">
