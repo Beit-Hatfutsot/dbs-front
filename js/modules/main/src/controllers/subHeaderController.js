@@ -16,7 +16,6 @@ var SubHeaderController = function($state, header, suggest, $timeout) {
 
     Object.defineProperty(this, 'raw_suggested', {
         get: function() {
-
             return suggest.suggested;
         }
     });
@@ -25,10 +24,9 @@ var SubHeaderController = function($state, header, suggest, $timeout) {
         get: function() {
             return {
                 general: [
-                    suggest.suggested.general.exact.length,
-                    suggest.suggested.general.starts_with.length,
-                    suggest.suggested.general.contains.length,
-                    suggest.suggested.general.phonetic.length
+                    suggest.suggested.general.People.length,
+                    suggest.suggested.general.Articles.length,
+                    suggest.suggested.general.Media.length
                 ]
             }
         }
@@ -36,12 +34,9 @@ var SubHeaderController = function($state, header, suggest, $timeout) {
 
     Object.defineProperty(this.suggested, 'general', {
         get: function() {
-            return suggest.suggested.general.exact.
-                concat(suggest.suggested.general.starts_with.
-                    concat(suggest.suggested.general.contains.
-                        concat(suggest.suggested.general.phonetic)
-                    )
-                );
+            return suggest.suggested.general.People.
+                concat(suggest.suggested.general.Articles.
+                    concat(suggest.suggested.general.Media));
         }
     });
 };
@@ -51,7 +46,6 @@ SubHeaderController.prototype = {
     get_suggestions: function(type) {
         var promise,
             self = this;
-
         this.suggested_index[type] = -1;
 
         if (this.header.query) {
@@ -74,9 +68,8 @@ SubHeaderController.prototype = {
 
 
     open_suggested: function(type) {
-        if ( this.suggested[type].length > 0 && this.header.query ) {
+        if (this.suggested[type].length > 0 && this.header.query) {
             this.suggested_open[type] = true;
-
         }
     },
 
@@ -108,11 +101,11 @@ SubHeaderController.prototype = {
             return 0;
         }
     },
-    select_suggested: function(type, value) {
+    select_suggested: function(type, collection, value) {
         this.suggested_index[type] = this.suggested[type].indexOf(value);
     },
 
-    adopt: function(type) {
+    adopt: function() {
         this.header.query = this.suggested.general[this.suggested_index.general];
         this.$state.go('general-search', {q: this.header.query});
     },
@@ -148,7 +141,7 @@ SubHeaderController.prototype = {
             else if ($event.keyCode === 13) {
                 if (this.suggested[type][ this.suggested_index[type] ]) {
                     $event.preventDefault();
-                    this.adopt(type);
+                    this.adopt();
                 }
 
                 this.close_suggested(type);
