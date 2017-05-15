@@ -11,7 +11,8 @@ angular.module('main').
 
 		var collection_name_map = {
 			names: 'familyNames',
-			places: 'places'
+			places: 'places',
+			general: '*'
 		},
 
 		suggest = {
@@ -30,6 +31,11 @@ angular.module('main').
 					starts_with: [],
 					contains: [],
 					phonetic: []
+				},
+				general: {
+					Articles: [],
+					People: [],
+					Media: []
 				}
 			},
 
@@ -39,6 +45,9 @@ angular.module('main').
 
 			suggest_places: function(place) {
 				return get_suggestions('places', place);
+			},
+			suggest_general: function(query) {
+				return get_suggestions('general', query);
 			}
 		};
 
@@ -47,8 +56,8 @@ angular.module('main').
 				var count, exact, all_suggestions;
 				var value_lc = value.toLowerCase();
 
-				return $http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value).
-					success(function(response) {
+				return $http.get(apiClient.urls.suggest + '/' + collection_name_map[what] + '/' + value)
+					.success(function(response) {
 						suggest.suggested = {
 							names: {
 								exact: [],
@@ -61,33 +70,66 @@ angular.module('main').
 								starts_with: [],
 								contains: [],
 								phonetic: []
-							}
+							},
+							general: {}
 						};
-						exact = null;
-						all_suggestions = [];
 
-						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
-							response[group].forEach(function(suggestion) {
-								if (suggestion.toLowerCase() === value_lc) {
-									exact = suggestion;
-								}
-								else {
-									all_suggestions	= suggest.suggested[what].starts_with.
-										concat(suggest.suggested[what].contains.
-											concat(suggest.suggested[what].phonetic)
-										);
-									if (all_suggestions.indexOf(suggestion) === -1) {
-										suggest.suggested[what][group].push(suggestion);
+						if (what == 'general') {
+							var sections = {'Articles': [], 'People': [], 'Media': []};
+							for (var collection in response.starts_with) {
+								for(var i=0; i<response.starts_with[collection].length; i++) {
+									var suggestion = response.starts_with[collection][i];
+									// collection == "familyNames"
+									// suggestion == "Hoch"
+									if (["familyNames", "places"].indexOf(collection) > -1) {
+										if (sections["Articles"].indexOf(suggestion) == -1) {
+											sections["Articles"].push(suggestion);
+										}
+									} else if (["persons", "personalities"].indexOf(collection) > -1) {
+										if (sections["People"].indexOf(suggestion) == -1) {
+											sections["People"].push(suggestion);
+										}
+									} else if (["photoUnits", "movies"].indexOf(collection) > -1) {
+										if (sections["Media"].indexOf(suggestion) == -1) {
+											sections["Media"].push(suggestion);
+										}
 									}
 								}
-							});
-						});
+							}
 
-						if (exact) {
-							suggest.suggested[what].exact.push(exact);
+							Object.keys(sections).forEach(function(section) {
+								//sort and remove duplicates
+								sections[section] = sections[section].sort().slice(0, 6);
+							});
+							suggest.suggested[what] = sections;
 						}
-					}).
-					error(function() {
+						else {
+							exact = null;
+							all_suggestions = [];
+							['starts_with', 'contains', 'phonetic'].forEach(function(group) {
+								response[group].forEach(function(suggestion) {
+									if (suggestion.toLowerCase() === value_lc) {
+											exact = suggestion;
+									}
+									else {
+										all_suggestions	= suggest.suggested[what].starts_with.
+											concat(suggest.suggested[what].contains.
+												concat(suggest.suggested[what].phonetic)
+											);
+
+										if (all_suggestions.indexOf(suggestion) === -1) {
+											suggest.suggested[what][group].push(suggestion);
+										}
+									}
+								})
+							});
+							if (exact) {
+								suggest.suggested[what].exact.push(exact);
+							}
+						};
+
+					})
+					.error(function() {
 						suggest.failed = true;
 					}).
 					finally(function() {
