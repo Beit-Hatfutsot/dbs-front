@@ -24,8 +24,8 @@ var SubHeaderController = function($state, header, suggest, $timeout) {
         get: function() {
             return {
                 general: [
-                    suggest.suggested.general.People.length,
                     suggest.suggested.general.Articles.length,
+                    suggest.suggested.general.People.length,
                     suggest.suggested.general.Media.length
                 ]
             }
@@ -34,8 +34,8 @@ var SubHeaderController = function($state, header, suggest, $timeout) {
 
     Object.defineProperty(this.suggested, 'general', {
         get: function() {
-            return suggest.suggested.general.People.
-                concat(suggest.suggested.general.Articles.
+            return suggest.suggested.general.Articles.
+                concat(suggest.suggested.general.People.
                     concat(suggest.suggested.general.Media));
         }
     });
