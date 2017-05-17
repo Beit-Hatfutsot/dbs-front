@@ -7,6 +7,8 @@
 		<div class="border-adhoc">
 			<ng-switch on="subHeaderCtrl.header.sub_header_state">
 				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.header.sub_header_state == 'general-search'">
+          <form id="general_search_form" autocomplete="off">
+
 					<label for="search-input" class="search-button-label">
 			        	<en>Search: </en>
 			        	<he>חיפוש כללי: </he>
@@ -25,24 +27,11 @@
               <div class="wizard-form__field__autosuggest-wrapper">
                 <div class="wizard-form__field__autosuggest-wrapper__autosuggest" ng-show="subHeaderCtrl.suggested_open['general']">
                   <div class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper">
-                    <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type" ng-show="subHeaderCtrl.suggested_distribution.general[0] > 0">
-                      <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__title">
-                          <en>People:</en>
-                          <he>מתחיל מ:</he>
-                      </div>
-                      <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item"
-                            ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item--selected': subHeaderCtrl.isSelectedSuggested('general', suggested)}"
-                            ng-click="subHeaderCtrl.adopt('general', 'People')"
-                            ng-repeat="suggested in subHeaderCtrl.raw_suggested.general.People"
-                            ng-mouseover="subHeaderCtrl.select_suggested('general', 'People', suggested)">
-                          {{suggested}}
-                      </div>
-                    </div>
 
-                    <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type" ng-show="subHeaderCtrl.suggested_distribution.general[1] > 0">
+                    <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type" ng-show="subHeaderCtrl.suggested_distribution.general[0] > 0">
                       <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__title" ng-show="subHeaderCtrl.raw_suggested.general.Articles.length > 0">
                           <en>Articles:</en>
-                          <he>מתחיל מ:</he>
+                          <he>מידע:</he>
                       </div>
                       <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item"
                       ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item--selected': subHeaderCtrl.isSelectedSuggested('general', suggested)}"
@@ -52,12 +41,23 @@
                           {{suggested}}
                       </div>
                     </div>
-
-
+                    <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type" ng-show="subHeaderCtrl.suggested_distribution.general[1] > 0">
+                      <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__title">
+                          <en>People:</en>
+                          <he>אנשים:</he>
+                      </div>
+                      <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item"
+                            ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item--selected': subHeaderCtrl.isSelectedSuggested('general', suggested)}"
+                            ng-click="subHeaderCtrl.adopt('general', 'People')"
+                            ng-repeat="suggested in subHeaderCtrl.raw_suggested.general.People"
+                            ng-mouseover="subHeaderCtrl.select_suggested('general', 'People', suggested)">
+                          {{suggested}}
+                      </div>
+                    </div>
                     <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type" ng-show="subHeaderCtrl.suggested_distribution.general[2] > 0">
                       <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__title" ng-show="subHeaderCtrl.raw_suggested.general.Media.length > 0">
                           <en>Media:</en>
-                          <he>מתחיל מ:</he>
+                          <he>מדיה:</he>
                       </div>
                       <div  class="wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item"
                             ng-class="{'wizard-form__field__autosuggest-wrapper__autosuggest__type-wrapper__type__item--selected': subHeaderCtrl.isSelectedSuggested('general', suggested)}"
@@ -77,6 +77,7 @@
 			    			<icon  class="button" alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
 				    	</button>
 			    	</div>
+          </form>
 				</div>
 				<div ng-switch-when="recently-viewed" class="recently-viewed" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
 					<div 	class="recently-arrow"
