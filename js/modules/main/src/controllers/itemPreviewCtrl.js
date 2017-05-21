@@ -27,7 +27,7 @@ ItemPreviewCtrl.prototype = {
             return this.$state.href(state_name,
                                     {tree_number:item_data.tree_num,
                                     version:item_data.tree_version,
-                                    node_id: item_data.id});
+                                    node_id: item_data.person_id});
         }
         else {
 			return this.item.get_url(item_data);
