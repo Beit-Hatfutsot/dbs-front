@@ -266,8 +266,7 @@
                     <he>נמצאו <strong>{{generalSearchCtrl.eurp_total + generalSearchCtrl.cjh_total}}</strong> תוצאות עבור <strong>{{generalSearchCtrl.query}}</strong></he>
                 </div>
             </div>
-
-            <div ng-if="generalSearchCtrl.results.total == 0">
+            <div ng-if="generalSearchCtrl.results.total == 0 && generalSearchCtrl.collection !== 'persons'">
                 <div class="no-res-notif">
                     <en>We couldn't find any items matching "{{generalSearchCtrl.query}}".<br/>Please try again with a different spelling, try a different query, or:</en>
                     <he>לא הצלחנו למצוא תוצאות עבור "{{generalSearchCtrl.query}}" במאגרים שלנו.<br>אנא בדקו שאין בטקסט שהזנתם שגיאות כתיב ונסו שוב, או הזינו טקסט חדש לחיפוש.<br>
@@ -282,6 +281,8 @@
                     <he>בית התפוצות חבר לארכיונים ומאגרי מידע בעולם, על מנת לתת לכם כמה שיותר תוצאות רלוונטיות.</he>
                 </div>
             </div>
+
+            <ng-include src="'templates/main/ftrees/no-results-found-gs-persons.html'" ng-if="generalSearchCtrl.results.total == 0 && generalSearchCtrl.collection == 'persons'"></ng-include>
 
             <div id="cjh" ng-if="generalSearchCtrl.cjh_total > 0">
                 <div class="db-results-exttitle">
@@ -339,7 +340,7 @@
                     </div>
                 </div>
             </div>
-            <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0"></ng-include>
+            <ng-include src="'templates/main/google-it.html'" ng-if="generalSearchCtrl.results.total == 0 && generalSearchCtrl.collection !== 'persons'"></ng-include>
         </div>
     </div>
 </div>
