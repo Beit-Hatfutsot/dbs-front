@@ -8,13 +8,13 @@ angular.module('main').
             link: function(scope, element, attrs) {
 
                 scope.text_search_type = [
-                    {id: '0', 'label': {'en': 'Exact', 'he': 'תאריך מדויק'}, url_param: 'exact'},
-                    {id: '1', 'label': {'en': 'Begins with', 'he': ''}, url_param: 'starts'},
-                    {id: '2', 'label': {'en': 'Sounds like', 'he': ''}, url_param: 'like'},
+                    {id: '0', 'label': {'en': 'Exact', 'he': 'מדוייק'}, url_param: 'exact'},
+                    {id: '1', 'label': {'en': 'Begins with', 'he': 'מתחיל ב'}, url_param: 'starts'},
+                    {id: '2', 'label': {'en': 'Sounds like', 'he': 'נשמע כמו'}, url_param: 'like'},
                 ];
 
                 scope.year_search_type = [
-                    {id: '0', label: {'en': 'exact', 'he': 'תאריך מדויק'}, url_param: 'exact'},
+                    {id: '0', label: {'en': 'exact', 'he': 'תאריך מדוייק'}, url_param: 'exact'},
                     {id: '1', label: {'en': '+/- year', 'he': 'טווח שנים: 1 +/-'}, url_param: 'pmyears'},
                     {id: '2', label: {'en': '+/-2 years', 'he': 'טווח שנים: 2 +/-'}, url_param: 'pmyears'},
                     {id: '3', label: {'en': '+/-3 years', 'he': 'טווח שנים: 3 +/-'}, url_param: 'pmyears'}
