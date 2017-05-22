@@ -146,6 +146,7 @@ form {
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
             border-top: 14px solid $red3;
+            pointer-events: none;
             .en & {
               right: 0;
             }

@@ -536,6 +536,7 @@
 							    height: 100%;
 							    position: absolute;
 							    bottom: -1px;
+                  pointer-events: none;
 
 							    .en & {
 							    	right: 0px;
