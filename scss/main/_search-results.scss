@@ -146,6 +146,7 @@ form {
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
             border-top: 14px solid $red3;
+            pointer-events: none;
             .en & {
               right: 0;
             }
@@ -380,6 +381,76 @@ form {
         .content {
             padding: 0 50px;
         }
+    }
+    .no-results-persons {
+      margin-top: 20px;
+      width: 100%;
+      color: $gray3;
+      line-height: 1.5;
+      font-size: 16px;
+
+      .en & {
+        padding-left: 10px;
+      }
+      .he & {
+        padding-right: 10px;
+      }
+
+      &__top, &__bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        .subtitle {
+          font-size: 20px;
+        }
+
+        a {
+          color: inherit;
+        }
+      }
+
+      &__top {
+
+        &__text {
+          width: 750px;
+
+          h2 {
+            color: $gray3;
+          }
+
+          ol {
+            margin-top: 0;
+            padding: 0 20px;
+          }
+        }
+
+        img {
+          width: 393px;
+          height: 349px;
+          margin-top: 20px;
+        }
+      }
+
+      &__bottom {
+
+        &__text {
+            width: 756px;
+
+            .emph {
+              font-size: 18px;
+              color: $gray2;
+            }
+            p {
+              margin-top: -7px;
+            }
+        }
+
+        img {
+          width: 356px;
+          height: 288px;
+        }
+      }
     }
 
     .start {
