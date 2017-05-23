@@ -288,6 +288,7 @@ GeneralSearchController.prototype = {
                 this.search_params = params;
             }
         }
+        else { params.with_persons = 1; }
         params.from_ = this.results.hits.length;
         return params;
     },
