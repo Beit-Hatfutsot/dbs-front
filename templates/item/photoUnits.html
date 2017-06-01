@@ -30,13 +30,15 @@
                         <div  class="item__content__media-container"
                               ng-class="{'item__content__media-container--photoUnit': itemController.item_type === 'photoUnits'}">
                             <div ng-repeat="pic in itemController.sorted_pictures">
-                              <img  class="picture"
-                                    fallback-src="images/digitization-{{itemController.lang}}.jpg"
-                                    ng-show="itemController.isActive($index)"
-                                    ng-src="{{pic.PictureUrl}}"
-                                    ng-click="itemController.open_gallery()"
-                                    prevent-rightclick
-                                    fit-thumb/>
+                              <a target='_blank'>
+                                <img  class="picture"
+                                      fallback-src="images/digitization-{{itemController.lang}}.jpg"
+                                      ng-show="itemController.isActive($index)"
+                                      ng-src="{{pic.PictureUrl}}"
+                                      ng-click="itemController.open_gallery($index)"
+                                      prevent-rightclick
+                                      fit-thumb/>
+                              </a>
                             </div>
                             <div class="arrows" ng-if="itemController.sorted_pictures.length > 1">
                                 <div class="arrow-left" ng-click="itemController.showPrev()"></div>
