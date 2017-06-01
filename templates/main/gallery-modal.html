@@ -6,14 +6,15 @@
     </div>
     <div class="gallery-modal__stage noselect">
       <div ng-repeat="pic in sorted_pictures">
-        <img  ng-show="isActive($index)"
-              fallback-src="images/digitization-{{lang}}.jpg"
-              ng-src="{{pic.PictureUrl}}"
-              alt="More Images"
-              fit-thumb
-              prevent-rightclick/>
+        <a target='_blank'>
+          <img  ng-show="isActive($index)"
+                fallback-src="images/digitization-{{lang}}.jpg"
+                ng-src="{{pic.PictureUrl}}"
+                alt="More Images"
+                fit-thumb
+                prevent-rightclick/>
+        </a>
       </div>
-
         <div class="arrows" ng-if="sorted_pictures.length > 1">
             <div class="arrow-left" ng-click="showPrev()"></div>
             <div class="arrow-right" ng-click="showNext()"></div>
