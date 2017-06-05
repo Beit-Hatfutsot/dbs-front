@@ -8,18 +8,17 @@ import os, json
 # SEL_CAP={\"browser\":\"Edge\",\"browser_version\":\"15.0\",\"os\":\"Windows\",\"os_version\":\"10\",\"resolution\":\"1280x1024\"}
 # SEL_EXEC=http://username:password@hub.browserstack.com:80/wd/hub
 # SEL_URLS=http://test.dbs.bh.org.il/,http://test.dbs.bh.org.il/search?q=Cohen,http://test.dbs.bh.org.il/familyname/cohen
+# SEL_TITLE=Edge-15-Win-10
 
 desired_cap = json.loads(os.environ["SEL_CAP"])
 
-driver = webdriver.Remote(
-
-    command_executor=os.environ["SEL_EXEC"],
-    desired_capabilities=desired_cap)
+driver = webdriver.Remote(command_executor=os.environ["SEL_EXEC"], desired_capabilities=desired_cap)
 
 for i, url in enumerate(os.environ["SEL_URLS"].split(",")):
-    filename="screenshot={}.png".format(i)
-    print("saving {} from url {}".format(i, url))
+    filename="screenshot-{}-{}.png".format(os.environ["SEL_TITLE"], i)
+    print("saving {} from url {}".format(filename, url))
     driver.get(url)
+    driver.maximize_window()
     driver.save_screenshot(filename)
 
 driver.quit()
