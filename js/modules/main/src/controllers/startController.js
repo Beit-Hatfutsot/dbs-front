@@ -44,8 +44,8 @@ var StartController = function($rootScope, $scope, langManager, $state, wizard, 
 			$state.go('persons', params);
 		}
 	});
-	$rootScope.title = langManager.lang == 'en'?'':'מאגרים: תמונות, פירוש שם, אילן יוחסין, קהילות | בית התפוצות';
-	$rootScope.description = langManager.lang=='en'?'':'ארכיון תמונות ווידאו, פירוש שמות משפחה,'+
+	$rootScope.title = langManager.lang == 'en'?'Databases: Images, Name Meanings, Family Trees, Communities | BH':'מאגרים: תמונות, פירוש שם, אילן יוחסין, קהילות | בית התפוצות';
+	$rootScope.description = langManager.lang=='en'?'Search archives of images & videos, last names, family trees, Jewish communities, luminaries & more via the free, open databases of The Museum of The Jewish People':'ארכיון תמונות ווידאו, פירוש שמות משפחה,'+
 												' אילן יוחסין, עצי משפחה, קהילות יהודיות בעולם, אישים ועוד.'+
 												' מאגרי המידע הפתוחים של מוזיאון העם היהודי - בית התפוצות';
 	$rootScope.keywords = langManager.lang == 'en'?'':'פירוש שמות משפחה, אילן יוחסין, עצי משפחה, קהילות יהודיות';
