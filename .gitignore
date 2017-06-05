@@ -9,3 +9,4 @@ docs/.tmp/**
 dist
 /venv
 .DS_Store
+/screenshot*
