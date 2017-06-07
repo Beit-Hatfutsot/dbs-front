@@ -110,14 +110,21 @@ form {
     }
 }
 
-    input {
-        padding: 0 10px;
-        flex: 1;
-    }
+  input {
+      padding: 0 10px;
+      flex: 1;
+      outline: none;
+      outline-style: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      text-transform: capitalize;
+  }
 
   .notIE {
     position: absolute;
     bottom: 2px;
+
     .en & {
       right: 0;
     }
@@ -125,71 +132,72 @@ form {
       left: 0;
     }
 
-
     .fudge {
-        display: inline-block;
-        position: relative;
-        height: 24px;
+      display: inline-block;
+      position: relative;
+      //height: 24px;
+      &:hover {
+        background-color: $gray5;
+      }
 
-        &:hover {
-            select, .fancyArrow {
-                background-color: $gray5;
-            }
+      .fancyArrow {
+        bottom: 2px;
+        position: absolute;
+        content: '';
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 14px solid $red3;
+        pointer-events: none;
+        .en & {
+          right: 0;
         }
-
-        .fancyArrow {
-            bottom: 2px;
-            position: absolute;
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 14px solid $red3;
-            pointer-events: none;
-            .en & {
-              right: 0;
-            }
-            .he & {
-              left: 0;
-            }
+        .he & {
+          left: 0;
         }
+      }
     }
     .fudge select {
-        padding: 0 4px;
-        outline-style:none;
-        //position: relative;
-        height: 100%;
-        outline: none;
-        color: $gray3;
-        border: none;
-        background: $gray6;
-        -moz-appearance: none;
-        font-size: 12px;
-        @include hover-pointer();
-            padding: 0 4pxpx;
-    font-size: 14px;
-    outline-style: none;
-    height: 100%;
-    outline: none;
-    color: #666666;
-    border: none;
-    background: inherit;
-    -moz-appearance: none;
-    position: relative;
-    .en & {
-      border-left: 2px solid $gray5;
-    }
-    .he & {
-      border-right: 2px solid #c2c2c2;
-    }
+      position: relative;
+      font-size: 14px;
+      height: 100%;
+      outline: none;
+      border: none;
+      color: $gray3;
+      background: inherit;
+      outline-style: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
 
+      &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 $gray3;
+      }
 
+      //appearance: none for IE 11
+      &::-ms-expand{
+        display: none;
+      }
+
+      &:focus, &:hover, &:active {
+        outline: 0;
+      }
+      &::-moz-focus-inner {
+        border: 0;
+      }
+      .en & {
+        padding: 0 18px 0 4px;
+        border-left: 2px solid $gray5;
+      }
+      .he & {
+        padding: 0 4px 0 18px;
+        border-right: 2px solid $gray5;
+      }
     }
   }
-
-
-
 
 }
 
