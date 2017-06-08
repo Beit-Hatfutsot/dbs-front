@@ -198,7 +198,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             }]*/
         },
 
-        {
+        /*{
             name: 'persons',
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
             controller: 'PersonsController as ctrl',
@@ -209,7 +209,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
             controller: 'PersonsController as ctrl',
             templateUrl: 'templates/main/ftrees/persons.html'
-        },
+        },*/
 
         {
             name: 'person-view-redirect',
