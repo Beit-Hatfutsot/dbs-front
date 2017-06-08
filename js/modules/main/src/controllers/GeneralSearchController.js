@@ -224,14 +224,12 @@ GeneralSearchController.prototype = {
         this.handle_search_modifiers(search_params);
         search_params = this.search_params;
         search_params.more = this.$stateParams.more;
-
-       // search_params.more = this.$stateParams.more;
-        /*var prev_search = this.$window.sessionStorage.getItem('ftrees_search_params');
+        var prev_search = this.$window.sessionStorage.getItem('persons_search');
         if (JSON.stringify(search_params) === prev_search) {
             self.notification.put(20);
-        }*/
+        }
         this.$state.go('general-search', search_params, {inherit: false});
-        //this.$window.sessionStorage.setItem('ftrees_search_params', JSON.stringify(search_params));
+        this.$window.sessionStorage.setItem('persons_search', JSON.stringify(search_params));
     },
 
 

@@ -193,13 +193,13 @@ ItemCtrl.prototype = {
     goto_persons: function() {
 		var lang = this.lang[0].toUpperCase() + this.lang.slice(1),
 			params = {};
+			params.collection = 'persons';
 
 		if (this.search_result.name.Header)
-		    params.last_name  = this.search_result.name.Header[lang]
-    else if (this.search_result.place.Header)
-		    params.place = this.search_result.place.Header[lang];
-
-    	this.$state.go('persons', params);
+		    params.q  = this.search_result.name.Header[lang]
+		else if (this.search_result.place.Header)
+		    params.q = this.search_result.place.Header[lang];
+    	this.$state.go('general-search', params);
 	},
 
 	showPrev: function () {
