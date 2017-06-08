@@ -105,7 +105,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'general-search',
             url: '/search?q&size&from_&collection'+
                         '&first&first_t&last&last_t'+
-                        '&pob&pom&pod&pob_t&pom_t&pod_t&pob_v&pom_v&pod_v'+
+                        '&place&pob&pom&pod&place_t&pob_t&pom_t&pod_t'+
                         '&yob&yom&yod&yob_t&yom_t&yod_t&yob_v&yom_v&yod_v'+
                         '&sex&treenum&more',
             controller: 'GeneralSearchController as generalSearchCtrl',
@@ -160,7 +160,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             name: 'he.he_general-search',
             url: '/חפשו?q&size&from_&collection'+
                         '&first&first_t&last&last_t'+
-                        '&pob&pom&pod&pob_t&pom_t&pod_t&pob_v&pom_v&pod_v'+
+                        '&place&pob&pom&pod&place_t&pob_t&pom_t&pod_t'+
                         '&yob&yom&yod&yob_t&yom_t&yod_t&yob_v&yom_v&yod_v'+
                         '&sex&treenum&more',
             controller: 'GeneralSearchController as generalSearchCtrl',

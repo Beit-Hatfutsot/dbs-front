@@ -37,6 +37,7 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
     this.search_modifiers  = {
         first_t: '',
         last_t: '',
+        place_t: '',
         pob_t:  '',
         pom_t:  '',
         pod_t:  '',
@@ -188,20 +189,25 @@ GeneralSearchController.prototype = {
     },
 
     toggle_more: function() {
+        var self = this;
         var param = this.$stateParams;
         if (param.more == '0' || param.more == undefined) {
             param.more = '1';
-            /*if(this.search_params.place) {
-                this.search_params.birth_place = this.search_params.place;
-                this.search_params.place = '';
-            }*/
+            if(this.search_params.place) {
+                this.search_params.pob = this.search_params.place;
+                delete this.search_params.place;
+            }
         }
         else {
             param.more = '0';
-            /*if(this.search_params.birth_place) {
-                this.search_params.place = this.search_params.birth_place;
-                this.search_params.birth_place = '';
-            }*/
+            var places = ['pob', 'pom', 'pod'];
+            for (var key in places) {
+                if (this.search_params[places[key]]) {
+                    this.search_params.place = this.search_params[places[key]];
+                    for (var key in places) {delete this.search_params[places[key]]};
+                    break;
+                }
+            }
         }
         this.$location.search(param);
     },
