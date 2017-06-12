@@ -34,14 +34,15 @@ var StartController = function($rootScope, $scope, langManager, $state, wizard, 
 		}
 		else {
 			var params = {};
+			params.collection = 'persons';
 			if (self.wizard.last_search.name != '')
-				params.last_name = self.wizard.last_search.name;
+				params.q = self.wizard.last_search.name;
 			else {
-				if (self.wizard.last_search.place.name != '' ) {
-					params.place = self.wizard.last_search.place;
+				if (self.wizard.last_search.place != '' ) {
+					params.q = self.wizard.last_search.place;
 				}
 			}
-			$state.go('persons', params);
+			$state.go('general-search', params);
 		}
 	});
 	$rootScope.title = langManager.lang == 'en'?'Databases: Images, Name Meanings, Family Trees, Communities | BH':'מאגרים: תמונות, פירוש שם, אילן יוחסין, קהילות | בית התפוצות';

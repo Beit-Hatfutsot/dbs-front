@@ -13,7 +13,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
 	this.langManager = langManager;
 	this.notification = notification;
 	this.$location = $location;
-	this.ftrees_search_params = JSON.parse(this.$window.sessionStorage.getItem('ftrees_search_params'));
+	this.persons_search = JSON.parse(this.$window.sessionStorage.getItem('persons_search'));
 
 	// renderer
 	this.rootId = "ftree-layout";
