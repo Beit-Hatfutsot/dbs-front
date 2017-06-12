@@ -1,4 +1,5 @@
-![CI status](https://codeship.com/projects/70b6f6b0-0892-0134-2fd9-0a16241ce4dd/status?branch=dev)
+[![CI status](https://codeship.com/projects/70b6f6b0-0892-0134-2fd9-0a16241ce4dd/status?branch=dev)](https://app.codeship.com/projects/155053)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=TFVvMFcxZjh2QjRmUVgzNnV5bytyOTBidFFPZ0xRSnZBTU5QSXBIQXBoWT0tLUMwU3liN0ludjd5RXYyUHF0cTlqMXc9PQ==--ef6726897a425a415b0db19a835ca0dfc4762082)](https://www.browserstack.com/automate)
 
 # Beit-Hatfusot Front-End README
 
@@ -47,6 +48,10 @@ To send request to different server than the default `local` server
 `live`, `test`, `local`:
 
     $ API_SERVER=live gulp serve
+
+## Automated Browser Tests
+
+We are using [BrowserStack](https://www.browserstack.com/automate) for automated testing. After deployment, we take screenshots from different urls - you can review them on Browserstack.
 
 ## Distrubution
 

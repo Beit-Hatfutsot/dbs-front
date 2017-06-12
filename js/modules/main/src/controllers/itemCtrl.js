@@ -193,13 +193,13 @@ ItemCtrl.prototype = {
     goto_persons: function() {
 		var lang = this.lang[0].toUpperCase() + this.lang.slice(1),
 			params = {};
+			params.collection = 'persons';
 
 		if (this.search_result.name.Header)
-		    params.last_name  = this.search_result.name.Header[lang]
-    else if (this.search_result.place.Header)
-		    params.place = this.search_result.place.Header[lang];
-
-    	this.$state.go('persons', params);
+		    params.q  = this.search_result.name.Header[lang]
+		else if (this.search_result.place.Header)
+		    params.q = this.search_result.place.Header[lang];
+    	this.$state.go('general-search', params);
 	},
 
 	showPrev: function () {
@@ -244,7 +244,11 @@ ItemCtrl.prototype = {
 	},
 
 	resize_font: function(size) {
-		var el = document.getElementsByClassName("item__article-texts")[0];
+		var collection = this.slug.collection;
+		var el = collection == 'video' || collection == 'image'?
+			document.getElementsByClassName("gallery-modal__info__picture-info")[0]:
+			document.getElementsByClassName("item__article-texts")[0];
+
 		angular.element(el).css("font-size", this.font_sizes[size] + "px");
 		this.active_font = size;
 	},

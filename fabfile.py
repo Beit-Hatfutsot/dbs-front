@@ -6,7 +6,7 @@ import logging
 from fabric.api import *
 
 env.user = 'bhs'
-
+env.use_ssh_config = True
 env.now = datetime.now().strftime('%Y%m%d-%H%M')
 
 def deploy(api_server='test'):

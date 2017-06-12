@@ -103,7 +103,11 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'general-search',
-            url: '/search?q&size&from_&collection',
+            url: '/search?q&size&from_&collection'+
+                        '&first&first_t&last&last_t'+
+                        '&place&pob&pom&pod&place_t&pob_t&pom_t&pod_t'+
+                        '&yob&yom&yod&yob_t&yom_t&yod_t&yob_v&yom_v&yod_v'+
+                        '&sex&treenum&more',
             controller: 'GeneralSearchController as generalSearchCtrl',
             templateUrl: 'templates/main/search-results.html'
         },
@@ -154,7 +158,11 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
         {
             name: 'he.he_general-search',
-            url: '/חפשו?q&size&from_&collection',
+            url: '/חפשו?q&size&from_&collection'+
+                        '&first&first_t&last&last_t'+
+                        '&place&pob&pom&pod&place_t&pob_t&pom_t&pod_t'+
+                        '&yob&yom&yod&yob_t&yom_t&yod_t&yob_v&yom_v&yod_v'+
+                        '&sex&treenum&more',
             controller: 'GeneralSearchController as generalSearchCtrl',
             templateUrl: 'templates/main/search-results.html'
         },
@@ -190,7 +198,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             }]*/
         },
 
-        {
+        /*{
             name: 'persons',
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
             controller: 'PersonsController as ctrl',
@@ -201,7 +209,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
             url: '/person?first_name&last_name&sex&place&birth_place&marriage_place&death_place&birth_year&marriage_year&death_year&tree_number&more',
             controller: 'PersonsController as ctrl',
             templateUrl: 'templates/main/ftrees/persons.html'
-        },
+        },*/
 
         {
             name: 'person-view-redirect',

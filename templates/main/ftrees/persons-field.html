@@ -1,0 +1,45 @@
+<div class="container">
+  <label>
+    <en>
+      {{label_text_en}}
+    </en>
+    <he>
+      {{label_text_he}}
+    </he>
+  </label>
+  <input ng-if="search_type !== 'sex'" type="text" ng-model="input" placeholder="{{placeholder}}">
+  <ng-switch on="search_type">
+    <div class="notIE">
+      <div class="fudge" ng-switch-when="text">
+        <select ng-options="option.label.{{ctrl.lang}} for option in text_search_type"
+                ng-model="selected">
+        </select>
+        <span class="fancyArrow"></span>
+      </div>
+      <div class="fudge" ng-switch-when="year">
+        <select ng-options="option.label.{{ctrl.lang}} for option in year_search_type"
+                ng-model="selected">
+        </select>
+        <span class="fancyArrow"></span>
+      </div>
+    </div>
+
+      <div class="filters__sex__choices" ng-switch-when="sex">
+        <input type="radio" name="sex" value="M" ng-model="ctrl.search_params.sex" id="choice-male"/>
+        <label class="label-sex" for="choice-male">
+          <en>Male</en>
+          <he>זכר</he>
+        </label>
+        <input type="radio" name="sex" value="F" ng-model="ctrl.search_params.sex" id="choice-female"/>
+        <label class="label-sex" for="choice-female">
+          <en>Female</en>
+          <he>נקבה</he>
+        </label>
+        <input type="radio" name="sex" value="U" ng-model="ctrl.search_params.sex" id="choice-nm" checked="checked"/>
+        <label class="label-sex" for="choice-nm">
+          <en>Never mind</en>
+          <he>לא משנה</he>
+        </label>
+      </div>
+    </ng-switch>
+</div>

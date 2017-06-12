@@ -24,14 +24,14 @@ angular.module('main').directive('itemPreview', function() {
             catch (er) {
                 scope.children = [];
             };
-            var sex = scope.previewData.G;
+            var sex = scope.previewData.sex;
 			// build the person info
             var person_info = "(";
             person_info += scope.previewData.birth_year || '?';
             person_info += ' - ';
             person_info += scope.previewData.death_year || '?';
             if (person_info == '(? - ?')
-                person_info = ''
+                person_info = '';
             else
                 person_info += ') ';
 

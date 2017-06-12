@@ -65,27 +65,27 @@ angular.module('main').
 						};
 						exact = null;
 						all_suggestions = [];
-
 						['starts_with', 'contains', 'phonetic'].forEach(function(group) {
 							response[group].forEach(function(suggestion) {
 								if (suggestion.toLowerCase() === value_lc) {
-									exact = suggestion;
+										exact = suggestion;
 								}
 								else {
 									all_suggestions	= suggest.suggested[what].starts_with.
 										concat(suggest.suggested[what].contains.
 											concat(suggest.suggested[what].phonetic)
 										);
+
 									if (all_suggestions.indexOf(suggestion) === -1) {
 										suggest.suggested[what][group].push(suggestion);
 									}
 								}
-							});
+							})
 						});
-
 						if (exact) {
 							suggest.suggested[what].exact.push(exact);
 						}
+
 					}).
 					error(function() {
 						suggest.failed = true;

@@ -1,6 +1,9 @@
 var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state, langManager, $stateParams, $http, apiClient, $uibModal, $q, $location, header, $window, notification) {
     var self = this, params = {};
+    var advanced_fields = ['pob', 'pom', 'pom', 'pob_t', 'pom_t', 'pom_t','treenum', 'yob', 'yom','yod',
+                           'yob_t', 'yom_t', 'yod_t', 'yob_v', 'yom_v', 'yod_v'];
     this.$state = $state;
+    this.$stateParams = $stateParams;
     this.$window = $window;
     this._collection  = ($stateParams.collection !== undefined)?$stateParams.collection:'allResults';
     this.results = {hits: []};
@@ -20,6 +23,7 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
     this.loading_cjh = true;
     this.google_query = "";
     this.langManager = langManager;
+    this.lang = langManager.lang;
     this.notification = notification;
     this.query_words = [
         {en:'Jewish', he:'יהודי', selected: false},
@@ -29,6 +33,49 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
         {en:'Community', he:'קהילה', selected: false},
         {en:'Israel', he:'ישראל', selected: false}
     ];
+
+    this.search_modifiers  = {
+        first_t: '',
+        last_t: '',
+        place_t: '',
+        pob_t:  '',
+        pom_t:  '',
+        pod_t:  '',
+        sex:    '',
+        yom_v:  '',
+        yob_v:  '',
+        yod_v:  '',
+        yom_t:  '',
+        yob_t:  '',
+        yod_t:  '',
+        treenum: ''
+    };
+
+    this.persons_parameters  = {
+        first: '',
+        first_t: '',
+        last: '',
+        last_t: '',
+        pob: '',
+        pom: '',
+        pod: '',
+        pob_t:  '',
+        pom_t:  '',
+        pod_t:  '',
+        sex:    '',
+        yob: '',
+        yom: '',
+        yod: '',
+        yom_v:  '',
+        yob_v:  '',
+        yod_v:  '',
+        yom_t:  '',
+        yob_t:  '',
+        yod_t:  '',
+        treenum: ''
+    };
+
+    this.search_params = {};
 
     this.collection_map = {
 
@@ -63,6 +110,11 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
         familyNames: {
             En: 'Family names',
             He: 'שמות משפחה'
+        },
+
+        persons: {
+            En: 'People (Family Trees)',
+            He: 'אנשים (עצי משפחה)'
         }
     };
 
@@ -89,6 +141,10 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
             this.cjh_results = [];
             this.cjh_total = 0;
             this.eurp_total = 0;
+            if (new_collection !== "persons") {
+                /*this.clear_filters();*/
+                 $state.transitionTo('general-search', {q: this.header.query, collection: new_collection});
+            }
             $state.go('general-search', {q: this.header.query, collection: new_collection});
         }
     });
@@ -98,7 +154,7 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
         self.load();
     };
 
-    $rootScope.$on('$stateChangeStart',
+    /*$rootScope.$on('$stateChangeStart',
         function(event, toState, toParams, fromState, fromParams){
           if (toState.name.endsWith('general-search') && fromState.name.endsWith('general-search')) {
             event.preventDefault();
@@ -108,10 +164,84 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
             $state.transitionTo(toState.name, toParams, {notify: false});
             self.load(toParams);
           }
-    })
+    })*/
 };
 
 GeneralSearchController.prototype = {
+
+    clear_filters: function() {
+        for (var persons_param in this.persons_parameters) {
+            this.search_params[persons_param] = '';
+            this.$location.search(persons_param, null);
+        }
+    },
+
+    handle_search_modifiers: function(search_params) {
+        var base;
+        for (var modifier in this.search_modifiers) {
+            if (modifier in search_params) {
+                base = modifier.split('_')[0];
+                if (search_params[base] == undefined || search_params[base] == '') {
+                    delete this.search_params[modifier];
+                }
+            }
+        }
+    },
+
+    toggle_more: function() {
+        var self = this;
+        var param = this.$stateParams;
+        if (param.more == '0' || param.more == undefined) {
+            param.more = '1';
+            if(this.search_params.place) {
+                this.search_params.pob = this.search_params.place;
+                delete this.search_params.place;
+            }
+        }
+        else {
+            param.more = '0';
+            var places = ['pob', 'pom', 'pod'];
+            for (var key in places) {
+                if (this.search_params[places[key]]) {
+                    this.search_params.place = this.search_params[places[key]];
+                    for (var key in places) {delete this.search_params[places[key]]};
+                    break;
+                }
+            }
+        }
+        this.$location.search(param);
+    },
+
+    update: function() {
+        var self = this;
+        //get search params (fileds content) and filter them
+        var search_params = angular.copy(this.search_params);
+        for (var param in search_params) {
+            if (search_params[param] === '' || search_params[param] == undefined) {
+                delete search_params[param];
+            }
+        }
+        this.handle_search_modifiers(search_params);
+        search_params = this.search_params;
+        search_params.more = this.$stateParams.more;
+        var prev_search = this.$window.sessionStorage.getItem('persons_search');
+        if (JSON.stringify(search_params) === prev_search) {
+            self.notification.put(20);
+        }
+        this.$state.go('general-search', search_params, {inherit: false});
+        this.$window.sessionStorage.setItem('persons_search', JSON.stringify(search_params));
+    },
+
+
+    search: function(par) {
+        var self = this;
+        this.$state.go('general-search', {params: par});
+        self.$http.get(self.apiClient.urls.search, {params: par})
+        .success(function (r) {
+            self.results = r.hits;
+            self.notification.loading(false);
+        });
+    },
 
     load: function() {
         var self = this;
@@ -151,7 +281,18 @@ GeneralSearchController.prototype = {
                 params.collection = this.collection_map[this.collection].api
             else
                 params.collection = this.collection;
+            if (this.collection == 'persons') {
+                for (var key in this.$stateParams) {
+                    if (this.$stateParams[key] && key !== 'more') {
+                        var val = this.$stateParams[key];
+                        params[key] = val;
+
+                    }
+                }
+                this.search_params = params;
+            }
         }
+        else { params.with_persons = 1; }
         params.from_ = this.results.hits.length;
         return params;
     },

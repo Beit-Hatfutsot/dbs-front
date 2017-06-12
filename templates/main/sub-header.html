@@ -7,21 +7,23 @@
 		<div class="border-adhoc">
 			<ng-switch on="subHeaderCtrl.header.sub_header_state">
 				<div ng-switch-when="general-search" class="general-search" ng-show="subHeaderCtrl.header.sub_header_state == 'general-search'">
+          <form id="general_search_form" autocomplete="off">
 					<label for="search-input" class="search-button-label">
 			        	<en>Search: </en>
 			        	<he>חיפוש כללי: </he>
 			    	</label>
 			    	<div class="gsearch-box-wrapper">
-				    	<input  id="search-input"
-				    			ng-model="subHeaderCtrl.header.query"
-				    			autofocus
-				    			ng-keydown="subHeaderCtrl.search_on_enter($event)"
-				    			type="text"
-				    			placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}">
+              <input  id="search-input"
+                      ng-model="subHeaderCtrl.header.query"
+                      autofocus
+                      type="text"
+                      placeholder="{{(lang=='en')?'Continue to explore...':'להמשיך לחקור...'}}">
+
 				    	<button class="search-button-back" ng-click="subHeaderCtrl.search()" ng-disabled="subHeaderCtrl.header.query.length < 2">
 			    			<icon  class="button" alt-text="{en: 'Search Databases', he: 'חיפש במאגרים'}" position="[-168, -426]"></icon>
 				    	</button>
 			    	</div>
+          </form>
 				</div>
 				<div ng-switch-when="recently-viewed" class="recently-viewed" ng-controller="RecentlyViewedController as recentlyViewedCtrl">
 					<div 	class="recently-arrow"

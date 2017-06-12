@@ -17,7 +17,6 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item, langManag
 ItemPreviewCtrl.prototype = {
 
     get_item_url: function(item_data) {
-
 		// TODO: refactor to user item.get_url
         if (this.url !== undefined) {
             return this.url;
@@ -27,7 +26,8 @@ ItemPreviewCtrl.prototype = {
             return this.$state.href(state_name,
                                     {tree_number:item_data.tree_num,
                                     version:item_data.tree_version,
-                                    node_id: item_data.id});
+                                    node_id: (item_data.person_id||item_data.id)
+                                });
         }
         else {
 			return this.item.get_url(item_data);
