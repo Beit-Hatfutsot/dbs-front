@@ -1,5 +1,6 @@
-var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalInstance) {
+var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalInstance, sorted_pictures) {
     $scope.gallery = gallery;
+    $scope.sorted_pictures = sorted_pictures;
     $scope.index = index;
     $scope.lang = langManager.lang;
 
@@ -7,11 +8,11 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalIn
 		return $scope.index === index;
 	};
 	$scope.showPrev = function () {
-		$scope.index = ($scope.index > 0) ? --$scope.index : $scope.gallery.Pictures.length - 1;
+		$scope.index = ($scope.index > 0) ? --$scope.index : $scope.sorted_pictures.length - 1;
 	};
 
 	$scope.showNext = function () {
-		$scope.index = ($scope.index < $scope.gallery.Pictures.length - 1) ? ++$scope.index : 0;
+		$scope.index = ($scope.index < $scope.sorted_pictures.length - 1) ? ++$scope.index : 0;
 	};
 	$scope.showPhoto = function (index) {
 		$scope.index = index;
@@ -22,21 +23,6 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalIn
     $scope.print = function () {
 		window.print();
 	};
-    $scope.sort_pictures = function() {
-        var digitized = [],
-            nondigitized = [];
-        for (var i = 0; i < gallery.Pictures.length; i++) {
-            var pic = gallery.Pictures[i];
-            if(pic.PictureId !== '') {
-                digitized.push(pic);
-            }
-            else {
-                nondigitized.push(pic);
-            }
-        }
-        digitized.push.apply(digitized, nondigitized);
-        return digitized;
-    }
 };
 
-angular.module('main').controller('GalleryModalCtrl', ['$scope', 'langManager', 'gallery', 'index', '$uibModalInstance', GalleryModalCtrl]);
+angular.module('main').controller('GalleryModalCtrl', ['$scope', 'langManager', 'gallery', 'index', '$uibModalInstance', 'sorted_pictures', GalleryModalCtrl]);
