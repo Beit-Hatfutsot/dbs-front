@@ -1,7 +1,9 @@
-var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item, langManager) {
+var ItemPreviewCtrl = function($state, $scope, $location, $rootScope, itemTypeMap, mjs, item, langManager) {
 
     var self = this;
     this.$state = $state;
+    this.$rootScope = $rootScope;
+    this.$location = $location;
     this.mjs = mjs;
     this.$scope = $scope;
     this.item = item;
@@ -15,6 +17,10 @@ var ItemPreviewCtrl = function($state, $scope, itemTypeMap, mjs, item, langManag
 };
 
 ItemPreviewCtrl.prototype = {
+
+    saveCurrentSearchUrl: function(){
+        this.$rootScope.lastSearchUrl = this.$location.url();
+    },
 
     get_item_url: function(item_data) {
 		// TODO: refactor to user item.get_url
@@ -67,4 +73,4 @@ ItemPreviewCtrl.prototype = {
 
 };
 
-angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', 'itemTypeMap', 'mjs', 'item', 'langManager', ItemPreviewCtrl]);
+angular.module('main').controller('ItemPreviewCtrl', ['$state', '$scope', '$location', '$rootScope', 'itemTypeMap', 'mjs', 'item', 'langManager', ItemPreviewCtrl]);
