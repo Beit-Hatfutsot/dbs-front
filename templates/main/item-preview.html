@@ -1,6 +1,6 @@
 <div class="{{itemPreviewController.collection_name==='genTreeIndividuals'? 'person-preview':'item-preview'}}">
   <ng-switch on="itemPreviewController.collection_name==='genTreeIndividuals'">
-    <a ng-switch-when="true" ng-href="{{itemPreviewController.get_item_url(previewData)}}">
+    <a ng-switch-when="true" ng-href="{{itemPreviewController.get_item_url(previewData)}}" ng-click="itemPreviewController.saveCurrentSearchUrl()">
       <div class="top">
           <div class="tree-num">
               <div class="tree-num__title">
