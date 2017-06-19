@@ -14,9 +14,22 @@ var ItemPreviewCtrl = function($state, $scope, $location, $rootScope, itemTypeMa
     this.rmdialog_is_open = false;
     this.item_string = item.get_key($scope.previewData);
     this.proper_lang = langManager.lang;
+    this.sorted_pictures = this.sort_pictures($scope.previewData);
 };
 
 ItemPreviewCtrl.prototype = {
+    sort_pictures: function(data) {
+        if (data.Pictures) {
+            var digitized = [];
+            for (var i = 0; i < data.Pictures.length; i++) {
+                var pic = data.Pictures[i];
+                if(pic.PictureUrl) {
+                    digitized.push(pic);
+                }
+            }
+        }
+        return digitized;
+    },
 
     saveCurrentSearchUrl: function(){
         this.$rootScope.lastSearchUrl = this.$location.url();

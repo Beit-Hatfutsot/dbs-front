@@ -5,24 +5,17 @@
        <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
     <div class="gallery-modal__stage noselect">
-      <div ng-repeat="pic in sort_pictures()" ng-switch on="pic.PictureId != undefined">
-        <img  ng-switch-when="true"
-              ng-show="isActive($index)"
-              ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"
-              alt="More Images"
-              fit-thumb
-              prevent-rightclick/>
-         <a    ng-switch-default
-                ng-href="{{lang=='en'?'http://www.bh.org.il/about-us/volunteering/':'http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/'}}"
-                target="blank">
-          <img  class="picture notdigitized"
-                ng-show="isActive($index)"
-                ng-src="images/digitization-{{lang}}.jpg"
-                prevent-rightclick>
-          </a>
+      <div ng-repeat="pic in sorted_pictures">
+        <a target='_blank'>
+          <img  ng-show="isActive($index)"
+                fallback-src="images/digitization-{{lang}}.jpg"
+                ng-src="{{pic.PictureUrl}}"
+                alt="More Images"
+                fit-thumb
+                prevent-rightclick/>
+        </a>
       </div>
-
-        <div class="arrows" ng-if="gallery.Pictures.length > 1">
+        <div class="arrows" ng-if="sorted_pictures.length > 1">
             <div class="arrow-left" ng-click="showPrev()"></div>
             <div class="arrow-right" ng-click="showNext()"></div>
         </div>
@@ -47,12 +40,12 @@
         </div>
         <div class="gallery-modal__info__gallery-preview">
             <div class="gallery-modal__info__gallery-preview__title">
-                <en>{{gallery.Header.En}} ({{gallery.Pictures.length}} Pictures found)</en>
-                <he>{{gallery.Header.He}} ({{gallery.Pictures.length}} תמונות נמצאו)</he>
+                <en>{{gallery.Header.En}} ({{sorted_pictures.length}} Pictures found)</en>
+                <he>{{gallery.Header.He}} ({{sorted_pictures.length}} תמונות נמצאו)</he>
             </div>
             <ul class="gallery-modal__info__gallery-preview__minified-picture">
-                <li ng-repeat="pic in sort_pictures()" ng-class="{'active':isActive($index)}">
-                    <img  ng-src="{{pic.PictureId == undefined  ? 'images/digitization-sm-'+lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
+                <li ng-repeat="pic in sorted_pictures" ng-class="{'active':isActive($index)}">
+                    <img  fallback-src="images/digitization-sm-{{lang}}.jpg" ng-src="{{pic.PictureUrl}}"
                           ng-click="showPhoto($index)"/>
                 </li>
             </ul>
