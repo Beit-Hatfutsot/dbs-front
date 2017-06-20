@@ -71,6 +71,11 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
             self.load(toParams);
 	    }
 	});
+	
+	$scope.backToLastSearch = function() {
+		$location.path($rootScope.lastSearchUrl);
+		$rootScope.lastSearchUrl = null;
+      };
 
 	document.documentElement.addEventListener('mouseup', function (e) {
 		self.mouseUp(e)
