@@ -15,19 +15,22 @@ angular.module('main').service('itemTypeMap', function() {
         'Photographs' : 'photoUnits',
         'Photograph albums' : 'photoUnits',
         'Photographic portraits' : 'photoUnits',
-        'Manuscripts': 'text',
+        'Manuscripts': 'text'
 	};
 
-	this.get_type = function(description_code) {
-		var type;
-		if (description_code) {
-			type = map[description_code];
-		}
-		else {
-			type = 'unknown';
-		}
-
-		return type;
+	this.get_type = function(item) {
+		return "unknown";
+		// TODO: how to determine type from CM item / what's the meaning of type
+		// see https://github.com/Beit-Hatfutsot/mojp-dbs-pipelines/issues/20
+		// var type;
+		// if (description_code) {
+		// 	type = map[description_code];
+		// }
+		// else {
+		// 	type = 'unknown';
+		// }
+        //
+		// return type;
 	};
 
 	this.get_collection_name = function(item_data) {
@@ -38,7 +41,7 @@ angular.module('main').service('itemTypeMap', function() {
 			return 'genTreeIndividuals';
 		}
 		else {
-			return this.get_type(item_data.UnitType);
+			return this.get_type(item_data);
 		}
 	};
 

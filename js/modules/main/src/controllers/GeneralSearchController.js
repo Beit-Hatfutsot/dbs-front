@@ -238,7 +238,7 @@ GeneralSearchController.prototype = {
         this.$state.go('general-search', {params: par});
         self.$http.get(self.apiClient.urls.search, {params: par})
         .success(function (r) {
-            self.results = r.hits;
+            self.results = r;
             self.notification.loading(false);
         });
     },
@@ -248,7 +248,7 @@ GeneralSearchController.prototype = {
         self.notification.loading(true);
         self.$http.get(self.apiClient.urls.search, {params: self.api_params()})
         .success(function (r) {
-            self.results = r.hits;
+            self.results = r;
             self.notification.loading(false);
         });
 
@@ -363,7 +363,7 @@ GeneralSearchController.prototype = {
 
         this.$http.get(this.apiClient.urls.search, {params: this.api_params()})
         .success(function (r){
-            results.hits = results.hits.concat(r.hits.hits);
+            results.hits = results.hits.concat(r.hits);
         });
     },
 

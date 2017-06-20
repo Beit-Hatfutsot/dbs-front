@@ -67,10 +67,10 @@ angular.module('main').
 			},
 
 			get_key: function(item_data) {
-				if (item_data.Slug)
-					return item_data.Slug.En || item_data.Slug.He;
-				if (item_data.params)
-					return JSON.stringify(item_data.params)
+				if (item_data.slug_en) return item_data.slug_en;
+				if (item_data.slug_he) return item_data.slug_he;
+				// TODO: figure out what params attribute contains
+				if (item_data.params) return JSON.stringify(item_data.params)
 			},
 
 		    get_marker_link: function(slug) {

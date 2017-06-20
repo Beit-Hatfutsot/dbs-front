@@ -73,21 +73,21 @@
                      'isExtResult': itemSource != 'bh'}">
           <item-type type="itemPreviewController.item_type"></item-type>
           <span class="header__text">
-            <en>{{previewData.Header.En}}</en>
-            <he>{{previewData.Header.He}}</he>
+            <en>{{previewData.title_en}}</en>
+            <he>{{previewData.title_he}}</he>
           </span>
         </div>
         <div ng-if="itemSource != 'bh'" class="text" ng-class="{'text--nothumb':
           !(previewData.thumbnail_url)}">
-            <en><span marked="previewData.UnitText1.En"></span></en>
-            <he><span marked="previewData.UnitText1.He"></span></he>
+            <en><span marked="previewData.content_html_en"></span></en>
+            <he><span marked="previewData.content_html_he"></span></he>
         </div>
         <div ng-if="itemSource == 'bh'">
-          <ng-switch on="previewData.UnitText1.{{itemPreviewController.uc_first()}} != '' && previewData.UnitText1.{{itemPreviewController.uc_first()}} != null">
+          <ng-switch on="itemPreviewController.has_lang_content(previewData)">
             <div ng-switch-when="true" class="text"
                  ng-class="{'text--nothumb': !(previewData.thumbnail_url)}">
-              <en><span marked="previewData.UnitText1.En"></span></en>
-              <he><span marked="previewData.UnitText1.He"></span></he>
+              <en><span marked="previewData.content_html_en"></span></en>
+              <he><span marked="previewData.content_html_he"></span></he>
             </div>
             <div ng-switch-when="false" class="text"
                  ng-class="{'text--nothumb': !(previewData.thumbnail_url)}">

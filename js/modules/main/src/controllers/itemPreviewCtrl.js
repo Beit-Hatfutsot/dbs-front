@@ -7,8 +7,10 @@ var ItemPreviewCtrl = function($state, $scope, $location, $rootScope, itemTypeMa
     this.mjs = mjs;
     this.$scope = $scope;
     this.item = item;
-    this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+    this.item_type = itemTypeMap.get_type($scope.previewData/*.UnitType*/);
+    // TODO: what's in_branch?
     this.in_branch = $scope.previewData.in_branch;
+    // TODO: what's url?
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
     this.rmdialog_is_open = false;
@@ -69,6 +71,10 @@ ItemPreviewCtrl.prototype = {
     uc_first: function() {
         var lang = this.proper_lang;
         return lang.charAt(0).toUpperCase() + lang.slice(1);
+    },
+
+    has_lang_content: function(doc) {
+        if (doc["content_html_"+this.proper_lang.toLowerCase()]) return true; else return false;
     }
 
 };

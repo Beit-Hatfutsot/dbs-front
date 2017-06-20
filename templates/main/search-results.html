@@ -246,7 +246,7 @@
                     </div>
                     <item-preview item-source="bh"
                                   ng-repeat="r_data in generalSearchCtrl.results.hits"
-                                  preview-data="r_data._source">
+                                  preview-data="r_data">
                     </item-preview>
                     <div class="loader" ng-click="generalSearchCtrl.fetch_more()" ng-if="generalSearchCtrl.results.total>generalSearchCtrl.results.hits.length">
                         <icon class="eye-icon" alt-text="{en: 'See more', he: 'לראות עוד'}" position="[-447, -628]" hover-offset="[3, 61]"></icon>
