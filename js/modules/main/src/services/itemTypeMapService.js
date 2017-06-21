@@ -19,7 +19,7 @@ angular.module('main').service('itemTypeMap', function() {
 	};
 
 	this.get_type = function(item) {
-		return "unknown";
+		return item.collection;
 		// TODO: how to determine type from CM item / what's the meaning of type
 		// see https://github.com/Beit-Hatfutsot/mojp-dbs-pipelines/issues/20
 		// var type;

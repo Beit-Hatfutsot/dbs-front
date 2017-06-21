@@ -102,26 +102,35 @@ angular.module('main').
 					proper_lang = lang[0].toUpperCase() + lang.slice(1),
 					params,
 					state;
-				//get url with another language if the item's description in current is missing
-				if (item_data.UnitText1 && (item_data.UnitText1[proper_lang] == null || item_data.UnitText1[proper_lang] == '')) {
-				proper_lang == 'En' ? proper_lang = 'He' : proper_lang = 'En';
-				lang = proper_lang.toLowerCase();
+				// get url with another language if the item's description in current is missing
+				if (
+						item_data["content_text_"+proper_lang.toLowerCase()] == null
+						|| item_data["content_text_"+proper_lang.toLowerCase()] == ""
+				) {
+					// no content for current lang, use the other lang
+					if (proper_lang.toLowerCase() == "en") {
+						proper_lang = "He";
+					} else {
+						proper_lang = "En";
+					}
+					lang = proper_lang.toLowerCase();
 				}
-
-				//TODO: try and remove the next 3 lines as url should be based
-				// on current language
+				//TODO: try and remove the next 3 lines as url should be based on current language
 				if (item_data.slug) {
+					// TODO: figure out what is this used for
 					state = 'item-view';
-					params = {collection: item_data.slug.collection,
-							  local_slug : item_data.slug.local_slug};
-				}
-				else if (item_data.Slug) {
+					params = {
+						collection: item_data.slug.collection,
+						local_slug : item_data.slug.local_slug
+					};
+				} else if (item_data["slug_"+proper_lang.toLowerCase()]) {
 					state = 'item-view';
-					var parts = item_data.Slug[proper_lang].split('_'),
+					// TODO: we should not make assumptions about how the slug looks like
+					// also, we know which collection the item belongs to
+					var parts = item_data["slug_"+proper_lang.toLowerCase()].split('_'),
 					params = {collection: parts[0],
 							  local_slug : parts[1]};
-				}
-				else {
+				} else {
 					state = item_data.state;
 					params = item_data.params;
 				}
