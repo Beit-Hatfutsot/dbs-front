@@ -7,8 +7,10 @@ var ItemPreviewCtrl = function($state, $scope, $location, $rootScope, itemTypeMa
     this.mjs = mjs;
     this.$scope = $scope;
     this.item = item;
-    this.item_type = itemTypeMap.get_type($scope.previewData.UnitType);
+    this.item_type = itemTypeMap.get_type($scope.previewData/*.UnitType*/);
+    // TODO: what's in_branch?
     this.in_branch = $scope.previewData.in_branch;
+    // TODO: what's url?
     this.url = $scope.previewData.url;
     this.collection_name = itemTypeMap.get_collection_name($scope.previewData);
     this.rmdialog_is_open = false;
@@ -23,21 +25,20 @@ ItemPreviewCtrl.prototype = {
     },
 
     get_item_url: function(item_data) {
-		// TODO: refactor to user item.get_url
         if (this.url !== undefined) {
             return this.url;
+        } else {
+            return this.item.get_url(item_data);
         }
-        if (this.collection_name === 'genTreeIndividuals') {
-            var state_name = this.proper_lang=='he'?'he.he_person-view':'person-view';
-            return this.$state.href(state_name,
-                                    {tree_number:item_data.tree_num,
-                                    version:item_data.tree_version,
-                                    node_id: (item_data.person_id||item_data.id)
-                                });
-        }
-        else {
-			return this.item.get_url(item_data);
-        }
+        // TODO: re-enable once we have persons data from CM
+        // if (this.collection_name === 'genTreeIndividuals') {
+        //     var state_name = this.proper_lang=='he'?'he.he_person-view':'person-view';
+        //     return this.$state.href(state_name,
+        //                             {tree_number:item_data.tree_num,
+        //                             version:item_data.tree_version,
+        //                             node_id: (item_data.person_id||item_data.id)
+        //                         });
+        // }
     },
 
     remove_from_mjs: function() {
@@ -69,6 +70,10 @@ ItemPreviewCtrl.prototype = {
     uc_first: function() {
         var lang = this.proper_lang;
         return lang.charAt(0).toUpperCase() + lang.slice(1);
+    },
+
+    has_lang_content: function(doc) {
+        if (doc["content_text_"+this.proper_lang.toLowerCase()]) return true; else return false;
     }
 
 };

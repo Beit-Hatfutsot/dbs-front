@@ -1,6 +1,7 @@
 <div class="{{itemPreviewController.collection_name==='genTreeIndividuals'? 'person-preview':'item-preview'}}">
   <ng-switch on="itemPreviewController.collection_name==='genTreeIndividuals'">
     <a ng-switch-when="true" ng-href="{{itemPreviewController.get_item_url(previewData)}}" ng-click="itemPreviewController.saveCurrentSearchUrl()">
+      <!-- TODO: re-enable once we have persons data from clearmash
       <div class="top">
           <div class="tree-num">
               <div class="tree-num__title">
@@ -56,41 +57,41 @@
               </ng-switch>
               <div class="family__members">{{children}}</div>
           </div>
-      </div>
+      </div>-->
     </a>
 
     <a  ng-switch-when="false"  ng-href="{{itemPreviewController.get_item_url(previewData)}}"
         target="{{itemSource=='cjh'||itemSource=='europeana'?'_blank': '_self'}}">
-      <div class="thumbnail" ng-if="previewData.thumbnail_url">
-        <img ng-src="{{previewData.thumbnail_url}}"
+      <div class="thumbnail" ng-if="previewData.main_thumbnail_image_url">
+        <img ng-src="{{previewData.main_thumbnail_image_url}}"
            alt="Preview Image"/>
       </div>
       <div class="white-part1" ng-class="{'white-part1--nothumb':
-        !(previewData.thumbnail_url), 'white-part1--thumbnail':
-        previewData.thumbnail_url}">
+        !(previewData.main_thumbnail_image_url), 'white-part1--thumbnail':
+        previewData.main_thumbnail_image_url}">
 
-        <div class="header" ng-class="{'header--nothumb': !(previewData.thumbnail_url),
+        <div class="header" ng-class="{'header--nothumb': !(previewData.main_thumbnail_image_url),
                      'isExtResult': itemSource != 'bh'}">
           <item-type type="itemPreviewController.item_type"></item-type>
           <span class="header__text">
-            <en>{{previewData.Header.En}}</en>
-            <he>{{previewData.Header.He}}</he>
+            <en>{{previewData.title_en}}</en>
+            <he>{{previewData.title_he}}</he>
           </span>
         </div>
         <div ng-if="itemSource != 'bh'" class="text" ng-class="{'text--nothumb':
-          !(previewData.thumbnail_url)}">
-            <en><span marked="previewData.UnitText1.En"></span></en>
-            <he><span marked="previewData.UnitText1.He"></span></he>
+          !(previewData.main_thumbnail_image_url)}">
+            <en><span marked="previewData.content_text_en"></span></en>
+            <he><span marked="previewData.content_text_he"></span></he>
         </div>
         <div ng-if="itemSource == 'bh'">
-          <ng-switch on="previewData.UnitText1.{{itemPreviewController.uc_first()}} != '' && previewData.UnitText1.{{itemPreviewController.uc_first()}} != null">
+          <ng-switch on="itemPreviewController.has_lang_content(previewData)">
             <div ng-switch-when="true" class="text"
-                 ng-class="{'text--nothumb': !(previewData.thumbnail_url)}">
-              <en><span marked="previewData.UnitText1.En"></span></en>
-              <he><span marked="previewData.UnitText1.He"></span></he>
+                 ng-class="{'text--nothumb': !(previewData.main_thumbnail_image_url)}">
+              <en><span marked="previewData.content_text_en"></span></en>
+              <he><span marked="previewData.content_text_he"></span></he>
             </div>
             <div ng-switch-when="false" class="text"
-                 ng-class="{'text--nothumb': !(previewData.thumbnail_url)}">
+                 ng-class="{'text--nothumb': !(previewData.main_thumbnail_image_url)}">
               <en>This item only exists in Hebrew at the moment.<br>
                   But not all is lost.<br>Click on the card to view it in Hebrew.
               </en>
@@ -99,7 +100,7 @@
           </ng-switch>
         </div>
 
-        <div class="diagonal-block" ng-if="previewData.thumbnail_url"
+        <div class="diagonal-block" ng-if="previewData.main_thumbnail_image_url"
            ng-class="{'diagonal-block--ext-result': itemSource!='bh'}">
           <div  class="diagonal-separator" style="right:-22px; opacity:1"></div>
           <div  class="diagonal-separator" style="right:-10px; opacity:0.7"
