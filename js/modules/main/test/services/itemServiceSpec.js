@@ -21,12 +21,12 @@ describe('item', function() {
 		});
 		it('should use the english slug as default when both exists',
 		   function () {
-			var item_data = {'Slug': {'He': 'שלום', 'En': 'hello'}}
+			var item_data = {'slug_he': 'שלום', 'slug_en': 'hello'};
 			expect(item.get_key(item_data)).toEqual('hello');
 		});
 		it('should use the hebrew slug when it is the only one',
 		   function () {
-			var item_data = {'Slug': {'He': 'שלום'}}
+			var item_data = {'slug_he': 'שלום'};
 			expect(item.get_key(item_data)).toEqual('שלום');
 		});
 	})
