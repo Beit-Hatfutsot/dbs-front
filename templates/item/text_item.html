@@ -8,20 +8,28 @@
                 <div class="item__header">
                     <div class="text">
                         <en>
-                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
-                  Your Search Result for {{itemController.item_data.Header.En}}:
-              </span>
-                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">
-                  Your Selected Item:
-              </span>
+                          <span ng-if="itemController.item_data.title_en">
+                            Your Search Result for {{itemController.item_data.title_en}}:
+                          </span>
+                          <!-- TODO: figure out why this logic is needed -->
+                                        <!--<span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.title_en">-->
+                  <!--Your Search Result for {{itemController.item_data.title_en}}:-->
+              <!--</span>-->
+                            <!--<span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">-->
+                  <!--Your Selected Item:-->
+              <!--</span>-->
                         </en>
                         <he>
-                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
-                  תוצאות חיפוש עבור {{itemController.item_data.Header.He}}:
-              </span>
-                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">
-                  הערך הנבחר:
-              <span>
+                          <span ng-if="itemController.item_data.title_he">
+                                        תוצאות חיפוש עבור {{itemController.item_data.title_he}}:
+                          </span>
+                          <!-- TODO: figure out why this logic is needed -->
+                            <!--<span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">-->
+                  <!--תוצאות חיפוש עבור {{itemController.item_data.Header.He}}:-->
+              <!--</span>-->
+                            <!--<span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">-->
+                  <!--הערך הנבחר:-->
+              <!--<span>-->
             </he>
           </div>
         </div>
@@ -102,14 +110,13 @@
                     </h1>
                 </div>
 
-                <ng-switch on="itemController.item_data.UnitText1.{{itemController.uc_first()}} !== ''
-                          && itemController.item_data.UnitText1.{{itemController.uc_first()}} != null">
+                <ng-switch on="itemController.hasTextContentForCurrentLang()">
                     <div ng-switch-when="true" class="item__article-texts" ng-class="{'expand': itemController.is_expanded}">
                         <en>
-                            <p marked="itemController.item_data.UnitText1.En"></p>
+                            <p marked="itemController.getTextContentForCurrentLang()"></p>
                         </en>
                         <he>
-                            <span marked="itemController.item_data.UnitText1.He"></span>
+                            <span marked="itemController.getTextContentForCurrentLang()"></span>
                         </he>
                     </div>
                     <div ng-switch-default="false" class="item__article-texts">
