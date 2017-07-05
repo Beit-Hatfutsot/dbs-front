@@ -77,60 +77,58 @@ ItemCtrl.prototype = {
 			lang = language_map[$rootScope.lang],
 			item = this.item_data,
 			description = {
-				5: {
+				"places": {
 					'En': 'Discover the history of the Jewish community of '+
-						  item.Header["En"]+
+						  item.title_en+
 						  '. Explore photos, family trees and more of the open databases of The Museum of the Jewish People',
-				    'He': 'גלו את ההיסטוריה והתרבות של קהילת יהודי ' +item.Header["He"]+
+				    'He': 'גלו את ההיסטוריה והתרבות של קהילת יהודי ' +item.title_he+
 						  ', עצי משפחה, פירוש שמות משפחה, צילומים ועוד במאגרי המידע הפתוחים של בית התפוצות, מוזיאון העם היהודי בתל אביב'
 				},
 
-				6: {
+                "familyNames": {
 					'En': '',
-					'He': 'מקור שם משפחה ' +item.Header["He"]+ ' – באתר בית התפוצות ניתן לאתר אילנות יוחסין, פירושים לשמות משפחה, תולדותיהן של קהילות ברחבי העולם, צילומים, תמונות, סרטים ועוד',
+					'He': 'מקור שם משפחה ' +item.title_he+ ' – באתר בית התפוצות ניתן לאתר אילנות יוחסין, פירושים לשמות משפחה, תולדותיהן של קהילות ברחבי העולם, צילומים, תמונות, סרטים ועוד',
 				}
 			},
 
 			title = {
-				//places
-				5: {
-					'En': 'The Jewish Community of '+ item.Header["En"] + ' | BH Open Databases',
-			    	'He': 'קהילת יהודי ' + item.Header["He"] + ' | מאגרי מידע - בית התפוצות'
+                "places": {
+					'En': 'The Jewish Community of '+ item.title_en + ' | BH Open Databases',
+			    	'He': 'קהילת יהודי ' + item.title_he + ' | מאגרי מידע - בית התפוצות'
 				},
-				//family names
-				6: {
+                "familyNames": {
 					'En': '',
-			    	'He': 'מקור השם ' + item.Header["He"]+  ' | מאגרי מידע - בית התפוצות',
+			    	'He': 'מקור השם ' + item.title_he+  ' | מאגרי מידע - בית התפוצות',
 				},
 
 				'deflt': {
-					'En': item.Header["En"] + ' | BH Open Databases',
-				    'He': item.Header["He"] + ' | מאגרי מידע - בית התפוצות'
+					'En': item.title_en + ' | BH Open Databases',
+				    'He': item.title_he + ' | מאגרי מידע - בית התפוצות'
 				}
 			},
 
 			keywords = {
-				5: {
-					'En': 'Jewish community of ' + item.Header["En"] + ', Jews in ' + item.Header["En"],
-			    	'He': 'קהילת יהודי ' + item.Header["He"]+ ', יהדות ' + item.Header["He"]+', יהודי ' + item.Header["He"],
+				"places": {
+					'En': 'Jewish community of ' + item.title_en + ', Jews in ' + item.title_en,
+			    	'He': 'קהילת יהודי ' + item.title_he+ ', יהדות ' + item.title_he+', יהודי ' + item.title_he,
 				},
 
-				6: {
+				"familyNames": {
 					'En': '',
-					'He': 'מקור שם המשפחה ' + item.Header["He"]+ ', מקור השם '+ item.Header["He"] + ', ' + item.Header["He"],
+					'He': 'מקור שם המשפחה ' + item.title_he+ ', מקור השם '+ item.title_he + ', ' + item.title_he,
 				}
 			};
 
-		$rootScope.keywords = keywords[item.UnitType]?keywords[item.UnitType][lang]:'';
-		$rootScope.title = title[item.UnitType]?title[item.UnitType][lang]:title['deflt'][lang];
-		$rootScope.description = description[item.UnitType]?description[item.UnitType][lang]:'';
+		$rootScope.keywords = keywords[item.collection]?keywords[item.collection][lang]:'';
+		$rootScope.title = title[item.collection]?title[item.collection][lang]:title['deflt'][lang];
+		$rootScope.description = description[item.collection]?description[item.collection][lang]:'';
 		main_pic_index = this.get_main_pic_index();
 		// TODO: make language option 'En' & 'He' universal
 		$rootScope.og_type = 'article';
 
 
 
-		$rootScope.slug = item.Slug;
+		$rootScope.slug = {"He": item.slug_he, "En": item.slug_en};
 		if (main_pic_index !== undefined) {
 			$rootScope.og_image = "http://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
 		}
@@ -142,8 +140,8 @@ ItemCtrl.prototype = {
 		this.item.get(this.slug).
 			then(function(item_data) {
 				self.recentlyViewed.put(
-					{Slug: item_data.Slug,
-					 header: item_data.Header,
+					{Slug: {"He": item_data.slug_he, "En": item_data.slug_en},
+					 header: {"He": item_data.title_he, "En": item_data.title_en},
 					 thumbnail_url: item_data.thumbnail_url
 					});
 				self.item_data = item_data;
@@ -254,11 +252,13 @@ ItemCtrl.prototype = {
 	},
 
 	get_main_pic_index: function() {
-		for (var i = 0; i < this.item_data.Pictures.length; i++) {
-			var pic = this.item_data.Pictures[i];
-			if (pic.IsPreview == "1") {
-				return i;
-			}
+		if (this.item_data.Pictures) {
+            for (var i = 0; i < this.item_data.Pictures.length; i++) {
+                var pic = this.item_data.Pictures[i];
+                if (pic.IsPreview == "1") {
+                    return i;
+                }
+            }
 		}
 	},
 
@@ -296,7 +296,16 @@ ItemCtrl.prototype = {
 	uc_first: function() {
 		var lang = this.lang;
     	return lang.charAt(0).toUpperCase() + lang.slice(1);
-    }
+    },
+
+	hasTextContentForCurrentLang: function() {
+		return this.getTextContentForCurrentLang() ? true : false;
+	},
+
+	getTextContentForCurrentLang: function() {
+        var lang = this.lang.toLowerCase();
+        return this.item_data["content_text_"+lang];
+	}
 
 };
 
