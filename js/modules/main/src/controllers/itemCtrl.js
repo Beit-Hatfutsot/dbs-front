@@ -31,6 +31,7 @@ function ItemCtrl($scope, $state, $stateParams, item, notification, itemTypeMap,
 	this.active_font = 's';
 	this.font_sizes = {'s':18, 'm':20, 'l':22};
 	this.get_item();
+	this.sorted_pictures = [];
 	this.public_url = $state.href(($rootScope.lang=='en'?'item-view': 'he.he_item-view'),
 								 {collection: $stateParams.collection, local_slug: $stateParams.local_slug},
 								 {absolute: true});
@@ -145,6 +146,7 @@ ItemCtrl.prototype = {
 					 thumbnail_url: item_data.thumbnail_url
 					});
 				self.item_data = item_data;
+				self.sorted_pictures = self.sort_pictures(self.item_data);
 				self.proper_link = self.item.get_url(self.item_data);
 				self.content_loaded = true;
 				self.refresh_root_scope();
@@ -191,21 +193,21 @@ ItemCtrl.prototype = {
     goto_persons: function() {
 		var lang = this.lang[0].toUpperCase() + this.lang.slice(1),
 			params = {};
-			params.collection = 'persons';
 
 		if (this.search_result.name.Header)
-		    params.q  = this.search_result.name.Header[lang]
-		else if (this.search_result.place.Header)
-		    params.q = this.search_result.place.Header[lang];
-    	this.$state.go('general-search', params);
+		    params.last_name  = this.search_result.name.Header[lang]
+    else if (this.search_result.place.Header)
+		    params.place = this.search_result.place.Header[lang];
+
+    	this.$state.go('persons', params);
 	},
 
 	showPrev: function () {
-		this._Index = (this._Index > 0) ? --this._Index : this.item_data.Pictures.length - 1;
+		this._Index = (this._Index > 0) ? --this._Index : this.sorted_pictures.length - 1;
 	},
 
 	showNext: function () {
-		this._Index = (this._Index < this.item_data.Pictures.length - 1) ? ++this._Index : 0;
+		this._Index = (this._Index < this.sorted_pictures.length - 1) ? ++this._Index : 0;
 	},
 
 	isActive: function (index) {
@@ -221,6 +223,7 @@ ItemCtrl.prototype = {
 			index = this._Index;
 		}
 		var	gallery = this.item_data;
+		var sorted_pictures = this.sorted_pictures;
 
 	    this.$uibModal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
@@ -229,7 +232,10 @@ ItemCtrl.prototype = {
 	     	resolve : {
 	     		gallery: function () {
 	     			return gallery
-	     	},
+	     		},
+	     		sorted_pictures: function () {
+	     			return sorted_pictures;
+	     		},
 	     		index: function () {
 	     			return index
 	     		}
@@ -262,35 +268,26 @@ ItemCtrl.prototype = {
 		}
 	},
 
-	get_additional_pic_index: function() {
+	get_additional_pic_url: function() {
 		for (var i = 0; i < this.item_data.Pictures.length; i++) {
 			var pic = this.item_data.Pictures[i];
 			if (pic.IsPreview == "0") {
-				return i;
+				return pic.PictureUrl;
 			}
 		}
 	},
 
-	get_additional_pic_url: function () {
-		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
-	},
-
-	sort_pictures: function() {
-		if (this.item_data.Pictures) {
-			var digitized = [],
-			nondigitized = [];
-		for (var i = 0; i < this.item_data.Pictures.length; i++) {
-			var pic = this.item_data.Pictures[i];
-			if(pic.PictureId !== '') {
-				digitized.push(pic);
-			}
-			else {
-				nondigitized.push(pic);
+	sort_pictures: function(data) {
+		if (data.Pictures) {
+			var digitized = [];
+			for (var i = 0; i < data.Pictures.length; i++) {
+				var pic = data.Pictures[i];
+				if(pic.PictureUrl) {
+					digitized.push(pic);
+				}
 			}
 		}
-		digitized.push.apply(digitized, nondigitized);
 		return digitized;
-		}
 	},
 
 	uc_first: function() {
