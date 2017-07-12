@@ -71,10 +71,10 @@ StartController.prototype = {
 			place = this.wizard.result.place;
 
 		if ( name.isNotEmpty() ) {
-			return name.Slug[this.lang];
+			return name["slug_"+this.lang.toLowerCase()];
 		}
 		else if ( place.isNotEmpty() ) {
-			return place.Slug[this.lang];
+			return place["slug_"+this.lang.toLowerCase()];
 		}
 		else {
 			return null
