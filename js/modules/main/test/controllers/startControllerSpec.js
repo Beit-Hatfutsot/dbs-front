@@ -57,15 +57,15 @@ describe('StartController', function() {
 	it('should choose a name result over place result from wizard results', function() {
 		wizard.query = {
 			name: {
-				Slug: {'En': 'family_Einstein'},
+				slug_en: 'family_Einstein'
 			},
 			place: {
-				Slug: {'En': 'place_someplace'},
+				slug_en: 'place_someplace'
 			}
-		}
+		};
 		wizard.search();
 		$timeout.flush();
-		var chosen_result = scope.startCtrl.choose_result()
+		var chosen_result = scope.startCtrl.choose_result();
 		expect(chosen_result).toBe('family_Einstein');
 	});
 
@@ -73,9 +73,9 @@ describe('StartController', function() {
 		wizard.query = {
 			name: '',
 			place: {
-				Slug: {'En': 'place_someplace'},
+				'slug_en': 'place_someplace'
 			}
-		}
+		};
 		wizard.search();
 		$timeout.flush();
 		var chosen_result = scope.startCtrl.choose_result()
@@ -85,10 +85,10 @@ describe('StartController', function() {
 	it('should choose a name result when place is empty', function() {
 		wizard.query = {
 			name: {
-				Slug: {'En': 'family_Einstein'},
+				'slug_en': 'family_Einstein'
 			},
 			place: ''
-		}
+		};
 		wizard.search();
 		$timeout.flush();
 		var chosen_result = scope.startCtrl.choose_result()
