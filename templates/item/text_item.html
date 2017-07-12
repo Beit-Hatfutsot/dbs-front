@@ -12,10 +12,10 @@
                             Your Search Result for {{itemController.item_data.title_en}}:
                           </span>
                           <!-- TODO: figure out why this logic is needed -->
-                                        <!--<span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.title_en">-->
+                                        <!--<span ng-if="(itemController.search_result.place.title_en || itemController.search_result.name.title_en) == itemController.item_data.title_en">-->
                   <!--Your Search Result for {{itemController.item_data.title_en}}:-->
               <!--</span>-->
-                            <!--<span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">-->
+                            <!--<span ng-if="(itemController.search_result.place.title_en || itemController.search_result.name.title_en) !== itemController.item_data.title_en">-->
                   <!--Your Selected Item:-->
               <!--</span>-->
                         </en>
@@ -24,10 +24,10 @@
                                         תוצאות חיפוש עבור {{itemController.item_data.title_he}}:
                           </span>
                           <!-- TODO: figure out why this logic is needed -->
-                            <!--<span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">-->
-                  <!--תוצאות חיפוש עבור {{itemController.item_data.Header.He}}:-->
+                            <!--<span ng-if="(itemController.search_result.place.title_he || itemController.search_result.name.title_he) == itemController.item_data.title_he">-->
+                  <!--תוצאות חיפוש עבור {{itemController.item_data.title_he}}:-->
               <!--</span>-->
-                            <!--<span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">-->
+                            <!--<span ng-if="(itemController.search_result.place.title_he || itemController.search_result.name.title_he) !== itemController.item_data.title_he">-->
                   <!--הערך הנבחר:-->
               <!--<span>-->
             </he>
@@ -105,8 +105,8 @@
                 <div class="header-wrapper">
                     <item-type type="itemController.item_type"></item-type>
                     <h1 class="item__article-header">
-                        <en>{{itemController.item_data.Header.En}}</en>
-                        <he>{{itemController.item_data.Header.He}}</he>
+                        <en>{{itemController.item_data.title_en}}</en>
+                        <he>{{itemController.item_data.title_he}}</he>
                     </h1>
                 </div>
 

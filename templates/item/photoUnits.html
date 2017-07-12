@@ -8,18 +8,18 @@
                 <div class="item__header">
                     <div class="text">
                         <en>
-                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) == itemController.item_data.Header.En">
-                                Your Search Result for {{itemController.item_data.Header.En}}:
+                            <span ng-if="(itemController.search_result.place.title_en || itemController.search_result.name.title_en) == itemController.item_data.title_en">
+                                Your Search Result for {{itemController.item_data.title_en}}:
                             </span>
-                            <span ng-if="(itemController.search_result.place.Header.En || itemController.search_result.name.Header.En) !== itemController.item_data.Header.En">
+                            <span ng-if="(itemController.search_result.place.title_en || itemController.search_result.name.title_en) !== itemController.item_data.title_en">
                                 Your Selected Item:
                             </span>
                         </en>
                         <he>
-                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) == itemController.item_data.Header.He">
-                                תוצאות חיפוש עבור {{itemController.item_data.Header.He}}:
+                            <span ng-if="(itemController.search_result.place.title_he || itemController.search_result.name.title_he) == itemController.item_data.title_he">
+                                תוצאות חיפוש עבור {{itemController.item_data.title_he}}:
                             </span>
-                            <span ng-if="(itemController.search_result.place.Header.He || itemController.search_result.name.Header.He) !== itemController.item_data.Header.He">
+                            <span ng-if="(itemController.search_result.place.title_he || itemController.search_result.name.title_he) !== itemController.item_data.title_he">
                                 הערך הנבחר:
                             <span>
                         </he>
@@ -92,8 +92,8 @@
                             <item-type type="itemController.item_type"
                               image="itemController.item_data.thumbnail_url"></item-type>
                             <h1 class="item__article-header">
-                                <en>{{itemController.item_data.Header.En}}</en>
-                                <he>{{itemController.item_data.Header.He}}</he>
+                                <en>{{itemController.item_data.title_en}}</en>
+                                <he>{{itemController.item_data.title_he}}</he>
                             </h1>
                         </div>
                         <div class="gallery-modal__info">
@@ -116,8 +116,8 @@
                             </div>
                             <div class="gallery-modal__info__gallery-preview">
                                 <div class="gallery-modal__info__gallery-preview__title">
-                                    <en>{{itemController.item_data.Header.En}} Pictures ({{itemController.item_data.Pictures.length}} found)</en>
-                                    <he>{{itemController.item_data.Header.He}} Pictures ({{itemController.item_data.Pictures.length}} found)</he>
+                                    <en>{{itemController.item_data.title_en}} Pictures ({{itemController.item_data.Pictures.length}} found)</en>
+                                    <he>{{itemController.item_data.title_he}} Pictures ({{itemController.item_data.Pictures.length}} found)</he>
                                 </div>
                                  <ul class="gallery-modal__info__gallery-preview__minified-picture">
                                     <li ng-repeat="pic in itemController.sort_pictures()" ng-class="{'active':itemController.isActive($index)}" ng-hide="isHidden($index)">

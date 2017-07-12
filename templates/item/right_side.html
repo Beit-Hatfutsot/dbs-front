@@ -5,15 +5,15 @@
     </div>
     <div class="search-results__field" ng-if="itemController.search_result.name.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.name)">
       <p class="vertical-middle">
-            <en>{{itemController.search_result.name.Header.En}}</en>
-            <he>{{itemController.search_result.name.Header.He}}</he>
+            <en>{{itemController.search_result.name.title_en}}</en>
+            <he>{{itemController.search_result.name.title_he}}</he>
         </p>
       <item-type type="'familyNames'"></item-type>
     </div>
     <div class="search-results__field" ng-if="itemController.search_result.place.isNotEmpty()" ng-click="itemController.goto_item(itemController.search_result.place)">
         <p class="vertical-middle">
-            <en>{{itemController.search_result.place.Header.En}}</en>
-            <he>{{itemController.search_result.place.Header.He}}</he>
+            <en>{{itemController.search_result.place.title_en}}</en>
+            <he>{{itemController.search_result.place.title_he}}</he>
         </p>
         <item-type type="'places'"></item-type>
     </div>
@@ -21,23 +21,27 @@
          ng-click="itemController.goto_persons()">
         <p class="vertical-middle">
             <span ng-if="itemController.search_result.name.Header">
-                <en>{{itemController.search_result.name.Header.En}}</en>
-                <he>{{itemController.search_result.name.Header.He}}</he>
+                <en>{{itemController.search_result.name.title_en}}</en>
+                <he>{{itemController.search_result.name.title_he}}</he>
             </span>
             <span ng-if="!itemController.search_result.name.Header && itemController.search_result.place.Header">
-                <en>{{itemController.search_result.place.Header.En}}</en>
-                <he>{{itemController.search_result.place.Header.He}}</he>
+                <en>{{itemController.search_result.place.title_en}}</en>
+                <he>{{itemController.search_result.place.title_he}}</he>
             </span>
         </p>
         <item-type type="'genTreeIndividuals'"></item-type>
     </div>
 </div>
-<div class="map" ng-show="itemController.item_data.UnitType == '5' && itemController.item_data.geometry">
+<div class="map" ng-show="itemController.item_data.google_map_embed">
   <div class="map__header">
-    <en>Nearby Places:</en>
-    <he>מקומות בסביבה:</he>
+    <en>Map:</en>
+    <he>מפה:</he>
   </div>
-  <leaflet preview-data="itemController.item_data" id="mapid"></leaflet>
+  <p><iframe allowfullscreen=""
+             frameborder="0"
+             height="300"
+             ng-src="{{itemController.item_data.google_map_embed}}"
+             style="border:0"></iframe></p>
 </div>
 
 <div class="search-results">
@@ -48,8 +52,8 @@
     <div class="search-results__field search"
           ui-sref="general-search({q: itemController.item_data.Header.{{itemController.proper_lang}}})">
       <p class="vertical-middle" ng-attr-title="{{itemController.item_data.Header[itemController.proper_lang]}}">
-            <en>{{itemController.item_data.Header.En}}</en>
-            <he>{{itemController.item_data.Header.He}}</he>
+            <en>{{itemController.item_data.title_en}}</en>
+            <he>{{itemController.item_data.title_he}}</he>
       </p>
       <div class="item-type">
         <div class="search-icon">

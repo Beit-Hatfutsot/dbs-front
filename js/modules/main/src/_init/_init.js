@@ -363,7 +363,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $
 
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
-        new RegExp('^http[s]?:\/\/storage.googleapis.com\/bhs.*\.mp4$')
+        new RegExp('^http[s]?:\/\/storage.googleapis.com\/bhs.*\.mp4$'),
+        new RegExp('^http[s]?:\/\/www.google.com\/.*$')
     ]);
 
 	markedProvider.setOptions({ breaks: true })

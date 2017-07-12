@@ -1,7 +1,7 @@
 <div id="printSection" class='gallery-modal'>
     <div class="gallery-modal__header">
-       <en>{{gallery.Header.En}}</en>
-       <he>{{gallery.Header.He}}</he>
+       <en>{{gallery.title_en}}</en>
+       <he>{{gallery.title_he}}</he>
        <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
     <div class="gallery-modal__stage noselect">
@@ -47,8 +47,8 @@
         </div>
         <div class="gallery-modal__info__gallery-preview">
             <div class="gallery-modal__info__gallery-preview__title">
-                <en>{{gallery.Header.En}} ({{gallery.Pictures.length}} Pictures found)</en>
-                <he>{{gallery.Header.He}} ({{gallery.Pictures.length}} תמונות נמצאו)</he>
+                <en>{{gallery.title_en}} ({{gallery.Pictures.length}} Pictures found)</en>
+                <he>{{gallery.title_he}} ({{gallery.Pictures.length}} תמונות נמצאו)</he>
             </div>
             <ul class="gallery-modal__info__gallery-preview__minified-picture">
                 <li ng-repeat="pic in sort_pictures()" ng-class="{'active':isActive($index)}">
