@@ -148,14 +148,16 @@ ItemCtrl.prototype = {
 				self.proper_link = self.item.get_url(self.item_data);
 				self.content_loaded = true;
 				self.refresh_root_scope();
-				if (item_data.related)
-					self.item.get_items(item_data.related).
-						then(function(related_data) {
-							self.parse_related_data(related_data);
-							self.notification.loading(false);
-						});
-				else
-					self.notification.loading(false);
+				self.related_data = [];
+				if (self.item_data.related_documents) {
+                    for (var field_id in self.item_data.related_documents) {
+						var docs = self.item_data.related_documents[field_id];
+                        docs.forEach(function(doc) {
+                        	self.related_data.push(doc);
+						})
+                    }
+				}
+                self.notification.loading(false);
 			},
 			function(error) {
 				self.error = error;
@@ -166,18 +168,6 @@ ItemCtrl.prototype = {
 					self.notification.put(5, error.status);
 				}
 			});
-	},
-
-	parse_related_data: function(related_data) {
-		var self = this;
-		self.related_data = [];
-
-		related_data.forEach(function(related_item) {
-			var proper_lang = self.lang[0].toUpperCase() + self.lang[1];
-			if (related_item.Slug && related_item.Slug[proper_lang] != self.slug.api) {
-				self.related_data.push(related_item);
-			}
-		});
 	},
 
 	goto_item: function(item_data) {
