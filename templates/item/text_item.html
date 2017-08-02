@@ -36,28 +36,27 @@
 
 				<div class="item-wrapper">
 					<div id="printSection" class="item__content">
-						<div 	class="item__content__media-container"
-								ng-if="itemController.item_data.main_image_url">
-								<div class="main-img-wrapper" ng-class="{'main-img-wrapper--display-more': itemController.item_data.Pictures.length > 1}">
+						<div 	class="item__content__media-container" ng-if="itemController.get_main_pic_url()">
+								<div class="main-img-wrapper" ng-class="{'main-img-wrapper--display-more': itemController.sort_pictures().length > 1}">
 									<img 	class="picture"
-											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
-											ng-src="{{itemController.item_data.main_image_url}}"
+											ng-class="{'picture--display-more': itemController.sort_pictures().length > 1}"
+											ng-src="{{itemController.get_main_pic_url()}}"
 											alt="Item Image"
 											ng-click="itemController.open_gallery(itemController.get_main_pic_index())"
 											prevent-rightclick/>
 								</div>
-								<div class="add-img-wrapper" ng-if="itemController.item_data.Pictures.length > 1">
+								<div class="add-img-wrapper" ng-if="itemController.get_additional_pic_url()">
 									<img  	class="picture"
-											ng-class="{'picture--display-more': itemController.item_data.Pictures.length > 1}"
+											ng-class="{'picture--display-more': itemController.sort_pictures().length > 1}"
 											ng-click="itemController.open_gallery(itemController.get_additional_pic_index())"
 											ng-src="{{itemController.get_additional_pic_url()}}"
 											prevent-rightclick>
 									<div  class="image-separator"></div>
 								</div>
-							<div class="white-part" ng-show="itemController.item_data.Pictures.length > 1">
+							<div class="white-part" ng-show="itemController.sort_pictures().length > 1">
 								<div class="pictures-info">
-									<en> + {{itemController.item_data.Pictures.length-1}} Pictures<br/>Click to View</en>
-									<he> + {{itemController.item_data.Pictures.length-1}} תמונות<br/>לחצו לצפייה</he>
+									<en> + {{itemController.sort_pictures().length-1}} Pictures<br/>Click to View</en>
+									<he> + {{itemController.sort_pictures().length-1}} תמונות<br/>לחצו לצפייה</he>
 								</div>
 								<div class="diagonal-block">
 									<div  class="diagonal-separator" style="left:-63px; opacity:1;"></div>
@@ -82,7 +81,7 @@
                   <div class="print-btn" ng-click="itemController.print()">
                      <ng-include src="'templates/svgs/print-btn.svg'"></ng-include>
                   </div>
-                  <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.proper_lang]}}"></share>
+                  <share href="itemController.public_url" text="{{itemController.item_data.Header[itemController.lang]}}"></share>
                   <div class="font-resize">
                     <span class="large"
                           ng-click="itemController.resize_font('l')"
