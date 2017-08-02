@@ -122,16 +122,18 @@ ItemCtrl.prototype = {
 		$rootScope.keywords = keywords[item.collection]?keywords[item.collection][lang]:'';
 		$rootScope.title = title[item.collection]?title[item.collection][lang]:title['deflt'][lang];
 		$rootScope.description = description[item.collection]?description[item.collection][lang]:'';
-		main_pic_index = this.get_main_pic_index();
 		// TODO: make language option 'En' & 'He' universal
 		$rootScope.og_type = 'article';
 
 
 
 		$rootScope.slug = {"He": item.slug_he, "En": item.slug_en};
-		if (main_pic_index !== undefined) {
-			$rootScope.og_image = "http://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
-		}
+
+		// TODO: modify for new architecture
+        // main_pic_index = this.get_main_pic_index();
+		// if (main_pic_index !== undefined) {
+		// 	$rootScope.og_image = "http://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
+		// }
 	},
 
 	get_item: function() {
@@ -142,7 +144,7 @@ ItemCtrl.prototype = {
 				self.recentlyViewed.put(
 					{Slug: {"He": item_data.slug_he, "En": item_data.slug_en},
 					 header: {"He": item_data.title_he, "En": item_data.title_en},
-					 thumbnail_url: item_data.thumbnail_url
+					 thumbnail_url: item_data.main_thumbnail_image_url
 					});
 				self.item_data = item_data;
 				self.proper_link = self.item.get_url(self.item_data);
@@ -191,26 +193,28 @@ ItemCtrl.prototype = {
 	},
 
 	showPrev: function () {
-		this._Index = (this._Index > 0) ? --this._Index : this.item_data.Pictures.length - 1;
+        // TODO: modify for new architecture
+        // this._Index = (this._Index > 0) ? --this._Index : this.item_data.Pictures.length - 1;
 	},
 
 	showNext: function () {
-		this._Index = (this._Index < this.item_data.Pictures.length - 1) ? ++this._Index : 0;
+        // TODO: modify for new architecture
+        // this._Index = (this._Index < this.item_data.Pictures.length - 1) ? ++this._Index : 0;
 	},
 
 	isActive: function (index) {
-		return this._Index === index;
+        // TODO: modify for new architecture
+        // return this._Index === index;
+		return true;
 	},
 
 	showPhoto: function (index) {
-		this._Index = index;
+        // TODO: modify for new architecture
+        // this._Index = index;
 	},
 
 	open_gallery: function (index) {
-		if (index == undefined) {
-			index = this._Index;
-		}
-		var	gallery = this.item_data;
+        var	gallery = this.item_data;
 
 	    this.$uibModal.open({
 	     	templateUrl: 'templates/main/gallery-modal.html',
@@ -242,45 +246,46 @@ ItemCtrl.prototype = {
 	},
 
 	get_main_pic_index: function() {
-		if (this.item_data.Pictures) {
-            for (var i = 0; i < this.item_data.Pictures.length; i++) {
-                var pic = this.item_data.Pictures[i];
-                if (pic.IsPreview == "1") {
-                    return i;
-                }
-            }
-		}
+        // TODO: modify for new architecture
+        // if (this.item_data.Pictures) {
+        //     for (var i = 0; i < this.item_data.Pictures.length; i++) {
+        //         var pic = this.item_data.Pictures[i];
+        //         if (pic.IsPreview == "1") {
+        //             return i;
+        //         }
+        //     }
+        // }
+		return -1;
 	},
 
 	get_additional_pic_index: function() {
-		for (var i = 0; i < this.item_data.Pictures.length; i++) {
-			var pic = this.item_data.Pictures[i];
-			if (pic.IsPreview == "0") {
-				return i;
-			}
-		}
+		// TODO: modify for new architecture
+		// for (var i = 0; i < this.item_data.Pictures.length; i++) {
+		// 	var pic = this.item_data.Pictures[i];
+		// 	if (pic.IsPreview == "0") {
+		// 		return i;
+		// 	}
+		// }
+		return -1;
 	},
 
 	get_additional_pic_url: function () {
-		return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
+		// TODO: modify for new architecture
+		// return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
+		return "";
 	},
 
 	sort_pictures: function() {
-		if (this.item_data.Pictures) {
-			var digitized = [],
-			nondigitized = [];
-		for (var i = 0; i < this.item_data.Pictures.length; i++) {
-			var pic = this.item_data.Pictures[i];
-			if(pic.PictureId !== '') {
-				digitized.push(pic);
-			}
-			else {
-				nondigitized.push(pic);
-			}
+		// currently we only support a single main image
+		// gallery will be added in #449
+		var pictures = [];
+		if (this.item_data.main_image_url) {
+			pictures = [{"url": this.item_data.main_image_url}]
 		}
-		digitized.push.apply(digitized, nondigitized);
-		return digitized;
+		if (typeof(this.pictures) === "undefined" || this.pictures.length !== pictures.length) {
+			this.pictures = pictures;
 		}
+		return this.pictures;
 	},
 
 	uc_first: function() {
