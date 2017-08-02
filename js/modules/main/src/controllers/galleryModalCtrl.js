@@ -4,17 +4,22 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalIn
     $scope.lang = langManager.lang;
 
 	$scope.isActive = function (index) {
-		return $scope.index === index;
+	    // TODO: modify for new architecture
+		// return $scope.index === index;
+        return true;
 	};
 	$scope.showPrev = function () {
-		$scope.index = ($scope.index > 0) ? --$scope.index : $scope.gallery.Pictures.length - 1;
+        // TODO: modify for new architecture
+        // $scope.index = ($scope.index > 0) ? --$scope.index : $scope.gallery.Pictures.length - 1;
 	};
 
 	$scope.showNext = function () {
-		$scope.index = ($scope.index < $scope.gallery.Pictures.length - 1) ? ++$scope.index : 0;
+        // TODO: modify for new architecture
+        // $scope.index = ($scope.index < $scope.gallery.Pictures.length - 1) ? ++$scope.index : 0;
 	};
 	$scope.showPhoto = function (index) {
-		$scope.index = index;
+        // TODO: modify for new architecture
+        // $scope.index = index;
 	};
 	$scope.dismiss = function () {
         $uibModalInstance.dismiss();
@@ -23,19 +28,17 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalIn
 		window.print();
 	};
     $scope.sort_pictures = function() {
-        var digitized = [],
-            nondigitized = [];
-        for (var i = 0; i < gallery.Pictures.length; i++) {
-            var pic = gallery.Pictures[i];
-            if(pic.PictureId !== '') {
-                digitized.push(pic);
-            }
-            else {
-                nondigitized.push(pic);
-            }
+        // currently we only support a single main image
+        // gallery will be added in #449
+        // TODO: merge with the itemCtrl sort_pictures
+        var pictures = [];
+        if (gallery.main_image_url) {
+            pictures = [{"url":gallery.main_image_url}]
         }
-        digitized.push.apply(digitized, nondigitized);
-        return digitized;
+        if (typeof(this.pictures) === "undefined" || this.pictures.length !== pictures.length) {
+            this.pictures = pictures;
+        }
+        return this.pictures;
     }
 };
 

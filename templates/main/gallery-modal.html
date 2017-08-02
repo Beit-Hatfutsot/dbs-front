@@ -5,40 +5,47 @@
        <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
     <div class="gallery-modal__stage noselect">
-      <div ng-repeat="pic in sort_pictures()" ng-switch on="pic.PictureId != undefined">
-        <img  ng-switch-when="true"
-              ng-show="isActive($index)"
-              ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"
-              alt="More Images"
-              fit-thumb
-              prevent-rightclick/>
-         <a    ng-switch-default
-                ng-href="{{lang=='en'?'http://www.bh.org.il/about-us/volunteering/':'http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/'}}"
-                target="blank">
-          <img  class="picture notdigitized"
-                ng-show="isActive($index)"
-                ng-src="images/digitization-{{lang}}.jpg"
-                prevent-rightclick>
-          </a>
+      <div>
+        <img ng-src="{{sort_pictures()[0].url}}"
+             alt="More Images"
+             prevent-rightclick fit-thumb />
       </div>
+      <!-- TODO: modify for new architecture - to support gallery -->
+      <!--<div ng-repeat="pic in sort_pictures()" ng-switch on="pic.PictureId != undefined">-->
+        <!--<img  ng-switch-when="true"-->
+              <!--ng-show="isActive($index)"-->
+              <!--ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"-->
+              <!--alt="More Images"-->
+              <!--fit-thumb-->
+              <!--prevent-rightclick/>-->
+         <!--<a    ng-switch-default-->
+                <!--ng-href="{{lang=='en'?'http://www.bh.org.il/about-us/volunteering/':'http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/'}}"-->
+                <!--target="blank">-->
+          <!--<img  class="picture notdigitized"-->
+                <!--ng-show="isActive($index)"-->
+                <!--ng-src="images/digitization-{{lang}}.jpg"-->
+                <!--prevent-rightclick>-->
+          <!--</a>-->
+      <!--</div>-->
 
-        <div class="arrows" ng-if="gallery.Pictures.length > 1">
-            <div class="arrow-left" ng-click="showPrev()"></div>
-            <div class="arrow-right" ng-click="showNext()"></div>
-        </div>
+        <!--<div class="arrows" ng-if="gallery.Pictures.length > 1">-->
+            <!--<div class="arrow-left" ng-click="showPrev()"></div>-->
+            <!--<div class="arrow-right" ng-click="showNext()"></div>-->
+        <!--</div>-->
     </div>
     <div class="gallery-modal__info">
         <div class="gallery-modal__info__picture-info">
-            <en><span class="field-name" ng-if="gallery.UnitText1.En.isNotEmpty()">Description: </span>{{gallery.UnitText1.En}}<br></en>
-            <he><span class="field-name" ng-if="gallery.UnitText1.He.isNotEmpty()">תיאור: </span>{{gallery.UnitText1.He}}<br></he>
-            <span ng-if="gallery.UnitType == 1 && gallery.UnitId">
-                <span class="field-name">
-                    <en>Photo Unit Number: </en>
-                    <he>מספר תמונה יחידה: </he>
-                </span>
-                {{gallery.UnitId}}
-                <br>
-            </span>
+            <en><span class="field-name" ng-if="gallery.content_text_en.isNotEmpty()">Description: </span>{{gallery.content_text_en}}<br></en>
+            <he><span class="field-name" ng-if="gallery.content_text_he.isNotEmpty()">תיאור: </span>{{gallery.content_text_he}}<br></he>
+          <!-- TODO: modify for new architecture -->
+          <!--<span ng-if="gallery.UnitType == 1 && gallery.UnitId">-->
+                <!--<span class="field-name">-->
+                    <!--<en>Photo Unit Number: </en>-->
+                    <!--<he>מספר תמונה יחידה: </he>-->
+                <!--</span>-->
+                <!--{{gallery.UnitId}}-->
+                <!--<br>-->
+            <!--</span>-->
             <span>
                 <en>© All Rights Reserved</en>
                 <he>© כל הזכויות שמורות</he>
@@ -47,14 +54,19 @@
         </div>
         <div class="gallery-modal__info__gallery-preview">
             <div class="gallery-modal__info__gallery-preview__title">
-                <en>{{gallery.title_en}} ({{gallery.Pictures.length}} Pictures found)</en>
-                <he>{{gallery.title_he}} ({{gallery.Pictures.length}} תמונות נמצאו)</he>
+                <!-- TODO: modify the picture numbers for gallery -->
+                <!--<en>{{gallery.title_en}} (1 Pictures found)</en>-->
+                <!--<he>{{gallery.title_he}} (1 תמונות נמצאו)</he>-->
             </div>
             <ul class="gallery-modal__info__gallery-preview__minified-picture">
-                <li ng-repeat="pic in sort_pictures()" ng-class="{'active':isActive($index)}">
-                    <img  ng-src="{{pic.PictureId == undefined  ? 'images/digitization-sm-'+lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"
-                          ng-click="showPhoto($index)"/>
+                <li class="active">
+                  <img ng-src="{{sort_pictures()[0].url}}">
                 </li>
+                <!-- TODO: modify to support gallery -->
+                <!--<li ng-repeat="pic in sort_pictures()" ng-class="{'active':isActive($index)}">-->
+                    <!--<img  ng-src="{{pic.PictureId == undefined  ? 'images/digitization-sm-'+lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"-->
+                          <!--ng-click="showPhoto($index)"/>-->
+                <!--</li>-->
             </ul>
         </div>
     </div>
