@@ -5,19 +5,13 @@
        <icon class="xsign" position="[-224, -333]" ng-click="dismiss()"></icon>
     </div>
     <div class="gallery-modal__stage noselect">
-      <div>
-        <img ng-src="{{sort_pictures()[0].url}}"
-             alt="More Images"
-             prevent-rightclick fit-thumb />
-      </div>
-      <!-- TODO: modify for new architecture - to support gallery -->
-      <!--<div ng-repeat="pic in sort_pictures()" ng-switch on="pic.PictureId != undefined">-->
-        <!--<img  ng-switch-when="true"-->
-              <!--ng-show="isActive($index)"-->
-              <!--ng-src="https://storage.googleapis.com/bhs-flat-pics/{{pic.PictureId}}.jpg"-->
-              <!--alt="More Images"-->
-              <!--fit-thumb-->
-              <!--prevent-rightclick/>-->
+      <div ng-repeat="pic in sort_pictures()">
+        <img  ng-show="isActive($index)"
+              ng-src="{{pic.url}}"
+              alt="More Images"
+              fit-thumb
+              prevent-rightclick />
+        <!-- TODO: add not digitized logic to new architecture -->
          <!--<a    ng-switch-default-->
                 <!--ng-href="{{lang=='en'?'http://www.bh.org.il/about-us/volunteering/':'http://www.bh.org.il/he/%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA-2/'}}"-->
                 <!--target="blank">-->
@@ -26,12 +20,12 @@
                 <!--ng-src="images/digitization-{{lang}}.jpg"-->
                 <!--prevent-rightclick>-->
           <!--</a>-->
-      <!--</div>-->
+      </div>
 
-        <!--<div class="arrows" ng-if="gallery.Pictures.length > 1">-->
-            <!--<div class="arrow-left" ng-click="showPrev()"></div>-->
-            <!--<div class="arrow-right" ng-click="showNext()"></div>-->
-        <!--</div>-->
+        <div class="arrows" ng-if="sort_pictures().length > 1">
+            <div class="arrow-left" ng-click="showPrev()"></div>
+            <div class="arrow-right" ng-click="showNext()"></div>
+        </div>
     </div>
     <div class="gallery-modal__info">
         <div class="gallery-modal__info__picture-info">
@@ -54,19 +48,15 @@
         </div>
         <div class="gallery-modal__info__gallery-preview">
             <div class="gallery-modal__info__gallery-preview__title">
-                <!-- TODO: modify the picture numbers for gallery -->
-                <!--<en>{{gallery.title_en}} (1 Pictures found)</en>-->
-                <!--<he>{{gallery.title_he}} (1 תמונות נמצאו)</he>-->
+                <en>{{gallery.title_en}} ({{sort_pictures().length}} Pictures found)</en>
+                <he>{{gallery.title_he}} ({{sort_pictures().length}} תמונות נמצאו)</he>
             </div>
             <ul class="gallery-modal__info__gallery-preview__minified-picture">
-                <li class="active">
-                  <img ng-src="{{sort_pictures()[0].url}}">
-                </li>
-                <!-- TODO: modify to support gallery -->
-                <!--<li ng-repeat="pic in sort_pictures()" ng-class="{'active':isActive($index)}">-->
+                <li ng-repeat="pic in sort_pictures()" ng-class="{'active':isActive($index)}">
                     <!--<img  ng-src="{{pic.PictureId == undefined  ? 'images/digitization-sm-'+lang+'.jpg' : 'https://storage.googleapis.com/bhs-flat-pics/'+pic.PictureId+'.jpg' }}"-->
                           <!--ng-click="showPhoto($index)"/>-->
-                <!--</li>-->
+                  <img ng-src="{{pic.url}}" ng-click="showPhoto($index)"/>
+                </li>
             </ul>
         </div>
     </div>

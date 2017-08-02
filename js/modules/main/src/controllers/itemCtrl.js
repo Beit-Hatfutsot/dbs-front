@@ -129,11 +129,10 @@ ItemCtrl.prototype = {
 
 		$rootScope.slug = {"He": item.slug_he, "En": item.slug_en};
 
-		// TODO: modify for new architecture
-        // main_pic_index = this.get_main_pic_index();
-		// if (main_pic_index !== undefined) {
-		// 	$rootScope.og_image = "http://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
-		// }
+		main_pic_index = this.get_main_pic_index();
+		if (main_pic_index !== undefined) {
+			$rootScope.og_image = this.sort_pictures()[main_pic_index];
+		}
 	},
 
 	get_item: function() {
@@ -152,12 +151,23 @@ ItemCtrl.prototype = {
 				self.refresh_root_scope();
 				self.related_data = [];
 				if (self.item_data.related_documents) {
-                    for (var field_id in self.item_data.related_documents) {
-						var docs = self.item_data.related_documents[field_id];
-                        docs.forEach(function(doc) {
-                        	self.related_data.push(doc);
-						})
-                    }
+					// TODO: move this logic to pipelines, frontend should be data source agnostic
+					var field_ids_order = [
+						"_c6_beit_hatfutsot_bh_place_located_in",
+						"_c6_beit_hatfutsot_bh_place_personality_death",
+						"_c6_beit_hatfutsot_bh_base_template_related_personality",
+						"_c6_beit_hatfutsot_bh_place_personality_birth"
+					];
+					field_ids_order.forEach(function(field_id) {
+						if (
+							typeof(self.item_data.related_documents[field_id]) !== "undefined"
+							&& self.item_data.related_documents[field_id].length > 0
+						) {
+                            self.item_data.related_documents[field_id].forEach(function(doc) {
+                            	self.related_data.push(doc);
+							});
+						}
+					});
 				}
                 self.notification.loading(false);
 			},
@@ -193,24 +203,19 @@ ItemCtrl.prototype = {
 	},
 
 	showPrev: function () {
-        // TODO: modify for new architecture
-        // this._Index = (this._Index > 0) ? --this._Index : this.item_data.Pictures.length - 1;
+        this._Index = (this._Index > 0) ? --this._Index : this.sort_pictures().length - 1;
 	},
 
 	showNext: function () {
-        // TODO: modify for new architecture
-        // this._Index = (this._Index < this.item_data.Pictures.length - 1) ? ++this._Index : 0;
+        this._Index = (this._Index < this.sort_pictures().length - 1) ? ++this._Index : 0;
 	},
 
 	isActive: function (index) {
-        // TODO: modify for new architecture
-        // return this._Index === index;
-		return true;
+        return this._Index === index;
 	},
 
 	showPhoto: function (index) {
-        // TODO: modify for new architecture
-        // this._Index = index;
+        this._Index = index;
 	},
 
 	open_gallery: function (index) {
@@ -246,41 +251,56 @@ ItemCtrl.prototype = {
 	},
 
 	get_main_pic_index: function() {
-        // TODO: modify for new architecture
-        // if (this.item_data.Pictures) {
-        //     for (var i = 0; i < this.item_data.Pictures.length; i++) {
-        //         var pic = this.item_data.Pictures[i];
-        //         if (pic.IsPreview == "1") {
-        //             return i;
-        //         }
-        //     }
-        // }
-		return -1;
+        var pictures = this.sort_pictures();
+		if (pictures.length > 0) {
+			return 0;
+			// TODO: modify for new architecture
+			//     if (pic.IsPreview == "1") {
+			//         return i;
+			//     }
+        }
 	},
 
 	get_additional_pic_index: function() {
-		// TODO: modify for new architecture
-		// for (var i = 0; i < this.item_data.Pictures.length; i++) {
-		// 	var pic = this.item_data.Pictures[i];
-		// 	if (pic.IsPreview == "0") {
-		// 		return i;
-		// 	}
-		// }
-		return -1;
+		var pictures = this.sort_pictures();
+		if (pictures.length > 1) {
+			return 1;
+			// if (pic.IsPreview == "0") {
+			// 	return i;
+			// }
+        }
 	},
 
 	get_additional_pic_url: function () {
-		// TODO: modify for new architecture
-		// return "https://storage.googleapis.com/bhs-flat-pics/" + this.item_data.Pictures[this.get_additional_pic_index()].PictureId + ".jpg";
-		return "";
+		if (this.get_additional_pic_index() !== undefined) {
+            return this.sort_pictures()[this.get_additional_pic_index()].url;
+		}
+	},
+
+	get_main_pic_url: function() {
+        if (this.get_main_pic_index() !== undefined) {
+            return this.sort_pictures()[this.get_main_pic_index()].url;
+        }
 	},
 
 	sort_pictures: function() {
-		// currently we only support a single main image
-		// gallery will be added in #449
 		var pictures = [];
-		if (this.item_data.main_image_url) {
-			pictures = [{"url": this.item_data.main_image_url}]
+		if (this.item_data.collection === "photoUnits") {
+            // currently we only support a single main image
+            // gallery support will be added in #449
+            if (this.item_data.main_image_url) {
+                pictures = [{"url": this.item_data.main_image_url}]
+            }
+		} else {
+			// TODO: move this logic to pipelines, frontend should be source agnostic
+			if (typeof(this.item_data.related_documents) !== "undefined" && typeof(this.item_data.related_documents["_c6_beit_hatfutsot_bh_base_template_multimedia_photos"]) !== "undefined") {
+				related_photo_docs = this.item_data.related_documents["_c6_beit_hatfutsot_bh_base_template_multimedia_photos"];
+                related_photo_docs.forEach(function(related_photo_doc) {
+                	if (related_photo_doc.main_image_url) {
+                		pictures.push({"url": related_photo_doc.main_image_url});
+					}
+				});
+			}
 		}
 		if (typeof(this.pictures) === "undefined" || this.pictures.length !== pictures.length) {
 			this.pictures = pictures;
