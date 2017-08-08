@@ -1,6 +1,6 @@
 var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalInstance) {
     $scope.gallery = gallery;
-    $scope.index = index;
+    $scope.index = (typeof(index) === "undefined") ? 0 : index;
     $scope.lang = langManager.lang;
 
 	$scope.isActive = function (index) {
@@ -25,22 +25,8 @@ var GalleryModalCtrl = function($scope, langManager, gallery, index, $uibModalIn
     $scope.sort_pictures = function() {
         // TODO: merge with the itemCtrl sort_pictures
         var pictures = [];
-        if ($scope.gallery.collection === "photoUnits") {
-            // currently we only support a single main image
-            // gallery support will be added in #449
-            if ($scope.gallery.main_image_url) {
-                pictures = [{"url": $scope.gallery.main_image_url}]
-            }
-        } else {
-            // TODO: move this logic to pipelines, frontend should be source agnostic
-            if (typeof($scope.gallery.related_documents) !== "undefined" && typeof($scope.gallery.related_documents["_c6_beit_hatfutsot_bh_base_template_multimedia_photos"]) !== "undefined") {
-                related_photo_docs = $scope.gallery.related_documents["_c6_beit_hatfutsot_bh_base_template_multimedia_photos"];
-                related_photo_docs.forEach(function(related_photo_doc) {
-                    if (related_photo_doc.main_image_url) {
-                        pictures.push({"url": related_photo_doc.main_image_url});
-                    }
-                });
-            }
+        if (typeof(this.gallery.images) !== "undefined") {
+            pictures = this.gallery.images;
         }
         if (typeof(this.pictures) === "undefined" || this.pictures.length !== pictures.length) {
             this.pictures = pictures;

@@ -285,23 +285,9 @@ ItemCtrl.prototype = {
 
 	sort_pictures: function() {
 		var pictures = [];
-		if (this.item_data.collection === "photoUnits") {
-            // currently we only support a single main image
-            // gallery support will be added in #449
-            if (this.item_data.main_image_url) {
-                pictures = [{"url": this.item_data.main_image_url}]
-            }
-		} else {
-			// TODO: move this logic to pipelines, frontend should be source agnostic
-			if (typeof(this.item_data.related_documents) !== "undefined" && typeof(this.item_data.related_documents["_c6_beit_hatfutsot_bh_base_template_multimedia_photos"]) !== "undefined") {
-				related_photo_docs = this.item_data.related_documents["_c6_beit_hatfutsot_bh_base_template_multimedia_photos"];
-                related_photo_docs.forEach(function(related_photo_doc) {
-                	if (related_photo_doc.main_image_url) {
-                		pictures.push({"url": related_photo_doc.main_image_url});
-					}
-				});
-			}
-		}
+        if (typeof(this.item_data.images) !== "undefined") {
+            pictures = this.item_data.images;
+        }
 		if (typeof(this.pictures) === "undefined" || this.pictures.length !== pictures.length) {
 			this.pictures = pictures;
 		}
