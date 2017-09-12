@@ -5,4 +5,4 @@ services:
   app:
     build: .
     image: orihoch/mojp-dbs-front
-    ports: ["3000:3000"]
+    ports: ["18080:80"]
