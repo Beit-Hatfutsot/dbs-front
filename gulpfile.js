@@ -29,7 +29,7 @@ var _baseUrlEnvMapping = {
 };
 
 gulp.task('base-url', function() {
-  var apiServer = process.env.API_SERVER || 'test';
+  var apiServer = process.env.API_SERVER || 'live';
 
   return gulp.src('./js/modules/config/config.js')
     .pipe(g.replace('BaseUrlPlaceHolder', _baseUrlEnvMapping[apiServer]))
