@@ -14,8 +14,10 @@
 angular.module('apiClient').
 	factory('apiClient', ['apiConfig', function(apiConfig) {
 
-	  	var api_client = {
-	  		base_url: 'http://' + apiConfig.baseUrl,
+        var base_url_scheme = "http"+((apiConfig.baseUrl==="api.dbs.bh.org.il")?"s":"");
+
+	    var api_client = {
+	  		base_url: base_url_scheme+'://' + apiConfig.baseUrl,
 
 	  		urls: {
           login:          'login',
