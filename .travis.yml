@@ -1,0 +1,6 @@
+language: bash
+cache:
+  directories:
+  - "$HOME/beit-hatfutsot-devops/"
+script:
+- travis_script.sh
