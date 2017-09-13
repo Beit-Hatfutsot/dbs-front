@@ -13,7 +13,7 @@ else
         git clone "https://${DEPLOYMENT_BOT_GITHUB_TOKEN}@github.com/Beit-Hatfutsot/beit-hatfutsot-devops.git"
     fi
     cd beit-hatfutsot-devops
-    bin/k8s_update_deployment_image.sh "${K8S_DEPLOYMENT_NAME}" "${K8S_IMAGE_NAME}:${TRAVIS_COMMIT}"
+    bin/k8s_update_deployment_image.py "${K8S_DEPLOYMENT_NAME}" "${K8S_IMAGE_NAME}:${TRAVIS_COMMIT}"
     git config user.email ori+beit-hatfutsot-deployment-bot@uumpa.com
     git config user.name beit-hatfutsot-deployment-bot
     git add "k8s/${K8S_DEPLOYMENT_NAME}.yaml"
