@@ -18,6 +18,5 @@ else
     git config user.name beit-hatfutsot-deployment-bot
     git add "k8s/${K8S_DEPLOYMENT_NAME}.yaml"
     git commit -m "deployment image update: ${K8S_DEPLOYMENT_NAME}=${TRAVIS_COMMIT}:${TRAVIS_COMMIT}"
-    https://github.com/Beit-Hatfutsot/beit-hatfutsot-devops.git
     git push "https://${DEPLOYMENT_BOT_GITHUB_TOKEN}@github.com/Beit-Hatfutsot/beit-hatfutsot-devops.git" master
 fi
