@@ -3,4 +3,4 @@ cache:
   directories:
   - "$HOME/beit-hatfutsot-devops/"
 script:
-- travis_script.sh
+- ./travis_script.sh
