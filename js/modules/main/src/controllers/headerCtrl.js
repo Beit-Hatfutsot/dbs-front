@@ -11,7 +11,7 @@ var HeaderCtrl = function($rootScope, $state, $location, langManager, wizard, he
     this.beta_notification_open = $window.localStorage.getItem('beta-welcome-msg') != 'dismissed';
     this.$window = $window;
     this.host = $location.host();
-    this.museum_link = this.host.indexOf('test') === 0?'http://test.bh.org.il':'http://www.bh.org.il';
+    this.museum_link = this.host.indexOf('test') === 0?'http://test.bh.org.il':'https://www.bh.org.il';
 
     this.search_placeholders = {
         'en': 'Search for communities, last names and personalities',

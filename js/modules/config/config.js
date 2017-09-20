@@ -19,5 +19,5 @@ angular.module('config', []).
         baseUrl:        'BaseUrlPlaceHolder',
     }).
 	constant('europeanaUrl',
-			 'http://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn');
+			 'https://www.europeana.eu/api/v2/search.json?wskey=End3LH3bn');
 

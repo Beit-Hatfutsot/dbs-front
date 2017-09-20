@@ -159,7 +159,7 @@ ItemCtrl.prototype = {
 
         $rootScope.slug = item.Slug;
         if (main_pic_index !== undefined) {
-            $rootScope.og_image = "http://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
+            $rootScope.og_image = "https://storage.googleapis.com/bhs-flat-pics/" + item.Pictures[main_pic_index].PictureId + ".jpg";
         }
     },
 

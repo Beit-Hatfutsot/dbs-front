@@ -387,7 +387,7 @@ GeneralSearchController.prototype = {
 
 
     google_search: function() {
-        this.$window.open('http://google.com/?q=' + this.google_query, '_blank');
+        this.$window.open('https://google.com/?q=' + this.google_query, '_blank');
     },
 
     google_search_on_enter:function ($event) {
