@@ -320,7 +320,7 @@ GeneralSearchController.prototype = {
         if (this.collection == 'images')
             params.q = params.q.concat(' dtype: Photographs');
         params.start = this.cjh_results.length || 0;
-        this.$http.jsonp("http://67.111.179.108:8080/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: params})
+        this.$http.jsonp("https://dbs.bh.org.il/cjh/solr/diginew/select/?fl=title,dtype,description,fulllink,thumbnail&rows=5&wt=json&json.wrf=JSON_CALLBACK", {params: params})
             .success(callback)
 
     },
