@@ -71,7 +71,7 @@ var PersonViewController = function ($http, $window, $document, $rootScope,
             self.load(toParams);
 	    }
 	});
-	
+
 	$scope.backToLastSearch = function() {
 		$location.path($rootScope.lastSearchUrl);
 		$rootScope.lastSearchUrl = null;
@@ -131,8 +131,14 @@ PersonViewController.prototype = {
 				});
 				self.tree_number = params.tree_number;
 				// self.detailsShown = true;
-        self.node.Slug = {En: slug};
-				self.$rootScope.title = self.get_full_name(self.node);
+        		self.node.Slug = {En: slug};
+        		if (self.$rootScope.lang == 'en') {
+        			self.$rootScope.title = '' + self.get_full_name(self.node) + ' | BH Open Databases';
+        			self.$rootScope.description = '' + self.get_full_name(self.node) + ' | Beit hatfutsot maintains A huge database of over 5 million people in detailed family trees. Come to explore your family story';
+				} else {
+        			self.$rootScope.title = '' + self.get_full_name(self.node) + ' מאגרי מידע - בית התפוצות | ';
+        			self.$rootScope.description = '' + self.get_full_name(self.node) + ' | לבית התפוצות מאגר עצום של מעל 5 מיליון בני אדם בעצי משפחה מפורטים ומלאי תוכן ועניין. בואו ליצור ולהכיר את הסיפור המשפחתי שלכם';
+				}
 				//register url changes while walking the tree
 				dataLayer.push({
 	                event: 'ngRouteChange',
