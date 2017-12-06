@@ -126,7 +126,7 @@
 
                             .title {
                                 line-height: 16px;
-                                font-size: 15px;
+                                font-size: 14px;
                                 color: #ffffff;
 
                                 .en & {
@@ -134,6 +134,13 @@
                                 }
                                 .he & {
                                     font-weight: 700;
+                                }
+
+                                .title-1 {
+                                  display: block;
+                                }
+                                .title-2 {
+                                  display: none;
                                 }
                             }
 
@@ -187,10 +194,12 @@
                         &:hover,
                         &.active {
                             a {
-                                .title {
-                                    display: none;
+                                .title-1 {
+                                  display: none;
                                 }
-
+                                .title-2 {
+                                  display: block;
+                                }
                                 .icon {
                                     display: block;
 
@@ -215,20 +224,6 @@
 
                         &.museum {
                             background-color: $blue3;
-
-                            &:hover .icon {
-
-                                .en & {
-                                    @include icon (-390px -258px);
-                                    width: 63px;
-                                    height: 45px;
-                                }
-                                .he & {
-                                    @include icon (-311px -260px);
-                                    width: 49px;
-                                    height: 42px;
-                                }
-                            }
                         }
 
                         &.shop {
@@ -276,10 +271,10 @@
 
                 .header-element {
                     .en & {
-                        margin-left: 15px;
+                        margin-left: 25px;
                     }
                     .he & {
-                        margin-right: 15px;
+                        margin-right: 25px;
                     }
                 }
 
@@ -290,22 +285,18 @@
 
                     &__button {
                       .label {
-                          background-color: $yellow3;
+                          //background-color: $yellow3;
                           padding: 0 5px;
                           line-height: 30px;
-                          font-size: 13px;
-                          font-weight: 600;
-                          color: #fff;
+                          font-size: 18px;
+                          //font-weight: 600;
+                          //color: #fff;
                           border: none;
                           outline: none;
                           @include hover-pointer();
 
                           &:hover {
-                              background-color: $gray3 !important;
-                          }
-
-                          &--active {
-                              background-color: $yellow2 !important;
+                              font-weight: 800;
                           }
                       }
                     }
@@ -563,8 +554,8 @@
                     z-index: 1;
 
                     svg {
-                      height: 56px;
-                      width: 148px;
+                      width: 178px;
+                      height: 55px;
                       vertical-align: middle;
 
                       .logo-cls-1 {fill:#fbaf34;}
@@ -584,41 +575,20 @@
                             display: block;
                             min-width: 100%;
                         }
-                        .my-account-label {
-                            background-color: $gray3 !important;
-                        }
-                    }
-
-                    &.signed {
-                        .my-account-label {
-                            border-radius: 20px;
-                        }
                     }
 
                     .my-account-label {
-                        background-color: $blue3;
                         padding: 0 10px;
                         line-height: 30px;
-                        font-size: 13px;
-                        font-weight: 600;
-                        color: #fff;
+                        font-size: 18px;
+                        font-family: "Open Sans","Open Sans Hebrew",sans-serif;
                         border: none;
                         outline: none;
                         position: relative;
                         @include hover-pointer();
 
                         &:hover {
-                            background-color: $gray3 !important;
-                        }
-
-                        .caret {
-                            display: inline-block;
-                            width: 0;
-                            height: 0;
-                            vertical-align: middle;
-                            border-top: 9px solid;
-                            border-right: 4px solid transparent;
-                            border-left: 4px solid transparent;
+                          font-weight: 800;
                         }
                     }
                     .dropdown-menu {
@@ -720,7 +690,8 @@
                     }
                 }
 
-                &__language-selector {
+
+              &__language-selector {
                     position: relative;
                     display: inline-block;
                     vertical-align: top;
