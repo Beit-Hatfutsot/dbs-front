@@ -12,7 +12,9 @@ script:
                    -v "`pwd`/mojp-k8s:/ops" \
                    orihoch/mojp-k8s \
                    -c "source ~/.bashrc; source switch_environment.sh production; \
-                      kubectl get pods \
+                      \
+                      kubectl set image deployment/front front=gcr.io/bh-org-01/mojp-dbs-front:$TRAVIS_COMMIT &&\
+                      kubectl rollout status deployment front \
                       ";
   else
     true
