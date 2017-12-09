@@ -12,7 +12,7 @@ script:
                    -v "`pwd`/mojp-k8s:/ops" \
                    orihoch/mojp-k8s \
                    -c "source ~/.bashrc; source switch_environment.sh production; \
-                       ./update_yaml.py "'{"front": {"image": "gcr.io/bh-org-01/mojp-dbs-front:'$TRAVIS_COMMIT'"}}'" \
+                       ./update_yaml.py '{"front":{"image":"gcr.io/bh-org-01/mojp-dbs-front:'$TRAVIS_COMMIT'"}}' \
                                         "values.production.yaml" &&\
                        git config user.email "deployment-bot@k8s-ops" &&\
                        git config user.name "deployment-bot" &&\
