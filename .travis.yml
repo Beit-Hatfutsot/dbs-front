@@ -1,24 +1,31 @@
 language: bash
 sudo: required
+env:
+- K8S_OPS_SECRET="k8s-ops-secret.json"
+- K8S_OPS_REPO_SLUG="Beit-Hatfutsot/mojp-k8s"
+- K8S_OPS_REPO_DIRECTORY="mojp-k8s"
+- K8S_OPS_DOCKER_IMAGE="orihoch/mojp-k8s"
+- K8S_OPS_ENVIRONMENT="production"
 services:
 - docker
 script:
+# see the k8s repo README for more details about how the continuous deployment works
 - |
   if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]; then
-    openssl aes-256-cbc -K $encrypted_6dcdd37ad8d6_key -iv $encrypted_6dcdd37ad8d6_iv -in secret-mojp-k8s-ops.json.enc -out k8s-ops-secret.json -d &&\
-    git clone --depth 1 https://github.com/Beit-Hatfutsot/mojp-k8s.git &&\
-    docker pull orihoch/mojp-k8s &&\
-    docker run -it -v "`pwd`/k8s-ops-secret.json:/k8s-ops/secret.json" \
-                   -v "`pwd`/mojp-k8s:/ops" \
-                   orihoch/mojp-k8s \
-                   -c "source ~/.bashrc; source switch_environment.sh production; \
-                       ./update_yaml.py '{"front":{"image":"gcr.io/bh-org-01/mojp-dbs-front:'$TRAVIS_COMMIT'"}}' \
-                                        "values.production.yaml" &&\
-                       git config user.email "deployment-bot@k8s-ops" &&\
-                       git config user.name "deployment-bot" &&\
+    openssl aes-256-cbc -K $encrypted_6dcdd37ad8d6_key -iv $encrypted_6dcdd37ad8d6_iv -in secret-mojp-k8s-ops.json.enc -out $K8S_OPS_SECRET -d &&\
+    git clone --depth 1 "https://github.com/${K8S_REPO_SLUG}.git" "${K8S_OPS_REPO_DIRECTORY}" &&\
+    docker pull "${K8S_OPS_DOCKER_IMAGE}" &&\
+    docker run -it -v "`pwd`/${K8S_OPS_SECRET}:/k8s-ops/secret.json" \
+                   -v "`pwd`/${K8S_OPS_REPO_DIRECTORY}:/ops" \
+                   "${K8S_OPS_DOCKER_IMAGE}" \
+                   -c "source ~/.bashrc; source switch_environment.sh ${K8S_OPS_ENVIRONMENT}; \
+                       ./update_yaml.py "'{"front":{"image":"gcr.io/bh-org-01/mojp-dbs-front:'$TRAVIS_COMMIT'"}}'" \
+                                        values.production.yaml &&\
+                       git config user.email 'deployment-bot@k8s-ops' &&\
+                       git config user.name deployment-bot &&\
                        git add values.production.yaml &&\
-                       git commit -m "dbs-front image update --no-deploy" &&\
-                       git push "https://${K8S_OPS_GITHUB_REPO_TOKEN}@github.com/Beit-Hatfutsot/mojp-k8s.git" master &&\
+                       git commit -m 'dbs-front image update --no-deploy' &&\
+                       git push "'https://'$K8S_OPS_GITHUB_REPO_TOKEN'@github.com/Beit-Hatfutsot/mojp-k8s.git'" master &&\
                        kubectl set image deployment/front front=gcr.io/bh-org-01/mojp-dbs-front:$TRAVIS_COMMIT &&\
                        kubectl rollout status deployment front \
                       ";
