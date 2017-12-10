@@ -20,13 +20,13 @@ script:
                    -v "`pwd`/${K8S_OPS_REPO_DIRECTORY}:/ops" \
                    "${K8S_OPS_DOCKER_IMAGE}" \
                    -c "source ~/.bashrc; source switch_environment.sh ${K8S_OPS_ENVIRONMENT}; \
-                       ./update_yaml.py "'{"front":{"image":"gcr.io/bh-org-01/mojp-dbs-front:'$TRAVIS_COMMIT'"}}'" \
+                       ./update_yaml.py '{"'"'"front"'"'":{"'"'"image"'"'":"'"'"gcr.io/bh-org-01/mojp-dbs-front:${TRAVIS_COMMIT}"'"'"}}' \
                                         values.production.yaml &&\
-                       git config user.email 'deployment-bot@k8s-ops' &&\
+                       git config user.email '"'deployment-bot@k8s-ops'"' &&\
                        git config user.name deployment-bot &&\
                        git add values.production.yaml &&\
                        git commit -m 'dbs-front image update --no-deploy' &&\
-                       git push "'https://'$K8S_OPS_GITHUB_REPO_TOKEN'@github.com/Beit-Hatfutsot/mojp-k8s.git'" master &&\
+                       git push '"'https://'$K8S_OPS_GITHUB_REPO_TOKEN'@github.com/Beit-Hatfutsot/mojp-k8s.git'"' master &&\
                        kubectl set image deployment/front front=gcr.io/bh-org-01/mojp-dbs-front:$TRAVIS_COMMIT &&\
                        kubectl rollout status deployment front \
                       ";
