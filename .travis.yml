@@ -1,12 +1,12 @@
 language: bash
 sudo: required
 env:
-- |
+- >-
   K8S_CONTINUOUS_DEPLOYMENT=true
-  K8S_OPS_REPO_SLUG="Beit-Hatfutsot/mojp-k8s"
-  K8S_OPS_REPO_DIRECTORY="mojp-k8s"
-  K8S_OPS_DOCKER_IMAGE="orihoch/mojp-k8s"
-  K8S_OPS_ENVIRONMENT="production"
+  K8S_OPS_REPO_SLUG=Beit-Hatfutsot/mojp-k8s
+  K8S_OPS_REPO_DIRECTORY=mojp-k8s
+  K8S_OPS_DOCKER_IMAGE=orihoch/mojp-k8s
+  K8S_OPS_ENVIRONMENT=production
 services:
 - docker
 script:
