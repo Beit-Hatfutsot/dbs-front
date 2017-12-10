@@ -1,17 +1,19 @@
 language: bash
 sudo: required
 env:
-- K8S_OPS_SECRET="k8s-ops-secret.json"
-- K8S_OPS_REPO_SLUG="Beit-Hatfutsot/mojp-k8s"
-- K8S_OPS_REPO_DIRECTORY="mojp-k8s"
-- K8S_OPS_DOCKER_IMAGE="orihoch/mojp-k8s"
-- K8S_OPS_ENVIRONMENT="production"
+- |
+  K8S_CONTINUOUS_DEPLOYMENT=true
+  K8S_OPS_SECRET="k8s-ops-secret.json"
+  K8S_OPS_REPO_SLUG="Beit-Hatfutsot/mojp-k8s"
+  K8S_OPS_REPO_DIRECTORY="mojp-k8s"
+  K8S_OPS_DOCKER_IMAGE="orihoch/mojp-k8s"
+  K8S_OPS_ENVIRONMENT="production"
 services:
 - docker
 script:
 # see the k8s repo README for more details about how the continuous deployment works
 - |
-  if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]; then
+  if [ "${K8S_CONTINUOUS_DEPLOYMENT}" == "true" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]; then
     openssl aes-256-cbc -K $encrypted_6dcdd37ad8d6_key -iv $encrypted_6dcdd37ad8d6_iv -in secret-mojp-k8s-ops.json.enc -out $K8S_OPS_SECRET -d &&\
     git clone --depth 1 "https://github.com/${K8S_REPO_SLUG}.git" "${K8S_OPS_REPO_DIRECTORY}" &&\
     docker pull "${K8S_OPS_DOCKER_IMAGE}" &&\
