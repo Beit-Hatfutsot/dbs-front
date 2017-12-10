@@ -12,10 +12,10 @@ SIMPLE_APP_DEPLOYMENT_IMAGE="gcr.io/bh-org-01/mojp-dbs-front"
 SIMPLE_APP_CONTAINER_NAME="front"
 DEPLOYMENT_SCRIPT="
    ./update_yaml.py '{"'"'"${SIMPLE_APP_DEPLOYMENT_NAME}"'"'":{"'"'"image"'"'":"'"'"${SIMPLE_APP_DEPLOYMENT_IMAGE}:${TRAVIS_COMMIT}"'"'"}}' \
-                     values.${K8S_OPS_ENVIRONMENT}.yaml &&\
+                     values.${K8S_OPS_ENVIRONMENT}.auto-updated.yaml &&\
     git config user.email deployment-bot'@'k8s-ops &&\
     git config user.name deployment-bot &&\
-    git add values.${K8S_OPS_ENVIRONMENT}.yaml &&\
+    git add values.${K8S_OPS_ENVIRONMENT}.auto-updated.yaml &&\
     git commit -m '${SIMPLE_APP_DEPLOYMENT_NAME} image update --no-deploy' &&\
     git push https://${K8S_OPS_GITHUB_REPO_TOKEN}'@'github.com/${K8S_OPS_REPO_SLUG}.git master &&\
     kubectl set image deployment/${SIMPLE_APP_DEPLOYMENT_NAME} ${SIMPLE_APP_CONTAINER_NAME}=${SIMPLE_APP_DEPLOYMENT_IMAGE}:$TRAVIS_COMMIT &&\
