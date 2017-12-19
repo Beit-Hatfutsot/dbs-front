@@ -2,6 +2,7 @@ var GeneralSearchController = function($rootScope, europeanaUrl, $scope, $state,
     var self = this, params = {};
     var advanced_fields = ['pob', 'pom', 'pom', 'pob_t', 'pom_t', 'pom_t','treenum', 'yob', 'yom','yod',
                            'yob_t', 'yom_t', 'yod_t', 'yob_v', 'yom_v', 'yod_v'];
+    this.$rootScope = $rootScope;
     this.$state = $state;
     this.$stateParams = $stateParams;
     this.$window = $window;
@@ -246,6 +247,11 @@ GeneralSearchController.prototype = {
     load: function() {
         var self = this;
         self.notification.loading(true);
+        if (self.$rootScope.lang == 'he') {
+            self.$rootScope.title = "תוצאות חיפוש עבור "+this.header.query+" – מאגרי מידע בית התפוצות";
+        } else {
+            self.$rootScope.title = "Search results for "+this.header.query+" - The Museum of The Jewish People";
+        }
         self.$http.get(self.apiClient.urls.search, {params: self.api_params()})
         .success(function (r) {
             self.results = r.hits;
