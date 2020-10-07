@@ -11,3 +11,8 @@ dist
 .DS_Store
 /screenshot*
 package-lock.json
+.redirector-db
+bh_entities.after_new_domains.txt
+*.egg-info
+*.pyc
+

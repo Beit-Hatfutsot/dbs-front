@@ -5,4 +5,21 @@ services:
   app:
     build: .
     image: orihoch/mojp-dbs-front
+
+  redirector-nginx:
+    build: redirector/nginx
+    image: orihoch/mojp-dbs-front-redirector-nginx
     ports: ["18080:80"]
+
+  redirector-app:
+    build: redirector/app
+    image: orihoch/mojp-dbs-front-redirector-app
+
+  redirector-db:
+    image: postgres:12@sha256:31122316d7afefa1d99d843f3a1a09a5484304183ecff7ab943b8bb94ba44ba4
+    ports: ["5432:5432"]
+    environment:
+      POSTGRES_PASSWORD: "123456"
+      PDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ".redirector-db:/var/lib/postgresql/data"

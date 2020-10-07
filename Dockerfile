@@ -1,6 +1,20 @@
 FROM orihoch/mojp-dbs-front-base
 
-COPY . /app
+COPY doc /app/doc
+COPY docs /app/docs
+COPY fonts /app/fonts
+COPY images /app/images
+COPY js /app/js
+COPY scss /app/scss
+COPY templates /app/templates
+COPY under_construction /app/under_construction
+COPY .nvmrc /app/
+COPY bower.json /app/
+COPY browserstack.py /app/
+COPY fabfile.py /app/
+COPY gulpfile.js /app/
+COPY index.html /app/
+COPY package.json /app/
 RUN npm install
 RUN bower --allow-root install
 RUN gulp dist

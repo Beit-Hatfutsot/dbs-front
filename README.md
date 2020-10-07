@@ -92,3 +92,15 @@ In order to serve the docs http://localhost:3000 run:
     $ cd docs
     $ bower install
     $ gulp docs:serve
+
+## Initialize the redirector DB
+
+```
+python3 -m redirector.init_db bh_entities.after_new_domains.txt "dbname=postgres user=postgres host=localhost port=5432 password=123456"
+```
+
+## Run redirector app locally
+
+```
+FLASK_APP=redirector.web FLASK_ENV=development DEBUG=1 flask run --host 0.0.0.0
+```

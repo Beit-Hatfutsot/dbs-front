@@ -5,4 +5,4 @@ env:
 services:
 - docker
 script:
-- ./continuous_deployment.sh
+- exit 0  # ./continuous_deployment.sh

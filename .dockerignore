@@ -22,4 +22,5 @@ bower_components
 dist
 node_modules
 venv
-
+bh_entities.after_new_domains.txt
+.redirector-db
