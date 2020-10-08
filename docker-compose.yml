@@ -14,6 +14,8 @@ services:
   redirector-app:
     build: redirector/app
     image: orihoch/mojp-dbs-front-redirector-app
+    environment:
+      DEBUG: "1"
 
   redirector-db:
     image: postgres:12@sha256:31122316d7afefa1d99d843f3a1a09a5484304183ecff7ab943b8bb94ba44ba4

@@ -3,13 +3,16 @@ import requests
 from flask import Flask, make_response, request, redirect
 import psycopg2
 import psycopg2.extras
+from urllib.parse import quote
 
 
 app = Flask(__name__)
 
 
+DEFAULT_HOMEPAGE = 'https://dbs.anumuseum.org.il/skn/'
 DEFAULT_HOMEPAGE_HE = 'https://dbs.anumuseum.org.il/skn/he/c6/bh'
 DEFAULT_HOMEPAGE_EN = 'https://dbs.anumuseum.org.il/skn/en/c6/BH'
+
 
 def find_matching_row(rows, OldUnitId, UnitId, Header_He, Header_En, name_lc):
     if UnitId:
@@ -37,6 +40,7 @@ def find_matching_row(rows, OldUnitId, UnitId, Header_He, Header_En, name_lc):
                 return row
     return None
 
+
 def get_redirect_url(path):
     lang, slug, url = None, None, None
     if path.startswith('he/'):
@@ -58,6 +62,19 @@ def get_redirect_url(path):
             hepath = hepath.replace('person/', '', 1)
             tmp = hepath.split('/')
             slug = 'person_{};{}.{}'.format(tmp[0], tmp[1], tmp[2])
+        elif hepath.startswith('אודות'):
+            if 'familyTree' in hepath:
+                url = 'https://dbs.anumuseum.org.il/skn/he/c6/e18493701/%D7%90%D7%95%D7%93%D7%95%D7%AA/%D7%90%D7%95%D7%93%D7%95%D7%AA_%D7%94%D7%9E%D7%A8%D7%9B%D7%96_%D7%9C%D7%92%D7%A0%D7%90%D7%9C%D7%95%D7%92%D7%99%D7%94_%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA_%D7%A2_%D7%A9_%D7%93%D7%92%D7%9C%D7%A1_%D7%90_%D7%92%D7%95%D7%9C%D7%93%D7%9E%D7%9F'
+            elif 'familyNames' in hepath:
+                url = 'https://dbs.anumuseum.org.il/skn/he/c6/e18493715/%D7%90%D7%95%D7%93%D7%95%D7%AA/%D7%90%D7%95%D7%93%D7%95%D7%AA_%D7%9E%D7%90%D7%92%D7%A8_%D7%A9%D7%9E%D7%95%D7%AA_%D7%94%D7%9E%D7%A9%D7%A4%D7%97%D7%94_%D7%A2_%D7%A9_%D7%9E%D7%9E%D7%99_%D7%93%D7%94_%D7%A9%D7%9C%D7%99%D7%98'
+            elif 'places' in hepath:
+                url = 'https://dbs.anumuseum.org.il/skn/he/c6/e18493709/%D7%90%D7%95%D7%93%D7%95%D7%AA/%D7%90%D7%95%D7%93%D7%95%D7%AA_%D7%9E%D7%90%D7%92%D7%A8_%D7%94%D7%A7%D7%94%D7%99%D7%9C%D7%95%D7%AA_%D7%94%D7%99%D7%94%D7%95%D7%93%D7%99%D7%95%D7%AA_%D7%A9%D7%9C_%D7%91%D7%99%D7%AA_%D7%94%D7%AA%D7%A4%D7%95%D7%A6%D7%95%D7%AA'
+            elif 'visual_documentation' in hepath:
+                url = 'https://dbs.anumuseum.org.il/skn/he/c6/e18493705/%D7%90%D7%95%D7%93%D7%95%D7%AA/%D7%90%D7%95%D7%93%D7%95%D7%AA_%D7%9E%D7%A8%D7%9B%D7%96_%D7%9C%D7%AA%D7%99%D7%A2%D7%95%D7%93_%D7%97%D7%96%D7%95%D7%AA%D7%99_%D7%A2_%D7%A9_%D7%91%D7%A8%D7%A0%D7%A8%D7%93_%D7%94_%D7%95%D7%9E%D7%A8%D7%99%D7%9D_%D7%90%D7%95%D7%A1%D7%98%D7%A8_%D7%91%D7%91'
+            elif 'termsOfUse' in hepath:
+                url = 'https://dbs.anumuseum.org.il/skn/he/c6/e18493717/%D7%90%D7%95%D7%93%D7%95%D7%AA/%D7%AA%D7%A0%D7%90%D7%99_%D7%A9%D7%99%D7%9E%D7%95%D7%A9'
+            else:
+                url = DEFAULT_HOMEPAGE_HE
         else:
             url = DEFAULT_HOMEPAGE_HE
     elif path.startswith('search'):
@@ -82,8 +99,23 @@ def get_redirect_url(path):
         path = path.replace('person/', '', 1)
         tmp = path.split('/')
         slug = 'person_{};{}.{}'.format(tmp[0], tmp[1], tmp[2])
+    elif path.startswith('about/'):
+        if 'familyTree' in path:
+            url = 'https://dbs.anumuseum.org.il/skn/en/c6/e18493701/%D7%90%D7%95%D7%93%D7%95%D7%AA/About_Douglas_E_Goldman_Jewish_Genealogy_Center_da'
+        elif 'familyNames' in path:
+            url = 'https://dbs.anumuseum.org.il/skn/en/c6/e18493715/%D7%90%D7%95%D7%93%D7%95%D7%AA/About_the_Memi_De_Shalit_Database_of_Jewish_Family'
+        elif 'places' in path:
+            url = 'https://dbs.anumuseum.org.il/skn/en/c6/e18493709/%D7%90%D7%95%D7%93%D7%95%D7%AA/About_the_Beit_Hatfutsot_Jewish_Communities_Databa'
+        elif 'visual_documentation' in path:
+            url = 'https://dbs.anumuseum.org.il/skn/en/c6/e18493705/%D7%90%D7%95%D7%93%D7%95%D7%AA/About_Bernard_H_and_Miriam_Oster_Visual_Documentat'
+        elif 'termsOfUse' in path:
+            url = 'https://dbs.anumuseum.org.il/skn/en/c6/e18493717/%D7%90%D7%95%D7%93%D7%95%D7%AA/Terms_of_Use'
+        else:
+            url = DEFAULT_HOMEPAGE_EN
+    elif path.startswith('he'):
+        url = DEFAULT_HOMEPAGE_HE
     else:
-        url = DEFAULT_HOMEPAGE_EN
+        url = DEFAULT_HOMEPAGE
     if lang and slug:
         backend_path = os.path.join('v1', 'item', slug)
         backend_url = 'https://api.dbs.bh.org.il/{}'.format(backend_path)
@@ -130,7 +162,7 @@ def get_redirect_url(path):
         if lang == 'he':
             url = DEFAULT_HOMEPAGE_HE
         else:
-            url = DEFAULT_HOMEPAGE_EN
+            url = DEFAULT_HOMEPAGE
     return url
 
 
@@ -152,7 +184,7 @@ def index(path):
             if os.environ.get("DEBUG") == 'yes':
                 raise
             else:
-                redirect_url = DEFAULT_HOMEPAGE_EN
+                redirect_url = DEFAULT_HOMEPAGE
         if os.environ.get("DEBUG"):
             return make_response("redirect: {}".format(redirect_url))
         else:
@@ -163,5 +195,5 @@ def index(path):
             uri += '?' + request.query_string.decode()
         response = make_response("internal: {}".format(uri), 200)
         if not os.environ.get("DEBUG"):
-            response.headers['X-Accel-Redirect'] = uri
+            response.headers['X-Accel-Redirect'] = quote(uri)
         return response
