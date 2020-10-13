@@ -81,7 +81,12 @@ def get_redirect_url(path):
         url = 'https://dbs.anumuseum.org.il/skn/en/c6/bh/search#query=' + (request.args.get('q') or '')
     elif path.startswith('place/'):
         lang = 'en'
-        slug = path.replace('place/', 'place_', 1)
+        if 'place/Italy' in path:
+            url = 'https://dbs.anumuseum.org.il/skn/en/c6/e163227/Place/Italy'
+        elif 'place/new-york-city' in path:
+            url = 'https://dbs.anumuseum.org.il/skn/en/c6/e256961/Place/New_York_City'
+        else:
+            slug = path.replace('place/', 'place_', 1)
     elif path.startswith('image/'):
         lang = 'en'
         slug = path.replace('image/', 'image_', 1)
