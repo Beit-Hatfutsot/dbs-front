@@ -123,7 +123,7 @@ def get_redirect_url(path):
         url = DEFAULT_HOMEPAGE
     if lang and slug:
         backend_path = os.path.join('v1', 'item', slug)
-        backend_url = 'https://api.dbs.bh.org.il/{}'.format(backend_path)
+        backend_url = 'http://back/{}'.format(backend_path)
         res = requests.get(backend_url).json()
         if len(res) > 0:
             item = res[0]

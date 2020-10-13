@@ -25,12 +25,6 @@ FLASK_APP=redirector.web FLASK_ENV=development DEBUG=1 flask run --host 0.0.0.0
 
 ### Run the bulk-updater
 
-Install requirements
-
-```
-python3 -m pip install -r redirector/app/requirements-bulk-update.txt
-```
-
 Create work directory
 
 ```

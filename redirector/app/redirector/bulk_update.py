@@ -12,9 +12,12 @@ session.cookies.set('REDIRECTOR_TESTING_ENABLED', 'yes')
 def get_new_url(old_url):
     new_url, exception = '', ''
     try:
-        old_url = old_url.replace('http://', 'https://')
-        res = session.head(old_url)
-        new_url = res.headers['Location']
+        if 'dbs.bh.org.il' not in old_url:
+            exception = 'url not supported'
+        else:
+            old_url = old_url.replace('https://', 'http://').replace('dbs.bh.org.il', 'localhost:5000')
+            res = session.head(old_url)
+            new_url = res.headers['Location']
     except Exception as e:
         traceback.print_exc()
         exception = str(e)
