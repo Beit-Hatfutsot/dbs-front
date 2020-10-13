@@ -15,4 +15,4 @@ package-lock.json
 bh_entities.after_new_domains.txt
 *.egg-info
 *.pyc
-
+.redirector-data
