@@ -1,4 +1,5 @@
 import os
+import traceback
 import requests
 from flask import Flask, make_response, request, redirect
 import psycopg2
@@ -41,8 +42,22 @@ def find_matching_row(rows, OldUnitId, UnitId, Header_He, Header_En, name_lc):
     return None
 
 
+def insert_cache_url(original_path, url, conn, cur):
+    try:
+        cur.execute('INSERT INTO cache (url, path) '
+                    'VALUES (%(url)s, %(path)s)',
+                    {"url": url, "path": original_path})
+        conn.commit()
+        if os.environ.get("DEBUG") == 'yes':
+            app.logger.info("Inserted to cache: {} -> {}".format(original_path, url))
+    except Exception as e:
+        conn.rollback()
+        if os.environ.get("DEBUG") == 'yes':
+            app.logger.info("Exception inserting to cache: {}".format(traceback.format_exc()))
+
+
 def get_redirect_url(path):
-    lang, slug, url = None, None, None
+    lang, slug, url, original_path = None, None, None, path
     if path.startswith('he/'):
         lang = 'he'
         hepath = path.replace('he/', '', 1)
@@ -122,47 +137,61 @@ def get_redirect_url(path):
     else:
         url = DEFAULT_HOMEPAGE
     if lang and slug:
-        backend_path = os.path.join('v1', 'item', slug)
-        backend_url = 'http://back/{}'.format(backend_path)
-        res = requests.get(backend_url).json()
-        if len(res) > 0:
-            item = res[0]
-            OldUnitId = item.get('OldUnitId')  # old_num
-            UnitId = item.get('UnitId')  # bhp_unit
-            Header = item.get('Header', {}) or {}
-            Header_He = Header.get('He')  # name_he
-            Header_En = Header.get('En')  # name_en
-            name_lc = item.get('name_lc')
-            if name_lc:
-                name_lc = name_lc[-1] + ', ' + ' '.join(name_lc[:-1])
-            where_sqls = []
-            if OldUnitId:
-                where_sqls.append('old_num = %(OldUnitId)s')
-            if UnitId:
-                where_sqls.append('bhp_unit = %(UnitId)s')
-            if Header_He:
-                where_sqls.append('name_he = %(Header_He)s')
-                where_sqls.append('lower(name_he) = lower(%(Header_He)s)')
-            if Header_En:
-                where_sqls.append('name_en = %(Header_En)s')
-                where_sqls.append('lower(name_en) = lower(%(Header_En)s)')
-            if name_lc:
-                where_sqls.append('( lower(name_en) = %(name_lc)s or lower(name_he) = %(name_lc)s )')
-            if len(where_sqls) > 0:
-                conn = psycopg2.connect("dbname=postgres user=postgres host=redirector-db port=5432 password=123456")
-                try:
-                    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-                    try:
-                        cur.execute("SELECT * FROM data WHERE " + ' OR '.join(where_sqls), {
-                            'UnitId': UnitId, 'OldUnitId': OldUnitId, 'Header_He': Header_He, 'Header_En': Header_En, 'name_lc': name_lc
-                        })
-                        row = find_matching_row(list(cur.fetchall()), OldUnitId, UnitId, Header_He, Header_En, name_lc)
-                        if row:
-                            url = row['url_{}'.format(lang)] or row['url_en'] or row['url_he']
-                    finally:
-                        cur.close()
-                finally:
-                    conn.close()
+        if os.environ.get("LOCALDEV") == 'yes':
+            conn = psycopg2.connect("dbname=postgres user=postgres host=localhost port=5432 password=123456")
+        else:
+            conn = psycopg2.connect("dbname=postgres user=postgres host=redirector-db port=5432 password=123456")
+        try:
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            try:
+                cur.execute("select url from cache where path=%(path)s", {"path": original_path.strip().strip('/')})
+                rows = list(cur.fetchall())
+                if len(rows) > 0:
+                    url = rows[0]['url']
+                    if os.environ.get("DEBUG") == 'yes':
+                        app.logger.info("Got from cache {} -> {}".format(original_path, url))
+                else:
+                    backend_path = os.path.join('v1', 'item', slug)
+                    if os.environ.get("LOCALDEV") == 'yes':
+                        backend_url = 'http://api.dbs.bh.org.il/{}'.format(backend_path)
+                    else:
+                        backend_url = 'http://back/{}'.format(backend_path)
+                    res = requests.get(backend_url).json()
+                    if len(res) > 0:
+                        item = res[0]
+                        OldUnitId = item.get('OldUnitId')  # old_num
+                        UnitId = item.get('UnitId')  # bhp_unit
+                        Header = item.get('Header', {}) or {}
+                        Header_He = Header.get('He')  # name_he
+                        Header_En = Header.get('En')  # name_en
+                        name_lc = item.get('name_lc')
+                        if name_lc:
+                            name_lc = name_lc[-1] + ', ' + ' '.join(name_lc[:-1])
+                        where_sqls = []
+                        if OldUnitId:
+                            where_sqls.append('old_num = %(OldUnitId)s')
+                        if UnitId:
+                            where_sqls.append('bhp_unit = %(UnitId)s')
+                        if Header_He:
+                            where_sqls.append('name_he = %(Header_He)s')
+                            where_sqls.append('lower(name_he) = lower(%(Header_He)s)')
+                        if Header_En:
+                            where_sqls.append('name_en = %(Header_En)s')
+                            where_sqls.append('lower(name_en) = lower(%(Header_En)s)')
+                        if name_lc:
+                            where_sqls.append('( lower(name_en) = %(name_lc)s or lower(name_he) = %(name_lc)s )')
+                        if len(where_sqls) > 0:
+                            cur.execute("SELECT * FROM data WHERE " + ' OR '.join(where_sqls), {
+                                'UnitId': UnitId, 'OldUnitId': OldUnitId, 'Header_He': Header_He, 'Header_En': Header_En, 'name_lc': name_lc
+                            })
+                            row = find_matching_row(list(cur.fetchall()), OldUnitId, UnitId, Header_He, Header_En, name_lc)
+                            if row:
+                                url = row['url_{}'.format(lang)] or row['url_en'] or row['url_he']
+                                insert_cache_url(original_path, url, conn, cur)
+            finally:
+                cur.close()
+        finally:
+            conn.close()
     elif not url:
         if lang == 'he':
             url = DEFAULT_HOMEPAGE_HE
